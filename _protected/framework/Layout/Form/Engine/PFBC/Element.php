@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Many changes have been made in this file.
  * By Pierre-Henry SORIA.
@@ -7,6 +8,7 @@
 namespace PFBC;
 
 use PFBC\Element\CKEditor;
+use PFBC\Validation\Str as StrValidation;
 
 abstract class Element extends Base
 {
@@ -178,7 +180,7 @@ abstract class Element extends Base
                     $options .= ', ';
                 }
                 $options .= $option . ': ';
-                /*When javascript needs to be applied as a jQuery option's value, no quotes are needed.*/
+                /* When javascript needs to be applied as a jQuery option's value, no quotes are needed. */
                 if (is_string($value) && substr($value, 0, 3) === 'js:') {
                     $options .= substr($value, 3);
                 } else {
@@ -205,18 +207,6 @@ abstract class Element extends Base
         echo $sHtml, ' />';
     }
 
-    protected function getHtmlRequiredIfApplicable()
-    {
-        $sCode = '';
-
-        // 'required' attr won't work with CKEditor editor, so ignore it if class called by 'CKEditor'
-        if (static::class !== CKEditor::class && $this->isRequired()) {
-            $sCode .= ' required="required"';
-        }
-
-        return $sCode;
-    }
-
     /**
      * This method provides a shortcut for checking if an element is required.
      */
@@ -229,6 +219,7 @@ abstract class Element extends Base
                 }
             }
         }
+
         return false;
     }
 
@@ -270,7 +261,6 @@ abstract class Element extends Base
         $this->attributes['id'] = $id;
     }
 
-
     public function setValue($value)
     {
         $this->attributes['value'] = $value;
@@ -282,7 +272,7 @@ abstract class Element extends Base
     public function setRequired($required)
     {
         if (!empty($required)) {
-            $this->validation[] = new Validation\Required;
+            $this->validation[] = new Validation\Required();
         }
     }
 
@@ -294,16 +284,58 @@ abstract class Element extends Base
      */
     public function setValidation($validation)
     {
-        /*If a single validation class is provided, an array is created in order to reuse the same logic.*/
+        /* If a single validation class is provided, an array is created in order to reuse the same logic. */
         if (!is_array($validation)) {
             $validation = [$validation];
         }
 
         foreach ($validation as $object) {
-            /*Ensures $object contains a existing concrete validation class.*/
+            /* Ensures $object contains a existing concrete validation class. */
             if ($object instanceof Validation) {
                 $this->validation[] = $object;
             }
         }
+    }
+
+    /**
+     * If the field has no explicit maxlength, borrow the max from a Str(min, max)
+     * validator on it so the browser enforces the same limit the server validates.
+     */
+    protected function applyMaxLengthFromValidation(): void
+    {
+        if (empty($this->attributes['maxlength'])) {
+            $iMax = $this->getValidationMaxLength();
+            if ($iMax !== null) {
+                $this->attributes['maxlength'] = $iMax;
+            }
+        }
+    }
+
+    /**
+     * @return int|null the max length declared by a Str validator on this element, or NULL if none
+     */
+    protected function getValidationMaxLength(): ?int
+    {
+        if (!empty($this->validation)) {
+            foreach ($this->validation as $oValidation) {
+                if ($oValidation instanceof StrValidation) {
+                    return $oValidation->getMax();
+                }
+            }
+        }
+
+        return null;
+    }
+
+    protected function getHtmlRequiredIfApplicable()
+    {
+        $sCode = '';
+
+        // 'required' attr won't work with CKEditor editor, so ignore it if class called by 'CKEditor'
+        if (static::class !== CKEditor::class && $this->isRequired()) {
+            $sCode .= ' required="required"';
+        }
+
+        return $sCode;
     }
 }
