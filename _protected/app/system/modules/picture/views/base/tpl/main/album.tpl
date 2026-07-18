@@ -8,7 +8,7 @@
             <h4><a href="{absolute_url}">{% substr(Framework\Security\Ban\Ban::filterWord($a->title),0,25) %}</a></h4>
             <p>
                 <a href="{url_data_sys_mod}picture/img/{% $a->username %}/{% $a->albumId %}/{% str_replace('original', 1000, $a->file) %}" title="{% $a->title %}" data-popup="slideshow">
-                    <img src="{url_data_sys_mod}picture/img/{% $a->username %}/{% $a->albumId %}/{% str_replace('original', '400', $a->file) %}" alt="{% $a->title %}" title="{% $a->title %}" loading="lazy" />
+                    <img src="{url_data_sys_mod}picture/img/{% $a->username %}/{% $a->albumId %}/{% str_replace('original', '400', $a->file) %}" alt="{% $a->title %}" title="{% $a->title %}" loading="lazy" decoding="async" />
                 </a>
             </p>
 
