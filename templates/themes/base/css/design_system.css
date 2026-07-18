@@ -334,6 +334,20 @@ input[type=color]::-moz-color-swatch {
     margin-bottom: 1.2em;
 }
 
+/** LIVE CHARACTER COUNTER (see static/js/str.js) **/
+.char_counter {
+    display: block;
+    margin-top: .3em;
+    color: var(--ph7-text-muted);
+    font-size: .85em;
+    text-align: right;
+}
+
+.char_counter_low {
+    color: var(--ph7-primary-dark);
+    font-weight: 600;
+}
+
 /** PASSWORD VISIBILITY TOGGLE (see static/js/password_toggle.js) **/
 .pwd_toggle {
     margin-left: .4em;

@@ -23,4 +23,5 @@ var pH7LangCore = {
     cookie_consent_msg: "Ce site utilise des cookies pour vous garantir la meilleure expérience sur notre site. Si vous continuez à utiliser ce dernier, nous considérerons que vous acceptez l'utilisation des cookies.",
     show_password: "Afficher le mot de passe",
     hide_password: "Masquer le mot de passe",
+    characters_left: "Il reste %0% caractères"
 };
