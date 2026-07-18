@@ -307,6 +307,33 @@ input[type=color]::-moz-color-swatch {
     }
 }
 
+/** EMPTY STATES (browse/search with no results) **/
+.empty_state {
+    text-align: center;
+    padding: 3em 1.5em;
+    margin: 1em auto;
+    max-width: 30em;
+    border: 1px dashed var(--ph7-border);
+    border-radius: var(--ph7-radius-lg);
+    background-color: var(--ph7-surface);
+}
+
+.empty_state_icon {
+    display: block;
+    font-size: 3em;
+    margin-bottom: .3em;
+}
+
+.empty_state h3 {
+    color: var(--ph7-text);
+    margin-bottom: .4em;
+}
+
+.empty_state p {
+    color: var(--ph7-text-muted);
+    margin-bottom: 1.2em;
+}
+
 /** PASSWORD VISIBILITY TOGGLE (see static/js/password_toggle.js) **/
 .pwd_toggle {
     margin-left: .4em;

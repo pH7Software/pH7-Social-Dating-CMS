@@ -7,7 +7,14 @@
 
 <div class="box-right col-xs-12 col-md-9 col-lg-9 col-xl-9 col-xl-offset-1">
     {if empty($users)}
-        <p class="center bold">{lang 'Whoops! No users found.'}</p>
+        <div class="empty_state">
+            <span class="empty_state_icon" role="img" aria-label="{lang 'Telescope'}">🔭</span>
+            <h3>{lang 'No members match your search (yet!)'}</h3>
+            <p>{lang 'Try widening the age range, choosing a bigger city, or clearing some filters in the Quick Search.'}</p>
+            {if !$is_user_auth}
+                <a class="btn btn-primary" href="{{ $design->url('user', 'signup', 'step1') }}">{lang 'Be the first — join for free!'}</a>
+            {/if}
+        </div>
     {else}
         {each $user in $users}
             {{ $country_name = t($user->country) }}
