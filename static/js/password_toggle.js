@@ -30,9 +30,11 @@
                 'class': 'pwd_toggle',
                 'aria-label': sShowLabel,
                 'aria-pressed': 'false',
-                title: sShowLabel,
-                text: EYE_ICON
+                title: sShowLabel
             });
+            // The emoji is decorative; aria-hidden keeps screen readers from announcing it
+            // on top of the aria-label (which would read e.g. "Show password, eye").
+            $oButton.append($('<span>', { 'aria-hidden': 'true', text: EYE_ICON }));
 
             $oButton.on('click', function () {
                 var bReveal = $oInput.attr('type') === 'password';
