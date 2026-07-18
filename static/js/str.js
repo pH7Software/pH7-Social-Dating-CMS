@@ -34,6 +34,12 @@ function textCounter(a, b) {
             if ($oField.data('noCounter') || $oField.data('counterBound')) {
                 return;
             }
+
+            // PFBC's Textarea element renders its own "N character(s)" counter (via textCounter()
+            // above) in a following <span id="<id>_rem_len">; don't add a second one on those.
+            if ($oField.attr('id') && document.getElementById($oField.attr('id') + '_rem_len')) {
+                return;
+            }
             $oField.data('counterBound', true);
 
             var $oCounter = $('<small>', { 'class': 'char_counter', 'aria-live': 'polite' });
