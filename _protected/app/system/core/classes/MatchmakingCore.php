@@ -175,7 +175,14 @@ final class MatchmakingCore
             return null;
         }
 
-        return (new \DateTime())->diff($oBirthDate)->y;
+        $oNow = new \DateTime();
+        // DateInterval::$y is absolute, so a future (corrupt) birthDate would yield a bogus positive
+        // age. Treat that as unknown rather than feeding a wrong age into the affinity curve.
+        if ($oBirthDate > $oNow) {
+            return null;
+        }
+
+        return $oNow->diff($oBirthDate)->y;
     }
 
     private static function normalize(string $sValue): string

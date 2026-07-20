@@ -108,6 +108,25 @@ final class MatchmakingCoreTest extends TestCase
         );
     }
 
+    public function testFutureBirthDateIsTreatedAsUnknownAge()
+    {
+        $oProfile = $this->createProfile(['birthDate' => $this->birthDateForAge(30)]);
+        $oFutureBirthDate = $this->createProfile(['birthDate' => date('Y-m-d', strtotime('+5 years'))]);
+        // A far-off but same-age candidate, for comparison against the neutral (0.5) unknown-age score
+        $oKnownAge = $this->createProfile(['birthDate' => $this->birthDateForAge(30)]);
+
+        // The future/corrupt date must not out-score a genuine same-age match via a bogus computed age
+        $this->assertGreaterThanOrEqual(
+            MatchmakingCore::score($oProfile, $oFutureBirthDate),
+            MatchmakingCore::score($oProfile, $oKnownAge)
+        );
+        // And it must land on the neutral unknown-age contribution, not a spuriously high one
+        $this->assertGreaterThan(
+            MatchmakingCore::score($oProfile, $oFutureBirthDate),
+            MatchmakingCore::score($oProfile, $this->createProfile(['birthDate' => $this->birthDateForAge(30)]))
+        );
+    }
+
     public function testSameCityMatchesDespiteWhitespaceAndCaseDifferences()
     {
         $oProfile = $this->createProfile(['birthDate' => $this->birthDateForAge(30), 'city' => 'New York']);
