@@ -83,6 +83,18 @@ final class ValidateTest extends TestCase
         $this->assertFalse($this->oValidate->int($mNumber, 0, 40000));
     }
 
+    #[DataProvider('validUrlsProvider')]
+    public function testValidUrl(string $sUrl): void
+    {
+        $this->assertTrue($this->oValidate->url($sUrl));
+    }
+
+    #[DataProvider('invalidUrlsProvider')]
+    public function testInvalidUrl(string $sUrl): void
+    {
+        $this->assertFalse($this->oValidate->url($sUrl));
+    }
+
     #[DataProvider('validFloatsProvider')]
     public function testValidFloat($fFloat): void
     {
@@ -210,6 +222,27 @@ final class ValidateTest extends TestCase
             ['lalal'],
             [''],
             [50000] // Exceed the maximum value set (max_range)
+        ];
+    }
+
+    public static function validUrlsProvider(): array
+    {
+        return [
+            ['http://example.com'],
+            ['https://ph7builder.com'],
+            ['https://sub.example.com/path?q=1&x=2#frag']
+        ];
+    }
+
+    public static function invalidUrlsProvider(): array
+    {
+        return [
+            // Script/scheme-injection vectors that FILTER_VALIDATE_URL alone lets through
+            'javascript scheme' => ['javascript://alert(1)'],
+            'non-http scheme' => ['ftp://files.example.com'],
+            // Plainly malformed
+            'no scheme' => ['example.com'],
+            'empty' => ['']
         ];
     }
 
