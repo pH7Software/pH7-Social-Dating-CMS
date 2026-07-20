@@ -96,6 +96,18 @@ final class MatchmakingCoreTest extends TestCase
         );
     }
 
+    public function testUnapprovedAvatarDoesNotEarnThePhotoBoost()
+    {
+        $oProfile = $this->createProfile([]);
+        $oApproved = $this->createProfile(['avatar' => '1.jpg', 'approvedAvatar' => 1]);
+        $oPending = $this->createProfile(['avatar' => '1.jpg', 'approvedAvatar' => 0]);
+
+        $this->assertGreaterThan(
+            MatchmakingCore::score($oProfile, $oPending),
+            MatchmakingCore::score($oProfile, $oApproved)
+        );
+    }
+
     public function testMissingDataDoesNotCrashScoring()
     {
         $oEmpty = new stdClass();

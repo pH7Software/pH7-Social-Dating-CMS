@@ -156,7 +156,12 @@ final class MatchmakingCore
 
     private static function getAvatarScore(\stdClass $oCandidate): float
     {
-        return empty($oCandidate->avatar) ? 0.0 : 1.0;
+        // Match the app's definition of a usable photo (see UserCoreModel): a set avatar that moderation
+        // approved. A pending/rejected photo shouldn't earn the "has a real photo" boost. When the
+        // approval flag is absent from the row, default to approved to mirror the column's DB default.
+        $bApproved = !isset($oCandidate->approvedAvatar) || (int)$oCandidate->approvedAvatar === 1;
+
+        return !empty($oCandidate->avatar) && $bApproved ? 1.0 : 0.0;
     }
 
     private static function getAge(\stdClass $oProfileData): ?int
