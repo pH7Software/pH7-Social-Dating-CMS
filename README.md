@@ -119,7 +119,7 @@ Based on **[pH7Framework](https://github.com/pH7Software/pH7-Social-Dating-CMS/t
 * Pages Management
 * Support for Multiple Languages, Internationalization and Localization (I18N)
 * European and American Time/Date formats
-* Cache system for the database, pH7Tpl (our template engine), static files (HTML, CSS, JS), string content, ...
+* [Cache system](https://github.com/pH7Software/pH7-Social-Dating-CMS/tree/18.x/_protected/framework/Cache#-ph7cache) for the database, [pH7Tpl](https://github.com/pH7Software/pH7-Social-Dating-CMS/tree/18.x/_protected/framework/Layout/Tpl/Engine/PH7Tpl#-ph7tpl-%EF%B8%8F) (its template engine), [static files (HTML, CSS, JS)](https://github.com/pH7Software/pH7-Social-Dating-CMS/tree/18.x/_protected/framework/Compress#-ph7compress), string content, ...
 * Maintenance Mode
 * Database Backup
 * Report Abuse
