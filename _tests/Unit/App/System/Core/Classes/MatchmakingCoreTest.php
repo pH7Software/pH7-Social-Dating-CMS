@@ -108,6 +108,18 @@ final class MatchmakingCoreTest extends TestCase
         );
     }
 
+    public function testSameCityMatchesDespiteWhitespaceAndCaseDifferences()
+    {
+        $oProfile = $this->createProfile(['birthDate' => $this->birthDateForAge(30), 'city' => 'New York']);
+        $oMessyCity = $this->createProfile(['birthDate' => $this->birthDateForAge(30), 'city' => '  new   YORK ']);
+        $oOtherCity = $this->createProfile(['birthDate' => $this->birthDateForAge(30), 'city' => 'Boston']);
+
+        $this->assertGreaterThan(
+            MatchmakingCore::score($oProfile, $oOtherCity),
+            MatchmakingCore::score($oProfile, $oMessyCity)
+        );
+    }
+
     public function testMissingDataDoesNotCrashScoring()
     {
         $oEmpty = new stdClass();

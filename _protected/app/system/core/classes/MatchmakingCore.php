@@ -180,6 +180,8 @@ final class MatchmakingCore
 
     private static function normalize(string $sValue): string
     {
-        return strtolower(trim($sValue));
+        // City is free-typed, so collapse internal whitespace too ("New  York" == "New York")
+        // before comparing; otherwise honest same-city matches are silently missed.
+        return strtolower(trim(preg_replace('/\s+/', ' ', $sValue)));
     }
 }
