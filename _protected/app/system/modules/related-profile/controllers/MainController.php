@@ -14,8 +14,13 @@ class MainController extends Controller
 {
     public const MAX_PROFILES = 5;
 
-    // Wider pool fetched from SQL, then re-ranked by compatibility score
-    public const MAX_CANDIDATES = 30;
+    /*
+     * The SQL pool is fetched in the model's default order (recent activity), then re-ranked by
+     * compatibility. Fetching several times more candidates than we display gives the scorer real
+     * headroom, so a highly-compatible match still surfaces even when it isn't the most recently active.
+     */
+    public const CANDIDATE_POOL_MULTIPLIER = 12;
+    public const MAX_CANDIDATES = self::MAX_PROFILES * self::CANDIDATE_POOL_MULTIPLIER;
 
     /** @var UserCoreModel */
     private $oUserModel;
