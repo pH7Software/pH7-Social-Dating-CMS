@@ -155,7 +155,7 @@ class UserDesignCoreModel extends Design
 
             echo '<li>';
             echo '<a rel="nofollow" href="', $this->oUser->getProfileSignupLink($oUser->username, $sFirstName, $oUser->sex), '">';
-            echo '<img src="', $this->getUserAvatar($oUser->username, $oUser->sex, self::PROFILE_BLOCK_AVATAR_SIZE), '" alt="', $sTitleInfo, '" title="', $sTitleInfo, '" />';
+            echo '<img src="', $this->getUserAvatar($oUser->username, $oUser->sex, self::PROFILE_BLOCK_AVATAR_SIZE), '" alt="', $sTitleInfo, '" title="', $sTitleInfo, '" loading="lazy" decoding="async" />';
             echo '</a>';
             echo '</li>';
         }
