@@ -20,7 +20,6 @@ error_reporting(0);
 //error_reporting(E_ALL & ~E_NOTICE & ~E_DEPRECATED & ~E_STRICT);
 ini_set('display_errors', PH7_ENV_DISABLED);
 ini_set('display_startup_errors', PH7_ENV_DISABLED);
-ini_set('track_errors', PH7_ENV_DISABLED);
 ini_set('html_errors', PH7_ENV_DISABLED);
 
 
