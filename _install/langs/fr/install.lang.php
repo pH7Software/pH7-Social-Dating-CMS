@@ -141,6 +141,7 @@ $LANG = [
     'warning_no_js' => 'Cette page Web est incompatible sans l\'activation de JavaScript.<br />
         Veuillez activer JavaScript via les options de votre navigateur Web.',
     'admin_url' => 'URL du panneau d\'administration',
+    'next_steps' => '👉 Et maintenant : connectez-vous à votre panneau d\'administration pour personnaliser votre site, activer les modules souhaités, ajouter quelques profils de départ et le mettre en ligne — la liste « Pour bien démarrer » vous guide pas à pas.',
     'powered' => 'Propulsé par',
     'loading' => 'Chargement en cours...',
 ];
