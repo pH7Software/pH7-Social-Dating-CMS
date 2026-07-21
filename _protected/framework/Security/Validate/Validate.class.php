@@ -124,7 +124,9 @@ class Validate
      */
     public function str($sValue, $iMin = null, $iMax = null)
     {
-        $sValue = filter_var($sValue, FILTER_SANITIZE_STRING);
+        // strip_tags() replaces FILTER_SANITIZE_STRING (deprecated in PHP 8.1): for this
+        // length/emptiness check it yields the same result without the deprecation notice.
+        $sValue = strip_tags((string)$sValue);
 
         if (!empty($sValue)) {
             if (!empty($iMin) && $this->oStr->length($sValue) < $iMin) {
