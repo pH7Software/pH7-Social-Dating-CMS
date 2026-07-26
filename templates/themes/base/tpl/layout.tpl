@@ -8,8 +8,8 @@
 
     <!-- Begin Title and Meta info -->
     <title>{if $page_title}{% $str->escape($str->upperFirst($page_title), true) %} - {site_name}{else}{site_name} - {slogan}{/if}</title>
-    <meta name="description" content="{% $str->escape($str->upperFirst($meta_description), true) %}" />
-    <meta name="keywords" content="{% $str->escape($meta_keywords, true) %}" />
+    <meta name="description" content="{% $str->escapeAttribute($str->upperFirst($meta_description)) %}" />
+    <meta name="keywords" content="{% $str->escapeAttribute($meta_keywords) %}" />
     {main_include 'social-meta-tags.inc.tpl'}
 
     {{
@@ -23,16 +23,16 @@
       ]
     }}
     <script type="application/ld+json">{% json_encode($aJsonLdWebsite, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) %}</script>
-    <meta name="robots" content="{meta_robots}" />
+    <meta name="robots" content="{% $str->escapeAttribute($meta_robots) %}" />
     <link rel="icon" href="{url_relative}favicon.ico" />
     <link rel="canonical" href="{current_url}" />
     <link rel="author" href="{url_root}humans.txt" />
     {if !$is_user_auth}{{ $design->regionalUrls() }}{/if}
-    <meta name="author" content="{meta_author}" />
-    <meta name="copyright" content="{meta_copyright}" />
-    <meta name="category" content="{meta_category}" />
-    <meta name="rating" content="{meta_rating}" />
-    <meta name="distribution" content="{meta_distribution}" />
+    <meta name="author" content="{% $str->escapeAttribute($meta_author) %}" />
+    <meta name="copyright" content="{% $str->escapeAttribute($meta_copyright) %}" />
+    <meta name="category" content="{% $str->escapeAttribute($meta_category) %}" />
+    <meta name="rating" content="{% $str->escapeAttribute($meta_rating) %}" />
+    <meta name="distribution" content="{% $str->escapeAttribute($meta_distribution) %}" />
     {if $header}{header}{/if}
 
     {if $is_pwa_enabled}

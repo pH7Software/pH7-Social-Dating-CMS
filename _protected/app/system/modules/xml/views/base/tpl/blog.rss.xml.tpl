@@ -14,9 +14,9 @@
       {if !empty($post->updatedDate)}
         <lastBuildDate>{% DateFormat::getRss($post->updatedDate) %}</lastBuildDate>
       {/if}
-      <description><![CDATA[{% $post->content %}]]></description>
-      <language>{% $post->langId %}</language>
-      <copyright>{% $post->metaCopyright %}</copyright>
+      <description><![CDATA[{% escape($post->content) %}]]></description>
+      <language>{% escape($post->langId) %}</language>
+      <copyright>{% escape($post->metaCopyright) %}</copyright>
     </item>
   {/each}
 </channel>

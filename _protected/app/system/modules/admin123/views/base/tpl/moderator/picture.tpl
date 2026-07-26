@@ -4,8 +4,8 @@
             {{ $action = ($picture->approved == 1) ? 'disapprovedphoto' : 'approvedphoto' }}
 
             <div class="thumb_photo">
-                <a href="{url_data_sys_mod}picture/img/{% $picture->username %}/{% $picture->albumId %}/{%  $file = str_replace('original', '1000',  $picture->file) %}" title="{% $picture->title %}" data-popup="image">
-                    <img src="{url_data_sys_mod}picture/img/{% $picture->username %}/{% $picture->albumId %}/{%  $file = str_replace('original', '400',  $picture->file) %}" alt="{% $picture->title %}" title="{% $picture->title %}" />
+                <a href="{url_data_sys_mod}picture/img/{% $picture->username %}/{% $picture->albumId %}/{%  $file = str_replace('original', '1000',  $picture->file) %}" title="{% $str->escapeAttribute($picture->title) %}" data-popup="image">
+                    <img src="{url_data_sys_mod}picture/img/{% $picture->username %}/{% $picture->albumId %}/{%  $file = str_replace('original', '400',  $picture->file) %}" alt="{% $str->escapeAttribute($picture->title) %}" title="{% $str->escapeAttribute($picture->title) %}" />
                 </a>
                 <p class="italic">
                     {lang 'Posted by'} {{ $design->getProfileLink($picture->username) }}<br />

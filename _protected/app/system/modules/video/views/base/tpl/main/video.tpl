@@ -1,10 +1,10 @@
 <div class="center">
     {if empty($error)}
-        <h2 class="s_bMarg">{% Framework\Security\Ban\Ban::filterWord($video->title) %}</h2>
+        <h2 class="s_bMarg">{% escape(Framework\Security\Ban\Ban::filterWord($video->title)) %}</h2>
         {{ VideoDesign::generate($video, VideoDesign::MOVIE_MEDIA_MODE, '100%', 440) }}
 
         <p>
-            {% nl2br(Framework\Parse\Emoticon::init(Framework\Security\Ban\Ban::filterWord($video->description))) %}
+            {% nl2br(Framework\Parse\Emoticon::init(escape(Framework\Security\Ban\Ban::filterWord($video->description)))) %}
         </p>
         <p class="italic">
             {lang 'Album created %0%', Framework\Date\Various::textTimeStamp($video->createdDate)}
