@@ -18,7 +18,7 @@
 
         <p>
             {% Framework\Parse\Emoticon::init(
-                Framework\Security\Ban\Ban::filterWord($post->message)
+                Framework\Security\Ban\Ban::filterWord(escape($post->message))
             ) %}
         </p>
 
@@ -67,7 +67,7 @@
                     <p>
                         {% Framework\Parse\Emoticon::init(
                             Framework\Parse\User::atUsernameToLink(
-                                Framework\Security\Ban\Ban::filterWord($msg->message)
+                                Framework\Security\Ban\Ban::filterWord(escape($msg->message))
                             )
                         ) %}
                     </p>
