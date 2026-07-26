@@ -1,6 +1,6 @@
 <?php
 /**
- * @title            Purifer Class
+ * @title            HTML Purifier Class
  *
  * @author           Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright        (c) 2013-2019, Pierre-Henry Soria. All Rights Reserved.
@@ -12,14 +12,35 @@ namespace PH7\Framework\Security\Validate;
 
 defined('PH7') or exit('Restricted access');
 
-/*
- * In developing!
- * In the near future it is possible that this class overrides the Filter class to no longer depend on CodeIgniter.
- * You can contribute too! => https://github.com/pH7Software/pH7-Social-Dating-CMS
- */
-
-class Purifer extends Xss
+class Purifier extends Xss
 {
+    private static ?\HTMLPurifier $oSharedPurifier = null;
+
+    private \HTMLPurifier $oPurifier;
+
+    public function __construct()
+    {
+        if (self::$oSharedPurifier === null) {
+            $oConfig = \HTMLPurifier_Config::createDefault();
+            $oConfig->set('Core.Encoding', PH7_ENCODING);
+            $oConfig->set('Cache.DefinitionImpl', null);
+            $oConfig->set('Attr.EnableID', false);
+            $oConfig->set('HTML.SafeIframe', false);
+            $oConfig->set(
+                'URI.AllowedSchemes',
+                [
+                    'http' => true,
+                    'https' => true,
+                    'mailto' => true
+                ]
+            );
+
+            self::$oSharedPurifier = new \HTMLPurifier($oConfig);
+        }
+
+        $this->oPurifier = self::$oSharedPurifier;
+    }
+
     /**
      * Clean a string against XSS vulnerabilities.
      *
@@ -30,5 +51,10 @@ class Purifer extends Xss
     public function xssClean($mStr)
     {
         return is_array($mStr) ? $this->arrayClean($mStr) : $this->clean($mStr);
+    }
+
+    protected function clean($sValue)
+    {
+        return $this->oPurifier->purify((string)$sValue);
     }
 }
