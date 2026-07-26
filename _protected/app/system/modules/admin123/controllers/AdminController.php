@@ -126,6 +126,8 @@ class AdminController extends Controller
 
     public function delete()
     {
+        $this->requireActionToken(PH7_ADMIN_MOD, 'admin', 'delete');
+
         try {
             $aData = explode('_', $this->httpRequest->post('id'));
             $iId = (int)$aData[0];

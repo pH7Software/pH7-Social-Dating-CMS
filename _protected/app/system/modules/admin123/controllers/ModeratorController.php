@@ -173,6 +173,8 @@ class ModeratorController extends Controller
 
     public function approvedPictureAlbum(): void
     {
+        $this->requireModeratorActionToken(__FUNCTION__);
+
         if ($this->oModeratorModel->approvedPictureAlbum(
             $this->httpRequest->post('album_id'),
             self::STR_APPROVE_STATUS
@@ -200,6 +202,8 @@ class ModeratorController extends Controller
 
     public function approvedPhoto(): void
     {
+        $this->requireModeratorActionToken(__FUNCTION__);
+
         if ($this->oModeratorModel->approvedPicture(
             $this->httpRequest->post('picture_id'),
             self::STR_APPROVE_STATUS
@@ -227,6 +231,8 @@ class ModeratorController extends Controller
 
     public function approvedVideoAlbum(): void
     {
+        $this->requireModeratorActionToken(__FUNCTION__);
+
         if ($this->oModeratorModel->approvedVideoAlbum(
             $this->httpRequest->post('album_id'),
             self::STR_APPROVE_STATUS
@@ -254,6 +260,8 @@ class ModeratorController extends Controller
 
     public function approvedVideo(): void
     {
+        $this->requireModeratorActionToken(__FUNCTION__);
+
         if ($this->oModeratorModel->approvedVideo(
             $this->httpRequest->post('video_id'),
             self::STR_APPROVE_STATUS
@@ -281,6 +289,8 @@ class ModeratorController extends Controller
 
     public function approvedAvatar(): void
     {
+        $this->requireModeratorActionToken(__FUNCTION__);
+
         if ($this->oModeratorModel->approvedAvatar(
             $this->httpRequest->post('id'),
             self::INT_APPROVE_STATUS
@@ -308,6 +318,8 @@ class ModeratorController extends Controller
 
     public function approvedBackground(): void
     {
+        $this->requireModeratorActionToken(__FUNCTION__);
+
         if ($this->oModeratorModel->approvedBackground(
             $this->httpRequest->post('id'),
             self::INT_APPROVE_STATUS
@@ -335,6 +347,8 @@ class ModeratorController extends Controller
 
     public function disapprovedPictureAlbum(): void
     {
+        $this->requireModeratorActionToken(__FUNCTION__);
+
         if ($this->oModeratorModel->approvedPictureAlbum(
             $this->httpRequest->post('album_id'),
             self::STR_DISAPPROVE_STATUS
@@ -362,6 +376,8 @@ class ModeratorController extends Controller
 
     public function disapprovedPhoto(): void
     {
+        $this->requireModeratorActionToken(__FUNCTION__);
+
         if ($this->oModeratorModel->approvedPicture(
             $this->httpRequest->post('picture_id'),
             self::STR_DISAPPROVE_STATUS
@@ -389,6 +405,8 @@ class ModeratorController extends Controller
 
     public function disapprovedVideoAlbum(): void
     {
+        $this->requireModeratorActionToken(__FUNCTION__);
+
         if ($this->oModeratorModel->approvedVideoAlbum(
             $this->httpRequest->post('album_id'),
             self::STR_DISAPPROVE_STATUS
@@ -416,6 +434,8 @@ class ModeratorController extends Controller
 
     public function disapprovedVideo(): void
     {
+        $this->requireModeratorActionToken(__FUNCTION__);
+
         if ($this->oModeratorModel->approvedVideo(
             $this->httpRequest->post('video_id'),
             self::STR_DISAPPROVE_STATUS
@@ -443,6 +463,8 @@ class ModeratorController extends Controller
 
     public function disapprovedAvatar(): void
     {
+        $this->requireModeratorActionToken(__FUNCTION__);
+
         if ($this->oModeratorModel->approvedAvatar(
             $this->httpRequest->post('id'),
             self::INT_DISAPPROVE_STATUS
@@ -470,6 +492,8 @@ class ModeratorController extends Controller
 
     public function disapprovedBackground(): void
     {
+        $this->requireModeratorActionToken(__FUNCTION__);
+
         if ($this->oModeratorModel->approvedBackground(
             $this->httpRequest->post('id'),
             self::INT_DISAPPROVE_STATUS
@@ -497,6 +521,8 @@ class ModeratorController extends Controller
 
     public function deletePictureAlbum(): void
     {
+        $this->requireModeratorActionToken(__FUNCTION__);
+
         $iAlbumId = (int)$this->httpRequest->post('album_id');
         $sUsername = (string)$this->httpRequest->post('username');
         $sSafeUsername = File::getFileBasename($sUsername);
@@ -532,6 +558,8 @@ class ModeratorController extends Controller
 
     public function deletePhoto(): void
     {
+        $this->requireModeratorActionToken(__FUNCTION__);
+
         $bPicture = (new PictureCoreModel)->deletePhoto(
             $this->httpRequest->post('id'),
             $this->httpRequest->post('album_id'),
@@ -567,6 +595,8 @@ class ModeratorController extends Controller
 
     public function deleteVideoAlbum(): void
     {
+        $this->requireModeratorActionToken(__FUNCTION__);
+
         $iAlbumId = (int)$this->httpRequest->post('album_id');
         $sUsername = (string)$this->httpRequest->post('username');
         $sSafeUsername = File::getFileBasename($sUsername);
@@ -602,6 +632,8 @@ class ModeratorController extends Controller
 
     public function deleteVideo(): void
     {
+        $this->requireModeratorActionToken(__FUNCTION__);
+
         $bVideo = (new VideoCoreModel)->deleteVideo(
             $this->httpRequest->post('id'),
             $this->httpRequest->post('album_id'),
@@ -637,6 +669,8 @@ class ModeratorController extends Controller
 
     public function deleteAvatar(): void
     {
+        $this->requireModeratorActionToken(__FUNCTION__);
+
         (new Admin)->deleteAvatar(
             $this->httpRequest->post('id'),
             $this->httpRequest->post('username')
@@ -657,6 +691,8 @@ class ModeratorController extends Controller
 
     public function deleteBackground(): void
     {
+        $this->requireModeratorActionToken(__FUNCTION__);
+
         (new Admin)->deleteBackground(
             $this->httpRequest->post('id'),
             $this->httpRequest->post('username')
@@ -671,6 +707,11 @@ class ModeratorController extends Controller
             ),
             $this->sMsg
         );
+    }
+
+    private function requireModeratorActionToken(string $sAction): void
+    {
+        $this->requireActionToken(PH7_ADMIN_MOD, 'moderator', strtolower($sAction));
     }
 
     private function notifyUserForApprovedContent(): void

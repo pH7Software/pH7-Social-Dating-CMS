@@ -45,6 +45,8 @@ class AdminController extends MainController
 
     public function approved()
     {
+        $this->requireActionToken('note', 'admin', 'approved');
+
         $iNoteId = $this->httpRequest->post('note_id', 'int');
 
         if (isset($iNoteId) && $this->oNoteModel->approved($iNoteId)) {
@@ -62,6 +64,8 @@ class AdminController extends MainController
 
     public function disapproved()
     {
+        $this->requireActionToken('note', 'admin', 'disapproved');
+
         $iNoteId = $this->httpRequest->post('note_id', 'int');
 
         if (isset($iNoteId) && $this->oNoteModel->approved($iNoteId, 0)) {

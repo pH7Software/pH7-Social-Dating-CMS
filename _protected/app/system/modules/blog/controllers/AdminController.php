@@ -38,6 +38,8 @@ class AdminController extends MainController
 
     public function delete()
     {
+        $this->requireActionToken('blog', 'admin', 'delete');
+
         $iId = $this->httpRequest->post('id');
 
         CommentCoreModel::deleteRecipient($iId, 'blog');

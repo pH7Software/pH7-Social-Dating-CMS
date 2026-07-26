@@ -66,6 +66,8 @@ class FieldController extends Controller
 
     public function delete()
     {
+        $this->requireActionToken('field', 'field', 'delete');
+
         $sMod = $this->httpRequest->post('mod');
         $sName = $this->httpRequest->post('name');
 

@@ -67,6 +67,8 @@ class AdminController extends MainController
 
     public function deleteMembership()
     {
+        $this->requireActionToken('payment', 'admin', 'deletemembership');
+
         $iMembershipId = $this->httpRequest->post('id', 'int');
 
         if (GroupId::undeletable($iMembershipId)) {

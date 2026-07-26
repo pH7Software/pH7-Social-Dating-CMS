@@ -80,6 +80,7 @@ class SettingController extends Controller
         $this->view->h2_title = t('Change your Profile Photo');
 
         if ($this->httpRequest->postExists('del')) {
+            $this->requireSettingActionToken('avatar');
             $this->removeAvatar();
         }
 
@@ -91,6 +92,7 @@ class SettingController extends Controller
         $this->setTitle(t('Profile Wallpaper'));
 
         if ($this->httpRequest->postExists('del')) {
+            $this->requireSettingActionToken('design');
             $this->removeWallpaper();
         }
 
@@ -193,6 +195,17 @@ class SettingController extends Controller
             null,
             t('Your wallpaper has been successfully deleted!')
         );
+    }
+
+    private function requireSettingActionToken(string $sAction): void
+    {
+        if ($this->bAdminLogged) {
+            $this->requireCurrentUrlToken();
+
+            return;
+        }
+
+        $this->requireActionToken('user', 'setting', $sAction);
     }
 
     /**

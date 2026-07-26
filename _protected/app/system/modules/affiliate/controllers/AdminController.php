@@ -206,6 +206,8 @@ class AdminController extends Controller implements UserModeratable
 
     public function approve(): void
     {
+        $this->requireActionToken('affiliate', 'admin', 'approve');
+
         Header::redirect(
             Uri::get('affiliate', 'admin', 'browse'),
             $this->moderateRegistration($this->httpRequest->post('id', Type::INTEGER), 1)
@@ -214,6 +216,8 @@ class AdminController extends Controller implements UserModeratable
 
     public function disapprove(): void
     {
+        $this->requireActionToken('affiliate', 'admin', 'disapprove');
+
         Header::redirect(
             Uri::get('affiliate', 'admin', 'browse'),
             $this->moderateRegistration($this->httpRequest->post('id', Type::INTEGER), 0)
@@ -262,6 +266,8 @@ class AdminController extends Controller implements UserModeratable
 
     public function ban(): void
     {
+        $this->requireActionToken('affiliate', 'admin', 'ban');
+
         $iId = $this->httpRequest->post('id');
 
         if ($this->oAffModel->ban($iId, 1, DbTableName::AFFILIATE)) {
@@ -279,6 +285,8 @@ class AdminController extends Controller implements UserModeratable
 
     public function unBan(): void
     {
+        $this->requireActionToken('affiliate', 'admin', 'unban');
+
         $iId = $this->httpRequest->post('id');
 
         if ($this->oAffModel->ban($iId, 0, DbTableName::AFFILIATE)) {
@@ -296,6 +304,8 @@ class AdminController extends Controller implements UserModeratable
 
     public function delete(): void
     {
+        $this->requireActionToken('affiliate', 'admin', 'delete');
+
         $aData = explode('_', $this->httpRequest->post('id'));
         $iId = (int)$aData[0];
         $sUsername = (string)$aData[1];

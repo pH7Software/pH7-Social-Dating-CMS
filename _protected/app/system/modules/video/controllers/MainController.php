@@ -200,6 +200,8 @@ class MainController extends Controller
 
     public function deleteVideo()
     {
+        $this->requireActionToken('video', 'main', 'deletevideo');
+
         $iVideoId = $this->httpRequest->post('video_id', Type::INTEGER);
 
         CommentCoreModel::deleteRecipient($iVideoId, 'video');
@@ -232,6 +234,8 @@ class MainController extends Controller
 
     public function deleteAlbum()
     {
+        $this->requireActionToken('video', 'main', 'deletealbum');
+
         $this->oVideoModel->deleteVideo($this->session->get('member_id'), $this->httpRequest->post('album_id', Type::INTEGER));
         $this->oVideoModel->deleteAlbum($this->session->get('member_id'), $this->httpRequest->post('album_id', Type::INTEGER));
         $sDir = PH7_PATH_PUBLIC_DATA_SYS_MOD . 'video/file/' . $this->session->get('member_username') . PH7_DS . $this->httpRequest->post('album_id') . PH7_DS;

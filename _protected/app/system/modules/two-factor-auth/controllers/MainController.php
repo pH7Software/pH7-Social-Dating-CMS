@@ -50,6 +50,10 @@ class MainController extends Controller
         $this->view->mod = $this->sMod;
 
         $this->iIsEnabled = (int)$this->o2FactorModel->isEnabled($this->iProfileId);
+        if ($this->httpRequest->postExists('status') || $this->httpRequest->postExists('get_backup_code')) {
+            $this->requireActionToken('two-factor-auth', 'main', 'setup/' . $this->sMod);
+        }
+
         if ($this->httpRequest->postExists('status')) {
             $this->update2FaStatus();
         }

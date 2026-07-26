@@ -94,6 +94,8 @@ class AdminController extends Controller
 
     public function delete(): void
     {
+        $this->requireActionToken('report', 'admin', 'delete');
+
         $this->bStatus = $this->oReportModel->delete($this->httpRequest->post('id', Type::INTEGER));
         $this->sMsg = $this->bStatus ? t('The report has been deleted.') : t('A problem occurred during the deleted of the reporting.');
 
