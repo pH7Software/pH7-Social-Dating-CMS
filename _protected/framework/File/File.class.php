@@ -104,6 +104,20 @@ class File
         return $sExtension !== '' ? '.' . strtolower($sExtension) : '';
     }
 
+    /**
+     * Return only the final path component for both Unix and Windows input.
+     */
+    public static function getFileBasename(string $sFile): string
+    {
+        if (strpos($sFile, "\0") !== false) {
+            return '';
+        }
+
+        $sBasename = basename(str_replace('\\', PH7_SH, $sFile));
+
+        return in_array($sBasename, ['', '.', '..'], true) ? '' : $sBasename;
+    }
+
     public static function isPathInsideDirectory(string $sFilePath, string $sDirectoryPath): bool
     {
         return strpos($sFilePath . PH7_DS, rtrim($sDirectoryPath, PH7_DS) . PH7_DS) === 0;

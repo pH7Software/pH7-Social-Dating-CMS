@@ -9,6 +9,7 @@
 namespace PH7;
 
 use PH7\Framework\Cache\Cache;
+use PH7\Framework\File\File;
 use PH7\Framework\Layout\Html\Design;
 use PH7\Framework\Mail\InvalidEmailException;
 use PH7\Framework\Mail\Mail;
@@ -496,12 +497,18 @@ class ModeratorController extends Controller
 
     public function deletePictureAlbum(): void
     {
+        $iAlbumId = (int)$this->httpRequest->post('album_id');
+        $sUsername = (string)$this->httpRequest->post('username');
+        $sSafeUsername = File::getFileBasename($sUsername);
+
         if (
-            (new PictureCoreModel)->deletePhoto($this->httpRequest->post('id'), $this->httpRequest->post('album_id')) &&
-            $this->oModeratorModel->deletePictureAlbum($this->httpRequest->post('album_id'))
+            (new PictureCoreModel)->deletePhoto($this->httpRequest->post('id'), $iAlbumId) &&
+            $this->oModeratorModel->deletePictureAlbum($iAlbumId)
         ) {
-            $sDir = PH7_PATH_PUBLIC_DATA_SYS_MOD . 'picture/img/' . $this->httpRequest->post('username') . PH7_DS . $this->httpRequest->post('album_id') . PH7_DS;
-            $this->file->deleteDir($sDir);
+            if ($sSafeUsername !== '' && $sSafeUsername === $sUsername && $iAlbumId > 0) {
+                $sDir = PH7_PATH_PUBLIC_DATA_SYS_MOD . 'picture/img/' . $sSafeUsername . PH7_DS . $iAlbumId . PH7_DS;
+                $this->file->deleteDir($sDir);
+            }
             PictureCore::clearCache();
             $this->notifyUserForDisapprovedContent();
 
@@ -560,12 +567,18 @@ class ModeratorController extends Controller
 
     public function deleteVideoAlbum(): void
     {
+        $iAlbumId = (int)$this->httpRequest->post('album_id');
+        $sUsername = (string)$this->httpRequest->post('username');
+        $sSafeUsername = File::getFileBasename($sUsername);
+
         if (
-            (new VideoCoreModel)->deleteVideo($this->httpRequest->post('id'), $this->httpRequest->post('album_id')) &&
-            $this->oModeratorModel->deleteVideoAlbum($this->httpRequest->post('album_id'))
+            (new VideoCoreModel)->deleteVideo($this->httpRequest->post('id'), $iAlbumId) &&
+            $this->oModeratorModel->deleteVideoAlbum($iAlbumId)
         ) {
-            $sDir = PH7_PATH_PUBLIC_DATA_SYS_MOD . 'video/file/' . $this->httpRequest->post('username') . PH7_DS . $this->httpRequest->post('album_id') . PH7_DS;
-            $this->file->deleteDir($sDir);
+            if ($sSafeUsername !== '' && $sSafeUsername === $sUsername && $iAlbumId > 0) {
+                $sDir = PH7_PATH_PUBLIC_DATA_SYS_MOD . 'video/file/' . $sSafeUsername . PH7_DS . $iAlbumId . PH7_DS;
+                $this->file->deleteDir($sDir);
+            }
             VideoCore::clearCache();
             $this->notifyUserForDisapprovedContent();
 

@@ -46,15 +46,31 @@ class VideoCore
         $sThumbExt = self::DEFAULT_THUMBNAIL_EXT
     ): void
     {
-        $sDir = PH7_PATH_PUBLIC_DATA_SYS_MOD . 'video/file/' . $sUsername . PH7_DS . $iAlbumId . PH7_DS;
+        $sUsername = (string)$sUsername;
+        $sSafeUsername = File::getFileBasename($sUsername);
+        $sVideoLink = (string)$sVideoLink;
+        $sSafeVideoLink = File::getFileBasename($sVideoLink);
+        $iAlbumId = (int)$iAlbumId;
+
+        if (
+            $sSafeUsername === '' ||
+            $sSafeUsername !== $sUsername ||
+            $sSafeVideoLink === '' ||
+            $sSafeVideoLink !== $sVideoLink ||
+            $iAlbumId < 1
+        ) {
+            return;
+        }
+
+        $sDir = PH7_PATH_PUBLIC_DATA_SYS_MOD . 'video/file/' . $sSafeUsername . PH7_DS . $iAlbumId . PH7_DS;
 
         $oFile = new File;
-        $sThumbName = $oFile->getFileWithoutExt($sVideoLink);
+        $sThumbName = $oFile->getFileWithoutExt($sSafeVideoLink);
 
         // Delete video file
         $aVideoExt = explode(',', $sVideoExt);
         foreach ($aVideoExt as $sExt) {
-            $oFile->deleteFile($sDir . $sVideoLink . $sExt);
+            $oFile->deleteFile($sDir . $sSafeVideoLink . $sExt);
         }
 
         // Delete thumbnail

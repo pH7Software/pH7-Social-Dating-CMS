@@ -22,16 +22,32 @@ class PictureCore
      */
     public function deletePhoto($iAlbumId, $sUsername, $sPictureLink)
     {
-        $sDir = PH7_PATH_PUBLIC_DATA_SYS_MOD . 'picture/img/' . $sUsername . PH7_DS . $iAlbumId . PH7_DS;
+        $sUsername = (string)$sUsername;
+        $sSafeUsername = File::getFileBasename($sUsername);
+        $sPictureLink = (string)$sPictureLink;
+        $sSafePictureLink = File::getFileBasename($sPictureLink);
+        $iAlbumId = (int)$iAlbumId;
+
+        if (
+            $sSafeUsername === '' ||
+            $sSafeUsername !== $sUsername ||
+            $sSafePictureLink === '' ||
+            $sSafePictureLink !== $sPictureLink ||
+            $iAlbumId < 1
+        ) {
+            return;
+        }
+
+        $sDir = PH7_PATH_PUBLIC_DATA_SYS_MOD . 'picture/img/' . $sSafeUsername . PH7_DS . $iAlbumId . PH7_DS;
 
         /** Array to the new format (>= PHP5.4) **/
         $aFiles = [
-            $sDir . $sPictureLink, // Original
-            $sDir . str_replace('original', '400', $sPictureLink),
-            $sDir . str_replace('original', '600', $sPictureLink),
-            $sDir . str_replace('original', '800', $sPictureLink),
-            $sDir . str_replace('original', '1000', $sPictureLink),
-            $sDir . str_replace('original', '1200', $sPictureLink)
+            $sDir . $sSafePictureLink, // Original
+            $sDir . str_replace('original', '400', $sSafePictureLink),
+            $sDir . str_replace('original', '600', $sSafePictureLink),
+            $sDir . str_replace('original', '800', $sSafePictureLink),
+            $sDir . str_replace('original', '1000', $sSafePictureLink),
+            $sDir . str_replace('original', '1200', $sSafePictureLink)
         ];
 
         (new File)->deleteFile($aFiles);
