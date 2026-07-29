@@ -1,9 +1,9 @@
 <?php
+
 /**
  * @author         Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright      (c) 2012-2023, Pierre-Henry Soria. All Rights Reserved.
  * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
- * @package        PH7 / App / System / Module / Admin / From
  */
 
 namespace PH7;
@@ -39,7 +39,7 @@ class SettingForm
     {
         if (isset($_POST['submit_setting'])) {
             if (\PFBC\Form::isValid($_POST['submit_setting'])) {
-                new SettingFormProcess;
+                new SettingFormProcess();
             }
 
             Header::redirect();
@@ -57,11 +57,10 @@ class SettingForm
         $oForm->addElement(new Hidden('submit_setting', 'form_setting'));
         $oForm->addElement(new Token('setting'));
 
-
         /********** General Settings **********/
         $oForm->addElement(new HTMLExternal('<div class="content" id="general"><div class="col-md-10"><h2 class="underline">' . t('Global Settings') . '</h2>'));
 
-        $oFile = new File;
+        $oFile = new File();
 
         $oForm->addElement(new Textbox(t('Site Name:'), 'site_name', ['value' => DbConfig::getSetting('siteName'), 'validation' => new Str(2, 50), 'required' => 1]));
 
@@ -199,14 +198,12 @@ class SettingForm
 
         unset($oFile);
 
-
         /********** Logo Settings **********/
         $oForm->addElement(new HTMLExternal('</div></div><div class="content" id="icon"><div class="col-md-10"><h2 class="underline">' . t('Icon Logo') . '</h2>'));
 
         $oForm->addElement(new \PFBC\Element\File('', 'logo', ['description' => t('Add your small logo/icon that represents/distinguishes the best your site/concept/brand.'), 'accept' => 'image/*']));
 
         $oForm->addElement(new HTMLExternal('<div class="s_marg"><img src="' . PH7_URL_TPL . PH7_TPL_NAME . PH7_SH . PH7_IMG . 'logo.png?v=' . File::version(PH7_PATH_TPL . PH7_TPL_NAME . PH7_DS . PH7_IMG . 'logo.png') . '" alt="' . t('Icon Logo') . '" title="' . t('The current logo of your website.') . '" /></div>'));
-
 
         /********** Design (Color) **********/
         $oForm->addElement(new HTMLExternal('</div></div><div class="content" id="design"><div class="col-md-10"><h2 class="underline">' . t('Override Website Colors') . '</h2>'));
@@ -230,9 +227,8 @@ class SettingForm
         $oForm->addElement(new Color(t('Links Hover:'), 'link_hover_color', ['value' => DbConfig::getSetting('linkHoverColor')]));
 
         $oForm->addElement(new HTMLExternal(
-            '<div class="right"><a href="' . Uri::get(PH7_ADMIN_MOD, 'setting', 'resetcolor', (new SecurityToken)->url(), false) . '">' . t('Reset Colors') . '</a></div>'
+            '<div class="right"><a href="' . Uri::get(PH7_ADMIN_MOD, 'setting', 'resetcolor', (new SecurityToken())->url(), false) . '">' . t('Reset Colors') . '</a></div>'
         ));
-
 
         /********** Registration **********/
         $oForm->addElement(new HTMLExternal('</div></div><div class="content" id="registration"><div class="col-md-10"><h2 class="underline">' . t('Registration') . '</h2>'));
@@ -290,7 +286,6 @@ class SettingForm
 
         $oForm->addElement(new Select(t('Default Membership Group:'), 'default_membership_group_id', self::getMembershipGroups(), ['description' => t('The default membership where the users will be added to.'), 'value' => DbConfig::getSetting('defaultMembershipGroupId'), 'required' => 1]));
 
-
         /********** Picture and Video **********/
         $oForm->addElement(new HTMLExternal('</div></div><div class="content" id="pic_vid"><div class="col-md-10"><h2 class="underline">' . t('Picture and Video') . '</h2>'));
 
@@ -309,7 +304,6 @@ class SettingForm
 
             $oForm->addElement(new Select(t('Autoplay Video:'), 'autoplay_video', ['1' => t('Enable'), '0' => t('Disable')], ['value' => DbConfig::getSetting('autoplayVideo'), 'required' => 1]));
         }
-
 
         /********** Moderation **********/
         $oForm->addElement(new HTMLExternal('</div></div><div class="content" id="moderation"><div class="col-md-10"><h2 class="underline">' . t('Moderation') . '</h2>'));
@@ -332,7 +326,6 @@ class SettingForm
             $oForm->addElement(new Select(t('Videos Manual Approval:'), 'video_manual_approval', ['1' => t('Enable'), '0' => t('Disable')], ['value' => DbConfig::getSetting('videoManualApproval'), 'required' => 1]));
         }
 
-
         /********** Email **********/
         $oForm->addElement(new HTMLExternal('</div></div><div class="content" id="email"><div class="col-md-10"><h2 class="underline">' . t('Email Parameters') . '</h2>'));
 
@@ -343,7 +336,6 @@ class SettingForm
         $oForm->addElement(new Email(t('Feedback Email:'), 'feedback_email', ['value' => DbConfig::getSetting('feedbackEmail'), 'required' => 1]));
 
         $oForm->addElement(new Email(t('Return Email:'), 'return_email', ['description' => 'Usually noreply@yoursite.com', 'value' => DbConfig::getSetting('returnEmail'), 'required' => 1]));
-
 
         /********** Security **********/
         $oForm->addElement(new HTMLExternal('</div></div><div class="content" id="security"><div class="col-md-10"><h2 class="underline">' . t('Security') . '</h2>'));
@@ -388,8 +380,6 @@ class SettingForm
 
         $oForm->addElement(new Textbox(t('Indicate a word that will replace the banned word in <a href="%0%">the list</a>.', Uri::get(PH7_ADMIN_MOD, 'file', 'protectededit', 'app/configs/banned/word.txt', false)), 'ban_word_replace', ['value' => DbConfig::getSetting('banWordReplace'), 'required' => 1]));
 
-        $oForm->addElement(new Select(t('Enable/Disable CSRF security tokens in forms:'), 'security_token_forms', ['1' => t('Enable'), '0' => t('Disable')], ['description' => t('Sometimes this protection can be annoying for users if there are not fast enough to fulfill the forms. However, if disabled, your website can be vulnerable on CSRF attacks in forms.'), 'value' => DbConfig::getSetting('securityToken'), 'required' => 1]));
-
         $oForm->addElement(new Number(t('CSRF token lifetime:'), 'security_token_lifetime', ['description' => t('Time in seconds.'), 'value' => DbConfig::getSetting('securityTokenLifetime'), 'required' => 1]));
 
         $oForm->addElement(new Select(t('Protect for Users against session cookies hijacking:'), 'is_user_session_ip_check', ['1' => t('Yes (recommended for security reasons)'), '0' => t('No')], ['description' => t('This protection can cause problems for logged in users with dynamic IPs. Please disable if their IP changes frequently during their session.'), 'value' => DbConfig::getSetting('isUserSessionIpCheck'), 'required' => 1]));
@@ -401,7 +391,6 @@ class SettingForm
         $oForm->addElement(new Select(t('Protect for Admins against session cookies hijacking:'), 'is_admin_session_ip_check', ['1' => t('Yes (highly recommended for security reasons)'), '0' => t('No')], ['description' => t('This protection can cause problems for admins with dynamic IPs. Please disable if their IP changes frequently during their session.'), 'value' => DbConfig::getSetting('isAdminSessionIpCheck'), 'required' => 1]));
 
         $oForm->addElement(new Select(t('System against DDoS attacks:'), 'stop_DDoS', ['1' => t('Activate'), '0' => t('Deactivate')], ['description' => t('Enable it ONLY if you think your website has real DDoS attacks or if your server is highly overloaded.'), 'value' => DbConfig::getSetting('DDoS'), 'required' => 1]));
-
 
         /********** Spam **********/
         $oForm->addElement(new HTMLExternal('</div></div><div class="content" id="spam"><div class="col-md-10"><h2 class="underline">' . t('Spam') . '</h2>'));
@@ -463,7 +452,6 @@ class SettingForm
 
         $oForm->addElement(new Number(t('Delete old IM Messages:'), 'clean_messenger', ['description' => t('Delete IM messages older than X days. 0 to disable.'), 'value' => DbConfig::getSetting('cleanMessenger'), 'required' => 1]));
 
-
         /********** API **********/
         $oForm->addElement(
             new HTMLExternal(
@@ -499,7 +487,6 @@ class SettingForm
         );
 
         $oForm->addElement(new Number(t('User inactivity timeout:'), 'user_timeout', ['description' => t('The number of minutes that a member becomes inactive (offline).'), 'value' => DbConfig::getSetting('userTimeout'), 'required' => 1]));
-
 
         $oForm->addElement(new HTMLExternal('</div></div><script src="' . PH7_URL_STATIC . PH7_JS . 'tabs.js"></script><script>tabs(\'p\', [\'general\',\'icon\',\'registration\',\'pic_vid\',\'moderation\',\'email\',\'security\',\'spam\',\'design\',\'api\',\'automation\']);</script>'));
         $oForm->addElement(new Button(t('Save'), 'submit', ['icon' => 'check']));
@@ -552,7 +539,7 @@ class SettingForm
     {
         $aGroupNames = [];
 
-        $oGroupIds = (new AdminCoreModel)->getMemberships();
+        $oGroupIds = (new AdminCoreModel())->getMemberships();
         foreach ($oGroupIds as $iId) {
             $aGroupNames[$iId->groupId] = $iId->name;
         }
