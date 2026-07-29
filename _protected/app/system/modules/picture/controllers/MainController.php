@@ -203,8 +203,13 @@ class MainController extends Controller
         $iPictureId = $this->httpRequest->post('picture_id', Type::INTEGER);
         $iAlbumId = $this->httpRequest->post('album_id', Type::INTEGER);
         $iProfileId = (int)$this->session->get('member_id');
+        $sPictureLink = $this->oPictureModel->getOwnedPhotoFile(
+            $iPictureId,
+            $iAlbumId,
+            $iProfileId
+        );
 
-        if (!$this->oPictureModel->isPhotoOwnedBy($iPictureId, $iAlbumId, $iProfileId)) {
+        if ($sPictureLink === false) {
             Header::redirect(
                 Uri::get('picture', 'main', 'albums'),
                 t('The photo could not be removed.')
@@ -222,7 +227,7 @@ class MainController extends Controller
         (new Picture())->deletePhoto(
             $iAlbumId,
             $this->session->get('member_username'),
-            $this->httpRequest->post('picture_link')
+            $sPictureLink
         );
 
         Picture::clearCache();

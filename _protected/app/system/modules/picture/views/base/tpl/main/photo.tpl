@@ -23,7 +23,7 @@
         {if $is_user_auth AND $member_id == $picture->profileId}
             <div class="small">
                 <a href="{{ $design->url('picture', 'main', 'editphoto', "$picture->albumId,$picture->title,$picture->pictureId") }}">{lang 'Edit'}</a> |
-                {{ LinkCoreForm::display(t('Delete'), 'picture', 'main', 'deletephoto', array('album_title'=>$picture->name, 'album_id'=>$picture->albumId, 'picture_id'=>$picture->pictureId, 'picture_link'=>$picture->file)) }}
+                {{ LinkCoreForm::display(t('Delete'), 'picture', 'main', 'deletephoto', array('album_title'=>$picture->name, 'album_id'=>$picture->albumId, 'picture_id'=>$picture->pictureId)) }}
             </div>
         {/if}
 
