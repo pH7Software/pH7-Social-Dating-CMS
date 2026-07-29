@@ -115,7 +115,6 @@ class UserController extends MainController
                 ];
                 $iUserId = $this->oUserModel->add(escape($aValidData, true));
 
-                unset($aValidData['password']);
                 $aValidData['profile_id'] = $iUserId;
 
                 $this->oRest->response($this->set($aValidData));
@@ -142,7 +141,6 @@ class UserController extends MainController
                 $oUserData = $this->oUserModel->readProfile($iId);
                 $this->oUser->setAuth($oUserData, $this->oUserModel, $this->session, new SecurityModel());
 
-                unset($aData['password']);
                 $this->oRest->response($this->set($aData));
             } else {
                 $aResults = [
