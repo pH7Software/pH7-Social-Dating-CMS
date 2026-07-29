@@ -1,7 +1,7 @@
 <div class="center">
     {if empty($error)}
         {each $category in $categories}
-            <h2 class="s_tMarg underline">{% $category->title %}</h2>
+            <h2 class="s_tMarg underline">{% escape($category->title) %}</h2>
             {if AdminCore::auth()}
                 <a class="btn btn-default btn-sm" href="{{ $design->url('forum', 'admin', 'editcategory', $category->categoryId) }}">{lang 'Edit'}</a> | {{ $design->popupLinkConfirm(t('Delete'), 'forum', 'admin', 'deletecategory', $category->categoryId, 'btn btn-default btn-sm') }}<br /><br />
             {/if}
