@@ -73,7 +73,6 @@ final class LangTest extends TestCase
         $oLang = new Lang;
         $oReflection = new ReflectionClass(Lang::class);
         $oUserLangProp = $oReflection->getProperty('sUserLang');
-        $oUserLangProp->setAccessible(true);
 
         $this->assertSame('en_US', $oUserLangProp->getValue($oLang));
     }

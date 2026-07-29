@@ -97,13 +97,16 @@ class UserCore
             throw new ForbiddenActionException('You cannot delete this profile!');
         }
 
-        $oFile = new File;
-        $oFile->deleteDir(PH7_PATH_PUBLIC_DATA_SYS_MOD . 'user/avatar/' . PH7_IMG . $sUsername);
-        $oFile->deleteDir(PH7_PATH_PUBLIC_DATA_SYS_MOD . 'user/background/' . PH7_IMG . $sUsername);
-        $oFile->deleteDir(PH7_PATH_PUBLIC_DATA_SYS_MOD . 'picture/' . PH7_IMG . $sUsername);
-        $oFile->deleteDir(PH7_PATH_PUBLIC_DATA_SYS_MOD . 'video/file/' . $sUsername);
-        $oFile->deleteDir(PH7_PATH_PUBLIC_DATA_SYS_MOD . 'note/' . PH7_IMG . $sUsername);
-        unset($oFile);
+        $sSafeUsername = File::getFileBasename($sUsername);
+        if ($sSafeUsername !== '' && $sSafeUsername === $sUsername) {
+            $oFile = new File;
+            $oFile->deleteDir(PH7_PATH_PUBLIC_DATA_SYS_MOD . 'user/avatar/' . PH7_IMG . $sSafeUsername);
+            $oFile->deleteDir(PH7_PATH_PUBLIC_DATA_SYS_MOD . 'user/background/' . PH7_IMG . $sSafeUsername);
+            $oFile->deleteDir(PH7_PATH_PUBLIC_DATA_SYS_MOD . 'picture/' . PH7_IMG . $sSafeUsername);
+            $oFile->deleteDir(PH7_PATH_PUBLIC_DATA_SYS_MOD . 'video/file/' . $sSafeUsername);
+            $oFile->deleteDir(PH7_PATH_PUBLIC_DATA_SYS_MOD . 'note/' . PH7_IMG . $sSafeUsername);
+            unset($oFile);
+        }
 
         $oUserModel->delete($iProfileId, $sUsername);
 
@@ -217,26 +220,31 @@ class UserCore
     {
         // We start to delete the file before the data in the database if we could not delete the file since we would have lost the link to the file found in the database.
         $sGetAvatar = (new UserCoreModel)->getAvatar($iProfileId, null);
+        $sUsername = (string)$sUsername;
+        $sSafeUsername = File::getFileBasename($sUsername);
         $sFile = (string)$sGetAvatar->pic;
+        $sSafeFile = File::getFileBasename($sFile);
 
-        $oFile = new File;
-        $sExt = PH7_DOT . $oFile->getFileExt($sFile);
+        if ($sSafeUsername !== '' && $sSafeUsername === $sUsername && $sSafeFile !== '' && $sSafeFile === $sFile) {
+            $oFile = new File;
+            $sExt = PH7_DOT . $oFile->getFileExt($sSafeFile);
 
-        $sPath = PH7_PATH_PUBLIC_DATA_SYS_MOD . 'user/avatar/img/' . $sUsername . PH7_SH;
+            $sPath = PH7_PATH_PUBLIC_DATA_SYS_MOD . 'user/avatar/img/' . $sSafeUsername . PH7_SH;
 
-        /** Array to the new format (>= PHP5.4) **/
-        $aFiles = [
-            $sPath . $sFile,
-            $sPath . str_replace($sExt, '-' . self::AVATAR2_SIZE . $sExt, $sFile),
-            $sPath . str_replace($sExt, '-' . self::AVATAR3_SIZE . $sExt, $sFile),
-            $sPath . str_replace($sExt, '-' . self::AVATAR4_SIZE . $sExt, $sFile),
-            $sPath . str_replace($sExt, '-' . self::AVATAR5_SIZE . $sExt, $sFile),
-            $sPath . str_replace($sExt, '-' . self::AVATAR6_SIZE . $sExt, $sFile),
-            $sPath . str_replace($sExt, '-' . self::AVATAR7_SIZE . $sExt, $sFile),
-        ];
+            /** Array to the new format (>= PHP5.4) **/
+            $aFiles = [
+                $sPath . $sSafeFile,
+                $sPath . str_replace($sExt, '-' . self::AVATAR2_SIZE . $sExt, $sSafeFile),
+                $sPath . str_replace($sExt, '-' . self::AVATAR3_SIZE . $sExt, $sSafeFile),
+                $sPath . str_replace($sExt, '-' . self::AVATAR4_SIZE . $sExt, $sSafeFile),
+                $sPath . str_replace($sExt, '-' . self::AVATAR5_SIZE . $sExt, $sSafeFile),
+                $sPath . str_replace($sExt, '-' . self::AVATAR6_SIZE . $sExt, $sSafeFile),
+                $sPath . str_replace($sExt, '-' . self::AVATAR7_SIZE . $sExt, $sSafeFile),
+            ];
 
-        $oFile->deleteFile($aFiles);
-        unset($oFile);
+            $oFile->deleteFile($aFiles);
+            unset($oFile);
+        }
 
         (new UserCoreModel)->deleteAvatar($iProfileId);
 
@@ -312,8 +320,15 @@ class UserCore
          * Second, Remove it in the database,
          * With the opposite order, we won't have the file path from the database to be able to delete the actual file.
          */
-        $sFile = (new UserCoreModel)->getBackground($iProfileId, null);
-        (new File)->deleteFile(PH7_PATH_PUBLIC_DATA_SYS_MOD . 'user/background/img/' . $sUsername . PH7_SH . $sFile);
+        $sUsername = (string)$sUsername;
+        $sSafeUsername = File::getFileBasename($sUsername);
+        $sFile = (string)(new UserCoreModel)->getBackground($iProfileId, null);
+        $sSafeFile = File::getFileBasename($sFile);
+        if ($sSafeUsername !== '' && $sSafeUsername === $sUsername && $sSafeFile !== '' && $sSafeFile === $sFile) {
+            (new File)->deleteFile(
+                PH7_PATH_PUBLIC_DATA_SYS_MOD . 'user/background/img/' . $sSafeUsername . PH7_SH . $sSafeFile
+            );
+        }
         (new UserCoreModel)->deleteBackground($iProfileId);
 
         /* Clean User Background Cache */

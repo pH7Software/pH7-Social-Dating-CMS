@@ -65,7 +65,9 @@
     "ext-zlib": "*",
     "arcturial/clickatell": "^3.0",
     "aws/aws-sdk-php": "^3.200",
+    "bacon/bacon-qr-code": "^3.0",
     "braintree/braintree_php": "^6.0",
+    "ezyang/htmlpurifier": "^4.19",
     "fakerphp/faker": "^1.24",
     "geoip2/geoip2": "^3.3",
     "guzzlehttp/guzzle": "^7.4",
@@ -75,19 +77,19 @@
     "ph-7/just-http-status-codes": "^1.1",
     "ph-7/passcode-password-generator": "^2.0",
     "ph-7/ph2gravatar": "^2.0",
-    "robthree/twofactorauth": "^1.6",
+    "robthree/twofactorauth": "^3.0",
     "stripe/stripe-php": "^20.0",
-    "symfony/console": "^5.4",
-    "symfony/mailer": "^6.0",
+    "symfony/console": "^7.4",
+    "symfony/mailer": "^7.4",
     "twbs/bootstrap": "^3.4",
-    "twilio/sdk": "^6.44"
+    "twilio/sdk": "^8.0"
   },
   "require-dev": {
-    "dealerdirect/phpcodesniffer-composer-installer": "^0.7.2",
+    "dealerdirect/phpcodesniffer-composer-installer": "^1.0",
     "friendsofphp/php-cs-fixer": "^3.95",
     "phake/phake": "^4.1",
     "phpstan/phpstan": "^2.1",
-    "phpunit/phpunit": "^9.6"
+    "phpunit/phpunit": "^11.5"
   },
   "suggest": {
     "symfony/thanks": "Thank your favorite PHP projects on GitHub (in the form of GitHub stars) using CLI"

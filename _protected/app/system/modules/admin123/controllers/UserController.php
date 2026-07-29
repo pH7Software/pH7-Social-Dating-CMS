@@ -267,6 +267,8 @@ class UserController extends Controller implements UserModeratable
 
     public function approve(): void
     {
+        $this->requireActionToken(PH7_ADMIN_MOD, 'user', 'approve');
+
         Header::redirect(
             Uri::get(PH7_ADMIN_MOD, 'user', 'browse'),
             $this->moderateRegistration($this->httpRequest->post('id', Type::INTEGER), 1)
@@ -275,6 +277,8 @@ class UserController extends Controller implements UserModeratable
 
     public function disapprove(): void
     {
+        $this->requireActionToken(PH7_ADMIN_MOD, 'user', 'disapprove');
+
         Header::redirect(
             Uri::get(PH7_ADMIN_MOD, 'user', 'browse'),
             $this->moderateRegistration($this->httpRequest->post('id', Type::INTEGER), 0)
@@ -323,6 +327,8 @@ class UserController extends Controller implements UserModeratable
 
     public function ban(): void
     {
+        $this->requireActionToken(PH7_ADMIN_MOD, 'user', 'ban');
+
         $iId = $this->httpRequest->post('id');
 
         if ($this->oAdminModel->ban($iId, 1)) {
@@ -340,6 +346,8 @@ class UserController extends Controller implements UserModeratable
 
     public function unBan(): void
     {
+        $this->requireActionToken(PH7_ADMIN_MOD, 'user', 'unban');
+
         $iId = $this->httpRequest->post('id');
 
         if ($this->oAdminModel->ban($iId, 0)) {
@@ -357,6 +365,8 @@ class UserController extends Controller implements UserModeratable
 
     public function delete(): void
     {
+        $this->requireActionToken(PH7_ADMIN_MOD, 'user', 'delete');
+
         try {
             $aData = explode('_', $this->httpRequest->post('id'));
             $iId = (int)$aData[0];

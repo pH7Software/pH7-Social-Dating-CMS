@@ -5,30 +5,40 @@
  */
 
 /**
- * Force target '_blank' with window.open JavaScript method.
+ * Open external links in a new tab.
+ * Delegated from the document so links added later (e.g. by ajax) are covered too.
  */
 (function () {
-    $('a').click(function () {
-        var href = $(this).attr('href');
+    var aWhitelistedHosts = [
+        'ph7builder.com', 'youtube.com', 'youtu.be', 'vimeo.com',
+        'dailymotion.com', 'metacafe.com', 'gravatar.com', 'softaculous.com'
+    ];
 
-        if (
-            href.indexOf('ph7builder.com') == -1 && href.indexOf('youtube.com') == -1 &&
-            href.indexOf('youtu.be') == -1 && href.indexOf('vimeo.com') == -1 &&
-            href.indexOf('dailymotion.com') == -1 && href.indexOf('metacafe.com') == -1 &&
-            href.indexOf('gravatar.com') == -1 && href.indexOf('softaculous.com') == -1 &&
-            (href.indexOf('http://') != -1 || href.indexOf('https://') != -1)
+    $(document).on('click', 'a', function () {
+        var sHref = $(this).attr('href');
 
-        ) {
-            var host = href.substr(href.indexOf(':') + 3);
-            if (host.indexOf('/') != -1) {
-                host = host.substring(0, host.indexOf('/'));
-            }
-            if (host != window.location.host) {
-                window.open(href);
-                return false;
+        // Anchors without an href (buttons, JS hooks) have no URL to open
+        if (!sHref || (sHref.indexOf('http://') === -1 && sHref.indexOf('https://') === -1)) {
+            return;
+        }
+
+        for (var i = 0; i < aWhitelistedHosts.length; i++) {
+            if (sHref.indexOf(aWhitelistedHosts[i]) !== -1) {
+                return;
             }
         }
-    })
+
+        var sHost = sHref.substr(sHref.indexOf(':') + 3);
+        if (sHost.indexOf('/') !== -1) {
+            sHost = sHost.substring(0, sHost.indexOf('/'));
+        }
+
+        if (sHost !== window.location.host) {
+            // "noopener" prevents the opened page from hijacking this window via window.opener (reverse tabnabbing)
+            window.open(sHref, '_blank', 'noopener');
+            return false;
+        }
+    });
 })();
 
 console.log('This Web App has been made with http://pH7Builder.com | The Social App Builder'

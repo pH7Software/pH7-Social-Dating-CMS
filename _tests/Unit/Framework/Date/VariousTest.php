@@ -11,6 +11,7 @@ declare(strict_types=1);
 namespace PH7\Test\Unit\Framework\Date;
 
 use PH7\Framework\Date\Various;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 class VariousTest extends TestCase
@@ -32,9 +33,7 @@ class VariousTest extends TestCase
         $this->assertSame(3731, $iResult);
     }
 
-    /**
-     * @dataProvider secAndTimeProvider
-     */
+    #[DataProvider('secAndTimeProvider')]
     public function testSecToTime(int $iSec, string $sTime): void
     {
         $sResult = Various::secToTime($iSec);
@@ -42,7 +41,7 @@ class VariousTest extends TestCase
         $this->assertSame($sTime, $sResult);
     }
 
-    public function secAndTimeProvider(): array
+    public static function secAndTimeProvider(): array
     {
         return [
             [563, '09:23'],

@@ -4,6 +4,8 @@
     <h2 class="underline">{lang 'Module(s) installed on your website:'}</h2><br />
 
     <form method="post">
+        {{ $designSecurity->inputToken('module_action') }}
+
         {each $sFolder in $oModule->showAvailableMods(Module::UNINSTALL)}
             {{ $sModsDirModFolder = $oFile->checkExtDir($sFolder) }}
 

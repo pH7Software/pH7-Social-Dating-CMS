@@ -1,11 +1,11 @@
 <?php
+
 /**
  * @title          Main Controller
  *
  * @author         Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright      (c) 2012-2022, Pierre-Henry Soria. All Rights Reserved.
  * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
- * @package        PH7 / App / System / Module / Admin / Controller
  */
 
 declare(strict_types=1);
@@ -15,6 +15,7 @@ namespace PH7;
 use PH7\Framework\Core\Kernel;
 use PH7\Framework\Date\Various as VDate;
 use PH7\Framework\Layout\Html\Meta;
+use PH7\Framework\Module\Various as SysMod;
 use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Security\Version;
@@ -41,6 +42,7 @@ class MainController extends Controller
         $this->view->is_news_feed = (bool)DbConfig::getSetting('isSoftwareNewsFeed');
         $this->view->software_blog_url = self::SOFTWARE_BLOG_URL;
         $this->view->show_get_started_section = $this->isWebsiteNew();
+        $this->view->is_profile_faker_enabled = SysMod::isEnabled('profile-faker');
         $this->view->tweet_msg_url = TweetSharing::getMessage();
 
         $this->checkUpdates();
@@ -71,7 +73,7 @@ class MainController extends Controller
 
     public function logout(): void
     {
-        (new Admin)->logout($this->session);
+        (new Admin())->logout($this->session);
 
         Header::redirect(
             Uri::get(PH7_ADMIN_MOD, 'main', 'login'),
@@ -83,13 +85,12 @@ class MainController extends Controller
     {
         $this->addCssFile();
 
-        $oStatModel = new StatisticCoreModel;
+        $oStatModel = new StatisticCoreModel();
 
         // Get the since date of the website
         $this->view->since_date = $this->dateTime->get(StatisticCoreModel::getDateOfCreation())->date();
 
-
-        //---------- Number of Logins Members ----------//
+        // ---------- Number of Logins Members ----------//
 
         // All Members
         $this->view->today_login_members = $oStatModel->totalLogins(DbTableName::MEMBER, 1);
@@ -119,8 +120,7 @@ class MainController extends Controller
         $this->view->year_login_couple_members = $oStatModel->totalLogins(DbTableName::MEMBER, 365, GenderTypeUserCore::COUPLE);
         $this->view->login_couple_members = $oStatModel->totalLogins(DbTableName::MEMBER, 0, GenderTypeUserCore::COUPLE);
 
-
-        //---------- Number of Logins Affiliates ----------//
+        // ---------- Number of Logins Affiliates ----------//
 
         // All Affiliates
         $this->view->today_login_affiliate = $oStatModel->totalLogins(DbTableName::AFFILIATE, 1);
@@ -143,8 +143,7 @@ class MainController extends Controller
         $this->view->year_login_female_affiliate = $oStatModel->totalLogins(DbTableName::AFFILIATE, 365, GenderTypeUserCore::FEMALE);
         $this->view->login_female_affiliate = $oStatModel->totalLogins(DbTableName::AFFILIATE, 0, GenderTypeUserCore::FEMALE);
 
-
-        //---------- Number of Logins Admins ----------//
+        // ---------- Number of Logins Admins ----------//
 
         // All Admins
         $this->view->today_login_admins = $oStatModel->totalLogins(DbTableName::ADMIN, 1);
@@ -167,8 +166,7 @@ class MainController extends Controller
         $this->view->year_login_female_admins = $oStatModel->totalLogins(DbTableName::ADMIN, 365, GenderTypeUserCore::FEMALE);
         $this->view->login_female_admins = $oStatModel->totalLogins(DbTableName::ADMIN, 0, GenderTypeUserCore::FEMALE);
 
-
-        //---------- Members Registrations ----------//
+        // ---------- Members Registrations ----------//
 
         // All Members
         $this->view->today_total_members = $oStatModel->totalMembers(1);
@@ -198,8 +196,7 @@ class MainController extends Controller
         $this->view->year_total_couple_members = $oStatModel->totalMembers(365, GenderTypeUserCore::COUPLE);
         $this->view->total_couple_members = $oStatModel->totalMembers(0, GenderTypeUserCore::COUPLE);
 
-
-        //---------- Affiliates Registrations ----------//
+        // ---------- Affiliates Registrations ----------//
 
         // All Affiliates
         $this->view->today_total_affiliate = $oStatModel->totalAffiliates(1);
@@ -222,8 +219,7 @@ class MainController extends Controller
         $this->view->year_total_female_affiliate = $oStatModel->totalAffiliates(365, GenderTypeUserCore::FEMALE);
         $this->view->total_female_affiliate = $oStatModel->totalAffiliates(0, GenderTypeUserCore::FEMALE);
 
-
-        //---------- Admins Registrations ----------//
+        // ---------- Admins Registrations ----------//
 
         // All Admins
         $this->view->today_total_admins = $oStatModel->totalAdmins(1);
@@ -246,8 +242,7 @@ class MainController extends Controller
         $this->view->year_total_female_admins = $oStatModel->totalAdmins(365, GenderTypeUserCore::FEMALE);
         $this->view->total_female_admins = $oStatModel->totalAdmins(0, GenderTypeUserCore::FEMALE);
 
-
-        //---------- Blogs ----------//
+        // ---------- Blogs ----------//
 
         $this->view->today_total_blogs = $oStatModel->totalBlogs(1);
         $this->view->week_total_blogs = $oStatModel->totalBlogs(7);
@@ -255,8 +250,7 @@ class MainController extends Controller
         $this->view->year_total_blogs = $oStatModel->totalBlogs(365);
         $this->view->total_blogs = $oStatModel->totalBlogs();
 
-
-        //---------- Notes ----------//
+        // ---------- Notes ----------//
 
         $this->view->today_total_notes = $oStatModel->totalNotes(1);
         $this->view->week_total_notes = $oStatModel->totalNotes(7);
@@ -264,8 +258,7 @@ class MainController extends Controller
         $this->view->year_total_notes = $oStatModel->totalNotes(365);
         $this->view->total_notes = $oStatModel->totalNotes();
 
-
-        //---------- Messages ----------//
+        // ---------- Messages ----------//
 
         $this->view->today_total_mails = $oStatModel->totalMails(1);
         $this->view->week_total_mails = $oStatModel->totalMails(7);
@@ -273,8 +266,7 @@ class MainController extends Controller
         $this->view->year_total_mails = $oStatModel->totalMails(365);
         $this->view->total_mails = $oStatModel->totalMails();
 
-
-        //---------- Comments ----------//
+        // ---------- Comments ----------//
 
         // Profile Comments
         $this->view->today_total_profile_comments = $oStatModel->totalProfileComments(1);
@@ -310,7 +302,6 @@ class MainController extends Controller
         $this->view->month_total_note_comments = $oStatModel->totalNoteComments(31);
         $this->view->year_total_note_comments = $oStatModel->totalNoteComments(365);
         $this->view->total_note_comments = $oStatModel->totalNoteComments();
-
 
         unset($oStatModel);
     }

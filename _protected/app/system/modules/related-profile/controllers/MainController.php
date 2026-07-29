@@ -1,19 +1,26 @@
 <?php
+
 /**
  * @author         Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright      (c) 2017-2019, Pierre-Henry Soria. All Rights Reserved.
  * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
- * @package        PH7 / App / System / Module / Related Profile / Controller
  */
 
 namespace PH7;
 
 use PH7\Framework\Layout\Html\Meta;
-use stdClass;
 
 class MainController extends Controller
 {
-    const MAX_PROFILES = 5;
+    public const MAX_PROFILES = 5;
+
+    /*
+     * The SQL pool is fetched in the model's default order (recent activity), then re-ranked by
+     * compatibility. Fetching several times more candidates than we display gives the scorer real
+     * headroom, so a highly-compatible match still surfaces even when it isn't the most recently active.
+     */
+    public const CANDIDATE_POOL_MULTIPLIER = 12;
+    public const MAX_CANDIDATES = self::MAX_PROFILES * self::CANDIDATE_POOL_MULTIPLIER;
 
     /** @var UserCoreModel */
     private $oUserModel;
@@ -22,7 +29,7 @@ class MainController extends Controller
     {
         parent::__construct();
 
-        $this->oUserModel = new UserCoreModel;
+        $this->oUserModel = new UserCoreModel();
     }
 
     public function index($iProfileId = null)
@@ -35,7 +42,7 @@ class MainController extends Controller
             $oRelatedProfiles = $this->relatedProfiles($oProfileData, $oProfileFields);
 
             if (!empty($oRelatedProfiles)) {
-                $this->view->avatarDesign = new AvatarDesignCore; // Avatar Design Class
+                $this->view->avatarDesign = new AvatarDesignCore(); // Avatar Design Class
                 $this->view->related_profiles = $oRelatedProfiles;
                 $this->view->id = $iProfileId;
             }
@@ -47,12 +54,12 @@ class MainController extends Controller
     /**
      * Get related profile data.
      *
-     * @param stdClass $oProfile User data.
-     * @param stdClass $oProfileFields Profile fields.
+     * @param \stdClass $oProfile       user data
+     * @param \stdClass $oProfileFields profile fields
      *
-     * @return array|int Related profiles.
+     * @return array|int related profiles
      */
-    private function relatedProfiles(stdClass $oProfile, stdClass $oProfileFields)
+    private function relatedProfiles(\stdClass $oProfile, \stdClass $oProfileFields)
     {
         $aParams = [
             SearchQueryCore::AGE => $oProfile->birthDate,
@@ -61,6 +68,15 @@ class MainController extends Controller
             SearchQueryCore::CITY => $oProfileFields->city
         ];
 
-        return $this->oUserModel->search($aParams, false, 0, self::MAX_PROFILES);
+        $aCandidates = $this->oUserModel->search($aParams, false, 0, self::MAX_CANDIDATES);
+        if (!is_array($aCandidates)) {
+            return $aCandidates;
+        }
+
+        // Give the profile's location to the scorer (profile fields live in a separate table)
+        $oProfile->city = $oProfileFields->city ?? '';
+        $oProfile->country = $oProfileFields->country ?? '';
+
+        return MatchmakingCore::rank($oProfile, $aCandidates, self::MAX_PROFILES);
     }
 }

@@ -309,6 +309,8 @@ class MainController extends Controller
 
     public function delete()
     {
+        $this->requireActionToken('note', 'main', 'delete');
+
         $iId = $this->httpRequest->post('id');
         $iProfileId = $this->session->get('member_id');
 

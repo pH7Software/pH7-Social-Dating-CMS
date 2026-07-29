@@ -137,6 +137,8 @@ class CommentController extends Controller
 
     public function delete()
     {
+        $this->requireActionToken('comment', 'comment', 'delete');
+
         if (CommentCore::isRemovalEligible($this->httpRequest, $this->session)) {
             $this->sTable = $this->httpRequest->post('table');
 

@@ -42,6 +42,29 @@ final class FileTest extends TestCase
         $this->assertSame('.tpl', File::getFileExtWithDot('layout.tpl'));
     }
 
+    // getFileBasename
+
+    public function testGetFileBasenameRemovesUnixTraversal(): void
+    {
+        $this->assertSame('config.php', File::getFileBasename('../../config.php'));
+    }
+
+    public function testGetFileBasenameRemovesWindowsTraversal(): void
+    {
+        $this->assertSame('config.php', File::getFileBasename('..\\..\\config.php'));
+    }
+
+    public function testGetFileBasenameRejectsDirectorySegments(): void
+    {
+        $this->assertSame('', File::getFileBasename('.'));
+        $this->assertSame('', File::getFileBasename('..'));
+    }
+
+    public function testGetFileBasenameRejectsNullBytes(): void
+    {
+        $this->assertSame('', File::getFileBasename("photo.jpg\0.php"));
+    }
+
     // isPathInsideDirectory
 
     public function testIsPathInsideDirectoryReturnsTrueForDirectChild(): void

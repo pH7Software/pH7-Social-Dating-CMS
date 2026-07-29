@@ -9,7 +9,7 @@ jobs:
       matrix:
         os: [ 'ubuntu-latest' ]
         php-versions: [ '8.2', '8.3', '8.4', '8.5' ]
-        phpunit-version: [ '9.6' ]
+        phpunit-version: [ '11.5' ]
     name: PHP ${{ matrix.php-versions }} Test on ${{ matrix.os }}
     steps:
       - name: Checkout

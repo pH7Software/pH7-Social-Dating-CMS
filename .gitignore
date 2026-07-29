@@ -20,6 +20,8 @@ composer.phar
 .php_cs
 phpcs.xml
 .php_cs.cache
+.php-cs-fixer.php
+.php-cs-fixer.cache
 
 # TMP/Log
 *.log
@@ -53,3 +55,4 @@ Thumbs.db
 # Mac OS
 .DS_Store*
 ._*
+.phpunit.cache

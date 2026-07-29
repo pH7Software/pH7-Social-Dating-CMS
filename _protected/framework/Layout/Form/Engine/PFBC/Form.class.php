@@ -1,14 +1,15 @@
 <?php
+
 /**
  * Many changes have been made in this file.
- * By Pierre-Henry Soria <https://ph7.me>
+ * By Pierre-Henry Soria <https://ph7.me>.
  */
 
 namespace PFBC;
 
 use PH7\Framework\Layout\Html\Design;
 
-/*This project's namespace structure is leveraged to autoload requested classes at runtime.*/
+/* This project's namespace structure is leveraged to autoload requested classes at runtime. */
 function load($class)
 {
     $file = __DIR__ . '/../' . str_replace('\\', PH7_DS, $class) . '.php';
@@ -24,19 +25,19 @@ if (in_array('__autoload', spl_autoload_functions(), true)) {
 
 class Form extends Base
 {
-    private static $sFormId;
     protected $ajax;
     protected $attributes;
     protected $error;
+    /* jQueryUI themes can be previewed at http://jqueryui.com/themeroller/. */
     protected $jQueryUITheme = 'smoothness';
     protected $resourcesPath;
+    /*Prevents various automated features from being automatically applied.  Current options for this array
+    included jQuery, jQueryUI, jQueryUIButtons, focus, and style.*/
     protected $prevent = [];
     protected $view;
-    /*jQueryUI themes can be previewed at http://jqueryui.com/themeroller/.*/
     protected $width;
+    private static $sFormId;
     private $elements = [];
-    /*Prevents various automated from being automatically applied.  Current options for this array
-    included jQuery, jQueryUI, jQueryUIButtons, focus, and style.*/
     private $prefix = 'http';
     private $values = [];
     private $ajaxCallback;
@@ -59,28 +60,38 @@ class Form extends Base
         /*The Standard view class is applied by default and will be used unless a different view is
         specified in the form's configure method*/
         if (empty($this->view)) {
-            $this->view = new View\CStandard;
+            $this->view = new View\CStandard();
         }
 
         if (empty($this->error)) {
-            $this->error = new Error\Standard;
+            $this->error = new Error\Standard();
         }
 
         $this->resourcesPath = PH7_URL_STATIC . 'PFBC';
     }
 
+    /**
+     * When a form is serialized and stored in the session, this function prevents any
+     * non-essential information from being included.
+     */
+    public function __sleep()
+    {
+        return ['attributes', 'elements', 'error'];
+    }
+
     public static function isValid($id = 'pfbc', $clearValues = true)
     {
         $valid = true;
-        /*The form's instance is recovered (unserialized) from the session.*/
+        /* The form's instance is recovered (unserialized) from the session. */
         $form = self::recover($id);
         if (!empty($form)) {
-            if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST')
+            if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
                 $data = $_POST;
-            else
+            } else {
                 $data = $_GET;
+            }
 
-            /*Any values/errors stored in the session for this form are cleared.*/
+            /* Any values/errors stored in the session for this form are cleared. */
             self::clearValues($id);
             self::clearErrors($id);
 
@@ -123,7 +134,7 @@ class Form extends Base
                 }
             }
 
-            /*If no validation errors were found, the form's session values are cleared.*/
+            /* If no validation errors were found, the form's session values are cleared. */
             if ($valid) {
                 if ($clearValues) {
                     self::clearValues($id);
@@ -135,15 +146,6 @@ class Form extends Base
         }
 
         return $valid;
-    }
-
-    private static function recover($id)
-    {
-        if (!empty($_SESSION['pfbc'][$id]['form'])) {
-            return unserialize($_SESSION['pfbc'][$id]['form'], ['allowed_classes' => true]);
-        }
-
-        return '';
     }
 
     public static function clearValues($id = 'pfbc')
@@ -185,7 +187,7 @@ class Form extends Base
     }
 
     /**
-     * @return string The ID of the form.
+     * @return string the ID of the form
      */
     public static function getFormId()
     {
@@ -208,22 +210,13 @@ class Form extends Base
 
     public static function setSuccess($id, $message, $element = '')
     {
-        return (new Design)->setFlashMsg($message, Design::SUCCESS_TYPE);
-    }
-
-    /**
-     * When a form is serialized and stored in the session, this function prevents any
-     * non-essential information from being included.
-     */
-    public function __sleep()
-    {
-        return ['attributes', 'elements', 'error'];
+        return (new Design())->setFlashMsg($message, Design::SUCCESS_TYPE);
     }
 
     public function addElement(Element $element)
     {
         $element->setForm($this);
-        //If the element doesn't have a specified id, a generic identifier is applied.
+        // If the element doesn't have a specified id, a generic identifier is applied.
         $id = $element->getID();
         if (empty($id)) {
             $element->setID($this->attributes['id'] . '-element-' . sizeof($this->elements));
@@ -311,8 +304,9 @@ class Form extends Base
         /*When validation errors occur, the form's submitted values are saved in a session
         array, which allows them to be pre-populated when the user is redirected to the form.*/
         $values = self::getSessionValues($this->attributes['id']);
-        if (!empty($values))
+        if (!empty($values)) {
             $this->setValues($values);
+        }
         $this->applyValues();
 
         $this->formatWidthProperties();
@@ -325,12 +319,13 @@ class Form extends Base
         $this->view->render();
         $this->renderJS();
 
-        /*The form's instance is serialized and saved in a session variable for use during validation.*/
+        /* The form's instance is serialized and saved in a session variable for use during validation. */
         $this->save();
 
         if ($returnHTML) {
             $html = ob_get_contents();
             ob_end_clean();
+
             return $html;
         }
 
@@ -340,38 +335,20 @@ class Form extends Base
     public static function getSessionValues($id = 'pfbc')
     {
         $values = [];
-        if (!empty($_SESSION['pfbc'][$id]['values']))
+        if (!empty($_SESSION['pfbc'][$id]['values'])) {
             $values = $_SESSION['pfbc'][$id]['values'];
+        }
+
         return $values;
     }
 
     /**
      * An associative array is used to pre-populate form elements.  The keys of this array correspond with
      * the element names.
-     *
-     * @param array $values
      */
     public function setValues(array $values)
     {
         $this->values = array_merge($this->values, $values);
-    }
-
-    /**
-     * Values that have been set through the setValues method, either manually by the developer
-     * or after validation errors, are applied to elements within this method.
-     */
-    private function applyValues()
-    {
-        foreach ($this->elements as $element) {
-            $name = $element->getName();
-            if (isset($this->values[$name])) {
-                $element->setValue($this->values[$name]);
-            } elseif (substr($name, -2) === '[]' &&
-                isset($this->values[substr($name, 0, -2)])
-            ) {
-                $element->setValue($this->values[substr($name, 0, -2)]);
-            }
-        }
     }
 
     /**
@@ -388,9 +365,36 @@ class Form extends Base
                 $this->width = substr($this->width, 0, -2);
             }
         } else {
-            /*If the form's width property is empty, 100% will be assumed.*/
+            /* If the form's width property is empty, 100% will be assumed. */
             $this->width = 100;
             $this->widthSuffix = '%';
+        }
+    }
+
+    private static function recover($id)
+    {
+        if (!empty($_SESSION['pfbc'][$id]['form'])) {
+            return unserialize($_SESSION['pfbc'][$id]['form'], ['allowed_classes' => true]);
+        }
+
+        return '';
+    }
+
+    /**
+     * Values that have been set through the setValues method, either manually by the developer
+     * or after validation errors, are applied to elements within this method.
+     */
+    private function applyValues()
+    {
+        foreach ($this->elements as $element) {
+            $name = $element->getName();
+            if (isset($this->values[$name])) {
+                $element->setValue($this->values[$name]);
+            } elseif (substr($name, -2) === '[]'
+                && isset($this->values[substr($name, 0, -2)])
+            ) {
+                $element->setValue($this->values[substr($name, 0, -2)]);
+            }
         }
     }
 
@@ -420,11 +424,14 @@ class Form extends Base
 
         echo 'jQuery(document).ready(function() {';
 
-        /*When the form is submitted, disable all submit buttons to prevent duplicate submissions.*/
-        echo 'jQuery("#', $id, '").bind("submit", function() {';
+        /* When the form is submitted, disable all submit buttons to prevent duplicate submissions. */
+        echo 'jQuery("#', $id, '").on("submit", function() {';
         if ($this->isNotJQueryUIButtons()) {
             echo 'jQuery(this).find("button[type=submit]").button("disable");';
-            echo 'jQuery(this).find("button[type=submit] span.ui-button-text").css("padding-right", "2.1em").append(\'<img class="pfbc-loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAIiIiAAAAGdnZyMjIwAAADQ0NEVFRU5OTiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" alt="Loading..."/>\');';
+            /* jQuery UI <=1.11 wraps the label in span.ui-button-text; 1.12+ doesn't, so fall back to the button itself. */
+            echo 'var $pfbcBtnLabel = jQuery(this).find("button[type=submit] span.ui-button-text");';
+            echo 'if (!$pfbcBtnLabel.length) { $pfbcBtnLabel = jQuery(this).find("button[type=submit]"); }';
+            echo '$pfbcBtnLabel.css("padding-right", "2.1em").append(\'<img class="pfbc-loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAIiIiAAAAGdnZyMjIwAAADQ0NEVFRU5OTiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" alt="Loading..."/>\');';
         } else {
             echo 'jQuery(this).find("button[type=submit]").attr("disabled", "disabled");';
         }
@@ -438,12 +445,12 @@ class Form extends Base
         /*For ajax, an anonymous onsubmit javascript function is bound to the form using jQuery.  jQuery's
         serialize function is used to grab each element's name/value pair.*/
         if (!empty($this->ajax)) {
-            echo 'jQuery("#', $id, '").bind("submit", {';
+            echo 'jQuery("#', $id, '").on("submit", {';
             $this->error->clear();
             echo <<<JS
             jQuery.ajax({
-                url: "{$this->attributes["action"]}",
-                type: "{$this->attributes["method"]}",
+                url: "{$this->attributes['action']}",
+                type: "{$this->attributes['method']}",
                 data: jQuery("#$id").serialize(),
                 success: function(response) {
                     if(typeof response != "undefined" && typeof response == "object" && response.errors) {
@@ -454,7 +461,7 @@ JS;
                     }
                     else {
 JS;
-            /*A callback function can be specified to handle any post submission events.*/
+            /* A callback function can be specified to handle any post submission events. */
             if (!empty($this->ajaxCallback)) {
                 echo $this->ajaxCallback, '(response);';
             }
@@ -462,13 +469,16 @@ JS;
             echo '}';
 
             if ($this->isNotJQueryUIButtons()) {
-                echo 'jQuery("#', $id, ' button[type=submit] span.ui-button-text").css("padding-right", "1em").find("img").remove();';
+                /* Same jQuery UI 1.12+ fallback as the submit handler above. */
+                echo 'var $pfbcBtnReset = jQuery("#', $id, ' button[type=submit] span.ui-button-text");';
+                echo 'if (!$pfbcBtnReset.length) { $pfbcBtnReset = jQuery("#', $id, ' button[type=submit]"); }';
+                echo '$pfbcBtnReset.css("padding-right", "1em").find("img").remove();';
                 echo 'jQuery("#', $id, ' button[type=submit]").button("enable");';
             } else {
                 echo 'jQuery("#', $id, '").find("button[type=submit]").removeAttr("disabled");';
             }
 
-            echo <<<JS
+            echo <<<'JS'
                 }
             });
             return false;
@@ -477,7 +487,7 @@ JS;
 JS;
         }
 
-        echo <<<JS
+        echo <<<'JS'
     });
 </script>
 JS;
@@ -502,7 +512,7 @@ JS;
             }
         }
 
-        /*This section prevents duplicate css files from being loaded.*/
+        /* This section prevents duplicate css files from being loaded. */
         if (!empty($urls)) {
             $urls = array_values(array_unique($urls));
             foreach ($urls as $url) {
@@ -535,7 +545,7 @@ JS;
             }
         }
 
-        //*This section prevents duplicate css files from being loaded.*/
+        // *This section prevents duplicate css files from being loaded.*/
         if (!empty($urls)) {
             $urls = array_values(array_unique($urls));
             foreach ($urls as $url) {

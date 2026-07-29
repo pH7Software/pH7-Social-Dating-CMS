@@ -24,7 +24,6 @@ final class ClickatellProviderTest extends TestCase
     {
         $oProvider = new ClickatellProvider('+61400000000', 'api-token');
         $oMethod = new ReflectionMethod(ClickatellProvider::class, 'isSuccessResponse');
-        $oMethod->setAccessible(true);
 
         $this->assertTrue($oMethod->invoke($oProvider, ['messages' => [['error' => false]]]));
     }
@@ -33,7 +32,6 @@ final class ClickatellProviderTest extends TestCase
     {
         $oProvider = new ClickatellProvider('+61400000000', 'api-token');
         $oMethod = new ReflectionMethod(ClickatellProvider::class, 'isSuccessResponse');
-        $oMethod->setAccessible(true);
 
         $this->assertFalse($oMethod->invoke($oProvider, ['result' => 'ok']));
     }
@@ -42,7 +40,6 @@ final class ClickatellProviderTest extends TestCase
     {
         $oProvider = new ClickatellProvider('+61400000000', 'api-token');
         $oMethod = new ReflectionMethod(ClickatellProvider::class, 'isSuccessResponse');
-        $oMethod->setAccessible(true);
 
         $this->assertFalse($oMethod->invoke($oProvider, ['messages' => [['id' => 'abc123']]]));
     }

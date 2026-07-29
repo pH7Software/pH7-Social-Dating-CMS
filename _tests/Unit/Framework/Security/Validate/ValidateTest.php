@@ -11,6 +11,7 @@ declare(strict_types=1);
 namespace PH7\Test\Unit\Framework\Security\Validate;
 
 use PH7\Framework\Security\Validate\Validate;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 final class ValidateTest extends TestCase
@@ -22,119 +23,103 @@ final class ValidateTest extends TestCase
         $this->oValidate = new Validate();
     }
 
-    /**
-     * @dataProvider validHexCodesProvider
-     */
+    #[DataProvider('validHexCodesProvider')]
     public function testValidHexCode(string $sHexCode): void
     {
         $this->assertTrue($this->oValidate->hex($sHexCode));
     }
 
-    /**
-     * @dataProvider invalidHexCodesProvider
-     */
+    #[DataProvider('invalidHexCodesProvider')]
     public function testInvalidHexCode(string $sHexCode): void
     {
         $this->assertFalse($this->oValidate->hex($sHexCode));
     }
 
-    /**
-     * @dataProvider validNamesProvider
-     */
+    #[DataProvider('validNamesProvider')]
     public function testValidName(string $sName, int $iMinLength, int $iMaxLength): void
     {
         $this->assertTrue($this->oValidate->name($sName, $iMinLength, $iMaxLength));
     }
 
-    /**
-     * @dataProvider invalidNamesProvider
-     */
+    #[DataProvider('invalidNamesProvider')]
     public function testInvalidName($mName, int $iMinLength, int $iMaxLength): void
     {
         $this->assertFalse($this->oValidate->name($mName, $iMinLength, $iMaxLength));
     }
 
-    /**
-     * @dataProvider validPhoneNumbersProvider
-     */
+    #[DataProvider('validPhoneNumbersProvider')]
     public function testValidPhoneNumber(string $sPhoneNumber): void
     {
         $this->assertSame(1, $this->oValidate->phone($sPhoneNumber));
     }
 
-    /**
-     * @dataProvider invalidPhoneNumbersProvider
-     */
+    #[DataProvider('invalidPhoneNumbersProvider')]
     public function testInvalidPhoneNumber(string $sPhoneNumber): void
     {
         $this->assertSame(0, $this->oValidate->phone($sPhoneNumber));
     }
 
-    /**
-     * @dataProvider validPasswordsProvider
-     */
+    #[DataProvider('validPasswordsProvider')]
     public function testValidPassword(string $sPassword, int $iMinLength, int $iMaxLength): void
     {
         $this->assertTrue($this->oValidate->password($sPassword, $iMinLength, $iMaxLength));
     }
 
-    /**
-     * @dataProvider invalidPasswordsProvider
-     */
+    #[DataProvider('invalidPasswordsProvider')]
     public function testInvalidPassword(string $sPassword, int $iMinLength, int $iMaxLength): void
     {
         $this->assertFalse($this->oValidate->password($sPassword, $iMinLength, $iMaxLength));
     }
 
-    /**
-     * @dataProvider validIntegersProvider
-     */
+    #[DataProvider('validIntegersProvider')]
     public function testValidInteger($mNumber): void
     {
         $this->assertTrue($this->oValidate->int($mNumber, 0, 60000));
     }
 
-    /**
-     * @dataProvider invalidIntegersProvider
-     */
+    #[DataProvider('invalidIntegersProvider')]
     public function testInvalidInteger($mNumber): void
     {
         $this->assertFalse($this->oValidate->int($mNumber, 0, 40000));
     }
 
-    /**
-     * @dataProvider validFloatsProvider
-     */
+    #[DataProvider('validUrlsProvider')]
+    public function testValidUrl(string $sUrl): void
+    {
+        $this->assertTrue($this->oValidate->url($sUrl));
+    }
+
+    #[DataProvider('invalidUrlsProvider')]
+    public function testInvalidUrl(string $sUrl): void
+    {
+        $this->assertFalse($this->oValidate->url($sUrl));
+    }
+
+    #[DataProvider('validFloatsProvider')]
     public function testValidFloat($fFloat): void
     {
         $this->assertTrue($this->oValidate->float($fFloat));
     }
 
-    /**
-     * @dataProvider invalidFloatsProvider
-     */
+    #[DataProvider('invalidFloatsProvider')]
     public function testInvalidFloat($mInvalidFloat): void
     {
         $this->assertFalse($this->oValidate->float($mInvalidFloat));
     }
 
-    /**
-     * @dataProvider validDateOfBirthsProvider
-     */
+    #[DataProvider('validDateOfBirthsProvider')]
     public function testBirthDate(string $sDate, int $iMinAge, int $iMaxAge): void
     {
         $this->assertTrue($this->oValidate->birthDate($sDate, $iMinAge, $iMaxAge));
     }
 
-    /**
-     * @dataProvider invalidDateOfBirthsProvider
-     */
+    #[DataProvider('invalidDateOfBirthsProvider')]
     public function testInvalidBirthDate(string $sDate, int $iMinAge, int $iMaxAge): void
     {
         $this->assertFalse($this->oValidate->birthDate($sDate, $iMinAge, $iMaxAge));
     }
 
-    public function validHexCodesProvider(): array
+    public static function validHexCodesProvider(): array
     {
         return [
             ['#eee'],
@@ -143,7 +128,7 @@ final class ValidateTest extends TestCase
         ];
     }
 
-    public function invalidHexCodesProvider(): array
+    public static function invalidHexCodesProvider(): array
     {
         return [
             ['eee'],
@@ -152,7 +137,7 @@ final class ValidateTest extends TestCase
         ];
     }
 
-    public function validNamesProvider(): array
+    public static function validNamesProvider(): array
     {
         return [
             ['Píėrre', 2, 20],
@@ -166,7 +151,7 @@ final class ValidateTest extends TestCase
         ];
     }
 
-    public function invalidNamesProvider(): array
+    public static function invalidNamesProvider(): array
     {
         return [
             ['abcdef', 2, 4],
@@ -181,7 +166,7 @@ final class ValidateTest extends TestCase
         ];
     }
 
-    public function validPhoneNumbersProvider(): array
+    public static function validPhoneNumbersProvider(): array
     {
         return [
             ['+44768374890'],
@@ -193,7 +178,7 @@ final class ValidateTest extends TestCase
         ];
     }
 
-    public function invalidPhoneNumbersProvider(): array
+    public static function invalidPhoneNumbersProvider(): array
     {
         return [
             ['++0768374890'],
@@ -203,7 +188,7 @@ final class ValidateTest extends TestCase
         ];
     }
 
-    public function validPasswordsProvider(): array
+    public static function validPasswordsProvider(): array
     {
         return [
             ['8374878*&@*#*5r8hjvfj^', 2, 40],
@@ -211,7 +196,7 @@ final class ValidateTest extends TestCase
         ];
     }
 
-    public function invalidPasswordsProvider(): array
+    public static function invalidPasswordsProvider(): array
     {
         return [
             ['1234567', 10, 30],
@@ -220,7 +205,7 @@ final class ValidateTest extends TestCase
         ];
     }
 
-    public function validIntegersProvider(): array
+    public static function validIntegersProvider(): array
     {
         return [
             [1],
@@ -230,7 +215,7 @@ final class ValidateTest extends TestCase
         ];
     }
 
-    public function invalidIntegersProvider(): array
+    public static function invalidIntegersProvider(): array
     {
         return [
             ['one'],
@@ -240,7 +225,28 @@ final class ValidateTest extends TestCase
         ];
     }
 
-    public function validFloatsProvider(): array
+    public static function validUrlsProvider(): array
+    {
+        return [
+            ['http://example.com'],
+            ['https://ph7builder.com'],
+            ['https://sub.example.com/path?q=1&x=2#frag']
+        ];
+    }
+
+    public static function invalidUrlsProvider(): array
+    {
+        return [
+            // Script/scheme-injection vectors that FILTER_VALIDATE_URL alone lets through
+            'javascript scheme' => ['javascript://alert(1)'],
+            'non-http scheme' => ['ftp://files.example.com'],
+            // Plainly malformed
+            'no scheme' => ['example.com'],
+            'empty' => ['']
+        ];
+    }
+
+    public static function validFloatsProvider(): array
     {
         return [
             [1.5],
@@ -250,7 +256,7 @@ final class ValidateTest extends TestCase
         ];
     }
 
-    public function invalidFloatsProvider(): array
+    public static function invalidFloatsProvider(): array
     {
         return [
             ['one'],
@@ -260,7 +266,7 @@ final class ValidateTest extends TestCase
         ];
     }
 
-    public function validDateOfBirthsProvider(): array
+    public static function validDateOfBirthsProvider(): array
     {
         return [
             ['02/02/1989', 18, 99],
@@ -270,7 +276,7 @@ final class ValidateTest extends TestCase
         ];
     }
 
-    public function invalidDateOfBirthsProvider(): array
+    public static function invalidDateOfBirthsProvider(): array
     {
         return [
             ['00/00/0000', 18, 99],

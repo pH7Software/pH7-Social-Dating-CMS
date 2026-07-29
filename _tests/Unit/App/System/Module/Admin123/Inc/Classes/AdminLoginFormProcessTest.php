@@ -31,7 +31,6 @@ final class AdminLoginFormProcessTest extends TestCase
         $oLoginFormProcess = $oReflection->newInstanceWithoutConstructor();
 
         $oAdminModelProp = $oReflection->getProperty('oAdminModel');
-        $oAdminModelProp->setAccessible(true);
         $oAdminModelProp->setValue($oLoginFormProcess, $oAdminModelMock);
 
         $sOutdatedHash = password_hash('password', PASSWORD_BCRYPT, ['cost' => 4]);

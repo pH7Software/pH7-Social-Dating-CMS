@@ -29,9 +29,9 @@ function Wall() {
      * @async
      */
     this.show = function () {
-        $.post(pH7Url.base + this.sUrl, {type: 'show'}).success(function (sHtmlData) {
+        $.post(pH7Url.base + this.sUrl, {type: 'show'}).done(function (sHtmlData) {
             $('#wall').html(sHtmlData);
-        }).error(function () {
+        }).fail(function () {
             $('.msg').addClass('alert alert-danger').text(pH7LangCore.unable_retrive_feeds).delay(2000).fadeOut();
         });
         setTimeout(function () {
@@ -45,9 +45,9 @@ function Wall() {
      * @async
      */
     this.showComment = function () {
-        $.post(pH7Url.base + this.sUrl, {type: 'showCommentProfile'}).success(function (sHtmlData) {
+        $.post(pH7Url.base + this.sUrl, {type: 'showCommentProfile'}).done(function (sHtmlData) {
             $('#wall').html(sHtmlData);
-        }).error(function () {
+        }).fail(function () {
             $('.msg').addClass('alert alert-danger').text(pH7LangCore.unable_retrive_feeds).delay(2000).fadeOut();
         });
         setTimeout(function () {

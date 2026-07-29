@@ -14,6 +14,8 @@
     </ul>
 {/if}
 
+<p class="bold">{$LANG.next_steps}</p>
+
 <p>
     <span class="bold">{$LANG.will_you_make_donation}</span> <a class="bold italic" href="{$patreon_url}" target="_blank" rel="noopener noreferrer">{$LANG.donate_here}</a><br />
     <small>

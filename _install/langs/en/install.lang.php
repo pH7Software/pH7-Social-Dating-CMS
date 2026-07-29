@@ -141,6 +141,7 @@ $LANG = [
     'warning_no_js' => 'JavaScript is disabled on your Web browser!<br />
         Please enable JavaScript via the options of your Web browser in order to use this website.',
     'admin_url' => 'Admin Panel URL',
+    'next_steps' => '👉 Next: sign in to your admin panel to brand your site, enable the modules you want, add a few starter profiles, and go live — the Getting Started checklist there walks you through it.',
     'powered' => 'Proudly powered by',
     'loading' => 'Loading...',
 ];

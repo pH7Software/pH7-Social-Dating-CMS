@@ -14,7 +14,7 @@
       {if !empty($com->updatedDate)}
         <lastBuildDate>{% DateFormat::getRss($com->updatedDate) %}</lastBuildDate>
       {/if}
-      <description><![CDATA[{% Framework\Security\Ban\Ban::filterWord($com->comment, false) %}]]></description>
+      <description><![CDATA[{% escape(Framework\Security\Ban\Ban::filterWord($com->comment, false)) %}]]></description>
     </item>
   {/each}
 </channel>

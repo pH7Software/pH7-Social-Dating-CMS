@@ -53,6 +53,14 @@
                 </a>
             </li>
 
+            {if $is_profile_faker_enabled}
+              <li>
+                  <a href="{{ $design->url('profile-faker', 'generator', 'addmember') }}">
+                      {lang 'Add sample profiles while your community grows (avoids the "empty site" feel)'}
+                  </a> 👥
+              </li>
+            {/if}
+
             <li>
                 {{ $boxes = ['donationbox', 'upsetbox'] }}
                 {{ $box = $boxes[mt_rand(0,1)] }}

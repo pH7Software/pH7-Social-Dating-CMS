@@ -50,8 +50,8 @@ ServerSignature Off
     </IfModule>
 </FilesMatch>
 
-# Leave open the humans.txt and robots.txt file
-<FilesMatch "humans\.txt|robots\.txt|(app-)?ads\.txt">
+# Leave open the humans.txt, robots.txt and security.txt files
+<FilesMatch "humans\.txt|robots\.txt|security\.txt|(app-)?ads\.txt">
     # Apache 2.4+
     <IfModule mod_authz_core.c>
         Require all granted
@@ -773,7 +773,7 @@ ErrorDocument 505 /error/http/index?code=505
 # Modify Headers
 <IfModule mod_headers.c>
     # Cache files
-    <FilesMatch "\.(jpe?g|png|gif|ico|webp|mp3|mp4|flv|webm|pdf)$">
+    <FilesMatch "\.(jpe?g|png|gif|ico|webp|avif|svgz?|woff2?|mp3|mp4|flv|webm|pdf)$">
         Header set Cache-Control "public"
         Header set Expires "Mon, 20 Apr 2070 20:00:00 GMT"
         Header unset Last-Modified
@@ -798,8 +798,8 @@ ErrorDocument 505 /error/http/index?code=505
         BrowserMatch ^Mozilla/4\.0[678] no-gzip
         # MSIE masquerades as Netscape, but it is fine
         BrowserMatch \bMSIE !no-gzip !gzip-only-text/html
-        # Don't compress images/archives/music/video/etc
-        SetEnvIfNoCase Request_URI \.(?:gif|jpe?g|png)$ no-gzip dont-vary
+        # Don't compress images/archives/music/video/etc (webp/avif/woff2 are already compressed; svg IS worth compressing)
+        SetEnvIfNoCase Request_URI \.(?:gif|jpe?g|png|webp|avif|woff2?)$ no-gzip dont-vary
         SetEnvIfNoCase Request_URI \.(?:exe|t?gz|zip|bz2|sit|rar)$ no-gzip dont-vary
         SetEnvIfNoCase Request_URI \.(?:avi|mov|mp3|mp4|rm|flv|mp?g)$ no-gzip dont-vary
     </IfModule>
@@ -822,6 +822,10 @@ ErrorDocument 505 /error/http/index?code=505
     ExpiresByType image/gif "access plus 31 days"
     ExpiresByType image/jpeg "access plus 31 days"
     ExpiresByType image/png "access plus 31 days"
+    ExpiresByType image/webp "access plus 31 days"
+    ExpiresByType image/avif "access plus 31 days"
+    ExpiresByType image/svg+xml "access plus 31 days"
+    ExpiresByType font/woff2 "access plus 1 year"
     ExpiresByType image/x-icon "access plus 1 year"
 </IfModule>
 

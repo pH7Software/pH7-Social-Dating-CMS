@@ -134,6 +134,7 @@ $LANG = [
     'warning_no_js' => 'Esta página web no es compatible sin tener Javascript activado.<br />
         Por favor, activa JavaScript en las opciones de su navegador web.',
     'admin_url' => 'URL del panel de administración',
+    'next_steps' => '👉 Ahora: inicia sesión en tu panel de administración para personalizar tu sitio, activar los módulos que quieras, añadir algunos perfiles iniciales y publicarlo — la lista «Primeros pasos» te guía paso a paso.',
     'powered' => 'Desarrollado por',
     'loading' => 'Cargando ...',
 ];

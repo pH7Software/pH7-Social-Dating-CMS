@@ -6,8 +6,8 @@
                 {{ $absolute_url = Framework\Mvc\Router\Uri::get('picture','main','album',"$album->username,$album->name,$album->albumId") }}
 
                 <div class="thumb_photo">
-                    <a href="{absolute_url}" target="_blank">
-                        <img src="{url_data_sys_mod}picture/img/{% $album->username %}/{% $album->albumId %}/{% $album->thumb %}" />
+                    <a href="{absolute_url}" target="_blank" rel="noopener">
+                        <img src="{url_data_sys_mod}picture/img/{% $album->username %}/{% $album->albumId %}/{% $album->thumb %}" alt="{% $str->escapeAttribute($album->name) %}" title="{% $str->escapeAttribute($album->name) %}" loading="lazy" decoding="async" />
                     </a>
                     <p class="italic">
                         {lang 'Posted by'} {{ $design->getProfileLink($album->username) }}<br />

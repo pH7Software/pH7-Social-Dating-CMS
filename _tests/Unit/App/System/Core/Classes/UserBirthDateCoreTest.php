@@ -13,13 +13,12 @@ namespace PH7\Test\Unit\App\System\Core\Classes;
 require_once PH7_PATH_SYS . 'core/classes/UserBirthDateCore.php';
 
 use PH7\UserBirthDateCore;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 final class UserBirthDateCoreTest extends TestCase
 {
-    /**
-     * @dataProvider invalidBirthDateProvider
-     */
+    #[DataProvider('invalidBirthDateProvider')]
     public function testInvalidAgeFromBirthDate(string $sBirthDate): void
     {
         $iAge = UserBirthDateCore::getAgeFromBirthDate($sBirthDate);
@@ -27,7 +26,7 @@ final class UserBirthDateCoreTest extends TestCase
         $this->assertSame($iAge, UserBirthDateCore::DEFAULT_AGE);
     }
 
-    public function invalidBirthDateProvider(): array
+    public static function invalidBirthDateProvider(): array
     {
         return [
             ['01902'],

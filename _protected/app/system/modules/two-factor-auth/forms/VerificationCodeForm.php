@@ -1,9 +1,9 @@
 <?php
+
 /**
  * @author         Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright      (c) 2016-2022, Pierre-Henry Soria. All Rights Reserved.
  * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
- * @package        PH7 / App / System / Module / Two-Factor Auth / Form
  */
 
 declare(strict_types=1);
@@ -28,7 +28,7 @@ class VerificationCodeForm
     {
         if (isset($_POST['submit_verification_code'])) {
             if (\PFBC\Form::isValid($_POST['submit_verification_code'])) {
-                new VerificationCodeFormProcess((new Http)->get('mod'));
+                new VerificationCodeFormProcess((new Http())->get('mod'));
             }
 
             Header::redirect();
@@ -51,7 +51,7 @@ class VerificationCodeForm
                 ]
             )
         );
-        $oForm->addElement(new Button);
+        $oForm->addElement(new Button());
         $oForm->render();
     }
 }

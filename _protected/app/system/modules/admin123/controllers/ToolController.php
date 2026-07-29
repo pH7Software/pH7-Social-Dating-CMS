@@ -252,6 +252,7 @@ class ToolController extends Controller
 
     public function optimize(): void
     {
+        $this->requireActionToken(PH7_ADMIN_MOD, 'tool', 'optimize');
         $this->checkPost();
 
         Db::optimize();
@@ -263,6 +264,7 @@ class ToolController extends Controller
 
     public function repair(): void
     {
+        $this->requireActionToken(PH7_ADMIN_MOD, 'tool', 'repair');
         $this->checkPost();
 
         Db::repair();

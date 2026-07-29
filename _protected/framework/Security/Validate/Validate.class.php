@@ -1,19 +1,17 @@
 <?php
+
 /**
  * @desc             Various methods to Validate.
  *
  * @author           Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright        (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
  * @license          MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
- * @package          PH7 / Framework / Security / Validate
  */
 
 namespace PH7\Framework\Security\Validate;
 
 defined('PH7') or exit('Restricted access');
 
-use DateTime;
-use Exception;
 use PH7\DbTableName;
 use PH7\ExistCoreModel;
 use PH7\Framework\Config\Config;
@@ -26,23 +24,23 @@ use PH7\UserCore;
 
 class Validate
 {
-    const REGEX_INVALID_NAME_PATTERN = '`(?:[\|<>"\=\]\[\}\{\\\\$€@%~^#\(\):;\?!¿\*])|(?:(?:https?|ftps?)://)|(?:[0-9])`';
-    const REGEX_DATE_FORMAT = '`^\d\d/\d\d/\d\d\d\d$`';
+    public const REGEX_INVALID_NAME_PATTERN = '`(?:[\|<>"\=\]\[\}\{\\\\$€@%~^#\(\):;\?!¿\*])|(?:(?:https?|ftps?)://)|(?:[0-9])`';
+    public const REGEX_DATE_FORMAT = '`^\d\d/\d\d/\d\d\d\d$`';
 
-    const MAX_INT_NUMBER = 999999999999;
+    public const MAX_INT_NUMBER = 999999999999;
 
-    const MIN_NAME_LENGTH = 2;
-    const MAX_NAME_LENGTH = 20;
+    public const MIN_NAME_LENGTH = 2;
+    public const MAX_NAME_LENGTH = 20;
 
-    const HEX_HASH = '#';
-    const MIN_HEX_LENGTH = 3;
-    const MAX_HEX_LENGTH = 6;
+    public const HEX_HASH = '#';
+    public const MIN_HEX_LENGTH = 3;
+    public const MAX_HEX_LENGTH = 6;
 
-    const DEF_MIN_USERNAME_LENGTH = 3;
-    const DEF_MIN_PASS_LENGTH = 6;
-    const DEF_MAX_PASS_LENGTH = 60;
-    const DEF_MIN_AGE = 18;
-    const DEF_MAX_AGE = 99;
+    public const DEF_MIN_USERNAME_LENGTH = 3;
+    public const DEF_MIN_PASS_LENGTH = 6;
+    public const DEF_MAX_PASS_LENGTH = 60;
+    public const DEF_MIN_AGE = 18;
+    public const DEF_MAX_AGE = 99;
 
     private const VALID_HTTP_WEBSITE_RESPONSES = [
         StatusCode::OK,
@@ -55,67 +53,60 @@ class Validate
 
     public function __construct()
     {
-        $this->oStr = new Str;
+        $this->oStr = new Str();
     }
 
     /**
      * Check the type of a value.
      *
      * @param string $sValue
-     * @param string $sType Type whose value should be (case-insensitive).
-     * @param bool $bRequired Default TRUE
+     * @param string $sType     type whose value should be (case-insensitive)
+     * @param bool   $bRequired Default TRUE
+     *
+     * @throws PH7InvalidArgumentException if the type doesn't exist
      *
      * @return bool
-     *
-     * @throws PH7InvalidArgumentException If the type doesn't exist.
      */
     public static function type($sValue, $sType, $bRequired = true)
     {
         $sType = strtolower($sType); // Case-insensitive type.
 
-        if (false === $bRequired && 0 === (new Str)->length($sValue)) // Yoda Condition ;-)
+        if (false === $bRequired && 0 === (new Str())->length($sValue)) { // Yoda Condition ;-)
             return true;
+        }
 
         switch ($sType) {
             case 'str':
             case 'string':
                 $bValid = is_string($sValue);
                 break;
-
             case 'int':
             case 'integer':
                 $bValid = is_int($sValue);
                 break;
-
             case 'float':
             case 'double':
                 $bValid = is_float($sValue);
                 break;
-
             case 'bool':
             case 'boolean':
                 $bValid = is_bool($sValue);
                 break;
-
             case 'num':
             case 'numeric':
                 $bValid = is_numeric($sValue);
                 break;
-
             case 'arr':
             case 'array':
                 $bValid = is_array($sValue);
                 break;
-
             case 'null':
                 $bValid = is_null($sValue);
                 break;
-
             case 'obj':
             case 'object':
                 $bValid = is_object($sValue);
                 break;
-
             default:
                 throw new PH7InvalidArgumentException('Invalid Type!');
         }
@@ -126,7 +117,6 @@ class Validate
     /**
      * Validate Is String.
      *
-     * @param $sValue
      * @param int $iMin Default NULL
      * @param int $iMax Default NULL
      *
@@ -134,18 +124,22 @@ class Validate
      */
     public function str($sValue, $iMin = null, $iMax = null)
     {
-        $sValue = filter_var($sValue, FILTER_SANITIZE_STRING);
+        // strip_tags() replaces FILTER_SANITIZE_STRING (deprecated in PHP 8.1): for this
+        // length/emptiness check it yields the same result without the deprecation notice.
+        $sValue = strip_tags((string)$sValue);
 
         if (!empty($sValue)) {
-            if (!empty($iMin) && $this->oStr->length($sValue) < $iMin)
+            if (!empty($iMin) && $this->oStr->length($sValue) < $iMin) {
                 return false;
-            elseif (!empty($iMax) && $this->oStr->length($sValue) > $iMax)
+            } elseif (!empty($iMax) && $this->oStr->length($sValue) > $iMax) {
                 return false;
-            elseif (!is_string($sValue))
+            } elseif (!is_string($sValue)) {
                 return false;
-            else
-                return true;
+            }
+
+            return true;
         }
+
         return false;
     }
 
@@ -219,9 +213,9 @@ class Validate
      * Validate username pattern and check if username is unique (doesn't already exist).
      *
      * @param string $sUsername
-     * @param int $iMin Default 3
-     * @param int $iMax Default 40
-     * @param string $sTable Default DbTableName::MEMBER
+     * @param int    $iMin      Default 3
+     * @param int    $iMax      Default 40
+     * @param string $sTable    Default DbTableName::MEMBER
      *
      * @return bool
      */
@@ -229,28 +223,28 @@ class Validate
     {
         $sUsername = trim($sUsername);
 
-        /**
+        /*
          * Do quicker check for admin usernames.
          * Admin usernames don't have URL pages (www.mysite.com/@<USERNAME>), so no need to check if any file names conflict with the username
          * and don't need to check for banned usernames either.
          */
         if ($sTable === DbTableName::ADMIN) {
-            return preg_match('#^' . PH7_USERNAME_PATTERN . '{' . $iMin . ',' . $iMax . '}$#', $sUsername) &&
-                !(new ExistCoreModel)->username($sUsername, $sTable);
+            return preg_match('#^' . PH7_USERNAME_PATTERN . '{' . $iMin . ',' . $iMax . '}$#', $sUsername)
+                && !(new ExistCoreModel())->username($sUsername, $sTable);
         }
 
-        return preg_match('#^' . PH7_USERNAME_PATTERN . '{' . $iMin . ',' . $iMax . '}$#', $sUsername) &&
-            !file_exists(PH7_PATH_ROOT . UserCore::PROFILE_PAGE_PREFIX . $sUsername) &&
-            !Ban::isUsername($sUsername) &&
-            !(new ExistCoreModel)->username($sUsername, $sTable);
+        return preg_match('#^' . PH7_USERNAME_PATTERN . '{' . $iMin . ',' . $iMax . '}$#', $sUsername)
+            && !file_exists(PH7_PATH_ROOT . UserCore::PROFILE_PAGE_PREFIX . $sUsername)
+            && !Ban::isUsername($sUsername)
+            && !(new ExistCoreModel())->username($sUsername, $sTable);
     }
 
     /**
      * Validate Password.
      *
      * @param string $sPwd
-     * @param int $iMin Default 6
-     * @param int $iMax Default 60
+     * @param int    $iMin Default 6
+     * @param int    $iMax Default 60
      *
      * @return bool
      */
@@ -265,7 +259,7 @@ class Validate
      * Validate Email.
      *
      * @param string $sEmail
-     * @param bool $bRealHost Checks whether the Email Host is valid.
+     * @param bool   $bRealHost checks whether the Email Host is valid
      *
      * @return bool
      */
@@ -281,16 +275,16 @@ class Validate
             }
         }
 
-        return filter_var($sEmail, FILTER_VALIDATE_EMAIL) !== false &&
-            $this->oStr->length($sEmail) <= PH7_MAX_EMAIL_LENGTH && !Ban::isEmail($sEmail);
+        return filter_var($sEmail, FILTER_VALIDATE_EMAIL) !== false
+            && $this->oStr->length($sEmail) <= PH7_MAX_EMAIL_LENGTH && !Ban::isEmail($sEmail);
     }
 
     /**
      * Validate Birthday.
      *
      * @param string $sValue The date format must be formatted like this: mm/dd/yyyy
-     * @param int $iMin Default 18
-     * @param int $iMax Default 99
+     * @param int    $iMin   Default 18
+     * @param int    $iMax   Default 99
      *
      * @return bool
      */
@@ -320,9 +314,10 @@ class Validate
     public function date($sValue)
     {
         try {
-            new DateTime($sValue);
+            new \DateTime($sValue);
+
             return true;
-        } catch (Exception $oE) {
+        } catch (\Exception $oE) {
             return false;
         }
     }
@@ -331,7 +326,7 @@ class Validate
      * Validate URL.
      *
      * @param string $sUrl
-     * @param bool $bRealUrl Checks if the current URL exists.
+     * @param bool   $bRealUrl checks if the current URL exists
      *
      * @return bool
      */
@@ -343,9 +338,15 @@ class Validate
             return false;
         }
 
+        // FILTER_VALIDATE_URL still accepts "javascript://", "ftp://", ... — restrict to http(s) so a
+        // stored website URL can't inject a script scheme when it's rendered inside an href attribute.
+        if (!preg_match('~^https?://~i', $sUrl)) {
+            return false;
+        }
+
         if ($bRealUrl) {
             /**
-             * Checks if the URL is valid and contains the HTTP status code '200 OK', '301 Moved Permanently' or '302 Found'
+             * Checks if the URL is valid and contains the HTTP status code '200 OK', '301 Moved Permanently' or '302 Found'.
              */
             $rCurl = curl_init();
             curl_setopt_array($rCurl, [CURLOPT_RETURNTRANSFER => true, CURLOPT_URL => $sUrl]);
@@ -376,7 +377,7 @@ class Validate
      *
      * @param string $sNumber
      *
-     * @return int|false Returns 1 if valid, 0 if invalid, or FALSE in case of error.
+     * @return int|false returns 1 if valid, 0 if invalid, or FALSE in case of error
      */
     public function phone($sNumber)
     {
@@ -393,17 +394,17 @@ class Validate
         $sHexChars = str_replace(self::HEX_HASH, '', $sHexCode);
         $iHexCharsLength = strlen($sHexChars);
 
-        return strpos($sHexCode, self::HEX_HASH) !== false &&
-            $iHexCharsLength >= self::MIN_HEX_LENGTH &&
-            $iHexCharsLength <= self::MAX_HEX_LENGTH;
+        return strpos($sHexCode, self::HEX_HASH) !== false
+            && $iHexCharsLength >= self::MIN_HEX_LENGTH
+            && $iHexCharsLength <= self::MAX_HEX_LENGTH;
     }
 
     /**
      * Validate Name.
      *
      * @param string $sName
-     * @param int $iMin Default 2
-     * @param int $iMax Default 20
+     * @param int    $iMin  Default 2
+     * @param int    $iMax  Default 20
      *
      * @return bool
      */
@@ -485,8 +486,8 @@ class Validate
     /**
      * Get option for some filter_var().
      *
-     * @param float|int $mMin Minimum range.
-     * @param float|int $mMax Maximum range.
+     * @param float|int $mMin minimum range
+     * @param float|int $mMax maximum range
      *
      * @return array
      */
@@ -494,5 +495,4 @@ class Validate
     {
         return ['options' => ['min_range' => $mMin, 'max_range' => $mMax]];
     }
-
 }

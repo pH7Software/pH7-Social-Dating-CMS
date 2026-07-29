@@ -305,6 +305,19 @@ namespace PH7\Framework\Str {
         }
 
         /**
+         * Remove markup and encode the result for an HTML attribute.
+         */
+        public function escapeAttribute($sText): string
+        {
+            return htmlspecialchars(
+                $this->stripTags((string)$sText),
+                ENT_QUOTES,
+                static::ENCODING,
+                false
+            );
+        }
+
+        /**
          * Escape an array of any dimension.
          */
         protected function arrayEscape(array $aData, bool $bStrip): array

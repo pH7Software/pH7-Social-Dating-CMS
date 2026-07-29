@@ -78,7 +78,6 @@ final class SmsGatewayFactoryTest extends TestCase
     {
         $oReflection = new ReflectionClass(Config::class);
         $oInstanceProp = $oReflection->getProperty('oInstance');
-        $oInstanceProp->setAccessible(true);
         $oInstanceProp->setValue(null, $oConfig);
     }
 }

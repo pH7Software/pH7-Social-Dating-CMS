@@ -24,4 +24,6 @@ Disallow:
 Disallow: /*?*tpl=*
 
 
-Sitemap: /site-map-xml
+# The Sitemap directive MUST be an absolute URL (the sitemaps protocol ignores relative paths).
+# Replace the domain below with your own so Google/Bing can discover your sitemap.
+Sitemap: https://www.example.com/site-map-xml

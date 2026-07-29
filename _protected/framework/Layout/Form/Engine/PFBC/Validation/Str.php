@@ -1,4 +1,5 @@
 <?php
+
 /**
  * We made this code.
  * By pH7 (Pierre-Henry SORIA).
@@ -26,13 +27,22 @@ class Str extends Validation
      */
     public function __construct($iMin = null, $iMax = null)
     {
-        $this->oStr = new FwkStr;
+        $this->oStr = new FwkStr();
         $this->iMin = $iMin;
         $this->iMax = $iMax;
     }
 
     /**
-     * @param string $sValue Check if the variable type is a valid string.
+     * @return int|null the maximum allowed length, or NULL if unbounded
+     */
+    public function getMax(): ?int
+    {
+        // Mirror the !empty() check used in isValid(): treat 0/null alike as "no maximum".
+        return !empty($this->iMax) ? (int)$this->iMax : null;
+    }
+
+    /**
+     * @param string $sValue check if the variable type is a valid string
      *
      * @return bool
      */
@@ -46,16 +56,19 @@ class Str extends Validation
 
         if (!empty($this->iMin) && $this->oStr->length($sValue) < $this->iMin) {
             $this->message = t('%element% must be at least %0% character(s) long.', $this->iMin);
+
             return false;
         }
 
         if (!empty($this->iMax) && $this->oStr->length($sValue) > $this->iMax) {
             $this->message = t('%element% cannot exceed %0% character(s).', $this->iMax);
+
             return false;
         }
 
         if (!is_string($sValue)) {
             $this->message = t('Please enter a string.');
+
             return false;
         }
 

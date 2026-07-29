@@ -7,7 +7,7 @@
   {{ $username_sender = (empty($msg->username)) ? PH7_ADMIN_USERNAME : escape($msg->username) }}
   {{ $firstName_sender = (empty($msg->firstName)) ? PH7_ADMIN_USERNAME : escape($msg->firstName) }}
   {{ $subject = escape(Framework\Security\Ban\Ban::filterWord($msg->title)) }}
-  {{ $message = Framework\Parse\Emoticon::init(Framework\Security\Ban\Ban::filterWord($msg->message)) }}
+  {{ $message = Framework\Parse\Emoticon::init(Framework\Security\Ban\Ban::filterWord(escape($msg->message))) }}
   {{ $is_outbox = ($msg->sender == $member_id) }}
   {{ $is_trash = (($msg->sender == $member_id && $msg->trash == 'sender') || ($msg->recipient == $member_id && $msg->trash == 'recipient') && !$is_outbox) }}
   {{ $is_delete = ($is_outbox || $is_trash) }}

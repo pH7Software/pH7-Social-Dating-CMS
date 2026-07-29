@@ -12,6 +12,7 @@ use PH7\Framework\Error\CException\PH7InvalidArgumentException;
 use PH7\Framework\Mobile\MobApp;
 use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Mvc\Router\Uri;
+use PH7\Framework\Security\Validate\Purifier;
 use PH7\Framework\Url\Header;
 
 class MainController extends Controller
@@ -67,7 +68,9 @@ class MainController extends Controller
             $this->addGuestAssetFiles($bIsBgVideo);
 
             // Assigns the promo text to the view
-            $this->view->promo_text = DbConfig::getMetaMain(PH7_LANG_NAME)->promoText;
+            $this->view->promo_text = (new Purifier)->xssClean(
+                DbConfig::getMetaMain(PH7_LANG_NAME)->promoText
+            );
 
             $this->manualTplInclude($this->getGuestTplPage() . '.inc.tpl');
         } else {

@@ -11,6 +11,7 @@ declare(strict_types=1);
 namespace PH7\Test\Unit\Framework\Http;
 
 use PH7\Framework\Http\Http;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 final class HttpTest extends TestCase
@@ -50,9 +51,7 @@ final class HttpTest extends TestCase
         $this->assertTrue($bActual);
     }
 
-    /**
-     * @dataProvider urlsAndHostNamesProvider
-     */
+    #[DataProvider('urlsAndHostNamesProvider')]
     public function testHostName(string $sUrl, $sExpectedUrl): void
     {
         $sActualUrl = Http::getHostName($sUrl);
@@ -60,9 +59,7 @@ final class HttpTest extends TestCase
         $this->assertSame($sExpectedUrl, $sActualUrl);
     }
 
-    /**
-     * @dataProvider  sslHeadersProvider
-     */
+    #[DataProvider('sslHeadersProvider')]
     public function testIsSsl(string $sServerKeyName, string $sServerValue): void
     {
         $_SERVER[$sServerKeyName] = $sServerValue;
@@ -96,7 +93,7 @@ final class HttpTest extends TestCase
         $this->assertSame('learning', $sActualSubdomain);
     }
 
-    public function urlsAndHostNamesProvider(): array
+    public static function urlsAndHostNamesProvider(): array
     {
         return [
             ['https://github.com/pH-7/GoodJsCode/blob/main/readme.md', 'github.com'],
@@ -106,7 +103,7 @@ final class HttpTest extends TestCase
         ];
     }
 
-    public function sslHeadersProvider(): array
+    public static function sslHeadersProvider(): array
     {
         return [
             ['HTTPS', 'on'],

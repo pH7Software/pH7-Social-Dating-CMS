@@ -12,7 +12,7 @@
         <p>
             <span class="bold">{lang 'URL:'}</span>
             {if !empty($report->url)}
-                <span class="italic"><a href="{% $report->url %}" target="_blank">{% $report->url %}</a></span>
+                <span class="italic"><a href="{% $report->url %}" target="_blank" rel="noopener noreferrer nofollow">{% $report->url %}</a></span>
             {else}
                 <span class="italic underline">{lang 'URL Unavailable'}</span>
             {/if}

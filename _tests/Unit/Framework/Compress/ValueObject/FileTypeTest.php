@@ -12,22 +12,19 @@ namespace PH7\Test\Unit\Framework\Compress\ValueObject;
 
 use PH7\Framework\Compress\ValueObject\FileType;
 use PH7\Framework\Compress\ValueObject\InvalidFileTypeException;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 final class FileTypeTest extends TestCase
 {
-    /**
-     * @dataProvider validTypesProvider
-     */
+    #[DataProvider('validTypesProvider')]
     public function testValidFileType(string $sFileType): void
     {
         $oFileType = new FileType($sFileType);
         $this->assertSame($sFileType, $oFileType->getValue());
     }
 
-    /**
-     * @dataProvider invalidTypesProvider
-     */
+    #[DataProvider('invalidTypesProvider')]
     public function testInvalidFileType(string $sFileType): void
     {
         $this->expectException(InvalidFileTypeException::class);
@@ -35,7 +32,7 @@ final class FileTypeTest extends TestCase
         new FileType($sFileType);
     }
 
-    public function validTypesProvider(): array
+    public static function validTypesProvider(): array
     {
         return [
             ['js'],
@@ -43,7 +40,7 @@ final class FileTypeTest extends TestCase
         ];
     }
 
-    public function invalidTypesProvider(): array
+    public static function invalidTypesProvider(): array
     {
         return [
             [''],

@@ -1,5 +1,3 @@
-version: "2"
-
 services:
   web:
     image: nginx:latest
@@ -20,6 +18,7 @@ services:
     command: bash -c "composer install"
     working_dir: /var/www/
   db:
-    image: mysql
+    # Pinned so a "latest" pull can't jump to a new MySQL major (e.g. 9's auth/SQL-mode changes) and break the dev DB
+    image: mysql:8.4
     ports:
       - "8001:3306"

@@ -62,4 +62,17 @@ final class StrTest extends TestCase
         $this->assertSame('&lt;b&gt;Me &amp; You&lt;/b&gt;', $this->oStr->escape('<b>Me & You</b>'));
         $this->assertSame('Me & You', $this->oStr->escape('<b>Me & You</b>', true));
     }
+
+    public function testEscapeAttributeStripsMarkupAndEncodesQuotes(): void
+    {
+        $this->assertSame(
+            'Hello &quot; onmouseover=&quot;alert&#039;XSS&#039; &amp; goodbye',
+            $this->oStr->escapeAttribute('<b>Hello</b> " onmouseover="alert\'XSS\' & goodbye')
+        );
+        $this->assertSame(
+            'Fish &amp; Chips',
+            $this->oStr->escapeAttribute('Fish &amp; Chips')
+        );
+        $this->assertSame('', $this->oStr->escapeAttribute(null));
+    }
 }

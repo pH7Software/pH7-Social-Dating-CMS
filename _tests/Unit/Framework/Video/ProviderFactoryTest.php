@@ -16,13 +16,12 @@ use PH7\Framework\Video\Api\Vimeo;
 use PH7\Framework\Video\Api\Youtube;
 use PH7\Framework\Video\InvalidApiProviderException;
 use PH7\Framework\Video\ProviderFactory;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 final class ProviderFactoryTest extends TestCase
 {
-    /**
-     * @dataProvider videoApiProvider
-     */
+    #[DataProvider('videoApiProvider')]
     public function testCreateValidApiProvider(string $sClassName, string $sExpectedClass): void
     {
         $oProvider = ProviderFactory::create($sClassName);
@@ -36,7 +35,7 @@ final class ProviderFactoryTest extends TestCase
         ProviderFactory::create('invalidVideoApiProvider');
     }
 
-    public function videoApiProvider(): array
+    public static function videoApiProvider(): array
     {
         return [
             ['youtu', Youtube::class],

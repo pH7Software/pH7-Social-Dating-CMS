@@ -15,6 +15,7 @@ require_once PH7_PATH_SYS . 'core/classes/AdsCore.php';
 use PH7\AdsCore;
 use PH7\DbTableName;
 use PH7\Framework\Error\CException\PH7InvalidArgumentException;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 final class AdsCoreTest extends TestCase
@@ -31,9 +32,7 @@ final class AdsCoreTest extends TestCase
         $this->assertSame('ads', AdsCore::getTable());
     }
 
-    /**
-     * @dataProvider tableNamesProvider
-     */
+    #[DataProvider('tableNamesProvider')]
     public function testCorrectTable(string $sTableName, string $sExpectedValue): void
     {
         $this->assertSame($sExpectedValue, AdsCore::checkTable($sTableName));
@@ -46,9 +45,7 @@ final class AdsCoreTest extends TestCase
         AdsCore::checkTable('wrong_table');
     }
 
-    /**
-     * @dataProvider tableNamesProvider
-     */
+    #[DataProvider('tableNamesProvider')]
     public function testCorrectTableToId(string $sTableName): void
     {
         $this->assertSame('adsId', AdsCore::convertTableToId($sTableName));
@@ -61,7 +58,7 @@ final class AdsCoreTest extends TestCase
         AdsCore::convertTableToId('wrong_table');
     }
 
-    public function tableNamesProvider(): array
+    public static function tableNamesProvider(): array
     {
         return [
             [DbTableName::AD, 'ads'],

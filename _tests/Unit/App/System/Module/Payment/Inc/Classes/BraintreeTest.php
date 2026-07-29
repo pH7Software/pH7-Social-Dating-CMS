@@ -30,7 +30,6 @@ final class BraintreeTest extends TestCase
     public function testGetConfigurationClassResolvesNamespacedClass(): void
     {
         $oMethod = new ReflectionMethod(Braintree::class, 'getConfigurationClass');
-        $oMethod->setAccessible(true);
 
         $this->assertSame(GatewayConfiguration::class, $oMethod->invoke(null));
     }

@@ -14,10 +14,10 @@
       {if !empty($post->updatedDate)}
         <lastBuildDate>{% DateFormat::getRss($post->updatedDate) %}</lastBuildDate>
       {/if}
-      <description><![CDATA[{% Framework\Security\Ban\Ban::filterWord($post->content, false) %}]]></description>
-      <language>{% $post->langId %}</language>
-      <copyright>{% Framework\Security\Ban\Ban::filterWord($post->metaCopyright, false) %}</copyright>
-      <dc:creator>{% $post->firstName %}{if !empty($post->lastName)} {% $post->lastName %} {/if}</dc:creator>
+      <description><![CDATA[{% escape(Framework\Security\Ban\Ban::filterWord($post->content, false)) %}]]></description>
+      <language>{% escape($post->langId) %}</language>
+      <copyright>{% escape(Framework\Security\Ban\Ban::filterWord($post->metaCopyright, false)) %}</copyright>
+      <dc:creator>{% escape($post->firstName) %}{if !empty($post->lastName)} {% escape($post->lastName) %} {/if}</dc:creator>
     </item>
   {/each}
 </channel>
