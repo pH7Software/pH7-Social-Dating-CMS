@@ -15,6 +15,7 @@ use PH7\Framework\Layout\Html\Security;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Navigation\Page;
 use PH7\Framework\Security\CSRF\Token;
+use PH7\Framework\Security\Validate\Validate;
 use PH7\Framework\Url\Header;
 
 class AdminController extends Controller
@@ -87,7 +88,11 @@ class AdminController extends Controller
         $this->view->page_title = $this->sTitle;
         $this->view->h1_title = $this->sTitle;
         $this->view->dateTime = $this->dateTime;
-        $this->view->report = $this->oReportModel->get($iId, 0, 1);
+        $oReport = $this->oReportModel->get($iId, 0, 1);
+        $this->view->report = $oReport;
+        $this->view->report_url = $oReport && (new Validate)->url((string)$oReport->url)
+            ? $oReport->url
+            : '';
 
         $this->output();
     }

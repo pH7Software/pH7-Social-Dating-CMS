@@ -7,18 +7,18 @@
             <span class="bold">{lang 'Spammer:'}</span> {{ $avatarDesign->get($oUserModel->getUsername($report->spammerId), $oUserModel->getFirstName($report->spammerId) ,null, 64) }}
         </p>
         <p>
-            <span class="bold">{lang 'Contant Type:'}</span> <span class="italic">{% $report->contentType %}</span>
+            <span class="bold">{lang 'Content Type:'}</span> <span class="italic">{% escape($report->contentType) %}</span>
         </p>
         <p>
             <span class="bold">{lang 'URL:'}</span>
-            {if !empty($report->url)}
-                <span class="italic"><a href="{% $report->url %}" target="_blank" rel="noopener noreferrer nofollow">{% $report->url %}</a></span>
+            {if !empty($report_url)}
+                <span class="italic"><a href="{% $str->escapeAttribute($report_url) %}" target="_blank" rel="noopener noreferrer nofollow">{% escape($report_url) %}</a></span>
             {else}
                 <span class="italic underline">{lang 'URL Unavailable'}</span>
             {/if}
         </p>
         <p>
-            <span class="bold">{lang 'Description of report'}</span> <span class="italic">{% $report->description %}</span>
+            <span class="bold">{lang 'Description of report'}</span> <span class="italic">{% nl2br(escape($report->description)) %}</span>
         </p>
         <p>
             <span class="bold">{lang 'Date:'}</span><span class="italic">{% $dateTime->get($report->dateTime)->dateTime() %}</span>
