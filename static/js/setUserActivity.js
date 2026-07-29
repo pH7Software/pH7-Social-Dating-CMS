@@ -5,7 +5,7 @@
  */
 
 function sendUserActivityHeartbeat() {
-    $.get(pH7Url.base + 'user/asset/ajax/setActivity');
+    $.get(pH7Url.base + 'user/asset/ajax/setActivity' + pH7Url.csrf);
 }
 
 function startUserActivityTracking() {
