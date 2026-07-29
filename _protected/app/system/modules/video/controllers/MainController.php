@@ -1,9 +1,9 @@
 <?php
+
 /**
  * @author         Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
  * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
- * @package        PH7 / App / System / Module / Video / Controller
  */
 
 namespace PH7;
@@ -16,14 +16,13 @@ use PH7\Framework\Navigation\Page;
 use PH7\Framework\Security\Ban\Ban;
 use PH7\Framework\Url\Header;
 use PH7\JustHttp\StatusCode;
-use stdClass;
 
 class MainController extends Controller
 {
     use ImageTaggable;
 
-    const ALBUMS_PER_PAGE = 14;
-    const VIDEOS_PER_PAGE = 10;
+    public const ALBUMS_PER_PAGE = 14;
+    public const VIDEOS_PER_PAGE = 10;
 
     /** @var VideoModel */
     private $oVideoModel;
@@ -47,12 +46,12 @@ class MainController extends Controller
     {
         parent::__construct();
 
-        $this->oVideoModel = new VideoModel;
-        $this->oPage = new Page;
+        $this->oVideoModel = new VideoModel();
+        $this->oPage = new Page();
         $this->sUsername = $this->httpRequest->get('username');
 
         $this->view->member_id = $this->session->get('member_id');
-        $this->iProfileId = (new UserCoreModel)->getId(null, $this->sUsername);
+        $this->iProfileId = (new UserCoreModel())->getId(null, $this->sUsername);
 
         // Predefined meta_keywords tags
         $this->view->meta_keywords = t('video,videos,free,free videos,music,online,watch,dating,video dating,social,community,social network,people video,flirt');
@@ -155,7 +154,7 @@ class MainController extends Controller
             $this->view->meta_description = t('Browse Videos From %0% | Video Album Social Community - %site_name%', $this->sUsername);
             $this->view->album = $oAlbum;
 
-            /**
+            /*
              * @internal FYI, we don't call `Statistic::setView()`, because it needs a foreach loop,
              * and it is unnecessary to do both, that's why it is located in the album.tpl view instead.
              */
@@ -203,30 +202,38 @@ class MainController extends Controller
         $this->requireActionToken('video', 'main', 'deletevideo');
 
         $iVideoId = $this->httpRequest->post('video_id', Type::INTEGER);
+        $iAlbumId = $this->httpRequest->post('album_id', Type::INTEGER);
+        $iProfileId = (int)$this->session->get('member_id');
+
+        if (!$this->oVideoModel->isVideoOwnedBy($iVideoId, $iAlbumId, $iProfileId)) {
+            Header::redirect(
+                Uri::get('video', 'main', 'albums'),
+                t('The video could not be removed.')
+            );
+        }
 
         CommentCoreModel::deleteRecipient($iVideoId, 'video');
 
         $this->oVideoModel->deleteVideo(
-            $this->session->get('member_id'),
-            $this->httpRequest->post('album_id', Type::INTEGER),
+            $iProfileId,
+            $iAlbumId,
             $iVideoId
         );
 
-        (new Video)->deleteVideo(
-            $this->httpRequest->post('album_id'),
+        (new Video())->deleteVideo(
+            $iAlbumId,
             $this->session->get('member_username'),
             $this->httpRequest->post('video_link')
         );
 
         Video::clearCache();
 
-
         Header::redirect(
             Uri::get(
                 'video',
                 'main',
                 'album',
-                $this->session->get('member_username') . ',' . $this->httpRequest->post('album_title') . ',' . $this->httpRequest->post('album_id')
+                $this->session->get('member_username') . ',' . $this->httpRequest->post('album_title') . ',' . $iAlbumId
             ),
             t('Your video has been removed.')
         );
@@ -236,10 +243,14 @@ class MainController extends Controller
     {
         $this->requireActionToken('video', 'main', 'deletealbum');
 
-        $this->oVideoModel->deleteVideo($this->session->get('member_id'), $this->httpRequest->post('album_id', Type::INTEGER));
-        $this->oVideoModel->deleteAlbum($this->session->get('member_id'), $this->httpRequest->post('album_id', Type::INTEGER));
-        $sDir = PH7_PATH_PUBLIC_DATA_SYS_MOD . 'video/file/' . $this->session->get('member_username') . PH7_DS . $this->httpRequest->post('album_id') . PH7_DS;
-        $this->file->deleteDir($sDir);
+        $iAlbumId = $this->httpRequest->post('album_id', Type::INTEGER);
+        $this->oVideoModel->deleteVideo($this->session->get('member_id'), $iAlbumId);
+        $this->oVideoModel->deleteAlbum($this->session->get('member_id'), $iAlbumId);
+        (new Video())->deleteAlbum(
+            $iAlbumId,
+            $this->session->get('member_username'),
+            $this->file
+        );
 
         Video::clearCache();
 
@@ -299,7 +310,7 @@ class MainController extends Controller
         $this->output();
     }
 
-    protected function imageToSocialMetaTags(stdClass $oVideo): void
+    protected function imageToSocialMetaTags(\stdClass $oVideo): void
     {
         $sImageUrl = PH7_URL_DATA_SYS_MOD . 'video/file/' . $oVideo->username . '/' . $oVideo->albumId . '/' . $oVideo->thumb;
         $this->view->image_social_meta_tag = $sImageUrl;
