@@ -55,7 +55,7 @@ class StoreStats
     {
         $sFullPath = PH7_PATH_TMP . static::DIR . $sFileName . static::EXT;
         $aData = [];
-        $iFlag = FILE_TEXT;
+        $iFlag = 0;
 
         if (is_file($sFullPath)) {
             $aLine = file($sFullPath);

@@ -1,0 +1,43 @@
+name: Validate Docker
+
+on:
+  push:
+    branches:
+      - 18.x
+  pull_request:
+    branches:
+      - 18.x
+
+permissions:
+  contents: read
+
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate Compose configuration
+        run: docker compose config --quiet
+
+      - name: Build development image
+        run: docker compose build
+
+      - name: Start development stack
+        run: docker compose up --detach --wait
+
+      - name: Verify installer responds
+        run: |
+          for attempt in {1..30}; do
+            if curl --fail --location --silent --show-error http://localhost:8080/ > /dev/null; then
+              exit 0
+            fi
+            sleep 5
+          done
+          docker compose logs
+          exit 1
+
+      - name: Stop development stack
+        if: always()
+        run: docker compose down --volumes

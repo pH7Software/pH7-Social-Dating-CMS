@@ -157,7 +157,7 @@ class File
      *
      * @return int|bool Returns the number of bytes that were written to the file, or FALSE on failure.
      */
-    public function putFile(string $sFile, string $sContents, int $iFlag = FILE_TEXT): int|bool
+    public function putFile(string $sFile, string $sContents, int $iFlag = 0): int|bool
     {
         return @file_put_contents($sFile, $sContents, $iFlag);
     }
