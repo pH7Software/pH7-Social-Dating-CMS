@@ -18,6 +18,7 @@ use PH7\Framework\Mail\Mail;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Navigation\Page;
 use PH7\Framework\Security\CSRF\Token as SecurityToken;
+use PH7\Framework\Security\Validate\Validate;
 use PH7\Framework\Url\Header;
 use PH7\Framework\Util\Various;
 use stdClass;
@@ -121,6 +122,7 @@ class AdminController extends Controller implements UserModeratable
             // Assigns variables for views
             $this->view->designSecurity = new HtmlSecurity; // Security Design Class
             $this->view->dateTime = $this->dateTime; // Date Time Class
+            $this->view->validate = new Validate;
 
             $this->sTitle = t('Browse Affiliates');
             $this->view->page_title = $this->sTitle;
