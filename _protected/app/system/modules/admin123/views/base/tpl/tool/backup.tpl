@@ -64,7 +64,7 @@
 
             <tr>
                 <td class="border vs_padd">
-                    <textarea id="backup">{sql_content}</textarea>
+                    <textarea id="backup">{% escape($sql_content) %}</textarea>
                 </td>
             </tr>
         {/if}
