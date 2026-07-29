@@ -11,7 +11,7 @@
     {each $membership in $memberships}
         <tr>
             <td>{% $membership->groupId %}</td>
-            <td>{% $membership->name %}</td>
+            <td>{% escape($membership->name) %}</td>
             <td>{% $membership->price %}</td>
             <td>
                 {if $membership->expirationDays == 0}
