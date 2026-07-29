@@ -11,7 +11,7 @@
             {if $is_user_auth AND $member_id == $a->profileId}
                 <div class="small">
                     <a href="{{ $design->url('video', 'main', 'editvideo', "$a->albumId,$a->title,$a->videoId") }}">{lang 'Edit'}</a> |
-                    {{ LinkCoreForm::display(t('Delete'), 'video', 'main', 'deletevideo', array('album_title'=>$a->name,'album_id'=>$a->albumId,'video_id'=>$a->videoId,'video_link'=>$a->file)) }}
+                    {{ LinkCoreForm::display(t('Delete'), 'video', 'main', 'deletevideo', array('album_title'=>$a->name,'album_id'=>$a->albumId,'video_id'=>$a->videoId)) }}
                 </div>
             {/if}
             <p>

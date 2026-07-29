@@ -18,20 +18,20 @@ class VideoCoreModel extends Model
     public const CREATED = 'createdDate';
     public const UPDATED = 'updatedDate';
 
-    public function isVideoOwnedBy(int $iVideoId, int $iAlbumId, int $iProfileId): bool
+    public function getOwnedVideoFile(int $iVideoId, int $iAlbumId, int $iProfileId): string|false
     {
         $rStmt = Db::getInstance()->prepare(
-            'SELECT COUNT(videoId) FROM' . Db::prefix(DbTableName::VIDEO) .
+            'SELECT file FROM' . Db::prefix(DbTableName::VIDEO) .
             'WHERE videoId = :videoId AND albumId = :albumId AND profileId = :profileId'
         );
         $rStmt->bindValue(':videoId', $iVideoId, \PDO::PARAM_INT);
         $rStmt->bindValue(':albumId', $iAlbumId, \PDO::PARAM_INT);
         $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
         $rStmt->execute();
-        $bIsOwned = (int)$rStmt->fetchColumn() === 1;
+        $mFile = $rStmt->fetchColumn();
         Db::free($rStmt);
 
-        return $bIsOwned;
+        return is_string($mFile) && $mFile !== '' ? $mFile : false;
     }
 
     /**

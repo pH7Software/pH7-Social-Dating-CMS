@@ -204,8 +204,13 @@ class MainController extends Controller
         $iVideoId = $this->httpRequest->post('video_id', Type::INTEGER);
         $iAlbumId = $this->httpRequest->post('album_id', Type::INTEGER);
         $iProfileId = (int)$this->session->get('member_id');
+        $sVideoLink = $this->oVideoModel->getOwnedVideoFile(
+            $iVideoId,
+            $iAlbumId,
+            $iProfileId
+        );
 
-        if (!$this->oVideoModel->isVideoOwnedBy($iVideoId, $iAlbumId, $iProfileId)) {
+        if ($sVideoLink === false) {
             Header::redirect(
                 Uri::get('video', 'main', 'albums'),
                 t('The video could not be removed.')
@@ -223,7 +228,7 @@ class MainController extends Controller
         (new Video())->deleteVideo(
             $iAlbumId,
             $this->session->get('member_username'),
-            $this->httpRequest->post('video_link')
+            $sVideoLink
         );
 
         Video::clearCache();
