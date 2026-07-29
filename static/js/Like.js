@@ -46,7 +46,7 @@ var Like = {
             context: oElement,
             type: 'POST',
             dataType: 'json',
-            url: pH7Url.base + 'asset/ajax/Like/',
+            url: pH7Url.base + 'asset/ajax/Like/' + pH7Url.csrf,
             data: 'vote=1&key=' + encodeURIComponent($(oElement).data('key')),
             success: function (oData) {
                 $(this).css({'opacity': 0});

@@ -1,11 +1,12 @@
 <?php
+
 /**
  * @desc           Simple Like Page Ajax Class.
  *
  * @author         Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright      (c) 2012-2022, Pierre-Henry Soria. All Rights Reserved.
  * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
- * @package        PH7 / App / System / Core / Asset / Ajax
+ *
  * @version        1.2
  */
 
@@ -13,8 +14,11 @@ namespace PH7;
 
 defined('PH7') or exit('Restricted access');
 
+use PH7\Framework\Http\Http;
 use PH7\Framework\Ip\Ip;
 use PH7\Framework\Mvc\Request\Http as HttpRequest;
+use PH7\Framework\Security\CSRF\Token;
+use PH7\JustHttp\StatusCode;
 
 class LikeCoreAjax
 {
@@ -34,9 +38,9 @@ class LikeCoreAjax
 
     public function __construct()
     {
-        $this->oHttpRequest = new HttpRequest;
+        $this->oHttpRequest = new HttpRequest();
 
-        ($this->oHttpRequest->postExists('key') ? $this->initialize() : exit('-1'));
+        $this->oHttpRequest->postExists('key') ? $this->initialize() : exit('-1');
     }
 
     /**
@@ -48,7 +52,13 @@ class LikeCoreAjax
             nt('You and one other have voted for this!', 'You and %n% other people have voted for this!', static::$iVotesLike - 1) :
             t("Congrats! You're the first one!");
 
-        return '{"votes":' . static::$iVotesLike . ',"txt":"' . $sTxt . '"}';
+        return json_encode(
+            [
+                'votes' => static::$iVotesLike,
+                'txt' => $sTxt
+            ],
+            JSON_UNESCAPED_UNICODE | JSON_INVALID_UTF8_SUBSTITUTE
+        );
     }
 
     /**
@@ -56,10 +66,16 @@ class LikeCoreAjax
      */
     private function initialize(): void
     {
-        $this->oLikeModel = new LikeCoreModel;
+        $this->oLikeModel = new LikeCoreModel();
         $this->sKey = $this->oHttpRequest->post('key');
         $this->iVote = (int)$this->oHttpRequest->post('vote');
         $this->sLastIp = Ip::get();
+
+        if ($this->iVote === 1 && (!UserCore::auth() || !(new Token())->checkUrl())) {
+            Http::setHeadersByCode(StatusCode::FORBIDDEN);
+            exit('Forbidden');
+        }
+
         $this->select();
     }
 
@@ -85,21 +101,11 @@ class LikeCoreAjax
     }
 
     /**
-     * Check the permissions so only members can like, but you can disable this check so even visitors will be able to like pages.
-     *
-     * @return bool Returns true if the user is connected, false otherwise.
-     */
-    private function checkPerm(): bool
-    {
-        return UserCore::auth();
-    }
-
-    /**
      * Adds voting into the database and increment the static vote attribute.
      */
     private function insert(): void
     {
-        static::$iVotesLike++;
+        ++static::$iVotesLike;
         $this->oLikeModel->insert($this->sKey, $this->sLastIp);
     }
 
@@ -108,16 +114,16 @@ class LikeCoreAjax
      */
     private function update(): void
     {
-        if ($this->sLastIpVoted != $this->sLastIp) {
-            static::$iVotesLike++;
+        if ($this->sLastIpVoted !== $this->sLastIp) {
+            ++static::$iVotesLike;
             $this->oLikeModel->update($this->sKey, $this->sLastIp);
         }
     }
 
     private function isUserVoting(): bool
     {
-        return $this->iVote && $this->checkPerm();
+        return $this->iVote === 1;
     }
 }
 
-echo (new LikeCoreAjax)->show();
+echo (new LikeCoreAjax())->show();
