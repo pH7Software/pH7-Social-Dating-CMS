@@ -63,7 +63,7 @@ function Wall() {
     this.add = function () {
         var sPost = $('.wall_post').val();
 
-        $.post(pH7Url.base + this.sUrl, {type: 'add', 'post': sPost}, function (oData) {
+        $.post(pH7Url.base + this.sUrl + pH7Url.csrf, {type: 'add', 'post': sPost}, function (oData) {
             oMe._output(oData);
         }, 'json');
     };
@@ -77,7 +77,7 @@ function Wall() {
     this.edit = function () {
         var sPost = $('.wall_post').val();
 
-        $.post(pH7Url.base + this.sUrl, {type: 'edit', 'post': sPost}, function (oData) {
+        $.post(pH7Url.base + this.sUrl + pH7Url.csrf, {type: 'edit', 'post': sPost}, function (oData) {
             oMe._output(oData);
         }, 'json');
     };
@@ -91,7 +91,7 @@ function Wall() {
     this.del = function () {
         var sPost = $('.wall_id').val();
 
-        $.post(pH7Url.base + this.sUrl, {type: 'delete', 'post': sPost}, function (oData) {
+        $.post(pH7Url.base + this.sUrl + pH7Url.csrf, {type: 'delete', 'post': sPost}, function (oData) {
             oMe._output(oData);
         }, 'json');
     };
