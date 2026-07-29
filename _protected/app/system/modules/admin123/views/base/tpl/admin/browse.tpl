@@ -48,13 +48,13 @@
                     {{ $adminId = (int)$admin->profileId }}
                     <tr>
                       <td>
-                          <input type="checkbox" name="action[]" value="{adminId}_{% $admin->username %}" />
+                          <input type="checkbox" name="action[]" value="{adminId}_{% $str->escapeAttribute($admin->username) %}" />
                       </td>
                       <td>{adminId}</td>
-                      <td>{% $admin->email %}</td>
+                      <td>{% escape($admin->email) %}</td>
                       <td>
-                          {% $admin->username %}<br />
-                          <span class="gray">{% $admin->firstName %}</span>
+                          {% escape($admin->username) %}<br />
+                          <span class="gray">{% escape($admin->firstName) %}</span>
                       </td>
                       <td>{{ $design->ip($admin->ip) }}</td>
                       <td class="small">{% $dateTime->get($admin->joinDate)->dateTime() %}</td>
