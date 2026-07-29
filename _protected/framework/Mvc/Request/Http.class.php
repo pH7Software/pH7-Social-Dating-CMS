@@ -396,7 +396,9 @@ class Http extends \PH7\Framework\Http\Http
         }
 
         if (!empty($sParam) && $sParam === self::ONLY_XSS_CLEAN) {
-            return (new Secty\Validate\Filter)->xssClean($aType[$sKey]);
+            // Use the dedicated rich-text sanitizer directly. Filter::xssClean()
+            // delegates to the same Purifier and remains a compatibility entry point.
+            return (new Secty\Validate\Purifier)->xssClean($aType[$sKey]);
         }
 
         return escape($aType[$sKey], $this->bStrip);
