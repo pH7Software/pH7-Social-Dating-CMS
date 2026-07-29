@@ -1,9 +1,9 @@
 <?php
+
 /**
  * @author         Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright      (c) 2012-2020, Pierre-Henry Soria. All Rights Reserved.
  * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
- * @package        PH7 / App / System / Module / Picture / Controller
  */
 
 namespace PH7;
@@ -17,14 +17,13 @@ use PH7\Framework\Security\Ban\Ban;
 use PH7\Framework\Security\CSRF\Token;
 use PH7\Framework\Url\Header;
 use PH7\JustHttp\StatusCode;
-use stdClass;
 
 class MainController extends Controller
 {
     use ImageTaggable;
 
-    const ALBUMS_PER_PAGE = 16;
-    const PHOTOS_PER_PAGE = 10;
+    public const ALBUMS_PER_PAGE = 16;
+    public const PHOTOS_PER_PAGE = 10;
 
     /** @var PictureModel */
     private $oPictureModel;
@@ -48,13 +47,13 @@ class MainController extends Controller
     {
         parent::__construct();
 
-        $this->oPictureModel = new PictureModel;
-        $this->oPage = new Page;
+        $this->oPictureModel = new PictureModel();
+        $this->oPage = new Page();
 
         $this->sUsername = $this->httpRequest->get('username');
 
         $this->view->member_id = $this->session->get('member_id');
-        $this->iProfileId = (new UserCoreModel)->getId(null, $this->sUsername);
+        $this->iProfileId = (new UserCoreModel())->getId(null, $this->sUsername);
 
         // Predefined meta_keywords tags
         $this->view->meta_keywords = t('picture,photo,pictures,photos,album,albums,photo album,picture album,gallery,picture dating');
@@ -152,7 +151,7 @@ class MainController extends Controller
             $this->view->meta_description = t("Browse %0%'s Photos | Photo Album Social Community - %site_name%", $this->sUsername);
             $this->view->album = $oAlbum;
 
-            /**
+            /*
              * @internal FYI, we don't call `Statistic::setView()`, because it needs a foreach loop,
              * and it is unnecessary to do both, that's why it is located in the album.tpl view instead.
              */
@@ -194,7 +193,7 @@ class MainController extends Controller
 
     public function deletePhoto()
     {
-        if (!(new Token)->check($this->getActionTokenName('deletephoto'))) {
+        if (!(new Token())->check($this->getActionTokenName('deletephoto'))) {
             Header::redirect(
                 Uri::get('picture', 'main', 'albums'),
                 Form::errorTokenMsg()
@@ -202,17 +201,26 @@ class MainController extends Controller
         }
 
         $iPictureId = $this->httpRequest->post('picture_id', Type::INTEGER);
+        $iAlbumId = $this->httpRequest->post('album_id', Type::INTEGER);
+        $iProfileId = (int)$this->session->get('member_id');
+
+        if (!$this->oPictureModel->isPhotoOwnedBy($iPictureId, $iAlbumId, $iProfileId)) {
+            Header::redirect(
+                Uri::get('picture', 'main', 'albums'),
+                t('The photo could not be removed.')
+            );
+        }
 
         CommentCoreModel::deleteRecipient($iPictureId, 'picture');
 
         $this->oPictureModel->deletePhoto(
-            $this->session->get('member_id'),
-            $this->httpRequest->post('album_id', Type::INTEGER),
+            $iProfileId,
+            $iAlbumId,
             $iPictureId
         );
 
-        (new Picture)->deletePhoto(
-            $this->httpRequest->post('album_id'),
+        (new Picture())->deletePhoto(
+            $iAlbumId,
             $this->session->get('member_username'),
             $this->httpRequest->post('picture_link')
         );
@@ -224,7 +232,7 @@ class MainController extends Controller
                 'picture',
                 'main',
                 'album',
-                $this->session->get('member_username') . ',' . $this->httpRequest->post('album_title') . ',' . $this->httpRequest->post('album_id')
+                $this->session->get('member_username') . ',' . $this->httpRequest->post('album_title') . ',' . $iAlbumId
             ),
             t('Your photo has been removed.')
         );
@@ -232,17 +240,21 @@ class MainController extends Controller
 
     public function deleteAlbum()
     {
-        if (!(new Token)->check($this->getActionTokenName('deletealbum'))) {
+        if (!(new Token())->check($this->getActionTokenName('deletealbum'))) {
             Header::redirect(
                 Uri::get('picture', 'main', 'albums'),
                 Form::errorTokenMsg()
             );
         }
 
-        $this->oPictureModel->deletePhoto($this->session->get('member_id'), $this->httpRequest->post('album_id', Type::INTEGER));
-        $this->oPictureModel->deleteAlbum($this->session->get('member_id'), $this->httpRequest->post('album_id', Type::INTEGER));
-        $sDir = PH7_PATH_PUBLIC_DATA_SYS_MOD . 'picture/img/' . $this->session->get('member_username') . PH7_DS . $this->httpRequest->post('album_id') . PH7_DS;
-        $this->file->deleteDir($sDir);
+        $iAlbumId = $this->httpRequest->post('album_id', Type::INTEGER);
+        $this->oPictureModel->deletePhoto($this->session->get('member_id'), $iAlbumId);
+        $this->oPictureModel->deleteAlbum($this->session->get('member_id'), $iAlbumId);
+        (new Picture())->deleteAlbum(
+            $iAlbumId,
+            $this->session->get('member_username'),
+            $this->file
+        );
 
         Picture::clearCache();
 
@@ -303,7 +315,7 @@ class MainController extends Controller
         $this->output();
     }
 
-    protected function imageToSocialMetaTags(stdClass $oPicture): void
+    protected function imageToSocialMetaTags(\stdClass $oPicture): void
     {
         $sFilename = str_replace('original', '600', $oPicture->file);
         $sImageUrl = PH7_URL_DATA_SYS_MOD . 'picture/img/' . $oPicture->username . '/' . $oPicture->albumId . '/' . $sFilename;

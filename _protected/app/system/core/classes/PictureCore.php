@@ -1,9 +1,9 @@
 <?php
+
 /**
  * @author         Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
  * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
- * @package        PH7 / App / System / Core / Class
  */
 
 namespace PH7;
@@ -13,8 +13,24 @@ use PH7\Framework\File\File;
 
 class PictureCore
 {
+    public function deleteAlbum($iAlbumId, $sUsername, File $oFile): bool
+    {
+        $sUsername = (string)$sUsername;
+        $sSafeUsername = File::getFileBasename($sUsername);
+        $iAlbumId = (int)$iAlbumId;
+
+        if ($sSafeUsername === '' || $sSafeUsername !== $sUsername || $iAlbumId < 1) {
+            return false;
+        }
+
+        $sAlbumPath = PH7_PATH_PUBLIC_DATA_SYS_MOD .
+            'picture/img/' . $sSafeUsername . PH7_DS . $iAlbumId . PH7_DS;
+
+        return $oFile->deleteDir($sAlbumPath);
+    }
+
     /**
-     * @param int $iAlbumId
+     * @param int    $iAlbumId
      * @param string $sUsername
      * @param string $sPictureLink (file with the extension)
      *
@@ -29,11 +45,11 @@ class PictureCore
         $iAlbumId = (int)$iAlbumId;
 
         if (
-            $sSafeUsername === '' ||
-            $sSafeUsername !== $sUsername ||
-            $sSafePictureLink === '' ||
-            $sSafePictureLink !== $sPictureLink ||
-            $iAlbumId < 1
+            $sSafeUsername === ''
+            || $sSafeUsername !== $sUsername
+            || $sSafePictureLink === ''
+            || $sSafePictureLink !== $sPictureLink
+            || $iAlbumId < 1
         ) {
             return;
         }
@@ -50,13 +66,13 @@ class PictureCore
             $sDir . str_replace('original', '1200', $sSafePictureLink)
         ];
 
-        (new File)->deleteFile($aFiles);
+        (new File())->deleteFile($aFiles);
         unset($aFiles);
     }
 
     public static function clearCache()
     {
-        (new Cache)->start(
+        (new Cache())->start(
             PictureCoreModel::CACHE_GROUP,
             null,
             null

@@ -1,34 +1,48 @@
 <?php
+
 /**
  * @author         Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
  * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
- * @package        PH7 / App / System / Core / Model
  */
 
 namespace PH7;
 
-use PDO;
 use PH7\Framework\Mvc\Model\Engine\Db;
 use PH7\Framework\Mvc\Model\Engine\Model;
-use stdClass;
 
 class PictureCoreModel extends Model
 {
-    const CACHE_GROUP = 'db/sys/mod/picture';
-    const CACHE_TIME = 172800;
-    const CREATED = 'createdDate';
-    const UPDATED = 'updatedDate';
+    public const CACHE_GROUP = 'db/sys/mod/picture';
+    public const CACHE_TIME = 172800;
+    public const CREATED = 'createdDate';
+    public const UPDATED = 'updatedDate';
+
+    public function isPhotoOwnedBy(int $iPictureId, int $iAlbumId, int $iProfileId): bool
+    {
+        $rStmt = Db::getInstance()->prepare(
+            'SELECT COUNT(pictureId) FROM' . Db::prefix(DbTableName::PICTURE) .
+            'WHERE pictureId = :pictureId AND albumId = :albumId AND profileId = :profileId'
+        );
+        $rStmt->bindValue(':pictureId', $iPictureId, \PDO::PARAM_INT);
+        $rStmt->bindValue(':albumId', $iAlbumId, \PDO::PARAM_INT);
+        $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
+        $rStmt->execute();
+        $bIsOwned = (int)$rStmt->fetchColumn() === 1;
+        Db::free($rStmt);
+
+        return $bIsOwned;
+    }
 
     /**
-     * @param null|int $iProfileId
-     * @param null|int $iAlbumId
-     * @param string $sApproved '1' = Approved | '0' = Pending
-     * @param int $iOffset
-     * @param int $iLimit
-     * @param string $sOrder
+     * @param int|null $iProfileId
+     * @param int|null $iAlbumId
+     * @param string   $sApproved  '1' = Approved | '0' = Pending
+     * @param int      $iOffset
+     * @param int      $iLimit
+     * @param string   $sOrder
      *
-     * @return stdClass|array
+     * @return \stdClass|array
      */
     public function album($iProfileId, $iAlbumId, $sApproved, $iOffset, $iLimit, $sOrder = self::CREATED)
     {
@@ -49,21 +63,21 @@ class PictureCoreModel extends Model
 
             $rStmt = Db::getInstance()->prepare($sSqlQuery);
             if ($bIsProfileId) {
-                $rStmt->bindValue(':profileId', $iProfileId, PDO::PARAM_INT);
+                $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
             }
 
             if ($bIsAlbumId) {
-                $rStmt->bindValue(':albumId', $iAlbumId, PDO::PARAM_INT);
+                $rStmt->bindValue(':albumId', $iAlbumId, \PDO::PARAM_INT);
             }
 
-            $rStmt->bindValue(':approved', $sApproved, PDO::PARAM_STR);
+            $rStmt->bindValue(':approved', $sApproved, \PDO::PARAM_STR);
 
-            $rStmt->bindParam(':offset', $iOffset, PDO::PARAM_INT);
-            $rStmt->bindParam(':limit', $iLimit, PDO::PARAM_INT);
+            $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
+            $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
 
             $rStmt->execute();
 
-            $mData = ($bIsProfileId && $bIsAlbumId) ? $rStmt->fetch(PDO::FETCH_OBJ) : $rStmt->fetchAll(PDO::FETCH_OBJ);
+            $mData = ($bIsProfileId && $bIsAlbumId) ? $rStmt->fetch(\PDO::FETCH_OBJ) : $rStmt->fetchAll(\PDO::FETCH_OBJ);
             Db::free($rStmt);
             $this->cache->put($mData);
         }
@@ -72,9 +86,9 @@ class PictureCoreModel extends Model
     }
 
     /**
-     * @param int $iProfileId
-     * @param int $iAlbumId
-     * @param null|int $iPictureId
+     * @param int      $iProfileId
+     * @param int      $iAlbumId
+     * @param int|null $iPictureId
      *
      * @return bool
      */
@@ -85,10 +99,10 @@ class PictureCoreModel extends Model
         $sSqlPictureId = $bIsPictureId ? ' AND pictureId = :pictureId ' : '';
         $sSql = 'DELETE FROM' . Db::prefix(DbTableName::PICTURE) . 'WHERE profileId = :profileId AND albumId = :albumId' . $sSqlPictureId;
         $rStmt = Db::getInstance()->prepare($sSql);
-        $rStmt->bindValue(':profileId', $iProfileId, PDO::PARAM_INT);
-        $rStmt->bindValue(':albumId', $iAlbumId, PDO::PARAM_INT);
+        $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
+        $rStmt->bindValue(':albumId', $iAlbumId, \PDO::PARAM_INT);
         if ($bIsPictureId) {
-            $rStmt->bindValue(':pictureId', $iPictureId, PDO::PARAM_INT);
+            $rStmt->bindValue(':pictureId', $iPictureId, \PDO::PARAM_INT);
         }
 
         return $rStmt->execute();
