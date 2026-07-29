@@ -18,7 +18,9 @@
 
         <p>
             {% Framework\Parse\Emoticon::init(
-                Framework\Security\Ban\Ban::filterWord(escape($post->message))
+                (new Framework\Security\Validate\Purifier)->xssClean(
+                    Framework\Security\Ban\Ban::filterWord($post->message)
+                )
             ) %}
         </p>
 
@@ -67,7 +69,9 @@
                     <p>
                         {% Framework\Parse\Emoticon::init(
                             Framework\Parse\User::atUsernameToLink(
-                                Framework\Security\Ban\Ban::filterWord(escape($msg->message))
+                                (new Framework\Security\Validate\Purifier)->xssClean(
+                                    Framework\Security\Ban\Ban::filterWord($msg->message)
+                                )
                             )
                         ) %}
                     </p>

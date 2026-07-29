@@ -1,9 +1,9 @@
 <?php
+
 /**
  * @author         Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
  * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
- * @package        PH7 / App / System / Module / Note / Controller
  */
 
 namespace PH7;
@@ -11,6 +11,7 @@ namespace PH7;
 use PH7\Datatype\Type;
 use PH7\Framework\Analytics\Statistic;
 use PH7\Framework\Cache\Cache;
+use PH7\Framework\File\File;
 use PH7\Framework\Http\Http;
 use PH7\Framework\Layout\Html\Design;
 use PH7\Framework\Mvc\Router\Uri;
@@ -21,21 +22,20 @@ use PH7\Framework\Security\CSRF\Token as SecurityToken;
 use PH7\Framework\Security\Validate\Filter;
 use PH7\Framework\Url\Header;
 use PH7\JustHttp\StatusCode;
-use stdClass;
 
 class MainController extends Controller
 {
-    const POSTS_PER_PAGE = 10;
-    const CATEGORIES_PER_PAGE = 10;
-    const AUTHORS_PER_PAGE = 10;
-    const ITEMS_MENU_TOP_VIEWS = 5;
-    const ITEMS_MENU_TOP_RATING = 5;
-    const ITEMS_MENU_AUTHORS = 6;
-    const ITEMS_MENU_CATEGORIES = 10;
-    const MAX_CATEGORIES = 300;
+    public const POSTS_PER_PAGE = 10;
+    public const CATEGORIES_PER_PAGE = 10;
+    public const AUTHORS_PER_PAGE = 10;
+    public const ITEMS_MENU_TOP_VIEWS = 5;
+    public const ITEMS_MENU_TOP_RATING = 5;
+    public const ITEMS_MENU_AUTHORS = 6;
+    public const ITEMS_MENU_CATEGORIES = 10;
+    public const MAX_CATEGORIES = 300;
 
-    const MAX_CATEGORY_LENGTH_SHOWN = 60;
-    const MAX_AUTHOR_LENGTH_SHOWN = 60;
+    public const MAX_CATEGORY_LENGTH_SHOWN = 60;
+    public const MAX_AUTHOR_LENGTH_SHOWN = 60;
 
     /** @var NoteModel */
     protected $oNoteModel;
@@ -56,8 +56,8 @@ class MainController extends Controller
     {
         parent::__construct();
 
-        $this->oNoteModel = new NoteModel;
-        $this->oPage = new Page;
+        $this->oNoteModel = new NoteModel();
+        $this->oPage = new Page();
         $this->iApproved = AdminCore::auth() && !UserCore::isAdminLoggedAs() ? null : 1;
 
         $this->view->member_id = $this->session->get('member_id');
@@ -96,7 +96,7 @@ class MainController extends Controller
     public function read($sUsername, $sPostId)
     {
         if (isset($sUsername, $sPostId)) {
-            $iProfileId = (new UserCoreModel)->getId(null, $sUsername);
+            $iProfileId = (new UserCoreModel())->getId(null, $sUsername);
             $oPost = $this->oNoteModel->readPost($sPostId, $iProfileId, $this->iApproved);
 
             if ($oPost && $this->doesPostExist($sPostId, $oPost)) {
@@ -113,10 +113,10 @@ class MainController extends Controller
 
                     /***** CONTENTS *****/
                     'h1_title' => Ban::filterWord($oPost->title),
-                    'content' => Emoticon::init((new Filter)->xssClean(Ban::filterWord($oPost->content))),
+                    'content' => Emoticon::init((new Filter())->xssClean(Ban::filterWord($oPost->content))),
                     'categories' => $this->oNoteModel->getCategory($oPost->noteId, 0, self::MAX_CATEGORIES),
 
-                    /** Date **/
+                    /* Date * */
                     'dateTime' => $this->dateTime,
                     'post' => $oPost
                 ];
@@ -311,13 +311,21 @@ class MainController extends Controller
     {
         $this->requireActionToken('note', 'main', 'delete');
 
-        $iId = $this->httpRequest->post('id');
-        $iProfileId = $this->session->get('member_id');
+        $iId = $this->httpRequest->post('id', Type::INTEGER);
+        $iProfileId = (int)$this->session->get('member_id');
+        $oPost = $this->getOwnedPost($iId, $iProfileId);
+
+        if (!$oPost) {
+            Header::redirect(
+                Uri::get('note', 'main', 'index'),
+                t('Your post could not be deleted.')
+            );
+        }
 
         CommentCoreModel::deleteRecipient($iId, 'note');
         $this->oNoteModel->deleteCategory($iId);
 
-        $this->deleteThumbFile($iId, $iProfileId);
+        $this->deleteThumbFile($oPost);
         $this->oNoteModel->deletePost($iId, $iProfileId);
 
         Note::clearCache();
@@ -329,14 +337,22 @@ class MainController extends Controller
 
     public function removeThumb($iId)
     {
-        if ((new SecurityToken)->checkUrl()) {
-            $iProfileId = $this->session->get('member_id');
-            $this->deleteThumbFile($iId, $iProfileId);
-            $this->oNoteModel->deleteThumb($iId, $iProfileId);
-            Note::clearCache();
+        if ((new SecurityToken())->checkUrl()) {
+            $iId = (int)$iId;
+            $iProfileId = (int)$this->session->get('member_id');
+            $oPost = $this->getOwnedPost($iId, $iProfileId);
 
-            $sMsg = t('The thumbnail has been deleted successfully!');
-            $sMsgType = Design::SUCCESS_TYPE;
+            if ($oPost) {
+                $this->deleteThumbFile($oPost);
+                $this->oNoteModel->deleteThumb($iId, $iProfileId);
+                Note::clearCache();
+
+                $sMsg = t('The thumbnail has been deleted successfully!');
+                $sMsgType = Design::SUCCESS_TYPE;
+            } else {
+                $sMsg = t('The thumbnail could not be deleted.');
+                $sMsgType = Design::ERROR_TYPE;
+            }
         } else {
             $sMsg = Form::errorTokenMsg();
             $sMsgType = Design::ERROR_TYPE;
@@ -372,7 +388,6 @@ class MainController extends Controller
 
         $this->view->authors = $this->getAuthorList();
 
-
         $this->view->categories = $this->getCategoryList();
     }
 
@@ -402,7 +417,7 @@ class MainController extends Controller
      */
     private function getCategoryList()
     {
-        $oCache = (new Cache)->start(NoteModel::CACHE_GROUP, 'categorylist', NoteModel::CACHE_LIFETIME);
+        $oCache = (new Cache())->start(NoteModel::CACHE_GROUP, 'categorylist', NoteModel::CACHE_LIFETIME);
 
         if (!$aCategories = $oCache->get()) {
             $aCategoryList = $this->oNoteModel->getCategory(null, 0, self::MAX_CATEGORIES);
@@ -419,7 +434,7 @@ class MainController extends Controller
                 );
 
                 if ($iTotalPostsPerCat > 0 && count($aCategories) <= self::ITEMS_MENU_CATEGORIES) {
-                    $oData = new stdClass();
+                    $oData = new \stdClass();
                     $oData->totalNotes = $iTotalPostsPerCat;
                     $oData->name = $oCategory->name;
                     $aCategories[] = $oData;
@@ -437,7 +452,7 @@ class MainController extends Controller
      */
     private function getAuthorList()
     {
-        $oCache = (new Cache)->start(NoteModel::CACHE_GROUP, 'authorlist', NoteModel::CACHE_LIFETIME);
+        $oCache = (new Cache())->start(NoteModel::CACHE_GROUP, 'authorlist', NoteModel::CACHE_LIFETIME);
 
         if (!$aAuthors = $oCache->get()) {
             $aAuthorList = $this->oNoteModel->getAuthor(0, self::ITEMS_MENU_AUTHORS);
@@ -454,7 +469,7 @@ class MainController extends Controller
                 );
 
                 if ($iTotalPostsPerAuthor > 0) {
-                    $oData = new stdClass();
+                    $oData = new \stdClass();
                     $oData->totalNotes = $iTotalPostsPerAuthor;
                     $oData->username = $oAuthor->username;
                     $aAuthors[] = $oData;
@@ -468,35 +483,44 @@ class MainController extends Controller
     }
 
     /**
-     * @internal Warning! Thumbnail must be removed before the note post in the database.
-     *
-     * @param int $iId
-     * @param int $iProfileId
-     *
-     * @return bool
+     * @internal the thumbnail must be removed before the note post in the database
      */
-    private function deleteThumbFile($iId, $iProfileId)
+    private function deleteThumbFile(\stdClass $oPost): bool
     {
-        $oFile = $this->oNoteModel->readPost(
-            $this->oNoteModel->getPostId($iId),
-            $iProfileId,
-            null
-        );
+        $sThumb = (string)$oPost->thumb;
+        if ($sThumb === '') {
+            return true;
+        }
 
-        return (new Note)->deleteThumb(
-            $this->session->get('member_username') . PH7_DS . $oFile->thumb,
+        $sUsername = (string)$this->session->get('member_username');
+        $sSafeUsername = File::getFileBasename($sUsername);
+        $sSafeThumb = File::getFileBasename($sThumb);
+        if ($sSafeUsername !== $sUsername || $sSafeThumb !== $sThumb) {
+            return false;
+        }
+
+        return (new Note())->deleteThumb(
+            $sSafeUsername . PH7_DS . $sSafeThumb,
             'note',
             $this->file
         );
     }
 
+    private function getOwnedPost(int $iId, int $iProfileId): \stdClass|false
+    {
+        $sPostId = $this->oNoteModel->getPostId($iId);
+
+        return $sPostId ?
+            $this->oNoteModel->readPost($sPostId, $iProfileId, null) :
+            false;
+    }
+
     /**
      * @param string $sPostId
-     * @param stdClass $oPost
      *
      * @return bool
      */
-    private function doesPostExist($sPostId, stdClass $oPost)
+    private function doesPostExist($sPostId, \stdClass $oPost)
     {
         return !empty($oPost->postId) && $this->str->equals($sPostId, $oPost->postId);
     }

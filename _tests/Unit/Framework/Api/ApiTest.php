@@ -24,8 +24,40 @@ final class ApiTest extends TestCase
 
     public function testSetWithValidData(): void
     {
-        $aData = json_decode('{"status":1,"msg":"Hello World!"}', true);
+        $sJsonData = $this->set(['status' => 1, 'msg' => 'Hello World!']);
 
-        $this->assertSame(['status' => 1, 'msg' => 'Hello World!'], $aData);
+        $this->assertSame(
+            ['status' => 1, 'msg' => 'Hello World!'],
+            json_decode($sJsonData, true, 512, JSON_THROW_ON_ERROR)
+        );
+    }
+
+    public function testSetOmitsCredentialFieldsRecursively(): void
+    {
+        $oProfile = (object) [
+            'username' => 'alice',
+            'password' => 'password-hash',
+            'hashValidation' => 'validation-secret',
+            'twoFactorAuthSecret' => 'two-factor-secret'
+        ];
+
+        $sJsonData = $this->set([
+            'profile' => $oProfile,
+            'related' => [
+                [
+                    'username' => 'bob',
+                    'password' => 'plaintext-password'
+                ]
+            ]
+        ]);
+        $aData = json_decode($sJsonData, true, 512, JSON_THROW_ON_ERROR);
+
+        $this->assertSame('alice', $aData['profile']['username']);
+        $this->assertSame('bob', $aData['related'][0]['username']);
+        $this->assertArrayNotHasKey('password', $aData['profile']);
+        $this->assertArrayNotHasKey('hashValidation', $aData['profile']);
+        $this->assertArrayNotHasKey('twoFactorAuthSecret', $aData['profile']);
+        $this->assertArrayNotHasKey('password', $aData['related'][0]);
+        $this->assertSame('password-hash', $oProfile->password);
     }
 }

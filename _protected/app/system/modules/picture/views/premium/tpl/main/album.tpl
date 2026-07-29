@@ -5,7 +5,7 @@
         <div class="m_photo center">
             {{ $absolute_url = Framework\Mvc\Router\Uri::get('picture','main','photo',"$a->username,$a->albumId,$a->title,$a->pictureId") }}
 
-            <h4><a href="{absolute_url}">{% substr(Framework\Security\Ban\Ban::filterWord($a->title),0,25) %}</a></h4>
+            <h4><a href="{absolute_url}">{% substr(escape(Framework\Security\Ban\Ban::filterWord($a->title)),0,25) %}</a></h4>
             <p>
                 <a href="{url_data_sys_mod}picture/img/{% $a->username %}/{% $a->albumId %}/{% str_replace('original', 1000, $a->file) %}" title="{% $str->escapeAttribute($a->title) %}" data-popup="slideshow">
                     <img src="{url_data_sys_mod}picture/img/{% $a->username %}/{% $a->albumId %}/{% str_replace('original', '400', $a->file) %}" alt="{% $str->escapeAttribute($a->title) %}" title="{% $str->escapeAttribute($a->title) %}" loading="lazy" decoding="async" />
@@ -15,7 +15,7 @@
             {if $is_user_auth AND $member_id == $a->profileId}
                 <div class="small">
                     <a href="{{ $design->url('picture', 'main', 'editphoto', "$a->albumId,$a->title,$a->pictureId") }}">{lang 'Edit'}</a> |
-                    {{ LinkCoreForm::display(t('Delete'), 'picture', 'main', 'deletephoto', array('album_title'=>$a->name, 'album_id'=>$a->albumId, 'picture_id'=>$a->pictureId, 'picture_link'=>$a->file)) }}
+                    {{ LinkCoreForm::display(t('Delete'), 'picture', 'main', 'deletephoto', array('album_title'=>$a->name, 'album_id'=>$a->albumId, 'picture_id'=>$a->pictureId)) }}
                 </div>
             {/if}
             <p>

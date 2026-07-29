@@ -77,23 +77,23 @@
                 {each $user in $browse}
                     <tr>
                         <td>
-                            <input type="checkbox" name="action[]" value="{% $user->profileId %}_{% $user->username %}" />
+                            <input type="checkbox" name="action[]" value="{% $user->profileId %}_{% $str->escapeAttribute($user->username) %}" />
                         </td>
                         <td>{% $user->profileId %}</td>
                         <td>
-                            <a href="mailto:{% $user->email %}" title="{lang 'Email the User'}">
-                                {% $user->email %}
+                            <a href="mailto:{% $str->escapeAttribute($user->email) %}" title="{lang 'Email the User'}">
+                                {% escape($user->email) %}
                             </a>
                         </td>
                         <td>
                             {{ $design->getProfileLink($user->username) }}<br />
-                            <span class="gray">{% $user->firstName %}</span>
+                            <span class="gray">{% escape($user->firstName) %}</span>
                         </td>
                         <td>{{ $avatarDesign->get($user->username, $user->firstName, null, 32) }}</td>
                         <td>
                             <img src="{{ $design->getSmallFlagIcon(Framework\Geo\Ip\Geo::getCountryCode($user->ip)) }}" title="{lang 'Country Flag'}" alt="{lang 'Country Flag'}" /> {{ $design->ip($user->ip) }}
                         </td>
-                        <td>{% $user->membershipName %} ({% $user->groupId %})</td> {* Name of the Membership Group *}
+                        <td>{% escape($user->membershipName) %} ({% $user->groupId %})</td> {* Name of the Membership Group *}
                         <td class="small">{% $dateTime->get($user->joinDate)->dateTime() %}</td>
                         <td class="small">
                             {if !empty($user->lastActivity)}
@@ -109,7 +109,7 @@
                                 {lang 'No editing'}
                             {/if}
                         </td>
-                        <td class="small">{% $user->reference %}</td>
+                        <td class="small">{% escape($user->reference) %}</td>
                         <td class="small">
                             <a href="{{ $design->url('user', 'setting', 'edit', $user->profileId) }}" title="{lang "Edit User's Profile Information"}">{lang 'Edit'}</a> •
                             <a href="{{ $design->url('user', 'setting', 'avatar', "$user->profileId,$user->username,$user->firstName,$user->sex", false) }}" title="{lang "Edit User's Profile Photo"}">{lang 'Profile Photo'}</a> •

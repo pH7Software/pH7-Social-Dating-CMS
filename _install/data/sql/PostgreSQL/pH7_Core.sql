@@ -1194,7 +1194,7 @@ INSERT INTO ph7_settings (settingName, settingValue, description, settingGroup) 
 ('watermarkTextImage', 'pH7Builder.com', 'Watermark text', 'image'),
 ('sizeWatermarkTextImage', 2, 'Between 0 to 5', 'image'),
 ('banWordReplace', '[removed]',  '',  'security'),
-('securityToken', 0, '0 to disable or 1 to enable the CSRF security token in the forms', 'security'),
+('securityToken', 1, 'Legacy compatibility flag; CSRF security tokens are always enabled', 'security'),
 ('securityTokenLifetime', 720, 'Time in seconds to the CSRF security token. Default 720 seconds (12 mins)', 'security'),
 ('DDoS', 0,  '0 to disabled or 1 to enabled DDoS attack protection',  'security'),
 ('isSiteValidated', 0,  '0 = site not validated | 1 = site validated',  'security'),

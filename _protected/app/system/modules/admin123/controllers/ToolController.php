@@ -1,9 +1,9 @@
 <?php
+
 /**
  * @author         Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright      (c) 2012-2022, Pierre-Henry Soria. All Rights Reserved.
  * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
- * @package        PH7 / App / System / Module / Admin / Controller
  */
 
 declare(strict_types=1);
@@ -12,6 +12,7 @@ namespace PH7;
 
 use PH7\Framework\Cache\Cache;
 use PH7\Framework\Date\CDateTime;
+use PH7\Framework\File\File;
 use PH7\Framework\Layout\Gzip\Gzip;
 use PH7\Framework\Layout\Html\Design;
 use PH7\Framework\Layout\Html\Security as HtmlSecurity;
@@ -46,7 +47,7 @@ class ToolController extends Controller
     public function cache(): void
     {
         // Add a CSRF token for the remove ajax cache request
-        $this->view->csrf_token = (new Token)->generate('cache');
+        $this->view->csrf_token = (new Token())->generate('cache');
 
         $this->addGeneralCssFile();
 
@@ -124,7 +125,7 @@ class ToolController extends Controller
     {
         $this->addGeneralCssFile();
 
-        $this->view->designSecurity = new HtmlSecurity; // Security Design Class
+        $this->view->designSecurity = new HtmlSecurity(); // Security Design Class
 
         $this->sTitle = t('Backup Management');
         $this->view->page_title = $this->sTitle;
@@ -134,14 +135,14 @@ class ToolController extends Controller
         $aDumpList = $this->removePaths($aDumpList);
         $this->view->aDumpList = $aDumpList;
 
-        $oSecurityToken = new Token;
+        $oSecurityToken = new Token();
         if ($this->httpRequest->postExists('backup')) {
             if (!$oSecurityToken->check('backup')) {
                 $this->design->setFlashMsg(Form::errorTokenMsg(), Design::ERROR_TYPE);
             } else {
                 // Clean the site name to avoid bug with the backup path
                 $sSiteName = str_replace([' ', '/', '\\'], '_', $this->registry->site_name);
-                $sCurrentDate = (new CDateTime)->get()->date();
+                $sCurrentDate = (new CDateTime())->get()->date();
 
                 switch ($this->httpRequest->post('backup_type')) {
                     case self::SERVER_ACTION:
@@ -149,25 +150,20 @@ class ToolController extends Controller
                         (new Backup(PH7_PATH_BACKUP_SQL . $sFileName))->back()->save();
                         $this->view->msg_success = t('Data dumped into backup file "%0%"', $sFileName);
                         break;
-
                     case self::SERVER_ARCHIVE_ACTION:
                         $sFileName = 'Database-dump.' . $sCurrentDate . '.sql.gz';
                         (new Backup(PH7_PATH_BACKUP_SQL . $sFileName))->back()->saveArchive();
                         $this->view->msg_success = t('Data dumped into backup file "%0%"', $sFileName);
                         break;
-
                     case self::CLIENT_ACTION:
                         (new Backup($sSiteName . '_' . $sCurrentDate . '.sql'))->back()->download();
                         break;
-
                     case self::CLIENT_ARCHIVE_ACTION:
                         (new Backup($sSiteName . '_' . $sCurrentDate . '.sql.gz'))->back()->downloadArchive();
                         break;
-
                     case self::SHOW_ACTION:
-                        $this->view->sql_content = (new Backup)->back()->show();
+                        $this->view->sql_content = (new Backup())->back()->show();
                         break;
-
                     default:
                         $this->design->setFlashMsg(
                             t('Please select a field.'),
@@ -181,7 +177,7 @@ class ToolController extends Controller
             if (!$oSecurityToken->check('backup')) {
                 $this->design->setFlashMsg(Form::errorTokenMsg(), Design::ERROR_TYPE);
             } else {
-                $sDumpFile = $this->httpRequest->post('dump_file');
+                $sDumpFile = $this->getSelectedDumpFileName();
 
                 if (!empty($sDumpFile)) {
                     if ($this->file->getFileExt($sDumpFile) === Backup::SQL_FILE_EXT) {
@@ -207,7 +203,7 @@ class ToolController extends Controller
             if (!$oSecurityToken->check('backup')) {
                 $this->design->setFlashMsg(Form::errorTokenMsg(), Design::ERROR_TYPE);
             } else {
-                $sDumpFile = $this->httpRequest->post('dump_file');
+                $sDumpFile = $this->getSelectedDumpFileName();
 
                 if (!empty($sDumpFile)) {
                     $this->file->deleteFile(PH7_PATH_BACKUP_SQL . $sDumpFile);
@@ -220,32 +216,34 @@ class ToolController extends Controller
                 }
             }
         }
-        unset($oSecurityToken);
-
-
         if ($this->httpRequest->postExists('restore_sql_file')) {
-            if (!empty($_FILES['sql_file']['tmp_name'])) {
-                $sNameFile = $_FILES['sql_file']['name'];
-                $sTmpFile = $_FILES['sql_file']['tmp_name'];
+            if (!$oSecurityToken->check('backup')) {
+                $this->design->setFlashMsg(Form::errorTokenMsg(), Design::ERROR_TYPE);
+            } else {
+                if (!empty($_FILES['sql_file']['tmp_name'])) {
+                    $sNameFile = $_FILES['sql_file']['name'];
+                    $sTmpFile = $_FILES['sql_file']['tmp_name'];
 
-                if ($this->file->getFileExt($sNameFile) === Backup::SQL_FILE_EXT) {
-                    $mStatus = (new Backup($sTmpFile))->restore();
-                } elseif ($this->file->getFileExt($sNameFile) === Backup::ARCHIVE_FILE_EXT) {
-                    $mStatus = (new Backup($sTmpFile))->restoreArchive();
+                    if ($this->file->getFileExt($sNameFile) === Backup::SQL_FILE_EXT) {
+                        $mStatus = (new Backup($sTmpFile))->restore();
+                    } elseif ($this->file->getFileExt($sNameFile) === Backup::ARCHIVE_FILE_EXT) {
+                        $mStatus = (new Backup($sTmpFile))->restoreArchive();
+                    } else {
+                        $mStatus = t('Dump file must be a SQL type (extension ".sql" or compressed archive ".gz")');
+                    }
+
+                    // Remove the temporary file
+                    $this->file->deleteFile($sTmpFile);
                 } else {
-                    $mStatus = t('Dump file must be a SQL type (extension ".sql" or compressed archive ".gz")');
+                    $mStatus = t('Please select a dump SQL file.');
                 }
 
-                // Remove the temporary file
-                $this->file->deleteFile($sTmpFile);
-            } else {
-                $mStatus = t('Please select a dump SQL file.');
+                $sMsg = ($mStatus === true) ? t('Data successfully restored from desktop!') : $mStatus;
+                $sMsgType = ($mStatus === true) ? Design::SUCCESS_TYPE : Design::ERROR_TYPE;
+                $this->design->setFlashMsg($sMsg, $sMsgType);
             }
-
-            $sMsg = ($mStatus === true) ? t('Data successfully restored from desktop!') : $mStatus;
-            $sMsgType = ($mStatus === true) ? Design::SUCCESS_TYPE : Design::ERROR_TYPE;
-            $this->design->setFlashMsg($sMsg, $sMsgType);
         }
+        unset($oSecurityToken);
 
         $this->output();
     }
@@ -285,10 +283,25 @@ class ToolController extends Controller
         );
     }
 
+    private function getSelectedDumpFileName(): string
+    {
+        $sDumpFile = (string)$this->httpRequest->post('dump_file');
+        $sFileName = File::getFileBasename($sDumpFile);
+
+        if (
+            $sFileName !== $sDumpFile
+            || !in_array(File::getFileExtWithDot($sFileName), self::BACKUP_FILE_EXTS, true)
+        ) {
+            return '';
+        }
+
+        return $sFileName;
+    }
+
     /**
      * Checks and stops the script if the method is not POST.
      *
-     * @return void The text by exit() function.
+     * @return void the text by exit() function
      */
     private function checkPost(): void
     {

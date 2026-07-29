@@ -26,4 +26,18 @@ final class AjaxTest extends TestCase
         $sActualResult = Ajax::jsonMsg(0, 'Noooo! :(');
         $this->assertSame('{"status":0,"txt":"Noooo! :("}', $sActualResult);
     }
+
+    public function testJsonMsgEscapesUntrustedSyntax(): void
+    {
+        $sActualResult = Ajax::jsonMsg(0, '"},"injected":true,"txt":"');
+
+        $this->assertSame(
+            '{"status":0,"txt":"\\"},\\"injected\\":true,\\"txt\\":\\""}',
+            $sActualResult
+        );
+        $this->assertSame(
+            ['status' => 0, 'txt' => '"},"injected":true,"txt":"'],
+            json_decode($sActualResult, true, 512, JSON_THROW_ON_ERROR)
+        );
+    }
 }

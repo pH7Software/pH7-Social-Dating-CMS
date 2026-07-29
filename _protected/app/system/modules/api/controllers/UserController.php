@@ -1,11 +1,12 @@
 <?php
+
 /**
  * @author         Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright      (c) 2015-2023, Pierre-Henry Soria. All Rights Reserved.
  * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
- * @package        PH7 / App / System / Module / Api / Controller
- * @link           https://ph7builder.com
- * @link           https://github.com/pH7Software/pH7Builder-HTTP-REST-Push-Data
+ *
+ * @see           https://ph7builder.com
+ * @see           https://github.com/pH7Software/pH7Builder-HTTP-REST-Push-Data
  */
 
 namespace PH7;
@@ -27,9 +28,9 @@ class UserController extends MainController
     {
         parent::__construct();
 
-        $this->oUser = new UserCore;
-        $this->oUserModel = new UserCoreModel;
-        $this->oValidate = new Validate;
+        $this->oUser = new UserCore();
+        $this->oUserModel = new UserCoreModel();
+        $this->oValidate = new Validate();
     }
 
     public function createAccount(): void
@@ -47,7 +48,7 @@ class UserController extends MainController
             $iMinAge = DbConfig::getSetting('minAgeRegistration');
             $iMaxAge = DbConfig::getSetting('maxAgeRegistration');
 
-            $sBirthDate = (new CDateTime)->get($aData['birth_date'])->date('m/d/Y');
+            $sBirthDate = (new CDateTime())->get($aData['birth_date'])->date('m/d/Y');
 
             $aRequiredFields = [
                 'email',
@@ -114,10 +115,8 @@ class UserController extends MainController
                 ];
                 $iUserId = $this->oUserModel->add(escape($aValidData, true));
 
-                // Add 'profile_id' key into the array
                 $aValidData['profile_id'] = $iUserId;
 
-                // Display the new user's details and ID
                 $this->oRest->response($this->set($aValidData));
             }
         }
@@ -140,7 +139,7 @@ class UserController extends MainController
             elseif ($this->oUserModel->login($aData['email'], $aData['password']) === true) {
                 $iId = $this->oUserModel->getId($aData['email']);
                 $oUserData = $this->oUserModel->readProfile($iId);
-                $this->oUser->setAuth($oUserData, $this->oUserModel, $this->session, new SecurityModel);
+                $this->oUser->setAuth($oUserData, $this->oUserModel, $this->session, new SecurityModel());
 
                 $this->oRest->response($this->set($aData));
             } else {
@@ -181,10 +180,6 @@ class UserController extends MainController
 
     /**
      * Get all profile data.
-     *
-     * @param string $sOrder
-     * @param int|null $iOffset
-     * @param int|null $iLimit
      */
     public function users(
         string $sOrder = SearchCoreModel::LAST_ACTIVITY,
@@ -209,10 +204,6 @@ class UserController extends MainController
      * Get profiles from geo location.
      *
      * @param string $sCountryCode The country code. e.g. US, CA, FR, ES, BE, NL
-     * @param string $sCity
-     * @param string $sOrder
-     * @param int|null $iOffset
-     * @param int|null $iLimit
      */
     public function usersFromLocation(
         string $sCountryCode,
@@ -246,7 +237,7 @@ class UserController extends MainController
     }
 
     /**
-     * Delete a user
+     * Delete a user.
      */
     public function deleteUser(int $iProfileId): void
     {

@@ -78,6 +78,14 @@ $goBox();
 // Setup tooltips
 // Title of the links
 
+function encodeTooltipText(oElement) {
+    const sTitle = oElement.attr('title');
+
+    if (typeof sTitle === 'string') {
+        oElement.attr('title', $('<div>').text(sTitle).html());
+    }
+}
+
 $('a[title],img[title],abbr[title]').each(function () {
     // "bIsDataPopup" checks that only for links that do not possess the attribute "data-popup", otherwise not the title of the popup (colorbox) cannot appear because of the plugin (tipTip).
     const bIsDataPopup = $(this).data('popup');
@@ -85,6 +93,8 @@ $('a[title],img[title],abbr[title]').each(function () {
     if (!bIsDataPopup) {
         const oE = $(this);
         let pos = "top";
+
+        encodeTooltipText(oE);
 
         if (oE.hasClass("tttop")) {
             pos = "top";
@@ -114,6 +124,8 @@ $('a[title],img[title],abbr[title]').each(function () {
 
 // Title of the Forms
 $('form input[title],textarea[title],select[title]').each(function () {
+    encodeTooltipText($(this));
+
     $(this).tipTip({
         activation: 'focus',
         edgeOffset: 5,

@@ -13,7 +13,7 @@
                             {{ $num_enabled_membership++ }}
                             <li class="list-group-item clearfix">
                                 <div class="pull-left">
-                                    <h4 class="underline">{% $membership->name %}</h4>
+                                    <h4 class="underline">{% escape($membership->name) %}</h4>
                                     <h5>
                                         {% $config->values['module.setting']['currency_sign'] %}{% $membership->price %}
                                         <span class="small">
@@ -28,7 +28,7 @@
                                             {/if}
                                         </span>
                                     </h5>
-                                    <p class="italic">{% $membership->description %}</p>
+                                    <p class="italic">{% nl2br(escape($membership->description)) %}</p>
                                 </div>
                                 <p class="pull-right">
                                     <a

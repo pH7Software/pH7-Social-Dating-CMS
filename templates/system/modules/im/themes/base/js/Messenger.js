@@ -42,6 +42,12 @@ var Messenger = {
         return this;
     },
 
+    getEndpointUrl: function (sAction) {
+        var sQuerySeparator = pH7Url.csrf === '' ? '?' : '&';
+
+        return pH7Url.base + 'im/asset/ajax/Messenger/' + pH7Url.csrf + sQuerySeparator + 'act=' + sAction;
+    },
+
     scheduleHeartbeat: function () {
         if (this.iHeartbeatTimer !== null) {
             clearTimeout(this.iHeartbeatTimer);
@@ -213,7 +219,7 @@ var Messenger = {
 
         $.ajax(
             {
-                url: pH7Url.base + "im/asset/ajax/Messenger/?act=heartbeat",
+                url: this.getEndpointUrl('heartbeat'),
                 type: 'POST',
                 cache: false,
                 dataType: "json",
@@ -272,7 +278,7 @@ var Messenger = {
         $('#chatbox_' + sBoxTitle).css('display', 'none');
         this.restructureBoxes();
 
-        $.post(pH7Url.base + "im/asset/ajax/Messenger/?act=close", {box: sBoxTitle});
+        $.post(this.getEndpointUrl('close'), {box: sBoxTitle});
     },
 
     toggleBoxGrowth: function (sBoxTitle) {
@@ -318,7 +324,7 @@ var Messenger = {
             $(oBoxTextarea).focus();
             $(oBoxTextarea).css('height', '44px');
             if (this.sMessage != '') {
-                $.post(pH7Url.base + "im/asset/ajax/Messenger/?act=send", {
+                $.post(this.getEndpointUrl('send'), {
                     to: sBoxTitle,
                     message: this.sMessage
                 }, function (oData) {
@@ -350,7 +356,7 @@ var Messenger = {
     startSession: function () {
         $.ajax(
             {
-                url: pH7Url.base + "im/asset/ajax/Messenger/?act=startsession",
+                url: this.getEndpointUrl('startsession'),
                 type: 'POST',
                 cache: false,
                 dataType: "json",

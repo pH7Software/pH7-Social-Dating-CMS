@@ -1,6 +1,6 @@
 <div class="center">
     {if empty($error)}
-        <h2>{% Framework\Security\Ban\Ban::filterWord($picture->title) %}</h2>
+        <h2>{% escape(Framework\Security\Ban\Ban::filterWord($picture->title)) %}</h2>
         <div class="picture_block">
             <a href="{url_data_sys_mod}picture/img/{% $picture->username %}/{% $picture->albumId %}/{% str_replace('original', 1200, $picture->file) %}" title="{% $str->escapeAttribute($picture->title) %}" data-popup="image">
                 <img src="{url_data_sys_mod}picture/img/{% $picture->username %}/{% $picture->albumId %}/{% str_replace('original', '600', $picture->file) %}" alt="{% $str->escapeAttribute($picture->title) %}" title="{% $str->escapeAttribute($picture->title) %}" class="thumb" />
@@ -8,7 +8,7 @@
         </div>
 
         <p>
-            {% nl2br(Framework\Parse\Emoticon::init(Framework\Security\Ban\Ban::filterWord($picture->description))) %}
+            {% nl2br(Framework\Parse\Emoticon::init(escape(Framework\Security\Ban\Ban::filterWord($picture->description)))) %}
         </p>
         <p class="italic">
             {lang 'Album created %0%', Framework\Date\Various::textTimeStamp($picture->createdDate)}
@@ -23,7 +23,7 @@
         {if $is_user_auth AND $member_id == $picture->profileId}
             <div class="small">
                 <a href="{{ $design->url('picture', 'main', 'editphoto', "$picture->albumId,$picture->title,$picture->pictureId") }}">{lang 'Edit'}</a> |
-                {{ LinkCoreForm::display(t('Delete'), 'picture', 'main', 'deletephoto', array('album_title'=>$picture->name, 'album_id'=>$picture->albumId, 'picture_id'=>$picture->pictureId, 'picture_link'=>$picture->file)) }}
+                {{ LinkCoreForm::display(t('Delete'), 'picture', 'main', 'deletephoto', array('album_title'=>$picture->name, 'album_id'=>$picture->albumId, 'picture_id'=>$picture->pictureId)) }}
             </div>
         {/if}
 

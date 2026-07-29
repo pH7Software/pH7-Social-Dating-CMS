@@ -81,23 +81,25 @@
                 {each $aff in $browse}
                     <tr>
                         <td>
-                            <input type="checkbox" name="action[]" value="{% $aff->profileId %}_{% $aff->username %}" />
+                            <input type="checkbox" name="action[]" value="{% $aff->profileId %}_{% $str->escapeAttribute($aff->username) %}" />
                         </td>
                         <td>{% $aff->profileId %}</td>
                         <td>
-                            <a href="mailto:{% $aff->email %}" title="{lang 'Email the Affiliate'}">
-                                {% $aff->email %}
+                            <a href="mailto:{% $str->escapeAttribute($aff->email) %}" title="{lang 'Email the Affiliate'}">
+                                {% escape($aff->email) %}
                             </a>
                         </td>
                         <td>
-                            {% $aff->username %}<br />
-                            <span class="small gray">{% $aff->firstName %} {% $aff->lastName %}</span>
+                            {% escape($aff->username) %}<br />
+                            <span class="small gray">{% escape($aff->firstName) %} {% escape($aff->lastName) %}</span>
                         </td>
-                        <td>{% $aff->refer %}</td>
-                        <td>{% $aff->bankAccount %}</td>
+                        <td>{% escape($aff->refer) %}</td>
+                        <td>{% escape($aff->bankAccount) %}</td>
                         <td>
-                            {if !empty($aff->website)}
-                                <a href="{% $aff->website %}">{% $aff->website %}</a>
+                            {if !empty($aff->website) AND $validate->url($aff->website)}
+                                <a href="{% $str->escapeAttribute($aff->website) %}">{% escape($aff->website) %}</a>
+                            {elseif !empty($aff->website)}
+                                {% escape($aff->website) %}
                             {else}
                                 {lang 'No website'}
                             {/if}

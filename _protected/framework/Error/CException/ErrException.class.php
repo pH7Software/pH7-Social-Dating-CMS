@@ -1,12 +1,14 @@
 <?php
+
 /**
  * @title          Error Exception Class
+ *
  * @desc           Management error messages for the Exceptions.
  *
  * @author         Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
  * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
- * @package        PH7/ Framework / Error / CException
+ *
  * @version        1.1
  */
 
@@ -21,21 +23,18 @@ namespace PH7\Framework\Error\CException {
         public function __toString()
         {
             switch ($this->severity) {
-                case E_USER_ERROR : // If the user issues a fatal error
+                case E_USER_ERROR: // If the user issues a fatal error
                     $sType = 'Fatal error ';
                     break;
-
-                case E_WARNING : // If PHP issues a warning
-                case E_USER_WARNING : // If the user issues a warning
+                case E_WARNING: // If PHP issues a warning
+                case E_USER_WARNING: // If the user issues a warning
                     $sType = 'Warning error';
                     break;
-
-                case E_NOTICE : // If PHP issues a notice
-                case E_USER_NOTICE : // If the user issues a notice
+                case E_NOTICE: // If PHP issues a notice
+                case E_USER_NOTICE: // If the user issues a notice
                     $sType = 'Notice error';
                     break;
-
-                default : // Unknown error
+                default: // Unknown error
                     $sType = 'Unknown error';
                     break;
             }
@@ -47,12 +46,13 @@ namespace PH7\Framework\Error\CException {
 
 namespace {
     use PH7\Framework\Error\CException\ErrException;
+    use PH7\Framework\Error\CException\PH7Exception;
 
     /**
      * The code serves as severity
-     * Refer to the predefined constants for more information: http://php.net/manual/errorfunc.constants.php
+     * Refer to the predefined constants for more information: http://php.net/manual/errorfunc.constants.php.
      *
-     * @param integer $iCode
+     * @param int    $iCode
      * @param string $sMessage
      * @param string $sFile
      * @param string $sLine
@@ -64,13 +64,9 @@ namespace {
         throw new ErrException($sMessage, 0, $iCode, $sFile, $sLine);
     }
 
-    /**
-     * @param ErrException $oExcept
-     */
     function customExcept(ErrException $oExcept)
     {
-        //header('HTTP/1.1 500 Internal Server Error');
-        echo '<b>ERROR:</b><br /> Message: ', $oExcept->getMessage(), '<br />File: ', $oExcept->getFile(), 'Line: ', $oExcept->getLine(), '<br />';
+        PH7Exception::launch($oExcept);
     }
 
     set_error_handler('errExcept');

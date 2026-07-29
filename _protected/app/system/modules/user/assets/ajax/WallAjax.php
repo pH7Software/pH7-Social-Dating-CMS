@@ -1,9 +1,9 @@
 <?php
+
 /**
  * @author         Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
  * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
- * @package        PH7 / App / System / Module / User / Asset / Ajax
  */
 
 namespace PH7;
@@ -15,12 +15,13 @@ use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Parse\Emoticon;
 use PH7\Framework\Parse\User as UserParser;
 use PH7\Framework\Security\Ban\Ban;
+use PH7\Framework\Security\CSRF\Token;
 use PH7\JustHttp\StatusCode;
 
 class WallAjax extends Core
 {
-    const MAX_ITEMS_SHOWN = 20;
-    const MAX_STRING_LENGTH_SHOWN = 80;
+    public const MAX_ITEMS_SHOWN = 20;
+    public const MAX_STRING_LENGTH_SHOWN = 80;
 
     /** @var WallModel */
     private $oWallModel;
@@ -31,7 +32,6 @@ class WallAjax extends Core
     /** @var string */
     private $sMsg;
 
-    /** @var mixed */
     private $mContents;
 
     /** @var bool */
@@ -41,30 +41,34 @@ class WallAjax extends Core
     {
         parent::__construct();
 
-        $this->oWallModel = new WallModel;
-        $this->oAvatarDesign = new AvatarDesignCore; // Avatar Design Class
+        $sAction = $this->httpRequest->post('type');
+        if (
+            in_array($sAction, ['add', 'edit', 'delete'], true)
+            && !(new Token())->checkUrl()
+        ) {
+            Http::setHeadersByCode(StatusCode::FORBIDDEN);
+            exit(jsonMsg(0, Form::errorTokenMsg()));
+        }
 
-        switch ($this->httpRequest->post('type')) {
+        $this->oWallModel = new WallModel();
+        $this->oAvatarDesign = new AvatarDesignCore(); // Avatar Design Class
+
+        switch ($sAction) {
             case 'show':
                 $this->show();
                 break;
-
             case 'showCommentProfile':
                 $this->showCommentProfile();
                 break;
-
             case 'add':
                 $this->add();
                 break;
-
             case 'edit':
                 $this->edit();
                 break;
-
             case 'delete':
                 $this->delete();
                 break;
-
             default:
                 $this->badRequest();
         }
@@ -127,7 +131,8 @@ class WallAjax extends Core
     {
         $this->bStatus = $this->oWallModel->add(
             $this->session->get('member_id'),
-            $this->httpRequest->post('post')
+            $this->httpRequest->post('post'),
+            $this->dateTime->get()->dateTime('Y-m-d H:i:s')
         );
 
         if (!$this->bStatus) {
@@ -143,7 +148,8 @@ class WallAjax extends Core
     {
         $this->bStatus = $this->oWallModel->edit(
             $this->session->get('member_id'),
-            $this->httpRequest->post('post')
+            $this->httpRequest->post('post'),
+            $this->dateTime->get()->dateTime('Y-m-d H:i:s')
         );
 
         if (!$this->bStatus) {
@@ -180,5 +186,5 @@ class WallAjax extends Core
 
 // Only for the members
 if (User::auth()) {
-    new WallAjax;
+    new WallAjax();
 }

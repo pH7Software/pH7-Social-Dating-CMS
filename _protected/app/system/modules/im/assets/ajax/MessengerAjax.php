@@ -1,12 +1,14 @@
 <?php
+
 /**
  * @title          Chat Messenger Ajax
  *
  * @author         Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
  * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
- * @package        PH7 / App / System / Module / IM / Asset / Ajax
+ *
  * @version        1.6
+ *
  * @required       PHP 5.4 or higher.
  */
 
@@ -23,6 +25,7 @@ use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Mvc\Request\Http as HttpRequest;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Parse\Emoticon;
+use PH7\Framework\Security\CSRF\Token;
 use PH7\Framework\Session\Session;
 use PH7\JustHttp\StatusCode;
 
@@ -38,28 +41,29 @@ class MessengerAjax extends PermissionCore
     {
         parent::__construct();
 
+        if (!(new Token())->checkUrl()) {
+            Http::setHeadersByCode(StatusCode::FORBIDDEN);
+            exit(jsonMsg(0, Form::errorTokenMsg()));
+        }
+
         Import::pH7App(PH7_SYS . PH7_MOD . 'im.models.MessengerModel');
 
-        $this->oHttpRequest = new HttpRequest;
-        $this->oMessengerModel = new MessengerModel;
+        $this->oHttpRequest = new HttpRequest();
+        $this->oMessengerModel = new MessengerModel();
 
         switch ($this->oHttpRequest->get('act')) {
             case 'heartbeat':
                 $this->heartbeat();
                 break;
-
             case 'send':
                 $this->send();
                 break;
-
             case 'close':
                 $this->close();
                 break;
-
             case 'startsession':
                 $this->startSession();
                 break;
-
             default:
                 Http::setHeadersByCode(StatusCode::BAD_REQUEST);
                 exit('Bad Request Error!');
@@ -202,7 +206,7 @@ class MessengerAjax extends PermissionCore
                 $sMsgTransform = '<small><em>' . t('%0% is currently offline. Maybe, try to chat later on? 😉', $sTo) . '</em></small>';
             }
         } else {
-            $this->oMessengerModel->insert($sFrom, $sTo, $sMsg, (new CDateTime)->get()->dateTime(self::DATETIME_FORMAT));
+            $this->oMessengerModel->insert($sFrom, $sTo, $sMsg, (new CDateTime())->get()->dateTime(self::DATETIME_FORMAT));
         }
 
         $_SESSION['messenger_history'][$this->oHttpRequest->post('to')] .= $this->setJsonContent(['status' => '1', 'user' => $sTo, 'msg' => $sMsgTransform]);
@@ -238,13 +242,11 @@ class MessengerAjax extends PermissionCore
         // Update array
         $aData += $aDefData;
 
-        $sJsonData = <<<EOD
-        {
-            "status": "{$aData['status']}",
-            "user": "{$aData['user']}",
-            "msg": "{$aData['msg']}"
-        }
-EOD;
+        $sJsonData = json_encode(
+            $aData,
+            JSON_UNESCAPED_UNICODE | JSON_INVALID_UTF8_SUBSTITUTE
+        );
+
         return $bEndComma ? $sJsonData . ',' : $sJsonData;
     }
 
@@ -255,7 +257,7 @@ EOD;
      */
     protected function isOnline($sUsername)
     {
-        $oUserModel = new UserCoreModel;
+        $oUserModel = new UserCoreModel();
         $iProfileId = $oUserModel->getId(null, $sUsername);
         $bIsOnline = $oUserModel->isOnline($iProfileId, DbConfig::getSetting('userTimeout'));
         unset($oUserModel);
@@ -270,10 +272,10 @@ EOD;
      */
     protected function sanitize($sText)
     {
-        $sText = escape($sText, true);
+        $sText = escape($sText);
         $sText = str_replace("\n\r", "\n", $sText);
         $sText = str_replace("\r\n", "\n", $sText);
-        $sText = str_replace("\n", "<br>", $sText);
+        $sText = str_replace("\n", '<br>', $sText);
 
         return $sText;
     }
@@ -281,11 +283,11 @@ EOD;
 
 // Go only if the user is logged
 if (UserCore::auth()) {
-    $oSession = new Session; // Initialize session & start_session() func
+    $oSession = new Session(); // Initialize session & start_session() func
     if (empty($_SESSION['messenger_username'])) {
         $_SESSION['messenger_username'] = $oSession->get('member_username');
     }
     unset($oSession);
 
-    new MessengerAjax;
+    new MessengerAjax();
 }

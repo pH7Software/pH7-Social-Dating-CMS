@@ -1,9 +1,9 @@
 <?php
+
 /**
  * @author         Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
  * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
- * @package        PH7 / App / System / Module / Mail / Controller
  */
 
 namespace PH7;
@@ -15,13 +15,12 @@ use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Navigation\Page;
 use PH7\Framework\Security\CSRF\Token;
 use PH7\Framework\Url\Header;
-use stdClass;
 
 class MainController extends Controller
 {
     use BulkAction;
 
-    const EMAILS_PER_PAGE = 10;
+    public const EMAILS_PER_PAGE = 10;
 
     /** @var MailModel */
     protected $oMailModel;
@@ -51,15 +50,15 @@ class MainController extends Controller
     {
         parent::__construct();
 
-        $this->oMailModel = new MailModel;
-        $this->oPage = new Page;
+        $this->oMailModel = new MailModel();
+        $this->oPage = new Page();
         $this->iProfileId = $this->session->get('member_id');
         $this->bAdminLogged = (AdminCore::auth() && !UserCore::auth());
 
-        $this->view->avatarDesign = new AvatarDesignCore; // Avatar Design Class
-        $this->view->designSecurity = new Security; // Security Design Class
+        $this->view->avatarDesign = new AvatarDesignCore(); // Avatar Design Class
+        $this->view->designSecurity = new Security(); // Security Design Class
 
-        $this->view->csrf_token = (new Token)->generate('mail');
+        $this->view->csrf_token = (new Token())->generate('mail');
 
         $this->view->member_id = $this->iProfileId;
 
@@ -85,7 +84,7 @@ class MainController extends Controller
 
     public function inbox()
     {
-        /** Default title **/
+        /* Default title * */
         $this->sTitle = t('Messages');
         $this->view->page_title = $this->sTitle;
         $this->view->h2_title = $this->sTitle;
@@ -280,7 +279,7 @@ class MainController extends Controller
     {
         $sKeywords = $this->httpRequest->get('looking');
         $sOrder = $this->httpRequest->get('order');
-        $iSort = $this->httpRequest->get('sort',Type::INTEGER);
+        $iSort = $this->httpRequest->get('sort', Type::INTEGER);
         $iType = $this->httpRequest->get('where', Type::INTEGER);
 
         $this->iTotalMails = $this->oMailModel->search(
@@ -343,7 +342,7 @@ class MainController extends Controller
         );
 
         if ($this->bStatus) {
-            $this->oMailModel->setReadMsg($iId);
+            $this->oMailModel->setReadMsg($this->iProfileId, $iId);
             $this->sMsg = t('Message has been moved to the trash.');
         } else {
             $this->sMsg = t("Your message doesn't exist in your inbox.");
@@ -360,19 +359,20 @@ class MainController extends Controller
         $aActions = $this->httpRequest->post('action');
         $bActionsEligible = $this->areActionsEligible($aActions);
 
-        if (!(new Token)->check('mail_action')) {
+        if (!(new Token())->check('mail_action')) {
             $this->sMsg = Form::errorTokenMsg();
         } else {
             if ($bActionsEligible) {
                 foreach ($aActions as $iId) {
                     $iId = (int)$iId;
 
-                    $this->oMailModel->setReadMsg($iId);
-                    $this->oMailModel->setTo(
+                    if ($this->oMailModel->setTo(
                         $this->iProfileId,
                         $iId,
                         MailModel::TRASH_MODE
-                    );
+                    )) {
+                        $this->oMailModel->setReadMsg($this->iProfileId, $iId);
+                    }
                 }
                 $this->sMsg = t('Your message(s) has/have been moved to the trash.');
             }
@@ -417,7 +417,7 @@ class MainController extends Controller
         $aActions = $this->httpRequest->post('action');
         $bActionsEligible = $this->areActionsEligible($aActions);
 
-        if (!(new Token)->check('mail_action')) {
+        if (!(new Token())->check('mail_action')) {
             $this->sMsg = Form::errorTokenMsg();
         } else {
             if ($bActionsEligible) {
@@ -458,7 +458,7 @@ class MainController extends Controller
             );
 
             if ($this->bStatus) {
-                $this->oMailModel->setReadMsg($iId);
+                $this->oMailModel->setReadMsg($this->iProfileId, $iId);
             }
         }
 
@@ -477,7 +477,7 @@ class MainController extends Controller
         $aActions = $this->httpRequest->post('action');
         $bActionsEligible = $this->areActionsEligible($aActions);
 
-        if (!(new Token)->check('mail_action')) {
+        if (!(new Token())->check('mail_action')) {
             $this->sMsg = Form::errorTokenMsg();
         } else {
             if ($bActionsEligible) {
@@ -487,12 +487,13 @@ class MainController extends Controller
                     if ($this->bAdminLogged) {
                         $this->oMailModel->adminDeleteMsg($iId);
                     } else {
-                        $this->oMailModel->setReadMsg($iId);
-                        $this->oMailModel->setTo(
+                        if ($this->oMailModel->setTo(
                             $this->iProfileId,
                             $iId,
                             MailModel::DELETE_MODE
-                        );
+                        )) {
+                            $this->oMailModel->setReadMsg($this->iProfileId, $iId);
+                        }
                     }
                 }
                 $this->sMsg = t('Your message(s) has/have been successfully removed.');
@@ -506,7 +507,7 @@ class MainController extends Controller
     private function isSingleActionTokenValid(string $sAction): bool
     {
         $sActionToken = Token::getNameFromUrl(Uri::get('mail', 'main', $sAction));
-        $oToken = new Token;
+        $oToken = new Token();
 
         return $oToken->check($sActionToken) || $oToken->check('mail_action');
     }
@@ -554,10 +555,10 @@ class MainController extends Controller
         return $this->bStatus ? Design::SUCCESS_TYPE : Design::ERROR_TYPE;
     }
 
-    private function setRead(stdClass $oMsg): void
+    private function setRead(\stdClass $oMsg): void
     {
-        if ($oMsg->status == MailModel::UNREAD_STATUS) {
-            $this->oMailModel->setReadMsg($oMsg->messageId);
+        if ($oMsg->status === MailModel::UNREAD_STATUS) {
+            $this->oMailModel->setReadMsg($this->iProfileId, (int)$oMsg->messageId);
         }
     }
 }

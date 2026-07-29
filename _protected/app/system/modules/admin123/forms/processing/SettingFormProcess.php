@@ -1,9 +1,9 @@
 <?php
+
 /**
  * @author         Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
  * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
- * @package        PH7 / App / System / Module / Admin / From / Processing
  */
 
 namespace PH7;
@@ -17,11 +17,11 @@ use PH7\Framework\Navigation\Browser;
 
 class SettingFormProcess extends Form
 {
-    const LOGO_FILENAME = 'logo.png';
-    const MIN_CSRF_TOKEN_LIFETIME = 10;
-    const LOGO_WIDTH = 47;
-    const LOGO_HEIGHT = 45;
-    const MAX_WATERMARK_SIZE = 5;
+    public const LOGO_FILENAME = 'logo.png';
+    public const MIN_CSRF_TOKEN_LIFETIME = 10;
+    public const LOGO_WIDTH = 47;
+    public const LOGO_HEIGHT = 45;
+    public const MAX_WATERMARK_SIZE = 5;
 
     /** @var bool */
     private $bIsErr = false;
@@ -106,7 +106,6 @@ class SettingFormProcess extends Form
         'ban_word_replace' => 'banWordReplace',
 
         // CSRF
-        'security_token_forms' => 'securityToken',
         'security_token_lifetime' => 'securityTokenLifetime',
 
         // Session hijacking protection
@@ -181,41 +180,37 @@ class SettingFormProcess extends Form
                 }
             } elseif ($this->hasDataChanged($sKey, $sVal)) {
                 switch ($sKey) {
-                    case 'min_username_length': {
-                        $iMaxUsernameLength = $this->httpRequest->post('max_username_length')-1;
+                    case 'min_username_length':
+                        $iMaxUsernameLength = $this->httpRequest->post('max_username_length') - 1;
                         if ($this->httpRequest->post('min_username_length') > $iMaxUsernameLength) {
                             \PFBC\Form::setError('form_setting', t('The minimum length of the username cannot exceed %0% characters.', $iMaxUsernameLength));
-                             $this->bIsErr = true;
-                         } else {
+                            $this->bIsErr = true;
+                        } else {
                             DbConfig::setSetting($this->httpRequest->post('min_username_length'), 'minUsernameLength');
                         }
-                    } break;
-
-                    case 'max_username_length': {
+                        break;
+                    case 'max_username_length':
                         if ($this->httpRequest->post('max_username_length') > PH7_MAX_USERNAME_LENGTH) {
                             \PFBC\Form::setError('form_setting', t('The maximum length of the username cannot exceed %0% characters.', PH7_MAX_USERNAME_LENGTH));
                             $this->bIsErr = true;
                         } else {
                             DbConfig::setSetting($this->httpRequest->post('max_username_length'), 'maxUsernameLength');
                         }
-                    } break;
-
-                    case 'min_age_registration': {
+                        break;
+                    case 'min_age_registration':
                         if ($this->httpRequest->post('min_age_registration') >= $this->httpRequest->post('max_age_registration')) {
                             \PFBC\Form::setError('form_setting', t('You cannot specify a minimum age higher than the maximum age.'));
                             $this->bIsErr = true;
                         } else {
                             DbConfig::setSetting($this->httpRequest->post('min_age_registration'), 'minAgeRegistration');
                         }
-                    } break;
-
-                    case 'size_watermark_text_image': {
-                        if ($this->httpRequest->post('size_watermark_text_image') >= 0 &&
-                            $this->httpRequest->post('size_watermark_text_image') <= self::MAX_WATERMARK_SIZE) {
+                        break;
+                    case 'size_watermark_text_image':
+                        if ($this->httpRequest->post('size_watermark_text_image') >= 0
+                            && $this->httpRequest->post('size_watermark_text_image') <= self::MAX_WATERMARK_SIZE) {
                             DbConfig::setSetting($this->httpRequest->post('size_watermark_text_image'), 'sizeWatermarkTextImage');
                         }
-                    } break;
-
+                        break;
                     case 'background_color':
                     case 'text_color':
                     case 'heading1_color':
@@ -223,17 +218,15 @@ class SettingFormProcess extends Form
                     case 'heading3_color':
                     case 'link_color':
                     case 'footer_link_color':
-                    case 'link_hover_color': {
+                    case 'link_hover_color':
                         // Prevent to override color style if the value isn't changed by user but set by the Web browser due to empty field values
                         if (!Browser::isDefaultBrowserHexCodeFound($this->httpRequest->post($sKey))) {
                             DbConfig::setSetting($this->httpRequest->post($sKey), $sVal);
                         }
-                    } break;
-
-                    default: {
+                        break;
+                    default:
                         $sMethod = ($sKey === 'site_status' ? 'setSiteMode' : ($sKey === 'social_media_widgets' ? 'setSocialWidgets' : 'setSetting'));
                         DbConfig::$sMethod($this->httpRequest->post($sKey, null, true), $sVal);
-                    }
                 }
             }
         }
@@ -251,7 +244,7 @@ class SettingFormProcess extends Form
                 $this->bIsErr = true;
             } else {
                 /**
-                 * @internal File::deleteFile() first tests if the file exists, and then deletes it.
+                 * @internal file::deleteFile() first tests if the file exists, and then deletes it
                  */
                 $sPathName = PH7_PATH_TPL . PH7_TPL_NAME . PH7_DS . PH7_IMG . self::LOGO_FILENAME;
                 $this->file->deleteFile($sPathName); // It erases the old logo.
@@ -271,15 +264,15 @@ class SettingFormProcess extends Form
      * @param string $sKey
      * @param string $sVal
      *
-     * @return bool
-     *
      * @throws Framework\Mvc\Request\WrongRequestMethodException
+     *
+     * @return bool
      */
     private function hasDataChanged($sKey, $sVal)
     {
         return
-            isset($_POST[$sKey]) &&
-            !$this->str->equals($this->httpRequest->post($sKey), DbConfig::getSetting($sVal));
+            isset($_POST[$sKey])
+            && !$this->str->equals($this->httpRequest->post($sKey), DbConfig::getSetting($sVal));
     }
 
     /**

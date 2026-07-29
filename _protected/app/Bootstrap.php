@@ -1,10 +1,11 @@
 <?php
+
 /**
  * @author         Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright      (c) 2012-2023, Pierre-Henry Soria. All Rights Reserved.
  * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
- * @link           https://ph7builder.com
- * @package        PH7 / App / Core
+ *
+ * @see           https://ph7builder.com
  */
 
 declare(strict_types=1);
@@ -13,7 +14,6 @@ namespace PH7;
 
 defined('PH7') or exit('Restricted access');
 
-use Exception;
 use PH7\App\Includes\Classes\Loader\Autoloader as AppLoader;
 use PH7\Framework\Config\Config;
 use PH7\Framework\Config\FileNotFoundException;
@@ -34,17 +34,22 @@ class Bootstrap
     /**
      * Set constructor/cloning to private since it's a singleton class.
      */
-    private function __construct() {}
-    private function __clone() {}
+    private function __construct()
+    {
+    }
+
+    private function __clone()
+    {
+    }
 
     /**
      * Get instance of class.
      *
-     * @return Bootstrap Returns the instance class or create initial instance of the class.
+     * @return Bootstrap returns the instance class or create initial instance of the class
      */
     public static function getInstance(): self
     {
-        return null === self::$oInstance ? self::$oInstance = new self : self::$oInstance;
+        return null === self::$oInstance ? self::$oInstance = new self() : self::$oInstance;
     }
 
     /**
@@ -60,7 +65,7 @@ class Bootstrap
     /**
      * Initialize the app, load the files and launch the main FrontController router.
      *
-     * @throws Exception
+     * @throws \Exception
      * @throws Except\PH7Exception
      * @throws Except\UserException
      * @throws FileNotFoundException
@@ -70,16 +75,16 @@ class Bootstrap
         try {
             $this->loadInitFiles();
 
-            //** Temporary code. In the near future, pH7Builder will be working without mod_rewrite
+            // ** Temporary code. In the near future, pH7Builder will be working without mod_rewrite
             if (!Server::cachedIsRewriteMod()) {
                 $this->notRewriteModEnabledError();
                 exit;
-            }  //*/
+            }  // */
 
             // Enable client browser cache
-            (new Browser)->cache();
+            (new Browser())->cache();
 
-            new Server; // Start Server
+            new Server(); // Start Server
 
             $this->startPageBenchmark();
             // Framework\Compress\Compress::enableZlipCompression();
@@ -87,10 +92,10 @@ class Bootstrap
             // Initialize the FrontController, we are asking the front controller to process the HTTP request
             FrontController::getInstance()->runRouter();
         } catch (FileNotFoundException|Except\UserException $oE) {
-            echo $oE->getMessage();
+            echo htmlspecialchars($oE->getMessage(), ENT_QUOTES, PH7_ENCODING);
         } catch (Except\PH7Exception $oE) {
             Except\PH7Exception::launch($oE);
-        } catch (Exception $oE) {
+        } catch (\Exception $oE) {
             Except\PH7Exception::launch($oE);
         } finally {
             $this->closeAppSession();
@@ -106,7 +111,7 @@ class Bootstrap
         require PH7_PATH_FRAMEWORK . 'Loader/Autoloader.php';
         FrameworkLoader::getInstance()->init();
 
-        /** Loading configuration files environments **/
+        /* Loading configuration files environments * */
         // For All environment
         Import::file(PH7_PATH_APP . 'configs/environment/all.env');
         // Specific to the current environment
@@ -131,7 +136,7 @@ class Bootstrap
     }
 
     /**
-     * Initialize the benchmark time. It is calculated in Framework\Layout\Html\Design::stat()
+     * Initialize the benchmark time. It is calculated in Framework\Layout\Html\Design::stat().
      */
     private function startPageBenchmark(): void
     {
@@ -151,7 +156,7 @@ class Bootstrap
     /**
      * Display an error message if the Apache mod_rewrite is not enabled.
      *
-     * @return void HTML output.
+     * @return void HTML output
      */
     private function notRewriteModEnabledError(): void
     {
