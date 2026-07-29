@@ -25,9 +25,12 @@ Without Docker: any PHP >= 8.2 with the extensions listed in `composer.json`, My
    ```
 3. **Run the tests and static analysis** — both must stay green:
    ```console
-   composer test      # PHPUnit
+   composer test      # deterministic PHPUnit suite
    composer analyse   # PHPStan
    ```
+   The separate `composer test-integration` suite requires an installed local
+   application and the external services or API credentials exercised by those
+   tests.
 4. Keep commits focused and their messages descriptive. Small, reviewable pull requests get merged faster.
 
 Theme/CSS contributions: `_tools/theme-preview.html` renders the base theme's CSS chain against sample markup without a full install — serve the repo root (e.g. `python3 -m http.server 8642`) and open it to check your changes, in both light and dark mode.

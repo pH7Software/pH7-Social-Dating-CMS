@@ -105,8 +105,9 @@
     }
   },
   "scripts": {
-    "test": "_protected/vendor/bin/phpunit",
-    "test-ci": "_protected/vendor/bin/phpunit --coverage-text --coverage-clover=build/coverage.xml",
+    "test": "_protected/vendor/bin/phpunit --testsuite \"pH7Builder Protected CI\" --no-coverage",
+    "test-ci": "_protected/vendor/bin/phpunit --testsuite \"pH7Builder Protected CI\" --coverage-text --coverage-clover=build/coverage.xml",
+    "test-integration": "_protected/vendor/bin/phpunit --testsuite \"pH7Builder Integration\" --no-coverage",
     "analyse": "_protected/vendor/bin/phpstan analyse --configuration=phpstan.neon.dist --memory-limit=1G",
     "post-cmd": [
       "cp -R _protected/vendor/twbs/bootstrap/dist/css/bootstrap.min.css static/css/bootstrap.css",
