@@ -12,6 +12,7 @@
 
 namespace PH7;
 
+use PH7\Framework\File\File;
 use PH7\Framework\Layout\Tpl\Engine\PH7Tpl\PH7Tpl;
 use PH7\Framework\Security\Ban\Ban;
 use PH7\Framework\Service\Suggestion;
@@ -85,7 +86,20 @@ class FileController extends Controller
 
     public function somethingProtectedAppDisplay(): void
     {
-        $this->displayAction(PH7_PATH_APP . $this->httpRequest->get('dir'));
+        $mAppPath = realpath(PH7_PATH_APP);
+        $mRequestedPath = realpath(PH7_PATH_APP . (string)$this->httpRequest->get('dir'));
+
+        if (
+            $mAppPath === false ||
+            $mRequestedPath === false ||
+            !File::isPathInsideDirectory($mRequestedPath, $mAppPath)
+        ) {
+            $this->displayPageDenied();
+
+            return;
+        }
+
+        $this->displayAction($mRequestedPath);
         $this->manualTplInclude('protecteddisplay.inc.tpl');
 
         $this->output();
