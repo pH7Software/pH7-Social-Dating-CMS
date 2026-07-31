@@ -284,6 +284,7 @@ Framework\Registry\Registry::getInstance()->lang = [
     'id' => 'bahasa Indonesia',
     'hi' => 'हिन्दी',
     'th' => 'ไทย',
+    'lo' => 'Lao',
 
     /***** Currencies *****/
     'AUD' => '(AUD) Australian Dollar',
