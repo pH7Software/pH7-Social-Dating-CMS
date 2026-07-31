@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: pH7Builder\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-07-29 18:41+0700\n"
-"PO-Revision-Date: 2026-07-30 20:55+0700\n"
+"PO-Revision-Date: 2026-07-31 21:09+0700\n"
 "Last-Translator: Bone NI <bounkirdni@gmail.com>\n"
 "Language-Team: Lao\n"
 "Language: lo_LA\n"
@@ -3701,7 +3701,7 @@ msgstr "IP API:"
 
 #: _protected/app/system/modules/admin123/forms/SettingForm.php:304
 msgid "The URL must end with a slash."
-msgstr "URL ຕ້ອງລົງທ້າຍດ້ວຍเครื่องหมาย /"
+msgstr "URL ຕ້ອງລົງທ້າຍດ້ວຍເຄື່ອງໝາຍ /"
 
 #: _protected/app/system/modules/admin123/forms/SettingForm.php:307
 msgid "Chat API:"
