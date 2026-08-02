@@ -9,8 +9,8 @@
 }
 
 body, td, pre {
-    font-family: 'Open Sans', Verdana, Arial, sans-serif;
-    font-size: 13px;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-size: 14px;
     color: #666;
 }
 

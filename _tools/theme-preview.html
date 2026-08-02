@@ -90,7 +90,7 @@
 
     <h2>Apprise dialog & tipTip tooltip (forced visible)</h2>
     <div style="position: relative; height: 220px;">
-        <div class="apprise" style="display:block; position:absolute; top:10px; left:10px; width:280px;">
+        <div class="apprise" style="display:block; position:absolute; top:10px; left:10px; width:calc(100% - 20px); max-width:280px; box-sizing:border-box;">
             <div class="apprise-inner">
                 <p>Are you sure you want to unmatch Alex?</p>
                 <div class="apprise-buttons">
@@ -99,7 +99,7 @@
                 </div>
             </div>
         </div>
-        <div id="tiptip_holder" class="tip_top" style="display:block; position:absolute; top:40px; left:340px;">
+        <div id="tiptip_holder" class="tip_top" style="display:block; position:absolute; top:150px; right:10px; left:auto;">
             <div id="tiptip_content">Online 5 minutes ago</div>
         </div>
     </div>

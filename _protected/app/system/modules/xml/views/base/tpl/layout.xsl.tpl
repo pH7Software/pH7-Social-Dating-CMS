@@ -12,7 +12,7 @@
         <head>
             <meta charset="utf-8" />
             <title>{lang 'XML Sitemap - %site_name%'}</title>
-            <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+            <meta name="viewport" content="width=device-width, initial-scale=1" />
             <link rel="stylesheet" href="{url_tpl_mod_css}style.css" />
         </head>
         <body>
