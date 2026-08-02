@@ -32,7 +32,7 @@ function init() {
     echo "18) update geoip db"
 
 
-    read option
+    read -r option
     case $option in
       "clear cache") clear-cache;;
       "remove tmp file") remove-tmp-file;;
@@ -115,19 +115,18 @@ function clean-code() {
         eval "$exec 's/\s+$/\n/'"
         eval "$exec 's/\t/    /g'"
 
-        #_clean-indent
         echo "Code has been cleaned!"
     fi
 }
 
 # Count all line of code in all files
 function count-line-code() {
-    find . -type f | xargs wc -l
+    find . -type f -exec wc -l {} +
 }
 
 # Count all line of code in PHP files
 function count-php-line-code() {
-    find . -type f -name '*.php' | xargs wc -l
+    find . -type f -name '*.php' -exec wc -l {} +
 }
 
 # Count all files
@@ -192,7 +191,7 @@ function save-code() {
 # Backup. Create a compressed archive of the project
 function backup() {
     echo "Specify the full path ending with a SLASH where you want the archive will be stored"
-    read path
+    read -r path
     if [ ! -d "$path" ]; then
         echo "The path is not a valid directory."
         exit 1
@@ -202,7 +201,7 @@ function backup() {
     if [ -e "$full_path" ]; then
         _confirm "A backup already exists in this directory, do you want to delete it?"
         if [ $? -eq 1 ]; then
-            rm $full_path
+            rm "$full_path"
         else
             echo "Backup canceled. Please choose a different backup directory or delete the old one."
             exit 2
@@ -214,7 +213,7 @@ function backup() {
     remove-tmp-file
     remove-log-file
 
-    tar -jcvf $full_path .
+    tar -jcvf "$full_path" .
     echo "Backup project successfully created into: $full_path"
 }
 
@@ -275,11 +274,11 @@ function update-geoip-db() {
 # Clear caches to avoid wrong data when checking out to another git branch
 function git-checkout() {
     echo "Give the name of the git branch you want to checkout"
-    read branch_name
-    if [ ! -z "$branch_name" ]; then
+    read -r branch_name
+    if [ -n "$branch_name" ]; then
         echo "Removing cache files before checking out the branch. Please answer 'Y'"
         clear-cache
-        git checkout $branch_name
+        git checkout "$branch_name"
     else
         echo "You need to enter the git branch name."
     fi
@@ -288,22 +287,10 @@ function git-checkout() {
 
 #### Private functions ####
 
-# Clean coding-style. Set PSR-* Ident Style (http://cs.sensiolabs.org)
-function _clean-indent() {
-    indents=indentation,function_declaration,function_typehint_space,
-method_argument_space,line_after_namespace,empty_return,linefeed,trailing_spaces,eof_ending,php_closing_tag,multiple_use,parenthesis,extra_empty_lines,short_tag,php4_constructor,phpdoc_scalar,
-lowercase_keywords,lowercase_constants,array_element_no_space_before_comma,array_element_white_space_after_comma,
-extra_empty_lines,encoding
-
-    cs_script="./_tools/php-cs-fixer.phar"
-
-    find . -type f -name "*.php" -exec php $cs_script fix {} --fixers=$indents \;
-}
-
 # Change permissions of the folders/files (CHMOD)
 function _permissions() {
-    find . -type f -print0 | sudo xargs -0 chmod $1 # First parameter for Files
-    find . -type d -print0 | sudo xargs -0 chmod $2 # Second parameter for Folders
+    find . -type f -print0 | sudo xargs -0 chmod "$1" # First parameter for Files
+    find . -type d -print0 | sudo xargs -0 chmod "$2" # Second parameter for Folders
 
     sudo chmod -R 777 ./_install/data/logs/
     sudo chmod -R 777 ./data/system/modules/*
@@ -323,23 +310,23 @@ function _cache-permissions() {
 
 # Save a git project to the specified repo (e.g. github, bitbucket)
 function _save-project-to-repo() {
-    git remote rm  $1 # Remove remote name if it already exists
-    git remote add $1 $2
-    git push $1
+    git remote rm "$1" # Remove remote name if it already exists
+    git remote add "$1" "$2"
+    git push "$1"
 }
 
 # Save repo on Internet Archive
 function _save-project-to-ia() {
     ia_saver_url="https://web.archive.org/save/"
 
-    curl -s $ia_saver_url$1 > /dev/null
+    curl -s "$ia_saver_url$1" > /dev/null
 }
 
 # Confirmation of orders entered
 function _confirm() {
-    echo $1 "(Y/N)"
-    read input
-    input=$(_to-lower $input) # Case-insensitive
+    echo "$1" "(Y/N)"
+    read -r input
+    input=$(_to-lower "$input") # Case-insensitive
     if [ "$input" == "y" ]; then
         return 1
     else
@@ -349,7 +336,7 @@ function _confirm() {
 
 # To lower
 function _to-lower() {
-    echo $1 | tr '[:upper:]' '[:lower:]'
+    echo "$1" | tr '[:upper:]' '[:lower:]'
 }
 
 function _error() {
