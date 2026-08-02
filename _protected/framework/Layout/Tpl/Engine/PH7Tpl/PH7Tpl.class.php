@@ -332,8 +332,12 @@ class PH7Tpl extends Kernel implements Templatable, GenerableFile
             $this->sCompileDir2 = $this->sCompileDir . $this->registry->module . '_' . md5($this->registry->path_module) . PH7_DS . PH7_TPL_MOD_NAME . PH7_DS . $sCurrentController . PH7_DS;
         }
 
-        $this->sCompileDirFile = ($bIsMainDir ? $this->sCompileDir2 . $sTplFileName . static::COMPILE_FILE_EXT : $this->sCompileDir2) .
-            str_replace($sCurrentController, '', $sTplFileName) . static::COMPILE_FILE_EXT;
+        $this->sCompileDirFile = self::buildCompileFilePath(
+            $this->sCompileDir2,
+            $bIsMainDir,
+            $sTplFileName,
+            $sCurrentController
+        );
 
         if (!$this->file->existFile($this->sTemplateDirFile)) {
             throw new TplException(
@@ -631,6 +635,19 @@ Template Engine: ' . self::NAME . ' version ' . self::VERSION . ' by ' . self::A
     protected function getCurrentController()
     {
         return $this->httpRequest->currentController();
+    }
+
+    private static function buildCompileFilePath(
+        string $sCompileDir,
+        bool $bIsMainDir,
+        string $sTplFileName,
+        string $sCurrentController
+    ): string {
+        $sCompileFileName = $bIsMainDir
+            ? $sTplFileName
+            : str_replace($sCurrentController, '', $sTplFileName);
+
+        return $sCompileDir . $sCompileFileName . static::COMPILE_FILE_EXT;
     }
 
     /**
