@@ -11,6 +11,7 @@ declare(strict_types=1);
 namespace PH7\Test\Unit\App\System\Module\Payment\Inc\Classes;
 
 require_once PH7_PATH_SYS_MOD . 'payment/inc/class/Api.php';
+require_once PH7_PATH_SYS_MOD . 'payment/inc/class/PaymentCheckout.php';
 require_once PH7_PATH_SYS_MOD . 'payment/inc/class/Stripe.php';
 
 use PH7\Stripe;
@@ -23,5 +24,10 @@ final class StripeTest extends TestCase
         $iAmount = Stripe::getAmount('19.99');
 
         $this->assertSame('1999', $iAmount);
+    }
+
+    public function testAmountWithOneDecimalPlace(): void
+    {
+        $this->assertSame('1990', Stripe::getAmount('19.9'));
     }
 }
