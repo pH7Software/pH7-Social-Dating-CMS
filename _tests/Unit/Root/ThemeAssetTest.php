@@ -96,6 +96,62 @@ final class ThemeAssetTest extends TestCase
         }
     }
 
+    public function testCookieBarDependencyIsPinnedAndIntegrityChecked(): void
+    {
+        $sProjectRoot = dirname(__DIR__, 3);
+        $aLayoutFiles = [
+            $sProjectRoot . '/templates/themes/base/tpl/layout.tpl',
+            $sProjectRoot . '/templates/themes/premium/tpl/layout.tpl'
+        ];
+
+        foreach ($aLayoutFiles as $sLayoutFile) {
+            $sLayout = file_get_contents($sLayoutFile);
+
+            $this->assertIsString($sLayout);
+            $this->assertStringContainsString('cookie-bar@1.10.3/', $sLayout);
+            $this->assertStringContainsString('integrity="sha384-', $sLayout);
+            $this->assertStringNotContainsString('cookie-bar/cookiebar-latest', $sLayout);
+        }
+    }
+
+    public function testAdminChartsUseCurrentLoaderApi(): void
+    {
+        $sAdminTemplateDirectory = dirname(__DIR__, 3) .
+            '/_protected/app/system/modules/admin123/views/base/tpl';
+        $aChartTemplates = [
+            $sAdminTemplateDirectory . '/main/stat.tpl',
+            $sAdminTemplateDirectory . '/tool/cache.tpl',
+            $sAdminTemplateDirectory . '/tool/freespace.tpl'
+        ];
+
+        foreach ($aChartTemplates as $sChartTemplate) {
+            $sTemplate = file_get_contents($sChartTemplate);
+
+            $this->assertIsString($sTemplate);
+            $this->assertStringContainsString('https://www.gstatic.com/charts/loader.js', $sTemplate);
+            $this->assertStringContainsString('google.charts.load(', $sTemplate);
+            $this->assertStringNotContainsString('https://www.google.com/jsapi', $sTemplate);
+            $this->assertStringNotContainsString('google.load(', $sTemplate);
+        }
+    }
+
+    public function testThemeFormControlsRetainResponsiveBorderBoxSizing(): void
+    {
+        $sProjectRoot = dirname(__DIR__, 3);
+        $aFormStylesheets = [
+            $sProjectRoot . '/templates/themes/base/css/form.css',
+            $sProjectRoot . '/templates/themes/premium/css/form.css'
+        ];
+
+        foreach ($aFormStylesheets as $sFormStylesheet) {
+            $sCss = file_get_contents($sFormStylesheet);
+
+            $this->assertIsString($sCss);
+            $this->assertStringContainsString('box-sizing: border-box;', $sCss);
+            $this->assertStringNotContainsString('box-sizing: content-box;', $sCss);
+        }
+    }
+
     private function findFiles(string $sDirectory, string $sSuffix): array
     {
         $aFiles = [];
