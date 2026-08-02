@@ -48,7 +48,7 @@ textarea {
 }
 
 input:not([type=image]):not([type=range]), textarea, select {
-    box-sizing: content-box; /* Bugfix with Botstrap for transition in forms */
+    box-sizing: border-box;
     font-size: 14px;
     border: 1px solid #ccc;
     color: #3F3F3F;

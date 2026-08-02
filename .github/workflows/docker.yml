@@ -29,7 +29,7 @@ jobs:
 
       - name: Verify installer responds
         run: |
-          for attempt in {1..30}; do
+          for _ in {1..30}; do
             if curl --fail --location --silent --show-error http://localhost:8080/ > /dev/null; then
               exit 0
             fi

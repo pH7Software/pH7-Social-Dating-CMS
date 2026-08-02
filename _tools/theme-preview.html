@@ -3,12 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>pH7Builder — Base Theme Style Guide</title>
+<title>pH7Builder — Theme Style Guide</title>
 <!--
-  Developer tool: previews the base theme CSS chain (same order as layout.tpl)
+  Developer tool: previews each theme CSS chain (same order as layout.tpl)
   against representative Bootstrap 3 markup, without needing a full install.
   Serve the repo root over HTTP, e.g.:  python3 -m http.server -d . 8642
-  then open http://localhost:8642/_tools/theme-preview.html
+  then open http://localhost:8642/_tools/theme-preview.html?theme=datelove
 -->
 <link rel="stylesheet" href="/static/css/bootstrap.css">
 <link rel="stylesheet" href="/static/css/bootstrap_customize.css">
@@ -20,11 +20,48 @@
 <link rel="stylesheet" href="/templates/themes/base/css/js/jquery/apprise.css">
 <link rel="stylesheet" href="/templates/themes/base/css/js/jquery/tipTip.css">
 <link rel="stylesheet" href="/templates/themes/base/css/design_system.css">
+<script>
+const previewParameters = new URLSearchParams(window.location.search);
+const selectedTheme = previewParameters.get('theme') || 'base';
+const derivativeThemes = ['cartoon', 'datelove', 'zendate'];
+const premiumOverrides = ['common.css', 'style.css', 'layout.css', 'color.css', 'form.css'];
+
+if (selectedTheme === 'premium') {
+    document.querySelectorAll('link[href*="/templates/themes/base/"]').forEach((link) => {
+        const stylesheetName = new URL(link.href).pathname.split('/').pop();
+        if (premiumOverrides.includes(stylesheetName)) {
+            link.href = link.href.replace('/templates/themes/base/', '/templates/themes/premium/');
+        }
+    });
+} else if (derivativeThemes.includes(selectedTheme)) {
+    const customStylesheet = document.createElement('link');
+    customStylesheet.rel = 'stylesheet';
+    customStylesheet.href = `/templates/themes/${selectedTheme}/css/_inc/common.custom.css`;
+    document.head.append(customStylesheet);
+}
+
+const previewRevision = previewParameters.get('audit');
+if (previewRevision) {
+    document.querySelectorAll('link[rel="stylesheet"]').forEach((link) => {
+        const stylesheetUrl = new URL(link.href);
+        stylesheetUrl.searchParams.set('audit', previewRevision);
+        link.href = stylesheetUrl.toString();
+    });
+}
+</script>
 </head>
-<body style="padding: 24px;">
+<body style="padding: 24px 0;">
 <div class="container">
-    <h1>Base theme style guide</h1>
-    <p>Every component below uses stock Bootstrap 3 markup, restyled by <code>design_system.css</code>.</p>
+    <h1>Theme style guide</h1>
+    <p>Every component below uses stock Bootstrap 3 markup and the selected theme's production CSS chain.</p>
+    <p aria-label="Choose preview theme">
+        Theme:
+        <a class="btn btn-default btn-xs" href="?theme=base">Base</a>
+        <a class="btn btn-default btn-xs" href="?theme=cartoon">Cartoon</a>
+        <a class="btn btn-default btn-xs" href="?theme=datelove">DateLove</a>
+        <a class="btn btn-default btn-xs" href="?theme=premium">Premium</a>
+        <a class="btn btn-default btn-xs" href="?theme=zendate">ZenDate</a>
+    </p>
 
     <h2>Buttons</h2>
     <p>

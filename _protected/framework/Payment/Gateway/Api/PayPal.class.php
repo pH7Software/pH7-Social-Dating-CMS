@@ -1,11 +1,12 @@
 <?php
+
 /**
  * @title            PayPal Class
  *
  * @author           Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright        (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
  * @license          MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
- * @package          PH7 / Framework / Payment / Gateway / Api
+ *
  * @version          1.4
  */
 
@@ -17,17 +18,17 @@ use PH7\Framework\File\Stream;
 use PH7\Framework\Url\Url;
 
 /**
- * PayPal class using PayPal's API
+ * PayPal class using PayPal's API.
  *
- * @link https://developer.paypal.com/docs/integration/direct/identity/seamless-checkout/
+ * @see https://developer.paypal.com/docs/integration/direct/identity/seamless-checkout/
  */
 class PayPal extends Provider implements Api
 {
-    const SANDBOX_PAYMENT_URL = 'https://ipnpb.sandbox.paypal.com/cgi-bin/webscr';
-    const PAYMENT_URL = 'https://ipnpb.paypal.com/cgi-bin/webscr';
+    public const SANDBOX_PAYMENT_URL = 'https://ipnpb.sandbox.paypal.com/cgi-bin/webscr';
+    public const PAYMENT_URL = 'https://ipnpb.paypal.com/cgi-bin/webscr';
 
     /* Should we accept valid transactions but hasn't been completed yet? */
-    const ACCEPT_VALID_PAYMENT_NOT_COMPLETED = true;
+    public const ACCEPT_VALID_PAYMENT_NOT_COMPLETED = false;
 
     /** @var string */
     private $sUrl;
@@ -39,8 +40,7 @@ class PayPal extends Provider implements Api
     private $sMsg;
 
     /** @var bool|null */
-    private $bValid = null;
-
+    private $bValid;
 
     /**
      * @param bool $bSandbox Default FALSE
@@ -63,7 +63,7 @@ class PayPal extends Provider implements Api
      *
      * @return string
      *
-     * @internal We added an empty parameter for the method only to be compatible with the API interface.
+     * @internal we added an empty parameter for the method only to be compatible with the API interface
      */
     public function getUrl($sParam = '')
     {
@@ -88,7 +88,7 @@ class PayPal extends Provider implements Api
      *
      * @return bool
      *
-     * @internal We added two empty parameters for the method only to be compatible with the API interface.
+     * @internal we added two empty parameters for the method only to be compatible with the API interface
      */
     public function valid($sParam1 = '', $sParam2 = '')
     {
@@ -99,7 +99,7 @@ class PayPal extends Provider implements Api
         $this->setParams();
 
         $mStatus = $this->getStatus();
-        $mStatus = trim($mStatus);
+        $mStatus = trim((string)$mStatus);
 
         if (0 === strcmp('VERIFIED', $mStatus)) {
             if ($this->isValidPayment()) {
@@ -123,7 +123,7 @@ class PayPal extends Provider implements Api
     /**
      * Connect to PayPal.
      *
-     * @return bool|string Message from the transaction status on success or FALSE on failure.
+     * @return bool|string message from the transaction status on success or FALSE on failure
      */
     protected function getStatus()
     {
@@ -133,6 +133,8 @@ class PayPal extends Provider implements Api
         curl_setopt($rCh, CURLOPT_POSTFIELDS, $this->sRequest);
         curl_setopt($rCh, CURLOPT_SSL_VERIFYPEER, 1);
         curl_setopt($rCh, CURLOPT_SSL_VERIFYHOST, 2);
+        curl_setopt($rCh, CURLOPT_CONNECTTIMEOUT, 10);
+        curl_setopt($rCh, CURLOPT_TIMEOUT, 30);
         $sHost = (string)parse_url($this->sUrl, PHP_URL_HOST);
         if ($sHost !== '') {
             curl_setopt($rCh, CURLOPT_HTTPHEADER, [sprintf('Host: %s', $sHost)]);
@@ -165,7 +167,7 @@ class PayPal extends Provider implements Api
     }
 
     /**
-     * Set data URL e.g., "&key=value"
+     * Set data URL e.g., "&key=value".
      *
      * @param string $sName
      * @param string $sValue
@@ -186,12 +188,19 @@ class PayPal extends Provider implements Api
      */
     protected function getPostData()
     {
-        $rRawPost = Stream::getInput();
-        $aRawPost = explode('&', $rRawPost);
+        return $this->parsePostData((string)Stream::getInput());
+    }
+
+    /**
+     * @return array<string,string>
+     */
+    protected function parsePostData(string $sRawPost): array
+    {
+        $aRawPost = explode('&', $sRawPost);
         $aPostData = [];
 
         foreach ($aRawPost as $sKeyVal) {
-            $aKeyVal = explode('=', $sKeyVal);
+            $aKeyVal = explode('=', $sKeyVal, 2);
             if (count($aKeyVal) === 2) {
                 $aPostData[$aKeyVal[0]] = Url::decode($aKeyVal[1]);
             }

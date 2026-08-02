@@ -1,30 +1,31 @@
-<script src="https://www.google.com/jsapi"></script>
+<script src="https://www.gstatic.com/charts/loader.js"></script>
 <script>
-    google.load("visualization", "1", {packages:["corechart"]});
-    google.setOnLoadCallback(showUserChart);
+    google.charts.load('current', {packages: ['corechart']});
+    google.charts.setOnLoadCallback(showUserChart);
 
     function showUserChart() {
         $('#user_chart').html('');
 
-        var oDate = new Date;
+        var oToday = new Date;
+        var oWeekAgo = new Date(oToday);
+        var oMonthAgo = new Date(oToday);
+        var oYearAgo = new Date(oToday);
         var oDateOptions = {
-           day: "numeric", month: "short", year: "numeric"
+            day: 'numeric', month: 'short', year: 'numeric'
         };
+        var sLocale = {% json_encode($config->values['language']['lang']) %};
 
-        oDate.setFullYear(oDate.getFullYear());
-        var sYear = oDate.toLocaleDateString('{% $config->values['language']['lang'] %}', oDateOptions);
+        oWeekAgo.setDate(oWeekAgo.getDate() - 7);
+        oMonthAgo.setDate(oMonthAgo.getDate() - 31);
+        oYearAgo.setDate(oYearAgo.getDate() - 365);
 
-        oDate.setMonth(oDate.getMonth()-1);
-        var sMonth = oDate.toLocaleDateString('{% $config->values['language']['lang'] %}', oDateOptions);
-
-        oDate.setDate(oDate.getDay()-7);
-        var sWeek = oDate.toLocaleDateString('{% $config->values['language']['lang'] %}', oDateOptions);
-
-        oDate.setDate(oDate.getDay());
-        var sDay = oDate.toLocaleDateString('{% $config->values['language']['lang'] %}', oDateOptions);
+        var sDay = oToday.toLocaleDateString(sLocale, oDateOptions);
+        var sWeek = oWeekAgo.toLocaleDateString(sLocale, oDateOptions);
+        var sMonth = oMonthAgo.toLocaleDateString(sLocale, oDateOptions);
+        var sYear = oYearAgo.toLocaleDateString(sLocale, oDateOptions);
 
         var aData = google.visualization.arrayToDataTable([
-          ['{lang 'Time'}', '{lang 'All'}', '{lang 'Man'}', '{lang 'Women'}', '{lang 'Couples'}'],
+          [{% json_encode(t('Time')) %}, {% json_encode(t('All')) %}, {% json_encode(t('Man')) %}, {% json_encode(t('Women')) %}, {% json_encode(t('Couples')) %}],
           [sDay, {today_total_members}, {today_total_male_members}, {today_total_female_members}, {today_total_couple_members}],
           [sWeek, {week_total_members}, {week_total_male_members}, {week_total_female_members}, {week_total_couple_members}],
           [sMonth, {month_total_members}, {month_total_male_members}, {month_total_female_members}, {month_total_couple_members}],
@@ -32,7 +33,7 @@
         ]);
 
         var aOptions = {
-          title: '{lang 'User Statistics'}'
+          title: {% json_encode(t('User Statistics')) %}
         };
 
         new google.visualization.LineChart($('#user_chart')[0]).draw(aData, aOptions);

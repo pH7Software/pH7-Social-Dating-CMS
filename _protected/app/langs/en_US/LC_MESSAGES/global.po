@@ -151,6 +151,8 @@ msgid "Email already used. Yours? <a href=\"%0%\">Password forgotten?</a>"
 msgstr ""
 
 #: _protected/app/system/core/assets/ajax/ValidateCoreAjax.php:155
+#: _protected/app/system/modules/affiliate/forms/processing/LoginFormProcess.php:64
+#: _protected/app/system/modules/user/forms/processing/LoginFormProcess.php:65
 msgid "Oops! \"%0%\" is not associated with any %site_name% accounts."
 msgstr ""
 
@@ -172,6 +174,7 @@ msgid "Your must enter a valid date (Month-Day-Year)."
 msgstr ""
 
 #: _protected/app/system/core/assets/ajax/ValidateCoreAjax.php:200
+#: _protected/app/system/modules/api/controllers/UserController.php:85
 #, php-format
 msgid "You must be %0% to %1% years to register on the site."
 msgstr ""
@@ -4311,11 +4314,6 @@ msgstr ""
 msgid "Your affiliate account has been created! %0%"
 msgstr ""
 
-#: _protected/app/system/modules/affiliate/forms/processing/LoginFormProcess.php:64
-#: _protected/app/system/modules/user/forms/processing/LoginFormProcess.php:65
-msgid "Oops! \"%0%\" is not associated with any %site_name% accounts."
-msgstr ""
-
 #: _protected/app/system/modules/affiliate/forms/processing/LoginFormProcess.php:88
 #: _protected/app/system/modules/user/forms/processing/LoginFormProcess.php:87
 msgid "Please try again (make sure your caps lock is off)."
@@ -4364,10 +4362,6 @@ msgstr ""
 
 #: _protected/app/system/modules/api/controllers/UserController.php:82
 msgid "The Password must contain from %0% to %1% characters."
-msgstr ""
-
-#: _protected/app/system/modules/api/controllers/UserController.php:85
-msgid "You must be %0% to %1% years to register on the site."
 msgstr ""
 
 #: _protected/app/system/modules/api/controllers/UserController.php:125
@@ -5661,6 +5655,7 @@ msgid "Compose a new message"
 msgstr ""
 
 #: _protected/app/system/modules/mail/controllers/MainController.php:86
+#: _protected/app/system/modules/user/forms/NotificationForm.php:36
 msgid "Messages"
 msgstr ""
 
@@ -6601,6 +6596,15 @@ msgstr ""
 
 #: _protected/app/system/modules/payment/controllers/MainController.php:346
 msgid "Amount: %1%%0%"
+msgstr ""
+
+#: _protected/app/system/modules/payment/views/base/tpl/main/pay.tpl:26
+msgid "Total:"
+msgstr ""
+
+#: _protected/app/system/modules/payment/views/base/tpl/main/membership.tpl:21
+#: _protected/app/system/modules/payment/views/base/tpl/main/pay.tpl:29
+msgid "including %0%% VAT"
 msgstr ""
 
 #: _protected/app/system/modules/payment/controllers/MainController.php:347
@@ -7608,10 +7612,6 @@ msgstr ""
 
 #: _protected/app/system/modules/user/forms/NotificationForm.php:35
 msgid "By enabling this option, you would be likely to receive occasional news on our website and our services and offers, promotions and other benefits to our partners."
-msgstr ""
-
-#: _protected/app/system/modules/user/forms/NotificationForm.php:36
-msgid "Messages"
 msgstr ""
 
 #: _protected/app/system/modules/user/forms/NotificationForm.php:37
@@ -12833,6 +12833,7 @@ msgid "Your logged IP is:"
 msgstr ""
 
 #: _protected/data/cache/pH7tpl_compile/admin123_4afd58a4d127bb00dfafed41a3407e91/base/main/news.inc.cpl.php:19
+#: _protected/app/system/modules/admin123/views/base/tpl/main/news.inc.tpl:2
 msgid "Latest <a href=\"%software_website%\" title=\"%software_name%\">pH7Builder Software</a>'s News"
 msgstr ""
 
@@ -15392,10 +15393,6 @@ msgstr ""
 msgid "Turn Off Two-Factor Authentication"
 msgstr ""
 
-#: _protected/app/system/modules/user/forms/PrivacyForm.php:74
-msgid "No, don't display members who viewed my profile. (Selecting this option will prevent you from seeing who visited your profile)."
-msgstr ""
-
 #: _protected/app/system/modules/user/views/base/tpl/main/accountdeleted.tpl:3
 msgid "Your account has been removed successfully!"
 msgstr ""
@@ -15691,10 +15688,6 @@ msgstr ""
 
 #: _protected/app/system/core/forms/DeleteUserCoreForm.php:42
 msgid "My email address has changed."
-msgstr ""
-
-#: _protected/app/system/modules/admin123/views/base/tpl/main/news.inc.tpl:2
-msgid "Latest <a href=\"%software_website%\" title=\"%software_name%\">pH7Builder Software</a>'s News"
 msgstr ""
 
 #: _protected/app/system/modules/two-factor-auth/controllers/MainController.php:121

@@ -1,11 +1,12 @@
 <?php
+
 /**
  * @title            2 Check Out Class
  *
  * @author           Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright        (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
  * @license          MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
- * @package          PH7 / Framework / Payment / Gateway / Api
+ *
  * @version          1.0
  */
 
@@ -24,7 +25,6 @@ class TwoCheckOut extends Provider implements Api
     /** @var bool */
     private $bValid = false;
 
-
     /**
      * @param bool $bSandbox
      */
@@ -40,7 +40,7 @@ class TwoCheckOut extends Provider implements Api
     /**
      * Get Checkout URL.
      *
-     * @param bool $bSinglePage TRUE = Single page, FALSE = Standard multi page.
+     * @param bool $bSinglePage TRUE = Single page, FALSE = Standard multi page
      *
      * @return string
      */
@@ -66,53 +66,48 @@ class TwoCheckOut extends Provider implements Api
      *
      * @param string $sVendorId
      * @param string $sSecretWord
+     * @param string $sSecretKey
      *
      * @return bool
      */
-    public function valid($sVendorId = '', $sSecretWord = '')
+    public function valid($sVendorId = '', $sSecretWord = '', $sSecretKey = '')
     {
         // Instant Notification Service Messages
-        $aInsMsg = [];
-
-        foreach ($_POST as $sKey => $sVal) {
-            $aInsMsg[$sKey] = $sVal;
-        }
+        $aInsMsg = $_POST;
+        $aReturnData = $_GET;
 
         if (
-            !empty($_POST['message_type']) &&
-            $_POST['message_type'] == 'FRAUD_STATUS_CHANGED'
+            ($aInsMsg['message_type'] ?? '') === 'FRAUD_STATUS_CHANGED'
+            && $this->hasScalarValues($aInsMsg, ['sale_id', 'invoice_id', 'fraud_status'])
         ) {
             $sHashPayload = $aInsMsg['sale_id'] . $sVendorId . $aInsMsg['invoice_id'] . $sSecretWord;
             $sLegacyHash = strtoupper(md5($sHashPayload));
-            $sReceivedHash = strtoupper((string)($aInsMsg['md5_hash'] ?? $aInsMsg['hash'] ?? $aInsMsg['HASH'] ?? ''));
+            $sLegacyReceivedHash = strtoupper((string)($aInsMsg['md5_hash'] ?? ''));
+            $sModernReceivedHash = (string)($aInsMsg['hash'] ?? $aInsMsg['HASH'] ?? '');
+            $bSignatureValid = (
+                $sLegacyReceivedHash !== ''
+                && hash_equals($sLegacyHash, $sLegacyReceivedHash)
+            ) || (
+                $sModernReceivedHash !== ''
+                && $sSecretKey !== ''
+                && $this->validateHmacSignature($sHashPayload, $sModernReceivedHash, $sSecretKey)
+            );
 
-            if (
-                ($aInsMsg['md5_hash'] ?? '') !== '' &&
-                hash_equals($sLegacyHash, strtoupper((string)$aInsMsg['md5_hash']))
-            ) {
+            if ($bSignatureValid && ($aInsMsg['fraud_status'] ?? '') === 'pass') {
                 $this->bValid = true;
-                $this->sMsg = t('Refund transaction valid.');
-            } elseif (
-                $sReceivedHash !== '' &&
-                $this->validateShaSignature($sHashPayload, $sReceivedHash)
-            ) {
-                $this->bValid = true;
-                $this->sMsg = t('Refund transaction valid.');
+                $this->sMsg = t('Transaction valid and completed.');
             } else {
                 $this->bValid = false;
-                $this->sMsg = t('Invalid refund transaction.');
+                $this->sMsg = t('Invalid transaction.');
             }
         } elseif (
-            !empty($_REQUEST['key']) &&
-            !empty($aInsMsg['order_number']) &&
-            !empty($aInsMsg['total'])
+            $this->hasScalarValues($aReturnData, ['key', 'order_number', 'total'])
         ) {
-            $sHashPayload = $sSecretWord . $sVendorId . $aInsMsg['order_number'] . $aInsMsg['total'];
+            $sHashPayload = $sSecretWord . $sVendorId . $aReturnData['order_number'] . $aReturnData['total'];
             $sLegacyHash = strtoupper(md5($sHashPayload));
-            $sSha2Hash = strtoupper(hash('sha256', $sHashPayload));
-            $sReceivedHash = strtoupper((string)($_REQUEST['key'] ?? ''));
+            $sReceivedHash = strtoupper((string)$aReturnData['key']);
 
-            if ($sReceivedHash !== '' && ($sReceivedHash === $sLegacyHash || $sReceivedHash === $sSha2Hash)) {
+            if ($sReceivedHash !== '' && hash_equals($sLegacyHash, $sReceivedHash)) {
                 $this->bValid = true;
                 $this->sMsg = t('Purchase transaction valid.');
             } else {
@@ -124,22 +119,44 @@ class TwoCheckOut extends Provider implements Api
             $this->sMsg = t('Invalid connection to 2CheckOut.');
         }
 
-        unset($aInsMsg);
+        unset($aInsMsg, $aReturnData);
 
         return $this->bValid;
     }
 
-    private function validateShaSignature(string $sPayload, string $sReceivedHash): bool
-    {
+    private function validateHmacSignature(
+        string $sPayload,
+        string $sReceivedHash,
+        string $sSecretKey
+    ): bool {
         [$sAlgorithm, $sHash] = $this->splitSignatureWithAlgorithm($sReceivedHash);
 
-        if ($sAlgorithm !== null) {
-            return $this->compareHash($sPayload, $sAlgorithm, $sHash);
+        if ($sAlgorithm === null) {
+            return false;
         }
 
-        // If no algorithm prefix is provided, try modern supported SHA variants.
-        return $this->compareHash($sPayload, 'sha256', $sHash) ||
-            $this->compareHash($sPayload, 'sha3-256', $sHash);
+        $sCalculatedHash = strtoupper(hash_hmac($sAlgorithm, $sPayload, $sSecretKey));
+
+        return hash_equals($sCalculatedHash, $sHash);
+    }
+
+    /**
+     * @param string[] $aFieldNames
+     */
+    private function hasScalarValues(array $aData, array $aFieldNames): bool
+    {
+        foreach ($aFieldNames as $sFieldName) {
+            if (
+                !isset($aData[$sFieldName])
+                || !is_scalar($aData[$sFieldName])
+                || is_bool($aData[$sFieldName])
+                || trim((string)$aData[$sFieldName]) === ''
+            ) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     /**
@@ -163,12 +180,5 @@ class TwoCheckOut extends Provider implements Api
         }
 
         return [$sAlgorithm, $sHash];
-    }
-
-    private function compareHash(string $sPayload, string $sAlgorithm, string $sExpectedHash): bool
-    {
-        $sCalculatedHash = strtoupper(hash($sAlgorithm, $sPayload));
-
-        return hash_equals($sCalculatedHash, $sExpectedHash);
     }
 }

@@ -9,14 +9,17 @@
             <div class="panel-body">
                 <ul class="list-group">
                     {each $membership in $memberships}
-                        {if $membership->enable == 1 AND $membership->price != 0}
+                        {if $membership->isPurchasable}
                             {{ $num_enabled_membership++ }}
                             <li class="list-group-item clearfix">
                                 <div class="pull-left">
                                     <h4 class="underline">{% escape($membership->name) %}</h4>
                                     <h5>
-                                        {% $config->values['module.setting']['currency_sign'] %}{% $membership->price %}
+                                        {% escape($config->values['module.setting']['currency_sign']) %}{% $membership->totalPrice %}
                                         <span class="small">
+                                            {if $config->values['module.setting']['vat_rate'] > 0}
+                                                ({lang 'including %0%% VAT', $config->values['module.setting']['vat_rate']})
+                                            {/if}
                                             {if $membership->expirationDays > 0}
                                                 {if $membership->expirationDays == 1}
                                                     {lang 'per day', $membership->expirationDays}

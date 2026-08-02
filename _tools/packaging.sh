@@ -121,9 +121,9 @@ function run() {
 
 # Confirmation of orders entered
 function _confirm() {
-    echo $1 "(Y/N)"
-    read input
-    input=$(_to-lower $input) # Case-insensitive
+    echo "$1" "(Y/N)"
+    read -r input
+    input=$(_to-lower "$input") # Case-insensitive
     if [ "$input" == "y" ]; then
         return 1
     else
@@ -133,7 +133,7 @@ function _confirm() {
 
 # To lower
 function _to-lower() {
-    echo $1 | tr '[:upper:]' '[:lower:]'
+    echo "$1" | tr '[:upper:]' '[:lower:]'
 }
 
 run

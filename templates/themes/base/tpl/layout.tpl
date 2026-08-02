@@ -217,7 +217,11 @@
 
     {* Cookie info bar *}
     {if $is_cookie_consent_bar}
-      <script src="https://cdn.jsdelivr.net/npm/cookie-bar/cookiebar-latest.min.js?always=1"></script>
+      <script
+        src="https://cdn.jsdelivr.net/npm/cookie-bar@1.10.3/cookiebar-latest.min.js?always=1"
+        integrity="sha384-uLZyDSeIDuxDTgQovVDh6PEtbh5UJDfdGWeEo5F3w9gEeIUHdqqowv84xY3IYhJO"
+        crossorigin="anonymous"
+      ></script>
     {/if}
 
     {* JS code Injection *}

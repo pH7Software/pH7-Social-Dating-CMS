@@ -1,11 +1,12 @@
 <?php
+
 /**
  * @title            Provider Class
  *
  * @author           Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright        (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
  * @license          MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
- * @package          PH7 / Framework / Payment / Gateway / Api
+ *
  * @version          1.0
  */
 
@@ -33,14 +34,16 @@ abstract class Provider
     /**
      * Generate Output.
      *
-     * @return string HTML tags.
+     * @return string HTML tags
      */
     public function generate()
     {
         $sHtml = ''; // Default Value
 
         foreach ($this->aParams as $sKey => $sVal) {
-            $sHtml .= "<input type=\"hidden\" name=\"$sKey\" value=\"$sVal\" />\n";
+            $sEscapedKey = htmlspecialchars((string)$sKey, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
+            $sEscapedValue = htmlspecialchars((string)$sVal, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
+            $sHtml .= "<input type=\"hidden\" name=\"$sEscapedKey\" value=\"$sEscapedValue\" />\n";
         }
 
         return $sHtml;

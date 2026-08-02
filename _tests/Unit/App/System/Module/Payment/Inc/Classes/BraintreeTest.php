@@ -64,6 +64,18 @@ final class BraintreeTest extends TestCase
         $this->assertSame('sandbox', GatewayConfiguration::environment());
     }
 
+    public function testInitSupportsLegacyPrivateKeySetting(): void
+    {
+        $oConfig = $this->createConfig(false, 'merchant_prod');
+        $oConfig->values['module.setting']['braintree.private_ke'] =
+            $oConfig->values['module.setting']['braintree.private_key'];
+        unset($oConfig->values['module.setting']['braintree.private_key']);
+
+        Braintree::init($oConfig);
+
+        $this->assertSame('private_key', GatewayConfiguration::privateKey());
+    }
+
     private function createConfig(bool $bSandboxEnabled, string $sMerchantId): Config
     {
         $oReflection = new ReflectionClass(Config::class);
@@ -75,7 +87,7 @@ final class BraintreeTest extends TestCase
                 'sandbox.enabled' => $bSandboxEnabled,
                 'braintree.merchant_id' => $sMerchantId,
                 'braintree.public_key' => 'public_key',
-                'braintree.private_ke' => 'private_key',
+                'braintree.private_key' => 'private_key',
             ],
         ];
 
