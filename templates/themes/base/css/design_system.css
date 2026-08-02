@@ -11,11 +11,13 @@
 
 :root {
     /* Brand */
-    --ph7-primary: #e8467c;
+    --ph7-primary: #d6336c;
     --ph7-primary-dark: #c92e63;
     --ph7-primary-soft: #fde8ef;
-    --ph7-accent: #7c5cff;
+    --ph7-accent: #7048e8;
     --ph7-gradient: linear-gradient(135deg, var(--ph7-primary) 0%, var(--ph7-accent) 100%);
+    --ph7-link: var(--ph7-primary);
+    --ph7-link-hover: var(--ph7-primary-dark);
 
     /* Surfaces & text */
     --ph7-bg: #ffffff;
@@ -43,6 +45,8 @@
 
 @media (prefers-color-scheme: dark) {
     :root {
+        --ph7-link: #ff7aa8;
+        --ph7-link-hover: #ff9fbd;
         --ph7-primary-soft: #3a2030;
         --ph7-bg: #15151c;
         --ph7-surface: #1e1e28;
@@ -78,12 +82,12 @@ label, .control-label, legend {
 }
 
 a {
-    color: var(--ph7-primary);
+    color: var(--ph7-link);
     transition: color var(--ph7-transition);
 }
 
 a:hover, a:focus {
-    color: var(--ph7-primary-dark);
+    color: var(--ph7-link-hover);
     text-decoration: none;
 }
 
@@ -120,7 +124,7 @@ a:hover, a:focus {
 .btn-primary:hover, .btn-primary:focus,
 .btn-success:hover, .btn-success:focus {
     background: var(--ph7-gradient);
-    filter: brightness(1.08);
+    filter: brightness(.92);
     color: #fff;
 }
 
@@ -133,7 +137,7 @@ a:hover, a:focus {
 .btn-default:hover, .btn-default:focus {
     background-color: var(--ph7-primary-soft);
     border-color: var(--ph7-primary);
-    color: var(--ph7-primary-dark);
+    color: var(--ph7-link-hover);
 }
 
 /** FORMS **/
@@ -274,7 +278,7 @@ input[type=color]::-moz-color-swatch {
 
 .dropdown-menu > li > a:hover {
     background-color: var(--ph7-primary-soft);
-    color: var(--ph7-primary-dark);
+    color: var(--ph7-link-hover);
 }
 
 /** TABLES **/
@@ -344,7 +348,7 @@ input[type=color]::-moz-color-swatch {
 }
 
 .char_counter_low {
-    color: var(--ph7-primary-dark);
+    color: var(--ph7-link-hover);
     font-weight: 600;
 }
 
