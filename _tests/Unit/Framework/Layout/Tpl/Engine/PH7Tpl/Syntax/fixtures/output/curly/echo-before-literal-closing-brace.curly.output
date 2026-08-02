@@ -1,0 +1,1 @@
+var object={value:<?php echo  json_encode($value) ;?>};

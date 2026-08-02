@@ -87,6 +87,11 @@ class CurlyTest extends SyntaxTestCase
         $this->assertFile('echo-semicolon', $this->oCurlySyntax);
     }
 
+    public function testEchoBeforeLiteralClosingBrace(): void
+    {
+        $this->assertFile('echo-before-literal-closing-brace', $this->oCurlySyntax);
+    }
+
     public function testIfStatement(): void
     {
         $this->assertFile('if', $this->oCurlySyntax);
