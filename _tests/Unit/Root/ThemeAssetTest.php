@@ -10,6 +10,8 @@ declare(strict_types=1);
 
 namespace PH7\Test\Unit\Root;
 
+use DOMDocument;
+use PH7\Framework\Mvc\Router\FrontController;
 use PHPUnit\Framework\TestCase;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
@@ -76,7 +78,7 @@ final class ThemeAssetTest extends TestCase
         }
     }
 
-    public function testTemplatesDoNotDisableBrowserZoom(): void
+    public function testTemplatesRetainAccessibleBrowserAndSignupNavigation(): void
     {
         $sProjectRoot = dirname(__DIR__, 3);
         $aTemplateFiles = array_merge(
@@ -94,6 +96,41 @@ final class ThemeAssetTest extends TestCase
                 sprintf('%s must allow users to zoom', $sTemplateFile)
             );
         }
+
+        $aTopMenuTemplates = [
+            $sProjectRoot . '/templates/themes/base/tpl/top_menu.inc.tpl',
+            $sProjectRoot . '/templates/themes/premium/tpl/top_menu.inc.tpl'
+        ];
+
+        foreach ($aTopMenuTemplates as $sTopMenuTemplate) {
+            $sTemplate = file_get_contents($sTopMenuTemplate);
+
+            $this->assertIsString($sTemplate);
+            $this->assertStringContainsString(
+                '$design->url(\'user\', \'signup\', \'step1\')',
+                $sTemplate
+            );
+        }
+
+        $oRoutes = new DOMDocument;
+        $this->assertTrue($oRoutes->load($sProjectRoot . '/_protected/app/configs/routes/en.xml'));
+
+        foreach ($oRoutes->getElementsByTagName('route') as $oRoute) {
+            if (!preg_match(
+                '`^' . $oRoute->getAttribute('url') . FrontController::REGEX_URL_EXTRA_OPTIONS . '$`',
+                'signup'
+            )) {
+                continue;
+            }
+
+            $this->assertSame('user', $oRoute->getAttribute('module'));
+            $this->assertSame('signup', $oRoute->getAttribute('controller'));
+            $this->assertSame('step1', $oRoute->getAttribute('action'));
+
+            return;
+        }
+
+        $this->fail('The public signup URL does not match a configured route.');
     }
 
     public function testCookieBarDependencyIsPinnedAndIntegrityChecked(): void
