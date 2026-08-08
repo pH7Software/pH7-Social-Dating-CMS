@@ -64,7 +64,7 @@ class NoteModel extends NoteCoreModel
 
             $sSqlQuery = 'SELECT DISTINCT m.username FROM' . Db::prefix(DbTableName::MEMBER) .
                 'AS m INNER JOIN' . Db::prefix(DbTableName::NOTE) .
-                'AS n ON m.profileId = n.profileId GROUP BY m.username ASC, n.noteId LIMIT :offset, :limit';
+                'AS n ON m.profileId = n.profileId ORDER BY m.username ASC LIMIT :offset, :limit';
             $rStmt = Db::getInstance()->prepare($sSqlQuery);
 
             $rStmt->bindParam(':offset', $iOffset, PDO::PARAM_INT);
