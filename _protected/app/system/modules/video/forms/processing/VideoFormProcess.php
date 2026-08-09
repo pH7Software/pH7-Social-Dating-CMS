@@ -37,14 +37,6 @@ class VideoFormProcess extends Form
         parent::__construct();
 
         /**
-         * This can cause minor errors (e.g. if a user sent a file that is not a video).
-         * So we hide the errors if we are not in development mode.
-         */
-        if (!isDebug()) {
-            error_reporting(0);
-        }
-
-        /**
          * Check if the video album ID is valid. The value must be numeric.
          * This test is necessary because when the selection exists but that no option is available (this can when a user wants to add a video but he has no album)
          * the return value is of type "string" and the value is "1".
@@ -58,7 +50,16 @@ class VideoFormProcess extends Form
         }
 
         $sAlbumTitle = MediaCore::cleanTitle($this->httpRequest->post('album_title'));
+        $iProfileId = (int)$this->session->get('member_id');
         $iAlbumId = (int)$this->httpRequest->post('album_id');
+        $oVideoModel = new VideoModel;
+        if (!$oVideoModel->doesAlbumBelongToProfile($iProfileId, $iAlbumId)) {
+            \PFBC\Form::setError(
+                'form_video',
+                t('Please choose one of your own albums.')
+            );
+            return;
+        }
 
         // Default URL Thumbnail
         $sThumb = '';
@@ -168,8 +169,8 @@ class VideoFormProcess extends Form
         $sTitle = MediaCore::cleanTitle($sTitle);
         $sApproved = DbConfig::getSetting('videoManualApproval') == 0 ? '1' : '0';
 
-        (new VideoModel)->addVideo(
-            $this->session->get('member_id'),
+        $oVideoModel->addVideo(
+            $iProfileId,
             $iAlbumId,
             $sTitle,
             $sDescription,

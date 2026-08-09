@@ -1,11 +1,11 @@
 <?php
+
 /**
  * @title          Add Users; Process Class
  *
  * @author         Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
  * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
- * @package        PH7 / App / System / Module / Admin / From / Processing
  */
 
 namespace PH7;
@@ -13,6 +13,7 @@ namespace PH7;
 defined('PH7') or exit('Restricted access');
 
 use PH7\Framework\Ip\Ip;
+use PH7\Framework\Layout\Html\Design;
 use PH7\Framework\Mvc\Request\Http;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Url\Header;
@@ -42,10 +43,21 @@ class AddUserFormProcess extends Form
             'description' => $this->httpRequest->post('description', Http::ONLY_XSS_CLEAN),
             'ip' => Ip::get()
         ];
-        $iProfileId = (new UserCoreModel)->add($aData);
+        try {
+            $iProfileId = (new UserCoreModel())->add($aData);
+        } catch (\Throwable $oException) {
+            error_log(sprintf('Admin member creation failed: %s', $oException->getMessage()));
+            Header::redirect(
+                Uri::get(PH7_ADMIN_MOD, 'user', 'add'),
+                t('The user could not be added. Verify the profile details and try again.'),
+                Design::ERROR_TYPE
+            );
+
+            return;
+        }
 
         if (!empty($_FILES['avatar']['tmp_name'])) {
-            (new UserCore)->setAvatar($iProfileId, $aData['username'], $_FILES['avatar']['tmp_name'], 1);
+            (new UserCore())->setAvatar($iProfileId, $aData['username'], $_FILES['avatar']['tmp_name'], 1);
         }
 
         Header::redirect(

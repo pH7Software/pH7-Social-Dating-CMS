@@ -6,7 +6,7 @@
 #                  (e.g., you@you:/path/to/root-project$ bash _tools/pH7.sh).
 #
 # Author:          Pierre-Henry Soria <hello@ph7builder.com>
-# Copyright:       (c) 2012-2022, Pierre-Henry Soria. All Rights Reserved.
+# Copyright:       (c) 2012-2026, Pierre-Henry Soria and pH7Builder contributors.
 # License:         MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
 ##
 
@@ -157,7 +157,7 @@ function show-empty-dir() {
 # Check and correct file permissions (CHMOD)
 # These permissions allow editing and creating files in the File Management admin module.
 function file-permissions() {
-    _permissions 666 777
+    _permissions 664 775
     _cache-permissions
     echo "Permissions have been changed!"
 }
@@ -170,11 +170,8 @@ function file-strict-permissions() {
     echo "Strict Permissions have been changed!"
 }
 
-# Push the project into GitHub and Bitbucket repos
+# Push the project into the maintained GitHub and GitLab repositories
 function save-code() {
-    # Bitbucket repo
-    _save-project-to-repo bitbucket git@bitbucket.org:pH_7/ph7cms-social-dating-app-site-builder.git
-
     # GitLab repo
     _save-project-to-repo gitlab git@gitlab.com:pH-7/pH7Builder.git
 
@@ -292,20 +289,27 @@ function _permissions() {
     find . -type f -print0 | sudo xargs -0 chmod "$1" # First parameter for Files
     find . -type d -print0 | sudo xargs -0 chmod "$2" # Second parameter for Folders
 
-    sudo chmod -R 777 ./_install/data/logs/
-    sudo chmod -R 777 ./data/system/modules/*
-    sudo chmod -R 777 ./_repository/module/*
-    sudo chmod -R 777 ./_repository/upgrade/*
-    sudo chmod -R 777 ./_protected/app/configs/*
-    sudo chmod -R 777 ./_protected/data/backup/*
-    sudo chmod -R 777 ./_protected/data/tmp/*
-    sudo chmod -R 777 ./_protected/data/log/*
+    _make-group-writable ./_install/data/logs/
+    _make-group-writable ./data/system/modules/
+    _make-group-writable ./_repository/module/
+    _make-group-writable ./_repository/upgrade/
+    _make-group-writable ./_protected/app/configs/
+    _make-group-writable ./_protected/data/backup/
+    _make-group-writable ./_protected/data/tmp/
+    _make-group-writable ./_protected/data/log/
 }
 
 # Cache permissions (CHMOD)
 function _cache-permissions() {
-    sudo chmod -R 777 ./_install/data/caches/*
-    sudo chmod -R 777 ./_protected/data/cache/*
+    _make-group-writable ./_install/data/caches/
+    _make-group-writable ./_protected/data/cache/
+}
+
+function _make-group-writable() {
+    if [ -d "$1" ]; then
+        sudo find "$1" -type d -exec chmod 775 {} +
+        sudo find "$1" -type f -exec chmod 664 {} +
+    fi
 }
 
 # Save a git project to the specified repo (e.g. github, bitbucket)

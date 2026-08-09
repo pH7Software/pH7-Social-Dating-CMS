@@ -39,7 +39,6 @@ class SettingFormProcess extends Form
         'bg_splash_vid' => 'bgSplashVideo',
         'users_block' => 'usersBlock',
         'number_profile_splash_page' => 'numberProfileSplashPage',
-        'wysiwyg_editor_forum' => 'wysiwygEditorForum',
         'social_media_widgets' => 'socialMediaWidgets',
         'disclaimer' => 'disclaimer',
         'cookie_consent_bar' => 'cookieConsentBar',
@@ -167,6 +166,10 @@ class SettingFormProcess extends Form
     private function updateGenericFields()
     {
         foreach (self::$aSettingFields as $sKey => $sVal) {
+            if (self::shouldPreserveExistingSecret($sKey, $this->httpRequest->post($sKey))) {
+                continue;
+            }
+
             if ($sKey === 'security_token_lifetime') {
                 $iSecTokenLifetime = (int)$this->httpRequest->post('security_token_lifetime');
 
@@ -230,6 +233,11 @@ class SettingFormProcess extends Form
                 }
             }
         }
+    }
+
+    private static function shouldPreserveExistingSecret(string $sKey, mixed $mValue): bool
+    {
+        return $sKey === 'cron_security_hash' && $mValue === '';
     }
 
     /**

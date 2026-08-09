@@ -3,8 +3,8 @@
  * @title          Production Environment File
  *
  * @author         Pierre-Henry Soria <hello@ph7builder.com>
- * @link           http://ph7builder.com
- * @copyright      (c) 2012-2021, Pierre-Henry Soria. All Rights Reserved.
+ * @link           https://ph7builder.com
+ * @copyright      (c) 2012-2026, Pierre-Henry Soria and pH7Builder contributors.
  * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package        PH7 / App / Config / Environment
  */
@@ -15,9 +15,9 @@ defined('PH7') or exit('Restricted access');
 
 define('PH7_ENV_DISABLED', 'Off');
 
-// If php.ini is inadequate, let's fix it
-error_reporting(0);
-//error_reporting(E_ALL & ~E_NOTICE & ~E_DEPRECATED & ~E_STRICT);
+// Report every error to the configured log without exposing details to visitors.
+error_reporting(E_ALL);
+ini_set('log_errors', 'On');
 ini_set('display_errors', PH7_ENV_DISABLED);
 ini_set('display_startup_errors', PH7_ENV_DISABLED);
 ini_set('html_errors', PH7_ENV_DISABLED);

@@ -1,7 +1,7 @@
 <?php
 /*
- * Notice: This file has been modified by the pH7Builder development team (well by Pierre-Henry Soria) <http://ph7cms.com>
- * Version now compatible with PHP 5+ and PHP 7+ (like PHP4 constructors have been move to PHP5 constructors because the old one wasn't working anymore with newer PHP version).
+ * Notice: This file has been modified by Pierre-Henry Soria for pH7Builder <https://ph7builder.com>
+ * Maintained for pH7Builder's supported PHP 8 runtime.
  */
 defined('PH7') or exit('Restricted access');
 
@@ -186,7 +186,17 @@ function _get_codeset($domain = null)
 {
     global $text_domains, $default_domain, $LC_CATEGORIES;
     if (!isset($domain)) $domain = $default_domain;
-    return (isset($text_domains[$domain]->codeset)) ? $text_domains[$domain]->codeset : ini_get('mbstring.internal_encoding');
+    if (isset($text_domains[$domain]->codeset) && is_string($text_domains[$domain]->codeset) &&
+        $text_domains[$domain]->codeset !== ''
+    ) {
+        return $text_domains[$domain]->codeset;
+    }
+
+    $legacy_encoding = ini_get('mbstring.internal_encoding');
+
+    return is_string($legacy_encoding) && $legacy_encoding !== ''
+        ? $legacy_encoding
+        : (defined('PH7_ENCODING') ? PH7_ENCODING : 'UTF-8');
 }
 
 /**
@@ -387,28 +397,28 @@ function _dcpgettext($domain, $context, $msgid, $category)
 /**
  * Context version of ngettext.
  */
-function _npgettext($context, $singular, $plural)
+function _npgettext($context, $singular, $plural, $number)
 {
     $l10n = _get_reader();
-    return _encode($l10n->npgettext($context, $singular, $plural));
+    return _encode($l10n->npgettext($context, $singular, $plural, $number));
 }
 
 /**
  * Override the current domain in a context ngettext call.
  */
-function _dnpgettext($domain, $context, $singular, $plural)
+function _dnpgettext($domain, $context, $singular, $plural, $number)
 {
     $l10n = _get_reader($domain);
-    return _encode($l10n->npgettext($context, $singular, $plural));
+    return _encode($l10n->npgettext($context, $singular, $plural, $number));
 }
 
 /**
  * Overrides the domain and category for a plural context-based lookup.
  */
-function _dcnpgettext($domain, $context, $singular, $plural, $category)
+function _dcnpgettext($domain, $context, $singular, $plural, $number, $category)
 {
     $l10n = _get_reader($domain, $category);
-    return _encode($l10n->npgettext($context, $singular, $plural));
+    return _encode($l10n->npgettext($context, $singular, $plural, $number));
 }
 
 

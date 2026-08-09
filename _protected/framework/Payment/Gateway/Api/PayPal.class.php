@@ -15,23 +15,26 @@ namespace PH7\Framework\Payment\Gateway\Api;
 defined('PH7') or exit('Restricted access');
 
 use PH7\Framework\File\Stream;
-use PH7\Framework\Url\Url;
 
 /**
  * PayPal class using PayPal's API.
  *
- * @see https://developer.paypal.com/docs/integration/direct/identity/seamless-checkout/
+ * @see https://developer.paypal.com/api/nvp-soap/ipn/
  */
 class PayPal extends Provider implements Api
 {
-    public const SANDBOX_PAYMENT_URL = 'https://ipnpb.sandbox.paypal.com/cgi-bin/webscr';
-    public const PAYMENT_URL = 'https://ipnpb.paypal.com/cgi-bin/webscr';
+    public const SANDBOX_PAYMENT_URL = 'https://www.sandbox.paypal.com/cgi-bin/webscr';
+    public const PAYMENT_URL = 'https://www.paypal.com/cgi-bin/webscr';
+    public const SANDBOX_VERIFICATION_URL = 'https://ipnpb.sandbox.paypal.com/cgi-bin/webscr';
+    public const VERIFICATION_URL = 'https://ipnpb.paypal.com/cgi-bin/webscr';
 
     /* Should we accept valid transactions but hasn't been completed yet? */
     public const ACCEPT_VALID_PAYMENT_NOT_COMPLETED = false;
 
     /** @var string */
     private $sUrl;
+
+    private string $sVerificationUrl;
 
     /** @var string */
     private $sRequest = 'cmd=_notify-validate';
@@ -42,6 +45,8 @@ class PayPal extends Provider implements Api
     /** @var bool|null */
     private $bValid;
 
+    protected bool $bTransportError = false;
+
     /**
      * @param bool $bSandbox Default FALSE
      */
@@ -49,8 +54,10 @@ class PayPal extends Provider implements Api
     {
         if ($bSandbox) {
             $this->sUrl = self::SANDBOX_PAYMENT_URL;
+            $this->sVerificationUrl = self::SANDBOX_VERIFICATION_URL;
         } else {
             $this->sUrl = self::PAYMENT_URL;
+            $this->sVerificationUrl = self::VERIFICATION_URL;
         }
 
         $this->param('cmd', '_xclick');
@@ -80,6 +87,11 @@ class PayPal extends Provider implements Api
         return $this->sMsg;
     }
 
+    public function hasTransportError(): bool
+    {
+        return $this->bTransportError;
+    }
+
     /**
      * Check if the transaction is valid.
      *
@@ -101,6 +113,13 @@ class PayPal extends Provider implements Api
         $mStatus = $this->getStatus();
         $mStatus = trim((string)$mStatus);
 
+        if ($this->bTransportError) {
+            $this->bValid = false;
+            $this->sMsg = t('Connection to PayPal failed.');
+
+            return false;
+        }
+
         if (0 === strcmp('VERIFIED', $mStatus)) {
             if ($this->isValidPayment()) {
                 $this->bValid = true;
@@ -113,6 +132,7 @@ class PayPal extends Provider implements Api
             $this->bValid = false;
             $this->sMsg = t('Invalid transaction.');
         } else {
+            $this->bTransportError = true;
             $this->bValid = false;
             $this->sMsg = t('Connection to PayPal failed.');
         }
@@ -127,7 +147,7 @@ class PayPal extends Provider implements Api
      */
     protected function getStatus()
     {
-        $rCh = curl_init($this->sUrl);
+        $rCh = curl_init($this->sVerificationUrl);
         curl_setopt($rCh, CURLOPT_POST, 1);
         curl_setopt($rCh, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($rCh, CURLOPT_POSTFIELDS, $this->sRequest);
@@ -135,21 +155,32 @@ class PayPal extends Provider implements Api
         curl_setopt($rCh, CURLOPT_SSL_VERIFYHOST, 2);
         curl_setopt($rCh, CURLOPT_CONNECTTIMEOUT, 10);
         curl_setopt($rCh, CURLOPT_TIMEOUT, 30);
-        $sHost = (string)parse_url($this->sUrl, PHP_URL_HOST);
+        curl_setopt($rCh, CURLOPT_USERAGENT, 'pH7Builder PayPal IPN verifier');
+        $sHost = (string)parse_url($this->sVerificationUrl, PHP_URL_HOST);
         if ($sHost !== '') {
             curl_setopt($rCh, CURLOPT_HTTPHEADER, [sprintf('Host: %s', $sHost)]);
         }
         $mRes = curl_exec($rCh);
 
-        if (curl_errno($rCh) === CURLE_SSL_CACERT) {
-            curl_setopt($rCh, CURLOPT_CAINFO, __DIR__ . '/cert/paypal_api_chain.crt');
-            $mRes = curl_exec($rCh);
-        }
+        $iHttpStatus = (int)curl_getinfo($rCh, CURLINFO_HTTP_CODE);
+        $this->bTransportError = $this->didTransportFail($mRes, curl_errno($rCh), $iHttpStatus);
 
-        curl_close($rCh);
         unset($rCh);
 
         return $mRes;
+    }
+
+    protected function getVerificationUrl(): string
+    {
+        return $this->sVerificationUrl;
+    }
+
+    protected function didTransportFail(mixed $mResponse, int $iCurlError, int $iHttpStatus): bool
+    {
+        return $mResponse === false
+            || $iCurlError !== CURLE_OK
+            || $iHttpStatus < 200
+            || $iHttpStatus >= 300;
     }
 
     /**
@@ -159,55 +190,16 @@ class PayPal extends Provider implements Api
      */
     protected function setParams()
     {
-        foreach ($this->getPostData() as $sKey => $sValue) {
-            $this->setUrlData($sKey, $sValue);
-        }
+        $this->sRequest = $this->buildVerificationRequest((string)Stream::getInput());
 
         return $this;
     }
 
-    /**
-     * Set data URL e.g., "&key=value".
-     *
-     * @param string $sName
-     * @param string $sValue
-     *
-     * @return self
-     */
-    protected function setUrlData($sName, $sValue)
+    protected function buildVerificationRequest(string $sRawPost): string
     {
-        $this->sRequest .= '&' . $sName . '=' . Url::encode($sValue);
-
-        return $this;
-    }
-
-    /**
-     * Get the Post Data.
-     *
-     * @return array
-     */
-    protected function getPostData()
-    {
-        return $this->parsePostData((string)Stream::getInput());
-    }
-
-    /**
-     * @return array<string,string>
-     */
-    protected function parsePostData(string $sRawPost): array
-    {
-        $aRawPost = explode('&', $sRawPost);
-        $aPostData = [];
-
-        foreach ($aRawPost as $sKeyVal) {
-            $aKeyVal = explode('=', $sKeyVal, 2);
-            if (count($aKeyVal) === 2) {
-                $aPostData[$aKeyVal[0]] = Url::decode($aKeyVal[1]);
-            }
-        }
-        unset($aRawPost);
-
-        return $aPostData;
+        return $sRawPost === ''
+            ? 'cmd=_notify-validate'
+            : 'cmd=_notify-validate&' . $sRawPost;
     }
 
     /**

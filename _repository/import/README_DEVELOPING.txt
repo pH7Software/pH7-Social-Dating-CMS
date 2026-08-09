@@ -1,6 +1,6 @@
-Import library is still under development, if you are a developer and you want to help us and join our volunteer team of developers to continue development of this module, you are welcome!
+Import tooling is experimental and is not part of the verified launch path.
+Test imports on a backup or staging database before using them with production
+data.
 
-Please use our open source Github repo: https://github.com/pH7Software/pH7-Social-Dating-CMS
-
-Thank you,
-The pH7 developers team.
+Contributions belong in the pH7Builder GitHub repository:
+https://github.com/pH7Software/pH7-Social-Dating-CMS

@@ -4,7 +4,7 @@
  * @title          Main Controller
  *
  * @author         Pierre-Henry Soria <hello@ph7builder.com>
- * @copyright      (c) 2012-2022, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2026, Pierre-Henry Soria and pH7Builder contributors.
  * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  */
 
@@ -28,12 +28,6 @@ class MainController extends Controller
 
     public function index(): void
     {
-        // Add ph7cms-helper's JS file if needed
-        $oValidateSite = new ValidateSiteCore($this->session);
-        if ($oValidateSite->needToInject()) {
-            $oValidateSite->injectAssetSuggestionBoxFiles($this->design);
-        }
-
         $this->view->page_title = t('Admin Panel');
         $this->view->h1_title = t('Admin Dashboard');
         $this->view->h2_title = t('Hi <em>%0%</em>! Welcome back to your site! 🤗', $this->session->get('admin_first_name'));
@@ -43,8 +37,6 @@ class MainController extends Controller
         $this->view->software_blog_url = self::SOFTWARE_BLOG_URL;
         $this->view->show_get_started_section = $this->isWebsiteNew();
         $this->view->is_profile_faker_enabled = SysMod::isEnabled('profile-faker');
-        $this->view->tweet_msg_url = TweetSharing::getMessage();
-
         $this->checkUpdates();
         $this->addStats();
 
@@ -315,7 +307,7 @@ class MainController extends Controller
             $sMsg = '<h3>' . t('🍰 A <a href="%0%" target="_blank" rel="noopener">New Release</a> 🎁 just for YOU! 😍', Kernel::SOFTWARE_RELEASE_URL) . '</h3>';
             $sMsg .= t('%software_name% <strong>%0%</strong> is available! Update it today to keep your site safe and stable.', $sLatestVer);
             $sMsg .= '<br /><br />';
-            $sMsg .= t('👉 <a href="%0%" target="_blank" rel="noopener">Run the upgrade wizard</a> 👈', PH7_URL_ROOT . 'asset/file/Upgrade');
+            $sMsg .= t('👉 <a href="%0%" target="_blank" rel="noopener">Review the manual upgrade steps</a> 👈', PH7_URL_ROOT . 'asset/file/Upgrade');
 
             $this->design->setMessage($sMsg);
         }

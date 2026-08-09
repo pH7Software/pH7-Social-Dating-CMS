@@ -1,7 +1,7 @@
 <?php
 /**
- * @author           Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright        (c) 2026, Pierre-Henry Soria. All Rights Reserved.
+ * @author           Pierre-Henry Soria <hello@ph7builder.com>
+ * @copyright        (c) 2026, Pierre-Henry Soria and pH7Builder contributors.
  * @license          MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package          PH7 / Test / Unit / App / System / Module / Sms Verification / Inc / Classes
  */
@@ -25,15 +25,15 @@ final class ClickatellProviderTest extends TestCase
         $oProvider = new ClickatellProvider('+61400000000', 'api-token');
         $oMethod = new ReflectionMethod(ClickatellProvider::class, 'isSuccessResponse');
 
-        $this->assertTrue($oMethod->invoke($oProvider, ['messages' => [['error' => false]]]));
+        $this->assertTrue($oMethod->invoke($oProvider, [['accepted' => true, 'error' => null]]));
     }
 
-    public function testIsSuccessResponseReturnsFalseWhenMessagesKeyIsMissing(): void
+    public function testIsSuccessResponseReturnsFalseForEmptyResponse(): void
     {
         $oProvider = new ClickatellProvider('+61400000000', 'api-token');
         $oMethod = new ReflectionMethod(ClickatellProvider::class, 'isSuccessResponse');
 
-        $this->assertFalse($oMethod->invoke($oProvider, ['result' => 'ok']));
+        $this->assertFalse($oMethod->invoke($oProvider, []));
     }
 
     public function testIsSuccessResponseReturnsFalseWhenErrorKeyIsMissing(): void
@@ -41,6 +41,19 @@ final class ClickatellProviderTest extends TestCase
         $oProvider = new ClickatellProvider('+61400000000', 'api-token');
         $oMethod = new ReflectionMethod(ClickatellProvider::class, 'isSuccessResponse');
 
-        $this->assertFalse($oMethod->invoke($oProvider, ['messages' => [['id' => 'abc123']]]));
+        $this->assertFalse($oMethod->invoke($oProvider, [['accepted' => true, 'id' => 'abc123']]));
+    }
+
+    public function testIsSuccessResponseReturnsFalseWhenMessageWasRejected(): void
+    {
+        $oProvider = new ClickatellProvider('+61400000000', 'api-token');
+        $oMethod = new ReflectionMethod(ClickatellProvider::class, 'isSuccessResponse');
+
+        $this->assertFalse(
+            $oMethod->invoke(
+                $oProvider,
+                [['accepted' => false, 'error' => 'Invalid destination address.']]
+            )
+        );
     }
 }

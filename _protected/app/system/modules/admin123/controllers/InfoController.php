@@ -1,7 +1,7 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <hello@ph7builder.com>
- * @copyright      (c) 2012-2022, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2026, Pierre-Henry Soria and pH7Builder contributors.
  * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package        PH7 / App / System / Module / Admin / Controller
  */
@@ -44,8 +44,6 @@ class InfoController extends Controller
         $this->view->page_title = $this->sTitle;
         $this->view->h1_title = $this->sTitle;
         $this->view->release_date = $this->dateTime->get(Version::KERNEL_RELEASE_DATE)->date();
-        $this->view->license_form_link = Uri::get(PH7_ADMIN_MOD, 'setting', 'license');
-        $this->view->tweet_msg_url = TweetSharing::getMessage();
 
         $this->output();
     }

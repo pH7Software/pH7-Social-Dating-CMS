@@ -25,8 +25,8 @@ class Country
      *
      * @return string The correct country code.
      */
-    public static function fixCode($sCountryCode)
+    public static function fixCode(?string $sCountryCode): string
     {
-        return str_ireplace(self::GB_COUNTRY_CODE, self::UK_COUNTRY_CODE, $sCountryCode);
+        return str_ireplace(self::GB_COUNTRY_CODE, self::UK_COUNTRY_CODE, $sCountryCode ?? '');
     }
 }

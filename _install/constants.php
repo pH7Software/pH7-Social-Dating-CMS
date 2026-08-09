@@ -10,29 +10,61 @@ defined('PH7') or exit('Restricted access');
 //---------- Variables ----------//
 
 //----- URL -----//
-// Check the SSL protocol compatibility
-// You need to clear caches if you move your server from HTTP to HTTPS. Admin Panel -> Tool -> Caches -> Caches Manager
+// Trust reverse-proxy headers only when the operator explicitly enables them.
+$bTrustProxyHeaders = getenv('PH7_TRUST_PROXY_HEADERS') === '1';
+$sForwardedProto = strtolower(trim(explode(',', (string)($_SERVER['HTTP_X_FORWARDED_PROTO'] ?? ''))[0]));
+
+// Check the SSL protocol compatibility.
 $sUrlProtocol = (
     (!empty($_SERVER['HTTPS']) && in_array(strtolower((string)$_SERVER['HTTPS']), ['on', '1'], true)) ||
-    (!empty($_SERVER['HTTP_X_FORWARDED_PROTO']) && stripos((string)$_SERVER['HTTP_X_FORWARDED_PROTO'], 'https') === 0) ||
-    (!empty($_SERVER['HTTP_X_FORWARDED_SSL']) && strtolower((string)$_SERVER['HTTP_X_FORWARDED_SSL']) === 'on') ||
+    ($bTrustProxyHeaders && $sForwardedProto === 'https') ||
+    ($bTrustProxyHeaders && strtolower((string)($_SERVER['HTTP_X_FORWARDED_SSL'] ?? '')) === 'on') ||
     (!empty($_SERVER['REQUEST_SCHEME']) && $_SERVER['REQUEST_SCHEME'] === 'https') ||
     ($_SERVER['SERVER_PORT'] ?? '') === '443'
 ) ? 'https://' : 'http://';
 
-// Determine the domain name, with the port if necessary
-$sServerName = ($_SERVER['SERVER_NAME'] ?? '') !== ($_SERVER['HTTP_HOST'] ?? '') ? ($_SERVER['HTTP_HOST'] ?? '') : ($_SERVER['SERVER_NAME'] ?? '');
-$sDomain = (($_SERVER['SERVER_PORT'] ?? '') !== '80' && ($_SERVER['SERVER_PORT'] ?? '') !== '443' && strpos($sServerName, ':') === false) ? $sServerName . ':' . ($_SERVER['SERVER_PORT'] ?? '') : $sServerName;
+// HTTP_HOST is request-controlled. Prefer an operator-defined canonical host,
+// then the web server's virtual-host name.
+$mCanonicalHost = getenv('PH7_CANONICAL_HOST');
+$bHasConfiguredCanonicalHost = is_string($mCanonicalHost) && trim($mCanonicalHost) !== '';
+$sServerName = is_string($mCanonicalHost) && trim($mCanonicalHost) !== ''
+    ? trim($mCanonicalHost)
+    : (string)($_SERVER['SERVER_NAME'] ?? '');
+$aServerNameMatches = [];
+$bValidServerName = is_string($sServerName) && preg_match(
+    '/^(?:\[[0-9a-f:.]+\]|[a-z0-9.-]+)(?::([0-9]{1,5}))?$/iD',
+    $sServerName,
+    $aServerNameMatches
+) === 1;
+if (!$bValidServerName || isset($aServerNameMatches[1]) &&
+    ((int)$aServerNameMatches[1] < 1 || (int)$aServerNameMatches[1] > 65535)
+) {
+    http_response_code(500);
+    exit($bHasConfiguredCanonicalHost
+        ? 'Configuration error: PH7_CANONICAL_HOST must contain only a hostname or IP address and an optional valid port.'
+        : 'Configuration error: the web server has no valid canonical ServerName. Configure the virtual host or set PH7_CANONICAL_HOST before installing.');
+}
+$iServerPort = filter_var(
+    $_SERVER['SERVER_PORT'] ?? null,
+    FILTER_VALIDATE_INT,
+    ['options' => ['min_range' => 1, 'max_range' => 65535]]
+);
+$iServerPort = is_int($iServerPort) ? $iServerPort : ($sUrlProtocol === 'https://' ? 443 : 80);
+$bHasExplicitPort = !empty($aServerNameMatches[1]);
+$sDomain = !$bHasConfiguredCanonicalHost && !$bHasExplicitPort && !in_array($iServerPort, [80, 443], true)
+    ? $sServerName . ':' . $iServerPort
+    : $sServerName;
 
 // Determine the current file of the application
-$sPhp_self = str_replace('\\', '', dirname(htmlspecialchars($_SERVER['PHP_SELF'] ?? '', ENT_QUOTES))); // Remove backslashes for Windows compatibility
+$sScriptName = is_string($_SERVER['SCRIPT_NAME'] ?? null) ? $_SERVER['SCRIPT_NAME'] : '/_install/index.php';
+$sPhp_self = str_replace('\\', '/', dirname($sScriptName));
 
 //---------- Constants ----------//
 
 //----- Other -----//
 define('PH7_ADMIN_MOD', 'admin123');
 define('PH7_REQUIRED_SERVER_VERSION', '8.2.0');
-define('PH7_REQUIRED_SQL_VERSION', '5.5.3');
+define('PH7_REQUIRED_SQL_VERSION', '8.0.0');
 define('PH7_ENCODING', 'utf-8');
 define('PH7_DEFAULT_TIMEZONE', 'America/Chicago');
 define('PH7_DS', DIRECTORY_SEPARATOR);

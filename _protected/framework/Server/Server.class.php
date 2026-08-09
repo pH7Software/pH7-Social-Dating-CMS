@@ -18,7 +18,6 @@ defined('PH7') or exit('Restricted access');
 
 use PH7\Framework\Cache\Cache;
 use PH7\Framework\Core\Kernel;
-use PH7\Framework\Url\Uri;
 
 use function PH7\is_internet;
 
@@ -186,9 +185,8 @@ final class Server
     {
         $aLocalHosts = [self::LOCAL_HOSTNAME, self::LOCAL_IP, self::LOCAL_IPV6];
         $sServerName = self::normalizeHost(self::getName());
-        $sHttpHost = self::normalizeHost(self::getVar(self::HTTP_HOST));
 
-        return in_array($sServerName, $aLocalHosts, true) || in_array($sHttpHost, $aLocalHosts, true);
+        return in_array($sServerName, $aLocalHosts, true);
     }
 
     /**
@@ -196,21 +194,7 @@ final class Server
      */
     public static function isRewriteMod(): bool
     {
-        // Check if mod_rewrite is installed and is configured to be used via .htaccess
-        $sHttpModRewrite = self::getVar('HTTP_MOD_REWRITE', '');
-        if (strtolower((string)$sHttpModRewrite) !== 'on') {
-            $sOutputMsg = 'mod_rewrite Works!';
-
-            if (Uri::getInstance()->fragment(0) === 'test_mod_rewrite') {
-                exit($sOutputMsg);
-            }
-
-            $sPage = self::getUrlContents(PH7_URL_ROOT . 'test_mod_rewrite');
-
-            return $sPage === $sOutputMsg;
-        }
-
-        return true;
+        return strtolower((string)self::getVar('HTTP_MOD_REWRITE', '')) === 'on';
     }
 
     public static function cachedIsRewriteMod(): bool
@@ -244,31 +228,28 @@ final class Server
         return substr(PH7_URL_PROT, 0, 5) === 'https';
     }
 
-    private static function getUrlContents(string $sUrl): string
+    /**
+     * Return an explicitly configured parent cookie domain, or an empty string
+     * for host-only cookies. The configured domain must contain the server name.
+     */
+    public static function getCookieDomain(): string
     {
-        if (function_exists('curl_init')) {
-            $rCurl = curl_init();
-            if ($rCurl !== false) {
-                curl_setopt($rCurl, CURLOPT_TIMEOUT, 10);
-                curl_setopt($rCurl, CURLOPT_CONNECTTIMEOUT, 5);
-                curl_setopt($rCurl, CURLOPT_RETURNTRANSFER, true);
-                curl_setopt($rCurl, CURLOPT_FOLLOWLOCATION, true);
-                curl_setopt($rCurl, CURLOPT_URL, $sUrl);
-                $mData = curl_exec($rCurl);
-                curl_close($rCurl);
-
-                return is_string($mData) ? $mData : '';
-            }
+        $mConfiguredDomain = getenv('PH7_COOKIE_DOMAIN');
+        if (!is_string($mConfiguredDomain)) {
+            return '';
         }
 
-        $bAllowUrlFopen = filter_var((string)ini_get('allow_url_fopen'), FILTER_VALIDATE_BOOLEAN);
-        if ($bAllowUrlFopen) {
-            $mData = @file_get_contents($sUrl);
-
-            return is_string($mData) ? $mData : '';
+        $sCookieDomain = strtolower(ltrim(trim($mConfiguredDomain), '.'));
+        $sCanonicalHost = defined('PH7_DOMAIN') ? PH7_DOMAIN : self::getName();
+        $sServerName = self::normalizeHost($sCanonicalHost);
+        if (
+            preg_match('/^(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?)(?:\.[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?)+$/D', $sCookieDomain) !== 1 ||
+            ($sServerName !== $sCookieDomain && !str_ends_with($sServerName, '.' . $sCookieDomain))
+        ) {
+            return '';
         }
 
-        return '';
+        return '.' . $sCookieDomain;
     }
 
     private static function normalizeHost(?string $sHost): string

@@ -1,9 +1,9 @@
 <?php
+
 /**
  * @author         Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
  * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
- * @package        PH7 / App / System / Module / Affiliate / Form / Processing
  */
 
 namespace PH7;
@@ -11,6 +11,7 @@ namespace PH7;
 defined('PH7') or exit('Restricted access');
 
 use PH7\Framework\Ip\Ip;
+use PH7\Framework\Layout\Html\Design;
 use PH7\Framework\Mvc\Request\Http;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Url\Header;
@@ -42,7 +43,18 @@ class AddAffiliateFormProcess extends Form
             'bank_account' => $this->httpRequest->post('bank_account'),
             'ip' => Ip::get()
         ];
-        (new AffiliateModel)->add($aData);
+        try {
+            (new AffiliateModel())->add($aData);
+        } catch (\Throwable $oException) {
+            error_log(sprintf('Admin affiliate creation failed: %s', $oException->getMessage()));
+            Header::redirect(
+                Uri::get('affiliate', 'admin', 'add'),
+                t('The affiliate could not be added. Verify the profile details and try again.'),
+                Design::ERROR_TYPE
+            );
+
+            return;
+        }
 
         Header::redirect(
             Uri::get('affiliate', 'admin', 'browse'),

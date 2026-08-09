@@ -1,20 +1,12 @@
 <div class="col-md-12">
     <div id="box_block" class="center">
-        <h1>{lang 'WHY YOU IGNORE ME? 😢'}</h1>
+        <h1>{lang 'Review pH7Builder'}</h1>
 
-        <figure class="center">
-            <a href="{% $config->values['module.setting']['review.link'] %}">
-                <img
-                    src="{url_tpl_mod_img}review-recall.svg"
-                    alt="Sourceforge Review"
-                    title="{lang 'Leave a Review'}"
-                />
+        <p>{lang 'If you have used the software, you can share an honest review when convenient.'}</p>
+        <p>
+            <a href="{% $config->values['module.setting']['review.link'] %}" target="_blank" rel="noopener noreferrer">
+                {lang 'Leave a review'}
             </a>
-            <figcaption>
-                <a href="{% $config->values['module.setting']['review.link'] %}">
-                    <em>{lang 'Leave a review today ⌛️'}</em>
-                </a>
-            </figcaption>
-        </figure>
+        </p>
     </div>
 </div>

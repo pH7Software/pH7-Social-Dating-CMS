@@ -1,6 +1,6 @@
 /*!
  * Author:        Pierre-Henry Soria <hello@ph7builder.com>
- * Copyright:     (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
+ * Copyright:     (c) 2012-2026, Pierre-Henry Soria and pH7Builder contributors.
  * License:       MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  */
 
@@ -11,7 +11,7 @@
 (function () {
     var aWhitelistedHosts = [
         'ph7builder.com', 'youtube.com', 'youtu.be', 'vimeo.com',
-        'dailymotion.com', 'metacafe.com', 'gravatar.com', 'softaculous.com'
+        'dailymotion.com', 'gravatar.com', 'softaculous.com'
     ];
 
     $(document).on('click', 'a', function () {
@@ -41,5 +41,5 @@
     });
 })();
 
-console.log('This Web App has been made with http://pH7Builder.com | The Social App Builder'
-    + "\r\n" + 'GitHub: http://github.com/pH7Software/pH7-Social-Dating-CMS');
+console.info('pH7Builder — https://ph7builder.com'
+    + "\r\n" + 'Source: https://github.com/pH7Software/pH7-Social-Dating-CMS');

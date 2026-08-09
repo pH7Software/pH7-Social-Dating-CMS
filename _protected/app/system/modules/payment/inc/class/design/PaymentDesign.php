@@ -22,10 +22,9 @@ class PaymentDesign extends Framework\Core\Core
     /**
      * @return void
      */
-    public function buttonPayPal(\stdClass $oMembership, string $sCheckoutToken)
+    public function buttonPayPal(\stdClass $oMembership, string $sCheckoutReference)
     {
         $oPayPal = new PayPal($this->config->values['module.setting']['sandbox.enabled']);
-        $sCheckoutReference = PaymentCheckout::createReference($oMembership->groupId, $sCheckoutToken);
         $mVatRate = $this->config->values['module.setting']['vat_rate'];
 
         $oPayPal
@@ -37,8 +36,12 @@ class PaymentDesign extends Framework\Core\Core
             ->param('no_note', 1)
             ->param('no_shipping', 1)
             ->param('currency_code', $this->config->values['module.setting']['currency_code'])
-            ->param('return', Uri::get('payment', 'main', 'process', 'paypal'))
-            ->param('rm', 2)// Auto redirection in POST data
+            ->param('notify_url', Uri::get('payment', 'main', 'notify', 'paypal'))
+            ->param(
+                'return',
+                Uri::get('payment', 'main', 'result', 'paypal') .
+                '?checkout_reference=' . rawurlencode($sCheckoutReference)
+            )
             ->param('cancel_return', Uri::get('payment', 'main', 'membership', '?msg=' . t('The payment was aborted. No charge has been taken from your account.'), false));
 
         if ((float)$mVatRate > 0) {
@@ -99,8 +102,19 @@ class PaymentDesign extends Framework\Core\Core
         $sCurrency = $this->config->values['module.setting']['currency_code'];
         $sLocale = PH7_LANG_NAME;
 
-        Braintree::init($this->config);
-        $sClientToken = Braintree::generateClientToken();
+        try {
+            Braintree::init($this->config);
+            $sClientToken = Braintree::generateClientToken();
+        } catch (\Throwable $oException) {
+            error_log(sprintf('Braintree checkout initialization failed: %s', $oException->getMessage()));
+            echo '<p class="alert alert-warning">',
+            $this->str->escape(
+                t('Braintree checkout is temporarily unavailable. Please use another payment method or contact the site owner.')
+            ),
+            '</p>';
+
+            return;
+        }
 
         echo '<script src="', $this->str->escapeAttribute(Braintree::JS_LIBRARY_URL), '"></script>';
 

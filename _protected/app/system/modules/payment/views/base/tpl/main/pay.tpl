@@ -1,8 +1,8 @@
 <div class="center">
-    {{ $is_paypal = $config->values['module.setting']['paypal.enabled'] }}
-    {{ $is_stripe = $config->values['module.setting']['stripe.enabled'] }}
-    {{ $is_braintree = $config->values['module.setting']['braintree.enabled'] }}
-    {{ $is_2co = $config->values['module.setting']['2co.enabled'] }}
+    {{ $is_paypal = $payment_gateways['paypal'] }}
+    {{ $is_stripe = $payment_gateways['stripe'] }}
+    {{ $is_braintree = $payment_gateways['braintree'] }}
+    {{ $is_2co = $payment_gateways['2co'] }}
     {*
          Still in development. Fork the project at https://github.com/pH7Software/pH7-Social-Dating-CMS/ and contribute to it,
          then, open a pull request :-)
@@ -38,7 +38,7 @@
 
             {if $is_paypal}
                 <div class="left vs_marg">
-                    {{ $oDesign->buttonPayPal($membership, $checkout_token) }}
+                    {{ $oDesign->buttonPayPal($membership, $paypal_checkout_reference) }}
                 </div>
             {/if}
 

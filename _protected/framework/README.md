@@ -2,15 +2,17 @@
 
 ### *The kernel of every pH7Builder installation 🚀*
 
-**pH7Framework** is a powerful framework designed by small packages (one package = one purpose or sub-purposes). It was built with the [KISS principle](https://en.wikipedia.org/wiki/KISS_principle) in mind. The framework has been specifically written for pH7 Social Dating CMS Pro (and now known as pH7Builder).
+**pH7Framework** is pH7Builder's project-specific, modular PHP framework. It
+supports the application's MVC, routing, templates, database, security, cache,
+and service layers.
 
 
 ## 🤕 Troubleshooting
 
-If you occur any issues, please report
-them [by raising an issue on GitHub](https://github.com/pH7Software/pH7-Social-Dating-CMS/issues).
+If you encounter an issue, search or open a focused report in the
+[GitHub issue tracker](https://github.com/pH7Software/pH7-Social-Dating-CMS/issues).
 
 ## 👋 Say Hello
 
-Don't forget to say “hi” to the community, on [the discussions board](https://github.com/pH7Software/pH7-Social-Dating-CMS/discussions) 😊
-
+Use the [discussions board](https://github.com/pH7Software/pH7-Social-Dating-CMS/discussions)
+for questions and project conversation.

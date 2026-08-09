@@ -404,9 +404,9 @@
             <i class="fa fa-life-ring"></i> {lang 'Help'} <span class="caret"></span>
           </a>
           <ul class="dropdown-menu" role="menu">
-            <li><a class="bold" href="{{ $design->url('ph7cms-helper','main','suggestionbox','?box=donationbox') }}" title="{lang 'Will You Be Nice Today? Like 81% of our users who contribute on a regular basis.'}"><i class="fa fa-trophy"></i> {lang 'Will You Be Nice Today?'} <span class="label label-primary">{lang 'HELP'}</span></a></li>
+            <li><a href="{{ $design->url('ph7cms-helper','main','suggestionbox','?box=donationbox') }}" title="{lang 'Optional ways to support pH7Builder'}"><i class="fa fa-heart"></i> {lang 'Support pH7Builder'}</a></li>
             <li><a href="{software_doc_url}" title="{lang 'Software Documentation'}"><i class="fa fa-book"></i> {lang 'Documentation'}</a></li>
-            <li><a href="{software_review_url}" title="{lang 'Help pH7Builder by giving a nice review! Highly appreciated :)'}"><i class="fa fa-heart"></i> {lang 'Give Nice Review'}</a></li>
+            <li><a href="{software_review_url}" title="{lang 'Share feedback about pH7Builder'}"><i class="fa fa-comment"></i> {lang 'Leave a Review'}</a></li>
             <li><a href="{software_issue_url}" title="{lang 'Report a Problem'}"><i class="fa fa-bug"></i> {lang 'Report a Bug'}</a></li>
           </ul>
         </li>

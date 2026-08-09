@@ -13,7 +13,7 @@
 namespace PH7\Framework\Error {
     defined('PH7') or exit('Restricted access');
 
-    use Exception;
+    use Throwable;
     use PH7\Framework\Config\Config;
     use PH7\Framework\Server\Environment;
 
@@ -29,7 +29,7 @@ namespace PH7\Framework\Error {
         /**
          * Gets Information (message, code, file, line, trace) of an Exception.
          */
-        public static function getInfoExcept(Exception $oE): string
+        public static function getInfoExcept(Throwable $oE): string
         {
             $sDebug = $oE->getMessage();
             $sDebug .= '<br />';

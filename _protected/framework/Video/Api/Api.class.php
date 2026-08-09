@@ -1,12 +1,13 @@
 <?php
+
 /**
  * @title            Abstract API class
  *
  * @author           Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright        (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
  * @license          MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
- * @package          PH7 / Framework / Video / Api
- * @link             http://ph7builder.com
+ *
+ * @see             http://ph7builder.com
  */
 
 declare(strict_types=1);
@@ -15,6 +16,7 @@ namespace PH7\Framework\Video\Api;
 
 defined('PH7') or exit('Restricted access');
 
+use PH7\Framework\File\CurlException;
 use PH7\Framework\File\File;
 use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Str\Str;
@@ -32,10 +34,10 @@ abstract class Api
 
     protected bool $bAutoplay;
 
-    public function __construct()
+    public function __construct(?bool $bAutoplay = null)
     {
-        $this->oStr = new Str;
-        $this->bAutoplay = (bool)DbConfig::getSetting('autoplayVideo');
+        $this->oStr = new Str();
+        $this->bAutoplay = $bAutoplay ?? (bool)DbConfig::getSetting('autoplayVideo');
     }
 
     /**
@@ -51,11 +53,13 @@ abstract class Api
      *
      * @see Api::getInfo();
      *
-     * @return string|bool The title with escape function if found otherwise returns false.
+     * @return string|bool the title with escape function if found otherwise returns false
      */
     public function getTitle()
     {
-        return !empty($this->oData->title) ? $this->oStr->escape($this->oData->title, true) : false;
+        $mTitle = is_object($this->oData) ? ($this->oData->title ?? null) : null;
+
+        return self::isValidTextValue($mTitle) ? $this->oStr->escape($mTitle, true) : false;
     }
 
     /**
@@ -63,11 +67,13 @@ abstract class Api
      *
      * @see Api::getInfo();
      *
-     * @return string|bool The description with escape function if found otherwise returns false.
+     * @return string|bool the description with escape function if found otherwise returns false
      */
     public function getDescription()
     {
-        return !empty($this->oData->description) ? $this->oStr->escape($this->oData->description, true) : false;
+        $mDescription = is_object($this->oData) ? ($this->oData->description ?? null) : null;
+
+        return self::isValidTextValue($mDescription) ? $this->oStr->escape($mDescription, true) : false;
     }
 
     /**
@@ -75,17 +81,17 @@ abstract class Api
      *
      * @see Api::getInfo();
      *
-     * @return int|bool The video duration if found, FALSE otherwise.
+     * @return int|bool the video duration if found, FALSE otherwise
      */
     public function getDuration()
     {
-        return !empty($this->oData->duration) ? (int)$this->oData->duration : false;
+        $mDuration = is_object($this->oData) ? ($this->oData->duration ?? null) : null;
+
+        return self::isValidDurationValue($mDuration) ? (int)$mDuration : false;
     }
 
     /**
-     * @param string $sUrl
-     *
-     * @return string|bool The embed URL if id is valid, false otherwise.
+     * @return string|bool the embed URL if id is valid, false otherwise
      */
     public function getEmbedUrl(string $sUrl)
     {
@@ -131,13 +137,43 @@ abstract class Api
     /**
      * Retrieve information on the video site where it is hosted.
      *
-     * @param string $sUrl
-     *
-     * @return \stdClass|bool Returns data object on success or FALSE on failure.
+     * @return \stdClass|bool returns data object on success or FALSE on failure
      */
     protected function getData(string $sUrl)
     {
-        $sData = (new File)->getUrlContents($sUrl);
-        return json_decode($sData);
+        try {
+            $mData = (new File())->getUrlContents($sUrl);
+        } catch (CurlException $oException) {
+            return false;
+        }
+
+        return $this->decodeData($mData);
+    }
+
+    /**
+     * @param string|false $mData
+     *
+     * @return array|\stdClass|bool
+     */
+    protected function decodeData($mData)
+    {
+        if (!is_string($mData)) {
+            return false;
+        }
+
+        $mDecodedData = json_decode($mData);
+
+        return is_array($mDecodedData) || is_object($mDecodedData) ? $mDecodedData : false;
+    }
+
+    protected static function isValidTextValue(mixed $mValue): bool
+    {
+        return is_string($mValue) && trim($mValue) !== '';
+    }
+
+    protected static function isValidDurationValue(mixed $mValue): bool
+    {
+        return (is_int($mValue) && $mValue > 0)
+            || (is_string($mValue) && preg_match('/^[1-9][0-9]*$/D', $mValue) === 1);
     }
 }

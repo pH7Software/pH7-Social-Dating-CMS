@@ -2,7 +2,7 @@
 
 /**
  * @author         Pierre-Henry Soria <hello@ph7builder.com>
- * @copyright      (c) 2012-2023, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2026, Pierre-Henry Soria and pH7Builder contributors.
  * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  */
 
@@ -14,6 +14,7 @@ use PFBC\Element\Email;
 use PFBC\Element\Hidden;
 use PFBC\Element\HTMLExternal;
 use PFBC\Element\Number;
+use PFBC\Element\Password;
 use PFBC\Element\Select;
 use PFBC\Element\Textbox;
 use PFBC\Element\Token;
@@ -32,8 +33,9 @@ use PH7\Framework\Url\Header;
 class SettingForm
 {
     private const CHANGE_CHAT_DOC_URL = 'https://ph7builder.com/how-to-change-chat/';
-    private const I18N_DOC_URL = 'https://ph7builder.com/doc/en/how-to-translate-to-another-language';
+    private const I18N_DOC_URL = 'https://github.com/pH7Software/pH7-Internationalization';
     private const GOOGLE_API_KEY_URL = 'https://console.cloud.google.com/google/maps-apis/credentials';
+    private const QUICK_START_DOC_URL = 'https://github.com/pH7Software/pH7-Social-Dating-CMS/blob/18.x/docs/QUICK_START.md';
 
     public static function display(): void
     {
@@ -82,24 +84,6 @@ class SettingForm
 
         $oForm->addElement(new Number(t('Number of Profiles on Splash Page:'), 'number_profile_splash_page', ['description' => t('The number of profile photos to display on the Splash Homepage. <br /><em>Available only if "Profiles on Guest Homepage" is enabled and if "User" is the Default Module.</em>'), 'value' => DbConfig::getSetting('numberProfileSplashPage'), 'validation' => new Str(1, 2), 'required' => 1]));
 
-        if ($bIsForumEnabled) {
-            $oForm->addElement(
-                new Select(
-                    t('WYSIWYG editor for Forum:'),
-                    'wysiwyg_editor_forum',
-                    [
-                        '1' => t('Enable'),
-                        '0' => t('Disable')
-                    ],
-                    [
-                        'description' => t('Enable WYSIWYG editor (CKEditor) for the forum posts. If disabled, the simple textarea field will be used.'),
-                        'value' => DbConfig::getSetting('wysiwygEditorForum'),
-                        'required' => 1
-                    ]
-                )
-            );
-        }
-
         $oForm->addElement(
             new Select(
                 t('Social Media Widgets:'),
@@ -141,7 +125,7 @@ class SettingForm
                     0 => t('Disable')
                 ],
                 [
-                    'description' => t('Enable a Cookie Consent Bar to prevent your users that your website uses cookies. This is required by EU Law (if you have visitors from EU countries). The Cookie Bar will only be displayed if the visitor is in the EU.'),
+                    'description' => t('Show a cookie notice to visitors in the EU. A notice alone does not make a site legally compliant; configure consent and data use for the laws that apply to your business.'),
                     'value' => DbConfig::getSetting('cookieConsentBar'),
                     'required' => 1
                 ]
@@ -170,10 +154,10 @@ class SettingForm
                 'display_powered_by_link',
                 [
                     1 => t('Enable'),
-                    0 => t('Disable (NOT recommended)')
+                    0 => t('Disable')
                 ],
                 [
-                    'description' => t('Are you proud of using <a href="%software_website%">pH7Builder</a> brand? Are you proud to say your dating app has been made by the Leading Dating Software provider?'),
+                    'description' => t('Display an optional pH7Builder credit link in the site footer. The MIT License does not require this public link.'),
                     'value' => DbConfig::getSetting('displayPoweredByLink'),
                     'required' => 1
                 ]
@@ -189,7 +173,7 @@ class SettingForm
                     0 => t('Disable')
                 ],
                 [
-                    'description' => t('Show the latest news about the software in the admin dashboard (recommend).'),
+                    'description' => t('Show pH7Builder project news in the admin dashboard.'),
                     'value' => DbConfig::getSetting('isSoftwareNewsFeed'),
                     'required' => 1
                 ]
@@ -328,6 +312,7 @@ class SettingForm
 
         /********** Email **********/
         $oForm->addElement(new HTMLExternal('</div></div><div class="content" id="email"><div class="col-md-10"><h2 class="underline">' . t('Email Parameters') . '</h2>'));
+        $oForm->addElement(new HTMLExternal('<p class="alert alert-info">' . t('These fields set message identities. Set PH7_MAILER_DSN in the server environment for SMTP; otherwise pH7Builder uses the server sendmail transport. Always test delivery before launch.') . '</p>'));
 
         $oForm->addElement(new Textbox(t('Email Name:'), 'email_name', ['value' => DbConfig::getSetting('emailName'), 'required' => 1]));
 
@@ -474,13 +459,15 @@ class SettingForm
         $oForm->addElement(new HTMLExternal('</div></div><div class="content" id="automation"><div class="col-md-10"><h2 class="underline">' . t('Automation') . '</h2>'));
 
         $oForm->addElement(
-            new Textbox(
+            new Password(
                 t('Secret word for the cron URL:'),
                 'cron_security_hash',
                 [
-                    'description' => t('Your very secret word for the cron URL. It will be used for running automated cron jobs.'),
-                    'value' => DbConfig::getSetting('cronSecurityHash'),
-                    'required' => 1,
+                    'autocomplete' => 'new-password',
+                    'description' => t('The saved secret is not displayed. Leave blank to keep it unchanged. Use a long random value in HTTPS cron URLs. <a href="%0%">See the cron setup guide</a>.', self::QUICK_START_DOC_URL . '#7-configure-cron'),
+                    'placeholder' => empty(DbConfig::getSetting('cronSecurityHash')) ? t('Not configured') : t('Configured'),
+                    'spellcheck' => 'false',
+                    'value' => '',
                     'validation' => new Str(1, 64)
                 ]
             )

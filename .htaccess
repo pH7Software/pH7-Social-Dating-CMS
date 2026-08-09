@@ -11,7 +11,7 @@
     RewriteEngine On
 
     ## Uncomment and adjust RewriteBase only if the app is installed in a subfolder.
-    ## Example: RewriteBase /ph7cms/
+    ## Example: RewriteBase /ph7builder/
     # RewriteBase /
 
     <IfModule mod_env.c>
@@ -24,13 +24,20 @@
     RewriteCond %{REQUEST_METHOD} ^TRACE$ [NC]
     RewriteRule .* - [F,L]
 
+    # Protect internal/development directories in source-checkout deployments.
+    RewriteRule ^(?:_protected|_repository|_tests|_tools|docker)(?:/|$) - [F,L,NC]
+    RewriteRule ^_install/(?:data|vendor)(?:/|$) - [F,L,NC]
+
     # Protect sensitive root files
-    RewriteRule "(^|/)(composer\.json|sample\.htaccess|error_log)$" - [F,L,NC]
+    RewriteRule "(^|/)(composer\.(?:json|lock)|sample\.htaccess|nginx\.conf|Dockerfile|docker-compose\.yml|php(?:unit|cs)\.xml\.dist|error_log)$" - [F,L,NC]
 
     # Deny direct access to internal text/config-like files,
     # while keeping standard public TXT files available.
-    RewriteCond %{REQUEST_URI} !/(humans\.txt|robots\.txt|(app-)?ads\.txt)$ [NC]
+    RewriteCond %{REQUEST_URI} !/(\.well-known/security\.txt|humans\.txt|robots\.txt|(app-)?ads\.txt)$ [NC]
     RewriteRule \.(?:cgi|pl|py|sh|bash|sql|tpl|ini|cache|log|lock|tmp|txt|md)$ - [F,L,NC]
+
+    # Only the application and installer front controllers may execute directly.
+    RewriteRule ^(?!(?:index|_install/index)\.php$).+\.php$ - [F,L,NC]
 
     ### pH7Builder URL Router (required) ###
     RewriteCond %{REQUEST_FILENAME} !-f
@@ -52,7 +59,7 @@
 </FilesMatch>
 
 # Deny sensitive config/build/runtime files.
-<FilesMatch "(^composer\.json$|^sample\.htaccess$|^error_log$|\.env$|\.ini$|\.log$|\.sql$|\.bak$|\.md$|\.lock$|\.tmp$|\.cache$)">
+<FilesMatch "(^composer\.(json|lock)$|^sample\.htaccess$|^nginx\.conf$|^Dockerfile$|^docker-compose\.yml$|^php(unit|cs)\.xml\.dist$|^error_log$|\.env$|\.ini$|\.log$|\.sql$|\.bak$|\.md$|\.lock$|\.tmp$|\.cache$)">
     <IfModule mod_authz_core.c>
         Require all denied
     </IfModule>
@@ -63,7 +70,7 @@
 </FilesMatch>
 
 # Keep these text files publicly reachable.
-<FilesMatch "^(humans\.txt|robots\.txt|(app-)?ads\.txt)$">
+<FilesMatch "^(security\.txt|humans\.txt|robots\.txt|(app-)?ads\.txt)$">
     <IfModule mod_authz_core.c>
         Require all granted
     </IfModule>

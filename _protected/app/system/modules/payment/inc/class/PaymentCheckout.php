@@ -14,12 +14,24 @@ final class PaymentCheckout
 {
     private const TOKEN_NAME_PREFIX = 'payment_checkout_';
     private const CONTEXT_NAME_PREFIX = 'payment_checkout_context_';
+    private const PAYPAL_CONTEXT_NAME_PREFIX = 'paypal_checkout_reference_';
+    private const PAYPAL_REFERENCE_PATTERN = '/^[a-f0-9]{40}$/';
     private const PRICE_SCALE = 100;
     private const VAT_SCALE = 1000;
     private const PERCENT_SCALE = 100 * self::VAT_SCALE;
 
     private function __construct()
     {
+    }
+
+    public static function createPayPalReference(): string
+    {
+        return bin2hex(random_bytes(20));
+    }
+
+    public static function isPayPalReference(string $sReference): bool
+    {
+        return preg_match(self::PAYPAL_REFERENCE_PATTERN, $sReference) === 1;
     }
 
     public static function getTokenName(int $iMembershipId): string
@@ -30,6 +42,11 @@ final class PaymentCheckout
     public static function getContextName(int $iMembershipId): string
     {
         return self::CONTEXT_NAME_PREFIX . $iMembershipId;
+    }
+
+    public static function getPayPalContextName(int $iMembershipId): string
+    {
+        return self::PAYPAL_CONTEXT_NAME_PREFIX . $iMembershipId;
     }
 
     public static function createReference(int $iMembershipId, string $sToken): string
@@ -126,14 +143,16 @@ final class PaymentCheckout
             && self::getTotalAmount($mPrice, $mVatRate) === self::formatMinorUnits($iPaidAmount);
     }
 
-    public static function isValidPayPalPayment(
+    public static function isValidPayPalNotification(
         array $aPayment,
-        \stdClass $oMembership,
+        string $sCheckoutReferenceHash,
+        int $iMembershipId,
         string $sMerchantEmail,
         string $sCurrency,
-        string|int|float $mVatRate
+        string|int|float $mExpectedAmount
     ): bool {
         $aRequiredFields = [
+            'custom',
             'payment_status',
             'txn_id',
             'receiver_email',
@@ -151,15 +170,22 @@ final class PaymentCheckout
             }
         }
 
-        $sMembershipId = (string)$aPayment['item_number'];
+        $sTransactionId = trim((string)$aPayment['txn_id']);
+        $sPostedMembershipId = (string)$aPayment['item_number'];
 
-        return $aPayment['payment_status'] === 'Completed'
-            && preg_match('/^[1-9][0-9]*$/', $sMembershipId) === 1
-            && (int)$sMembershipId === (int)$oMembership->groupId
+        $sCheckoutReference = (string)$aPayment['custom'];
+
+        return self::isPayPalReference($sCheckoutReference)
+            && preg_match('/^[a-f0-9]{64}$/', $sCheckoutReferenceHash) === 1
+            && hash_equals($sCheckoutReferenceHash, hash('sha256', $sCheckoutReference))
+            && $aPayment['payment_status'] === 'Completed'
+            && $sTransactionId !== ''
+            && strlen($sTransactionId) <= 127
+            && preg_match('/^[1-9][0-9]*$/', $sPostedMembershipId) === 1
+            && (int)$sPostedMembershipId === $iMembershipId
             && strcasecmp(trim((string)$aPayment['receiver_email']), trim($sMerchantEmail)) === 0
             && strtoupper((string)$aPayment['mc_currency']) === strtoupper($sCurrency)
-            && self::isExpectedAmount($oMembership->price, $mVatRate, $aPayment['mc_gross'])
-            && trim((string)$aPayment['txn_id']) !== '';
+            && self::isExpectedAmount($mExpectedAmount, 0, $aPayment['mc_gross']);
     }
 
     private static function isValidToken(string $sToken): bool

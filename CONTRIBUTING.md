@@ -8,14 +8,18 @@ Thank you for helping to make pH7Builder the best free dating/social web app bui
 git clone https://github.com/pH7Software/pH7-Social-Dating-CMS.git
 cd pH7-Social-Dating-CMS
 docker compose up --build
+docker compose exec php php _install/create-install-token.php
 ```
 
-Open http://localhost:8080 to run the installer. The development database uses
+Enter the printed token at <http://localhost:8080> to run the installer. The development database uses
 host `db`, database and username `ph7builder`, and password `ph7builder`.
+Because Docker snapshots the checkout into a named volume, run
+`docker compose down -v` before rebuilding after source changes. This deletes
+the local application and database volumes.
 
 Without Docker: install dependencies with `composer install`, then use any PHP
 >= 8.2 installation with the extensions listed in `composer.json`,
-MySQL/MariaDB, and Apache/nginx (see `nginx.conf` / `sample.htaccess`).
+MySQL 8.0+, and Apache/nginx (see `nginx.conf` / `sample.htaccess`).
 
 ## Before you open a pull request
 

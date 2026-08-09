@@ -2,18 +2,18 @@
 /**
  * This script checks the server requirements for pH7Builder software.
  *
- * It was written in order to be standarlone and can be used in different projects.
+ * It was written to be standalone and can be used in different projects.
  * If you want to use it in your project, please keep the license and the developer details below in order to have the right to distribute it.
  *
  * @package        Install
  * @file           requirements
  * @author         Pierre-Henry Soria
  * @email          <hello@ph7builder.com>
- * @copyright      (c) 2011-2023, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2011-2026, Pierre-Henry Soria and pH7Builder contributors.
  * @license        MIT (https://opensource.org/licenses/MIT)
  * @language       (PHP) and (HTML5 + CSS)
  * @since          2011/10/25
- * @version        Last revision: 2017/10/23
+ * @version        Last revision: 2026/08/08
  */
 
 defined('PH7') or exit('Restricted access');
@@ -34,9 +34,15 @@ $aRequirementsNeeded = array(
         'pdo_mysql' => 'PDO',
         'zip' => 'Zip',
         'zlib' => 'Zlib',
+        'fileinfo' => 'Fileinfo',
         'gd' => 'GD',
         'mbstring' => 'mbstring',
-        'exif' => 'exif'
+        'exif' => 'exif',
+        'iconv' => 'iconv',
+        'openssl' => 'OpenSSL',
+        'simplexml' => 'SimpleXML',
+        'xml' => 'XML',
+        'xmlwriter' => 'XMLWriter'
     ),
     CLASS_KEY => array(
         'DOMDocument' => 'dom'
@@ -44,7 +50,11 @@ $aRequirementsNeeded = array(
     FUNCTION_KEY => array(
         'exif_imagetype' => 'exif',
         'imagettftext' => 'GD FreeType Support',
-        'curl_init' => 'cURL'
+        'imagecreatefromwebp' => 'GD WebP read support',
+        'imagewebp' => 'GD WebP write support',
+        'curl_init' => 'cURL',
+        'password_hash' => 'password hashing',
+        'random_bytes' => 'cryptographically secure random bytes'
     ),
     DIRECTIVE_KEY => array(
         'file_uploads'
@@ -83,6 +93,29 @@ foreach ($aRequirementsNeeded as $sType => $aRequirements) {
                 $aErrors[] = $sDirective . ' PHP directive needs to be enabled.';
             }
         }
+    }
+}
+
+$aWritablePaths = array(
+    PH7_ROOT_PUBLIC => 'the pH7Builder root directory (needed temporarily to create _constants.php)'
+);
+
+foreach ($aWritablePaths as $sPath => $sDescription) {
+    if (!is_dir($sPath) || !is_writable($sPath)) {
+        $aErrors[] = 'The web-server user must be able to write ' . $sDescription . '. Grant owner/group write access; do not use world-writable permissions.';
+    }
+}
+
+$aRuntimeDirectories = array(
+    PH7_ROOT_INSTALL . 'data/caches' => 'the installer state and access-token directory',
+    PH7_ROOT_INSTALL . 'data/caches/smarty_compile' => 'the installer template cache directory',
+    PH7_ROOT_INSTALL . 'data/caches/smarty_cache' => 'the installer cache directory',
+    PH7_ROOT_INSTALL . 'data/logs' => 'the installer log directory'
+);
+
+foreach ($aRuntimeDirectories as $sPath => $sDescription) {
+    if ((!is_dir($sPath) && !@mkdir($sPath, 0775, true)) || !is_writable($sPath)) {
+        $aErrors[] = 'The web-server user must be able to create and write ' . $sDescription . '. Grant owner/group write access; do not use world-writable permissions.';
     }
 }
 

@@ -1,20 +1,21 @@
 <?php
+
 /**
  * @desc             Class is used to create/manipulate images using GD library.
  *
  * @author           Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright        (c) 2012-2020, Pierre-Henry Soria. All Rights Reserved.
  * @license          MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
- * @package          PH7 / Framework / Image
- * @link             https://ph7.me
- * @linkGD           https://php.net/manual/book.image.php
+ *
+ * @see             https://ph7.me
+ *
+ * @seeGD           https://php.net/manual/book.image.php
  */
 
 namespace PH7\Framework\Image;
 
 defined('PH7') or exit('Restricted access');
 
-use GdImage;
 use PH7\Framework\Error\CException\PH7InvalidArgumentException;
 use PH7\Framework\File\File;
 use PH7\Framework\File\TooLargeException;
@@ -52,9 +53,9 @@ class FileStorage implements Storageable
     private const ZONE_CORP_BOTTOM_LEFT = 'bottom-left';
     private const ZONE_CORP_LEFT = 'left';
 
-
     private const DEFAULT_MAX_WIDTH = 3000;
     private const DEFAULT_MAX_HEIGHT = 3000;
+    private const MAX_SOURCE_PIXELS = 12_500_000;
 
     private const DEFAULT_IMAGE_QUALITY = 100;
     private const DEFAULT_COMPRESSION_LEVEL = 4;
@@ -65,7 +66,7 @@ class FileStorage implements Storageable
     /** @var string */
     private $sType;
 
-    /** @var resource|GdImage|false */
+    /** @var resource|\GdImage|false */
     private $rImage;
 
     /** @var int */
@@ -86,11 +87,10 @@ class FileStorage implements Storageable
     /** @var int */
     private $iCompression = self::DEFAULT_COMPRESSION_LEVEL;
 
-
     /**
-     * @param string $sFile Full path to the image file.
-     * @param int $iMaxWidth Default value 3000.
-     * @param int $iMaxHeight Default value 3000.
+     * @param string $sFile      full path to the image file
+     * @param int    $iMaxWidth  default value 3000
+     * @param int    $iMaxHeight default value 3000
      */
     public function __construct($sFile, $iMaxWidth = self::DEFAULT_MAX_WIDTH, $iMaxHeight = self::DEFAULT_MAX_HEIGHT)
     {
@@ -100,45 +100,59 @@ class FileStorage implements Storageable
     }
 
     /**
-     * @return bool
+     * @throws TooLargeException if the image file is not found
      *
-     * @throws TooLargeException If the image file is not found.
+     * @return bool
      */
     public function validate()
     {
-        $mImgType = $this->getType();
-
-        if (!$mImgType || !is_file($this->sFile)) {
+        if (!is_file($this->sFile) || !is_readable($this->sFile)) {
             if (isDebug()) {
                 throw new TooLargeException('DebugMode: The file could not be uploaded. Possibly too large.');
             }
+
             return false;
         }
 
-        switch ($mImgType) {
-            case self::JPG:
-                $this->rImage = imagecreatefromjpeg($this->sFile);
-                $this->sType = self::JPG_NAME;
-                break;
+        $mImgType = $this->getType();
+        $aImageInfo = @getimagesize($this->sFile);
+        if (
+            !$mImgType
+            || !is_array($aImageInfo)
+            || ($aImageInfo[2] ?? null) !== $mImgType
+            || !self::areSourceDimensionsSafe((int)$aImageInfo[0], (int)$aImageInfo[1])
+        ) {
+            return false;
+        }
 
-            case self::PNG:
-                $this->rImage = imagecreatefrompng($this->sFile);
-                $this->sType = self::PNG_NAME;
-                break;
+        try {
+            switch ($mImgType) {
+                case self::JPG:
+                    $this->rImage = @imagecreatefromjpeg($this->sFile);
+                    $this->sType = self::JPG_NAME;
+                    break;
+                case self::PNG:
+                    $this->rImage = @imagecreatefrompng($this->sFile);
+                    $this->sType = self::PNG_NAME;
+                    break;
+                case self::GIF:
+                    $this->rImage = @imagecreatefromgif($this->sFile);
+                    $this->sType = self::GIF_NAME;
+                    break;
+                case self::WEBP: // Will only work with PHP >= 7.1
+                    $this->rImage = @imagecreatefromwebp($this->sFile);
+                    $this->sType = self::WEBP_NAME;
+                    break;
+                    // Invalid Zone
+                default:
+                    return false; // File type incompatible. Please save the image in .jpg, .png or .gif
+            }
+        } catch (\Throwable) {
+            return false;
+        }
 
-            case self::GIF:
-                $this->rImage = imagecreatefromgif($this->sFile);
-                $this->sType = self::GIF_NAME;
-                break;
-
-            case self::WEBP: // Will only work with PHP >= 7.1
-                $this->rImage = imagecreatefromwebp($this->sFile);
-                $this->sType = self::WEBP_NAME;
-                break;
-
-            // Invalid Zone
-            default:
-                return false; // File type incompatible. Please save the image in .jpg, .png or .gif
+        if (!$this->rImage instanceof \GdImage) {
+            return false;
         }
 
         $this->iWidth = imagesx($this->rImage);
@@ -153,7 +167,7 @@ class FileStorage implements Storageable
     }
 
     /**
-     * @param int $iQ From 0 (worst quality) to 100 (best quality).
+     * @param int $iQ from 0 (worst quality) to 100 (best quality)
      *
      * @return self
      */
@@ -179,9 +193,9 @@ class FileStorage implements Storageable
     public function resize(?int $iX = null, ?int $iY = null): self
     {
         if (!$iX) { // If height is not given
-            $iX = $this->iWidth * ($iY / $this->iHeight);
+            $iX = (int)round($this->iWidth * ($iY / $this->iHeight));
         } elseif (!$iY) { // If width is not given
-            $iY = $this->iHeight * ($iX / $this->iWidth);
+            $iY = (int)round($this->iHeight * ($iX / $this->iWidth));
         }
 
         $rTmp = imagecreatetruecolor($iX, $iY);
@@ -211,8 +225,6 @@ class FileStorage implements Storageable
      * @param int $iY
      * @param int $iWidth
      * @param int $iHeight
-     *
-     * @return self
      */
     public function crop($iX = 0, $iY = 0, $iWidth = 1, $iHeight = 1): self
     {
@@ -248,8 +260,8 @@ class FileStorage implements Storageable
     public function dynamicResize($iNewWidth, $iNewHeight)
     {
         if (
-            $iNewHeight > $iNewWidth ||
-            ($iNewHeight === $iNewWidth && $this->iHeight < $this->iWidth)
+            $iNewHeight > $iNewWidth
+            || ($iNewHeight === $iNewWidth && $this->iHeight < $this->iWidth)
         ) {
             // Taller image
             $this->resize(null, $iNewHeight);
@@ -283,15 +295,15 @@ class FileStorage implements Storageable
     }
 
     /**
-     * @param int $iWidth
-     * @param int $iHeight
-     * @param string $sZone Default value is center.
+     * @param int    $iWidth
+     * @param int    $iHeight
+     * @param string $sZone   default value is center
      *
      * @see self::crop() The method that is returned by this method.
      *
-     * @return self
+     * @throws PH7InvalidArgumentException if the image crop is invalid
      *
-     * @throws PH7InvalidArgumentException If the image crop is invalid.
+     * @return self
      */
     public function zoneCrop($iWidth, $iHeight, $sZone = self::ZONE_CROP_CENTER)
     {
@@ -300,56 +312,45 @@ class FileStorage implements Storageable
                 $iX = ($iWidth - $this->iWidth) / -2;
                 $iY = ($iHeight - $this->iHeight) / -2;
                 break;
-
             case self::ZONE_CORP_TOP_LEFT:
                 $iX = 0;
                 $iY = 0;
                 break;
-
             case self::ZONE_CORP_TOP:
                 $iX = ($this->iWidth - $iWidth) / 2;
                 $iY = 0;
                 break;
-
             case self::ZONE_CORP_TOP_RIGHT:
                 $iX = $this->iWidth - $iWidth;
                 $iY = 0;
                 break;
-
-            // Right
+                // Right
             case self::ZONE_CORP_RIGHT:
                 $iX = $this->iWidth - $iWidth;
                 $iY = ($this->iHeight - $iHeight) / 2;
                 break;
-
             case self::ZONE_CORP_BOTTOM_RIGHT:
                 $iX = $this->iWidth - $iWidth;
                 $iY = $this->iHeight - $iHeight;
                 break;
-
             case self::ZONE_CORP_BOTTOM:
                 $iX = ($this->iWidth - $iWidth) / 2;
                 $iY = $this->iHeight - $iHeight;
                 break;
-
             case self::ZONE_CORP_BOTTOM_LEFT:
                 $iX = 0;
                 $iY = $this->iHeight - $iHeight;
                 break;
-
             case self::ZONE_CORP_LEFT:
                 $iX = 0;
                 $iY = ($this->iHeight - $iHeight) / 2;
                 break;
-
-            // Invalid Zone
+                // Invalid Zone
             default:
-                throw new PH7InvalidArgumentException(
-                    'Invalid image crop zone ' . $sZone . ' given for image helper zoneCrop().'
-                );
+                throw new PH7InvalidArgumentException('Invalid image crop zone ' . $sZone . ' given for image helper zoneCrop().');
         }
 
-        return $this->crop($iX, $iY, $iWidth, $iHeight);
+        return $this->crop((int)round($iX), (int)round($iY), $iWidth, $iHeight);
     }
 
     /**
@@ -361,14 +362,15 @@ class FileStorage implements Storageable
     public function rotate($iDeg = 0, $iBg = 0)
     {
         $this->rImage = imagerotate($this->rImage, $iDeg, $iBg);
+
         return $this;
     }
 
     /**
      * Create a Watermark text on the image.
      *
-     * @param string $sText Text of watermark.
-     * @param int $iSize The size of text. Between 0 to 5.
+     * @param string $sText text of watermark
+     * @param int    $iSize The size of text. Between 0 to 5.
      *
      * @return self
      */
@@ -380,6 +382,8 @@ class FileStorage implements Storageable
         $rWhite = imagecolorallocate($this->rImage, 255, 255, 255);
         $rBlack = imagecolorallocate($this->rImage, 0, 0, 0);
         $rGray = imagecolorallocate($this->rImage, 127, 127, 127);
+
+        $rColor = $rWhite;
 
         if ($iWidthText > 0 && $iHeightText > 0) {
             if (imagecolorat($this->rImage, $iWidthText, $iHeightText) > $rGray) {
@@ -408,11 +412,7 @@ class FileStorage implements Storageable
     /**
      * Save an image.
      *
-     * @param string $sFile
-     *
-     * @return self
-     *
-     * @throws PH7InvalidArgumentException If the image format is invalid.
+     * @throws PH7InvalidArgumentException if the image format is invalid
      */
     public function save(string $sFile): self
     {
@@ -420,24 +420,18 @@ class FileStorage implements Storageable
             case self::JPG_NAME:
                 imagejpeg($this->rImage, $sFile, $this->iQuality);
                 break;
-
             case self::PNG_NAME:
                 imagepng($this->rImage, $sFile, $this->iCompression);
                 break;
-
             case self::GIF_NAME:
-                imagegif($this->rImage, $sFile, $this->iQuality);
+                imagegif($this->rImage, $sFile);
                 break;
-
             case self::WEBP_NAME:
                 imagewebp($this->rImage, $sFile, $this->iQuality);
                 break;
-
-            // Invalid Zone
+                // Invalid Zone
             default:
-                throw new PH7InvalidArgumentException(
-                    'Invalid format Image in method ' . __METHOD__ . ' of class ' . __CLASS__
-                );
+                throw new PH7InvalidArgumentException('Invalid format Image in method ' . __METHOD__ . ' of class ' . __CLASS__);
         }
 
         return $this;
@@ -446,9 +440,9 @@ class FileStorage implements Storageable
     /**
      * Show an image.
      *
-     * @return self
+     * @throws PH7InvalidArgumentException if the image format is invalid
      *
-     * @throws PH7InvalidArgumentException If the image format is invalid.
+     * @return self
      */
     public function show()
     {
@@ -459,27 +453,21 @@ class FileStorage implements Storageable
                 header('Content-type: image/jpeg');
                 imagejpeg($this->rImage, null, $this->iQuality);
                 break;
-
             case self::PNG_NAME:
                 header('Content-type: image/png');
                 imagepng($this->rImage, null, $this->iCompression);
                 break;
-
             case self::GIF_NAME:
                 header('Content-type: image/gif');
-                imagegif($this->rImage, null, $this->iQuality);
+                imagegif($this->rImage);
                 break;
-
             case self::WEBP_NAME:
                 header('Content-type: image/webp');
                 imagewebp($this->rImage, null, $this->iQuality);
                 break;
-
-            // Invalid Zone
+                // Invalid Zone
             default:
-                throw new PH7InvalidArgumentException(
-                    'Invalid format image in method ' . __METHOD__ . ' of class ' . __CLASS__
-                );
+                throw new PH7InvalidArgumentException('Invalid format image in method ' . __METHOD__ . ' of class ' . __CLASS__);
         }
 
         return $this;
@@ -488,13 +476,10 @@ class FileStorage implements Storageable
     public function remove(string $sFile): self
     {
         // If it exists, remove the temporary image file
-        (new File)->deleteFile($sFile);
+        (new File())->deleteFile($sFile);
 
-        // Free the memory associated with the image
-        // Make sure $rImage is the correct type and not null. Needs to be an instance of GdImage
-        if ($this->rImage instanceof GdImage) {
-            @imagedestroy($this->rImage);
-        }
+        // GD images are ordinary objects on PHP 8 and are released automatically.
+        $this->rImage = null;
 
         return $this;
     }
@@ -510,7 +495,7 @@ class FileStorage implements Storageable
     /**
      * Determine and get the type of the image (even an unallowed image type) by reading the first bytes and checking its signature.
      *
-     * @return int|bool When a correct signature is found, returns the appropriate integer constant value, FALSE otherwise.
+     * @return int|bool when a correct signature is found, returns the appropriate integer constant value, FALSE otherwise
      */
     public function getType()
     {
@@ -520,7 +505,7 @@ class FileStorage implements Storageable
     /**
      * Get the image extension.
      *
-     * @return string The extension of the image without the dot.
+     * @return string the extension of the image without the dot
      */
     public function getExt()
     {
@@ -538,11 +523,18 @@ class FileStorage implements Storageable
     }
 
     /**
-     * @return false|int Returns the identifier of the transparent color index.
+     * @return false|int returns the identifier of the transparent color index
      */
     public function getTransparentColor()
     {
         return imagecolortransparent($this->rImage);
+    }
+
+    private static function areSourceDimensionsSafe(int $iWidth, int $iHeight): bool
+    {
+        return $iWidth > 0
+            && $iHeight > 0
+            && $iWidth <= intdiv(self::MAX_SOURCE_PIXELS, $iHeight);
     }
 
     private function preserveTransparencies()
@@ -552,12 +544,10 @@ class FileStorage implements Storageable
                 $this->allocateAlphaColorTransparency();
                 $this->handlePngTransparency();
                 break;
-
             case self::GIF_NAME:
                 $this->allocateAlphaColorTransparency();
                 imagealphablending($this->rImage, true);
                 break;
-
             case self::JPG_NAME:
                 imagealphablending($this->rImage, true);
                 break;
@@ -583,18 +573,10 @@ class FileStorage implements Storageable
     }
 
     /**
-     * @return bool TRUE if the image is too large (and should be resized), FALSE otherwise.
+     * @return bool TRUE if the image is too large (and should be resized), FALSE otherwise
      */
     private function isTooLarge()
     {
         return $this->iWidth > $this->iMaxWidth || $this->iHeight > $this->iMaxHeight;
-    }
-
-    /**
-     * Remove temporary file.
-     */
-    public function __destruct()
-    {
-        $this->remove($this->sFile);
     }
 }

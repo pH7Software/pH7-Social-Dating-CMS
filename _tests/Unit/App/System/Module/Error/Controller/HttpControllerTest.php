@@ -20,7 +20,7 @@ final class HttpControllerTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->oClient = new Client(['exceptions' => false]);
+        $this->oClient = new Client(['http_errors' => false]);
     }
 
     public function testNotFoundPage(): void

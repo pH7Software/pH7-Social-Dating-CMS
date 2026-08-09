@@ -1,9 +1,9 @@
 <?php
+
 /**
  * @author         Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright      (c) 2013-2019, Pierre-Henry Soria. All Rights Reserved.
  * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
- * @package        PH7 / App / System / Module / Field / Form / Processing
  */
 
 namespace PH7;
@@ -19,16 +19,35 @@ class EditFieldFormProcess extends Form
     {
         parent::__construct();
 
-        $sMod = $this->httpRequest->get('mod');
-        $sName = $this->httpRequest->post('name');
+        $mMod = $_GET['mod'] ?? null;
+        $mCurrentName = $_GET['name'] ?? null;
+        $mName = $_POST['name'] ?? null;
+        if (
+            !is_string($mMod)
+            || !in_array($mMod, ['user', 'aff'], true)
+            || !FieldModel::isValidColumnName($mCurrentName)
+            || !FieldModel::isValidColumnName($mName)
+        ) {
+            \PFBC\Form::setError('form_edit_field', t('Please enter a valid field name.'));
+
+            return;
+        }
+
+        $sMod = $mMod;
+        $sCurrentName = $mCurrentName;
+        $sName = $mName;
         $sType = $this->httpRequest->post('type');
         $iLength = $this->httpRequest->post('length');
         $sDefVal = $this->httpRequest->post('value');
 
-        if (Field::unmodifiable($sMod, $sName)) {
+        $bCurrentNameProtected = Field::unmodifiable($sMod, $sCurrentName);
+        $bSubmittedNameProtected = Field::unmodifiable($sMod, $sName);
+
+        if ($bCurrentNameProtected || $bSubmittedNameProtected) {
+            $sProtectedName = $bCurrentNameProtected ? $sCurrentName : $sName;
             \PFBC\Form::setError(
                 'form_edit_field',
-                t('Wrong field name submitted. %0% cannot be modified.', $sName)
+                t('Wrong field name submitted. %0% cannot be modified.', $sProtectedName)
             );
         } else {
             $bRet = (new FieldModel(Field::getTable($sMod), $sName, $sType, $iLength, $sDefVal))->update();

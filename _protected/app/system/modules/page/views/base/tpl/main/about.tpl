@@ -1,8 +1,16 @@
 <div class="center">
-    <h3>{lang 'Dating CMS - Dating Software, Open Source Dating Script'}</h3>
+    <h3>{lang 'About this website'}</h3>
     <p>
-        <a href="{software_url}" title="{lang 'pH7 Social / Dating CMS'}"><strong>pH7 Dating CMS</strong></a>
-        {lang}is a <a href="https://sourceforge.net/projects/ph7socialdating/" title="Free Dating Web App Solution">Free</a> and <a href="https://github.com/pH7Software/pH7-Social-Dating-CMS" title="Open Source Social Dating Software">Open Source</a> <strong>Social Dating Software</strong> for building online dating web apps and social networks.{/lang}
+        {lang 'This website runs on'}
+        <a href="{software_url}" title="pH7Builder"><strong>pH7Builder</strong></a>,
+        {lang 'self-hosted, open-source software for dating sites, matchmaking communities, and social networks.'}
     </p>
-    <p>{lang}pH7Builder is also sometimes called "CMS-Dating".{/lang}</p>
+    <p>
+        {lang 'pH7Builder was created by'}
+        <a href="https://ph7.me" title="Pierre-Henry Soria">Pierre-Henry Soria</a>
+        {lang 'and is maintained by the'}
+        <a href="https://github.com/pH7Software" title="pH7Software on GitHub">pH7Software</a>
+        {lang 'open-source project.'}
+    </p>
+    <p>{lang 'The operator of this website is responsible for its members, content, policies, and services.'}</p>
 </div>

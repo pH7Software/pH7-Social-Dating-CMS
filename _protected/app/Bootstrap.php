@@ -65,7 +65,7 @@ class Bootstrap
     /**
      * Initialize the app, load the files and launch the main FrontController router.
      *
-     * @throws \Exception
+     * @throws \Throwable
      * @throws Except\PH7Exception
      * @throws Except\UserException
      * @throws FileNotFoundException
@@ -95,7 +95,7 @@ class Bootstrap
             echo htmlspecialchars($oE->getMessage(), ENT_QUOTES, PH7_ENCODING);
         } catch (Except\PH7Exception $oE) {
             Except\PH7Exception::launch($oE);
-        } catch (\Exception $oE) {
+        } catch (\Throwable $oE) {
             Except\PH7Exception::launch($oE);
         } finally {
             $this->closeAppSession();
@@ -162,7 +162,7 @@ class Bootstrap
     {
         $sMsg = '<p class="warning"><a href="' . Kernel::SOFTWARE_WEBSITE . '">pH7Builder</a> requires Apache "mod_rewrite".</p>
         <p>Firstly, please <strong>make sure the ".htaccess" file has been uploaded to the root directory where pH7Builder is installed</strong>. If not, use your FTP client (such as Filezilla) and upload it again from pH7Builder unziped package and try again.<br />
-        Secondly, please <strong>make sure "mod_rewrite" is correctly installed</strong>.<br /> Click <a href="https://ph7builder.com/doc/en/how-to-install-rewrite-module" target="_blank" rel="noopener">here</a> if you want to get more information on how to install the rewrite module.<br /><br />
+        Secondly, please <strong>make sure URL rewriting is correctly configured</strong>.<br /> See the <a href="https://github.com/pH7Software/pH7-Social-Dating-CMS/blob/18.x/docs/QUICK_START.md" target="_blank" rel="noopener">Production Quick Start</a> for Apache and nginx examples.<br /><br />
         After that, please <a href="' . PH7_URL_ROOT . '">retry</a>.</p>';
 
         echo html_body("Apache's mod_rewrite is required", $sMsg);

@@ -16,6 +16,7 @@ use PH7\Framework\Mail\Mail;
 use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Payment\Gateway\Api\Api as ApiInterface;
 use PH7\Framework\Security\CSRF\Token;
+use PH7\Framework\Str\Str;
 use Stripe\Charge as StripeCharge;
 
 class MainController extends Controller
@@ -36,13 +37,6 @@ class MainController extends Controller
     ];
 
     private const CHECKOUT_TOKEN_LIFETIME = 7200;
-
-    private const GATEWAY_ENABLE_SETTINGS = [
-        self::PAYPAL_GATEWAY_NAME => 'paypal.enabled',
-        self::STRIPE_GATEWAY_NAME => 'stripe.enabled',
-        self::BRAINTREE_GATEWAY_NAME => 'braintree.enabled',
-        self::TWO_CHECKOUT_GATEWAY_NAME => '2co.enabled'
-    ];
 
     private const SENSITIVE_PAYMENT_FIELDS = [
         'checkout_reference',
@@ -66,13 +60,15 @@ class MainController extends Controller
     /** @var bool Payment status. Default is failure (FALSE) */
     private $bStatus = false;
 
+    private float $fCompletedMembershipAmount = 0.0;
+
     public function __construct()
     {
         parent::__construct();
 
         $this->oUserModel = new AffiliateCoreModel();
         $this->oPayModel = new PaymentModel();
-        $this->iProfileId = $this->session->get('member_id');
+        $this->iProfileId = (int)$this->session->get('member_id');
     }
 
     public function index()
@@ -88,8 +84,10 @@ class MainController extends Controller
         if (empty($oMembershipData)) {
             $this->displayPageNotFound(t('No membership found!'));
         } else {
+            $bHasPaymentGateway = in_array(true, $this->getPaymentGateways(), true);
             foreach ($oMembershipData as $oMembership) {
-                $oMembership->isPurchasable = PaymentCheckout::isPurchasableMembership($oMembership);
+                $oMembership->isPurchasable = $bHasPaymentGateway
+                    && PaymentCheckout::isPurchasableMembership($oMembership);
                 if ($oMembership->isPurchasable) {
                     $oMembership->totalPrice = $this->getTotalAmount($oMembership);
                 }
@@ -126,17 +124,38 @@ class MainController extends Controller
 
             $this->view->page_title = $this->view->h1_title = t('Payment Option');
             $this->view->membership = $oMembershipData;
-            $this->view->is_purchasable_membership = PaymentCheckout::isPurchasableMembership($oMembershipData);
+            $aPaymentGateways = $this->getPaymentGateways();
+            $this->view->is_purchasable_membership = in_array(true, $aPaymentGateways, true)
+                && PaymentCheckout::isPurchasableMembership($oMembershipData);
             if ($this->view->is_purchasable_membership) {
                 $this->view->checkout_token = (new Token())->generate(
                     PaymentCheckout::getTokenName($iMembershipId)
                 );
-                $this->view->total_price = $this->getTotalAmount($oMembershipData);
+                $sTotalAmount = $this->getTotalAmount($oMembershipData);
+                $this->view->total_price = $sTotalAmount;
                 $this->session->set(
                     PaymentCheckout::getContextName($iMembershipId),
                     $this->getCheckoutContext($oMembershipData)
                 );
+
+                if ($aPaymentGateways[self::PAYPAL_GATEWAY_NAME]) {
+                    $sPayPalCheckoutReference = $this->createPayPalCheckoutReference(
+                        $oMembershipData,
+                        $sTotalAmount
+                    );
+                    if ($sPayPalCheckoutReference === null) {
+                        $aPaymentGateways[self::PAYPAL_GATEWAY_NAME] = false;
+                        $this->design->setMessage(
+                            t('PayPal checkout is temporarily unavailable. Please use another configured gateway or contact the site owner.')
+                        );
+                    } else {
+                        $this->view->paypal_checkout_reference = $sPayPalCheckoutReference;
+                    }
+                }
+
+                $this->view->is_purchasable_membership = in_array(true, $aPaymentGateways, true);
             }
+            $this->view->payment_gateways = $aPaymentGateways;
             $this->output();
         }
     }
@@ -153,9 +172,6 @@ class MainController extends Controller
         }
 
         switch ($sProvider) {
-            case self::PAYPAL_GATEWAY_NAME:
-                $this->paypalHandler();
-                break;
             case self::STRIPE_GATEWAY_NAME:
                 $this->stripeHandler();
                 break;
@@ -178,7 +194,7 @@ class MainController extends Controller
         $this->view->page_title = $this->view->h2_title = $this->sTitle;
 
         if ($this->bStatus) {
-            $this->updateAffiliateCommission();
+            $this->updateAffiliateCommission($this->fCompletedMembershipAmount);
             $this->clearCache();
         }
 
@@ -189,6 +205,85 @@ class MainController extends Controller
             $this->setAutoRedirectionToHomepage();
         }
 
+        $this->output();
+    }
+
+    public function notify(string $sProvider = ''): void
+    {
+        if ($sProvider !== self::PAYPAL_GATEWAY_NAME || $this->httpRequest->getMethod() !== 'POST') {
+            $this->sendPaymentNotificationResponse(400);
+        }
+
+        $mCheckoutReference = $_POST['custom'] ?? null;
+        if (!is_string($mCheckoutReference) || strlen($mCheckoutReference) > 127) {
+            $this->sendPaymentNotificationResponse(400);
+        }
+
+        try {
+            $oCheckout = $this->oPayModel->getPayPalCheckout($mCheckoutReference);
+            if ($oCheckout === null) {
+                $this->sendPaymentNotificationResponse(200);
+            }
+
+            $oPayPal = new PayPal((bool)(int)$oCheckout->sandbox);
+            if (!$oPayPal->valid()) {
+                $this->sendPaymentNotificationResponse($oPayPal->hasTransportError() ? 503 : 200);
+            }
+
+            if (!PaymentCheckout::isValidPayPalNotification(
+                $_POST,
+                (string)$oCheckout->checkout_reference_hash,
+                (int)$oCheckout->membership_id,
+                (string)$oCheckout->merchant_account,
+                (string)$oCheckout->expected_currency,
+                (string)$oCheckout->expected_amount
+            )) {
+                $this->sendPaymentNotificationResponse(200);
+            }
+
+            $iPaymentResult = $this->oPayModel->completePayPalCheckout(
+                $mCheckoutReference,
+                trim((string)$_POST['txn_id']),
+                $this->dateTime->get()->dateTime(UserCoreModel::DATETIME_FORMAT)
+            );
+            if ($iPaymentResult === PaymentModel::PAYMENT_COMPLETED) {
+                $this->runPayPalCompletionHooks($oCheckout);
+            }
+
+            $this->sendPaymentNotificationResponse(200);
+        } catch (\Throwable) {
+            // A retryable response lets PayPal resend a verified notification after a transient failure.
+            $this->sendPaymentNotificationResponse(503);
+        }
+    }
+
+    public function result(): void
+    {
+        $this->view->page_title = $this->view->h2_title = t('Payment received');
+        $sTemplateName = 'pending';
+        $sCheckoutReference = $this->httpRequest->get('checkout_reference');
+        if (is_string($sCheckoutReference) && $sCheckoutReference !== '') {
+            try {
+                $oCheckout = $this->oPayModel->getPayPalCheckout($sCheckoutReference);
+                if (
+                    $oCheckout instanceof \stdClass
+                    && $oCheckout->status === 'completed'
+                    && UserCore::auth()
+                    && (int)$oCheckout->profile_id === $this->iProfileId
+                ) {
+                    $this->updateUserGroupId((int)$oCheckout->membership_id);
+                    $this->clearCache();
+                    $this->session->remove(
+                        PaymentCheckout::getPayPalContextName((int)$oCheckout->membership_id)
+                    );
+                    $sTemplateName = 'success';
+                }
+            } catch (\Throwable) {
+                // Keep the result page actionable while a transient status lookup is retried by PayPal.
+            }
+        }
+
+        $this->manualTplInclude($sTemplateName . PH7Tpl::TEMPLATE_FILE_EXT);
         $this->output();
     }
 
@@ -214,10 +309,8 @@ class MainController extends Controller
 
     /**
      * Update the Affiliate Commission.
-     *
-     * @return void
      */
-    private function updateAffiliateCommission()
+    private function updateAffiliateCommission(float $fMembershipAmount): void
     {
         // Load the Affiliate config file
         $this->config->load(PH7_PATH_SYS_MOD . 'affiliate' . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE);
@@ -228,11 +321,11 @@ class MainController extends Controller
             return;
         }
 
-        $iAffCom = $this->getAffiliateCommissionAmount();
+        $fAffiliateCommission = $this->getAffiliateCommissionAmount($fMembershipAmount);
 
-        if ($iAffCom > 0) {
+        if ($fAffiliateCommission > 0) {
             // If commission amount is higher than 0, we update the user's commission
-            $this->oUserModel->updateUserJoinCom($iAffId, $iAffCom);
+            $this->oUserModel->updateUserJoinCom($iAffId, $fAffiliateCommission);
         }
     }
 
@@ -243,28 +336,40 @@ class MainController extends Controller
      *
      * @throws Framework\Layout\Tpl\Engine\PH7Tpl\Exception
      */
-    private function sendNotifyMail($iMembershipId): bool
+    private function sendNotifyMail($iMembershipId, string $sGatewayName): bool
     {
         $sAdminEmail = DbConfig::getSetting('adminEmail');
         $oMembershipData = $this->oPayModel->getMemberships($iMembershipId);
+        $oProfile = $this->oUserModel->readProfile($this->iProfileId);
+        if (!$oProfile instanceof \stdClass || !$oMembershipData instanceof \stdClass) {
+            return false;
+        }
 
-        $sUsername = $this->session->get('member_username');
-        $sProfileLink = ' (' . $this->design->getProfileLink($sUsername, false) . ')';
-        $sBuyer = $this->session->get('member_first_name') . $sProfileLink;
+        $sUsername = (string)$oProfile->username;
+        $sFirstName = (string)$oProfile->firstName;
+        $sProfileUrl = (new Str())->escapeAttribute((new UserCore())->getProfileLink($sUsername));
+        $sBuyerHtml = escape($sFirstName) . ' (<a href="' . $sProfileUrl . '">' . escape($sUsername) . '</a>)';
+        $sBuyerText = preg_replace('/[\r\n]+/', ' ', strip_tags($sFirstName . ' (' . $sUsername . ')'));
+        if (!is_string($sBuyerText)) {
+            return false;
+        }
 
-        $this->view->intro = t('Hello!') . '<br />' . t('Congratulations! You received a new payment from %0%', $sBuyer);
-        $this->view->date = t('Date of the payment: %0%', $this->dateTime->get()->date());
-        $this->view->membership_name = t('Membership name: %0%', $oMembershipData->name);
-        $this->view->membership_price = t(
+        $this->view->intro = t('Hello!') . '<br />' . t('Congratulations! You received a new payment from %0%', $sBuyerHtml);
+        $this->view->date = escape(t('Date of the payment: %0%', $this->dateTime->get()->date()));
+        $this->view->membership_name = escape(t('Membership name: %0%', $oMembershipData->name));
+        $this->view->membership_price = escape(t(
             'Amount: %1%%0%',
             $this->getTotalAmount($oMembershipData),
             $this->config->values['module.setting']['currency_sign']
-        );
-        $this->view->membership_duration = nt('Membership duration: %n% day', 'Membership duration: %n% days', $oMembershipData->expirationDays);
-        $this->view->browser_info = t('User Web browser info: %0%', $this->browser->getUserAgent());
-        $this->view->ip = t('Buyer IP address: %0%', $this->design->ip(null, false));
+        ));
+        $this->view->membership_duration = escape(nt('Membership duration: %n% day', 'Membership duration: %n% days', $oMembershipData->expirationDays));
+        $this->view->browser_info = escape(t('Payment gateway: %0%', $this->getGatewayDisplayName($sGatewayName)));
+        $this->view->ip = escape(t('Buyer account IP address: %0%', $oProfile->ip));
 
-        $this->view->become_patron = t('It might be now the perfect time to <a href="%0%">become a Patron</a> and support the development of the software?', Kernel::PATREON_URL);
+        $this->view->become_patron = t(
+            'It might be now the perfect time to <a href="%0%">become a Patron</a> and support the development of the software?',
+            (new Str())->escapeAttribute(Kernel::PATREON_URL)
+        );
 
         $sMessageHtml = $this->view->parseMail(
             PH7_PATH_SYS . 'global/' . PH7_VIEWS . PH7_TPL_MAIL_NAME . '/tpl/mail/sys/mod/payment/ipn.tpl',
@@ -273,23 +378,10 @@ class MainController extends Controller
 
         $aInfo = [
             'to' => $sAdminEmail,
-            'subject' => t('New Payment Received from %0%', $sBuyer)
+            'subject' => t('New Payment Received from %0%', $sBuyerText)
         ];
 
         return (new Mail())->send($aInfo, $sMessageHtml);
-    }
-
-    private function paypalHandler()
-    {
-        $oPayPal = new PayPal($this->config->values['module.setting']['sandbox.enabled']);
-        if (!$this->httpRequest->postExists('custom') || !$oPayPal->valid()) {
-            return;
-        }
-
-        $oMembership = $this->getCheckoutMembership($this->httpRequest->post('custom'));
-        if ($oMembership !== null && $this->isValidPayPalPayment($oMembership)) {
-            $this->completeMembershipPayment($oMembership, PayPal::class);
-        }
     }
 
     private function stripeHandler()
@@ -326,10 +418,9 @@ class MainController extends Controller
                     $this->completeMembershipPayment($oMembership, Stripe::class);
                 }
             } catch (\Throwable $oException) {
-                // Card declines are handled as payment failures (without exposing exception details).
-                if (!$this->isStripeCardDeclineException($oException)) {
-                    $this->design->setMessage($this->str->escape($oException->getMessage(), true));
-                }
+                $sFailureType = $this->isStripeCardDeclineException($oException) ? 'declined' : 'failed';
+                error_log(sprintf('Stripe checkout %s: %s', $sFailureType, $oException->getMessage()));
+                $this->setPaymentGatewayFailureMessage('Stripe');
             }
         }
     }
@@ -347,30 +438,40 @@ class MainController extends Controller
                 return;
             }
 
-            Braintree::init($this->config);
+            try {
+                Braintree::init($this->config);
 
-            $oResult = Braintree::sale([
-                'amount' => $this->getTotalAmount($oMembership),
-                'paymentMethodNonce' => $sNonce,
-                'options' => ['submitForSettlement' => true]
-            ]);
+                $oResult = Braintree::sale([
+                    'amount' => $this->getTotalAmount($oMembership),
+                    'paymentMethodNonce' => $sNonce,
+                    'options' => ['submitForSettlement' => true]
+                ]);
 
-            if (
-                $oResult->success
-                && $oResult->transaction
-                && PaymentCheckout::isExpectedAmount(
-                    $oMembership->price,
-                    $this->config->values['module.setting']['vat_rate'],
-                    $oResult->transaction->amount
-                )
-                && strtoupper((string)$oResult->transaction->currencyIsoCode) === strtoupper(
-                    $this->config->values['module.setting']['currency_code']
-                )
-            ) {
-                $this->completeMembershipPayment($oMembership, Braintree::class);
-            } elseif ($oResult->transaction) {
-                $sErrMsg = t('Error processing transaction: %0%', $oResult->transaction->processorResponseText);
-                $this->design->setMessage($this->str->escape($sErrMsg, true));
+                if (
+                    $oResult->success
+                    && $oResult->transaction
+                    && PaymentCheckout::isExpectedAmount(
+                        $oMembership->price,
+                        $this->config->values['module.setting']['vat_rate'],
+                        $oResult->transaction->amount
+                    )
+                    && strtoupper((string)$oResult->transaction->currencyIsoCode) === strtoupper(
+                        $this->config->values['module.setting']['currency_code']
+                    )
+                ) {
+                    $this->completeMembershipPayment($oMembership, Braintree::class);
+                } else {
+                    if ($oResult->transaction) {
+                        error_log(sprintf(
+                            'Braintree checkout declined: %s',
+                            (string)$oResult->transaction->processorResponseText
+                        ));
+                    }
+                    $this->setPaymentGatewayFailureMessage('Braintree');
+                }
+            } catch (\Throwable $oException) {
+                error_log(sprintf('Braintree checkout failed: %s', $oException->getMessage()));
+                $this->setPaymentGatewayFailureMessage('Braintree');
             }
         }
     }
@@ -437,17 +538,6 @@ class MainController extends Controller
         return $oMembership;
     }
 
-    private function isValidPayPalPayment(\stdClass $oMembership): bool
-    {
-        return PaymentCheckout::isValidPayPalPayment(
-            $_POST,
-            $oMembership,
-            $this->config->values['module.setting']['paypal.email'],
-            $this->config->values['module.setting']['currency_code'],
-            $this->config->values['module.setting']['vat_rate']
-        );
-    }
-
     private function completeMembershipPayment(\stdClass $oMembership, string $sGatewayName): void
     {
         $iMembershipId = (int)$oMembership->groupId;
@@ -460,6 +550,7 @@ class MainController extends Controller
         }
 
         $this->bStatus = true;
+        $this->fCompletedMembershipAmount = (float)$oMembership->price;
         $this->updateUserGroupId($iMembershipId);
         $this->notifyPayment($sGatewayName, $iMembershipId);
     }
@@ -473,7 +564,7 @@ class MainController extends Controller
             );
         }
 
-        $this->sendNotifyMail($iMembershipId);
+        $this->sendNotifyMail($iMembershipId, $sGatewayName);
     }
 
     private function getTotalAmount(\stdClass $oMembership): string
@@ -493,9 +584,117 @@ class MainController extends Controller
 
     private function isPaymentProviderEnabled(string $sProvider): bool
     {
-        $sSettingName = self::GATEWAY_ENABLE_SETTINGS[$sProvider] ?? null;
+        return PaymentGatewayConfig::isReady($sProvider, $this->config->values['module.setting']);
+    }
 
-        return $sSettingName !== null && !empty($this->config->values['module.setting'][$sSettingName]);
+    private function getPaymentGateways(): array
+    {
+        return PaymentGatewayConfig::getAvailability($this->config->values['module.setting']);
+    }
+
+    private function createPayPalCheckoutReference(
+        \stdClass $oMembership,
+        string $sExpectedAmount
+    ): ?string {
+        try {
+            $iMembershipId = (int)$oMembership->groupId;
+            $sContextName = PaymentCheckout::getPayPalContextName($iMembershipId);
+            $mExistingReference = $this->session->get($sContextName, false);
+            if (is_string($mExistingReference) && PaymentCheckout::isPayPalReference($mExistingReference)) {
+                $oExistingCheckout = $this->oPayModel->getPayPalCheckout($mExistingReference);
+                if ($this->isReusablePayPalCheckout($oExistingCheckout, $oMembership, $sExpectedAmount)) {
+                    return $mExistingReference;
+                }
+            }
+            $this->session->remove($sContextName);
+
+            $sCheckoutReference = PaymentCheckout::createPayPalReference();
+            $bCreated = $this->oPayModel->createPayPalCheckout(
+                $sCheckoutReference,
+                (int)$this->iProfileId,
+                $iMembershipId,
+                (string)$oMembership->price,
+                $sExpectedAmount,
+                (string)$this->config->values['module.setting']['currency_code'],
+                (string)$this->config->values['module.setting']['paypal.email'],
+                (bool)$this->config->values['module.setting']['sandbox.enabled'],
+                $this->dateTime->get()->dateTime(UserCoreModel::DATETIME_FORMAT)
+            );
+
+            if (!$bCreated) {
+                return null;
+            }
+
+            $this->session->set($sContextName, $sCheckoutReference);
+
+            return $sCheckoutReference;
+        } catch (\Throwable) {
+            return null;
+        }
+    }
+
+    private function isReusablePayPalCheckout(
+        mixed $mCheckout,
+        \stdClass $oMembership,
+        string $sExpectedAmount
+    ): bool {
+        return $mCheckout instanceof \stdClass
+            && $mCheckout->status === 'pending'
+            && (int)$mCheckout->profile_id === $this->iProfileId
+            && (int)$mCheckout->membership_id === (int)$oMembership->groupId
+            && PaymentCheckout::isExpectedAmount($oMembership->price, 0, $mCheckout->membership_amount)
+            && PaymentCheckout::isExpectedAmount($sExpectedAmount, 0, $mCheckout->expected_amount)
+            && strtoupper((string)$mCheckout->expected_currency) === strtoupper(
+                (string)$this->config->values['module.setting']['currency_code']
+            )
+            && strcasecmp(
+                trim((string)$mCheckout->merchant_account),
+                trim((string)$this->config->values['module.setting']['paypal.email'])
+            ) === 0
+            && (bool)(int)$mCheckout->sandbox ===
+                (bool)$this->config->values['module.setting']['sandbox.enabled'];
+    }
+
+    private function runPayPalCompletionHooks(\stdClass $oCheckout): void
+    {
+        $this->iProfileId = (int)$oCheckout->profile_id;
+        $this->fCompletedMembershipAmount = (float)$oCheckout->membership_amount;
+
+        try {
+            $this->clearCache();
+        } catch (\Throwable) {
+            // A cache miss is safe; the database remains the source of truth.
+        }
+
+        try {
+            $this->notifyPayment(PayPal::class, (int)$oCheckout->membership_id);
+        } catch (\Throwable) {
+            // Membership fulfillment is already committed; notification delivery must not trigger a duplicate payment.
+        }
+
+        try {
+            $this->updateAffiliateCommission($this->fCompletedMembershipAmount);
+        } catch (\Throwable) {
+            // Affiliate bookkeeping must not make PayPal retry an already fulfilled transaction.
+        }
+    }
+
+    private function sendPaymentNotificationResponse(int $iStatusCode): never
+    {
+        http_response_code($iStatusCode);
+        if (!headers_sent()) {
+            header('Content-Type: text/plain; charset=utf-8');
+        }
+        exit;
+    }
+
+    private function getGatewayDisplayName(string $sGatewayName): string
+    {
+        $iNamespacePosition = strrpos($sGatewayName, '\\');
+
+        return $iNamespacePosition === false
+            ? $sGatewayName
+            : substr($sGatewayName, $iNamespacePosition + 1);
     }
 
     private function isStripeCardDeclineException(\Throwable $oException): bool
@@ -504,6 +703,16 @@ class MainController extends Controller
 
         return is_a($oException, \Stripe\Exception\CardException::class)
             || (class_exists($sLegacyCardExceptionClass, false) && is_a($oException, $sLegacyCardExceptionClass));
+    }
+
+    private function setPaymentGatewayFailureMessage(string $sGatewayName): void
+    {
+        $this->design->setMessage(
+            t(
+                '%0% checkout could not be completed. Check your payment receipt before retrying, or contact the site owner.',
+                $sGatewayName
+            )
+        );
     }
 
     /**
@@ -535,11 +744,16 @@ class MainController extends Controller
      */
     private function clearCache()
     {
-        (new Cache())->start(
-            UserCoreModel::CACHE_GROUP,
-            'membershipDetails' . $this->iProfileId,
-            null
-        )->clear();
+        $oCache = new Cache();
+        foreach (
+            [
+                'membershipDetails' . $this->iProfileId,
+                'readProfile' . $this->iProfileId . DbTableName::MEMBER,
+                'groupId' . $this->iProfileId . DbTableName::MEMBER
+            ] as $sCacheId
+        ) {
+            $oCache->start(UserCoreModel::CACHE_GROUP, $sCacheId, null)->clear();
+        }
     }
 
     /**
@@ -575,11 +789,10 @@ class MainController extends Controller
      *
      * @return float|int
      */
-    private function getAffiliateCommissionAmount()
+    private function getAffiliateCommissionAmount(float $fMembershipAmount): float
     {
-        $iAmount = $this->oUserModel->readProfile($this->iProfileId)->price;
-
-        return $iAmount * $this->config->values['module.setting']['rate.user_membership_payment'] / 100;
+        return $fMembershipAmount *
+            (float)$this->config->values['module.setting']['rate.user_membership_payment'] / 100;
     }
 
     /**

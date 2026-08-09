@@ -1,12 +1,14 @@
 <?php
+
 /**
  * @title            Validate Ajax Class
+ *
  * @desc             Checks the data entered by a form via Ajax and indicates if there are errors (Asynchronous data).
  *
  * @author           Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright        (c) 2012-2020, Pierre-Henry Soria. All Rights Reserved.
  * @license          MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
- * @package          PH7 / App / System / Core / Asset / Ajax
+ *
  * @version          1.2
  */
 
@@ -14,7 +16,6 @@ namespace PH7;
 
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Date\CDateTime;
 use PH7\Framework\Http\Http;
 use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Mvc\Request\Http as HttpRequest;
@@ -39,13 +40,13 @@ class ValidateCoreAjax
     private $sMsg = ' ';
 
     /** @var int By default the status is in "failure" (0 = fail, 1 = OK) */
-    private $iStatus = 0; //
+    private $iStatus = 0;
 
     public function __construct()
     {
-        $this->oStr = new Str;
-        $this->oValidate = new Validate;
-        $this->oExistsModel = new ExistCoreModel;
+        $this->oStr = new Str();
+        $this->oValidate = new Validate();
+        $this->oExistsModel = new ExistCoreModel();
     }
 
     /**
@@ -80,28 +81,23 @@ class ValidateCoreAjax
                 case 'username':
                     $this->username($sInputVal, $sParam1);
                     break;
-
-                // Check Password.
+                    // Check Password.
                 case 'password':
                     $this->password($sInputVal);
                     break;
-
-                // Check of the date of birth
+                    // Check of the date of birth
                 case 'birth_date':
                     $this->birthDate($sInputVal);
                     break;
-
-                // Check the captcha.
+                    // Check the captcha.
                 case 'ccaptcha':
                     $this->captcha($sInputVal);
                     break;
-
-                // Check acceptance of the terms of use.
+                    // Check acceptance of the terms of use.
                 case 'terms-0':
                     $this->terms($sInputVal);
                     break;
-
-                // If we receive another invalid value, we display a message with a HTTP header.
+                    // If we receive another invalid value, we display a message with a HTTP header.
                 default:
                     Http::setHeadersByCode(StatusCode::BAD_REQUEST);
                     exit('Bad Request Error!');
@@ -110,7 +106,6 @@ class ValidateCoreAjax
 
         echo json_encode(['status' => $this->iStatus, 'msg' => $this->sMsg, 'fieldId' => $sFieldId]);
     }
-
 
     /**
      * Validate the username (must not be empty or already known).
@@ -192,12 +187,11 @@ class ValidateCoreAjax
         $iMin = DbConfig::getSetting('minAgeRegistration');
         $iMax = DbConfig::getSetting('maxAgeRegistration');
 
-        // Format the date to the needed format
-        $sValue = (new CDateTime)->get($sValue)->date('m/d/Y');
+        $sBirthDate = Validate::normalizeBirthDate($sValue);
 
-        if (!$this->oValidate->date($sValue)) {
-            $this->sMsg = t('Your must enter a valid date (Month-Day-Year).');
-        } elseif (!$this->oValidate->birthDate($sValue, $iMin, $iMax)) {
+        if ($sBirthDate === null) {
+            $this->sMsg = t('Enter a valid birth date using YYYY-MM-DD or MM/DD/YYYY.');
+        } elseif (!$this->oValidate->birthDate($sBirthDate, $iMin, $iMax)) {
             $this->sMsg = t('You must be %0% to %1% years to register on the site.', $iMin, $iMax);
         } else {
             $this->iStatus = 1;
@@ -209,8 +203,8 @@ class ValidateCoreAjax
      * Check whether the type of a variable is string.
      *
      * @param string $sValue
-     * @param int $iMin
-     * @param int $iMax
+     * @param int    $iMin
+     * @param int    $iMax
      *
      * @return void
      */
@@ -271,14 +265,13 @@ class ValidateCoreAjax
      * Validate Captcha.
      *
      * @return string $sValue
-     *
      * @return void
      */
     protected function captcha($sValue)
     {
         $bIsCaseSensitive = (bool)DbConfig::getSetting('captchaCaseSensitive');
 
-        if ((new Captcha)->check($sValue, $bIsCaseSensitive)) {
+        if ((new Captcha())->check($sValue, $bIsCaseSensitive)) {
             $this->iStatus = 1;
             $this->sMsg = t('OK!');
         } else {
@@ -290,7 +283,6 @@ class ValidateCoreAjax
      * Validate international phone numbers in EPP format.
      *
      * @return string $sValue
-     *
      * @return void
      */
     protected function phone($sValue)
@@ -320,7 +312,7 @@ class ValidateCoreAjax
     }
 
     /**
-     * @param string $sTable The table name.
+     * @param string $sTable the table name
      *
      * @return bool
      */
@@ -330,9 +322,9 @@ class ValidateCoreAjax
     }
 }
 
-$oHttpRequest = new HttpRequest;
+$oHttpRequest = new HttpRequest();
 if ($oHttpRequest->postExists('fieldId')) {
-    (new ValidateCoreAjax)->form(
+    (new ValidateCoreAjax())->form(
         $oHttpRequest->post('inputVal'),
         $oHttpRequest->post('fieldId'),
         $oHttpRequest->post('param1'),

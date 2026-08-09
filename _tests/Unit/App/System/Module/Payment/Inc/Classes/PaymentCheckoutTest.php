@@ -40,6 +40,20 @@ final class PaymentCheckoutTest extends TestCase
     {
         $this->assertSame('payment_checkout_6', PaymentCheckout::getTokenName(self::MEMBERSHIP_ID));
         $this->assertSame('payment_checkout_context_6', PaymentCheckout::getContextName(self::MEMBERSHIP_ID));
+        $this->assertSame(
+            'paypal_checkout_reference_6',
+            PaymentCheckout::getPayPalContextName(self::MEMBERSHIP_ID)
+        );
+    }
+
+    public function testPayPalReferencesAreOpaqueAndUnique(): void
+    {
+        $sFirstReference = PaymentCheckout::createPayPalReference();
+        $sSecondReference = PaymentCheckout::createPayPalReference();
+
+        $this->assertMatchesRegularExpression('/^[a-f0-9]{40}$/', $sFirstReference);
+        $this->assertTrue(PaymentCheckout::isPayPalReference($sFirstReference));
+        $this->assertNotSame($sFirstReference, $sSecondReference);
     }
 
     #[DataProvider('invalidReferenceProvider')]
@@ -105,21 +119,6 @@ final class PaymentCheckoutTest extends TestCase
         $this->assertFalse(PaymentCheckout::isPurchasableMembership([]));
     }
 
-    public function testValidPayPalPaymentMatchesTrustedCheckoutDetails(): void
-    {
-        $oMembership = $this->createMembership();
-
-        $this->assertTrue(
-            PaymentCheckout::isValidPayPalPayment(
-                $this->createPayPalPayment(),
-                $oMembership,
-                'merchant@example.com',
-                'USD',
-                '20'
-            )
-        );
-    }
-
     #[DataProvider('invalidPayPalPaymentProvider')]
     public function testInvalidPayPalPaymentIsRejected(string $sField, string $sValue): void
     {
@@ -127,12 +126,13 @@ final class PaymentCheckoutTest extends TestCase
         $aPayment[$sField] = $sValue;
 
         $this->assertFalse(
-            PaymentCheckout::isValidPayPalPayment(
+            PaymentCheckout::isValidPayPalNotification(
                 $aPayment,
-                $this->createMembership(),
+                hash('sha256', self::TOKEN),
+                self::MEMBERSHIP_ID,
                 'merchant@example.com',
                 'USD',
-                '20'
+                '23.99'
             )
         );
     }
@@ -156,29 +156,51 @@ final class PaymentCheckoutTest extends TestCase
         unset($aPayment['txn_id']);
 
         $this->assertFalse(
-            PaymentCheckout::isValidPayPalPayment(
+            PaymentCheckout::isValidPayPalNotification(
                 $aPayment,
-                $this->createMembership(),
+                hash('sha256', self::TOKEN),
+                self::MEMBERSHIP_ID,
                 'merchant@example.com',
                 'USD',
-                '20'
+                '23.99'
             )
         );
     }
 
-    private function createMembership(): stdClass
+    public function testValidPayPalNotificationMatchesPersistedCheckout(): void
     {
-        $oMembership = new stdClass;
-        $oMembership->groupId = self::MEMBERSHIP_ID;
-        $oMembership->enable = '1';
-        $oMembership->price = '19.99';
+        $aPayment = $this->createPayPalPayment();
 
-        return $oMembership;
+        $this->assertTrue(
+            PaymentCheckout::isValidPayPalNotification(
+                $aPayment,
+                hash('sha256', self::TOKEN),
+                self::MEMBERSHIP_ID,
+                'merchant@example.com',
+                'USD',
+                '23.99'
+            )
+        );
+    }
+
+    public function testPayPalNotificationForAnotherCheckoutIsRejected(): void
+    {
+        $this->assertFalse(
+            PaymentCheckout::isValidPayPalNotification(
+                $this->createPayPalPayment(),
+                hash('sha256', str_repeat('a', 40)),
+                self::MEMBERSHIP_ID,
+                'merchant@example.com',
+                'USD',
+                '23.99'
+            )
+        );
     }
 
     private function createPayPalPayment(): array
     {
         return [
+            'custom' => self::TOKEN,
             'payment_status' => 'Completed',
             'txn_id' => 'PAYPAL-TRANSACTION-1',
             'receiver_email' => 'merchant@example.com',

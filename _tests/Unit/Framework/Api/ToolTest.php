@@ -72,13 +72,31 @@ class ToolTest extends TestCase
         $this->assertFalse(Tool::checkAccess($this->oConfig, $this->oHttpRequest));
     }
 
-    public function testDevApiKeyApiAccess(): void
+    public function testArrayApiKeyIsDeniedWithoutTypeError(): void
+    {
+        $_SERVER['REQUEST_METHOD'] = 'GET';
+        $_GET['private_api_key'] = ['invalid'];
+        $_GET['url'] = 'ph7cms.com';
+
+        $this->assertFalse(Tool::checkAccess($this->oConfig, $this->oHttpRequest));
+    }
+
+    public function testArrayUrlIsDeniedWithoutTypeError(): void
+    {
+        $_SERVER['REQUEST_METHOD'] = 'GET';
+        $_GET['private_api_key'] = 'c56cd417b958b9ce37bdd80569ef94836ccdc5c7';
+        $_GET['url'] = ['ph7cms.com'];
+
+        $this->assertFalse(Tool::checkAccess($this->oConfig, $this->oHttpRequest));
+    }
+
+    public function testFormerDevelopmentApiKeyIsAlwaysRejected(): void
     {
         $_SERVER['SERVER_NAME'] = '127.0.0.1';
         $_SERVER['REQUEST_METHOD'] = 'POST';
         $_POST['private_api_key'] = 'dev772277';
         $_POST['url'] = 'ph7cms.com';
 
-        $this->assertTrue(Tool::checkAccess($this->oConfig, $this->oHttpRequest));
+        $this->assertFalse(Tool::checkAccess($this->oConfig, $this->oHttpRequest));
     }
 }

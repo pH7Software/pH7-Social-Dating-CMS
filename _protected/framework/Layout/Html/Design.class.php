@@ -1,7 +1,7 @@
 <?php
 /**
  * @author           Pierre-Henry Soria <hello@ph7builder.com>
- * @copyright        (c) 2012-2023, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2012-2026, Pierre-Henry Soria and pH7Builder contributors.
  * @license          MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package          PH7 / Framework / Layout / Html
  */
@@ -369,21 +369,13 @@ class Design
                 $bSoftwareName = true;
             }
 
-            echo ($bSoftwareName ? '<span class="italic">' . t('Big thanks to') : ''), ' <strong>', ($bLink ? '<a class="underline" href="' . Kernel::SOFTWARE_WEBSITE . '" title="' . Kernel::SOFTWARE_DESCRIPTION . '">' : ''), ($bSoftwareName ? Kernel::SOFTWARE_NAME : ''), ($bVersion ? ' ' . Kernel::SOFTWARE_VERSION : ''), ($bLink ? '</a>' : ''), ($bSoftwareName ? '</strong> <span role="img" aria-label="love">❤️</span></span>' : '');
+            echo ($bSoftwareName ? '<span class="italic">' . t('Powered by') : ''), ' <strong>', ($bLink ? '<a class="underline" href="' . Kernel::SOFTWARE_WEBSITE . '" title="' . Kernel::SOFTWARE_DESCRIPTION . '">' : ''), ($bSoftwareName ? Kernel::SOFTWARE_NAME : ''), ($bVersion ? ' ' . Kernel::SOFTWARE_VERSION : ''), ($bLink ? '</a>' : ''), ($bSoftwareName ? '</strong></span>' : '');
         }
 
         if ($bComment) {
-            echo '
-                <!-- ', sprintf(Kernel::SOFTWARE_COPYRIGHT, date('Y')), ' -->
-                <!-- Powered by ', Kernel::SOFTWARE_NAME, ' ', Kernel::SOFTWARE_VERSION, ', Build ', Kernel::SOFTWARE_BUILD, ' -->
-                <!-- This notice cannot be removed in any case.
-                This open source software is distributed for free and you must respect the thousands of days, months and several years it took to develop it.
-                Think to the developer who worked hard for years coding what you use.
-                All rights reserved to ', Kernel::SOFTWARE_NAME, ', ', Kernel::SOFTWARE_COMPANY, '
-                You can never claim that you own the code, developed or helped the software if it is not the case -->';
+            echo '<!-- Powered by ', Kernel::SOFTWARE_NAME, ' ', Kernel::SOFTWARE_VERSION,
+                ', created by ', Kernel::SOFTWARE_AUTHOR, '. MIT License. -->';
         }
-
-        echo '<!-- "Powered by ', Kernel::SOFTWARE_NAME, ', ', Kernel::SOFTWARE_VERSION_NAME, ', ', Kernel::SOFTWARE_VERSION, ', Build ', Kernel::SOFTWARE_BUILD, ' -->';
     }
 
     /**
@@ -393,7 +385,9 @@ class Design
      */
     final public function smallLink()
     {
-        echo '<strong>', t('THANKS to'), ' <a href="', Kernel::SOFTWARE_WEBSITE, '" title="', Kernel::SOFTWARE_DESCRIPTION, '">', Kernel::SOFTWARE_NAME, '</a> ', Kernel::SOFTWARE_VERSION, '!</strong> <span role="img" aria-label="love">❤️</span>';
+        if ((bool)DbConfig::getSetting('displayPoweredByLink')) {
+            echo '<strong>', t('Powered by'), ' <a href="', Kernel::SOFTWARE_WEBSITE, '" title="', Kernel::SOFTWARE_DESCRIPTION, '">', Kernel::SOFTWARE_NAME, '</a></strong>';
+        }
     }
 
     /**
@@ -549,15 +543,24 @@ class Design
      */
     public function geoIp($bPrint = true)
     {
-        $sCountry = Geo::getCountry();
+        $sCountry = trim((string)Geo::getCountry());
         $sCountryCode = Country::fixCode(Geo::getCountryCode());
-        $sCountryLang = t($sCountryCode); // Country name translated into the user language
-        $sCity = Geo::getCity();
+        $sCountryLang = $sCountryCode !== '' ? trim((string)t($sCountryCode)) : '';
+        $sCity = trim((string)Geo::getCity());
 
-        if (SysMod::isEnabled('map')) {
-            $sHtml = '<a href="' . Uri::get('map', 'country', 'index', $sCountry . PH7_SH . $sCity) . '" title="' . t('Meet New People in %0%, %1% with %site_name%!', $sCountryLang, $sCity) . '">' . $sCity . '</a>';
+        if ($sCity === '') {
+            $sLocation = $sCountryLang !== '' && $sCountryLang !== '-- Select --'
+                ? $sCountryLang
+                : t('your area');
+            $sHtml = '<span>' . escape($sLocation) . '</span>';
+        } elseif (SysMod::isEnabled('map')) {
+            $sUrl = Uri::get('map', 'country', 'index', $sCountry . PH7_SH . $sCity);
+            $sTitle = t('Meet New People in %0%, %1% with %site_name%!', $sCountryLang, $sCity);
+            $sHtml = '<a href="' . $this->oStr->escapeAttribute($sUrl) . '" title="' .
+                $this->oStr->escapeAttribute($sTitle) . '">' . escape($sCity) . '</a>';
         } else {
-            $sHtml = '<abbr title="' . t('Meet New People in %0%, %1% thanks to %site_name%!', $sCountryLang, $sCity) . '">' . $sCity . '</abbr>';
+            $sTitle = t('Meet New People in %0%, %1% thanks to %site_name%!', $sCountryLang, $sCity);
+            $sHtml = '<abbr title="' . $this->oStr->escapeAttribute($sTitle) . '">' . escape($sCity) . '</abbr>';
         }
 
         if (!$bPrint) {
@@ -909,7 +912,6 @@ HTML;
     {
         $this->bIsDiv = true;
 
-        // DO NOT REMOVE THE COPYRIGHT CODE BELOW! Thank you!
         echo '<html><head><meta charset="utf-8" />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />

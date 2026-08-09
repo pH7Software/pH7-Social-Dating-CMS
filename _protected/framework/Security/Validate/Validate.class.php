@@ -282,7 +282,7 @@ class Validate
     /**
      * Validate Birthday.
      *
-     * @param string $sValue The date format must be formatted like this: mm/dd/yyyy
+     * @param string $sValue The date must use YYYY-MM-DD or MM/DD/YYYY
      * @param int    $iMin   Default 18
      * @param int    $iMax   Default 99
      *
@@ -290,18 +290,42 @@ class Validate
      */
     public function birthDate($sValue, $iMin = self::DEF_MIN_AGE, $iMax = self::DEF_MAX_AGE)
     {
-        if (empty($sValue) || !preg_match(static::REGEX_DATE_FORMAT, $sValue)) {
+        $sBirthDate = static::normalizeBirthDate($sValue);
+        if ($sBirthDate === null) {
             return false;
         }
 
-        $aBirthDate = explode('/', $sValue); // Format is "mm/dd/yyyy"
-        if (!checkdate($aBirthDate[0], $aBirthDate[1], $aBirthDate[2])) {
-            return false;
-        }
+        [$iYear, $iMonth, $iDay] = array_map('intval', explode('-', $sBirthDate));
 
-        $iUserAge = (new YearMeasure($aBirthDate[2], $aBirthDate[0], $aBirthDate[1]))->get(); // Get the current user's age
+        $iUserAge = (new YearMeasure($iYear, $iMonth, $iDay))->get(); // Get the current user's age
 
         return $iUserAge >= $iMin && $iUserAge <= $iMax;
+    }
+
+    public static function normalizeBirthDate(mixed $mBirthDate): ?string
+    {
+        if (!is_string($mBirthDate)) {
+            return null;
+        }
+
+        $sBirthDate = trim($mBirthDate);
+        if (preg_match('/\A(\d{4})-(\d{2})-(\d{2})\z/', $sBirthDate, $aMatches)) {
+            $iYear = (int)$aMatches[1];
+            $iMonth = (int)$aMatches[2];
+            $iDay = (int)$aMatches[3];
+        } elseif (preg_match('/\A(\d{2})\/(\d{2})\/(\d{4})\z/', $sBirthDate, $aMatches)) {
+            $iMonth = (int)$aMatches[1];
+            $iDay = (int)$aMatches[2];
+            $iYear = (int)$aMatches[3];
+        } else {
+            return null;
+        }
+
+        if (!checkdate($iMonth, $iDay, $iYear)) {
+            return null;
+        }
+
+        return sprintf('%04d-%02d-%02d', $iYear, $iMonth, $iDay);
     }
 
     /**
@@ -352,7 +376,6 @@ class Validate
             curl_setopt_array($rCurl, [CURLOPT_RETURNTRANSFER => true, CURLOPT_URL => $sUrl]);
             curl_exec($rCurl);
             $iResponse = (int)curl_getinfo($rCurl, CURLINFO_HTTP_CODE);
-            curl_close($rCurl);
 
             return in_array($iResponse, self::VALID_HTTP_WEBSITE_RESPONSES, true);
         }

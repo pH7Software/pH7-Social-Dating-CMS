@@ -273,7 +273,7 @@ class DynamicFieldCoreForm
         if (strstr($this->sColumn, 'textarea')) {
             $sType = 'Textarea';
         } elseif (strstr($this->sColumn, 'editor')) {
-            $sType = 'CKEditor';
+            $sType = 'Textarea';
         } elseif (strstr($this->sColumn, 'email')) {
             $sType = 'Email';
         } elseif (strstr($this->sColumn, 'password')) {

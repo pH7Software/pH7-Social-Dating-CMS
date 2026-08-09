@@ -1,9 +1,9 @@
 <?php
+
 /**
  * @author         Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright      (c) 2013-2019, Pierre-Henry Soria. All Rights Reserved.
  * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
- * @package        PH7 / App / System / Module / Field / Form
  */
 
 namespace PH7;
@@ -26,8 +26,10 @@ class AddFieldForm
     public static function display()
     {
         if (isset($_POST['submit_add_field'])) {
-            if (\PFBC\Form::isValid($_POST['submit_add_field'])) {
-                new AddFieldFormProcess;
+            if (!FieldModel::isValidColumnName($_POST['name'] ?? null)) {
+                \PFBC\Form::setError('form_add_field', t('Please enter a valid field name.'));
+            } elseif (\PFBC\Form::isValid($_POST['submit_add_field'])) {
+                new AddFieldFormProcess();
             }
 
             Header::redirect();

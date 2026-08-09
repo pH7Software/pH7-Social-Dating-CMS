@@ -1,31 +1,28 @@
-1. Requirements: https://ph7builder.com/doc/en/requirements
-2. Installation: https://ph7builder.com/doc/en/install
-3. Once you finished the installation, your admin panel URL will be: http://YOUR-SITE.com/admin123/
+pH7Builder installation
+=======================
 
+Requirements: PHP 8.2+ and MySQL 8.0+ with the PHP extensions listed in
+composer.json. Older MySQL versions and MariaDB are not verified or supported
+for this release. The versioned release ZIP includes production dependencies;
+a source checkout requires Composer 2.
 
---- Softaculous/Fantastico Installation ---
-If your web host offers Softaculous/Fantastico with pH7Builder enabled, you can install pH7Builder in one-click.
-Generally, through cPanel -> Softaculous icon -> search for "pH7Builder".
+Production Quick Start:
+https://github.com/pH7Software/pH7-Social-Dating-CMS/blob/18.x/docs/QUICK_START.md
 
-For "Fantastico", search it under "pH7SocialDatingCMS" name in the "Portals/CMS" category.
+Launch Checklist:
+https://github.com/pH7Software/pH7-Social-Dating-CMS/blob/18.x/docs/LAUNCH_CHECKLIST.md
 
+Release guides:
+https://github.com/pH7Software/pH7-Social-Dating-CMS/tree/18.x/docs
 
---- Good Hosting ---
-https://ph7builder.com/hosting/
+With PHP, MySQL, and the web server prepared, dependency installation and the
+guided browser installer normally take about 20–30 minutes. DNS, HTTPS
+certificate issuance, and mail-provider approval are outside that estimate.
 
+After installation, the default admin path is /admin123/. Remove the _install
+directory before using the site. Keep production debug display off, configure
+the server/hosting mail transport and cron jobs, then complete a real test
+signup before launch.
 
---- Useful Doc ---
-Documentation: https://ph7builder.com/doc/
-Github Wiki: https://github.com/pH7Software/pH7-Social-Dating-CMS/wiki/
-pH7Builder Blog: https://ph7builder.com/blog (if you dig well, you will find several tutorials and helpful posts)
-
-
---- Troubleshooting ---
-If you got an issue and ca't find the answer anywhere on the web,
-a good idea is to dig the Open/Closed Issues
-or open an issue if you couldn't find the answer to your problem.
 Issues: https://github.com/pH7Software/pH7-Social-Dating-CMS/issues
-
-
----
-Note: I really hope you enjoy using pH7Builder as much as I enjoyed creating it! 😊
+Discussions: https://github.com/pH7Software/pH7-Social-Dating-CMS/discussions

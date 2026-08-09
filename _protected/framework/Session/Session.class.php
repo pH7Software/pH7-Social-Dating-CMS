@@ -23,7 +23,6 @@ class Session
     private const DEFAULT_COOKIE_NAME = 'PHPSESSID';
     private const DEFAULT_EXPIRATION = 0;
     private const DEFAULT_PATH = PH7_SH;
-    private const DEFAULT_DOMAIN = '';
 
     /**
      * @param bool|null $bDisableSessionCache disable PHP's session cache
@@ -154,26 +153,24 @@ class Session
     private function initializePHPSession(): void
     {
         $aConfig = $this->getConfig();
+        ini_set('session.use_strict_mode', '1');
         session_name((string)($aConfig['cookie_name'] ?? self::DEFAULT_COOKIE_NAME));
 
-        /*
-         * In localhost mode, security session_set_cookie_params causing problems in the sessions, so we disable this if we are in localhost mode.
-         * Otherwise, if we are in production mode, we activate it.
-         */
-        if (!Server::isLocalHost()) {
-            $iTime = (int)($aConfig['expiration'] ?? self::DEFAULT_EXPIRATION);
-            session_set_cookie_params([
-                'lifetime' => $iTime,
-                'path' => (string)($aConfig['path'] ?? self::DEFAULT_PATH),
-                'domain' => (string)($aConfig['domain'] ?? self::DEFAULT_DOMAIN),
-                'secure' => Server::isHttps(),
-                'httponly' => true,
-                // Lax (not Strict) so links from emails/social networks keep users logged in.
-                'samesite' => 'Lax'
-            ]);
-        }
+        $iTime = (int)($aConfig['expiration'] ?? self::DEFAULT_EXPIRATION);
+        session_set_cookie_params([
+            'lifetime' => $iTime,
+            'path' => (string)($aConfig['path'] ?? self::DEFAULT_PATH),
+            'domain' => Server::getCookieDomain(),
+            'secure' => Server::isHttps(),
+            'httponly' => true,
+            // Lax (not Strict) so links from emails/social networks keep users logged in.
+            'samesite' => 'Lax'
+        ]);
 
         @session_start();
+        if (!$this->isSessionActivated()) {
+            throw new \RuntimeException('The application could not start a PHP session. Check session.save_path permissions.');
+        }
     }
 
     private function isSessionActivated(): bool

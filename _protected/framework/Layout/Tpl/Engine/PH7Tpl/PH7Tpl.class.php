@@ -2,7 +2,7 @@
 /**
  * @author           Pierre-Henry Soria <hello@ph7builder.com>
  * @package          PH7 / Framework / Layout / Tpl / Engine / PH7Tpl
- * @copyright        (c) 2011-2026, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2011-2026, Pierre-Henry Soria and pH7Builder contributors.
  * @license          MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  *
  * @history          Supports now PHP 5 with beautiful object code (POO), (removed all the ugly object code from PHP 4.x).
@@ -34,7 +34,7 @@ class PH7Tpl extends Kernel implements Templatable, GenerableFile
     const NAME = 'PH7Tpl';
     const AUTHOR = 'Pierre-Henry Soria';
     const VERSION = '1.6.0';
-    const ERR_MSG = 'It seems you have removed the copyright notice(s) in the software. If you really want to remove them, please email: %s';
+    const ERR_MSG = 'Template compilation failed because the required Design object is unavailable.';
     const DATETIME_FORMAT = 'Y-m-d H:i:s';
 
     /**
@@ -684,22 +684,6 @@ Template Engine: ' . self::NAME . ' version ' . self::VERSION . ' by ' . self::A
             $this->setErrMsg();
         }
 
-        /**
-         * Skip this step if it's not layout.tpl file or if it's not the base template
-         * (because there isn't "link()" in layout.tpl of other templates as it includes the "base" one).
-         */
-        if ($this->isMainCompilePage() && !$this->notBaseTheme()) {
-            // It is forbidden to violate the copyright!
-            // Think to me, who has spent years to develop a professional, high-quality software and done my best to help other developers!
-            if (!$this->isMarkCopyright()) {
-                $this->setErrMsg();
-            }
-        }
-
-        if ($this->isXmlSitemapCompilePage() && !$this->isSmallMarkCopyright()) {
-            $this->setErrMsg();
-        }
-
         if ($this->bPhpCompressor) {
             $this->sCode = (new Compress)->parsePhp($this->sCode);
         }
@@ -761,16 +745,6 @@ Template Engine: ' . self::NAME . ' version ' . self::VERSION . ' by ' . self::A
     }
 
     /**
-     * Checks if the compile file in the $this->sCompileDirFile attribute is the XML (with XSL layout) Sitemap page (mainlayout.xsl.cpl.php).
-     *
-     * @return bool
-     */
-    private function isXmlSitemapCompilePage()
-    {
-        return preg_match('#' . static::XML_SITEMAP_COMPILE_PAGE . '#', $this->sCompileDirFile);
-    }
-
-    /**
      * Checks if the directory passed by the argument of the method is the main directory.
      */
     private function isMainDir(?string $sDirPath): bool
@@ -789,39 +763,6 @@ Template Engine: ' . self::NAME . ' version ' . self::VERSION . ' by ' . self::A
     private function checkDesignInstance()
     {
         return !empty($this->_aVars['design']) && $this->_aVars['design'] instanceof Design;
-    }
-
-    /**
-     * Checks if the marks licensing, copyright has not been removed.
-     *
-     * @return bool
-     */
-    private function isMarkCopyright()
-    {
-        // "link()" and "softwareComment()" can never be removed
-        return $this->isKeywordFoundInCode('design->link()') &&
-            $this->isKeywordFoundInCode('design->softwareComment()');
-    }
-
-    /**
-     * Checks if the small links copyright has not been removed.
-     *
-     * @return bool
-     */
-    private function isSmallMarkCopyright()
-    {
-        return $this->isKeywordFoundInCode('design->smallLink()');
-    }
-
-    /**
-     * Check if it's not the base theme.
-     *
-     * @return bool Returns TRUE if it's not the base theme, FALSE otherwise.
-     */
-    private function notBaseTheme()
-    {
-        return strpos($this->sTemplateDir, PH7_PATH_TPL . PH7_DEFAULT_THEME . PH7_DS) === false &&
-            $this->isKeywordFoundInCode('$this->display(\'' . $this->getMainPage() . '\', PH7_PATH_TPL . PH7_DEFAULT_THEME . PH7_DS)');
     }
 
     /**
@@ -869,17 +810,12 @@ Template Engine: ' . self::NAME . ' version ' . self::VERSION . ' by ' . self::A
         return $this;
     }
 
-    private function isKeywordFoundInCode(string $sKeyword): bool
-    {
-        return strpos($this->sCode, $sKeyword) !== false;
-    }
-
     /**
      * Set the error message.
      */
     private function setErrMsg(): void
     {
-        $this->sCode = sprintf(static::ERR_MSG, self::SOFTWARE_EMAIL);
+        $this->sCode = static::ERR_MSG;
     }
 
     public function __destruct()

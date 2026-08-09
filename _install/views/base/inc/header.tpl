@@ -9,13 +9,12 @@
         <title>{$LANG.welcome|upper} «{$software_name|upper}» {$software_version}</title>
         <link rel="icon" href="{$smarty.const.PH7_URL_ROOT}favicon.ico" />
         <meta name="robots" content="noindex, nofollow" />
-        <!---- Copyright pH7 Dating/Social CMS; All Rights Reserved ---->
+        <!-- pH7Builder installer metadata -->
         <meta name="author" content="{$software_author}" />
         <meta name="copyright" content="{$software_copyright}" />
         <meta name="creator" content="pH7Builder (Pierre-Henry Soria)" />
         <meta name="designer" content="pH7Builder (Pierre-Henry Soria)" />
         <meta name="generator" content="{$software_name} {$software_version}" />
-        <!---- End Copyright pH7 Dating/Social CMS; All Rights Reserved ---->
         <!-- End Title and Meta -->
         <!-------- Sheet Css -------->
         <!-- Bootstrap -->
@@ -58,4 +57,8 @@
                     >{$progressbar_percentage}%
                     </div>
                 </div>
+            {/if}
+
+            {if !empty($csrf_error)}
+                <div class="error"><p>{$csrf_error|escape}</p></div>
             {/if}

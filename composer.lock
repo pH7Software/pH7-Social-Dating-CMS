@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a11072cb26030b47c597cd2b035cce8a",
+    "content-hash": "085bf345ee1720758cc864e2280d6f35",
     "packages": [
         {
             "name": "arcturial/clickatell",
@@ -7204,12 +7204,17 @@
         "ext-curl": "*",
         "ext-dom": "*",
         "ext-exif": "*",
+        "ext-fileinfo": "*",
         "ext-gd": "*",
         "ext-hash": "*",
+        "ext-iconv": "*",
         "ext-json": "*",
         "ext-mbstring": "*",
+        "ext-openssl": "*",
         "ext-pdo_mysql": "*",
+        "ext-simplexml": "*",
         "ext-xml": "*",
+        "ext-xmlwriter": "*",
         "ext-zip": "*",
         "ext-zlib": "*"
     },

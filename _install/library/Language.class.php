@@ -97,21 +97,38 @@ class Language
         setcookie(
             Controller::SOFTWARE_PREFIX_COOKIE_NAME . '_install_lang',
             $sCookieValue,
-            time() + 60 * 60 * 24 * 365,
-            '',
-            '',
-            false,
-            true
+            [
+                'expires' => time() + 60 * 60 * 24 * 365,
+                'path' => parse_url(PH7_URL_INSTALL, PHP_URL_PATH) ?: '/',
+                'secure' => str_starts_with(PH7_URL_INSTALL, 'https://'),
+                'httponly' => true,
+                'samesite' => 'Lax'
+            ]
         );
     }
 
     private function getUserLang(): string
     {
-        return (string)($_GET[self::REQUEST_PARAM_NAME] ?? '');
+        $mLanguage = $_GET[self::REQUEST_PARAM_NAME] ?? '';
+
+        return self::normalizeLanguage($mLanguage);
     }
 
     private function getCookieLang(): string
     {
-        return (string)($_COOKIE[Controller::SOFTWARE_PREFIX_COOKIE_NAME . '_install_lang'] ?? '');
+        $mLanguage = $_COOKIE[Controller::SOFTWARE_PREFIX_COOKIE_NAME . '_install_lang'] ?? '';
+
+        return self::normalizeLanguage($mLanguage);
+    }
+
+    private static function normalizeLanguage(mixed $mLanguage): string
+    {
+        if (!is_string($mLanguage)) {
+            return '';
+        }
+
+        $sLanguage = strtolower(trim($mLanguage));
+
+        return preg_match('/^[a-z]{2}$/D', $sLanguage) === 1 ? $sLanguage : '';
     }
 }

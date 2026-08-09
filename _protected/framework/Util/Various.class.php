@@ -1,32 +1,31 @@
 <?php
+
 /**
  * @title          Various Class
+ *
  * @desc           MISC (Miscellaneous Functions) Class.
  *                 Some various useful methods.
  *
  * @author         Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
  * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
- * @package        PH7 / Framework / Util
  */
 
 namespace PH7\Framework\Util;
 
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Ip\Ip;
-use PH7\Framework\Navigation\Browser;
 use PH7\Framework\Str\Str;
 
 class Various
 {
-    const DEFAULT_LENGTH = 40;
+    public const DEFAULT_LENGTH = 40;
 
     /**
      * Generate Random string.
      *
      * @param string|null $sStr
-     * @param int $iLength Default is 40 Characters.
+     * @param int         $iLength default is 40 Characters
      *
      * @return string
      */
@@ -39,29 +38,16 @@ class Various
 
         $iBytesLength = (int)max(16, ceil($iLength / 2));
 
-        try {
-            $sChars = bin2hex(random_bytes($iBytesLength));
-            return substr($sChars, 0, $iLength);
-        } catch (\Throwable $oException) {
-            // Graceful fallback for environments where cryptographic RNG is unavailable.
-        }
+        $sChars = bin2hex(random_bytes($iBytesLength));
 
-        $sPrefix = (string)mt_rand();
-        $sStr = !empty($sStr) ? (string)$sStr : '';
-
-        $sChars = hash(
-            'whirlpool',
-            hash('whirlpool', uniqid($sPrefix, true) . $sStr . Ip::get() . time()) . hash('sha512', (new Browser)->getUserAgent() . microtime(true) * 9999)
-        );
-
-        return self::padStr($sChars, $iLength);
+        return substr($sChars, 0, $iLength);
     }
 
     /**
      * Padding String.
      *
      * @param string $sStr
-     * @param int $iLength
+     * @param int    $iLength
      *
      * @return string
      */
@@ -69,7 +55,7 @@ class Various
     {
         $iLength = (int)$iLength;
 
-        return ((new Str)->length($sStr) >= $iLength) ? substr($sStr, 0, $iLength) : str_pad($sStr, $iLength, $sStr);
+        return ((new Str())->length($sStr) >= $iLength) ? substr($sStr, 0, $iLength) : str_pad($sStr, $iLength, $sStr);
     }
 
     /**
@@ -90,7 +76,7 @@ class Various
             $aSpecialChars
         );
 
-        for ($iAmount = 0; $iAmount < $iLength; $iAmount++) {
+        for ($iAmount = 0; $iAmount < $iLength; ++$iAmount) {
             $sWord .= $aKeys[array_rand($aKeys)];
         }
 

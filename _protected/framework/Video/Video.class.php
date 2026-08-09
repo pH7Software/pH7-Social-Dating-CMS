@@ -1,13 +1,15 @@
 <?php
+
 /**
  * @title            Video Class
+ *
  * @desc             Class is used to create/manipulate videos using FFmpeg.
  *
  * @author           Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright        (c) 2012-2020, Pierre-Henry Soria. All Rights Reserved.
  * @license          MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
- * @package          PH7 / Framework / Video
- * @link             https://ph7builder.com
+ *
+ * @see             https://ph7builder.com
  */
 
 namespace PH7\Framework\Video;
@@ -51,8 +53,6 @@ class Video extends Upload
 
     private File $oFile;
 
-    private string $sMimeType;
-
     private string $sExt;
 
     private string $sFfmpegPath;
@@ -62,7 +62,7 @@ class Video extends Upload
     /**
      * @param array $aFile Example: $_FILES['video']
      *
-     * @throws MissingProgramException If FFmpeg is not installed.
+     * @throws MissingProgramException if FFmpeg is not installed
      */
     public function __construct(array $aFile)
     {
@@ -73,29 +73,38 @@ class Video extends Upload
             throw new MissingProgramException($sMsg);
         }
 
-        $this->oFile = new File;
+        $this->oFile = new File();
         $this->aFile = $aFile;
-        $this->sMimeType = (string)($this->aFile['type'] ?? '');
         $this->sExt = $this->oFile->getFileExt((string)($this->aFile['name'] ?? ''));
 
-        /** Attributes from "Upload" abstract class **/
+        /* Attributes from "Upload" abstract class * */
         $this->sMaxSize = Config::getInstance()->values['video']['upload.max_size'];
         $this->iFileSize = (int)$this->aFile['size'];
     }
 
     /**
-     * @return bool
+     * Remove temporary file.
+     */
+    public function __destruct()
+    {
+        if (isset($this->oFile, $this->aFile['tmp_name'])) {
+            $this->oFile->deleteFile($this->aFile['tmp_name']);
+        }
+    }
+
+    /**
+     * @throws TooLargeException if the video file is not found
      *
-     * @throws TooLargeException If the video file is not found.
+     * @return bool
      */
     public function validate()
     {
         if (!$this->isUploadedTempFile()) {
             if (isDebug()) {
                 throw new TooLargeException('Video file could not be uploaded. Possibly too large.');
-            } else {
-                return false;
             }
+
+            return false;
         }
 
         $sExpectedMime = $this->getExpectedMimeByExtension();
@@ -104,11 +113,9 @@ class Video extends Upload
         }
 
         $sDetectedMime = $this->detectMimeType();
-        if ($this->isReliableDetectedMime($sDetectedMime)) {
-            return $this->mimeMatchesExpected($sDetectedMime, $sExpectedMime);
-        }
 
-        return $this->mimeMatchesExpected($this->sMimeType, $sExpectedMime);
+        return $this->isReliableDetectedMime($sDetectedMime)
+            && $this->mimeMatchesExpected($sDetectedMime, $sExpectedMime);
     }
 
     /**
@@ -132,9 +139,9 @@ class Video extends Upload
     /**
      * Convert video file and the extension video type.
      *
-     * @param string $sFile New renamed file name.
+     * @param string $sFile new renamed file name
      *
-     * @return string The new name that you entered in the parameter of this method.
+     * @return string the new name that you entered in the parameter of this method
      */
     public function rename($sFile)
     {
@@ -156,11 +163,11 @@ class Video extends Upload
      * Generate a thumbnail with FFmpeg.
      *
      * @param string $sPicturePath
-     * @param int $iSeconds
-     * @param int $iWidth
-     * @param int $iHeight
+     * @param int    $iSeconds
+     * @param int    $iWidth
+     * @param int    $iHeight
      *
-     * @return string The thumbnail file that you entered in the parameter of this method.
+     * @return string the thumbnail file that you entered in the parameter of this method
      */
     public function thumbnail($sPicturePath, $iSeconds, $iWidth, $iHeight)
     {
@@ -177,7 +184,7 @@ class Video extends Upload
     /**
      * Gets video duration.
      *
-     * @return int Seconds.
+     * @return int seconds
      */
     public function getDuration()
     {
@@ -193,7 +200,7 @@ class Video extends Upload
     /**
      * Get Type Video File.
      *
-     * @return string The extension of the video without the dot.
+     * @return string the extension of the video without the dot
      */
     public function getExt()
     {
@@ -268,14 +275,5 @@ class Video extends Upload
     private function getEscapedTmpFilePath(): string
     {
         return escapeshellarg((string)$this->aFile['tmp_name']);
-    }
-
-    /**
-     * Remove temporary file.
-     */
-    public function __destruct()
-    {
-        // If it exists, delete the temporary video file
-        $this->oFile->deleteFile($this->aFile['tmp_name']);
     }
 }

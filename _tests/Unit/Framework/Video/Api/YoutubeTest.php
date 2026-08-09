@@ -19,7 +19,7 @@ final class YoutubeTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->oYoutube = new Youtube;
+        $this->oYoutube = new Youtube(false);
     }
 
     public function testApiKeyIsSet(): void

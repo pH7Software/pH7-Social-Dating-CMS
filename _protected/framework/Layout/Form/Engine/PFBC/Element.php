@@ -7,7 +7,6 @@
 
 namespace PFBC;
 
-use PFBC\Element\CKEditor;
 use PFBC\Validation\Str as StrValidation;
 
 abstract class Element extends Base
@@ -331,8 +330,7 @@ abstract class Element extends Base
     {
         $sCode = '';
 
-        // 'required' attr won't work with CKEditor editor, so ignore it if class called by 'CKEditor'
-        if (static::class !== CKEditor::class && $this->isRequired()) {
+        if ($this->isRequired()) {
             $sCode .= ' required="required"';
         }
 

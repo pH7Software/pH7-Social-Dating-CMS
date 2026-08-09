@@ -1,14 +1,17 @@
-All (this means all files, assets and folders) of this software was coded (created) by pH7Development team (Pierre-Henry Soria), all rights reserved.
-Except certain files and libraries (JavaScript, PHP, or other) whose license and/or the author is identified in the file or a text file next to it.
+# Copyright and notices
 
-All the Copyright Notice, Links and Copyright Comments can never be removed from the source code!
+Copyright © 2011–2026 Pierre-Henry Soria and pH7Builder contributors.
 
-Copyright (C) 2011-2023  Pierre-Henry Soria
+pH7Builder was created by [Pierre-Henry Soria](https://ph7.me) and is
+maintained through the [pH7Software project](https://github.com/pH7Software).
+Individual files and the Git history may identify additional contributors and
+copyright holders.
 
-This program is free software: you can redistribute it and/or modify
-it under the terms of the MIT license.
+Project-authored code is distributed under the [MIT License](LICENSE.md). The
+MIT License permits use, modification, distribution, sublicensing, and sale;
+it does not require a public “Powered by” link. Its copyright and permission
+notice must remain in copies or substantial portions of the Software.
 
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-See the License file for more details.
+Third-party libraries and assets remain subject to their own copyright notices
+and licenses. Preserve those notices and review the applicable dependency or
+asset license before redistribution.

@@ -2,6 +2,9 @@ _constants.php
 
 _install/data/caches/smarty_cache/*
 _install/data/caches/smarty_compile/*
+_install/data/caches/install-state.json
+_install/data/caches/install-token.hash
+.ph7builder-install-removal-*
 _install/vendor/*
 _install/composer.lock
 

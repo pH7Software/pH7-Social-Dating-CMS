@@ -1,9 +1,9 @@
 <?php
+
 /**
  * @author         Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
  * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
- * @package        PH7 / App / System / Module / Payment / Config
  */
 
 namespace PH7;
@@ -20,7 +20,14 @@ class Permission extends PermissionCore
     {
         parent::__construct();
 
-        if (!UserCore::auth() && $this->registry->controller !== 'AdminController') {
+        $bPublicPayPalEndpoint = $this->registry->controller === 'MainController'
+            && $this->registry->action === 'notify';
+
+        if (
+            !UserCore::auth()
+            && $this->registry->controller !== 'AdminController'
+            && !$bPublicPayPalEndpoint
+        ) {
             $this->signUpRedirect();
         }
 

@@ -1,9 +1,9 @@
 <?php
+
 /**
  * @author         Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright      (c) 2013-2019, Pierre-Henry Soria. All Rights Reserved.
  * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
- * @package        PH7 / App / System / Module / Field / Controller
  */
 
 namespace PH7;
@@ -68,12 +68,20 @@ class FieldController extends Controller
     {
         $this->requireActionToken('field', 'field', 'delete');
 
-        $sMod = $this->httpRequest->post('mod');
-        $sName = $this->httpRequest->post('name');
+        $bStatus = false;
+        $mMod = $_POST['mod'] ?? null;
+        $mName = $_POST['name'] ?? null;
+        $sMod = is_string($mMod) && in_array($mMod, ['user', 'aff'], true) ? $mMod : 'user';
 
-        if (Field::unmodifiable($sMod, $sName) || !Field::doesExist($sMod, $sName)) {
-            $bStatus = false;
-        } elseif ($bStatus = (new FieldModel(Field::getTable($sMod), $sName))->delete()) {
+        if (
+            FieldModel::isValidColumnName($mName)
+            && !Field::unmodifiable($sMod, $mName)
+            && Field::doesExist($sMod, $mName)
+        ) {
+            $bStatus = (new FieldModel(Field::getTable($sMod), $mName))->delete();
+        }
+
+        if ($bStatus) {
             Field::clearCache();
         }
 

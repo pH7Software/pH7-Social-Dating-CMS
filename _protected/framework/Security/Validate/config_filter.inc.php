@@ -3,6 +3,8 @@
 namespace PH7\Framework\Security\Validate;
 defined('PH7') or exit('Restricted access');
 
+use PH7\Framework\Server\Server;
+
 /*
 |--------------------------------------------------------------------------
 | Default Character Set
@@ -26,7 +28,7 @@ $config['charset'] = PH7_ENCODING;
 |
 */
 $config['cookie_prefix'] = 'pHS';
-$config['cookie_domain'] = PH7_DOMAIN_COOKIE;
+$config['cookie_domain'] = Server::getCookieDomain();
 $config['cookie_path'] = '/';
 $config['cookie_secure'] = true;
 

@@ -1,12 +1,13 @@
 <?php
+
 /**
  * @title          Add Fake Profiles; Process Class
+ *
  * @desc           Generate Fake Profiles from Web API.
  *
  * @author         Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright      (c) 2014-2022, Pierre-Henry Soria. All Rights Reserved.
  * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
- * @package        PH7 / App / System / Module / Admin / From / Processing
  */
 
 declare(strict_types=1);
@@ -20,7 +21,7 @@ use PH7\Framework\Ip\Ip;
 use PH7\Framework\Security\Validate\Validate;
 use PH7\Framework\Url\Url;
 
-/** Reset the time limit and increase the memory **/
+/* Reset the time limit and increase the memory * */
 @set_time_limit(0);
 @ini_set('memory_limit', '528M');
 
@@ -42,10 +43,10 @@ class AddFakeProfilesFormProcess extends Form
     {
         parent::__construct();
 
-        $oUser = new UserCore;
-        $oUserModel = new UserCoreModel;
-        $this->oExistsModel = new ExistCoreModel;
-        $this->oValidate = new Validate;
+        $oUser = new UserCore();
+        $oUserModel = new UserCoreModel();
+        $this->oExistsModel = new ExistCoreModel();
+        $this->oValidate = new Validate();
 
         $aApiResponse = $this->getApiClient();
         $aUserData = $aApiResponse['results'] ?? null;
@@ -55,9 +56,14 @@ class AddFakeProfilesFormProcess extends Form
                 $sUsername = trim($aUser['login']['username']);
 
                 if ($this->isValidProfile($sEmail, $sUsername)) {
-                    self::$iTotalGenerated++;
                     $aData = $this->storeUserDataIntoArray($sUsername, $sEmail, $aUser, $oUser);
-                    $aData['profile_id'] = $oUserModel->add(escape($aData, true));
+                    try {
+                        $aData['profile_id'] = $oUserModel->add(escape($aData, true));
+                    } catch (\Throwable $oException) {
+                        error_log(sprintf('Fake member creation failed: %s', $oException->getMessage()));
+                        continue;
+                    }
+                    ++self::$iTotalGenerated;
                     $this->addAvatar($aData, $oUser);
                 }
             }
@@ -123,8 +129,8 @@ class AddFakeProfilesFormProcess extends Form
     /**
      * Get Data from the third-party API.
      *
-     * @param string $sApiUrl API URL.
-     * @param string $sApiParams Parameters to send to the API.
+     * @param string $sApiUrl     API URL
+     * @param string $sApiParams  parameters to send to the API
      * @param string $sApiVersion Version of the API it will use. If fails from the API server, it will ignore it.
      */
     private function getApiResults(string $sApiUrl, string $sApiParams, string $sApiVersion): string|bool
@@ -142,7 +148,7 @@ class AddFakeProfilesFormProcess extends Form
      */
     private function addAvatar(array $aData, UserCore $oUser): void
     {
-        /**
+        /*
          * Sometimes, cURL fails under Windows or some other specific server configs,
          * for this reason, we use `file_get_contents()` as fallback when cURL fails.
          */
@@ -190,8 +196,8 @@ class AddFakeProfilesFormProcess extends Form
 
     private function isValidProfile(string $sEmail, string $sUsername): bool
     {
-        return $this->oValidate->email($sEmail) &&
-            !$this->oExistsModel->email($sEmail) &&
-            $this->oValidate->username($sUsername);
+        return $this->oValidate->email($sEmail)
+            && !$this->oExistsModel->email($sEmail)
+            && $this->oValidate->username($sUsername);
     }
 }

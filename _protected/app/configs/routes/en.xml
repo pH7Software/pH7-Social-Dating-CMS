@@ -13,6 +13,10 @@
     <!-- User -->
       <route url="@([a-zA-Z0-9_-]+)" path="system/modules" module="user" controller="profile" action="index" vars="username" />
       <route url="signup" path="system/modules" module="user" controller="signup" action="step1" />
+      <route url="signup/step2" path="system/modules" module="user" controller="signup" action="step2" />
+      <route url="signup/step3" path="system/modules" module="user" controller="signup" action="step3" />
+      <route url="signup/step4" path="system/modules" module="user" controller="signup" action="step4" />
+      <route url="signup/done" path="system/modules" module="user" controller="signup" action="done" />
       <route url="login" path="system/modules" module="user" controller="main" action="login" />
       <route url="resend-activation" path="system/modules" module="user" controller="main" action="resendactivation" />
       <route url="user/setting/delete-account/?([a-z]+)?" path="system/modules" module="user" controller="setting" action="delete" vars="delete_status" />

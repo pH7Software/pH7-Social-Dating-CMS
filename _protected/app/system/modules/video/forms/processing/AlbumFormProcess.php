@@ -30,14 +30,6 @@ class AlbumFormProcess extends Form implements NudityDetectable
     {
         parent::__construct();
 
-        /**
-         * This can cause minor errors (eg if a user sent a file that is not a video).
-         * So we hide the errors if we are not in development mode.
-         */
-        if (!isDebug()) {
-            error_reporting(0);
-        }
-
         // Resizing and saving the video album thumbnail
         $oPicture = new FileStorageImage($_FILES['album']['tmp_name']);
         if (!$oPicture->validate()) {

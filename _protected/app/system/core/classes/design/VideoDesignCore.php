@@ -21,6 +21,7 @@ use PH7\Framework\Date\Various;
 use PH7\Framework\File\File;
 use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Pattern\Statik;
+use PH7\Framework\Str\Str;
 use PH7\Framework\Video\Api as VideoApi;
 use PH7\Framework\Video\InvalidApiProviderException;
 use stdClass;
@@ -59,7 +60,18 @@ class VideoDesignCore
                 $oVideo = (new VideoApi)->getMeta($oData->file, $sMedia, $mWidth, $mHeight);
 
                 if ($sMedia === self::PREVIEW_MEDIA_MODE) {
-                    echo $sDurationTag, '<a href="', $oData->file, '" title="', $sEscapedTitle, '" data-popup="frame-video"><img src="', $oVideo, '" alt="', $sEscapedTitle, '" title="', $sEscapedTitle, '" /></a>';
+                    $oStr = new Str;
+                    $sPreviewUrl = trim((string)$oVideo);
+                    if ($sPreviewUrl === '') {
+                        $sPreviewUrl = PH7_URL_TPL . PH7_TPL_NAME . PH7_SH . PH7_IMG .
+                            'icon/' . UserDesignCore::NONE_IMG_FILENAME;
+                    }
+
+                    echo $sDurationTag, '<a href="', $oStr->escapeAttribute($oData->file),
+                        '" title="', $oStr->escapeAttribute($oData->title),
+                        '" data-popup="frame-video"><img src="', $oStr->escapeAttribute($sPreviewUrl),
+                        '" alt="', $oStr->escapeAttribute($oData->title),
+                        '" title="', $oStr->escapeAttribute($oData->title), '" /></a>';
                 } else {
                     echo $oVideo;
                 }

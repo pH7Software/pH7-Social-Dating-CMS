@@ -188,10 +188,14 @@ class LoginFormProcess extends Form implements LoginableForm
 
     /**
      * @param int $iProfileId
-     * @param string $sLocationName
+     * @param string|null $sLocationName
      */
-    public function isForeignLocation(int $iProfileId, string $sLocationName): bool
+    public function isForeignLocation(int $iProfileId, ?string $sLocationName): bool
     {
+        if ($sLocationName === null || $sLocationName === '') {
+            return false;
+        }
+
         $sLatestUsedIp = $this->oUserModel->getLastUsedIp($iProfileId);
 
         if (!empty($sLatestUsedIp) && (new Validate)->ip($sLatestUsedIp)) {

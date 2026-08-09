@@ -80,24 +80,12 @@ class Header
      */
     public static function selfUrl(): string
     {
-        $sHttps = strtolower((string)($_SERVER['HTTPS'] ?? ''));
-        $sForwardedProto = strtolower((string)($_SERVER['HTTP_X_FORWARDED_PROTO'] ?? ''));
-        $bSecure = in_array($sHttps, ['on', '1'], true) || $sForwardedProto === 'https';
-
-        $sServerProtocol = strtolower((string)($_SERVER['SERVER_PROTOCOL'] ?? 'http/1.1'));
-        $iProtocolSeparatorPos = strpos($sServerProtocol, PH7_SH);
-        $sScheme = $iProtocolSeparatorPos !== false ? substr($sServerProtocol, 0, $iProtocolSeparatorPos) : 'http';
-        $sProtocol = $sScheme . ($bSecure ? 's' : '');
-
-        $sHostHeader = (string)($_SERVER['HTTP_HOST'] ?? '');
-        $sHost = $sHostHeader !== '' ? $sHostHeader : (string)($_SERVER['SERVER_NAME'] ?? 'localhost');
-        $iPort = (int)($_SERVER['SERVER_PORT'] ?? 0);
         $sRequestUri = (string)($_SERVER['REQUEST_URI'] ?? PH7_SH);
+        $sRequestUri = str_replace(["\r", "\n"], '', $sRequestUri);
+        if (!str_starts_with($sRequestUri, PH7_SH)) {
+            $sRequestUri = PH7_SH;
+        }
 
-        $bHostAlreadyContainsPort = $sHostHeader !== '' && strpos($sHostHeader, ':') !== false;
-        $bIsStandardPort = ($bSecure && $iPort === 443) || (!$bSecure && $iPort === 80) || $iPort === 0;
-        $sPort = ($bIsStandardPort || $bHostAlreadyContainsPort) ? '' : ':' . $iPort;
-
-        return $sProtocol . '://' . $sHost . $sPort . $sRequestUri;
+        return rtrim(PH7_URL_PROT . PH7_DOMAIN, PH7_SH) . $sRequestUri;
     }
 }

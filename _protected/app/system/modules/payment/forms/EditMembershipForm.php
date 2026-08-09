@@ -120,6 +120,7 @@ class EditMembershipForm
                     0 => t('Disabled')
                 ],
                 [
+                    'description' => t('Enable a paid membership only after at least one payment gateway is configured and successfully tested.'),
                     'value' => $oMembership->enable,
                     'required' => 1
                 ]

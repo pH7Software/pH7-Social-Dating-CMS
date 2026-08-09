@@ -10,8 +10,10 @@ declare(strict_types=1);
 
 namespace PH7\Test\Unit\Framework\Geo\Map;
 
+use ErrorException;
 use PH7\Framework\Geo\Map\Api as ApiMap;
 use PHPUnit\Framework\TestCase;
+use ReflectionProperty;
 
 class ApiTest extends TestCase
 {
@@ -33,5 +35,36 @@ class ApiTest extends TestCase
     {
         $oMap = new ApiMap;
         $this->assertTrue($oMap->isApiKeyNotSet());
+    }
+
+    public function testKmlImportDoesNotEmitPhpDeprecation(): void
+    {
+        $sFixturePath = tempnam(sys_get_temp_dir(), 'ph7-kml-');
+        $this->assertIsString($sFixturePath);
+        file_put_contents(
+            $sFixturePath,
+            '<kml><Document><Folder><Placemark><name>Test place</name><Point><coordinates>153.02,-27.47</coordinates></Point></Placemark></Folder></Document></kml>'
+        );
+
+        set_error_handler(
+            static function (int $iSeverity, string $sMessage, string $sFile, int $iLine): bool {
+                if ($iSeverity === E_DEPRECATED) {
+                    throw new ErrorException($sMessage, 0, $iSeverity, $sFile, $iLine);
+                }
+
+                return false;
+            }
+        );
+
+        try {
+            $oMap = new ApiMap;
+            $oMap->addKML($sFixturePath);
+        } finally {
+            restore_error_handler();
+            unlink($sFixturePath);
+        }
+
+        $oContentMarker = new ReflectionProperty(ApiMap::class, 'contentMarker');
+        $this->assertStringContainsString('Test place', $oContentMarker->getValue($oMap));
     }
 }

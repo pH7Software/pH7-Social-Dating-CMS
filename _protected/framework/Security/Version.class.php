@@ -3,7 +3,7 @@
  * @desc             Version Information for the security of packaged software.
  *
  * @author           Pierre-Henry Soria <hello@ph7builder.com>
- * @copyright        (c) 2012-2024, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2012-2026, Pierre-Henry Soria and pH7Builder contributors.
  * @license          MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package          PH7 / Framework / Security
  */
@@ -26,7 +26,7 @@ final class Version
 
     private const LATEST_VERSION_URL = 'https://xml.ph7builder.com/software-info.xml';
 
-    public const UPGRADE_DOC_URL = 'https://ph7builder.com/doc/en/upgrade';
+    public const UPGRADE_DOC_URL = 'https://github.com/pH7Software/pH7-Social-Dating-CMS/blob/18.x/docs/UPGRADING.md';
 
     public const VERSION_PATTERN = '\d{1,2}\.\d{1,2}\.\d{1,2}';
 
@@ -51,9 +51,9 @@ final class Version
      *
      * More details: https://ph7builder.com/new-versioning-system/
      */
-    public const KERNEL_VERSION = '18.5.1';
+    public const KERNEL_VERSION = '18.6.0';
     public const KERNEL_BUILD = '1';
-    public const KERNEL_RELEASE_DATE = '2026-08-02';
+    public const KERNEL_RELEASE_DATE = '2026-08-09';
 
     /*** Framework Server ***/
     public const KERNEL_TECHNOLOGY_NAME = 'pH7Builder.com';
@@ -74,13 +74,16 @@ final class Version
     public static function getLatestInfo(): array|bool
     {
         $oCache = (new Cache)->start(self::CACHE_GROUP, 'version-info', self::CACHE_TIME);
-        if (!$mData = $oCache->get()) {
+        $mData = $oCache->get();
+        if (!is_array($mData)) {
             $mData = self::retrieveXmlInfoFromRemoteServer();
-            $oCache->put($mData);
+            if (is_array($mData)) {
+                $oCache->put($mData);
+            }
         }
         unset($oCache);
 
-        return $mData;
+        return is_array($mData) ? $mData : false;
     }
 
     /**
@@ -91,6 +94,17 @@ final class Version
     public static function isUpdateEligible(): bool
     {
         if (!$aLatestInfo = self::getLatestInfo()) {
+            return false;
+        }
+
+        if (!isset(
+            $aLatestInfo['is_alert'],
+            $aLatestInfo['name'],
+            $aLatestInfo['version'],
+            $aLatestInfo['build']
+        ) || !is_bool($aLatestInfo['is_alert']) || !is_string($aLatestInfo['name']) ||
+            !is_string($aLatestInfo['version']) || !is_string($aLatestInfo['build'])
+        ) {
             return false;
         }
 
@@ -128,32 +142,55 @@ final class Version
             return false;
         }
 
-        // Set default values to variables (if nothing in foreach loop)
-        $bIsAlert = $sVerName = $sVerNumber = $sVerBuild = null;
+        return self::parseLatestInfo($oDom);
+    }
 
+    private static function parseLatestInfo(DOMDocument $oDom): array|bool
+    {
         /** @var DOMElement $oSoft */
         foreach ($oDom->getElementsByTagName(self::FRAMEWORK_TAG_NAME) as $oSoft) {
             // Get info for "ph7builder" package
             $oInfo = $oSoft->getElementsByTagName(self::PACKAGE_TAG_NAME)->item(0);
+            if (!$oInfo instanceof DOMElement) {
+                continue;
+            }
 
-            $bIsAlert = self::isUpdateAlertEnabled($oInfo);
-            $sVerName = $oInfo->getElementsByTagName('name')->item(0)->nodeValue;
-            $sVerNumber = $oInfo->getElementsByTagName('version')->item(0)->nodeValue;
-            $sVerBuild = $oInfo->getElementsByTagName('build')->item(0)->nodeValue;
+            $sVerName = self::getElementValue($oInfo, 'name');
+            $sVerNumber = self::getElementValue($oInfo, 'version');
+            $sVerBuild = self::getElementValue($oInfo, 'build');
+            if ($sVerName === null || $sVerNumber === null || $sVerBuild === null ||
+                !preg_match('#^' . self::VERSION_PATTERN . '$#', $sVerNumber) ||
+                !preg_match('/^[0-9]+$/D', $sVerBuild)
+            ) {
+                continue;
+            }
+
+            return [
+                'is_alert' => self::isUpdateAlertEnabled($oInfo),
+                'name' => $sVerName,
+                'version' => $sVerNumber,
+                'build' => $sVerBuild
+            ];
         }
-        unset($oDom);
 
-        return [
-            'is_alert' => $bIsAlert,
-            'name' => $sVerName,
-            'version' => $sVerNumber,
-            'build' => $sVerBuild
-        ];
+        return false;
     }
 
     private static function isUpdateAlertEnabled(DOMElement $oInfo): bool
     {
         // "Validate::bool()" returns TRUE for "1", "true", "on", and "yes", FALSE otherwise
-        return (new Validate)->bool($oInfo->getElementsByTagName('upd-alert')->item(0)->nodeValue);
+        return (new Validate)->bool(self::getElementValue($oInfo, 'upd-alert'));
+    }
+
+    private static function getElementValue(DOMElement $oParent, string $sElementName): ?string
+    {
+        $oElement = $oParent->getElementsByTagName($sElementName)->item(0);
+        if (!$oElement instanceof DOMElement) {
+            return null;
+        }
+
+        $sValue = trim($oElement->textContent);
+
+        return $sValue !== '' ? $sValue : null;
     }
 }

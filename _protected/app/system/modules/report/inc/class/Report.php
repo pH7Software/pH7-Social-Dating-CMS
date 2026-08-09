@@ -1,9 +1,9 @@
 <?php
+
 /**
  * @author         Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
  * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
- * @package        PH7 / App / System / Module / Report / Inc / Class
  */
 
 declare(strict_types=1);
@@ -14,9 +14,21 @@ use PH7\Framework\Date\CDateTime;
 use PH7\Framework\Layout\Tpl\Engine\Templatable;
 use PH7\Framework\Mail\Mail;
 use PH7\Framework\Mvc\Model\DbConfig;
+use PH7\Framework\Str\Str;
 
 class Report
 {
+    public const CONTENT_TYPES = [
+        'user',
+        'avatar',
+        'mail',
+        'comment',
+        'picture',
+        'video',
+        'forum',
+        'note'
+    ];
+
     private Templatable $oView;
 
     private string|bool $mStatus = false;
@@ -31,8 +43,8 @@ class Report
      */
     public function add(array $aData): self
     {
-        if ($this->areValidProfileIds($aData)) {
-            $this->mStatus = (new ReportModel)->add($aData);
+        if (self::isValidContentType($aData['type'] ?? null) && $this->areValidProfileIds($aData)) {
+            $this->mStatus = (new ReportModel())->add($aData);
 
             if ($this->mStatus === true) {
                 if (DbConfig::getSetting('sendReportMail')) {
@@ -44,8 +56,13 @@ class Report
         return $this;
     }
 
+    public static function isValidContentType(mixed $mType): bool
+    {
+        return is_string($mType) && in_array($mType, self::CONTENT_TYPES, true);
+    }
+
     /**
-     * Get status
+     * Get status.
      *
      * @return string|bool Text of the statute or boolean
      */
@@ -55,24 +72,33 @@ class Report
     }
 
     /**
-     * @param array $aData Report's details.
+     * @param array $aData report's details
      *
-     * @return bool Number of recipients who were accepted for delivery.
+     * @return bool number of recipients who were accepted for delivery
      */
     protected function sendMail(array $aData): bool
     {
-        $oUser = new UserCore;
-        $oUserModel = new UserCoreModel;
+        $oUser = new UserCore();
+        $oUserModel = new UserCoreModel();
         $sReporterUsername = $oUserModel->getUsername($aData['reporter_id']);
         $sSpammerUsername = $oUserModel->getUsername($aData['spammer_id']);
-        $sDate = (new CDateTime)->get($aData['date'])->dateTime();
+        $sDate = (new CDateTime())->get($aData['date'])->dateTime();
+        $oStr = new Str();
+        $sReporterProfileUrl = $oStr->escapeAttribute($oUser->getProfileLink($sReporterUsername));
+        $sSpammerProfileUrl = $oStr->escapeAttribute($oUser->getProfileLink($sSpammerUsername));
+        $sReporterUsername = escape((string)$sReporterUsername);
+        $sSpammerUsername = escape((string)$sSpammerUsername);
+        $sContentType = escape((string)$aData['type']);
+        $sReportUrl = escape((string)$aData['url']);
+        $sDescription = escape((string)$aData['desc']);
+        $sDate = escape($sDate);
 
         $this->oView->content =
-            t('Reporter:') . ' <b><a href="' . $oUser->getProfileLink($sReporterUsername) . '">' . $sReporterUsername . '</a></b><br /><br /> ' .
-            t('Spammer:') . ' <b><a href="' . $oUser->getProfileLink($sSpammerUsername) . '">' . $sSpammerUsername . '</a></b><br /><br /> ' .
-            t('Contant Type:') . ' <b>' . $aData['type'] . '</b><br /><br /> ' .
-            t('URL:') . ' <b>' . $aData['url'] . '</b><br /><br /> ' .
-            t('Description of report:') . ' <b>' . $aData['desc'] . '</b><br /><br /> ' .
+            t('Reporter:') . ' <b><a href="' . $sReporterProfileUrl . '">' . $sReporterUsername . '</a></b><br /><br /> ' .
+            t('Spammer:') . ' <b><a href="' . $sSpammerProfileUrl . '">' . $sSpammerUsername . '</a></b><br /><br /> ' .
+            t('Content Type:') . ' <b>' . $sContentType . '</b><br /><br /> ' .
+            t('URL:') . ' <b>' . $sReportUrl . '</b><br /><br /> ' .
+            t('Description of report:') . ' <b>' . $sDescription . '</b><br /><br /> ' .
             t('Date:') . ' <b>' . $sDate . '</b><br /><br />';
 
         unset($oUser, $oUserModel);
@@ -86,12 +112,12 @@ class Report
             'subject' => t('Abuse report from %site_name%')
         ];
 
-        return (new Mail)->send($aInfo, $sHtmlMessage);
+        return (new Mail())->send($aInfo, $sHtmlMessage);
     }
 
     private function areValidProfileIds(array $aData): bool
     {
-        $oExistsModel = new ExistCoreModel;
+        $oExistsModel = new ExistCoreModel();
 
         return $oExistsModel->id($aData['reporter_id']) && $oExistsModel->id($aData['spammer_id']);
     }

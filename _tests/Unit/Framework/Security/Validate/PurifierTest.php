@@ -47,6 +47,14 @@ final class PurifierTest extends TestCase
         );
     }
 
+    public function testRemovesInlineStylesAfterLegacyEditorRetirement(): void
+    {
+        $this->assertSame(
+            '<p>Text</p>',
+            $this->oPurifier->xssClean('<p style="color:red;position:absolute">Text</p>')
+        );
+    }
+
     public function testCleansNestedArrays(): void
     {
         $this->assertSame(

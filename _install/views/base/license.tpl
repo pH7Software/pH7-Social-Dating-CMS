@@ -9,6 +9,7 @@
 </p>
 
 <form method="post" action="{$smarty.const.PH7_URL_SLUG_INSTALL}license">
+    <input type="hidden" name="action_token" value="{$action_token|escape}" />
     <p>
         <input type="checkbox" name="license_agreed" id="license_agreed" onclick="checkAgreementStatus()"/> {$LANG.agree_license}
     </p>

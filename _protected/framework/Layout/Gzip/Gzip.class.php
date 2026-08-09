@@ -139,9 +139,31 @@ class Gzip
             exit('No directory specified!');
         }
 
-        $this->sDir = $this->oHttpRequest->get('d');
-        $this->sBase = $this->oFile->checkExtDir(realpath($this->sDir));
-        $this->sBaseUrl = $this->clearUrl($this->oFile->checkExtDir($this->sDir));
+        $sRequestedDir = $this->oHttpRequest->get('d');
+        $sNormalizedDir = $this->normalizeDirectoryPath($sRequestedDir);
+        if ($sNormalizedDir === null) {
+            Http::setHeadersByCode(StatusCode::FORBIDDEN);
+            exit('Invalid directory path!');
+        }
+
+        $this->sDir = $sNormalizedDir;
+
+        $sPublicRoot = realpath(PH7_PATH_ROOT);
+        $sBase = $sPublicRoot === false ? false : realpath($sPublicRoot . PH7_DS . $this->sDir);
+        if ($sBase === false) {
+            Http::setHeadersByCode(StatusCode::NOT_FOUND);
+            exit('Directory not found!');
+        }
+
+        if (!File::isPathInsideDirectory($sBase, $sPublicRoot)) {
+            Http::setHeadersByCode(StatusCode::FORBIDDEN);
+            exit('Invalid directory path!');
+        }
+
+        $this->sBase = $this->oFile->checkExtDir($sBase);
+        $this->sBaseUrl = $this->sDir === ''
+            ? ''
+            : $this->clearUrl($this->oFile->checkExtDir($this->sDir));
 
         // The Files
         if (!$this->oHttpRequest->getExists('f')) {
@@ -153,7 +175,22 @@ class Gzip
         $this->aElements = explode(',', $this->sFiles);
 
         foreach ($this->aElements as $sElement) {
+            if ($this->normalizeRelativePath($sElement) !== $sElement) {
+                Http::setHeadersByCode(StatusCode::FORBIDDEN);
+                exit('Invalid file path!');
+            }
+
             $sPath = realpath($this->sBase . $sElement);
+
+            if ($sPath === false) {
+                Http::setHeadersByCode(StatusCode::NOT_FOUND);
+                exit('File not found!');
+            }
+
+            if (!File::isPathInsideDirectory($sPath, $this->sBase)) {
+                Http::setHeadersByCode(StatusCode::FORBIDDEN);
+                exit('Invalid file path!');
+            }
 
             if (!$this->isValidStaticFileExtension($sPath)) {
                 Http::setHeadersByCode(StatusCode::FORBIDDEN);
@@ -318,14 +355,14 @@ class Gzip
         $sLocalPath = $this->sBase . $sElement;
 
         try {
-            $sFullUrl = PH7_URL_ROOT . $this->sBaseUrl . $sElement;
-            $sFileContents = $this->oFile->getUrlContents($sFullUrl);
+            $sFileContents = $this->oFile->getFile($sLocalPath);
 
             if (is_string($sFileContents)) {
                 return $sFileContents;
             }
 
-            $sFileContents = $this->oFile->getFile($sLocalPath);
+            $sFullUrl = PH7_URL_ROOT . $this->sBaseUrl . $sElement;
+            $sFileContents = $this->oFile->getUrlContents($sFullUrl);
             if (is_string($sFileContents)) {
                 return $sFileContents;
             }
@@ -533,6 +570,41 @@ class Gzip
             ($this->sType === self::HTML_NAME && substr($sPath, -5) === '.html') ||
             ($this->sType === self::JS_NAME && substr($sPath, -3) === '.js') ||
             ($this->sType === self::CSS_NAME && substr($sPath, -4) === '.css');
+    }
+
+    /**
+     * Normalizes a public-root-relative asset path and rejects traversal.
+     */
+    private function normalizeRelativePath(string $sPath): string
+    {
+        if ($sPath === '' || str_contains($sPath, "\0")) {
+            return '';
+        }
+
+        $sPath = trim(str_replace('\\', '/', $sPath), '/');
+        $aSegments = explode('/', $sPath);
+
+        foreach ($aSegments as $sSegment) {
+            if ($sSegment === '' || $sSegment === '.' || $sSegment === '..') {
+                return '';
+            }
+        }
+
+        return implode('/', $aSegments);
+    }
+
+    /**
+     * The dot marker is retained for the existing root-level multi-directory bundle.
+     */
+    private function normalizeDirectoryPath(string $sPath): ?string
+    {
+        if ($sPath === '.') {
+            return '';
+        }
+
+        $sPath = $this->normalizeRelativePath($sPath);
+
+        return $sPath === '' ? null : $sPath;
     }
 
     /**

@@ -13,11 +13,13 @@ namespace PH7\Test\Unit\App\System\Module\Field\Inc\Classes;
 require_once PH7_PATH_SYS_MOD . 'field/inc/class/Field.php';
 
 use PH7\Field;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 final class FieldTest extends TestCase
 {
     const PHONE_FIELD_NAME = 'phone';
+    const MIDDLE_NAME_FIELD_NAME = 'middleName';
     const PUNCHLINE_FIELD_NAME = 'punchline';
     const CUSTOM_FIELD_NAME = 'myownfield';
 
@@ -61,5 +63,52 @@ final class FieldTest extends TestCase
         $bResult = Field::unmodifiable('aff', self::PHONE_FIELD_NAME);
 
         $this->assertTrue($bResult);
+    }
+
+    public function testAffiliateMiddleNameFieldIsAlwaysProtected(): void
+    {
+        $bResult = Field::unmodifiable('aff', self::MIDDLE_NAME_FIELD_NAME);
+
+        $this->assertTrue($bResult);
+    }
+
+    public function testUserPhoneFieldIsAlwaysProtected(): void
+    {
+        $bResult = Field::unmodifiable('user', self::PHONE_FIELD_NAME);
+
+        $this->assertTrue($bResult);
+    }
+
+    #[DataProvider('hardCodedFieldProvider')]
+    public function testHardCodedSystemFieldsAreAlwaysProtected(string $sMod, string $sField): void
+    {
+        $this->assertTrue(Field::unmodifiable($sMod, $sField));
+    }
+
+    public static function hardCodedFieldProvider(): array
+    {
+        return [
+            'member profile ID' => ['user', 'profileId'],
+            'member middle name' => ['user', 'middleName'],
+            'member description' => ['user', 'description'],
+            'member punchline' => ['user', 'punchline'],
+            'member city' => ['user', 'city'],
+            'member state' => ['user', 'state'],
+            'member postal code' => ['user', 'zipCode'],
+            'member country' => ['user', 'country'],
+            'member phone' => ['user', 'phone'],
+            'member height' => ['user', 'height'],
+            'member weight' => ['user', 'weight'],
+            'affiliate profile ID' => ['aff', 'profileId'],
+            'affiliate middle name' => ['aff', 'middleName'],
+            'affiliate description' => ['aff', 'description'],
+            'affiliate address' => ['aff', 'address'],
+            'affiliate phone' => ['aff', 'phone'],
+            'affiliate city' => ['aff', 'city'],
+            'affiliate state' => ['aff', 'state'],
+            'affiliate postal code' => ['aff', 'zipCode'],
+            'affiliate country' => ['aff', 'country'],
+            'affiliate website' => ['aff', 'website']
+        ];
     }
 }

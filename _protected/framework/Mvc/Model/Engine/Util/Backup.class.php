@@ -49,11 +49,11 @@ class Backup implements GenerableFile
      */
     public function back(): self
     {
-        $this->sSql = $this->getHeaderContents();
+        $this->sSql = $this->getHeaderContents() . "SET FOREIGN_KEY_CHECKS=0;\r\n\r\n";
 
-        $aTables = $aColumns = $aValues = [];
+        $aTables = [];
         $oAllTables = Db::showTables();
-        while ($aRow = $oAllTables->fetch()) {
+        while ($aRow = $oAllTables->fetch(\PDO::FETCH_NUM)) {
             $aTables[] = $aRow[0];
         }
         unset($oAllTables);
@@ -62,58 +62,45 @@ class Backup implements GenerableFile
 
         // Loop through tables
         foreach ($aTables as $sTable) {
-            $rResult = $oDb->query('SHOW CREATE TABLE ' . $sTable);
-
-            $iNum = $rResult->rowCount();
-            if ($iNum > 0) {
-                $aRow = $rResult->fetch();
-
-                $this->sSql .= "--\r\n-- Table: $sTable\r\n--\r\n\r\n";
-                $this->sSql .= "DROP TABLE IF EXISTS $sTable;\r\n\r\n";
-
-                $sValue = $aRow[1];
-
-                /*** Clean up statement ***/
-                $sValue = str_replace('`', '', $sValue);
-
-                /*** Table structure ***/
-                $this->sSql .= $sValue . ";\r\n\r\n";
-
-                unset($aRow);
+            $sQuotedTable = self::quoteIdentifier($sTable);
+            $rResult = $oDb->query('SHOW CREATE TABLE ' . $sQuotedTable);
+            $aCreateTable = $rResult !== false ? $rResult->fetch(\PDO::FETCH_NUM) : false;
+            if (!is_array($aCreateTable) || !isset($aCreateTable[1]) || !is_string($aCreateTable[1])) {
+                throw new \RuntimeException('Unable to read the structure of database table "' . $sTable . '".');
             }
+
+            $this->sSql .= "--\r\n-- Table: $sTable\r\n--\r\n\r\n";
+            $this->sSql .= 'DROP TABLE IF EXISTS ' . $sQuotedTable . ";\r\n\r\n";
+            $this->sSql .= $aCreateTable[1] . ";\r\n\r\n";
             unset($rResult);
 
-            $rResult = $oDb->query('SELECT * FROM ' . $sTable);
+            $rResult = $oDb->query('SELECT * FROM ' . $sQuotedTable);
+            if ($rResult === false) {
+                throw new \RuntimeException('Unable to read the data of database table "' . $sTable . '".');
+            }
 
-            $iNum = $rResult->rowCount();
-            if ($iNum > 0) {
-                while ($aRow = $rResult->fetch()) {
-                    foreach ($aRow as $sColumn => $sValue) {
-                        if (!is_numeric($sColumn)) {
-                            if (!empty($sValue) && is_string($sValue)) {
-                                $sValue = Db::getInstance()->quote($sValue);
-                                $sValue = str_replace(["\r", "\n"], ['', '\n'], $sValue);
-                            }
+            $bHasRows = false;
+            while ($aRow = $rResult->fetch(\PDO::FETCH_ASSOC)) {
+                $bHasRows = true;
+                $this->sSql .= self::buildInsertStatement(
+                    $sTable,
+                    $aRow,
+                    static fn (string $sValue): string|false => $oDb->quote($sValue, \PDO::PARAM_STR)
+                );
+            }
 
-                            $aColumns[] = $sColumn;
-                            $aValues[] = $sValue;
-                        }
-                    }
+            if ($rResult->errorCode() !== '00000') {
+                throw new \RuntimeException('Unable to finish reading database table "' . $sTable . '".');
+            }
 
-                    $this->sSql .= 'INSERT INTO ' . $sTable . ' (' . implode(', ', $aColumns) . ') VALUES(\'' . implode(
-                            '\', \'',
-                            $aValues
-                        ) . "');\n";
-
-                    unset($aColumns, $aValues);
-                }
+            if ($bHasRows) {
                 $this->sSql .= "\r\n\r\n";
-
-                unset($aRow);
             }
             unset($rResult);
         }
         unset($oDb);
+
+        $this->sSql .= "SET FOREIGN_KEY_CHECKS=1;\r\n";
 
         return $this;
     }
@@ -209,6 +196,43 @@ class Backup implements GenerableFile
             "--\r\n\r\n";
 
         return $sSql;
+    }
+
+    private static function buildInsertStatement(string $sTable, array $aRow, callable $cQuote): string
+    {
+        if ($aRow === []) {
+            throw new \RuntimeException('Unable to serialize an empty database row.');
+        }
+
+        $aColumns = [];
+        $aValues = [];
+
+        foreach ($aRow as $sColumn => $mValue) {
+            $aColumns[] = self::quoteIdentifier((string)$sColumn);
+            $aValues[] = self::serializeValue($mValue, $cQuote);
+        }
+
+        return 'INSERT INTO ' . self::quoteIdentifier($sTable) . ' (' . implode(', ', $aColumns) .
+            ') VALUES (' . implode(', ', $aValues) . ");\n";
+    }
+
+    private static function serializeValue(mixed $mValue, callable $cQuote): string
+    {
+        if ($mValue === null) {
+            return 'NULL';
+        }
+
+        $mQuotedValue = $cQuote((string)$mValue);
+        if (!is_string($mQuotedValue)) {
+            throw new \RuntimeException('Unable to quote a database value for backup.');
+        }
+
+        return $mQuotedValue;
+    }
+
+    private static function quoteIdentifier(string $sIdentifier): string
+    {
+        return '`' . str_replace('`', '``', $sIdentifier) . '`';
     }
 
     /**

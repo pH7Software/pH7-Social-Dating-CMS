@@ -20,6 +20,9 @@ class AdminController extends Controller
     /** @var string */
     private $sMsg;
 
+    /** @var string */
+    private $sTitle;
+
     public function __construct()
     {
         parent::__construct();

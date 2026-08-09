@@ -26,7 +26,7 @@ class GitHubIssuesResolveCommand extends Command
     private const API_BASE_URI = 'https://api.github.com';
     private const DEFAULT_REPOSITORY = 'pH7Software/pH7-Social-Dating-CMS';
     private const TOKEN_ENV_NAMES = ['GITHUB_TOKEN', 'GH_TOKEN'];
-    private const USER_AGENT = 'pH7CMS-Issue-Resolver';
+    private const USER_AGENT = 'pH7Builder-Issue-Resolver';
     private const HTTP_TIMEOUT = 30;
 
     protected function configure(): void

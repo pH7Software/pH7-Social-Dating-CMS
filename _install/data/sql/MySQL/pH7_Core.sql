@@ -3,7 +3,7 @@
 -- Title:         SQL Core (base) Install File
 --
 -- Author:        Pierre-Henry Soria <hello@ph7builder.com>
--- Copyright:     (c) 2012-2022, Pierre-Henry Soria. All Rights Reserved.
+-- Copyright:     (c) 2012-2026, Pierre-Henry Soria and pH7Builder contributors.
 -- License:       MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
 -- Package:       PH7 / Install / Data / Sql / MySQL
 --
@@ -69,9 +69,32 @@ INSERT INTO ph7_memberships (groupId, name, description, permissions, price, exp
 (@iUserVisitorGroup, 'Visitor (not visible)', 'This subscription is offered to all visitors who visit the site.', 'a:21:{s:21:"quick_search_profiles";s:1:"1";s:24:"advanced_search_profiles";s:1:"1";s:10:"read_mails";s:1:"0";s:10:"send_mails";s:1:"0";s:13:"view_pictures";s:1:"1";s:15:"upload_pictures";s:1:"0";s:11:"view_videos";s:1:"1";s:13:"upload_videos";s:1:"0";s:17:"instant_messaging";s:1:"0";s:4:"chat";s:1:"1";s:10:"hot_or_not";s:1:"1";s:15:"love_calculator";s:1:"0";s:10:"read_notes";s:1:"1";s:11:"write_notes";s:1:"0";s:15:"read_blog_posts";s:1:"1";s:13:"view_comments";s:1:"1";s:14:"write_comments";s:1:"0";s:12:"forum_access";s:1:"1";s:19:"create_forum_topics";s:1:"0";s:19:"answer_forum_topics";s:1:"0";s:18:"member_site_access";s:1:"0";}', 0.00, 0, '1'),
 (@iUserPendingGroup, 'Pending (not visible)', 'Pending subscription provisional migration to a different subscription.', 'a:21:{s:21:"quick_search_profiles";s:1:"1";s:24:"advanced_search_profiles";s:1:"1";s:10:"read_mails";s:1:"0";s:10:"send_mails";s:1:"0";s:13:"view_pictures";s:1:"1";s:15:"upload_pictures";s:1:"0";s:11:"view_videos";s:1:"1";s:13:"upload_videos";s:1:"0";s:17:"instant_messaging";s:1:"0";s:4:"chat";s:1:"1";s:10:"hot_or_not";s:1:"1";s:15:"love_calculator";s:1:"0";s:10:"read_notes";s:1:"1";s:11:"write_notes";s:1:"0";s:15:"read_blog_posts";s:1:"1";s:13:"view_comments";s:1:"1";s:14:"write_comments";s:1:"0";s:12:"forum_access";s:1:"1";s:19:"create_forum_topics";s:1:"0";s:19:"answer_forum_topics";s:1:"0";s:18:"member_site_access";s:1:"0";}', 0.00, 15, '0'),
 (@iUserRegularGroup, 'Regular (Free)', 'Free Membership.', 'a:21:{s:21:"quick_search_profiles";s:1:"1";s:24:"advanced_search_profiles";s:1:"1";s:10:"read_mails";s:1:"1";s:10:"send_mails";s:1:"1";s:13:"view_pictures";s:1:"1";s:15:"upload_pictures";s:1:"1";s:11:"view_videos";s:1:"1";s:13:"upload_videos";s:1:"1";s:17:"instant_messaging";s:1:"1";s:4:"chat";s:1:"1";s:10:"hot_or_not";s:1:"1";s:15:"love_calculator";s:1:"1";s:10:"read_notes";s:1:"1";s:11:"write_notes";s:1:"1";s:15:"read_blog_posts";s:1:"1";s:13:"view_comments";s:1:"1";s:14:"write_comments";s:1:"1";s:12:"forum_access";s:1:"1";s:19:"create_forum_topics";s:1:"1";s:19:"answer_forum_topics";s:1:"1";s:18:"member_site_access";s:1:"1";}', 0.00, 0, '1'),
-(4, 'Platinum', 'The membership for the small budget.', 'a:21:{s:21:"quick_search_profiles";s:1:"1";s:24:"advanced_search_profiles";s:1:"1";s:10:"read_mails";s:1:"1";s:10:"send_mails";s:1:"1";s:13:"view_pictures";s:1:"1";s:15:"upload_pictures";s:1:"1";s:11:"view_videos";s:1:"1";s:13:"upload_videos";s:1:"1";s:17:"instant_messaging";s:1:"1";s:4:"chat";s:1:"1";s:10:"hot_or_not";s:1:"1";s:15:"love_calculator";s:1:"1";s:10:"read_notes";s:1:"1";s:11:"write_notes";s:1:"1";s:15:"read_blog_posts";s:1:"1";s:13:"view_comments";s:1:"1";s:14:"write_comments";s:1:"1";s:12:"forum_access";s:1:"1";s:19:"create_forum_topics";s:1:"1";s:19:"answer_forum_topics";s:1:"1";s:18:"member_site_access";s:1:"1";}', 9.99, 5, '1'),
-(5, 'Silver', 'The premium membership!', 'a:21:{s:21:"quick_search_profiles";s:1:"1";s:24:"advanced_search_profiles";s:1:"1";s:10:"read_mails";s:1:"1";s:10:"send_mails";s:1:"1";s:13:"view_pictures";s:1:"1";s:15:"upload_pictures";s:1:"1";s:11:"view_videos";s:1:"1";s:13:"upload_videos";s:1:"1";s:17:"instant_messaging";s:1:"1";s:4:"chat";s:1:"1";s:10:"hot_or_not";s:1:"1";s:15:"love_calculator";s:1:"1";s:10:"read_notes";s:1:"1";s:11:"write_notes";s:1:"1";s:15:"read_blog_posts";s:1:"1";s:13:"view_comments";s:1:"1";s:14:"write_comments";s:1:"1";s:12:"forum_access";s:1:"1";s:19:"create_forum_topics";s:1:"1";s:19:"answer_forum_topics";s:1:"1";s:18:"member_site_access";s:1:"1";}', 19.99, 10, '1'),
-(6, 'Gold', 'The must membership! The Gold!!!', 'a:21:{s:21:"quick_search_profiles";s:1:"1";s:24:"advanced_search_profiles";s:1:"1";s:10:"read_mails";s:1:"1";s:10:"send_mails";s:1:"1";s:13:"view_pictures";s:1:"1";s:15:"upload_pictures";s:1:"1";s:11:"view_videos";s:1:"1";s:13:"upload_videos";s:1:"1";s:17:"instant_messaging";s:1:"1";s:4:"chat";s:1:"1";s:10:"hot_or_not";s:1:"1";s:15:"love_calculator";s:1:"1";s:10:"read_notes";s:1:"1";s:11:"write_notes";s:1:"1";s:15:"read_blog_posts";s:1:"1";s:13:"view_comments";s:1:"1";s:14:"write_comments";s:1:"1";s:12:"forum_access";s:1:"1";s:19:"create_forum_topics";s:1:"1";s:19:"answer_forum_topics";s:1:"1";s:18:"member_site_access";s:1:"1";}', 29.99, 30, '1');
+(4, 'Platinum', 'The membership for the small budget.', 'a:21:{s:21:"quick_search_profiles";s:1:"1";s:24:"advanced_search_profiles";s:1:"1";s:10:"read_mails";s:1:"1";s:10:"send_mails";s:1:"1";s:13:"view_pictures";s:1:"1";s:15:"upload_pictures";s:1:"1";s:11:"view_videos";s:1:"1";s:13:"upload_videos";s:1:"1";s:17:"instant_messaging";s:1:"1";s:4:"chat";s:1:"1";s:10:"hot_or_not";s:1:"1";s:15:"love_calculator";s:1:"1";s:10:"read_notes";s:1:"1";s:11:"write_notes";s:1:"1";s:15:"read_blog_posts";s:1:"1";s:13:"view_comments";s:1:"1";s:14:"write_comments";s:1:"1";s:12:"forum_access";s:1:"1";s:19:"create_forum_topics";s:1:"1";s:19:"answer_forum_topics";s:1:"1";s:18:"member_site_access";s:1:"1";}', 9.99, 5, '0'),
+(5, 'Silver', 'The premium membership!', 'a:21:{s:21:"quick_search_profiles";s:1:"1";s:24:"advanced_search_profiles";s:1:"1";s:10:"read_mails";s:1:"1";s:10:"send_mails";s:1:"1";s:13:"view_pictures";s:1:"1";s:15:"upload_pictures";s:1:"1";s:11:"view_videos";s:1:"1";s:13:"upload_videos";s:1:"1";s:17:"instant_messaging";s:1:"1";s:4:"chat";s:1:"1";s:10:"hot_or_not";s:1:"1";s:15:"love_calculator";s:1:"1";s:10:"read_notes";s:1:"1";s:11:"write_notes";s:1:"1";s:15:"read_blog_posts";s:1:"1";s:13:"view_comments";s:1:"1";s:14:"write_comments";s:1:"1";s:12:"forum_access";s:1:"1";s:19:"create_forum_topics";s:1:"1";s:19:"answer_forum_topics";s:1:"1";s:18:"member_site_access";s:1:"1";}', 19.99, 10, '0'),
+(6, 'Gold', 'The must membership! The Gold!!!', 'a:21:{s:21:"quick_search_profiles";s:1:"1";s:24:"advanced_search_profiles";s:1:"1";s:10:"read_mails";s:1:"1";s:10:"send_mails";s:1:"1";s:13:"view_pictures";s:1:"1";s:15:"upload_pictures";s:1:"1";s:11:"view_videos";s:1:"1";s:13:"upload_videos";s:1:"1";s:17:"instant_messaging";s:1:"1";s:4:"chat";s:1:"1";s:10:"hot_or_not";s:1:"1";s:15:"love_calculator";s:1:"1";s:10:"read_notes";s:1:"1";s:11:"write_notes";s:1:"1";s:15:"read_blog_posts";s:1:"1";s:13:"view_comments";s:1:"1";s:14:"write_comments";s:1:"1";s:12:"forum_access";s:1:"1";s:19:"create_forum_topics";s:1:"1";s:19:"answer_forum_topics";s:1:"1";s:18:"member_site_access";s:1:"1";}', 29.99, 30, '0');
+
+
+CREATE TABLE IF NOT EXISTS ph7_payment_transactions (
+  payment_transaction_id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  checkout_reference_hash char(64) CHARACTER SET ascii COLLATE ascii_bin NOT NULL,
+  provider varchar(20) CHARACTER SET ascii COLLATE ascii_bin NOT NULL,
+  provider_transaction_id varchar(127) CHARACTER SET ascii COLLATE ascii_bin DEFAULT NULL,
+  profile_id int(10) unsigned NOT NULL,
+  membership_id tinyint(3) unsigned NOT NULL,
+  membership_amount decimal(12,2) unsigned NOT NULL,
+  expected_amount decimal(12,2) unsigned NOT NULL,
+  expected_currency char(3) CHARACTER SET ascii COLLATE ascii_bin NOT NULL,
+  merchant_account varchar(190) NOT NULL,
+  sandbox tinyint(1) unsigned NOT NULL DEFAULT 1,
+  status enum('pending','completed') CHARACTER SET ascii COLLATE ascii_bin NOT NULL DEFAULT 'pending',
+  created_at datetime NOT NULL,
+  completed_at datetime DEFAULT NULL,
+  PRIMARY KEY (payment_transaction_id),
+  UNIQUE KEY payment_checkout_reference (checkout_reference_hash),
+  UNIQUE KEY payment_provider_transaction (provider, provider_transaction_id),
+  KEY payment_profile_status (profile_id, status),
+  KEY payment_status_created (status, created_at)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
 CREATE TABLE IF NOT EXISTS ph7_members (
@@ -595,8 +618,8 @@ CREATE TABLE IF NOT EXISTS ph7_forums_categories (
 
 INSERT INTO ph7_forums_categories (categoryId, title) VALUES
 (1, 'General'),
-(2, 'Free Online Dating Site'),
-(3, 'Business');
+(2, 'Dating and Relationships'),
+(3, 'Community');
 
 
 CREATE TABLE IF NOT EXISTS ph7_forums (
@@ -611,9 +634,9 @@ CREATE TABLE IF NOT EXISTS ph7_forums (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=1;
 
 INSERT INTO ph7_forums (forumId, name, description, categoryId) VALUES
-(1, 'Hello', 'Free dating site', 1),
-(2, 'Online Dating', 'Discussion about the online dating websites', 2),
-(3, 'The Best Dating Site', 'The best dating site', 1);
+(1, 'Introductions', 'Welcome new members to your community', 1),
+(2, 'Dating and Relationships', 'Share thoughtful dating and relationship advice', 2),
+(3, 'Community Feedback', 'Help improve this community', 3);
 
 
 CREATE TABLE IF NOT EXISTS ph7_forums_topics (
@@ -677,8 +700,8 @@ CREATE TABLE IF NOT EXISTS ph7_log_error (
   logId mediumint(10) unsigned NOT NULL AUTO_INCREMENT,
   logError longtext,
   PRIMARY KEY (logId),
-  FULLTEXT KEY logError (logError) -- FULLTEXT is not supported by InnoDB in MySQL < 5.6.4, so set MyISAM instead
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=1;
+  FULLTEXT KEY logError (logError)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=1;
 
 
 CREATE TABLE IF NOT EXISTS ph7_admins_attempts_login (
@@ -825,7 +848,7 @@ CREATE TABLE IF NOT EXISTS ph7_members_friends (
 CREATE TABLE IF NOT EXISTS ph7_members_wall (
   wallId int(10) unsigned NOT NULL AUTO_INCREMENT,
   profileId int(10) unsigned NOT NULL DEFAULT 0,
-  post text CHARACTER SET armscii8,
+  post text,
   createdDate datetime NULL,
   updatedDate datetime DEFAULT NULL,
   PRIMARY KEY (wallId),
@@ -881,7 +904,7 @@ CREATE TABLE IF NOT EXISTS ph7_meta_main (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 INSERT INTO ph7_meta_main (langId, pageTitle, metaDescription, metaKeywords, headline, slogan, promoText, metaRobots, metaAuthor, metaCopyright, metaRating, metaDistribution, metaCategory) VALUES
-('en_US', 'Home', 'The Best Online Social Dating Service to meet people and keep in touch with your friends', 'meet people, community, single, friends, meet singles, women, men, dating site, dating service, dating website, online dating website', 'Be on the right place!', 'The place to meet lovely people!', 'You''re on the best place for meeting new people nearby! Chat, Flirt, Socialize and have Fun!<br />Create any Social Dating Web Apps or Websites like this one with the #1 <a href="https://ph7builder.com">Dating Web App Builder</a>. It''s Professional, Modern, Open Source, and gives you the Best Way to launch a new Social/Dating Business!', 'index, follow, all', 'Pierre-Henry Soria (pH7Builder.com)', 'Copyright Pierre-Henry Soria. All Rights Reserved.', 'general', 'global', 'dating');
+('en_US', 'Home', 'Meet people, build genuine connections, and grow a community around your brand.', 'meet people, community, matchmaking, social network, dating', 'Welcome to our community', 'Meet people. Build genuine connections.', 'Create your profile, discover people nearby, and start a conversation.', 'index, follow, all', 'Your Site Name', 'Your Site Name', 'general', 'global', 'dating');
 
 
 CREATE TABLE IF NOT EXISTS ph7_sys_mods_enabled (
@@ -930,7 +953,7 @@ CREATE TABLE IF NOT EXISTS ph7_modules (
 
 INSERT INTO ph7_modules (vendorName, moduleName, version, active) VALUES
 /* Gives the current version of pH7Builder SQL schema (this helps to update and shows whether it is necessary or not to update the database as well) */
-('pH7Builder', 'SQL System Schema', '1.6.4', 1);
+('pH7Builder', 'SQL System Schema', '1.6.6', 1);
 
 
 CREATE TABLE IF NOT EXISTS ph7_report (
@@ -1029,8 +1052,8 @@ INSERT INTO ph7_settings (settingName, settingValue, description, settingGroup) 
 ('sendReportMail', 1, 'Send the Report by eMail (1 = enable, 0 = disable)', 'security'),
 ('siteStatus', 'enable', 'enable or maintenance', 'general'),
 ('mailType', 'mail', '', 'email'),
-('smtpHostName', 'mail.example.com', '', 'email'),
-('smtpPassword', 123456, '', 'email'),
+('smtpHostName', '', 'Legacy setting; configure PH7_MAILER_DSN in the server environment', 'email'),
+('smtpPassword', '', 'Legacy setting; configure PH7_MAILER_DSN in the server environment', 'email'),
 ('smtpPort', 25, '', 'email'),
 ('watermarkTextImage', 'pH7Builder.com', 'Watermark text', 'image'),
 ('sizeWatermarkTextImage', 2, 'Between 0 to 5', 'image'),

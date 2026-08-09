@@ -43,7 +43,7 @@ class Browser
     public function getLanguage(bool $bFullLangCode = false): string
     {
         $oStr = new Str;
-        $sLang = explode(',', Server::getVar(Server::HTTP_ACCEPT_LANGUAGE))[0];
+        $sLang = explode(',', (string)Server::getVar(Server::HTTP_ACCEPT_LANGUAGE))[0];
 
         $iFullLangCode = $bFullLangCode ? 5 : Lang::ISO_LANG_CODE_LENGTH;
 
@@ -93,7 +93,7 @@ class Browser
             return false;
         }
 
-        $sEncoding = Server::getVar(Server::HTTP_ACCEPT_ENCODING);
+        $sEncoding = (string)Server::getVar(Server::HTTP_ACCEPT_ENCODING);
 
         if (false !== strpos($sEncoding, 'x-gzip')) {
             return 'x-gzip';

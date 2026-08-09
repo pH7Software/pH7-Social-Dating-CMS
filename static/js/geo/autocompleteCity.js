@@ -6,8 +6,8 @@
 
 /*
  * ATTENTION!
- * Please remplace "ph7cms" by your username by registering on: http://www.geonames.org/login
- * After, you will need to enable the Free Web Services here: http://www.geonames.org/manageaccount
+ * Please replace "ph7cms" with your username after registering at: https://www.geonames.org/login
+ * Then enable the Free Web Services here: https://www.geonames.org/manageaccount
  */
 $(document).ready(function () {
     autocompleteCityInit('ph7cms'); // Remplace "ph7cms" by your username!
@@ -25,7 +25,7 @@ function autocompleteCityInit(sGeonamesUsername) {
             source: function (oRequest, oResponse) {
                 $.ajax(
                     {
-                        url: 'http://ws.geonames.org/searchJSON?username=' + sGeonamesUsername + sUrlSlug,
+                        url: 'https://secure.geonames.org/searchJSON?username=' + sGeonamesUsername + sUrlSlug,
                         dataType: 'jsonp',
                         data: {
                             featureClass: 'P',

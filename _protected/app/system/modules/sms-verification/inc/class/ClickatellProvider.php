@@ -1,7 +1,7 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <hello@ph7builder.com>
- * @copyright      (c) 2019-2023, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2019-2026, Pierre-Henry Soria and pH7Builder contributors.
  * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package        PH7 / App / System / Module / SMS Verification / Inc / Class
  */
@@ -22,9 +22,7 @@ class ClickatellProvider extends SmsProvider implements SmsProvidable
             $aResponse = $oClickatell->sendMessage(
                 [
                     'to' => [$sPhoneNumber],
-                    'content' => $sTextMessage
-                ],
-                [
+                    'content' => $sTextMessage,
                     'from' => $this->sSenderNumber
                 ]
             );
@@ -42,15 +40,11 @@ class ClickatellProvider extends SmsProvider implements SmsProvidable
 
     private function isSuccessResponse(array $aResponse): bool
     {
-        if (!isset($aResponse['messages']) || !is_array($aResponse['messages'])) {
-            return false;
-        }
-
-        $aMessage = array_pop($aResponse['messages']);
+        $aMessage = array_pop($aResponse);
         if (!is_array($aMessage) || !array_key_exists('error', $aMessage)) {
             return false;
         }
 
-        return $aMessage['error'] === false;
+        return ($aMessage['accepted'] ?? false) === true && $aMessage['error'] === null;
     }
 }
