@@ -1,54 +1,27 @@
 <div class="col-md-12">
     <div id="box_block" class="center">
-        <h1 class="underline">😍 {lang 'Make Your Website Better!'} ❤️</h1>
+        <h1>{lang 'Support pH7Builder'}</h1>
+
+        <p>
+            {lang 'pH7Builder is MIT-licensed open-source software. Financial support is optional and helps fund continued maintenance.'}
+        </p>
 
         <form action="{form_action}" method="post">
             {form_body}
-            <input type="image" name="submit" src="{url_tpl_mod_img}paypal-donate.en.png" alt="{lang 'Donate'}" />
+            <input type="image" name="submit" src="{url_tpl_mod_img}paypal-donate.en.png" alt="{lang 'Donate with PayPal'}" />
         </form>
 
-        <p>{lang '~OR~'}</p>
-
-        <p class="s_bMarg">
-            {* give random boolean *}
-            {if mt_rand(0,1) === 1}
-                <a class="bold" href="{% $config->values['module.setting']['buymeacoffee.link'] %}" rel="noreferrer">
-                    {lang '🎁 Gift me a cup of coffee 😋'}
-                </a>
-            {elseif mt_rand(0,1) === 0}
-                <a class="bold" href="{% $config->values['module.setting']['patreon.link'] %}" rel="noreferrer">
-                    {lang 'Become a Patron! 🤗'}
-                </a>
-            {else}
-                {{ $patreon_btns = ['become-patreon.en.png', 'support-patreon.en.png'] }}
-                {{ $patreon_btn = $patreon_btns[mt_rand(0,1)] }}
-
-                <a href="{% $config->values['module.setting']['patreon.link'] %}" rel="noreferrer">
-                    <img
-                        class="img-rounded"
-                        src="{url_tpl_mod_img}{patreon_btn}"
-                        alt="Patreon"
-                        title="{lang 'Go to Patreon'}"
-                    />
-                </a>
-            {/if}
+        <p>{lang 'Other optional ways to support the project:'}</p>
+        <p>
+            <a href="{% $config->values['module.setting']['buymeacoffee.link'] %}" target="_blank" rel="noopener noreferrer">
+                {lang 'Buy Me a Coffee'}
+            </a>
+            &nbsp;·&nbsp;
+            <a href="{% $config->values['module.setting']['patreon.link'] %}" target="_blank" rel="noopener noreferrer">
+                {lang 'Patreon'}
+            </a>
         </p>
+
+        <p><small>{lang 'Thank you for using and contributing to pH7Builder. There is no obligation to donate.'}</small></p>
     </div>
-
-    <p class="center">
-        {lang}Will You Be Nice Today...?{/lang}<br />
-        <span class="bold">
-            {lang}And make your website better with regular updates.{/lang}
-        </span><br />
-        <span class="underline">
-            {lang}Be like the 81% of users who contribute to the software on a regular basis 🙏{/lang}
-        </span>
-    </p>
-
-    <figure class="center">
-        <img src="{url_tpl_mod_img}eye.svg" alt="{lang 'Staring Eye'}" />
-        <figcaption>
-            <em>{lang '👀 We believe in you!'}</em>
-        </figcaption>
-    </figure>
 </div>

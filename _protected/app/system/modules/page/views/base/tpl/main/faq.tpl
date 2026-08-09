@@ -55,11 +55,11 @@
 
   <div class="faq">
     <a href="#divShow_6">
-      {lang 'By who this Web App has been developed?'}
+      {lang 'Who created the software powering this website?'}
     </a>
   </div>
 
   <div class="hidden" id="divShow_6">
-    This whole social dating website has been developed by <a href="http://ph7.me" title="Author of the Open Source Social Networking Project: 'pH7Builder'">Pierre-Henry Soria</a> (<em><a href="https://github.com/pH-7" title="Author of pH7Builder software">GitHub</a>/<a href="https://www.linkedin.com/in/ph7enry/">LinkedIn</a></em>). Now he is a Senior Software Engineer and continues to update and develop his "<abbr title='pH7Builder; Formerly known as "pH7Builder" or "pH7 Social Dating CMS"'>open source project</abbr>" during his free time. <a href="https://github.com/pH7Software/pH7-Social-Dating-CMS" title="pH7Builder is a Free and Open Source Social Dating App/Site Builder">pH7Builder (formerly pH7Builder)</a> is his first "big" project he made when he was still student.
+    {lang 'This website runs on'} <a href="https://github.com/pH7Software/pH7-Social-Dating-CMS" title="pH7Builder on GitHub">pH7Builder</a>, {lang 'open-source software created by'} <a href="https://ph7.me" title="Pierre-Henry Soria">Pierre-Henry Soria</a> (<a href="https://github.com/pH-7" title="Pierre-Henry Soria on GitHub">GitHub</a>). {lang 'The website operator is responsible for this site and its content.'}
   </div>
 </div>

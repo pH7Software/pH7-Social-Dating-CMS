@@ -1,11 +1,6 @@
 <div class="center">
     <p>
-        {lang 'AMAZING!!! 😍 You currently have %0% users!', $total_users}
-        <span class="underline">
-            <a class="bold" href="{{ $design->url('ph7cms-helper', 'main', 'suggestionbox', '?box=donationbox') }}">
-                {lang 'Would it be a good time for you to continuing supporting the project?'}
-                ➡️ <span class="bold">{lang 'YEEES!'}</span>
-            </a>
-        </span> 🚀
+        <strong>{lang 'Milestone reached: %0% users!', $total_users}</strong>
+        {lang 'Review moderation capacity, email delivery, backups, and server resources before the next stage of growth.'}
     </p>
 </div>

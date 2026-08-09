@@ -44,12 +44,8 @@
       {main_include 'pwa-icon-tags.inc.tpl'}
     {/if}
 
-    <!-- Begin Copyright pH7 Dating/Social CMS by Pierre-Henry SORIA, All Rights Reserved -->
-    <!-- Do not modify or remove this code! Think of those who spend a lot of time to develop this CMS & Framework for you -->
-    <meta name="creator" content="pH7Builder, Pierre-Henry Soria - {software_url}" />
-    <meta name="designer" content="pH7Builder, Pierre-Henry Soria - {software_url}" />
+    <!-- Software generator metadata -->
     <meta name="generator" content="{software_name}, v{software_version}" />
-    <!-- End Copyright -->
 
     <!-- End Title and Meta -->
 
@@ -195,7 +191,7 @@
     <div class="right vs_marg">
       {* Required for the GeoLite2 free version. Not needed if you purchase their full paid version *}
       <small class="small">
-        {lang}We use GeoLite2 from <a href="http://www.maxmind.com" rel="nofollow" class="gray">MaxMind</a>{/lang}
+        {lang}We use GeoLite2 from <a href="https://www.maxmind.com" rel="nofollow" class="gray">MaxMind</a>{/lang}
       </small>
     </div>
     <!-- End Footer -->

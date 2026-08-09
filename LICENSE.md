@@ -1,6 +1,6 @@
 # MIT License
 
-**Copyright (c) 2011-2023  [Pierre-Henry Soria](https://ph7.me)**
+**Copyright (c) 2011-2026 [Pierre-Henry Soria](https://ph7.me) and pH7Builder contributors**
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
