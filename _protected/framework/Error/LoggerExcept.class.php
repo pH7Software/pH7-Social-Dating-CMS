@@ -14,7 +14,7 @@ namespace PH7\Framework\Error;
 
 defined('PH7') or exit('Restricted access');
 
-use Exception;
+use Throwable;
 use PH7\DbTableName;
 use PH7\Framework\File\File;
 use PH7\Framework\Http\Http;
@@ -51,7 +51,7 @@ final class LoggerExcept extends Logger
     /**
      * Write to the logfile.
      */
-    public function except(Exception $oExcept): void
+    public function except(Throwable $oExcept): void
     {
         // Time: Set the log date/time.
         // IP: The IP address of the client.

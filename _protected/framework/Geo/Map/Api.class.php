@@ -447,7 +447,6 @@ class Api
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($curl, CURLOPT_URL, $url);
         $data = curl_exec($curl);
-        curl_close($curl);
         return $data;
     }
 
@@ -599,7 +598,7 @@ class Api
      */
     public function addKML($url, $category = '', $icon = '')
     {
-        $xml = new \SimpleXMLElement($url, null, true);
+        $xml = new \SimpleXMLElement($url, 0, true);
         foreach ($xml->Document->Folder->Placemark as $item) {
             $coordinates = explode(',', (string)$item->Point->coordinates);
             $name = (string)$item->name;

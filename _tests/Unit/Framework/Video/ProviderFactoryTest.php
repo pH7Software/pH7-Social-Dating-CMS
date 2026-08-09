@@ -11,7 +11,6 @@ declare(strict_types=1);
 namespace PH7\Test\Unit\Framework\Video;
 
 use PH7\Framework\Video\Api\Dailymotion;
-use PH7\Framework\Video\Api\Metacafe;
 use PH7\Framework\Video\Api\Vimeo;
 use PH7\Framework\Video\Api\Youtube;
 use PH7\Framework\Video\InvalidApiProviderException;
@@ -24,7 +23,7 @@ final class ProviderFactoryTest extends TestCase
     #[DataProvider('videoApiProvider')]
     public function testCreateValidApiProvider(string $sClassName, string $sExpectedClass): void
     {
-        $oProvider = ProviderFactory::create($sClassName);
+        $oProvider = ProviderFactory::create($sClassName, false);
         $this->assertInstanceOf($sExpectedClass, $oProvider);
     }
 
@@ -32,7 +31,14 @@ final class ProviderFactoryTest extends TestCase
     {
         $this->expectException(InvalidApiProviderException::class);
 
-        ProviderFactory::create('invalidVideoApiProvider');
+        ProviderFactory::create('invalidVideoApiProvider', false);
+    }
+
+    public function testCreateRejectsRetiredMetacafeProvider(): void
+    {
+        $this->expectException(InvalidApiProviderException::class);
+
+        ProviderFactory::create('metacafe', false);
     }
 
     public static function videoApiProvider(): array
@@ -43,7 +49,6 @@ final class ProviderFactoryTest extends TestCase
             ['dailymotion', Dailymotion::class],
             ['dai', Dailymotion::class],
             ['vimeo', Vimeo::class],
-            ['metacafe', Metacafe::class],
         ];
     }
 }

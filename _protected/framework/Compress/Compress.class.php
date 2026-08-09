@@ -224,7 +224,7 @@ class Compress
                 /**
                  * Inclusion of Douglas Crockford's JSMin
                  */
-                $sJsMinified = Minify\JS::minify($sContent);
+                $sJsMinified = Minify\Js::minify($sContent);
             }
         }
 

@@ -15,6 +15,7 @@ namespace PH7\Framework\Error\CException;
 defined('PH7') or exit('Restricted access');
 
 use Exception;
+use Throwable;
 use PH7\Framework\Error\Debug;
 use PH7\Framework\Error\LoggerExcept;
 use PH7\Framework\Page\Page;
@@ -38,9 +39,9 @@ class PH7Exception extends Exception
     /**
      * Sends the exception data to the logger class.
      *
-     * @param Exception $oExcept
+     * @param Throwable $oExcept
      */
-    public static function launch(Exception $oExcept)
+    public static function launch(Throwable $oExcept)
     {
         if (Debug::is()) {
             Page::exception($oExcept);

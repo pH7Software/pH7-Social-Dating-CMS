@@ -64,7 +64,7 @@ namespace {
         throw new ErrException($sMessage, 0, $iCode, $sFile, $sLine);
     }
 
-    function customExcept(ErrException $oExcept)
+    function customExcept(\Throwable $oExcept)
     {
         PH7Exception::launch($oExcept);
     }

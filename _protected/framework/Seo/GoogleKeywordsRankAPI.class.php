@@ -100,7 +100,6 @@ class GoogleKeywordsRankAPI
         curl_setopt($curl, CURLOPT_URL, $url);
         $this->response = curl_exec($curl);
         $infos = curl_getinfo($curl);
-        curl_close($curl);
         return $infos['http_code'];
     }
 

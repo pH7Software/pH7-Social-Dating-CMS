@@ -17,7 +17,6 @@ defined('PH7') or exit('Restricted access');
 
 use DomDocument;
 use DOMElement;
-use PDO;
 use PH7\Framework\Config\Config;
 use PH7\Framework\Error\CException\PH7Exception;
 use PH7\Framework\File\Import as FileImporter;
@@ -298,19 +297,15 @@ final class FrontController
      */
     public function _initializeDatabase()
     {
-        $aDriverOptions = [
-            PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES ' . $this->oConfig->values['database']['charset']
-        ];
-
         /* DSN */
         Db::getInstance(
-            $this->oConfig->values['database']['type'] . ':host=' . $this->oConfig->values['database']['hostname'] . ';port=' . $this->oConfig->values['database']['port'] . ';dbname=' . $this->oConfig->values['database']['name'],
+            $this->oConfig->values['database']['type'] . ':host=' . $this->oConfig->values['database']['hostname'] . ';port=' . $this->oConfig->values['database']['port'] . ';dbname=' . $this->oConfig->values['database']['name'] . ';charset=' . $this->oConfig->values['database']['charset'],
             /* Username */
             $this->oConfig->values['database']['username'],
             /* Password */
             $this->oConfig->values['database']['password'],
             /* Driver */
-            $aDriverOptions,
+            [],
             /* Prefix */
             $this->oConfig->values['database']['prefix']
         );

@@ -97,6 +97,6 @@ abstract class Base
      */
     protected function filter($sText)
     {
-        return htmlspecialchars($sText, ENT_QUOTES);
+        return htmlspecialchars((string)($sText ?? ''), ENT_QUOTES);
     }
 }

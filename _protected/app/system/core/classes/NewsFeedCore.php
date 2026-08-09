@@ -52,6 +52,8 @@ class NewsFeedCore
         $this->oCache->start(self::CACHE_GROUP, 'softwareNewsFeed' . $iNum, self::CACHE_LIFETIME);
 
         if (!$this->aData = $this->oCache->get()) {
+            $this->aData = [];
+
             if (!@$this->oXml->load(static::NEWS_URL)) {
                 throw new PH7Exception('Unable to retrieve news feeds for the URL: ' . static::NEWS_URL);
             }

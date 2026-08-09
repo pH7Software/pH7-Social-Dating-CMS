@@ -54,7 +54,7 @@ defined('PH7') or exit('Restricted access');
  * @author Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright (c) 2011-2019, Pierre-Henry Soria. All Rights Reserved.
  */
-class JS
+class Js
 {
     const ORD_LF = 10;
     const ORD_SPACE = 32;
@@ -395,6 +395,8 @@ class JS
      */
     protected function isAlphaNum($c)
     {
-        return ord($c) > 126 || $c === '\\' || preg_match('/^[\w\$]$/', $c) === 1;
+        return is_string($c)
+            && $c !== ''
+            && (ord($c) > 126 || $c === '\\' || preg_match('/^[\w\$]$/', $c) === 1);
     }
 }

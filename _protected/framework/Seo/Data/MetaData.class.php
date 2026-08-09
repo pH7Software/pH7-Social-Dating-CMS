@@ -1,7 +1,7 @@
 <?php
 /**
  * @author           Pierre-Henry Soria <hello@ph7builder.com>
- * @copyright        (c) 2019, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2019-2026, Pierre-Henry Soria and pH7Builder contributors.
  * @license          MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package          PH7 / Framework / Seo / Data
  */
@@ -15,19 +15,19 @@ final class MetaData
      *
      * @return array
      */
-    public static function getDefault($sLangId)
+    public static function getDefault(string $sLangId): array
     {
         $aData = [
             'langId' => $sLangId,
             'pageTitle' => 'Home',
-            'metaDescription' => 'The Best Online Social Dating Service to meet people and keep in touch with your friends',
-            'metaKeywords' => 'meet people, community, single, friends, meet singles, women, men, dating site, dating service, dating website, online dating website',
-            'headline' => 'Be on the right place!',
-            'slogan' => 'Online Dating Community with Chat Rooms',
-            'promoText' => 'You\'re on the best place for meeting new people nearby! Chat, Flirt, Socialize and have Fun!<br />Create any Dating Sites like that with <a href="https://ph7builder.com">pH7Builder</a>. It is Professional, Free, Open Source, ...',
+            'metaDescription' => 'Meet people, build genuine connections, and grow a community around your brand.',
+            'metaKeywords' => 'meet people, community, matchmaking, social network, dating',
+            'headline' => 'Welcome to our community',
+            'slogan' => 'Meet people. Build genuine connections.',
+            'promoText' => 'Create your profile, discover people nearby, and start a conversation.',
             'metaRobots' => 'index, follow, all',
-            'metaAuthor' => 'Pierre-Henry Soria (pH7Builder.com)',
-            'metaCopyright' => 'Pierre-Henry Soria. All Rights Reserved.',
+            'metaAuthor' => 'Your Site Name',
+            'metaCopyright' => 'Your Site Name',
             'metaRating' => 'general',
             'metaDistribution' => 'global',
             'metaCategory' => 'dating'

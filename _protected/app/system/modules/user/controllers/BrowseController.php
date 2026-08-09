@@ -1,9 +1,9 @@
 <?php
+
 /**
  * @author         Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright      (c) 2012-2022, Pierre-Henry Soria. All Rights Reserved.
  * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
- * @package        PH7 / App / System / Module / User / Controller
  */
 
 declare(strict_types=1);
@@ -27,8 +27,8 @@ class BrowseController extends Controller
     {
         parent::__construct();
 
-        $this->oUserModel = new UserModel;
-        $this->oPage = new Page;
+        $this->oUserModel = new UserModel();
+        $this->oPage = new Page();
     }
 
     public function index(): void
@@ -46,21 +46,21 @@ class BrowseController extends Controller
             $this->oPage->getNbItemsPerPage()
         );
 
-        if ($this->isSearch() && !empty($aUsers)) {
+        if ($this->isSearch() && empty($aUsers)) {
             Header::redirect(
                 Uri::get('user', 'browse', 'index'),
                 t('No results. Please try again with wider or different search criteria.'),
                 Design::ERROR_TYPE
             );
         } else {
-            /**
+            /*
              * @internal Here, we can put HTML tags in `<title>` tag since the template will strip them out before the output.
              */
             $this->view->page_title = t('Browse Members');
             $this->view->h1_title = '<span class="pH1">' . t('Browse Members') . '</span>';
             $this->view->h3_title = t('Meet new People with %0%', '<span class="pH0">' . $this->registry->site_name . '</span>');
             $this->view->meta_description = t('Meet new People and Friends near you with %site_name% - Browse Members');
-            $this->view->avatarDesign = new AvatarDesignCore;
+            $this->view->avatarDesign = new AvatarDesignCore();
             $this->view->users = $aUsers;
             $this->output();
         }

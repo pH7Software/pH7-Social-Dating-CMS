@@ -30,8 +30,8 @@ final class Autoloader
 {
     const FRAMEWORK_NAMESPACE = 'PH7\Framework';
     const COMPOSER_AUTOLOAD_FULL_PATH = PH7_PATH_PROTECTED . 'vendor/autoload.php';
-    const INFO_INSTALL_COMPOSER_LINK = 'https://github.com/pH7Software/pH7-Social-Dating-CMS#installation';
-    const DOWNLOAD_SOFTWARE_LINK = 'https://sourceforge.net/projects/ph7socialdating/files/latest/download';
+    const INFO_INSTALL_COMPOSER_LINK = 'https://github.com/pH7Software/pH7-Social-Dating-CMS/blob/18.x/docs/QUICK_START.md';
+    const DOWNLOAD_SOFTWARE_LINK = 'https://github.com/pH7Software/pH7-Social-Dating-CMS/releases/latest';
 
     /**
      * Make the class singleton by importing the appropriate trait.
@@ -126,8 +126,8 @@ final class Autoloader
 
         $sMsg = <<<HTML
 <p class="warning">Third-Party Libraries Not Installed</p>
-<p>Oops! It seems you downloaded pH7Builder from Github. We don't include third-party libraries on Github.<br />
-Please <strong><a href="{$sInstallComposerLink}" target="_blank" rel="noopener">read those instructions</a></strong> to install the third-party libraries or download pH7Builder from <strong><a href="{$sDownloadLink}" target="_blank" rel="noopener">Sourceforge</a></strong> if you don't understand how to download the third-party libraries separately.</p>'
+<p>This copy does not contain its locked third-party dependencies.<br />
+Run <code>composer install --no-dev --optimize-autoloader</code> in the project root using the <strong><a href="{$sInstallComposerLink}" target="_blank" rel="noopener">installation instructions</a></strong>, or deploy the complete archive from the <strong><a href="{$sDownloadLink}" target="_blank" rel="noopener">official GitHub release</a></strong>.</p>
 HTML;
         echo html_body('You need to run Composer', $sMsg);
         exit;

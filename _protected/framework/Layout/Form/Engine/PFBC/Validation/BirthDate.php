@@ -1,18 +1,16 @@
 <?php
+
 /**
- * Created by Pierre-Henry Soria
+ * Created by Pierre-Henry Soria.
  */
 
 namespace PFBC\Validation;
 
 use PFBC\Validation;
-use PH7\Framework\Date\CDateTime;
 use PH7\Framework\Mvc\Model\DbConfig;
 
 class BirthDate extends Validation
 {
-    const DATE_PATTERN = 'm/d/Y';
-
     /** @var int */
     protected $iMin;
 
@@ -29,18 +27,14 @@ class BirthDate extends Validation
     }
 
     /**
-     * @param string $sDate
-     *
      * @return bool
      */
-    public function isValid($sDate)
+    public function isValid($mDate)
     {
-        if ($this->isNotApplicable($sDate)) {
+        if ($mDate === null || $mDate === '') {
             return true;
         }
 
-        $sDate = (new CDateTime)->get($sDate)->date(self::DATE_PATTERN);
-
-        return $this->oValidate->birthDate($sDate, $this->iMin, $this->iMax);
+        return is_string($mDate) && $this->oValidate->birthDate($mDate, $this->iMin, $this->iMax);
     }
 }
