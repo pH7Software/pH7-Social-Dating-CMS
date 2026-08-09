@@ -212,4 +212,11 @@ final class HttpTest extends TestCase
         $this->assertSame('Pierre', $this->oHttpRequest->get('setname'));
         $this->assertSame('Pierre', $this->oHttpRequest->post('setname'));
     }
+
+    public function testRequestUriExcludesQueryStringFromRoutingPath(): void
+    {
+        $_SERVER['REQUEST_URI'] = '/api/main/ping?private_api_key=test&url=example.com';
+
+        $this->assertSame('api/main/ping', $this->oHttpRequest->requestUri());
+    }
 }

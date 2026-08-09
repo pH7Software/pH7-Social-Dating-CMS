@@ -1,16 +1,15 @@
 <?php
+
 /**
  * @title          User Model
  *
  * @author         Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
  * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
- * @package        PH7/ App / System / Module / User / Model
  */
 
 namespace PH7;
 
-use PDO;
 use PH7\Framework\Mvc\Model\Engine\Db;
 
 class UserModel extends UserCoreModel
@@ -26,44 +25,49 @@ class UserModel extends UserCoreModel
     }
 
     /**
-     * Join Step 1
-     *
-     * @param array $aData
+     * Join Step 1.
      *
      * @return int Returns the user's ID
      */
     public function join(array $aData)
     {
-        $rStmt = Db::getInstance()->prepare($this->getQuery('join', $this->sQueryPath));
-        $rStmt->bindValue(':email', $aData['email'], PDO::PARAM_STR);
-        $rStmt->bindValue(':username', $aData['username'], PDO::PARAM_STR);
-        $rStmt->bindValue(':password', $aData['password'], PDO::PARAM_STR);
-        $rStmt->bindValue(':first_name', $aData['first_name'], PDO::PARAM_STR);
-        $rStmt->bindValue(':reference', $aData['reference'], PDO::PARAM_STR);
-        $rStmt->bindValue(':is_active', $aData['is_active'], PDO::PARAM_INT);
-        $rStmt->bindValue(':ip', $aData['ip'], PDO::PARAM_STR);
-        $rStmt->bindParam(':hash_validation', $aData['hash_validation'], PDO::PARAM_STR, self::HASH_VALIDATION_LENGTH);
-        $rStmt->bindValue(':current_date', $aData['current_date'], PDO::PARAM_STR);
-        $rStmt->bindValue(':affiliated_id', $aData['affiliated_id'], PDO::PARAM_INT);
-        $rStmt->execute();
-        $this->setKeyId(Db::getInstance()->lastInsertId()); // Set the user's ID
-        Db::free($rStmt);
+        return $this->runRegistrationTransaction(
+            function (Db $oDb) use ($aData): int {
+                $rStmt = $oDb->prepare($this->getQuery('join', $this->sQueryPath));
+                $rStmt->bindValue(':email', $aData['email'], \PDO::PARAM_STR);
+                $rStmt->bindValue(':username', $aData['username'], \PDO::PARAM_STR);
+                $rStmt->bindValue(':password', $aData['password'], \PDO::PARAM_STR);
+                $rStmt->bindValue(':first_name', $aData['first_name'], \PDO::PARAM_STR);
+                $rStmt->bindValue(':reference', $aData['reference'], \PDO::PARAM_STR);
+                $rStmt->bindValue(':is_active', $aData['is_active'], \PDO::PARAM_INT);
+                $rStmt->bindValue(':ip', $aData['ip'], \PDO::PARAM_STR);
+                $rStmt->bindParam(':hash_validation', $aData['hash_validation'], \PDO::PARAM_STR, self::HASH_VALIDATION_LENGTH);
+                $rStmt->bindValue(':current_date', $aData['current_date'], \PDO::PARAM_STR);
+                $rStmt->bindValue(':affiliated_id', $aData['affiliated_id'], \PDO::PARAM_INT);
+                if (!$rStmt->execute()) {
+                    throw new \RuntimeException('The member account could not be created.');
+                }
+                $this->setKeyId($oDb->lastInsertId()); // Set the user's ID
+                Db::free($rStmt);
 
-        $this->setInfoFields(array()); // Insert an empty "members_info" entry with the user's ID
-        $this->setDefaultPrivacySetting();
-        $this->setDefaultNotification();
+                if (
+                    !$this->setInfoFields([])
+                    || !$this->setDefaultPrivacySetting()
+                    || !$this->setDefaultNotification()
+                    || !$this->updateMembership($aData['group_id'], $this->getKeyId(), $this->sCurrentDate)
+                ) {
+                    throw new \RuntimeException('The complete member profile could not be created.');
+                }
 
-        // Last thing, update the membership with the correct details
-        $this->updateMembership($aData['group_id'], $this->getKeyId(), $this->sCurrentDate);
-
-        return $this->getKeyId();
+                return $this->getKeyId();
+            }
+        );
     }
 
     /**
      * Execute SQL Join files.
      *
-     * @param array $aData
-     * @param string $sJoinStep Step of the "Join" file ('2_1', '2_2' or '3').
+     * @param string $sJoinStep step of the "Join" file ('2_1', '2_2' or '3')
      *
      * @return bool
      */

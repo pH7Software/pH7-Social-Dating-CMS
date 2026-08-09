@@ -292,7 +292,7 @@ class Http extends \PH7\Framework\Http\Http
      */
     public function requestUri()
     {
-        $sUri = $this->getUri();
+        $sUri = explode('?', $this->getUri(), 2)[0];
 
         // Remove relative subfolder path and the first left slash
         $sRequestUri = ltrim($sUri, PH7_SH);

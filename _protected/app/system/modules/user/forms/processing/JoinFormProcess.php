@@ -1,16 +1,15 @@
 <?php
+
 /**
  * @author         Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
  * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
- * @package        PH7 / App / System / Module / User / Form / Processing
  */
 
 namespace PH7;
 
 defined('PH7') or exit('Restricted access');
 
-use DateTime;
 use PH7\Framework\Cookie\Cookie;
 use PH7\Framework\Date\CDateTime;
 use PH7\Framework\Ip\Ip;
@@ -34,13 +33,13 @@ class JoinFormProcess extends Form
     {
         parent::__construct();
 
-        $this->oUserModel = new UserModel;
+        $this->oUserModel = new UserModel();
         $this->iActiveType = (int)DbConfig::getSetting('userActivationType');
     }
 
     public function step1()
     {
-        $iAffId = (int)(new Cookie)->get(AffiliateCore::COOKIE_NAME);
+        $iAffId = (int)(new Cookie())->get(AffiliateCore::COOKIE_NAME);
 
         $aData = [
             'email' => $this->httpRequest->post('mail'),
@@ -49,7 +48,7 @@ class JoinFormProcess extends Form
             'reference' => $this->getAffiliateReference(),
             'ip' => Ip::get(),
             'hash_validation' => Various::genRnd(null, UserCoreModel::HASH_VALIDATION_LENGTH),
-            'current_date' => (new CDateTime)->get()->dateTime('Y-m-d H:i:s'),
+            'current_date' => (new CDateTime())->get()->dateTime('Y-m-d H:i:s'),
             'is_active' => $this->iActiveType,
             'group_id' => (int)DbConfig::getSetting('defaultMembershipGroupId'),
             'affiliated_id' => $iAffId
@@ -62,13 +61,13 @@ class JoinFormProcess extends Form
         $iTimeDelay = (int)DbConfig::getSetting('timeDelayUserRegistration');
         if (!$this->oUserModel->checkWaitJoin($aData['ip'], $iTimeDelay, $aData['current_date'])) {
             \PFBC\Form::setError('form_join_user', Form::waitRegistrationMsg($iTimeDelay));
-        } elseif (!$iProfileId = $this->oUserModel->join($aData)) {
+        } elseif (!$iProfileId = $this->registerStep1($aData)) {
             \PFBC\Form::setError('form_join_user',
                 t('An error occurred during registration!') . '<br />' .
                 t('Please try again or come back later.')
             );
         } else {
-            /**
+            /*
              * Update the Affiliate Commission
              * Only if the user's account is already activated
              */
@@ -105,6 +104,7 @@ class JoinFormProcess extends Form
                 t('An error occurred during registration!') . '<br />' .
                 t('Please try again or come back later.')
             );
+
             return;
         }
 
@@ -152,6 +152,7 @@ class JoinFormProcess extends Form
                 t('An error occurred during registration!') . '<br />' .
                 t('Please try again or come back later.')
             );
+
             return;
         }
 
@@ -192,7 +193,7 @@ class JoinFormProcess extends Form
                 $iApproved = 0;
             }
 
-            $bAvatar = (new UserCore)->setAvatar(
+            $bAvatar = (new UserCore())->setAvatar(
                 $this->session->get('profile_id'),
                 $this->session->get('username'),
                 $_FILES['avatar']['tmp_name'],
@@ -205,6 +206,17 @@ class JoinFormProcess extends Form
                 $this->session->set('mail_step4', $this->session->get('mail_step1'));
                 $this->redirectUserToDonePage();
             }
+        }
+    }
+
+    private function registerStep1(array $aData): int
+    {
+        try {
+            return (int)$this->oUserModel->join($aData);
+        } catch (\Throwable $oException) {
+            error_log(sprintf('Member registration failed: %s', $oException->getMessage()));
+
+            return 0;
         }
     }
 
@@ -238,13 +250,13 @@ class JoinFormProcess extends Form
     }
 
     /**
-     * @return string Returns the birthdate depending of what field type is used in the form.
+     * @return string returns the birthdate depending of what field type is used in the form
      */
     private function getUserBirthDateValue()
     {
         if (DbConfig::getSetting('isUserAgeRangeField')) {
             $iAge = $this->httpRequest->post('age', 'int');
-            $oDate = new DateTime;
+            $oDate = new \DateTime();
             $oDate->modify(sprintf('- %d year', $iAge));
             $sBirthDate = $oDate->format('Y-m-d');
         } else {

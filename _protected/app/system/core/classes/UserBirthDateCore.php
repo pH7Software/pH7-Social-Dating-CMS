@@ -1,9 +1,9 @@
 <?php
+
 /**
  * @author         Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright      (c) 2018-2019, Pierre-Henry Soria. All Rights Reserved.
  * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
- * @package        PH7 / App / System / Core / Class
  */
 
 namespace PH7;
@@ -12,12 +12,12 @@ use PH7\Framework\Math\Measure\Year as YearMeasure;
 
 class UserBirthDateCore
 {
-    const DEFAULT_AGE = 30;
-    const BIRTHDATE_DELIMITER = '-';
-    const NUMBER_ARRAY_ELEMENTS = 3;
+    public const DEFAULT_AGE = 30;
+    public const BIRTHDATE_DELIMITER = '-';
+    public const NUMBER_ARRAY_ELEMENTS = 3;
 
     /**
-     * @param string $sBirthDate YYYY-MM-DD format.
+     * @param string $sBirthDate YYYY-MM-DD format
      *
      * @return int
      */
@@ -33,15 +33,13 @@ class UserBirthDateCore
     }
 
     /**
-     * @param array $aAge
-     *
      * @return bool
      */
     private static function isInvalidBirthDate(array $aAge)
     {
         $iAgeElements = count($aAge);
 
-        return $iAgeElements < self::NUMBER_ARRAY_ELEMENTS ||
-            $iAgeElements > self::NUMBER_ARRAY_ELEMENTS;
+        return $iAgeElements < self::NUMBER_ARRAY_ELEMENTS
+            || $iAgeElements > self::NUMBER_ARRAY_ELEMENTS;
     }
 }

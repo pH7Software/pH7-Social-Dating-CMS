@@ -19,16 +19,34 @@ class MainControllerTest extends TestCase
 {
     protected Client $oClient;
 
+    private string $sPrivateApiKey;
+
+    private string $sAllowedDomain;
+
     protected function setUp(): void
     {
-        $this->oClient = new Client(['exceptions' => false]);
+        $this->oClient = new Client(['http_errors' => false]);
+
+        $aConfig = parse_ini_file(PH7_PATH_APP_CONFIG . PH7_CONFIG_FILE, true);
+        if (!is_array($aConfig) || !isset($aConfig['ph7cms.api'])) {
+            $this->markTestSkipped('An installed pH7Builder configuration is required for the API integration tests.');
+        }
+
+        $aApiConfig = $aConfig['ph7cms.api'];
+        $aAllowedDomains = (array)($aApiConfig['allow_domains'] ?? []);
+        $this->sPrivateApiKey = (string)($aApiConfig['private_key'] ?? '');
+        $this->sAllowedDomain = (string)reset($aAllowedDomains);
+
+        if ($this->sPrivateApiKey === '' || $this->sAllowedDomain === '') {
+            $this->markTestSkipped('API credentials and an allowed domain are required for the API integration tests.');
+        }
     }
 
     public function testDenyRequest(): void
     {
         $oResponse = $this->oClient->get($this->getApiUrl('ping'), [
             'query' => [
-                'private_api_key' => 'dev772277',
+                'private_api_key' => $this->sPrivateApiKey,
                 'url' => 'doesntexist.com'
             ]
         ]);
@@ -40,8 +58,8 @@ class MainControllerTest extends TestCase
     {
         $oResponse = $this->oClient->post($this->getApiUrl('ping'), [
             'query' => [
-                'private_api_key' => 'dev772277',
-                'url' => 'ph7cms.com'
+                'private_api_key' => $this->sPrivateApiKey,
+                'url' => $this->sAllowedDomain
             ]
         ]);
 
@@ -61,8 +79,8 @@ class MainControllerTest extends TestCase
     {
         $oResponse = $this->oClient->get($this->getApiUrl('ping'), [
             'query' => [
-                'private_api_key' => 'dev772277',
-                'url' => 'ph7cms.com'
+                'private_api_key' => $this->sPrivateApiKey,
+                'url' => $this->sAllowedDomain
             ]
         ]);
 

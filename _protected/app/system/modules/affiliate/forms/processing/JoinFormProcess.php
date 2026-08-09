@@ -1,9 +1,9 @@
 <?php
+
 /**
  * @author         Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
  * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
- * @package        PH7 / App / System / Module / Affiliate / Form / Processing
  */
 
 declare(strict_types=1);
@@ -33,7 +33,7 @@ class JoinFormProcess extends Form
     public function step1(): void
     {
         $sBirthDate = $this->dateTime->get($this->httpRequest->post('birth_date'))->date('Y-m-d');
-        $iAffId = (int)(new Cookie)->get(AffiliateCore::COOKIE_NAME);
+        $iAffId = (int)(new Cookie())->get(AffiliateCore::COOKIE_NAME);
 
         $aData = [
             'email' => $this->httpRequest->post('mail'),
@@ -49,17 +49,17 @@ class JoinFormProcess extends Form
             'zip_code' => $this->httpRequest->post('zip_code'),
             'ip' => Ip::get(),
             'hash_validation' => Various::genRnd(null, UserCoreModel::HASH_VALIDATION_LENGTH),
-            'current_date' => (new CDateTime)->get()->dateTime(UserCoreModel::DATETIME_FORMAT),
+            'current_date' => (new CDateTime())->get()->dateTime(UserCoreModel::DATETIME_FORMAT),
             'is_active' => $this->iActiveType,
             'affiliated_id' => $iAffId
         ];
 
-        $oAffModel = new AffiliateModel;
+        $oAffModel = new AffiliateModel();
 
         $iTimeDelay = (int)DbConfig::getSetting('timeDelayAffRegistration');
         if (!$oAffModel->checkWaitJoin($aData['ip'], $iTimeDelay, $aData['current_date'], DbTableName::AFFILIATE)) {
             \PFBC\Form::setError('form_join_aff', Form::waitRegistrationMsg($iTimeDelay));
-        } elseif (!$oAffModel->join($aData)) {
+        } elseif (!$this->registerAffiliate($oAffModel, $aData)) {
             \PFBC\Form::setError('form_join_aff',
                 t('An error occurred during registration!') . '<br />' .
                 t('Please try again with new information in the form fields or come back later.')
@@ -67,7 +67,7 @@ class JoinFormProcess extends Form
         } else {
             $oRegistration = new Registration($this->view);
 
-            /** Update the Affiliate Commission **/
+            /* Update the Affiliate Commission * */
             if ($this->isUserActivated()) {
                 AffiliateCore::updateJoinCom($iAffId, $this->config, $this->registry);
             }
@@ -82,6 +82,17 @@ class JoinFormProcess extends Form
         }
 
         unset($oAffModel);
+    }
+
+    private function registerAffiliate(AffiliateModel $oAffiliateModel, array $aData): bool
+    {
+        try {
+            return $oAffiliateModel->join($aData);
+        } catch (\Throwable $oException) {
+            error_log(sprintf('Affiliate registration failed: %s', $oException->getMessage()));
+
+            return false;
+        }
     }
 
     private function isUserActivated(): bool
