@@ -38,12 +38,14 @@
 /.github export-ignore
 /_tests export-ignore
 /_tools export-ignore
+/AGENTS.md export-ignore
 .gitattributes export-ignore
 .gitignore export-ignore
 .editorconfig export-ignore
 .dockerignore export-ignore
 .php-cs-fixer.dist.php export-ignore
 phpcs.xml.dist export-ignore
+phpstan.neon.dist export-ignore
 phpunit.xml.dist export-ignore
 
 ## Docker is a development environment, not part of the runnable release archive
