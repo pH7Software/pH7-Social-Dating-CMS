@@ -56,23 +56,27 @@
             {if $is_profile_faker_enabled}
               <li>
                   <a href="{{ $design->url('profile-faker', 'generator', 'addmember') }}">
-                      {lang 'Add sample profiles while your community grows (avoids the "empty site" feel)'}
+                      {lang 'Add clearly labelled sample profiles on a non-production site'}
                   </a> 👥
               </li>
             {/if}
 
             <li>
-                {{ $boxes = ['donationbox', 'upsetbox'] }}
-                {{ $box = $boxes[mt_rand(0,1)] }}
-                <a class="underline" href="{{ $design->url('ph7cms-helper', 'main', 'suggestionbox', '?box='.$box) }}">
-                    {lang 'Contribute to the software'}
-                </a> 🚀
+                <a href="{{ $design->url('payment', 'admin', 'membershiplist') }}">
+                    {lang 'Review membership permissions, prices, and expiry periods'}
+                </a>
             </li>
 
             <li>
-                <a href="{tweet_msg_url}" target="_blank" rel="noopener noreferrer">
-                    {lang 'Share it on Twitter'}
-                </a> 💙
+                <a href="{{ $design->url(PH7_ADMIN_MOD, 'setting', 'general') }}#p=automation">
+                    {lang 'Configure the cron secret and server scheduler'}
+                </a>
+            </li>
+
+            <li>
+                <a href="{{ $design->url(PH7_ADMIN_MOD, 'setting', 'general') }}#p=registration">
+                    {lang 'Review registration, activation, moderation, and anti-spam settings'}
+                </a>
             </li>
         </ul>
     </div>
