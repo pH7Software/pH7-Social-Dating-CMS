@@ -1,9 +1,9 @@
 <?php
+
 /**
  * @author         Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
  * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
- * @package        PH7 / App / System / Module / Report / Form / Processing
  */
 
 declare(strict_types=1);
@@ -20,11 +20,18 @@ class ReportFormProcess extends Form
 
         $sUrl = $this->getUrl();
         $mNeedle = strstr($sUrl, '?', true);
+        $mContentType = $this->httpRequest->post('type');
+        if (!Report::isValidContentType($mContentType)) {
+            \PFBC\Form::setError('form_report', t('Unable to report abuse.'));
+
+            return;
+        }
+
         $aData = [
             'reporter_id' => $this->session->get('member_id'),
             'spammer_id' => $this->httpRequest->post('spammer'),
             'url' => ($mNeedle ? $mNeedle : $sUrl),
-            'type' => $this->httpRequest->post('type'),
+            'type' => $mContentType,
             'desc' => $this->httpRequest->post('desc'),
             'date' => $this->dateTime->get()->dateTime('Y-m-d H:i:s')
         ];
@@ -32,7 +39,6 @@ class ReportFormProcess extends Form
         $mReport = (new Report($this->view))->add($aData)->get();
 
         unset($aData);
-
 
         if ($mReport === 'already_reported') {
             \PFBC\Form::setError('form_report', t('You have already reported abuse about this profile.'));

@@ -17,12 +17,10 @@ defined('PH7') or exit('Restricted access');
 
 use PH7\Framework\Config\Config;
 use PH7\Framework\Mvc\Request\Http as HttpRequest;
-use PH7\Framework\Server\Server;
 
 class Tool
 {
     const SOFTWARE_API_URL = 'https://api.ph7builder.com/';
-    const DEV_APP_API_KEY = 'dev772277';
 
     /**
      * Check if an external app can have access to the API.
@@ -34,8 +32,15 @@ class Tool
      */
     public static function checkAccess(Config $oConfig, HttpRequest $oRequest): bool
     {
-        if (self::isApiKeyValid($oRequest->gets('private_api_key'), $oConfig)) {
-            return self::isUrlAllowed($oRequest->gets('url'), $oConfig);
+        $mPrivateApiKey = $oRequest->gets('private_api_key');
+        $mUrl = $oRequest->gets('url');
+
+        if (!is_string($mPrivateApiKey) || !is_string($mUrl)) {
+            return false;
+        }
+
+        if (self::isApiKeyValid($mPrivateApiKey, $oConfig)) {
+            return self::isUrlAllowed($mUrl, $oConfig);
         }
 
         return false;
@@ -43,8 +48,11 @@ class Tool
 
     private static function isApiKeyValid(string $sPrivateApiKey, Config $oConfig): bool
     {
-        return strcmp($sPrivateApiKey, $oConfig->values['ph7cms.api']['private_key']) === 0 ||
-            (Server::isLocalHost() && $sPrivateApiKey === self::DEV_APP_API_KEY);
+        $mConfiguredApiKey = $oConfig->values['ph7cms.api']['private_key'] ?? null;
+
+        return is_string($mConfiguredApiKey) &&
+            $mConfiguredApiKey !== '' &&
+            hash_equals($mConfiguredApiKey, $sPrivateApiKey);
     }
 
     private static function isUrlAllowed(string $sUrl, Config $oConfig): bool

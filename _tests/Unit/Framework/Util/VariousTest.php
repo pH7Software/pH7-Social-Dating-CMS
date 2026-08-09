@@ -17,8 +17,23 @@ class VariousTest extends TestCase
 {
     public function testGenerateRandom(): void
     {
-        $iStringLength = strlen(Various::genRnd('Pierre-Henry Random :D', 8));
-        $this->assertSame(8, $iStringLength);
+        $sFirstValue = Various::genRnd('Pierre-Henry Random :D', 40);
+        $sSecondValue = Various::genRnd('Pierre-Henry Random :D', 40);
+
+        $this->assertSame(40, strlen($sFirstValue));
+        $this->assertMatchesRegularExpression('/\A[a-f0-9]{40}\z/', $sFirstValue);
+        $this->assertNotSame($sFirstValue, $sSecondValue);
+    }
+
+    public function testRandomGenerationHasNoWeakFallback(): void
+    {
+        $sSource = file_get_contents(PH7_PATH_FRAMEWORK . 'Util/Various.class.php');
+
+        $this->assertIsString($sSource);
+        $this->assertStringContainsString('random_bytes(', $sSource);
+        $this->assertStringNotContainsString('mt_rand(', $sSource);
+        $this->assertStringNotContainsString('uniqid(', $sSource);
+        $this->assertStringNotContainsString('catch (', $sSource);
     }
 
     public function testPaddingString(): void

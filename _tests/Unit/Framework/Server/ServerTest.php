@@ -41,11 +41,25 @@ final class ServerTest extends TestCase
         $this->assertFalse(Server::isLocalHost());
     }
 
-    public function testItIsLocalHostWithPort(): void
+    public function testHttpHostCannotSpoofLocalhostMode(): void
     {
         $_SERVER['HTTP_HOST'] = 'localhost:8080';
 
-        $this->assertTrue(Server::isLocalHost());
+        $this->assertFalse(Server::isLocalHost());
+    }
+
+    public function testCookiesRemainHostOnlyWithoutExplicitConfiguration(): void
+    {
+        putenv('PH7_COOKIE_DOMAIN');
+
+        $this->assertSame('', Server::getCookieDomain());
+    }
+
+    public function testUnrelatedCookieDomainIsRejected(): void
+    {
+        putenv('PH7_COOKIE_DOMAIN=attacker.example');
+
+        $this->assertSame('', Server::getCookieDomain());
     }
 
     public function testGetUndefinedServerKey(): void
@@ -81,5 +95,6 @@ final class ServerTest extends TestCase
     {
         unset($_SERVER['SERVER_NAME']);
         unset($_SERVER['HTTP_HOST']);
+        putenv('PH7_COOKIE_DOMAIN');
     }
 }

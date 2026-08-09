@@ -57,7 +57,7 @@ class Image
      */
     public function close()
     {
-        imagedestroy($this->resource);
+        $this->resource = null;
     }
 
     /**

@@ -44,14 +44,6 @@ class PictureFormProcess extends Form implements NudityDetectable
         parent::__construct();
 
         /**
-         * This can cause minor errors (e.g. if a user sent a file that is not a photo).
-         * So we hide the errors if we are not in development mode.
-         */
-        if (!isDebug()) {
-            error_reporting(0);
-        }
-
-        /**
          * Check if the photo album ID is valid. The value must be numeric.
          * This test is necessary because when the selection exists but that no option is available (this can when a user wants to add photos but he has no album)
          * the return value is of type "string" and the value is "1".
@@ -63,6 +55,19 @@ class PictureFormProcess extends Form implements NudityDetectable
             );
             return; // Stop execution of the method.
         }
+
+        $iProfileId = (int)$this->session->get('member_id');
+        $iAlbumId = (int)$this->httpRequest->post('album_id');
+        $oPictureModel = new PictureModel;
+        if (!$oPictureModel->doesAlbumBelongToProfile($iProfileId, $iAlbumId)) {
+            \PFBC\Form::setError(
+                'form_picture',
+                t('Please choose one of your own albums.')
+            );
+            return;
+        }
+
+        $sAlbumTitle = MediaCore::cleanTitle($this->httpRequest->post('album_title'));
 
         /**
          * Resizing and saving some photos
@@ -79,9 +84,6 @@ class PictureFormProcess extends Form implements NudityDetectable
                 \PFBC\Form::setError('form_picture', Form::wrongImgFileTypeMsg());
                 return; // Stop execution of the method.
             }
-
-            $sAlbumTitle = MediaCore::cleanTitle($this->httpRequest->post('album_title'));
-            $iAlbumId = (int)$this->httpRequest->post('album_id');
 
             $oPicture2 = clone $oPicture1;
             $oPicture3 = clone $oPicture1;
@@ -135,8 +137,8 @@ class PictureFormProcess extends Form implements NudityDetectable
             $sTitle = $this->getImageTitle($oPicture1);
             $sTitle = MediaCore::cleanTitle($sTitle);
 
-            (new PictureModel)->addPhoto(
-                $this->session->get('member_id'),
+            $oPictureModel->addPhoto(
+                $iProfileId,
                 $iAlbumId,
                 $sTitle,
                 $this->httpRequest->post('description'),

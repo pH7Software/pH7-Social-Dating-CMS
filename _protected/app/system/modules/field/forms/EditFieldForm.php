@@ -1,9 +1,9 @@
 <?php
+
 /**
  * @author         Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright      (c) 2013-2019, Pierre-Henry Soria. All Rights Reserved.
  * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
- * @package        PH7 / App / System / Module / Field / Form
  */
 
 namespace PH7;
@@ -27,8 +27,13 @@ class EditFieldForm
     public static function display()
     {
         if (isset($_POST['submit_edit_field'])) {
-            if (\PFBC\Form::isValid($_POST['submit_edit_field'])) {
-                new EditFieldFormProcess;
+            if (
+                !FieldModel::isValidColumnName($_GET['name'] ?? null)
+                || !FieldModel::isValidColumnName($_POST['name'] ?? null)
+            ) {
+                \PFBC\Form::setError('form_edit_field', t('Please enter a valid field name.'));
+            } elseif (\PFBC\Form::isValid($_POST['submit_edit_field'])) {
+                new EditFieldFormProcess();
             }
 
             Header::redirect();
@@ -62,7 +67,7 @@ class EditFieldForm
                 array_merge(
                     [
                         'description' => t('Field Name must contain 2-30 alphanumeric characters ([a-z], [A-Z], [0-9] and [_]). Then, you can translate the language key in <span class="italic underline">%0%</span>', PH7_PATH_APP_LANG . PH7_LANG_NAME . PH7_DS . 'language.php'),
-                        'value' => (new Http)->get('name'),
+                        'value' => self::getCurrentFieldName(),
                         'pattern' => $sFieldPattern,
                         'required' => 1,
                         'validation' => new RegExp($sFieldPattern),
@@ -96,5 +101,14 @@ class EditFieldForm
         );
         $oForm->addElement(new Button(t('Update')));
         $oForm->render();
+    }
+
+    private static function getCurrentFieldName(): string
+    {
+        $mFieldName = $_GET['name'] ?? null;
+
+        return FieldModel::isValidColumnName($mFieldName)
+            ? (new Http())->get('name')
+            : '';
     }
 }

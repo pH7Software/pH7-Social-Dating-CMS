@@ -14,7 +14,7 @@ namespace PH7\Framework\Page;
 
 defined('PH7') or exit('Restricted access');
 
-use Exception;
+use Throwable;
 use PH7\Framework\Http\Http;
 use PH7\Framework\Navigation\Browser;
 use PH7\JustHttp\StatusCode;
@@ -66,7 +66,7 @@ class Page
         exit;
     }
 
-    public static function exception(Exception $oExcept): void
+    public static function exception(Throwable $oExcept): void
     {
         // Set 500 HTTP status code
         Http::setHeadersByCode(StatusCode::INTERNAL_SERVER_ERROR);

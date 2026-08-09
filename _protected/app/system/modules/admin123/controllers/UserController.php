@@ -125,8 +125,6 @@ class UserController extends Controller implements UserModeratable
 
     public function result(): void
     {
-        error_reporting(0);
-
         $iGroupId = $this->httpRequest->get('group_id', Type::INTEGER);
         $iBan = $this->httpRequest->get('ban', Type::INTEGER);
         $sWhere = $this->httpRequest->get('where');

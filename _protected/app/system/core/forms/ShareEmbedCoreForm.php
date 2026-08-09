@@ -10,6 +10,7 @@ namespace PH7;
 
 use PFBC\Element\HTMLExternal;
 use PFBC\Element\Textarea;
+use PH7\Framework\Str\Str;
 
 class ShareEmbedCoreForm
 {
@@ -25,10 +26,15 @@ class ShareEmbedCoreForm
      */
     public static function display($sFileUrl, $iEmbedWidth = 580, $iEmbedHeight = 450, $iWidth = null)
     {
-        $sEmbedCode = '<object codebase="http://www.adobe.com/go/getflashplayer" width="' . $iEmbedWidth . '" height="' . $iEmbedHeight . '" align="middle">
-        <param name="movie" value="' . $sFileUrl . '" /><param name="quality" value="high" />
-        <embed src="' . $sFileUrl . '" width="' . $iEmbedWidth . '" height="' . $iEmbedHeight . '" align="middle" quality="high" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash"></embed>
-        </object>';
+        $sEscapedFileUrl = (new Str())->escapeAttribute($sFileUrl);
+        $iEmbedWidth = max(1, (int)$iEmbedWidth);
+        $iEmbedHeight = max(1, (int)$iEmbedHeight);
+        $sEmbedCode = sprintf(
+            '<video src="%s" width="%d" height="%d" controls preload="metadata"></video>',
+            $sEscapedFileUrl,
+            $iEmbedWidth,
+            $iEmbedHeight
+        );
 
         $oForm = new \PFBC\Form('form_share_embed', $iWidth);
         $oForm->configure(['action' => '', 'class' => 'center']);

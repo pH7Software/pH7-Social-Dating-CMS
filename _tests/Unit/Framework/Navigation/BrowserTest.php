@@ -106,6 +106,20 @@ final class BrowserTest extends TestCase
         $this->assertFalse($this->oBrowser->encoding());
     }
 
+    public function testMissingAcceptEncodingDoesNotThrow(): void
+    {
+        unset($_SERVER['HTTP_ACCEPT_ENCODING']);
+
+        $this->assertFalse($this->oBrowser->encoding());
+    }
+
+    public function testMissingAcceptLanguageReturnsEmptyLanguage(): void
+    {
+        unset($_SERVER['HTTP_ACCEPT_LANGUAGE']);
+
+        $this->assertSame('', $this->oBrowser->getLanguage());
+    }
+
     #[DataProvider('mobileServerHeadersProvider')]
     public function testIsMobile(string $sServerKeyName, string $sServerValue): void
     {
@@ -166,5 +180,6 @@ final class BrowserTest extends TestCase
         unset($_SERVER['HTTP_USER_AGENT']);
         unset($_SERVER['HTTP_IF_MODIFIED_SINCE']);
         unset($_SERVER['HTTP_REFERER']);
+        $_SERVER['HTTP_ACCEPT_LANGUAGE'] = 'en-GB,en;q=0.9';
     }
 }

@@ -76,6 +76,27 @@ class VideoModel extends VideoCoreModel
      *
      * @return bool
      */
+    public function doesAlbumBelongToProfile($iProfileId, $iAlbumId)
+    {
+        $rStmt = Db::getInstance()->prepare(
+            'SELECT COUNT(albumId) FROM' . Db::prefix(DbTableName::ALBUM_VIDEO) .
+            'WHERE profileId = :profileId AND albumId = :albumId'
+        );
+        $rStmt->bindValue(':profileId', $iProfileId, PDO::PARAM_INT);
+        $rStmt->bindValue(':albumId', $iAlbumId, PDO::PARAM_INT);
+        $rStmt->execute();
+        $bOwnsAlbum = (bool)$rStmt->fetchColumn();
+        Db::free($rStmt);
+
+        return $bOwnsAlbum;
+    }
+
+    /**
+     * @param int $iProfileId
+     * @param int $iAlbumId
+     *
+     * @return bool
+     */
     public function deleteAlbum($iProfileId, $iAlbumId)
     {
         $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix(DbTableName::ALBUM_VIDEO) . 'WHERE profileId = :profileId AND albumId = :albumId');

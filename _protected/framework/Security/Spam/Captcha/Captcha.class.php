@@ -4,7 +4,7 @@
  * @desc           Generates a captcha and manages the display of the image.
  *
  * @author         Pierre-Henry Soria <hello@ph7builder.com>
- * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2026, Pierre-Henry Soria and pH7Builder contributors.
  * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package        PH7 / Framework / Security / Spam / Captcha
  * @version        0.9
@@ -193,7 +193,7 @@ class Captcha
         (new Browser)->noCache();
         header('Content-type: image/png');
         imagepng($this->rImg);
-        imagedestroy($this->rImg);
+        $this->rImg = null;
     }
 
     /**
@@ -250,10 +250,10 @@ class Captcha
                 $iAngle = mt_rand(-70, 70);
                 imagettftext(
                     $this->rImg,
-                    mt_rand($this->iSize / 2, $this->iSize),
+                    mt_rand(intdiv($this->iSize, 2), $this->iSize),
                     $iAngle,
                     ($i * $this->iStringWidth) + $this->iMargin,
-                    $this->iHeight + mt_rand(1, $this->iMargin / 2),
+                    $this->iHeight + mt_rand(1, intdiv($this->iMargin, 2)),
                     $mColor,
                     $this->sFont,
                     $sText

@@ -119,6 +119,41 @@ final class ValidateTest extends TestCase
         $this->assertFalse($this->oValidate->birthDate($sDate, $iMinAge, $iMaxAge));
     }
 
+    #[DataProvider('normalizedBirthDateProvider')]
+    public function testBirthDateInputIsStrictlyNormalized(string $sInput, string $sExpected): void
+    {
+        $this->assertSame($sExpected, Validate::normalizeBirthDate($sInput));
+    }
+
+    public static function normalizedBirthDateProvider(): array
+    {
+        return [
+            'HTML date input' => ['2000-02-29', '2000-02-29'],
+            'legacy API date input' => ['02/29/2000', '2000-02-29'],
+            'surrounding whitespace' => [' 2000-12-31 ', '2000-12-31']
+        ];
+    }
+
+    #[DataProvider('invalidBirthDateInputProvider')]
+    public function testInvalidBirthDateInputIsRejected(mixed $mInput): void
+    {
+        $this->assertNull(Validate::normalizeBirthDate($mInput));
+    }
+
+    public static function invalidBirthDateInputProvider(): array
+    {
+        return [
+            'unparseable text' => ['not-a-date'],
+            'impossible ISO date' => ['2001-02-29'],
+            'impossible legacy date' => ['02/30/2000'],
+            'ambiguous format' => ['31/12/2000'],
+            'missing zero padding' => ['2000-2-29'],
+            'timestamp' => ['951782400'],
+            'date with time' => ['2000-02-29T00:00:00Z'],
+            'array-shaped input' => [['2000-02-29']]
+        ];
+    }
+
     public static function validHexCodesProvider(): array
     {
         return [
@@ -270,6 +305,7 @@ final class ValidateTest extends TestCase
     {
         return [
             ['02/02/1989', 18, 99],
+            ['1989-02-02', 18, 99],
             ['02/22/1990', 20, 90],
             ['12/10/1998', 18, 80],
             ['12/10/1998', 18, 99]
@@ -285,6 +321,9 @@ final class ValidateTest extends TestCase
             ['01/03/1990/03', 18, 99],
             ['03/00/1986', 18, 99],
             ['03-10-1986', 18, 99],
+            ['not-a-date', 18, 99],
+            ['2001-02-29', 18, 99],
+            ['02/30/2000', 18, 99],
         ];
     }
 }

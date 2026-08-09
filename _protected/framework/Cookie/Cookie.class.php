@@ -26,7 +26,7 @@ class Cookie
      *
      * @param array|string $mName Name of the cookie.
      * @param string|null $sValue value of the cookie, Optional if the cookie data is in an array.
-     * @param int|null $iTime The time the cookie expires. This is a Unix timestamp.
+     * @param int|null $iTime Cookie lifetime in seconds.
      * @param bool|null $bSecure If TRUE cookie will only be sent over a secure HTTPS connection from the client.
      */
     public function set($mName, ?string $sValue = null, ?int $iTime = null, ?bool $bSecure = null): void
@@ -34,38 +34,31 @@ class Cookie
         $aCookieConfig = Config::getInstance()->values['cookie'] ?? [];
         $sCookiePrefix = $aCookieConfig['prefix'] ?? '';
         $sCookiePath = $aCookieConfig['path'] ?? PH7_SH;
-        $sCookieDomain = $aCookieConfig['domain'] ?? '';
         $iExpiration = (int)($aCookieConfig['expiration'] ?? self::DEFAULT_EXPIRATION);
 
-        $iTime = time() + ((int)!empty($iTime) ? $iTime : $iExpiration);
         $bSecure = !empty($bSecure) && is_bool($bSecure) ? $bSecure : Server::isHttps();
 
         if (is_array($mName)) {
             foreach ($mName as $sName => $sVal) {
-                $this->set($sName, $sVal, $iTime, $bSecure);
+                $sCookieValue = is_scalar($sVal) ? (string)$sVal : null;
+                $this->set((string)$sName, $sCookieValue, $iTime, $bSecure);
             }
         } else {
             $sCookieName = $sCookiePrefix . $mName;
+            $iExpiresAt = time() + (!empty($iTime) ? $iTime : $iExpiration);
 
-            /* Check if we are not in localhost mode, otherwise may not work */
-            if (!Server::isLocalHost()) {
-                setcookie(
-                    $sCookieName,
-                    $sValue,
-                    $iTime,
-                    $sCookiePath,
-                    $sCookieDomain,
-                    $bSecure,
-                    true
-                );
-            } else {
-                setcookie(
-                    $sCookieName,
-                    $sValue,
-                    $iTime,
-                    PH7_SH
-                );
-            }
+            setcookie(
+                $sCookieName,
+                $sValue ?? '',
+                [
+                    'expires' => $iExpiresAt,
+                    'path' => $sCookiePath,
+                    'domain' => Server::getCookieDomain(),
+                    'secure' => $bSecure,
+                    'httponly' => true,
+                    'samesite' => 'Lax'
+                ]
+            );
         }
     }
 
@@ -118,7 +111,6 @@ class Cookie
         $aCookieConfig = Config::getInstance()->values['cookie'] ?? [];
         $sCookiePrefix = $aCookieConfig['prefix'] ?? '';
         $sCookiePath = $aCookieConfig['path'] ?? PH7_SH;
-        $sCookieDomain = $aCookieConfig['domain'] ?? '';
 
         if (is_array($mName)) {
             foreach ($mName as $sName) {
@@ -130,20 +122,19 @@ class Cookie
             // We put the cookie into an array. So, if the cookie is in a multi-dimensional arrays, it is clear how much is destroyed
             $_COOKIE[$sCookieName] = array();
 
-            // We ask the browser to delete the cookie
-            if (!Server::isLocalHost()) {
-                setcookie(
-                    $sCookieName,
-                    '',
-                    0,
-                    $sCookiePath,
-                    $sCookieDomain,
-                    Server::isHttps(),
-                    true
-                );
-            } else {
-                setcookie($sCookieName, '', 0, PH7_SH);
-            }
+            // Delete it with the same scope and security attributes used by set().
+            setcookie(
+                $sCookieName,
+                '',
+                [
+                    'expires' => time() - 3600,
+                    'path' => $sCookiePath,
+                    'domain' => Server::getCookieDomain(),
+                    'secure' => Server::isHttps(),
+                    'httponly' => true,
+                    'samesite' => 'Lax'
+                ]
+            );
 
             // then, we delete the cookie value locally to avoid using it by mistake later on in the script
             unset($_COOKIE[$sCookieName]);
