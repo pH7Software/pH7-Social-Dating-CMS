@@ -2,9 +2,9 @@ services:
   web:
     image: nginx:1.28-alpine
     ports:
-      - "8080:80"
+      - "127.0.0.1:8080:80"
     volumes:
-      - .:/var/www:ro
+      - ph7builder-app:/var/www:ro
       - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
     depends_on:
       php:
@@ -14,17 +14,16 @@ services:
     build:
       context: .
     working_dir: /var/www
-    command: sh -c "composer install --no-interaction && exec php-fpm"
+    environment:
+      PH7_CANONICAL_HOST: localhost:8080
     volumes:
-      - .:/var/www
+      - ph7builder-app:/var/www
     depends_on:
       db:
         condition: service_healthy
 
   db:
     image: mysql:8.4
-    ports:
-      - "8001:3306"
     environment:
       MYSQL_DATABASE: ph7builder
       MYSQL_USER: ph7builder
@@ -40,4 +39,5 @@ services:
       - ph7builder-db:/var/lib/mysql
 
 volumes:
+  ph7builder-app:
   ph7builder-db:

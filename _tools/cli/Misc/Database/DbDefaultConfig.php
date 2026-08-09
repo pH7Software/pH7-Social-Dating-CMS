@@ -10,7 +10,7 @@ final class DbDefaultConfig
 {
     public const HOSTNAME = 'localhost';
     public const USERNAME = 'root';
-    public const NAME = 'ph7cms';
+    public const NAME = 'ph7builder';
     public const PREFIX = 'ph7_';
     public const PORT = '3306';
     public const CHARSET = 'utf8mb4';
