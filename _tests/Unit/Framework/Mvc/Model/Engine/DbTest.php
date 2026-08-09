@@ -26,7 +26,7 @@ final class DbTest extends TestCase
 
     public function testSqlCompatibilityRequirements(): void
     {
-        $this->assertSame('5.5.3', Db::REQUIRED_SQL_VERSION);
+        $this->assertSame('8.0.0', Db::REQUIRED_SQL_VERSION);
 
         $sProjectRoot = dirname(__DIR__, 6);
         $aViolations = [];

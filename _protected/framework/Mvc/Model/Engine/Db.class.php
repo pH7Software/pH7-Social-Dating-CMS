@@ -1,12 +1,14 @@
 <?php
+
 /**
  * @title            Db (Database) Class
+ *
  * @desc             PDO Singleton Class
  *
  * @author           Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright        (c) 2011-2023, Pierre-Henry Soria. All Rights Reserved.
  * @license          MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
- * @package          PH7 / Framework / Mvc / Model / Engine
+ *
  * @version          1.6
  */
 
@@ -16,14 +18,13 @@ defined('PH7') or exit('Restricted access');
 
 use PDO;
 use PDOStatement;
-use Throwable;
 
 /**
  * @class Singleton Class
  */
 class Db
 {
-    public const REQUIRED_SQL_VERSION = '5.5.3';
+    public const REQUIRED_SQL_VERSION = '8.0.0';
 
     public const ASC = 'ASC';
     public const DESC = 'DESC';
@@ -54,9 +55,9 @@ class Db
     private static $fTime = 0.0;
 
     /** @var self|null */
-    private static $oInstance = null;
+    private static $oInstance;
 
-    /** @var PDO */
+    /** @var \PDO */
     private static $oDb;
 
     /**
@@ -67,13 +68,20 @@ class Db
     }
 
     /**
-     * @param string $sDsn
+     * Like the constructor, we make __clone private, so nobody can clone the instance.
+     */
+    private function __clone()
+    {
+    }
+
+    /**
+     * @param string      $sDsn
      * @param string|null $sUsername
      * @param string|null $sPassword
-     * @param array|null $aDriverOptions
+     * @param array|null  $aDriverOptions
      * @param string|null $sPrefix
      *
-     * @return self Returns the PDO instance class or create initial connection.
+     * @return self returns the PDO instance class or create initial connection
      */
     public static function getInstance($sDsn = '', $sUsername = null, $sPassword = null, $aDriverOptions = null, $sPrefix = null)
     {
@@ -98,12 +106,12 @@ class Db
                 self::$sPrefix = $sPrefix;
             }
 
-            self::$oInstance = new static;
+            self::$oInstance = new static();
 
             try {
-                self::$oDb = new PDO(self::$sDsn, self::$sUsername, self::$sPassword, self::$aDriverOptions);
-                self::$oDb->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            } catch (Throwable $oE) {
+                self::$oDb = new \PDO(self::$sDsn, self::$sUsername, self::$sPassword, self::$aDriverOptions);
+                self::$oDb->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+            } catch (\Throwable $oE) {
                 exit(self::ERROR_MESSAGE);
             }
 
@@ -121,6 +129,14 @@ class Db
     public function beginTransaction()
     {
         return self::$oDb->beginTransaction();
+    }
+
+    /**
+     * Checks whether a transaction is currently active.
+     */
+    public function inTransaction(): bool
+    {
+        return self::$oDb->inTransaction();
     }
 
     /**
@@ -172,8 +188,6 @@ class Db
      * Retrieve a database connection attribute.
      *
      * @param int $iAttribute
-     *
-     * @return mixed
      */
     public function getAttribute($iAttribute)
     {
@@ -193,7 +207,7 @@ class Db
     /**
      * Returns the ID of the last inserted row or sequence value.
      *
-     * @param string $sName Name of the sequence object from which the ID should be returned.
+     * @param string $sName name of the sequence object from which the ID should be returned
      *
      * @return string
      */
@@ -205,9 +219,9 @@ class Db
     /**
      * Prepares a statement for execution and returns a statement object.
      *
-     * @param string $sStatement A valid SQL statement for the target database server.
+     * @param string $sStatement a valid SQL statement for the target database server
      *
-     * @return PDOStatement
+     * @return \PDOStatement
      */
     public function prepare($sStatement)
     {
@@ -229,6 +243,7 @@ class Db
     public function execute($sStatement)
     {
         $rStmt = self::$oDb->prepare($sStatement);
+
         return $rStmt !== false && $rStmt->execute();
     }
 
@@ -237,7 +252,7 @@ class Db
      *
      * @param string $sStatement
      *
-     * @return PDOStatement|bool Returns PDOStatement object, or FALSE on failure.
+     * @return \PDOStatement|bool returns PDOStatement object, or FALSE on failure
      */
     public function query($sStatement)
     {
@@ -258,7 +273,7 @@ class Db
      */
     public function queryFetchAllAssoc($sStatement)
     {
-        return self::$oDb->query($sStatement)->fetchAll(PDO::FETCH_ASSOC);
+        return self::$oDb->query($sStatement)->fetchAll(\PDO::FETCH_ASSOC);
     }
 
     /**
@@ -270,15 +285,13 @@ class Db
      */
     public function queryFetchRowAssoc($sStatement)
     {
-        return self::$oDb->query($sStatement)->fetch(PDO::FETCH_ASSOC);
+        return self::$oDb->query($sStatement)->fetch(\PDO::FETCH_ASSOC);
     }
 
     /**
      * Execute query and select one column only.
      *
      * @param string $sStatement
-     *
-     * @return mixed
      */
     public function queryFetchColAssoc($sStatement)
     {
@@ -289,11 +302,11 @@ class Db
      * Quotes a string for use in a query.
      *
      * @param string $sInput
-     * @param int $iParameterType
+     * @param int    $iParameterType
      *
      * @return string
      */
-    public function quote($sInput, $iParameterType = PDO::PARAM_NULL)
+    public function quote($sInput, $iParameterType = \PDO::PARAM_NULL)
     {
         return self::$oDb->quote($sInput, $iParameterType);
     }
@@ -312,7 +325,6 @@ class Db
      * Set an attribute.
      *
      * @param int $iAttribute
-     * @param mixed $mValue
      *
      * @return bool
      */
@@ -334,7 +346,7 @@ class Db
     /**
      * Show all tables.
      *
-     * @return PDOStatement|bool Returns PDOStatement object, or FALSE on failure.
+     * @return \PDOStatement|bool returns PDOStatement object, or FALSE on failure
      */
     public static function showTables()
     {
@@ -355,9 +367,9 @@ class Db
      * If table name is empty, only prefix will be returned otherwise the table name with its prefix will be returned.
      *
      * @param string $sTable Table name. Default ''
-     * @param bool $bSpace With or without a space before and after the table name. Default value is FALSE, so with space before and after table name.
+     * @param bool   $bSpace With or without a space before and after the table name. Default value is FALSE, so with space before and after table name.
      *
-     * @return string prefixed table name, just prefix if table name is empty.
+     * @return string prefixed table name, just prefix if table name is empty
      */
     public static function prefix($sTable = '', $bSpace = true)
     {
@@ -369,12 +381,10 @@ class Db
     /**
      * Free database.
      *
-     * @param PDOStatement $rStmt Close cursor of PDOStatement class.
-     * @param bool $bCloseConnection Close connection of PDO.
-     *
-     * @return void
+     * @param \PDOStatement $rStmt            close cursor of PDOStatement class
+     * @param bool          $bCloseConnection close connection of PDO
      */
-    public static function free(?PDOStatement &$rStmt = null, bool $bCloseConnection = false): void
+    public static function free(?\PDOStatement &$rStmt = null, bool $bCloseConnection = false): void
     {
         // Close Cursor
         if ($rStmt !== null) {
@@ -425,11 +435,10 @@ class Db
      */
     public static function checkMySqlVersion()
     {
-        $sMySQLVer = self::$oDb->getAttribute(PDO::ATTR_SERVER_VERSION);
+        $sMySQLVer = self::$oDb->getAttribute(\PDO::ATTR_SERVER_VERSION);
 
         if (version_compare($sMySQLVer, self::REQUIRED_SQL_VERSION, '<')) {
-            $sMsg = 'ERROR: Your MySQL version is ' . $sMySQLVer . '. pH7Builder requires MySQL ' . self::REQUIRED_SQL_VERSION . ' or newer.';
-            exit($sMsg);
+            throw new \RuntimeException('Your database server version is ' . $sMySQLVer . '. pH7Builder requires MySQL ' . self::REQUIRED_SQL_VERSION . ' or newer.');
         }
     }
 
@@ -453,13 +462,6 @@ class Db
      */
     private function increment()
     {
-        self::$iCount++;
-    }
-
-    /**
-     * Like the constructor, we make __clone private, so nobody can clone the instance.
-     */
-    private function __clone()
-    {
+        ++self::$iCount;
     }
 }

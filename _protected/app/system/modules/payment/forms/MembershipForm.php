@@ -110,7 +110,8 @@ class MembershipForm
                     0 => t('Disabled')
                 ],
                 [
-                    'value' => 1,
+                    'description' => t('Keep a paid membership disabled until at least one payment gateway is configured and successfully tested.'),
+                    'value' => 0,
                     'required' => 1
                 ]
             )

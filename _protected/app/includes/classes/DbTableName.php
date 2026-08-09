@@ -1,9 +1,9 @@
 <?php
+
 /**
  * @author           Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright        (c) 2018-2021, Pierre-Henry Soria. All Rights Reserved.
  * @license          MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
- * @package          PH7 / App / Include / Class
  */
 
 namespace PH7;
@@ -13,6 +13,7 @@ final class DbTableName
     public const ADMIN = 'admins';
     public const MEMBER = 'members';
     public const MEMBERSHIP = 'memberships';
+    public const PAYMENT_TRANSACTION = 'payment_transactions';
     public const AFFILIATE = 'affiliates';
     public const SUBSCRIBER = 'subscribers';
     public const MEMBER_INFO = 'members_info';
