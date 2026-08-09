@@ -1,7 +1,7 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <hello@ph7builder.com>
- * @copyright      (c) 2012-2022, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2026, Pierre-Henry Soria and pH7Builder contributors.
  * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package        PH7 / App / System / Module / Newsletter / Inc / Class
  */
@@ -107,8 +107,11 @@ class Newsletter extends Core
 
     private function isOptedInSubscriber(stdClass $oSubscriber): bool
     {
-        return $this->isMemberData($oSubscriber) &&
-            !$this->oSubscriberModel->isNotification($oSubscriber->profileId, 'enableNewsletters');
+        if (!$this->isMemberData()) {
+            return true;
+        }
+
+        return $this->oSubscriberModel->isNotification($oSubscriber->profileId, 'enableNewsletters');
     }
 
     private function isMemberData(): bool
