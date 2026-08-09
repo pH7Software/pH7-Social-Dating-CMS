@@ -15,12 +15,10 @@ $LANG = [
     'charset' => 'utf-8',
     'lang_name' => 'Français',
     'version' => 'version',
-    'welcome_voice' => 'Bienvenue sur l\'installation de ' . Controller::SOFTWARE_NAME . ', version ' . Controller::SOFTWARE_VERSION . '. ' .
-        'J\'espère que tu vas aimer ton nouveau réseau de rencontre sociale.',
     'CMS_desc' => '<p>Bienvenue à l\'installation de ' . Controller::SOFTWARE_NAME . '.<br />
         Nous vous remercions d\'avoir choisis notre CMS et nous espérons qu\'il va vous plaire.</p>',
     'choose_install_lang' => 'Veuillez choisir votre langue pour commencer l\'installation',
-    'requirements_desc' => 'ATTENTION ! Veuillez être sûr que <abbr title="Votre serveur distant ou votre machine/PC si vous êtes en localhost">vous êtes</abbr> connecté à Internet et que votre serveur a les <a href="' . Controller::SOFTWARE_REQUIREMENTS_URL . '" target="_blank" rel="noopener">exigences nécessaires</a> pour faire fonctionner pH7Builder.',
+    'requirements_desc' => 'Le programme d’installation a vérifié les exigences PHP locales. Vous pouvez aussi consulter les <a href="' . Controller::SOFTWARE_REQUIREMENTS_URL . '" target="_blank" rel="noopener">exigences serveur complètes</a>.',
     'requirements2_desc' => 'Avant toute chose, veuillez créer une base de données MySQL et affecter un utilisateur à elle avec tous les privilèges. Une fois que vous avez créé la base de données MySQL et son utilisateur, assurez-vous d\'écrire le nom de la base de données, le nom d\'utilisateur et le mot de passe, car vous en aurez besoin pour l\'installation.',
     'config_path' => 'Chemin du répertoire &laquo; protected &raquo;',
     'desc_config_path' => 'Veuillez indiquer le chemin complet de votre répertoire &laquo; protected &raquo;<br />
@@ -35,7 +33,7 @@ $LANG = [
     'register' => 'Enregistrer !',
     'site_name' => 'Nom unique pour votre site',
     'agree_license' => 'J\'ai lu et j\'accepte les Termes de licence ci-dessus.',
-    'conform_to_laws' => 'J\'accepte de toujours garder mon site web entièrement légal et de me conformer à toutes lois et régulations applicables susceptibles de s\'appliquer à moi, à mon entreprise, à mon site web et ses utilisateurs, et de vérifier et <a href="https://ph7builder.com/doc/en/how-to-edit-the-static-and-legal-pages" target="_blank" rel="noopener">mettre à jour les "CGU", "charte de confidentialité", "mentions légales" (et toutes autres pages légales nécessaires)</a> afin de me conformer pleinement aux lois et régulations applicables.',
+    'conform_to_laws' => 'J\'accepte de toujours garder mon site web entièrement légal et de me conformer à toutes lois et régulations applicables susceptibles de s\'appliquer à moi, à mon entreprise, à mon site web et ses utilisateurs, et de vérifier et <a href="https://github.com/pH7Software/pH7-Social-Dating-CMS/blob/18.x/docs/LAUNCH_CHECKLIST.md#legal-and-privacy" target="_blank" rel="noopener">mettre à jour les "CGU", "charte de confidentialité", "mentions légales" (et toutes autres pages légales nécessaires)</a> afin de me conformer pleinement aux lois et régulations applicables.',
     'responsibilities_agreement' => 'J\'accepte d\'utiliser ce logiciel à mes risques et périls et que l\'auteur de ce logiciel ne pourra en aucun cas être tenu responsable des dommages-intérêts directs ou indirects, ni de tout autre dommage de quelque nature que ce soit, résultant de l\'utilisation de ce logiciel ou de l\'impossibilité d\'utiliser le logiciel pour quelque raison que ce soit.',
     'step' => 'Étape',
     'welcome' => 'Bienvenue sur l\'installation de',
@@ -49,10 +47,13 @@ $LANG = [
     'error_page_not_found_desc' => 'Désolé, mais la page que vous cherchez est introuvable.',
     'no_protected_exist' => 'Désolé, mais nous n\'avons pas trouvé le répertoire &laquo; protected &raquo;',
     'no_protected_readable' => 'Veuillez changer les permissions du répertoire &laquo; protected &raquo; pour qu\'il soit en mode &laquo; lecture &raquo; (CHMOD 755).',
-    'no_public_writable' => 'Veuillez changer les permissions du répertoire &laquo; racine &raquo; pour qu\'il soit en mode &laquo; écriture &raquo; (CHMOD 777).',
-    'no_app_config_writable' => 'Veuillez changer les permissions du répertoire &laquo; protected/app/configs &raquo; pour qu\'il soit en mode &laquo; écriture &raquo; (CHMOD 777).',
-    'database_error' => 'Erreur de connexion avec votre base de données.<br />',
-    'error_sql_import' => 'Une erreur s\'est produit pendant l\'importation de du fichier SQL vers votre base de données',
+    'stale_constants_recovery' => 'Le répertoire protégé précédemment configuré est indisponible. Choisissez un chemin valide ; le programme d’installation remplacera le fichier _constants.php obsolète en toute sécurité.',
+    'no_public_writable' => 'Le serveur web ne peut pas écrire dans le répertoire racine. Accordez temporairement l’écriture au propriétaire ou au groupe, jamais à tout le monde.',
+    'no_app_config_writable' => 'Le serveur web ne peut pas écrire dans protected/app/configs. Accordez temporairement l’écriture au propriétaire ou au groupe, jamais à tout le monde.',
+    'runtime_path_not_writable' => 'Le serveur web ne peut pas écrire dans %s. Accordez l’écriture au propriétaire ou au groupe, jamais à tout le monde.',
+    'database_error' => 'L’opération de base de données a échoué. Vérifiez l’hôte, le port, le nom, les identifiants et les privilèges. Les détails techniques sont dans le journal d’installation.',
+    'initial_admin_mismatch' => 'Un administrateur existe déjà dans cette base de données, mais ne correspond pas aux identifiants saisis. Réessayez avec l’adresse e-mail, le nom d’utilisateur et le mot de passe d’origine, ou supprimez les tables de cette installation avant de recommencer.',
+    'error_sql_import' => 'Le schéma n’a pas pu être importé. Utilisez une base vide et consultez _install/data/logs/php_error.log avant de réessayer.',
     'require_mysql_version' => 'Vous devez installer MySQL ' . PH7_REQUIRED_SQL_VERSION . ' ou supérieur afin de pouvoir continuer.',
     'field_required' => 'Ce champ est obligatoire',
     'all_fields_mandatory' => 'Tous les champs marqués d\'un astérisque (*) sont obligatoires',
@@ -69,6 +70,7 @@ $LANG = [
     'db_port' => 'Numéro de port de votre base de données',
     'desc_db_port' => 'Veuillez laisser la valeur à "3306" si vous ne savez pas.',
     'ffmpeg_path' => 'Le chemin vers l\'exécutable FFmpeg (si vous ne le savez pas où il se trouve, veuillez vous renseigner auprès de votre hébergeur)',
+    'ffmpeg_optional' => 'Facultatif. Laissez vide si FFmpeg n’est pas disponible ; la conversion vidéo locale restera indisponible.',
     'bug_report_email' => 'E-mail de rapport de bogues',
     'bug_report_email_placeholder' => 'bug@votre-domaine.com',
     'admin_first_name' => 'Votre prénom',
@@ -83,13 +85,14 @@ $LANG = [
     'admin_return_email_placeholder' => 'noreply@votre-site.com',
     'admin_password' => 'Votre mot de passe',
     'admin_passwords' => 'Veuillez confirmer votre mot de passe',
+    'bad_site_name' => 'Le nom du site doit comporter entre 2 et 50 caractères.',
     'bad_email' => 'E-mail incorrecte',
     'bad_username' => 'Votre pseudo est incorrect',
     'username_too_short' => 'Votre pseudo est trop court, minimum 3 caractères',
     'username_too_long' => 'Votre pseudo est trop long, maximum 30 caractères',
     'password_no_number' => 'Votre mot de passe doit contenir au moins un chiffre',
     'password_no_upper' => 'Votre mot de passe doit contenir au moins une majuscule',
-    'password_too_short' => 'Votre mot de passe est trop court. 6 caractères minimum',
+    'password_too_short' => 'Votre mot de passe est trop court. Il doit comporter au moins 12 caractères.',
     'password_too_long' => 'Votre mot de passe est trop long',
     'passwords_different' => 'Le mot de passe de confirmation ne correspond pas au mot de passe initial',
     'bad_first_name' => 'Veuillez entrer votre prénom, il doit également être compris entre 2 et 20 caractères.',
@@ -99,29 +102,21 @@ $LANG = [
     'remove_install_folder_auto' => 'Effacer automatiquement le répertoire &laquo; install &raquo; (cette opération nécessite les droits d\'accès nécessaires sur le dossier &laquo; install &raquo;).',
     'confirm_remove_install_folder_auto' => 'ATTENTION, tous les fichiers du dossiers /_install/ vont être supprimés.',
     'title_email_finish_install' => 'À propos de l\'installation : Informations',
-    'content_email_finish_install' => '<p><strong>Félicitations! 🥳 Votre site est maintenant installé 😍</strong></p>
-        <p>J\'espère que vous allez avoir beaucoup de plaisir avec <em>' . Controller::SOFTWARE_NAME . '</em> !</p>
-        <p>L\'URL de VOTRE Site de Rencontre est : <em><a href="' . PH7_URL_ROOT . '">' . PH7_URL_ROOT . '</a></em></p>
-        <p>L\'URL du panneau d\'administration est : <em><a href="' . PH7_URL_ROOT . PH7_ADMIN_MOD . '">' . PH7_URL_ROOT . PH7_ADMIN_MOD . '</a></em><br />
-            Votre adresse e-mail pour le panneau d\'administration est : <em>' . (!empty($_SESSION['val']['admin_login_email']) ? $_SESSION['val']['admin_login_email'] : '') . '</em><br />
-            Votre nom d\'utilisateur pour le panneau d\'administration est : <em>' . (!empty($_SESSION['val']['admin_username']) ? $_SESSION['val']['admin_username'] : '') . '</em><br />
-            Votre mot de passe est : <em>****** (caché pour des raisons de sécurité. C\'est celui choisi durant l\'installation).</em>
+    'content_email_finish_install' => '<p><strong>Votre site pH7Builder a été installé avec succès.</strong></p>
+        <p>Site : <a href="' . PH7_URL_ROOT . '">' . PH7_URL_ROOT . '</a></p>
+        <p>Administration : <a href="' . PH7_URL_ROOT . PH7_ADMIN_MOD . '">' . PH7_URL_ROOT . PH7_ADMIN_MOD . '</a><br />
+            E-mail de connexion : <em>' . (!empty($_SESSION['val']['admin_login_email']) ? escape($_SESSION['val']['admin_login_email']) : '') . '</em><br />
+            Nom d\'utilisateur : <em>' . (!empty($_SESSION['val']['admin_username']) ? escape($_SESSION['val']['admin_username']) : '') . '</em><br />
+            Mot de passe : <em>masqué ; utilisez celui choisi pendant l\'installation.</em>
         </p>
-        <p>N\'oubliez pas de vous la péter en montrant votre nouveau service de rencontre à tous vos amis, vos collègues et vos potes de Facebook (et même à vos ennemis... ou pas).</p>
-        <p><strong>Voici un <a href="' . get_tweet_post("Viens de créer mon #AppDeRencontre avec #pH7Builder 😍 %s \n%s #ScriptRencontre 💪", Controller::SOFTWARE_TWITTER, Controller::SOFTWARE_GIT_REPO_URL) . '">un Tweet pré-écrit</a> (que vous pouvez éditer, bien sûr)</strong>.</p>
-        <p>&nbsp;</p>
-        <p><strong>Allez-vous m\'aider à améliorer le logiciel ? <a href="' . Controller::PATREON_URL . '">Faire une donation ici</a></strong></p>
-        <p>&nbsp;</p>
-        <p>Pour tout rapport de bogues, suggestions, partenariat, participation au développement du logiciel et/ou à sa traduction, etc.,
-        veuillez visiter le <a href="' . Controller::SOFTWARE_GIT_REPO_URL . '">dépôt GitHub</a>.</p>
-        <p>---</p>
-        <p>Bien à vous,<br />
-        <strong><a href="' . Controller::AUTHOR_URL . '">Pierre Soria</a></strong></p>',
+        <p>Supprimez le dossier d\'installation, puis <a href="' . Controller::SOFTWARE_LOCKDOWN_URL . '">exécutez les commandes de verrouillage de production</a> avant de vous connecter. Terminez la liste de lancement avant d\'accepter de vrais membres ou paiements.</p>
+        <p>Documentation et rapports de bogues : <a href="' . Controller::SOFTWARE_GIT_REPO_URL . '">pH7Builder sur GitHub</a>.</p>
+        <p>Bien à vous,<br /><strong><a href="' . Controller::AUTHOR_URL . '">Pierre-Henry Soria</a></strong><br />Fondateur de pH7Builder</p>',
     'yes_dir' => 'Le répertoire a été trouvé avec succès !',
     'no_dir' => 'Le répertoire n\'existe pas.',
     'wait_importing_database' => 'Veuillez patienter pendant l\'importation de la base de donnée.<br />
         Cette opération peut prendre plusieurs minutes.',
-    'add_sample_data' => 'Générer des profils d\'exemple (vous pouvez les supprimer par la suite)',
+    'add_sample_data' => 'Générer des profils d’exemple pour une évaluation locale (à supprimer avant la production)',
     'niche' => 'Choisissez le type de site que vous voulez avoir 😇',
     'social_dating_niche' => 'Niche de Rencontre Sociale',
     'social_niche' => 'Niche de Réseautage Sociale',
@@ -141,7 +136,18 @@ $LANG = [
     'warning_no_js' => 'Cette page Web est incompatible sans l\'activation de JavaScript.<br />
         Veuillez activer JavaScript via les options de votre navigateur Web.',
     'admin_url' => 'URL du panneau d\'administration',
-    'next_steps' => '👉 Et maintenant : connectez-vous à votre panneau d\'administration pour personnaliser votre site, activer les modules souhaités, ajouter quelques profils de départ et le mettre en ligne — la liste « Pour bien démarrer » vous guide pas à pas.',
+    'next_steps' => '👉 Étape suivante : supprimez le programme d\'installation, puis <a href="' . Controller::SOFTWARE_LOCKDOWN_URL . '" target="_blank" rel="noopener">exécutez les commandes de verrouillage de production</a> avant de vous connecter. La liste « Pour bien démarrer » de l\'administration vous guidera ensuite dans la personnalisation et le lancement.',
     'powered' => 'Propulsé par',
     'loading' => 'Chargement en cours...',
+    'invalid_action' => 'Ce formulaire d’installation a expiré ou appartient à une autre session. Rechargez la page et réessayez.',
+    'install_access_intro' => 'Saisissez le jeton d’accès à l’installation créé sur votre serveur. Il empêche une autre personne de revendiquer le premier compte administrateur.',
+    'install_access_not_configured' => 'L’accès à l’installation est verrouillé. Exécutez la commande ci-dessous depuis le dossier pH7Builder, puis rechargez cette page.',
+    'install_access_token' => 'Jeton d’accès à l’installation',
+    'install_access_invalid' => 'Le jeton d’accès à l’installation est incorrect.',
+    'invalid_database_settings' => 'Saisissez un hôte, un port (1–65535), un nom, un utilisateur et un préfixe valides. L’encodage requis est utf8mb4.',
+    'invalid_ffmpeg_path' => 'Le chemin FFmpeg n’est pas un fichier exécutable. Corrigez-le ou laissez-le vide.',
+    'invalid_niche' => 'Choisissez l’un des types de site disponibles, puis réessayez.',
+    'sample_data_warning' => 'Le site est installé, mais les profils d’exemple n’ont pas tous été créés. Consultez le journal et supprimez-les avant la production.',
+    'welcome_email_warning' => 'Le site est installé, mais l’e-mail de bienvenue n’a pas pu être envoyé. Configurez l’envoi d’e-mails dans l’administration avant le lancement.',
+    'remove_install_failed' => 'Le répertoire d’installation n’a pas pu être entièrement supprimé. Supprimez _install manuellement avant d’ouvrir le site.',
 ];

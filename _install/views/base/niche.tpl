@@ -2,7 +2,10 @@
 
 <h2>{$LANG.niche}</h2>
 
+{include file="inc/errors.tpl"}
+
 <form method="post" action="{$smarty.const.PH7_URL_SLUG_INSTALL}niche">
+    <input type="hidden" name="action_token" value="{$action_token|escape}" />
     <div class="col-md-4">
         <h3 class="underline">{$LANG.social_dating_niche}</h3>
         <p class="img_thumb">

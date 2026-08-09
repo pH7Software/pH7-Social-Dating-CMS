@@ -21,7 +21,11 @@ $oSiteChecker = new WebsiteChecker();
 
 try {
     $oSiteChecker->checkPhpVersion();
-    if (!$oSiteChecker->doesConfigFileExist()) {
+    $bConfigFileExists = $oSiteChecker->doesConfigFileExist();
+    if (!$bConfigFileExists || !$oSiteChecker->doesConfigPinCanonicalAuthority()) {
+        $oSiteChecker->normalizeRequestAuthority();
+    }
+    if (!$bConfigFileExists) {
         if ($oSiteChecker->doesInstallFolderExist()) {
             $oSiteChecker->clearBrowserCache();
             $oSiteChecker->moveToInstaller();

@@ -5,7 +5,7 @@
   "license": "MIT",
   "require": {
     "php": "^8.2",
-    "smarty/smarty": "^4.2"
+    "smarty/smarty": ">=4.5.7 <4.5.8"
   },
   "autoload": {
     "classmap": [

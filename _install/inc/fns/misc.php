@@ -116,12 +116,12 @@ function validate_username($sUsername, $iMin = 3, $iMax = 30)
  * Validate password.
  *
  * @param string $sPassword
- * @param int $iMin 6
+ * @param int $iMin 12
  * @param int $iMax 92
  *
  * @return int (0 = OK | 1 = too short | 2 = too long | 3 = no number | 4 = no upper).
  */
-function validate_password($sPassword, $iMin = 6, $iMax = 92)
+function validate_password($sPassword, $iMin = 12, $iMax = 92)
 {
     if (mb_strlen($sPassword) < $iMin) return 1;
     elseif (mb_strlen($sPassword) > $iMax) return 2;
@@ -206,15 +206,199 @@ function redirect($sUrl)
  *
  * @return bool
  */
-function delete_dir($sPath)
+function delete_dir(string $sPath): bool
 {
-    return (
-    is_file($sPath) ?
-        @unlink($sPath) :
-        (is_dir($sPath) ?
-            array_map(__NAMESPACE__ . '\delete_dir', glob($sPath . '/*')) === @rmdir($sPath) :
-            false)
+    if (is_link($sPath) || is_file($sPath)) {
+        return @unlink($sPath);
+    }
+
+    if (!is_dir($sPath)) {
+        return false;
+    }
+
+    $aEntries = scandir($sPath);
+    if ($aEntries === false) {
+        return false;
+    }
+
+    $bDeleted = true;
+    foreach ($aEntries as $sEntry) {
+        if ($sEntry === '.' || $sEntry === '..') {
+            continue;
+        }
+
+        if (!delete_dir($sPath . PH7_DS . $sEntry)) {
+            $bDeleted = false;
+        }
+    }
+
+    return $bDeleted && @rmdir($sPath);
+}
+
+/**
+ * Read the durable, non-secret installer progress record.
+ */
+function get_install_state(): array
+{
+    $sStatePath = PH7_ROOT_INSTALL . 'data/caches/install-state.json';
+    if (!is_file($sStatePath) || !is_readable($sStatePath)) {
+        return ['completed_step' => 0];
+    }
+
+    $sState = file_get_contents($sStatePath);
+    $aState = is_string($sState) ? json_decode($sState, true) : null;
+    if (!is_array($aState) || !isset($aState['completed_step']) || !is_int($aState['completed_step'])) {
+        return ['completed_step' => 0];
+    }
+
+    $iRecordedStep = max(0, min(6, $aState['completed_step']));
+    $iCompletedStep = $iRecordedStep;
+    $aContext = isset($aState['context']) && is_array($aState['context']) ? $aState['context'] : [];
+
+    if ($iCompletedStep >= 3 && !is_file(PH7_ROOT_PUBLIC . '_constants.php')) {
+        $iCompletedStep = 0;
+    } elseif ($iCompletedStep >= 3 && !has_valid_protected_install_path($aContext)) {
+        $iCompletedStep = 2;
+    } elseif ($iCompletedStep >= 4 && !has_installed_database_config($aContext)) {
+        $iCompletedStep = 3;
+    }
+
+    $aState['completed_step'] = $iCompletedStep;
+    $aState['context'] = sanitize_install_state_context($aContext, $iCompletedStep);
+    if ($iCompletedStep !== $iRecordedStep) {
+        $aState['recovered_from_step'] = $iRecordedStep;
+    }
+
+    return $aState;
+}
+
+/**
+ * Verify the configuration artifact required after installer step 4.
+ */
+function has_installed_database_config(array $aContext): bool
+{
+    foreach (get_protected_install_path_candidates($aContext) as $sProtectedPath) {
+        $sConfigPath = $sProtectedPath . 'app/configs/config.ini';
+        if (!is_file($sConfigPath) || !is_readable($sConfigPath)) {
+            continue;
+        }
+
+        $aConfig = parse_ini_file($sConfigPath, true, INI_SCANNER_TYPED);
+        if (is_array($aConfig) && isset($aConfig['database']) && is_array($aConfig['database']) &&
+            isset(
+                $aConfig['database']['type'],
+                $aConfig['database']['hostname'],
+                $aConfig['database']['username'],
+                $aConfig['database']['password'],
+                $aConfig['database']['name'],
+                $aConfig['database']['prefix'],
+                $aConfig['database']['charset'],
+                $aConfig['database']['port']
+            )
+        ) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+function has_valid_protected_install_path(array $aContext): bool
+{
+    foreach (get_protected_install_path_candidates($aContext) as $sProtectedPath) {
+        if (is_file($sProtectedPath . 'app/configs/constants.php')) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+function get_protected_install_path_candidates(array $aContext): array
+{
+    $aProtectedCandidates = [];
+    if (isset($aContext['protected_path']) && is_string($aContext['protected_path'])) {
+        $aProtectedCandidates[] = check_ext_end($aContext['protected_path']);
+    }
+    $aProtectedCandidates[] = PH7_ROOT_PUBLIC . '_protected' . PH7_DS;
+    $aProtectedCandidates[] = dirname(PH7_ROOT_PUBLIC) . PH7_DS . '_protected' . PH7_DS;
+
+    return array_unique($aProtectedCandidates);
+}
+
+/**
+ * Keep only validated, non-secret context needed after the effective step.
+ */
+function sanitize_install_state_context(array $aContext, int $iCompletedStep): array
+{
+    $aSafeContext = [];
+
+    if ($iCompletedStep >= 3 && isset($aContext['protected_path']) && is_string($aContext['protected_path'])) {
+        $sRealProtectedPath = realpath(rtrim($aContext['protected_path'], '/\\'));
+        if (is_string($sRealProtectedPath) && is_dir($sRealProtectedPath)) {
+            $aSafeContext['protected_path'] = check_ext_end($sRealProtectedPath);
+        }
+    }
+    if ($iCompletedStep >= 4 && isset($aContext['database_prefix']) && is_string($aContext['database_prefix']) &&
+        preg_match('/^[a-z][a-z0-9_]{0,31}$/i', $aContext['database_prefix']) === 1
+    ) {
+        $aSafeContext['database_prefix'] = $aContext['database_prefix'];
+    }
+    if ($iCompletedStep >= 5 && isset($aContext['admin_login_email']) && is_string($aContext['admin_login_email']) &&
+        filter_var($aContext['admin_login_email'], FILTER_VALIDATE_EMAIL) !== false
+    ) {
+        $aSafeContext['admin_login_email'] = $aContext['admin_login_email'];
+    }
+    if ($iCompletedStep >= 5 && isset($aContext['admin_username']) && is_string($aContext['admin_username']) &&
+        preg_match('/^[\w-]{3,30}$/', $aContext['admin_username']) === 1
+    ) {
+        $aSafeContext['admin_username'] = $aContext['admin_username'];
+    }
+
+    return $aSafeContext;
+}
+
+/**
+ * Persist installer progress without database credentials or passwords.
+ */
+function save_install_state(int $iCompletedStep, array $aContext = []): bool
+{
+    if ($iCompletedStep < 2 || $iCompletedStep > 6) {
+        return false;
+    }
+
+    $aPreviousState = get_install_state();
+    $aState = [
+        'completed_step' => max($iCompletedStep, (int)$aPreviousState['completed_step'])
+    ];
+
+    $aPreviousContext = isset($aPreviousState['context']) && is_array($aPreviousState['context'])
+        ? $aPreviousState['context']
+        : [];
+    $aState['context'] = sanitize_install_state_context(
+        array_merge($aPreviousContext, $aContext),
+        $aState['completed_step']
     );
+
+    $sState = json_encode($aState, JSON_UNESCAPED_SLASHES);
+    if (!is_string($sState)) {
+        return false;
+    }
+
+    $sStatePath = PH7_ROOT_INSTALL . 'data/caches/install-state.json';
+    $sTemporaryPath = $sStatePath . '.installing-' . bin2hex(random_bytes(8));
+    if (@file_put_contents($sTemporaryPath, $sState . PHP_EOL, LOCK_EX) === false) {
+        return false;
+    }
+
+    @chmod($sTemporaryPath, 0600);
+    if (!@rename($sTemporaryPath, $sStatePath)) {
+        @unlink($sTemporaryPath);
+
+        return false;
+    }
+
+    return true;
 }
 
 /**
@@ -227,11 +411,14 @@ function delete_dir($sPath)
  */
 function exec_query_file(Database $oDb, $sSqlFile)
 {
-    if (!is_file($sSqlFile)) {
+    if (!is_file($sSqlFile) || !is_readable($sSqlFile)) {
         return false;
     }
 
     $sSqlContent = file_get_contents($sSqlFile);
+    if (!is_string($sSqlContent) || trim($sSqlContent) === '') {
+        return false;
+    }
     $sSqlContent = str_replace(PH7_TABLE_PREFIX, $_SESSION['db']['prefix'], $sSqlContent);
     $rStmt = $oDb->exec($sSqlContent);
     unset($sSqlContent);
@@ -242,12 +429,38 @@ function exec_query_file(Database $oDb, $sSqlFile)
 /**
  * Delete the install folder.
  *
- * @return void
+ * @return bool
  */
-function remove_install_dir()
+function remove_install_dir(): bool
 {
-    @chmod(PH7_ROOT_INSTALL, 0777);
-    delete_dir(PH7_ROOT_INSTALL);
+    $sPublicRoot = realpath(PH7_ROOT_PUBLIC);
+    $sInstallRoot = realpath(PH7_ROOT_INSTALL);
+
+    if ($sPublicRoot === false || $sInstallRoot === false) {
+        return false;
+    }
+
+    $sExpectedInstallRoot = $sPublicRoot . PH7_DS . '_install';
+    if (!hash_equals($sExpectedInstallRoot, $sInstallRoot)) {
+        error_log('Installer cleanup refused an unexpected path: ' . $sInstallRoot);
+
+        return false;
+    }
+
+    $sQuarantinePath = $sPublicRoot . PH7_DS . '.ph7builder-install-removal-' . bin2hex(random_bytes(16));
+    if (!@rename($sInstallRoot, $sQuarantinePath)) {
+        error_log('Installer cleanup could not quarantine the _install directory. Remove it manually.');
+
+        return false;
+    }
+
+    if (!delete_dir($sQuarantinePath)) {
+        error_log('Installer cleanup left a quarantined directory that must be removed manually: ' . $sQuarantinePath);
+    }
+
+    // The routable _install path is gone even if best-effort quarantine cleanup
+    // could not remove every entry.
+    return true;
 }
 
 /**
@@ -257,15 +470,11 @@ function remove_install_dir()
  */
 function client_ip()
 {
-    $sIp = $_SERVER['REMOTE_ADDR']; // Default value
+    $mRemoteAddress = $_SERVER['REMOTE_ADDR'] ?? null;
 
-    if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
-        $sIp = $_SERVER['HTTP_CLIENT_IP'];
-    } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
-        $sIp = $_SERVER['HTTP_X_FORWARDED_FOR'];
-    }
-
-    return preg_match('/^[a-z0-9:.]{7,}$/', $sIp) ? $sIp : '0.0.0.0';
+    return is_string($mRemoteAddress) && filter_var($mRemoteAddress, FILTER_VALIDATE_IP) !== false
+        ? $mRemoteAddress
+        : '0.0.0.0';
 }
 
 /**
@@ -289,7 +498,10 @@ function escape($sVal)
  */
 function clean_string($sVal)
 {
-    return str_replace('"', '\"', $sVal);
+    return strtr(
+        $sVal,
+        ["\\" => "\\\\", '$' => '\\$', "\r" => '', "\n" => '', '"' => '\\"']
+    );
 }
 
 /**
@@ -299,19 +511,13 @@ function clean_string($sVal)
  *
  * @return string The random hash. Maximum 128 characters with whirlpool encryption.
  */
-function generate_hash($iLength = 80)
+function generate_hash(int $iLength = 80): string
 {
-    $sPrefix = (string)mt_rand();
+    if ($iLength < 1 || $iLength > 128) {
+        throw new \InvalidArgumentException('The generated hash length must be between 1 and 128 characters.');
+    }
 
-    return substr(
-        hash(
-            'whirlpool',
-            time() . hash('sha512',
-                getenv('REMOTE_ADDR') . uniqid($sPrefix, true) . microtime(true) * 999999999999)
-        ),
-        0,
-        $iLength
-    );
+    return substr(bin2hex(random_bytes((int)ceil($iLength / 2))), 0, $iLength);
 }
 
 /**
@@ -322,12 +528,18 @@ function generate_hash($iLength = 80)
 function ffmpeg_path()
 {
     if (is_windows()) {
-        $sPath = is_file('C:\ffmpeg\bin\ffmpeg.exe') ? 'C:\ffmpeg\bin\ffmpeg.exe' : 'C:\ffmpeg\ffmpeg.exe';
+        $aPaths = ['C:\ffmpeg\bin\ffmpeg.exe', 'C:\ffmpeg\ffmpeg.exe'];
     } else {
-        $sPath = is_file('/usr/local/bin/ffmpeg') ? '/usr/local/bin/ffmpeg' : '/usr/bin/ffmpeg';
+        $aPaths = ['/usr/local/bin/ffmpeg', '/usr/bin/ffmpeg'];
     }
 
-    return $sPath;
+    foreach ($aPaths as $sPath) {
+        if (is_file($sPath) && is_executable($sPath)) {
+            return $sPath;
+        }
+    }
+
+    return '';
 }
 
 /**
@@ -341,20 +553,9 @@ function is_url_rewrite()
         return false;
     }
 
-    // Check if mod_rewrite is installed and is configured to be used via .htaccess
-    $sHttpModRewrite = (string)getenv('HTTP_MOD_REWRITE');
-    if (!$bIsRewrite = (strtolower($sHttpModRewrite) === 'on')) {
-        $sOutputMsg = 'mod_rewrite Works!';
-
-        if (!empty($_GET['a']) && $_GET['a'] === 'test_mod_rewrite') {
-            exit($sOutputMsg);
-        }
-
-        $sPage = get_url_contents(PH7_URL_INSTALL . 'test_mod_rewrite');
-        $bIsRewrite = ($sPage === $sOutputMsg);
-    }
-
-    return $bIsRewrite;
+    // The active .htaccess or web-server configuration sets this marker.
+    // Do not probe a request-derived URL: query-string routes are the safe fallback.
+    return strtolower((string)getenv('HTTP_MOD_REWRITE')) === 'on';
 }
 
 /**
@@ -365,50 +566,6 @@ function is_url_rewrite()
 function is_windows()
 {
     return 0 === stripos(PHP_OS, 'WIN');
-}
-
-/**
- * Get the URL contents with CURL.
- *
- * @param string $sFile
- *
- * @return string|bool Returns the result content on success, FALSE on failure.
- */
-function get_url_contents($sFile)
-{
-    $rCh = curl_init();
-    curl_setopt($rCh, CURLOPT_URL, $sFile);
-    curl_setopt($rCh, CURLOPT_HEADER, 0);
-    curl_setopt($rCh, CURLOPT_RETURNTRANSFER, 1);
-    curl_setopt($rCh, CURLOPT_FOLLOWLOCATION, 1);
-    $mResult = curl_exec($rCh);
-    curl_close($rCh);
-    unset($rCh);
-
-    return $mResult;
-}
-
-/**
- * Extract Zip archive.
- *
- * @param string $sFile Zip file.
- * @param string $sDir Destination to extract the file.
- *
- * @return bool
- */
-function zip_extract($sFile, $sDir)
-{
-    $oZip = new \ZipArchive;
-
-    $mRes = $oZip->open($sFile);
-
-    if ($mRes === true) {
-        $oZip->extractTo($sDir);
-        $oZip->close();
-        return true;
-    }
-
-    return false; // Return error value
 }
 
 /**
@@ -438,23 +595,9 @@ function check_url($sUrl)
 function is_software_installed($sCtrlName, $sAction)
 {
     return is_file(PH7_ROOT_PUBLIC . '_constants.php') &&
+        (int)get_install_state()['completed_step'] === 0 &&
         $sCtrlName === 'InstallController' &&
         in_array($sAction, array('index', 'license'), true);
-}
-
-/**
- * @param string $sTweetMsg
- * @param string $sTwitterUsername
- * @param string $sGitRepoUrl
- *
- * @return string
- */
-function get_tweet_post($sTweetMsg, $sTwitterUsername, $sGitRepoUrl)
-{
-    $sTwitterTweetUrl = 'https://x.com/intent/post?text=';
-    $sMsg = sprintf($sTweetMsg, $sTwitterUsername, $sGitRepoUrl);
-
-    return $sTwitterTweetUrl . urlencode($sMsg);
 }
 
 /**
@@ -464,23 +607,43 @@ function get_tweet_post($sTweetMsg, $sTwitterUsername, $sGitRepoUrl)
  *
  * @return bool Returns TRUE if the mail was successfully accepted for delivery, FALSE otherwise.
  */
-function send_mail(array $aParams)
+function send_mail(array $aParams): bool
 {
-    $sServerAdmin = (string)($_SERVER['SERVER_ADMIN'] ?? 'noreply@localhost');
-    $sHttpHost = (string)($_SERVER['HTTP_HOST'] ?? 'localhost');
+    foreach (['to', 'subject', 'body'] as $sRequiredParameter) {
+        if (!isset($aParams[$sRequiredParameter]) || !is_string($aParams[$sRequiredParameter])) {
+            return false;
+        }
+    }
+
+    if (filter_var($aParams['to'], FILTER_VALIDATE_EMAIL) === false ||
+        preg_match('/[\r\n]/', $aParams['subject']) === 1
+    ) {
+        return false;
+    }
+
+    $sServerAdmin = is_string($_SERVER['SERVER_ADMIN'] ?? null) ? $_SERVER['SERVER_ADMIN'] : '';
+    if (filter_var($sServerAdmin, FILTER_VALIDATE_EMAIL) === false) {
+        $sServerAdmin = $aParams['to'];
+    }
+
+    $sFrom = isset($aParams['from']) && is_string($aParams['from']) ? $aParams['from'] : $sServerAdmin;
+    if (filter_var($sFrom, FILTER_VALIDATE_EMAIL) === false) {
+        $sFrom = $sServerAdmin;
+    }
 
     // Frontier to separate the text part and the HTML part.
-    $sFrontier = "-----=" . md5(mt_rand());
+    $sFrontier = '-----=' . bin2hex(random_bytes(16));
 
     // Removing any HTML tags to get a text format.
     // If any of our lines are larger than 70 characters, we return to the new line.
     $sTextBody = wordwrap(strip_tags($aParams['body']), 70);
 
     // HTML format (you can change the layout below).
+    $sEscapedSubject = htmlspecialchars($aParams['subject'], ENT_QUOTES, 'UTF-8');
     $sHtmlBody = <<<EOF
 <html>
   <head>
-    <title>{$aParams['subject']}</title>
+    <title>{$sEscapedSubject}</title>
   </head>
   <body>
     <div style="text-align:center">{$aParams['body']}</div>
@@ -488,16 +651,9 @@ function send_mail(array $aParams)
 </html>
 EOF;
 
-    // If the email sender is empty, we define the server email.
-    if (empty($aParams['from'])) {
-        $aParams['from'] = $sServerAdmin;
-    }
-
     /*** Headers ***/
-    // To avoid the email goes to spam folder of email client.
-    $sHeaders = "From: \"{$sHttpHost}\" <{$sServerAdmin}>\r\n";
-
-    $sHeaders .= "Reply-To: <{$aParams['from']}>\r\n";
+    $sHeaders = 'From: "pH7Builder" <' . $sServerAdmin . ">\r\n";
+    $sHeaders .= 'Reply-To: <' . $sFrom . ">\r\n";
     $sHeaders .= "MIME-Version: 1.0\r\n";
     $sHeaders .= "Content-Type: multipart/alternative; boundary=\"$sFrontier\"\r\n";
 

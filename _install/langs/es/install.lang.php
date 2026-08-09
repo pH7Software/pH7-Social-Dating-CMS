@@ -15,12 +15,10 @@ $LANG = [
     'charset' => 'utf-8',
     'lang_name' => 'Español',
     'version' => 'versión',
-    'welcome_voice' => 'Bienvenidos a la instalación de ' . Controller::SOFTWARE_NAME . ', ' . Controller::SOFTWARE_VERSION . '. ' .
-        'Espero que te gusta su nueva aplicación web para la reunión social.',
     'CMS_desc' => '<p>Bienvenido a la instalación de ' . Controller::SOFTWARE_NAME . '.<br />
         Gracias por elegir nuestro CMS y esperamos que sea de su agrado usted.</p>',
     'choose_install_lang' => 'Por favor, elija su idioma para comenzar la instalación',
-    'requirements_desc' => '¡ADVERTENCIA! Por favor, asegúrese que <abbr title ="El servidor remoto o el ordenador si no está localhost">usted es</abbr> conectado a Internet y de que el servidor tiene la <a href="' . Controller::SOFTWARE_REQUIREMENTS_URL . '" target="_blank" rel="noopener">necesaria requisitos</a> para funcionar pH7Builder.',
+    'requirements_desc' => 'El instalador ha comprobado los requisitos PHP locales. También puede consultar los <a href="' . Controller::SOFTWARE_REQUIREMENTS_URL . '" target="_blank" rel="noopener">requisitos completos del servidor</a>.',
     'requirements2_desc' => 'En primer lugar, cree una base de datos MySQL y asignar a un usuario con privilegios completos. Una vez creada la base de datos MySQL y el usuario, asegúrese de escribir el nombre de la base de datos, el nombre de usuario y contraseña, ya que necesitará para la instalación.',
     'config_path' => 'Ruta del directorio &laquo;protected&raquo;',
     'desc_config_path' => 'Por favor, especifique la ruta completa a la carpeta de &laquo;protected&raquo;.<br />
@@ -35,7 +33,7 @@ $LANG = [
     'register' => '¡Guárdelo!',
     'site_name' => 'Nombre de tu sitio',
     'agree_license' => 'He leído y acepto los términos anteriores.',
-    'conform_to_laws' => 'Estoy de acuerdo en mantener siempre mi sitio web totalmente legal y cumplir con cualquier leyes y regulaciones aplicables que pueda aplicarse a mí, mi corporación, a mi sitio web y a sus usuarios, y para revisar y <a href="https://ph7builder.com/doc/en/how-to-edit-the-static-and-legal-pages" target="_blank" rel="noopener">actualizar los "Términos", "Política de privacidad" (y cualquier otra página legal necesaria)</a> para cumplir plenamente con las leyes y regulaciones aplicables.',
+    'conform_to_laws' => 'Estoy de acuerdo en mantener siempre mi sitio web totalmente legal y cumplir con cualquier leyes y regulaciones aplicables que pueda aplicarse a mí, mi corporación, a mi sitio web y a sus usuarios, y para revisar y <a href="https://github.com/pH7Software/pH7-Social-Dating-CMS/blob/18.x/docs/LAUNCH_CHECKLIST.md#legal-and-privacy" target="_blank" rel="noopener">actualizar los "Términos", "Política de privacidad" (y cualquier otra página legal necesaria)</a> para cumplir plenamente con las leyes y regulaciones aplicables.',
     'responsibilities_agreement' => 'Estoy de acuerdo en usar el software bajo mi propio riesgo y que el autor de este software no puede, en ningún caso, ser considerado responsable por daños directos o indirectos, ni por ningún otro daño de ningún tipo, como resultado del uso de este software o la imposibilidad de Úsalo por cualquier motivo.',
     'step' => 'Paso',
     'welcome' => 'Bienvenido a la instalación de',
@@ -49,10 +47,13 @@ $LANG = [
     'error_page_not_found_desc' => 'Lo sentimos, pero la página que busca no se pudo encontrar.',
     'no_protected_exist' => 'Lo sentimos, pero no hemos encontrado el directorio &laquo;protected&raquo;.',
     'no_protected_readable' => 'Cambie los permisos del directorio &laquo;protected&raquo; en el modo de lectura (CHMOD 755).',
-    'no_public_writable' => 'Cambie los permisos del directorio &laquo;raíz&raquo; en el modo de escritura (CHMOD 777).',
-    'no_app_config_writable' => 'Cambie los permisos del directorio &laquo;protected/app/configs&raquo; en el modo de escritura (CHMOD 777).',
-    'database_error' => 'Error al conectar con la base de datos.<br />',
-    'error_sql_import' => 'Se produjo un error al importar el archivo en su base de datos SQL',
+    'stale_constants_recovery' => 'El directorio protegido configurado anteriormente no está disponible. Elija una ruta válida; el instalador reemplazará de forma segura el archivo _constants.php obsoleto.',
+    'no_public_writable' => 'El servidor web no puede escribir en el directorio raíz. Conceda escritura temporal al propietario o grupo; no use permisos para todos.',
+    'no_app_config_writable' => 'El servidor web no puede escribir en protected/app/configs. Conceda escritura temporal al propietario o grupo; no use permisos para todos.',
+    'runtime_path_not_writable' => 'El servidor web no puede escribir en %s. Conceda escritura al propietario o grupo; no use permisos para todos.',
+    'database_error' => 'La operación de base de datos falló. Revise host, puerto, nombre, credenciales y privilegios. Los detalles técnicos están en el registro del instalador.',
+    'initial_admin_mismatch' => 'Ya existe un administrador en esta base de datos, pero no coincide con los datos de acceso enviados. Vuelva a intentarlo con el correo, el nombre de usuario y la contraseña originales, o elimine las tablas de esta instalación antes de comenzar de nuevo.',
+    'error_sql_import' => 'No se pudo importar el esquema. Use una base vacía y revise _install/data/logs/php_error.log antes de reintentar.',
     'require_mysql_version' => 'Debe instalar MySQL ' . PH7_REQUIRED_SQL_VERSION . ' o superior para poder continuar.',
     'field_required' => 'Este campo es obligatorio',
     'all_fields_mandatory' => 'Todos los campos marcados con un asterisco (*) son obligatorios',
@@ -69,6 +70,7 @@ $LANG = [
     'db_port' => 'Puerto de la base de datos',
     'desc_db_port' => 'Por favor, mantenga el valor a "3306" si usted no sabe.',
     'ffmpeg_path' => 'La ruta al ejecutable FFmpeg (si no sabe dónde está, consulte a su empresa de alojamiento web)',
+    'ffmpeg_optional' => 'Opcional. Déjelo vacío si FFmpeg no está disponible; la conversión local de vídeo no estará disponible.',
     'bug_report_email' => 'Bug informes e-mail',
     'bug_report_email_placeholder' => 'bug@minombrededominio.com',
     'admin_first_name' => 'Su nombre',
@@ -83,13 +85,14 @@ $LANG = [
     'admin_return_email_placeholder' => 'noreply@yoursite.com',
     'admin_password' => 'Su contraseña',
     'admin_passwords' => 'Por favor, confirme su contraseña',
+    'bad_site_name' => 'El nombre del sitio debe tener entre 2 y 50 caracteres.',
     'bad_email' => 'E-mail incorrecta',
     'bad_username' => 'Su nombre de usuario es incorrecto',
     'username_too_short' => 'Su apodo es demasiado corto, por lo menos 3 caracteres',
     'username_too_long' => 'Su nombre es muy largo, con un máximo de 30 caracteres',
     'password_no_number' => 'Su contraseña debe contener al menos un número',
     'password_no_upper' => 'La contraseña debe contener al menos una mayúscula',
-    'password_too_short' => 'Su contraseña es demasiado corta. 6 caractères mínimo',
+    'password_too_short' => 'Su contraseña es demasiado corta. Debe tener al menos 12 caracteres.',
     'password_too_long' => 'Su contraseña es demasiado larga',
     'passwords_different' => 'La confirmación de contraseña no coincide con la contraseña inicial',
     'bad_first_name' => 'or favor, introduzca su nombre, debe ser de entre 2 y 20 caracteres.',
@@ -99,22 +102,21 @@ $LANG = [
     'remove_install_folder_auto' => 'Eliminar automáticamente el directorio &laquo;install&raquo; (esto requiere derechos de acceso para borrar el directorio &laquo;install&raquo;).',
     'confirm_remove_install_folder_auto' => 'ADVERTENCIA, se eliminarán todos los archivos de la carpeta /_install/.',
     'title_email_finish_install' => 'Acerca de la instalación: Información',
-    'content_email_finish_install' => '<p><strong>¡Enhorabuena, tu sitio web está instalado correctamente!</strong></p>
-        <p>¡Esperamos que usted disfrute de <em>' . Controller::SOFTWARE_NAME . '</em>!</p>
-        <p>La URL de su propio sitio web es: <a href="' . PH7_URL_ROOT . '">' . PH7_URL_ROOT . '</a></p>
-        <p>Tu Panel de Administración URL es: <a href="' . PH7_URL_ROOT . PH7_ADMIN_MOD . '">' . PH7_URL_ROOT . PH7_ADMIN_MOD . '</a></p>
-        <p>No se olvide de mostrar al mostrar su nuevo sitio de citas para todos sus amigos, sus colegas y compañeros de su Facebook (e incluso a sus enemigos ... o no).</p>
-        <p>&nbsp;</p>
-        <p>P.D. Para informes de errores, sugerencias, colaboración, participación en el desarrollo y / o traducción de software, etc,
-            por favor visite nuestro <a href="' . Controller::SOFTWARE_GIT_REPO_URL . '">GitHub sitio web</a>.</p>
-        <p>---</p>
-        <p>Saludos,<br />
-        <a href="' . Controller::AUTHOR_URL . '">Pierre Soria</a></p>',
+    'content_email_finish_install' => '<p><strong>Su sitio pH7Builder se ha instalado correctamente.</strong></p>
+        <p>Sitio: <a href="' . PH7_URL_ROOT . '">' . PH7_URL_ROOT . '</a></p>
+        <p>Administración: <a href="' . PH7_URL_ROOT . PH7_ADMIN_MOD . '">' . PH7_URL_ROOT . PH7_ADMIN_MOD . '</a><br />
+            Correo de acceso: <em>' . (!empty($_SESSION['val']['admin_login_email']) ? escape($_SESSION['val']['admin_login_email']) : '') . '</em><br />
+            Usuario: <em>' . (!empty($_SESSION['val']['admin_username']) ? escape($_SESSION['val']['admin_username']) : '') . '</em><br />
+            Contraseña: <em>oculta; use la elegida durante la instalación.</em>
+        </p>
+        <p>Elimine el directorio de instalación y <a href="' . Controller::SOFTWARE_LOCKDOWN_URL . '">ejecute los comandos de bloqueo de producción</a> antes de iniciar sesión. Complete la lista de lanzamiento antes de aceptar usuarios o pagos reales.</p>
+        <p>Documentación e incidencias: <a href="' . Controller::SOFTWARE_GIT_REPO_URL . '">pH7Builder en GitHub</a>.</p>
+        <p>Saludos,<br /><strong><a href="' . Controller::AUTHOR_URL . '">Pierre-Henry Soria</a></strong><br />Fundador de pH7Builder</p>',
     'yes_dir' => '¡El directorio se encuentra correctamente!',
     'no_dir' => 'El directorio no existe.',
     'wait_importing_database' => 'Espere al importar la base de datos por favor.<br />
         Esto puede tardar varios minutos.',
-    'add_sample_data' => 'Generar perfiles de muestra (podrás eliminarlos más adelante)',
+    'add_sample_data' => 'Generar perfiles de muestra para evaluación local (elimínelos antes de producción)',
     'niche' => 'Elige el tipo de sitio que desea tener',
     'social_dating_niche' => 'Nicho de citas sociales',
     'social_niche' => 'Nicho de redes sociales',
@@ -134,7 +136,18 @@ $LANG = [
     'warning_no_js' => 'Esta página web no es compatible sin tener Javascript activado.<br />
         Por favor, activa JavaScript en las opciones de su navegador web.',
     'admin_url' => 'URL del panel de administración',
-    'next_steps' => '👉 Ahora: inicia sesión en tu panel de administración para personalizar tu sitio, activar los módulos que quieras, añadir algunos perfiles iniciales y publicarlo — la lista «Primeros pasos» te guía paso a paso.',
+    'next_steps' => '👉 Siguiente paso: elimina el instalador y <a href="' . Controller::SOFTWARE_LOCKDOWN_URL . '" target="_blank" rel="noopener">ejecuta los comandos de bloqueo de producción</a> antes de iniciar sesión. La lista «Primeros pasos» del panel de administración te guiará después en la personalización y el lanzamiento.',
     'powered' => 'Desarrollado por',
     'loading' => 'Cargando ...',
+    'invalid_action' => 'Este formulario del instalador caducó o pertenece a otra sesión. Recargue la página e inténtelo de nuevo.',
+    'install_access_intro' => 'Introduzca el token de acceso a la instalación creado en su servidor. Esto evita que otra persona reclame la primera cuenta de administrador.',
+    'install_access_not_configured' => 'El acceso a la instalación está bloqueado. Ejecute el siguiente comando desde el directorio de pH7Builder y vuelva a cargar esta página.',
+    'install_access_token' => 'Token de acceso a la instalación',
+    'install_access_invalid' => 'El token de acceso a la instalación es incorrecto.',
+    'invalid_database_settings' => 'Introduzca host, puerto (1–65535), nombre, usuario y prefijo válidos. La codificación requerida es utf8mb4.',
+    'invalid_ffmpeg_path' => 'La ruta de FFmpeg no es un archivo ejecutable. Corríjala o déjela vacía.',
+    'invalid_niche' => 'Elija uno de los tipos de sitio disponibles e inténtelo de nuevo.',
+    'sample_data_warning' => 'El sitio se instaló, pero los perfiles de ejemplo no se completaron. Revise el registro y elimínelos antes de producción.',
+    'welcome_email_warning' => 'El sitio se instaló, pero no se pudo enviar el correo de bienvenida. Configure el envío de correo en el panel de administración antes del lanzamiento.',
+    'remove_install_failed' => 'No se pudo eliminar completamente el directorio del instalador. Elimine _install manualmente antes de abrir el sitio.',
 ];

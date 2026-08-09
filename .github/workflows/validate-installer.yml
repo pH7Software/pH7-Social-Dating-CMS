@@ -17,8 +17,21 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v7
 
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          tools: composer:v2
+          coverage: none
+
       - name: Validate installer composer.json
         run: composer validate --strict --working-dir _install
+
+      - name: Resolve installer dependencies
+        run: composer install --no-interaction --no-progress --prefer-dist --working-dir _install
+
+      - name: Audit installer dependencies
+        run: composer audit --locked --working-dir _install
 
       - name: PHP syntax check for installer
         run: find _install -type f -name '*.php' -exec php -l {} \; | tee /dev/stderr | (! grep -q "Parse error")

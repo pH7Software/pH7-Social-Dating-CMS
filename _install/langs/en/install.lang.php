@@ -15,12 +15,10 @@ $LANG = [
     'charset' => 'utf-8',
     'lang_name' => 'English',
     'version' => 'version',
-    'welcome_voice' => 'Welcome to ' . Controller::SOFTWARE_NAME . ', version ' . Controller::SOFTWARE_VERSION . '. ' .
-        'I hope you will enjoy your new social web app.',
     'CMS_desc' => '<p>Welcome to ' . Controller::SOFTWARE_NAME . ' Installer.<br />
         Thank you for choosing <strong>pH7Builder</strong>, and we hope you will love it!</p>',
     'choose_install_lang' => 'Please choose your language to begin the installation',
-    'requirements_desc' => 'WARNING! Please make sure <abbr title="Your Server. On local host, it will be you (your computer)">you are</abbr> connected to the Internet and your server has the <a href="' . Controller::SOFTWARE_REQUIREMENTS_URL . '" target="_blank" rel="noopener">minimum requirements</a>.',
+    'requirements_desc' => 'The installer has checked the local PHP requirements. You can also review the <a href="' . Controller::SOFTWARE_REQUIREMENTS_URL . '" target="_blank" rel="noopener">complete server requirements</a>.',
     'requirements2_desc' => 'Before to continue, please create a MySQL database and assign a user to it with full privileges. Once you created the MySQL database and its user, make sure to write down the database name, username and password since you will need them for the installation.',
     'config_path' => '&quot;protected&quot; folder path',
     'desc_config_path' => 'Please specify the full path of your &quot;protected&quot; folder.<br />
@@ -35,7 +33,7 @@ $LANG = [
     'register' => 'Save It!',
     'site_name' => 'A Unique Site Name',
     'agree_license' => 'I have <strong>read</strong> and <strong>agree</strong> to the above Terms.',
-    'conform_to_laws' => 'I <strong>agree to always keep my website fully legal and to conform with any applicable laws and regulations</strong> that may apply to me, to my corporation, to my website and its users, and to review and <a href="https://ph7builder.com/doc/en/how-to-edit-the-static-and-legal-pages" target="_blank" rel="noopener">update the "TOS", "Privacy Policy" (and any other required legal pages of my website)</a> in order to fully comply with the applicable laws and regulations.',
+    'conform_to_laws' => 'I <strong>agree to always keep my website fully legal and to conform with any applicable laws and regulations</strong> that may apply to me, to my corporation, to my website and its users, and to review and <a href="https://github.com/pH7Software/pH7-Social-Dating-CMS/blob/18.x/docs/LAUNCH_CHECKLIST.md#legal-and-privacy" target="_blank" rel="noopener">update the "TOS", "Privacy Policy" (and any other required legal pages of my website)</a> in order to fully comply with the applicable laws and regulations.',
     'responsibilities_agreement' => 'I <strong>agree to use the software at my own risk</strong> and that the author of this software cannot in any case be held liable for direct or indirect damage, nor for any other damage of any kind whatsoever, resulting from the use of this software or the impossibility to use it for any reason whatsoever.',
     'step' => 'Step',
     'welcome' => 'Welcome to the installation of',
@@ -49,10 +47,13 @@ $LANG = [
     'error_page_not_found_desc' => 'Sorry, the page you are looking for could not be found.',
     'no_protected_exist' => 'Sorry, we haven\'t found the &quot;protected&quot; directory.',
     'no_protected_readable' => 'Please change the permissions of the &quot;protected&quot; directory to read mode (CHMOD 755).',
-    'no_public_writable' => 'Please change the permissions of the root public directory to write mode (CHMOD 777).',
-    'no_app_config_writable' => 'Please change the permissions for &quot;protected/app/configs&quot; directory to write mode (CHMOD 777).',
-    'database_error' => 'Error connecting to your database.<br />',
-    'error_sql_import' => 'An error occurred while importing the file to your SQL database',
+    'stale_constants_recovery' => 'The previously configured protected directory is unavailable. Choose a valid path; the installer will safely replace the stale _constants.php file.',
+    'no_public_writable' => 'The web-server user cannot write the root directory. Grant owner/group write access temporarily; do not use world-writable permissions.',
+    'no_app_config_writable' => 'The web-server user cannot write protected/app/configs. Grant owner/group write access temporarily; do not use world-writable permissions.',
+    'runtime_path_not_writable' => 'The web-server user cannot write %s. Grant owner/group write access; do not use world-writable permissions.',
+    'database_error' => 'The database operation failed. Check the hostname, port, database name, credentials, and user privileges. Technical details were written to the installer log.',
+    'initial_admin_mismatch' => 'An administrator already exists in this database but does not match the submitted login. Retry with the original administrator email, username, and password, or clear this installation\'s database tables before starting again.',
+    'error_sql_import' => 'The database schema could not be imported. Use an empty database and review _install/data/logs/php_error.log before retrying.',
     'require_mysql_version' => 'You must install MySQL ' . PH7_REQUIRED_SQL_VERSION . ' or higher in order to continue.',
     'field_required' => 'This field is required',
     'all_fields_mandatory' => 'All fields marked with an asterisk (*) are required',
@@ -69,6 +70,7 @@ $LANG = [
     'db_port' => 'Database host port number',
     'desc_db_port' => 'Leave it to "3306" if you don\'t know.',
     'ffmpeg_path' => 'The path to the FFmpeg executable (if you don\'t know where it is, please ask your hosting company)',
+    'ffmpeg_optional' => 'Optional. Leave blank if FFmpeg is unavailable; local video conversion will remain unavailable.',
     'bug_report_email' => 'Bug reports email',
     'bug_report_email_placeholder' => 'error_log@yourdomain.com',
     'admin_first_name' => 'Your first name',
@@ -83,13 +85,14 @@ $LANG = [
     'admin_return_email_placeholder' => 'noreply@yoursite.com',
     'admin_password' => 'Your password (to login into the admin panel)',
     'admin_passwords' => 'Please confirm your password',
+    'bad_site_name' => 'The site name must be between 2 and 50 characters.',
     'bad_email' => 'Incorrect email',
     'bad_username' => 'Your username is incorrect',
     'username_too_short' => 'Your username is too short, at least 3 characters',
     'username_too_long' => 'Your username is too long, maximum 30 characters',
     'password_no_number' => 'Your password must contain at least one number',
     'password_no_upper' => 'Your password must contain at least one uppercase letter',
-    'password_too_short' => 'Your password is too short. Must be at least 6 characters',
+    'password_too_short' => 'Your password is too short. It must be at least 12 characters.',
     'password_too_long' => 'Your password is too long',
     'passwords_different' => 'The confirmation password doesn\'t match with the initial one',
     'bad_first_name' => 'Please enter your first name, it must also be between 2 and 20 characters.',
@@ -99,29 +102,21 @@ $LANG = [
     'remove_install_folder_auto' => 'Automatically delete the &quot;install&quot; directory (this requires access rights to delete the &quot;install&quot; directory).',
     'confirm_remove_install_folder_auto' => 'WARNING, All files in the /_install/ folder will be removed.',
     'title_email_finish_install' => 'About your installation: Information',
-    'content_email_finish_install' => '<p><strong>Congrats! 🥳 Your website has successfully been installed! 😍</strong></p>
-        <p>I hope you\'ll enjoy <em>' . Controller::SOFTWARE_NAME . '</em> a lot!</p>
-        <p>The URL of Your OWN Social/Dating website is: <em><a href="' . PH7_URL_ROOT . '">' . PH7_URL_ROOT . '</a></em></p>
-        <p>Your Admin Panel URL is: <em><a href="' . PH7_URL_ROOT . PH7_ADMIN_MOD . '">' . PH7_URL_ROOT . PH7_ADMIN_MOD . '</a></em><br />
-            Your Admin Login Email is: <em>' . (!empty($_SESSION['val']['admin_login_email']) ? $_SESSION['val']['admin_login_email'] : '') . '</em><br />
-            Your Admin Login Username is: <em>' . (!empty($_SESSION['val']['admin_username']) ? $_SESSION['val']['admin_username'] : '') . '</em><br />
-            Your Admin Login Password is: <em>****** (hidden for security reasons. It\'s the one you chose during the installation).</em>
+    'content_email_finish_install' => '<p><strong>Your pH7Builder site has been installed successfully.</strong></p>
+        <p>Site: <a href="' . PH7_URL_ROOT . '">' . PH7_URL_ROOT . '</a></p>
+        <p>Admin panel: <a href="' . PH7_URL_ROOT . PH7_ADMIN_MOD . '">' . PH7_URL_ROOT . PH7_ADMIN_MOD . '</a><br />
+            Login email: <em>' . (!empty($_SESSION['val']['admin_login_email']) ? escape($_SESSION['val']['admin_login_email']) : '') . '</em><br />
+            Username: <em>' . (!empty($_SESSION['val']['admin_username']) ? escape($_SESSION['val']['admin_username']) : '') . '</em><br />
+            Password: <em>hidden; use the password selected during installation.</em>
         </p>
-        <p>Don\'t forget to show off YOUR new Social Dating Website to your friends, colleagues and Facebook\'s mates (and even to your haters... why not! :-) ).</p>
-        <p><strong>Here is a <a href="' . get_tweet_post("Built my #Social #DatingWebsite with #pH7Builder 😍 %s \n%s #DatingSoftware 🚀", Controller::SOFTWARE_TWITTER, Controller::SOFTWARE_GIT_REPO_URL) . '">pre-written Tweet</a> (which you can edit, of course)</strong>.</p>
-        <p>&nbsp;</p>
-        <p><strong>Will you help me to improve the software..? <a href="' . Controller::PATREON_URL . '">Make a donation here</a></strong></p>
-        <p>&nbsp;</p>
-        <p>P.S. For any bug reports, suggestions, partnership, translation, contribution or other,
-        please visit the <a href="' . Controller::SOFTWARE_GIT_REPO_URL . '">GitHub Repo</a>.</p>
-        <p>---</p>
-        <p>Kind regards,<br />
-        <strong><a href="' . Controller::AUTHOR_URL . '">Pierre Soria</a></strong></p>',
+        <p>Remove the installer directory, then <a href="' . Controller::SOFTWARE_LOCKDOWN_URL . '">run the production lockdown commands</a> before signing in. Complete the launch checklist before accepting real members or payments.</p>
+        <p>Documentation and issue reporting: <a href="' . Controller::SOFTWARE_GIT_REPO_URL . '">pH7Builder on GitHub</a>.</p>
+        <p>Best regards,<br /><strong><a href="' . Controller::AUTHOR_URL . '">Pierre-Henry Soria</a></strong><br />Founder of pH7Builder</p>',
     'yes_dir' => 'The directory was found successfully!',
     'no_dir' => 'The directory does not exist.',
     'wait_importing_database' => 'Please wait while importing the database.<br />
         This may take several minutes.',
-    'add_sample_data' => 'Generate sample profiles (you will be able to remove them later)',
+    'add_sample_data' => 'Generate sample profiles for local evaluation (remove them before production)',
     'niche' => 'Choose the Kind of WebApp you Want to Build 😇',
     'social_dating_niche' => 'Social-Dating Niche 🥰',
     'social_niche' => 'Community Niche 🥳',
@@ -141,7 +136,18 @@ $LANG = [
     'warning_no_js' => 'JavaScript is disabled on your Web browser!<br />
         Please enable JavaScript via the options of your Web browser in order to use this website.',
     'admin_url' => 'Admin Panel URL',
-    'next_steps' => '👉 Next: sign in to your admin panel to brand your site, enable the modules you want, add a few starter profiles, and go live — the Getting Started checklist there walks you through it.',
+    'next_steps' => '👉 Next: remove the installer, then <a href="' . Controller::SOFTWARE_LOCKDOWN_URL . '" target="_blank" rel="noopener">run the production lockdown commands</a> before signing in. The Getting Started checklist in the admin panel will then guide you through branding and launch.',
     'powered' => 'Proudly powered by',
     'loading' => 'Loading...',
+    'invalid_action' => 'This installer form expired or was opened in another session. Reload the page and try again.',
+    'install_access_intro' => 'Enter the one-time installer access token created on your server. This prevents someone else from claiming the first administrator account.',
+    'install_access_not_configured' => 'Installer access is locked. Run the command below from the pH7Builder directory, then reload this page.',
+    'install_access_token' => 'Installer access token',
+    'install_access_invalid' => 'The installer access token is incorrect.',
+    'invalid_database_settings' => 'Enter a valid database host, port (1–65535), name, username, and table prefix. The required encoding is utf8mb4.',
+    'invalid_ffmpeg_path' => 'The FFmpeg path is not an executable file. Correct it or leave it blank.',
+    'invalid_niche' => 'Choose one of the available site types and try again.',
+    'sample_data_warning' => 'The site was installed, but sample profiles could not be completed. Review the installer log and remove any generated sample profiles before production.',
+    'welcome_email_warning' => 'The site was installed, but the welcome email could not be sent. Configure email delivery in the admin panel before launch.',
+    'remove_install_failed' => 'The installer directory could not be removed completely. Delete _install manually before opening the site.',
 ];

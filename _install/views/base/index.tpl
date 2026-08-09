@@ -2,7 +2,39 @@
 
 <h2>{$LANG.welcome|upper} &laquo;{$software_name|upper}&raquo; {$LANG.version|upper} {$software_version}</h2>
 
-{$LANG.CMS_desc}
+{if !empty($install_access_required)}
+    <p>{$LANG.install_access_intro}</p>
+
+    {if empty($install_access_configured)}
+        <p class="error">{$LANG.install_access_not_configured}</p>
+        <p><code>php _install/create-install-token.php</code></p>
+    {else}
+        {if !empty($install_access_error)}
+            <p class="error">{$install_access_error|escape}</p>
+        {/if}
+
+        <form method="post" action="{$smarty.const.PH7_URL_SLUG_INSTALL}index">
+            <input type="hidden" name="action_token" value="{$action_token|escape}" />
+            <p>
+                <label for="install_access_token">{$LANG.install_access_token}:</label><br />
+                <input
+                    type="password"
+                    name="install_access_token"
+                    id="install_access_token"
+                    minlength="32"
+                    autocomplete="off"
+                    required="required"
+                />
+            </p>
+            <p>
+                <button type="submit" name="install_access_submit" value="1" class="btn btn-primary btn-lg">
+                    {$LANG.next}
+                </button>
+            </p>
+        </form>
+    {/if}
+{else}
+    {$LANG.CMS_desc}
 
 <p>{$LANG.choose_install_lang}</p>
 
@@ -17,16 +49,6 @@
     <button type="button" onclick="document.location.href='{$smarty.const.PH7_URL_SLUG_INSTALL}license'"
         class="btn btn-primary btn-lg">{$LANG.go}</button>
 </p>
-
-<!-- Add a real welcome voice! -->
-<script src="{$smarty.const.PH7_URL_INSTALL}static/js/artyom.js"></script>
-<script>
-    artyom.initialize({
-        lang: "{$LANG.lang}",
-        debug: false,
-        speed: 0.9 // Slower the speed voice
-    });
-</script>
-<script>artyom.say("{$LANG.welcome_voice}");</script>
+{/if}
 
 {include file="inc/footer.tpl"}

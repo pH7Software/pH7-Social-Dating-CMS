@@ -14,36 +14,18 @@ defined('PH7') or exit(header('Location: ./'));
 ########## VARIABLES ##########
 
 ##### URL #####
-// Check the SSL protocol compatibility
-$sUrlProtocol = (
-    (!empty($_SERVER['HTTPS']) && in_array(strtolower((string)$_SERVER['HTTPS']), ['on', '1'], true)) ||
-    (!empty($_SERVER['HTTP_X_FORWARDED_PROTO']) && stripos((string)$_SERVER['HTTP_X_FORWARDED_PROTO'], 'https') === 0) ||
-    (!empty($_SERVER['HTTP_X_FORWARDED_SSL']) && strtolower((string)$_SERVER['HTTP_X_FORWARDED_SSL']) === 'on') ||
-    (!empty($_SERVER['REQUEST_SCHEME']) && $_SERVER['REQUEST_SCHEME'] === 'https') ||
-    ($_SERVER['SERVER_PORT'] ?? '') === '443'
-) ? 'https://' : 'http://';
+// The installer replaces these values once. Runtime requests must never derive
+// security-sensitive links from the request-controlled Host header.
+$sUrlProtocol = '%url_protocol%';
+$sDomain = '%domain%';
 
-// Determine the domain name, with the port if necessary
-$sServerName = ($_SERVER['SERVER_NAME'] ?? '') !== ($_SERVER['HTTP_HOST'] ?? '') ? ($_SERVER['HTTP_HOST'] ?? '') : ($_SERVER['SERVER_NAME'] ?? '');
-$sDomain = (($_SERVER['SERVER_PORT'] ?? '') !== '80' && ($_SERVER['SERVER_PORT'] ?? '') !== '443' && strpos($sServerName, ':') === false) ? $sServerName . ':' . ($_SERVER['SERVER_PORT'] ?? '') : $sServerName;
-
-// Get the domain that the cookie and cookie session is available (Set-Cookie: domain=your_site_name.com)
-$sCookieHost = strtolower(trim((string)$sServerName));
-if (strpos($sCookieHost, '[') === 0) {
-    $iClosingBracketPos = strpos($sCookieHost, ']');
-    if ($iClosingBracketPos !== false) {
-        $sCookieHost = substr($sCookieHost, 0, $iClosingBracketPos + 1);
-    }
-} elseif (substr_count($sCookieHost, ':') === 1) {
-    $sCookieHost = (string)preg_replace('/:\d+$/', '', $sCookieHost);
-}
-$sCookieHost = trim($sCookieHost, '[]');
-$bIsCookieHostIp = filter_var($sCookieHost, FILTER_VALIDATE_IP) !== false;
-$bIsCookieHostLocal = $sCookieHost === 'localhost' || $sCookieHost === '';
-$sDomain_cookie = (!$bIsCookieHostIp && !$bIsCookieHostLocal) ? '.' . preg_replace('/^www\./', '', $sCookieHost) : '';
+// Host-only cookies are the safe default. PH7_COOKIE_DOMAIN can explicitly opt
+// into a validated parent domain when cross-subdomain cookies are required.
+$sDomain_cookie = '';
 
 // Determine the current file of the application
-$sPhp_self = str_replace('\\', '', dirname(htmlspecialchars($_SERVER['PHP_SELF'] ?? '', ENT_QUOTES))); // Remove backslashes for Windows compatibility
+$sScriptName = is_string($_SERVER['SCRIPT_NAME'] ?? null) ? $_SERVER['SCRIPT_NAME'] : '/index.php';
+$sPhp_self = str_replace('\\', '/', dirname($sScriptName));
 
 
 ########## CONSTANTS ##########
@@ -52,6 +34,7 @@ $sPhp_self = str_replace('\\', '', dirname(htmlspecialchars($_SERVER['PHP_SELF']
 define('PH7_DS', DIRECTORY_SEPARATOR);
 define('PH7_PS', PATH_SEPARATOR);
 define('PH7_SH', '/'); // SlasH
+define('PH7_CANONICAL_AUTHORITY_PINNED', true);
 define('PH7_SELF', (substr($sPhp_self, -1) !== PH7_SH) ? $sPhp_self . PH7_SH : $sPhp_self);
 define('PH7_RELATIVE', PH7_SELF);
 

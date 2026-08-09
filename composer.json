@@ -1,28 +1,24 @@
 {
   "name": "ph7software/ph7builder",
-  "description": "pH7Builder. Social Dating Web App Site Builder",
+  "description": "Self-hosted PHP platform for building white-label dating sites, matchmaking communities, and social networks",
   "keywords": [
-    "business builder",
-    "community builder",
-    "CMS",
+    "php",
+    "mysql",
+    "self-hosted",
+    "open source",
+    "white-label dating app",
+    "php dating software",
+    "dating script",
+    "dating website",
     "dating",
-    "social",
+    "dating app",
+    "matchmaking",
     "social network",
     "social networking",
-    "community",
-    "community management",
-    "dating website",
-    "dating app",
-    "user",
-    "member",
-    "member area",
-    "payment",
-    "business",
-    "startup",
-    "membership",
-    "osdate",
-    "dating script",
-    "tinder"
+    "community platform",
+    "membership platform",
+    "pwa",
+    "cms"
   ],
   "type": "project",
   "homepage": "https://ph7builder.com",
@@ -32,7 +28,7 @@
       "name": "Pierre-Henry Soria",
       "email": "hi@ph7.me",
       "homepage": "https://ph7.me",
-      "role": "Senior Software Developer"
+      "role": "Founder and Software Engineer"
     }
   ],
   "config": {
@@ -55,12 +51,17 @@
     "ext-curl": "*",
     "ext-dom": "*",
     "ext-exif": "*",
+    "ext-fileinfo": "*",
     "ext-gd": "*",
     "ext-hash": "*",
+    "ext-iconv": "*",
     "ext-json": "*",
     "ext-mbstring": "*",
+    "ext-openssl": "*",
     "ext-pdo_mysql": "*",
+    "ext-simplexml": "*",
     "ext-xml": "*",
+    "ext-xmlwriter": "*",
     "ext-zip": "*",
     "ext-zlib": "*",
     "arcturial/clickatell": "^3.0",
@@ -115,17 +116,18 @@
     ],
     "post-install-cmd": [
       "@post-cmd",
-      "@composer install --working-dir _install"
+      "@install-installer-dependencies"
     ],
     "post-update-cmd": [
       "@post-cmd",
-      "@composer update --working-dir _install"
-    ]
+      "@install-installer-dependencies"
+    ],
+    "install-installer-dependencies": "@php _protected/app/includes/InstallerDependencies.php"
   },
   "minimum-stability": "stable",
   "support": {
     "source": "https://github.com/pH7Software/pH7-Social-Dating-CMS",
     "issues": "https://github.com/pH7Software/pH7-Social-Dating-CMS/issues",
-    "docs": "https://ph7builder.com/doc"
+    "docs": "https://github.com/pH7Software/pH7-Social-Dating-CMS/tree/18.x/docs"
   }
 }

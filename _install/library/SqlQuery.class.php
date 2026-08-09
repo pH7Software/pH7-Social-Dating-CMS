@@ -28,4 +28,10 @@ final class SqlQuery
     public const UPDATE_SYS_MODULE = "UPDATE %s SET enabled = :status WHERE folderName = :modName LIMIT 1";
 
     public const UPDATE_CRON_SECURITY_HASH = "UPDATE %s SET settingValue = :securityHash WHERE settingName = 'cronSecurityHash' LIMIT 1";
+
+    public const UPDATE_META_OWNER = 'UPDATE %s SET metaAuthor = :siteName, metaCopyright = :siteName';
+
+    public const UPDATE_SETTING = 'UPDATE %s SET settingValue = :settingValue WHERE settingName = :settingName LIMIT 1';
+
+    public const UPDATE_STATIC_FILE_STATUS = "UPDATE %s SET active = :status WHERE staticId = 1 AND fileType = 'js' LIMIT 1";
 }

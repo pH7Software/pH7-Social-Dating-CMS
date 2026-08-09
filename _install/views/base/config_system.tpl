@@ -5,10 +5,8 @@
 {include file="inc/errors.tpl"}
 
 <form method="post" action="{$smarty.const.PH7_URL_SLUG_INSTALL}config_system">
+    <input type="hidden" name="action_token" value="{$action_token|escape}" />
     <fieldset>
-        <input type="hidden" name="db_type_name" value="{$smarty.session.db.type_name|escape}" required="required" />
-        <input type="hidden" name="db_type" value="{$smarty.session.db.type|escape}" required="required" />
-
         <p>
             <span class="mandatory">*</span> <label for="db_hostname">{$LANG.db_hostname}:</label><br />
             <span class="small">{$LANG.desc_db_hostname}</span><br />
@@ -22,7 +20,7 @@
 
         <p>
             <span class="mandatory">*</span> <label for="db_password">{$LANG.db_password}:</label><br />
-            <input type="password" id="db_password" name="db_password" required="required" />
+            <input type="password" id="db_password" name="db_password" autocomplete="new-password" required="required" />
         </p>
 
         <p>
@@ -39,18 +37,19 @@
         <p>
             <span class="mandatory">*</span> <label for="db_charset">{$LANG.db_encoding}:</label><br />
             <span class="small">{$LANG.desc_db_encoding}</span><br />
-            <input type="text" name="db_charset" id="db_charset" onfocus="if ('{$def_db_charset}' == this.value) this.value='';" onblur="if ('' == this.value) this.value = '{$def_db_charset}';" value="{$smarty.session.db.charset|escape}" required="required" />
+            <input type="text" name="db_charset" id="db_charset" value="{$smarty.session.db.charset|escape}" readonly="readonly" required="required" />
         </p>
 
         <p>
             <span class="mandatory">*</span> <label for="db_port">{$LANG.db_port}:</label><br />
             <span class="small">{$LANG.desc_db_port}</span><br />
-            <input type="text" name="db_port" id="db_port" onfocus="if ('{$def_db_port}' == this.value) this.value='';" onblur="if ('' == this.value) this.value = '{$def_db_port}';" value="{$smarty.session.db.port|escape}" required="required" />
+            <input type="number" name="db_port" id="db_port" min="1" max="65535" inputmode="numeric" value="{$smarty.session.db.port|escape}" required="required" />
         </p>
 
         <p>
-            <span class="mandatory">*</span> <label for="ffmpeg_path">{$LANG.ffmpeg_path}:</label><br />
-            <input type="text" name="ffmpeg_path" id="ffmpeg_path" value="{$smarty.session.val.ffmpeg_path|escape}" required="required" />
+            <label for="ffmpeg_path">{$LANG.ffmpeg_path}:</label><br />
+            <span class="small">{$LANG.ffmpeg_optional}</span><br />
+            <input type="text" name="ffmpeg_path" id="ffmpeg_path" value="{$smarty.session.val.ffmpeg_path|escape}" />
         </p>
 
         <p>

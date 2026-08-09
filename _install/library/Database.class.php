@@ -3,7 +3,7 @@
  * @title            Helper PDO Database Class
  *
  * @author           Pierre-Henry Soria <hi@ph7.me>
- * @copyright        (c) 2012-2020, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2012-2026, Pierre-Henry Soria and pH7Builder contributors.
  * @license          MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package          PH7 / Install / Library
  */
@@ -19,24 +19,16 @@ use PDO;
 class Database extends PDO
 {
     const DBMS_MYSQL_NAME = 'MySQL';
-    const DBMS_POSTGRESQL_NAME = 'PostgreSQL';
 
     const DSN_MYSQL_PREFIX = 'mysql';
-    const DSN_POSTGRESQL_PREFIX = 'pgsql';
 
     public function __construct(array $aParams)
     {
-        $aDriverOptions = [];
-
-        if ($this->isMySQL($aParams['db_type'])) {
-            $aDriverOptions[PDO::MYSQL_ATTR_INIT_COMMAND] = 'SET NAMES ' . $aParams['db_charset'];
-        }
-
         parent::__construct(
-            "{$aParams['db_type']}:host={$aParams['db_hostname']};dbname={$aParams['db_name']};",
+            $this->buildDsn($aParams),
             $aParams['db_username'],
             $aParams['db_password'],
-            $aDriverOptions
+            []
         );
 
         $this->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -48,5 +40,22 @@ class Database extends PDO
     private function isMySQL(string $sDbType): bool
     {
         return $sDbType === Database::DSN_MYSQL_PREFIX;
+    }
+
+    private function buildDsn(array $aParams): string
+    {
+        $sDsn = sprintf(
+            '%s:host=%s;port=%d;dbname=%s',
+            $aParams['db_type'],
+            $aParams['db_hostname'],
+            $aParams['db_port'],
+            $aParams['db_name']
+        );
+
+        if ($this->isMySQL($aParams['db_type'])) {
+            $sDsn .= ';charset=' . $aParams['db_charset'];
+        }
+
+        return $sDsn;
     }
 }

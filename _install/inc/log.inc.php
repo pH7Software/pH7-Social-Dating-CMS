@@ -11,5 +11,8 @@
 defined('PH7') or exit('Restricted access');
 
 ini_set('log_errors', 'On');
+ini_set('display_errors', 'Off');
+ini_set('display_startup_errors', 'Off');
+error_reporting(E_ALL);
 ini_set('error_log', PH7_ROOT_INSTALL . 'data/logs/php_error.log');
 ini_set('ignore_repeated_errors', 'On');
