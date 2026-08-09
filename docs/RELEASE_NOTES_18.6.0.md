@@ -82,17 +82,20 @@ validation and transaction guarantees.
 
 ## Release verification before publication
 
-- [ ] Fresh install completes on the release package with PHP 8.2 and MySQL 8.
-- [ ] Direct upgrade from an unmodified 18.5.1 database completes and preserves
+- [x] Fresh install completes on the release package with PHP 8.2 and MySQL 8.
+- [x] Direct upgrade from an unmodified 18.5.1 database completes and preserves
       user data.
-- [ ] PHPUnit, static analysis, Composer validation/audit, installer validation,
+- [x] PHPUnit, static analysis, Composer validation/audit, installer validation,
       and PHP syntax checks pass.
-- [ ] Apache and nginx smoke tests cover public pages, admin login, protected
+- [x] Apache and nginx smoke tests cover public pages, admin login, protected
       paths, uploads, and error responses.
-- [ ] The GitHub release archive includes all production dependencies or the
+- [x] The GitHub release archive includes all production dependencies or the
       installation instructions clearly require Composer.
-- [ ] Version constants, installer metadata, Git tag, release title, and this
+- [x] Version constants, installer metadata, Git tag, release title, and this
       document all say `18.6.0`.
+
+## Post-publication operational step
+
 - [ ] After the release assets are public, the live update feed's `ph7builder`
       entry says `REVOLUTIONARY™`, version `18.6.0`, SQL schema `1.6.6`, and
       build `1`; only then is `upd-alert` enabled.
