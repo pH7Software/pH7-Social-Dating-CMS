@@ -179,7 +179,7 @@ class MainController extends Controller
     /**
      * Add CSS/JS files for visitor's homepage.
      */
-    private function addGuestAssetFiles(string $bIsBgVideo): void
+    private function addGuestAssetFiles(bool $bIsBgVideo): void
     {
         $sIsCssVidSplashFile = $bIsBgVideo === true ? 'video_splash.css,' : '';
         $this->design->addCss(
