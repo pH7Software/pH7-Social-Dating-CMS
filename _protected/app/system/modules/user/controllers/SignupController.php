@@ -1,11 +1,11 @@
 <?php
+
 /**
  * @title          SignUp Controller
  *
  * @author         Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
  * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
- * @package        PH7 / App / System / Module / User / Controller
  */
 
 namespace PH7;
@@ -16,7 +16,7 @@ use PH7\Framework\Url\Header;
 
 class SignupController extends Controller
 {
-    const TOTAL_SIGNUP_STEPS = 3;
+    public const TOTAL_SIGNUP_STEPS = 3;
 
     public function step1()
     {
@@ -24,6 +24,10 @@ class SignupController extends Controller
         $this->design->addCss(
             PH7_LAYOUT . PH7_TPL . PH7_TPL_NAME . PH7_SH . PH7_CSS,
             'zoomer.css'
+        );
+        $this->design->addCss(
+            PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_CSS,
+            'general.css'
         );
 
         $bRef = $this->httpRequest->getExists('ref');
@@ -62,7 +66,7 @@ class SignupController extends Controller
         }
 
         $this->view->page_title = $this->getSignupPageTitle($bUserRef, $sFirstName);
-        $this->view->meta_description = t('Sign Up today to meet friends, sex friends, singles, families, neighbors and many others people near or far from you! %site_name% is a free social dating with profiles, blog, rating, hot or not, video chat rooms');
+        $this->view->meta_description = t('Create your profile on %site_name% to meet new people nearby or around the world. Discover profiles, conversations, photos, and communities that match your interests.');
 
         $sH1Txt = $this->getSignupHeading($bUserRef, $sFirstName, $sUsername);
         $this->view->h1_title = '<div class="animated fadeInDown">' . $sH1Txt . '</div>';
@@ -74,7 +78,7 @@ class SignupController extends Controller
 
     public function step2()
     {
-        $this->setTitle(t('Sign up - Step 2/3'));
+        $this->setTitle(t('Create your profile — Step 2 of 3'));
         $this->setupProgressbar(2, 66);
 
         $this->output();
@@ -82,17 +86,17 @@ class SignupController extends Controller
 
     public function step3()
     {
-        $this->setTitle(t('Sign up - Step 3/3'));
-        $this->setupProgressbar(3, 99);
+        $this->setTitle(t('Create your profile — Step 3 of 3'));
+        $this->setupProgressbar(3, 100);
 
         $this->output();
     }
 
     public function step4()
     {
-        $this->setTitle(t('Now, Upload a Photo of You! 😃'));
+        $this->setTitle(t('Add a profile photo'));
         // Assign AvatarDesign to view for displaying the avatar lightBox through the step4.tpl
-        $this->view->avatarDesign = new AvatarDesignCore;
+        $this->view->avatarDesign = new AvatarDesignCore();
 
         $this->output();
     }
@@ -116,7 +120,7 @@ class SignupController extends Controller
                 )
             );
         } else {
-            if ((new UserMilestoneCore(new UserCoreModel))->isTotalUserReached()) {
+            if ((new UserMilestoneCore(new UserCoreModel()))->isTotalUserReached()) {
                 $sUrl = Uri::get(
                     'milestone-celebration',
                     'main',
@@ -141,8 +145,8 @@ class SignupController extends Controller
     }
 
     /**
-     * @param int $iStep Number of the current step (e.g. 1, 2, 3).
-     * @param int $iPercentage Percentage of progression.
+     * @param int $iStep       Number of the current step (e.g. 1, 2, 3).
+     * @param int $iPercentage percentage of progression
      *
      * @return void
      */
@@ -156,17 +160,17 @@ class SignupController extends Controller
     /**
      * Returns the appropriate sign up page title for the registration page.
      *
-     * @param bool $bUserRef
+     * @param bool   $bUserRef
      * @param string $sFirstName
      *
      * @return string
      */
     private function getSignupPageTitle($bUserRef, $sFirstName)
     {
-        $sPageTitle = t('Free Sign Up to Meet Lovely People!');
+        $sPageTitle = t('Join %site_name% and meet new people');
 
         if ($bUserRef) {
-            $sPageTitle = t('Sign up to meet %0% on %site_name%. The Real Social Dating app!', $sFirstName);
+            $sPageTitle = t('Join %site_name% to connect with %0%', $sFirstName);
         }
 
         return $sPageTitle;
@@ -175,7 +179,7 @@ class SignupController extends Controller
     /**
      * Returns the appropriate sign up heading for the registration page.
      *
-     * @param bool $bUserRef
+     * @param bool   $bUserRef
      * @param string $sFirstName
      * @param string $sUsername
      *
@@ -183,10 +187,10 @@ class SignupController extends Controller
      */
     private function getSignupHeading($bUserRef, $sFirstName, $sUsername)
     {
-        $sHeading = t('Sign Up on %site_name%! 🎉');
+        $sHeading = t('Create your profile on %site_name%');
 
         if ($bUserRef) {
-            $sHeading = t('😍 Sign Up to Meet <span class="pink2">%0%</span> (a.k.a <span class="pink1">%1%</span>) on <span class="pink2">%site_name%</span> 🥰', $sFirstName, $this->str->upperFirst($sUsername));
+            $sHeading = t('Join <span class="pink2">%site_name%</span> to connect with <span class="pink2">%0%</span> (<span class="pink1">%1%</span>)', $sFirstName, $this->str->upperFirst($sUsername));
         }
 
         return $sHeading;

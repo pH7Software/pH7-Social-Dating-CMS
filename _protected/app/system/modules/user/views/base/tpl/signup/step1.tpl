@@ -5,10 +5,21 @@
     </div>
 
     <div class="pull-right col-xs-12 col-sm-5 col-md-5 col-md-offset-1 col-lg-4 animated fadeInRight">
-        <div class="center">
-            <p>
-                {lang 'Already registered?'} <a href="{{ $design->url('user','main','login') }}"><strong>{lang 'Sign In!'}</strong></a>
-            </p>
+        <aside class="panel panel-default signup_support" aria-label="{lang 'Signup information'}">
+            <div class="panel-body">
+                <h2>{lang 'Create your profile with confidence'}</h2>
+                <ul class="list-unstyled">
+                    <li><i class="fa fa-check-circle" aria-hidden="true"></i> {lang 'Registration takes three short steps.'}</li>
+                    <li><i class="fa fa-check-circle" aria-hidden="true"></i> {lang 'You can update your profile, privacy, and notification settings later.'}</li>
+                </ul>
+                <p>
+                    {lang 'Already have an account?'}
+                    <a href="{{ $design->url('user','main','login') }}"><strong>{lang 'Sign in'}</strong></a>
+                </p>
+            </div>
+        </aside>
+
+        <div class="center signup_profiles">
             {if !empty($user_ref)}
                 <a href="{{ $design->getUserAvatar($username, $sex, 400) }}" title="{first_name}" data-popup="image">
                     <img
