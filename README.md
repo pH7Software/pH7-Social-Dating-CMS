@@ -25,7 +25,21 @@ certificate issuance, and mail-provider approval are outside that estimate.
 [Release guides](docs/) ·
 [Releases](https://github.com/pH7Software/pH7-Social-Dating-CMS/releases)
 
-![Bundled pH7Builder base-theme preview](templates/themes/base/img/preview.png)
+<p align="center">
+  <img
+    src="https://cloud.githubusercontent.com/assets/1325411/19419476/5475b32c-93d0-11e6-9756-8e7db8df129f.png"
+    width="760"
+    alt="Build a self-hosted social dating community with pH7Builder"
+  >
+</p>
+
+## Built for ownership
+
+pH7Builder gives entrepreneurs a self-hosted alternative to rented SaaS
+platforms. Deploy it on infrastructure you choose, adapt the source code to
+your niche, and retain control of the application, database, files, and member
+data. There is no required public “Powered by” link; the MIT license notice
+simply remains with copies or substantial portions of the software.
 
 ## What is included
 
@@ -146,6 +160,41 @@ Language packs live in the separate
 Keep application code and community translations in their respective
 repositories.
 
+## Product gallery
+
+The bundled themes are responsive and can be adapted to match a dating brand
+or community niche. The exact screens and modules shown depend on the selected
+theme and enabled configuration.
+
+<p align="center">
+  <img
+    src="templates/themes/base/img/preview.png"
+    width="760"
+    alt="Bundled pH7Builder base-theme preview"
+  >
+</p>
+
+<p align="center">
+  <img
+    src="https://user-images.githubusercontent.com/1325411/35779585-68f0d5fc-09c7-11e8-91eb-bf793fcfab6e.png"
+    width="49%"
+    alt="pH7Builder member profile page"
+  >
+  <img
+    src="https://cloud.githubusercontent.com/assets/1325411/14080251/b476e5c6-f4fb-11e5-825e-ddc992ba1055.png"
+    width="49%"
+    alt="pH7Builder administration panel user list"
+  >
+</p>
+
+<p align="center">
+  <img
+    src="https://cloud.githubusercontent.com/assets/1325411/19419481/657386a4-93d0-11e6-8eee-95deba2d30a0.png"
+    width="760"
+    alt="Create a social dating web application with pH7Builder"
+  >
+</p>
+
 ## Documentation and support
 
 - [Official website](https://ph7builder.com)
@@ -164,14 +213,56 @@ Bug fixes, tests, documentation, modules, themes, and translations are welcome.
 Please read [CONTRIBUTING.md](CONTRIBUTING.md), keep pull requests focused, and
 run the test and static-analysis commands listed there.
 
-## Creator and project
+## Creator
 
-pH7Builder was created by
-[Pierre-Henry Soria](https://ph7.me) ([GitHub](https://github.com/pH-7)) and is
-maintained in the [pH7Software organization](https://github.com/pH7Software).
-If the project helps your business, you can support continued maintenance via
-[Ko-fi](https://ko-fi.com/phenry) or
-[Buy Me a Coffee](https://www.buymeacoffee.com/ph7cms).
+<table>
+  <tr>
+    <td width="180" align="center" valign="top">
+      <a href="https://ph7.me">
+        <img
+          src="https://avatars0.githubusercontent.com/u/1325411?s=200"
+          width="144"
+          height="144"
+          alt="Pierre-Henry Soria"
+        >
+      </a>
+      <br>
+      <strong>Pierre-Henry Soria</strong>
+    </td>
+    <td valign="top">
+      pH7Builder was created by <a href="https://ph7.me"><strong>Pierre-Henry Soria</strong></a>,
+      a Belgian software engineer and open-source product creator. He also
+      created the project-specific pH7Framework to give entrepreneurs a
+      flexible, self-hosted foundation for dating services and social
+      communities.
+      <br><br>
+      The project is developed openly through the
+      <a href="https://github.com/pH7Software">pH7Software organization</a>.
+      Follow Pierre-Henry on
+      <a href="https://github.com/pH-7">GitHub</a>,
+      <a href="https://www.linkedin.com/in/ph7enry/">LinkedIn</a>,
+      <a href="https://bsky.app/profile/pierrehenry.dev">Bluesky</a>, or
+      <a href="https://x.com/phenrysay">X</a>.
+    </td>
+  </tr>
+</table>
+
+<details>
+  <summary><strong>A moment from the project history</strong></summary>
+  <br>
+  <img
+    src="https://user-images.githubusercontent.com/1325411/78962138-32ffa100-7ae3-11ea-8d35-83d78f3cbc48.jpg"
+    width="760"
+    alt="Pierre-Henry Soria working on pH7Software at a Costa Coffee shop on February 4, 2017"
+  >
+  <br>
+  <em>Pierre-Henry working on pH7Software at a Costa Coffee shop on February 4, 2017.</em>
+</details>
+
+If pH7Builder helps your business, you can support continued open-source
+maintenance through
+[![Ko-fi](static/img/kofi-logo.png)](https://ko-fi.com/phenry)
+[![Buy Me a Coffee](static/img/buymeacoffee-logo.svg)](https://www.buymeacoffee.com/ph7cms).
 
 ## License
 
