@@ -61,6 +61,18 @@ cd pH7Builder-v18.6.0
 composer install --no-dev --prefer-dist --optimize-autoloader
 ```
 
+As another verified path, Composer can create the project directly from the
+tagged Packagist release. Run this from the parent of the intended deployment
+directory:
+
+```console
+composer create-project ph7software/ph7builder:18.6.0 ph7builder --no-dev --prefer-dist
+```
+
+Softaculous and SourceForge also list pH7Builder, but their available archive
+may lag behind the current GitHub and Packagist release. Confirm the exact
+version before using either channel.
+
 If Composer warns about running as root, stop and correct the directory owner
 before continuing.
 

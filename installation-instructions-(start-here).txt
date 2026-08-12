@@ -15,6 +15,16 @@ https://github.com/pH7Software/pH7-Social-Dating-CMS/blob/18.x/docs/LAUNCH_CHECK
 Release guides:
 https://github.com/pH7Software/pH7-Social-Dating-CMS/tree/18.x/docs
 
+Composer installation of this release:
+composer create-project ph7software/ph7builder:18.6.0 pH7Builder-v18.6.0 --no-dev --prefer-dist
+
+Other distribution listings:
+Softaculous: https://www.softaculous.com/apps/socialnetworking/pH7Builder
+SourceForge: https://sourceforge.net/projects/ph7socialdating/
+
+Softaculous and SourceForge can lag behind GitHub and Packagist. Confirm the
+exact offered version before installing or upgrading.
+
 With PHP, MySQL, and the web server prepared, dependency installation and the
 guided browser installer normally take about 20–30 minutes. DNS, HTTPS
 certificate issuance, and mail-provider approval are outside that estimate.
@@ -26,3 +36,5 @@ signup before launch.
 
 Issues: https://github.com/pH7Software/pH7-Social-Dating-CMS/issues
 Discussions: https://github.com/pH7Software/pH7-Social-Dating-CMS/discussions
+
+I really hope you enjoy using pH7Builder as much as I enjoyed creating it! 😊

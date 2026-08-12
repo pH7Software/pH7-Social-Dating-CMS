@@ -41,6 +41,18 @@ your niche, and retain control of the application, database, files, and member
 data. There is no required public “Powered by” link; the MIT license notice
 simply remains with copies or substantial portions of the software.
 
+Self-hosting also lets an owner choose energy-conscious infrastructure and
+control how media, caching, and server resources are used. The actual footprint
+depends on the host, traffic, content, and configuration.
+
+<p align="center">
+  <img
+    src="static/img/love-nature.svg"
+    width="150"
+    alt="Love nature and operate pH7Builder responsibly"
+  >
+</p>
+
 ## What is included
 
 - Member profiles, search, matchmaking, nearby people, friends, and activity
@@ -60,6 +72,30 @@ Features depend on the modules you enable and the external services you
 configure. Before accepting real users or payments, complete the
 [Launch Checklist](docs/LAUNCH_CHECKLIST.md) and test the exact production
 configuration.
+
+<details>
+  <summary><strong>Explore the feature set</strong></summary>
+
+- **Discovery and matching:** advanced member search, behavioral matchmaking,
+  related profiles, nearby people, Hot or Not, profile ratings, mutual friends,
+  visits, likes, profile backgrounds, and privacy controls.
+- **Publishing and conversation:** private mail, instant messaging, chat,
+  notifications, comments, blogs, notes, forums, pages, photo albums, videos,
+  newsletters, invitations, and activity streams.
+- **Business tools:** membership groups and permissions, paid plans,
+  advertisements, an affiliate programme, payment integrations, basic
+  analytics, database backups, file management, dynamic profile fields, and
+  CSV user import.
+- **Trust and moderation:** member and content approval queues, abuse reports,
+  blocking tools, country restrictions, login-attempt protection, registration
+  throttling, duplicate-content checks, optional image screening, two-factor
+  authentication, and optional SMS verification through configured providers.
+- **Platform and reach:** multilingual routes and interface packs, responsive
+  themes, SEO controls, sitemap and RSS support, a REST API module, PWA support,
+  cron automation, maintenance mode, and sample-profile generation for
+  non-production evaluation.
+
+</details>
 
 ## Requirements
 
@@ -116,6 +152,19 @@ sha256sum -c pH7Builder-v18.6.0.zip.sha256
 unzip pH7Builder-v18.6.0.zip
 cd pH7Builder-v18.6.0
 ```
+
+Composer can install the same tagged release from Packagist:
+
+```console
+composer create-project ph7software/ph7builder:18.6.0 pH7Builder-v18.6.0 --no-dev --prefer-dist
+```
+
+pH7Builder is also listed on
+[Softaculous](https://www.softaculous.com/apps/socialnetworking/pH7Builder) and
+[SourceForge](https://sourceforge.net/projects/ph7socialdating/). Those
+catalogues can lag behind GitHub and Packagist, so compare the offered version
+with the [latest GitHub release](https://github.com/pH7Software/pH7-Social-Dating-CMS/releases)
+before installing or upgrading.
 
 The complete copy-paste deployment procedure—including database creation,
 permissions, nginx/Apache notes, HTTPS, cron, mail, payments, and the first test
@@ -199,6 +248,9 @@ theme and enabled configuration.
 
 - [Official website](https://ph7builder.com)
 - [Release guides](docs/)
+- [Legacy how-to documentation](https://ph7builder.com/doc/) — useful for
+  older customization topics; prefer the release guides for installation,
+  upgrades, and security-sensitive instructions.
 - [Issue tracker](https://github.com/pH7Software/pH7-Social-Dating-CMS/issues)
 - [Discussions](https://github.com/pH7Software/pH7-Social-Dating-CMS/discussions)
 - [Security policy](SECURITY.md)
@@ -215,6 +267,9 @@ run the test and static-analysis commands listed there.
 
 ## Creator
 
+Designed and coded with lots of ❤️ by Pierre-Henry Soria, a passionate Belgian
+software engineer and open-source product creator.
+
 <table>
   <tr>
     <td width="180" align="center" valign="top">
@@ -230,19 +285,17 @@ run the test and static-analysis commands listed there.
       <strong>Pierre-Henry Soria</strong>
     </td>
     <td valign="top">
-      pH7Builder was created by <a href="https://ph7.me"><strong>Pierre-Henry Soria</strong></a>,
-      a Belgian software engineer and open-source product creator. He also
-      created the project-specific pH7Framework to give entrepreneurs a
+      <a href="https://ph7.me"><strong>Pierre-Henry Soria</strong></a> created
+      pH7Builder and the project-specific pH7Framework to give entrepreneurs a
       flexible, self-hosted foundation for dating services and social
       communities.
       <br><br>
       The project is developed openly through the
       <a href="https://github.com/pH7Software">pH7Software organization</a>.
-      Follow Pierre-Henry on
-      <a href="https://github.com/pH-7">GitHub</a>,
-      <a href="https://www.linkedin.com/in/ph7enry/">LinkedIn</a>,
+      Follow Pierre-Henry on <a href="https://github.com/pH-7">GitHub</a>,
       <a href="https://bsky.app/profile/pierrehenry.dev">Bluesky</a>, or
-      <a href="https://x.com/phenrysay">X</a>.
+      <a href="https://x.com/phenrysay">X</a>, and connect professionally on
+      <a href="https://www.linkedin.com/in/ph7enry/">LinkedIn</a>.
     </td>
   </tr>
 </table>
@@ -257,6 +310,10 @@ run the test and static-analysis commands listed there.
   >
   <br>
   <em>Pierre-Henry working on pH7Software at a Costa Coffee shop on February 4, 2017.</em>
+  <p>
+    Early versions were crafted with a deliberately practical toolset: LAMP,
+    Geany, Sublime Text, PhpStorm, GIMP, ImageOptim, Poedit, and Git.
+  </p>
 </details>
 
 If pH7Builder helps your business, you can support continued open-source
