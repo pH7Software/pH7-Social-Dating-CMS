@@ -219,4 +219,31 @@ final class HttpTest extends TestCase
 
         $this->assertSame('api/main/ping', $this->oHttpRequest->requestUri());
     }
+
+    public function testCurrentUrlEncodesQuerySeparatorsOnlyOnce(): void
+    {
+        $_SERVER['REQUEST_URI'] = '/signup/step2?signup_profile_id=2&signup_recovery_token=abc123';
+
+        $this->assertSame(
+            'http://localhost:8888/signup/step2?signup_profile_id=2&amp;signup_recovery_token=abc123',
+            $this->oHttpRequest->currentUrl()
+        );
+    }
+
+    public function testCurrentUrlForHeaderUsesRawQuerySeparators(): void
+    {
+        $_SERVER['REQUEST_URI'] = '/signup/step2?signup_profile_id=2&signup_recovery_token=abc123';
+
+        $this->assertSame(
+            'http://localhost:8888/signup/step2?signup_profile_id=2&signup_recovery_token=abc123',
+            $this->oHttpRequest->currentUrlForHeader()
+        );
+    }
+
+    public function testCurrentUrlForHeaderRejectsAnAbsoluteRequestTarget(): void
+    {
+        $_SERVER['REQUEST_URI'] = "https://attacker.example/\r\nInjected: value";
+
+        $this->assertSame('http://localhost:8888/', $this->oHttpRequest->currentUrlForHeader());
+    }
 }
