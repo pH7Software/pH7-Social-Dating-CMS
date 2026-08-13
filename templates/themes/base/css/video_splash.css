@@ -1,16 +1,29 @@
 /*
  * Author:        Pierre-Henry Soria <hello@ph7builder.com>
- * Copyright:     (c) 2016-2019, Pierre-Henry Soria. All Rights Reserved.
+ * Copyright:     (c) 2016-2026, Pierre-Henry Soria and pH7Builder contributors.
  * License:       MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  */
 
-/** Change the color text to a more visible one (darker/whiter) when the background video on the splash homepage is enabled **/
+/** Keep the video visible beneath the splash page's content. **/
+html, body {
+    background: transparent;
+}
+
+/** Change the color text to a more visible one (darker/whiter) when the background video on the splash homepage is enabled. **/
 body {
     color: #333 !important;
 }
 
-.bt_login_forgot a, #form_login_user label, #promo_text, #promo_text a, #form_join_user em {
+.bt_login_forgot a, #promo_text, #promo_text a {
     color: #FFF !important;
+}
+
+#form_login_user label, #form_join_user label, #form_join_user label a, #form_join_user em {
+    color: #333 !important;
+}
+
+#form_join_user .pfbc-label strong, #form_login_user .bt_login_forgot a {
+    color: var(--ph7-primary-dark, #C92E63) !important;
 }
 
 #promo_text h2, #promo_text h2 a {
@@ -19,6 +32,7 @@ body {
 
 #promo_text {
     max-width: 500px;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, .8);
 }
 
 footer a, footer p {
@@ -30,7 +44,7 @@ footer a, footer p {
     color: #EEE !important;
 }
 
-#form_join_user label, #form_join_user label a, nav.bottom_nav {
+nav.bottom_nav {
     color: #EEE !important;
 }
 
@@ -44,4 +58,15 @@ footer a, footer p {
 
 #logo a {
     color: #EEE;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, .8);
+}
+
+@media (prefers-color-scheme: dark) {
+    #form_login_user label, #form_join_user label, #form_join_user label a, #form_join_user em {
+        color: #EEE !important;
+    }
+
+    #form_join_user .pfbc-label strong, #form_login_user .bt_login_forgot a {
+        color: var(--ph7-link-hover, #FF9FBD) !important;
+    }
 }
