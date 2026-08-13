@@ -66,6 +66,18 @@ final class SignupExperienceTest extends TestCase
         $this->assertStringContainsString('@media (max-width: 767px)', $sStyles);
     }
 
+    public function testSignupDoesNotGuessIdentityOrLocation(): void
+    {
+        $sForm = $this->readProjectFile(
+            '_protected/app/system/modules/user/forms/JoinForm.php'
+        );
+
+        $this->assertStringNotContainsString('predictGenderFromFirstName', $sForm);
+        $this->assertStringNotContainsString('getOppositeGenderPreferences', $sForm);
+        $this->assertStringContainsString("['' => t('')] + Form::getCountryValues()", $sForm);
+        $this->assertStringContainsString('Country::fixCode(Geo::getCountryCode())', $sForm);
+    }
+
     private function readProjectFile(string $sRelativePath): string
     {
         $sContents = file_get_contents(self::PROJECT_ROOT . '/' . $sRelativePath);
