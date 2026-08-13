@@ -25,7 +25,33 @@ certificate issuance, and mail-provider approval are outside that estimate.
 [Release guides](docs/) ·
 [Releases](https://github.com/pH7Software/pH7-Social-Dating-CMS/releases)
 
-![Bundled pH7Builder base-theme preview](templates/themes/base/img/preview.png)
+<p align="center">
+  <img
+    src="https://cloud.githubusercontent.com/assets/1325411/19419476/5475b32c-93d0-11e6-9756-8e7db8df129f.png"
+    width="760"
+    alt="Build a self-hosted social dating community with pH7Builder"
+  >
+</p>
+
+## Built for ownership
+
+pH7Builder gives entrepreneurs a self-hosted alternative to rented SaaS
+platforms. Deploy it on infrastructure you choose, adapt the source code to
+your niche, and retain control of the application, database, files, and member
+data. There is no required public “Powered by” link; the MIT license notice
+simply remains with copies or substantial portions of the software.
+
+Self-hosting also lets an owner choose energy-conscious infrastructure and
+control how media, caching, and server resources are used. The actual footprint
+depends on the host, traffic, content, and configuration.
+
+<p align="center">
+  <img
+    src="static/img/love-nature.svg"
+    width="150"
+    alt="Love nature and operate pH7Builder responsibly"
+  >
+</p>
 
 ## What is included
 
@@ -46,6 +72,30 @@ Features depend on the modules you enable and the external services you
 configure. Before accepting real users or payments, complete the
 [Launch Checklist](docs/LAUNCH_CHECKLIST.md) and test the exact production
 configuration.
+
+<details>
+  <summary><strong>Explore the feature set</strong></summary>
+
+- **Discovery and matching:** advanced member search, behavioral matchmaking,
+  related profiles, nearby people, Hot or Not, profile ratings, mutual friends,
+  visits, likes, profile backgrounds, and privacy controls.
+- **Publishing and conversation:** private mail, instant messaging, chat,
+  notifications, comments, blogs, notes, forums, pages, photo albums, videos,
+  newsletters, invitations, and activity streams.
+- **Business tools:** membership groups and permissions, paid plans,
+  advertisements, an affiliate programme, payment integrations, basic
+  analytics, database backups, file management, dynamic profile fields, and
+  CSV user import.
+- **Trust and moderation:** member and content approval queues, abuse reports,
+  blocking tools, country restrictions, login-attempt protection, registration
+  throttling, duplicate-content checks, optional image screening, two-factor
+  authentication, and optional SMS verification through configured providers.
+- **Platform and reach:** multilingual routes and interface packs, responsive
+  themes, SEO controls, sitemap and RSS support, a REST API module, PWA support,
+  cron automation, maintenance mode, and sample-profile generation for
+  non-production evaluation.
+
+</details>
 
 ## Requirements
 
@@ -103,6 +153,19 @@ unzip pH7Builder-v18.6.0.zip
 cd pH7Builder-v18.6.0
 ```
 
+Composer can install the same tagged release from Packagist:
+
+```console
+composer create-project ph7software/ph7builder:18.6.0 pH7Builder-v18.6.0 --no-dev --prefer-dist
+```
+
+pH7Builder is also listed on
+[Softaculous](https://www.softaculous.com/apps/socialnetworking/pH7Builder) and
+[SourceForge](https://sourceforge.net/projects/ph7socialdating/). Those
+catalogues can lag behind GitHub and Packagist, so compare the offered version
+with the [latest GitHub release](https://github.com/pH7Software/pH7-Social-Dating-CMS/releases)
+before installing or upgrading.
+
 The complete copy-paste deployment procedure—including database creation,
 permissions, nginx/Apache notes, HTTPS, cron, mail, payments, and the first test
 signup—is in the [Production Quick Start](docs/QUICK_START.md).
@@ -146,10 +209,48 @@ Language packs live in the separate
 Keep application code and community translations in their respective
 repositories.
 
+## Product gallery
+
+The bundled themes are responsive and can be adapted to match a dating brand
+or community niche. The exact screens and modules shown depend on the selected
+theme and enabled configuration.
+
+<p align="center">
+  <img
+    src="templates/themes/base/img/preview.png"
+    width="760"
+    alt="Bundled pH7Builder base-theme preview"
+  >
+</p>
+
+<p align="center">
+  <img
+    src="https://user-images.githubusercontent.com/1325411/35779585-68f0d5fc-09c7-11e8-91eb-bf793fcfab6e.png"
+    width="49%"
+    alt="pH7Builder member profile page"
+  >
+  <img
+    src="https://cloud.githubusercontent.com/assets/1325411/14080251/b476e5c6-f4fb-11e5-825e-ddc992ba1055.png"
+    width="49%"
+    alt="pH7Builder administration panel user list"
+  >
+</p>
+
+<p align="center">
+  <img
+    src="https://cloud.githubusercontent.com/assets/1325411/19419481/657386a4-93d0-11e6-8eee-95deba2d30a0.png"
+    width="760"
+    alt="Create a social dating web application with pH7Builder"
+  >
+</p>
+
 ## Documentation and support
 
 - [Official website](https://ph7builder.com)
 - [Release guides](docs/)
+- [Legacy how-to documentation](https://ph7builder.com/doc/) — useful for
+  older customization topics; prefer the release guides for installation,
+  upgrades, and security-sensitive instructions.
 - [Issue tracker](https://github.com/pH7Software/pH7-Social-Dating-CMS/issues)
 - [Discussions](https://github.com/pH7Software/pH7-Social-Dating-CMS/discussions)
 - [Security policy](SECURITY.md)
@@ -164,14 +265,61 @@ Bug fixes, tests, documentation, modules, themes, and translations are welcome.
 Please read [CONTRIBUTING.md](CONTRIBUTING.md), keep pull requests focused, and
 run the test and static-analysis commands listed there.
 
-## Creator and project
+## Creator
 
-pH7Builder was created by
-[Pierre-Henry Soria](https://ph7.me) ([GitHub](https://github.com/pH-7)) and is
-maintained in the [pH7Software organization](https://github.com/pH7Software).
-If the project helps your business, you can support continued maintenance via
-[Ko-fi](https://ko-fi.com/phenry) or
-[Buy Me a Coffee](https://www.buymeacoffee.com/ph7cms).
+Designed and coded with lots of ❤️ by Pierre-Henry Soria, a passionate Belgian
+software engineer and open-source product creator.
+
+<table>
+  <tr>
+    <td width="180" align="center" valign="top">
+      <a href="https://ph7.me">
+        <img
+          src="https://avatars0.githubusercontent.com/u/1325411?s=200"
+          width="144"
+          height="144"
+          alt="Pierre-Henry Soria"
+        >
+      </a>
+      <br>
+      <strong>Pierre-Henry Soria</strong>
+    </td>
+    <td valign="top">
+      <a href="https://ph7.me"><strong>Pierre-Henry Soria</strong></a> created
+      pH7Builder and the project-specific pH7Framework to give entrepreneurs a
+      flexible, self-hosted foundation for dating services and social
+      communities.
+      <br><br>
+      The project is developed openly through the
+      <a href="https://github.com/pH7Software">pH7Software organization</a>.
+      Follow Pierre-Henry on <a href="https://github.com/pH-7">GitHub</a>,
+      <a href="https://bsky.app/profile/pierrehenry.dev">Bluesky</a>, or
+      <a href="https://x.com/phenrysay">X</a>, and connect professionally on
+      <a href="https://www.linkedin.com/in/ph7enry/">LinkedIn</a>.
+    </td>
+  </tr>
+</table>
+
+<details>
+  <summary><strong>A moment from the project history</strong></summary>
+  <br>
+  <img
+    src="https://user-images.githubusercontent.com/1325411/78962138-32ffa100-7ae3-11ea-8d35-83d78f3cbc48.jpg"
+    width="760"
+    alt="Pierre-Henry Soria working on pH7Software at a Costa Coffee shop on February 4, 2017"
+  >
+  <br>
+  <em>Pierre-Henry working on pH7Software at a Costa Coffee shop on February 4, 2017.</em>
+  <p>
+    Early versions were crafted with a deliberately practical toolset: LAMP,
+    Geany, Sublime Text, PhpStorm, GIMP, ImageOptim, Poedit, and Git.
+  </p>
+</details>
+
+If pH7Builder helps your business, you can support continued open-source
+maintenance through
+[![Ko-fi](static/img/kofi-logo.png)](https://ko-fi.com/phenry)
+[![Buy Me a Coffee](static/img/buymeacoffee-logo.svg)](https://www.buymeacoffee.com/ph7cms).
 
 ## License
 

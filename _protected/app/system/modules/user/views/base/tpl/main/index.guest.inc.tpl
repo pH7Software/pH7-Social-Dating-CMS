@@ -2,13 +2,13 @@
     <h1 class="red3 italic underline">{headline}</h1>
     <div class="center">
         <a href="{{ $design->url('user','main','login') }}" class="btn btn-primary btn-lg">
-            <strong>{lang 'Login'}</strong>
+            <strong>{lang 'Sign in'}</strong>
         </a>
     </div>
     {{ JoinForm::step1() }}
 
     <div class="counter center">
-        <h2 class="red3">{lang 'People love us! Realtime users using our service'}</h2>
+        <h2 class="red3">{lang 'Community members'}</h2>
         {{ $userDesign->userCounter() }}
     </div>
 </div>
@@ -38,7 +38,7 @@
     </div>
 
     <div class="block_txt">
-        <h2>{lang '🚀 Meet amazing people near %0%! 🎉', $design->geoIp(false)}</h2>
+        <h2>{lang 'Meet people near %0% who share your interests', $design->geoIp(false)}</h2>
         {promo_text}
     </div>
 

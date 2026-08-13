@@ -306,10 +306,22 @@ class Http extends \PH7\Framework\Http\Http
      */
     public function currentUrl()
     {
-        return htmlspecialchars(
-            PH7_URL_PROT . PH7_DOMAIN . $this->getUri(),
-            ENT_QUOTES
-        );
+        // Server::getVar() already encodes REQUEST_URI for safe HTML output.
+        return PH7_URL_PROT . PH7_DOMAIN . $this->getUri();
+    }
+
+    /**
+     * @return string The current URL decoded for use in an HTTP header.
+     */
+    public function currentUrlForHeader(): string
+    {
+        $sRequestUri = (string)($_SERVER['REQUEST_URI'] ?? PH7_SH);
+        $sRequestUri = str_replace(["\r", "\n"], '', $sRequestUri);
+        if (!str_starts_with($sRequestUri, PH7_SH)) {
+            $sRequestUri = PH7_SH;
+        }
+
+        return rtrim(PH7_URL_PROT . PH7_DOMAIN, PH7_SH) . $sRequestUri;
     }
 
     /**

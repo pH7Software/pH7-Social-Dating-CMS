@@ -44,7 +44,7 @@
             <div id="particles-js"></div>
 
             {if !empty($sept_number)}
-                {assign var="progressbar_percentage" value=$sept_number*14.3}
+                {assign var="progressbar_percentage" value=($sept_number/$total_install_steps*100)|round}
 
                 <div class="progress">
                     <div

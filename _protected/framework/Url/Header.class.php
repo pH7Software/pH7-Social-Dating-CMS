@@ -38,7 +38,7 @@ class Header
         Http::setHeadersByCode($iRedirectCode);
 
         $oHttpRequest = new HttpRequest;
-        $sUrl = $sUrl !== null ? $sUrl : $oHttpRequest->currentUrl();
+        $sUrl = $sUrl !== null ? $sUrl : $oHttpRequest->currentUrlForHeader();
         $sUrl = $oHttpRequest->pH7Url($sUrl);
         if (!self::isSafeRedirectUrl($sUrl)) {
             $sUrl = PH7_URL_ROOT;

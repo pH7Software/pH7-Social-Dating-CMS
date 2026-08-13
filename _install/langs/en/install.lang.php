@@ -3,7 +3,7 @@
  * @title            English Language File
  *
  * @author           Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright        (c) 2012-2022, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2012-2026, Pierre-Henry Soria and pH7Builder contributors.
  * @license          MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package          PH7 / Lang / EN
  */
@@ -19,10 +19,10 @@ $LANG = [
         Thank you for choosing <strong>pH7Builder</strong>, and we hope you will love it!</p>',
     'choose_install_lang' => 'Please choose your language to begin the installation',
     'requirements_desc' => 'The installer has checked the local PHP requirements. You can also review the <a href="' . Controller::SOFTWARE_REQUIREMENTS_URL . '" target="_blank" rel="noopener">complete server requirements</a>.',
-    'requirements2_desc' => 'Before to continue, please create a MySQL database and assign a user to it with full privileges. Once you created the MySQL database and its user, make sure to write down the database name, username and password since you will need them for the installation.',
+    'requirements2_desc' => 'Before continuing, create a MySQL database and assign a user with full privileges to it. Keep the database name, username, and password ready for the installation.',
     'config_path' => '&quot;protected&quot; folder path',
     'desc_config_path' => 'Please specify the full path of your &quot;protected&quot; folder.<br />
-        It is wise and advisable (but not mandatory in any case) to put this directory outside of the public directory of the Web server.',
+        For better security, place this directory outside the Web server\'s public directory whenever your hosting setup allows it.',
     'need_frame' => 'You must use a Web browser that supports inline frames!',
     'path_protected' => 'Path of the &quot;protected&quot; folder',
     'next' => 'Next',
@@ -117,18 +117,18 @@ $LANG = [
     'wait_importing_database' => 'Please wait while importing the database.<br />
         This may take several minutes.',
     'add_sample_data' => 'Generate sample profiles for local evaluation (remove them before production)',
-    'niche' => 'Choose the Kind of WebApp you Want to Build 😇',
+    'niche' => 'Choose the kind of community you want to build 😇',
     'social_dating_niche' => 'Social-Dating Niche 🥰',
     'social_niche' => 'Community Niche 🥳',
     'dating_niche' => 'Dating Niche 😍',
     'base_niche_desc' => 'By choosing this niche, the main modules will be enabled and the generic template (social dating community theme) will be chosen by default.',
-    'zendate_niche_desc' => 'By choosing the Social niche, only the Social modules will be enabled, profile photo won\'t be required by default and the Social theme will be the default one.',
+    'zendate_niche_desc' => 'By choosing the Community niche, only the social modules will be enabled, a profile photo will not be required by default, and the Social theme will be selected.',
     'datelove_niche_desc' => 'By choosing the Dating niche, only the Dating modules will be enabled on your website, profile photo will be required by default and the Dating theme will be the default one.',
     'go_social_dating' => 'Go for Social Dating!',
     'go_social' => 'Go for Social!',
     'go_dating' => 'Go for Dating!',
     'recommended' => 'Recommended Niche',
-    'recommended_desc' => 'Choose this niche if you haven\'t an idea yet.',
+    'recommended_desc' => 'Choose this niche if you are not sure yet.',
     'note_able_to_change_niche_settings_later' => 'Please note that you will be able to change the template and enable/disable the modules later in your admin panel.',
     'will_you_make_donation' => '😇 Will you help me to maintain &amp; improve the software?',
     'donate_here' => 'Subscribe now to be a patron 🏆',

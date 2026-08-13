@@ -7,3 +7,56 @@
 #general p {
     letter-spacing: .1rem;
 }
+
+.signup_progress_label {
+    color: var(--ph7-text-muted, #6b6b7a);
+    display: flex;
+    justify-content: space-between;
+    margin: 0 0 .6rem;
+}
+
+.signup_progress .progress {
+    margin-bottom: 2rem;
+}
+
+.signup_support {
+    margin: 0 0 1.5rem;
+    text-align: left;
+}
+
+.signup_support .panel-body {
+    padding: 1.5rem;
+}
+
+.signup_support h2 {
+    font-size: 1.8rem;
+    margin: 0 0 1rem;
+}
+
+.signup_support li {
+    display: flex;
+    gap: .7rem;
+    line-height: 1.5;
+    margin-bottom: .8rem;
+}
+
+.signup_support .fa {
+    color: var(--ph7-primary, #d6336c);
+    margin-top: .25rem;
+}
+
+.signup_support p {
+    border-top: 1px solid var(--ph7-border, #e4e4ec);
+    margin: 1rem 0 0;
+    padding-top: 1rem;
+}
+
+@media (max-width: 767px) {
+    .signup_support {
+        margin-top: 1.5rem;
+    }
+
+    .signup_profiles {
+        display: none;
+    }
+}

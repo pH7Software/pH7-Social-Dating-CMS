@@ -189,6 +189,24 @@ final class ThemeAssetTest extends TestCase
         }
     }
 
+    public function testVideoSplashKeepsItsBackgroundVisible(): void
+    {
+        $sCss = file_get_contents(
+            dirname(__DIR__, 3) . '/templates/themes/base/css/video_splash.css'
+        );
+
+        $this->assertIsString($sCss);
+        $this->assertMatchesRegularExpression(
+            '/html, body\s*\{[^}]*background:\s*transparent;/s',
+            $sCss
+        );
+        $this->assertStringContainsString(
+            '#form_login_user label, #form_join_user label',
+            $sCss
+        );
+        $this->assertStringContainsString('color: #333 !important;', $sCss);
+    }
+
     private function findFiles(string $sDirectory, string $sSuffix): array
     {
         $aFiles = [];

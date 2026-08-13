@@ -69,4 +69,18 @@ final class InstallerLanguageTest extends TestCase
         $this->assertIsString($sController);
         $this->assertStringContainsString(self::LOCKDOWN_URL, $sController);
     }
+
+    #[DataProvider('installerLanguageProvider')]
+    public function testInstallerLicenseCreditsContributors(string $sLanguage): void
+    {
+        $sLicense = file_get_contents(
+            __DIR__ . '/../../../_install/langs/' . $sLanguage . '/license.html'
+        );
+
+        $this->assertIsString($sLicense);
+        $this->assertStringContainsString(
+            'Pierre-Henry Soria and pH7Builder contributors',
+            $sLicense
+        );
+    }
 }

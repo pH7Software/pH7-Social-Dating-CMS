@@ -29,6 +29,7 @@ use PFBC\Validation\Password;
 use PFBC\Validation\Str;
 use PFBC\Validation\Username;
 use PH7\Framework\Geo\Ip\Geo;
+use PH7\Framework\Geo\Misc\Country;
 use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Mvc\Request\Http;
 use PH7\Framework\Mvc\Router\Uri;
@@ -37,69 +38,6 @@ use PH7\Framework\Url\Header;
 
 class JoinForm
 {
-    private static function predictGenderFromFirstName()
-    {
-        $sFirstName = (new Session)->get('first_name');
-
-        if (empty($sFirstName)) {
-            return GenderTypeUserCore::MALE;
-        }
-
-        $sNameInLowerCase = strtolower(trim($sFirstName));
-
-        $aCommonFemaleNames = [
-            'mary', 'maria', 'sarah', 'lisa', 'jennifer', 'linda', 'patricia',
-            'barbara', 'susan', 'jessica', 'nancy', 'margaret', 'ashley',
-            'emily', 'elizabeth', 'michelle', 'amanda', 'melissa', 'deborah',
-            'sophie', 'emma', 'olivia', 'ava', 'isabella', 'mia', 'charlotte',
-            'amelia', 'harper', 'sophia', 'evelyn', 'abigail', 'ella', 'grace',
-            'anna', 'marie', 'claire', 'julie', 'kate', 'katherine', 'laura',
-            'rebecca', 'rachel', 'hannah', 'alice', 'victoria', 'lucy', 'lily'
-        ];
-
-        $aCommonMaleNames = [
-            'james', 'john', 'robert', 'michael', 'william', 'david', 'richard',
-            'joseph', 'thomas', 'charles', 'christopher', 'daniel', 'matthew',
-            'anthony', 'mark', 'donald', 'steven', 'paul', 'andrew', 'joshua',
-            'kevin', 'brian', 'george', 'edward', 'ronald', 'timothy', 'jason',
-            'jeffrey', 'ryan', 'jacob', 'nicholas', 'eric', 'stephen', 'jonathan'
-        ];
-
-        if (in_array($sNameInLowerCase, $aCommonFemaleNames, true)) {
-            return GenderTypeUserCore::FEMALE;
-        }
-
-        if (in_array($sNameInLowerCase, $aCommonMaleNames, true)) {
-            return GenderTypeUserCore::MALE;
-        }
-
-        $aFemaleEndings = ['ia' => 2, 'ina' => 3, 'elle' => 4, 'ette' => 4, 'ine' => 3, 'anna' => 4, 'lyn' => 3];
-        foreach ($aFemaleEndings as $sEnding => $iLength) {
-            if (substr($sNameInLowerCase, -$iLength) === $sEnding && strlen($sNameInLowerCase) > $iLength) {
-                return GenderTypeUserCore::FEMALE;
-            }
-        }
-
-        return GenderTypeUserCore::MALE;
-    }
-
-    private static function getOppositeGenderPreferences($sUserGender = null)
-    {
-        if ($sUserGender === null) {
-            $sUserGender = self::predictGenderFromFirstName();
-        }
-
-        if ($sUserGender === GenderTypeUserCore::FEMALE) {
-            return [GenderTypeUserCore::MALE];
-        }
-
-        if ($sUserGender === GenderTypeUserCore::MALE) {
-            return [GenderTypeUserCore::FEMALE];
-        }
-
-        return [GenderTypeUserCore::MALE, GenderTypeUserCore::FEMALE];
-    }
-
     public static function step1()
     {
         if ((new Session)->exists('mail_step1')) {
@@ -169,9 +107,6 @@ class JoinForm
         $oForm->addElement(new Hidden('submit_join_user2', 'form_join_user2'));
         $oForm->addElement(new Token('join2'));
 
-        $sPredictedGender = self::predictGenderFromFirstName();
-        $aDefaultMatchPreferences = self::getOppositeGenderPreferences($sPredictedGender);
-
         $oForm->addElement(
             new Radio(
                 t('I am a'),
@@ -181,7 +116,7 @@ class JoinForm
                     GenderTypeUserCore::MALE => '👨 ' . t('Man'),
                     GenderTypeUserCore::COUPLE => '💑 ' . t('Couple')
                 ],
-                ['value' => $sPredictedGender, 'required' => 1]
+                ['required' => 1]
             )
         );
 
@@ -194,7 +129,7 @@ class JoinForm
                     GenderTypeUserCore::FEMALE => '👩 ' . t('Woman'),
                     GenderTypeUserCore::COUPLE => '💑 ' . t('Couple')
                 ],
-                ['value' => $aDefaultMatchPreferences, 'required' => 1]
+                ['required' => 1]
             )
         );
 
@@ -204,8 +139,12 @@ class JoinForm
             new Select(
                 t('Your Country'),
                 'country',
-                Form::getCountryValues(),
-                ['id' => 'str_country', 'value' => Geo::getCountryCode(), 'required' => 1]
+                ['' => t('')] + Form::getCountryValues(),
+                [
+                    'id' => 'str_country',
+                    'value' => Country::fixCode(Geo::getCountryCode()),
+                    'required' => 1
+                ]
             )
         );
 

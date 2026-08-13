@@ -144,6 +144,17 @@ final class InstallerHardeningTest extends TestCase
         $this->assertSame('ph7builder', \PH7\Cli\Misc\Database\DbDefaultConfig::NAME);
     }
 
+    public function testInstallerProgressEndsAtExactlyOneHundredPercent(): void
+    {
+        $sHeader = $this->readProjectFile('_install/views/base/inc/header.tpl');
+
+        $this->assertStringContainsString(
+            '($sept_number/$total_install_steps*100)|round',
+            $sHeader
+        );
+        $this->assertStringNotContainsString('$sept_number*14.3', $sHeader);
+    }
+
     public function testInstallerRequiresServerSideFileTypeDetection(): void
     {
         $sRequirements = $this->readProjectFile('_install/requirements.php');
