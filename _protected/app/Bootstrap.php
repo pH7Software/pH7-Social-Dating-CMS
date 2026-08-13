@@ -154,17 +154,17 @@ class Bootstrap
     }
 
     /**
-     * Display an error message if the Apache mod_rewrite is not enabled.
+     * Display an error message if URL rewriting is not enabled.
      *
      * @return void HTML output
      */
     private function notRewriteModEnabledError(): void
     {
-        $sMsg = '<p class="warning"><a href="' . Kernel::SOFTWARE_WEBSITE . '">pH7Builder</a> requires Apache "mod_rewrite".</p>
-        <p>Firstly, please <strong>make sure the ".htaccess" file has been uploaded to the root directory where pH7Builder is installed</strong>. If not, use your FTP client (such as Filezilla) and upload it again from pH7Builder unziped package and try again.<br />
-        Secondly, please <strong>make sure URL rewriting is correctly configured</strong>.<br /> See the <a href="https://github.com/pH7Software/pH7-Social-Dating-CMS/blob/18.x/docs/QUICK_START.md" target="_blank" rel="noopener">Production Quick Start</a> for Apache and nginx examples.<br /><br />
-        After that, please <a href="' . PH7_URL_ROOT . '">retry</a>.</p>';
+        $sMsg = '<p class="warning"><a href="' . Kernel::SOFTWARE_WEBSITE . '">pH7Builder</a> requires URL rewriting.</p>
+        <p>On Apache, confirm that the package\'s <strong>.htaccess file is present in the pH7Builder root directory</strong>.<br />
+        Then make sure URL rewriting is correctly configured for your Web server. See the <a href="https://github.com/pH7Software/pH7-Social-Dating-CMS/blob/18.x/docs/QUICK_START.md" target="_blank" rel="noopener">Production Quick Start</a> for Apache and nginx examples.<br /><br />
+        Once configured, <a href="' . PH7_URL_ROOT . '">retry</a>.</p>';
 
-        echo html_body("Apache's mod_rewrite is required", $sMsg);
+        echo html_body('URL rewriting is required', $sMsg);
     }
 }
