@@ -33,16 +33,17 @@ PostgreSQL are not verified or supported by this patch.
 
 ## Release verification before publication
 
-- [ ] Framework and installer versions, release date, docs, tag, and release
-      title all identify `18.6.1`.
-- [ ] The complete PHPUnit suite, PHPStan, PHP syntax sweep, Composer
+- [x] Framework and installer versions, release date, docs, planned tag, and
+      release title all identify `18.6.1`.
+- [x] The complete PHPUnit suite, PHPStan, PHP syntax sweep, Composer
       validation, and dependency audits pass.
-- [ ] A fresh MySQL 8 install completes, including admin creation and installer
+- [x] A fresh MySQL 8 install completes, including admin creation and installer
       removal.
-- [ ] Signup completes through login; Notes, admin, video splash, and responsive
+- [x] Signup completes through login; Notes, admin, video splash, and responsive
       layouts remain functional.
-- [ ] The production ZIP is built from the committed tree, includes locked
-      dependencies, excludes development files, and matches its SHA-256 file.
+- [x] A reproducible release-candidate ZIP is built from the committed tree,
+      includes locked dependencies, excludes development files, and matches its
+      SHA-256 file.
 
 ## Post-publication operational step
 
