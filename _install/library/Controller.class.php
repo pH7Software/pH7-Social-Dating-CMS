@@ -30,7 +30,7 @@ abstract class Controller implements Controllable
     public const SOFTWARE_COPYRIGHT = 'Copyright © 2012-%s Pierre-Henry Soria and pH7Builder contributors.';
 
     public const SOFTWARE_VERSION_NAME = 'REVOLUTIONARY™';
-    public const SOFTWARE_VERSION = '18.6.0';
+    public const SOFTWARE_VERSION = '18.6.1';
 
     public const SOFTWARE_BUILD = '1';
 

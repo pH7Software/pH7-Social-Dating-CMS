@@ -3,6 +3,19 @@
 Automatic in-place upgrades are currently unavailable. Upgrade a staging copy
 manually, verify it, and only then repeat the reviewed procedure in production.
 
+## 18.6.1 patch release
+
+pH7Builder 18.6.1 is a code-only patch over 18.6.0. It does not change the SQL
+schema, so an installation already running 18.6.0 needs no database migration.
+Deploy the 18.6.1 files without overwriting local configuration, uploaded data,
+custom modules, custom themes, or gateway credentials. Reinstall dependencies
+from the committed lock file when deploying from source, clear application
+caches, and test signup through login before reopening the site.
+
+Sites older than 18.6.0 must still follow every applicable intermediate path
+below. In particular, an 18.5.1 database still requires the reviewed
+`18.5.1-18.6.0` migration before the 18.6.1 application is used.
+
 ## 18.6.0 compatibility change
 
 pH7Builder 18.6.0 requires MySQL 8.0 or newer. Older MySQL versions and MariaDB
@@ -43,9 +56,9 @@ mysqldump --single-transaction --routines --triggers --default-character-set=utf
 Replace the example account names as needed. Keep the dump outside the public
 web root and protect it as production data.
 
-## Direct 18.5.1 → 18.6.0 path
+## Direct 18.5.1 → 18.6.x path
 
-1. Deploy the tagged 18.6.0 source without overwriting local configuration,
+1. Deploy the tagged 18.6.1 source without overwriting local configuration,
    uploads, custom modules, custom themes, or gateway credentials. Merge the
    safer payment defaults deliberately; do not replace a live payment config
    with the release template.
@@ -104,9 +117,9 @@ web root and protect it as production data.
    Replace the example document root first, then verify that exact `_install`
    path is absent. Do not run the command against a variable or broader path.
 9. Clear application caches in Admin → Tools → Caches.
-10. Confirm the site and admin panel report 18.6.0, then test signup, login,
-   Notes, profile editing, uploads, password reset, email, cron, memberships,
-   and payment callbacks.
+10. Confirm the site and admin panel report the deployed target version, then
+    test signup, login, Notes, profile editing, uploads, password reset, email,
+    cron, memberships, and payment callbacks.
 11. Inspect application, PHP-FPM, and web-server logs before taking the site out
    of maintenance mode.
 
