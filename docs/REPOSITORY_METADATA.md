@@ -1,7 +1,7 @@
-# GitHub Repository Metadata Proposal
+# GitHub Repository Metadata
 
-This copy is intentionally factual and compact. Apply it in the GitHub
-repository settings when the 18.6.0 release is ready.
+This copy records the factual, compact metadata used in the GitHub repository
+settings. Keep it aligned when the product requirements or positioning change.
 
 ## Description
 

@@ -31,12 +31,12 @@ final class VersionTest extends TestCase
             [
                 'is_alert' => true,
                 'name' => 'REVOLUTIONARY™',
-                'version' => '18.6.0',
+                'version' => '18.6.1',
                 'build' => '1'
             ],
             $this->parseReleaseXml(
                 '<software><ph7><ph7builder><upd-alert>true</upd-alert><name> REVOLUTIONARY™ </name>' .
-                '<version>18.6.0</version><build>1</build></ph7builder></ph7></software>'
+                '<version>18.6.1</version><build>1</build></ph7builder></ph7></software>'
             )
         );
     }
@@ -52,7 +52,7 @@ final class VersionTest extends TestCase
             '<build>1</build></ph7builder></ph7></software>'
         ];
         yield 'invalid build' => [
-            '<software><ph7><ph7builder><name>Release</name><version>18.6.0</version>' .
+            '<software><ph7><ph7builder><name>Release</name><version>18.6.1</version>' .
             '<build>beta</build></ph7builder></ph7></software>'
         ];
     }

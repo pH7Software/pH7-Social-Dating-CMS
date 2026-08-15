@@ -146,17 +146,17 @@ only the required writable paths, configure the web server, and then open
 directory before opening the browser installer.
 
 ```console
-curl -LO https://github.com/pH7Software/pH7-Social-Dating-CMS/releases/download/v18.6.0/pH7Builder-v18.6.0.zip
-curl -LO https://github.com/pH7Software/pH7-Social-Dating-CMS/releases/download/v18.6.0/pH7Builder-v18.6.0.zip.sha256
-sha256sum -c pH7Builder-v18.6.0.zip.sha256
-unzip pH7Builder-v18.6.0.zip
-cd pH7Builder-v18.6.0
+curl -LO https://github.com/pH7Software/pH7-Social-Dating-CMS/releases/download/v18.6.1/pH7Builder-v18.6.1.zip
+curl -LO https://github.com/pH7Software/pH7-Social-Dating-CMS/releases/download/v18.6.1/pH7Builder-v18.6.1.zip.sha256
+sha256sum -c pH7Builder-v18.6.1.zip.sha256
+unzip pH7Builder-v18.6.1.zip
+cd pH7Builder-v18.6.1
 ```
 
 Composer can install the same tagged release from Packagist:
 
 ```console
-composer create-project ph7software/ph7builder:18.6.0 pH7Builder-v18.6.0 --no-dev --prefer-dist
+composer create-project ph7software/ph7builder:18.6.1 pH7Builder-v18.6.1 --no-dev --prefer-dist
 ```
 
 pH7Builder is also listed on

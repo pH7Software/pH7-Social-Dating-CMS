@@ -96,6 +96,6 @@ validation and transaction guarantees.
 
 ## Post-publication operational step
 
-- [ ] After the release assets are public, the live update feed's `ph7builder`
-      entry says `REVOLUTIONARY™`, version `18.6.0`, SQL schema `1.6.6`, and
-      build `1`; only then is `upd-alert` enabled.
+- [ ] Superseded by the 18.6.1 operational step. The feed was not advanced for
+      18.6.0, so no installed site was directed to a missing or incomplete
+      patch; publish and verify 18.6.1 before enabling its update alert.

@@ -102,7 +102,7 @@ you serve.
 - [ ] Every membership name, permission, price, currency, duration, renewal,
       cancellation, and refund statement matches what the checkout promises.
 - [ ] Unused gateways are disabled and no example keys remain.
-- [ ] Stripe stays disabled in 18.6.0; the bundled legacy flow must be migrated
+- [ ] Stripe stays disabled in 18.6.x; the bundled legacy flow must be migrated
       to Checkout Sessions or Payment Intents before it is offered to members.
 - [ ] 2Checkout stays disabled until its bundled legacy flow is migrated to the
       2Checkout API 6.0.

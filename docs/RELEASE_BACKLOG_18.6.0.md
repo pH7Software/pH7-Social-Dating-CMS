@@ -22,9 +22,9 @@ public callback URL.
 
 Run the packaged browser installer, member signup, admin login, Notes, uploads,
 cron, and the direct database migration on every supported PHP minor and the
-supported MySQL 8 range. Add Apache and nginx package smoke tests. Docker was
-not available in the local 18.6.0 audit environment, so the existing Docker
-workflow remains dependent on CI verification.
+supported MySQL 8 range. Add Apache and nginx package smoke tests. The Docker
+workflow now builds the development image, starts its stack, and verifies the
+installer in CI; expand that coverage rather than duplicating it manually.
 
 **Launch impact:** this catches hosting-specific failures before a new owner
 meets them during deployment.
@@ -85,8 +85,9 @@ the codebase coherent without disrupting existing sites.
 
 Make release publication update and verify the external pH7Builder update feed
 only after the GitHub tag, ZIP, and checksum are publicly available. For the
-18.6.0 publication, its `ph7builder` entry must say `REVOLUTIONARY™`, version
-`18.6.0`, SQL schema `1.6.6`, and build `1` before `upd-alert` is enabled.
+18.6.1 patch publication, its `ph7builder` entry must say `REVOLUTIONARY™`,
+version `18.6.1`, SQL schema `1.6.6`, and build `1` before `upd-alert` is
+enabled.
 
 **Launch impact:** installed sites discover real, downloadable releases without
 being sent to missing assets or left on stale version metadata.

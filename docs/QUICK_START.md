@@ -43,21 +43,21 @@ the archive and its checksum from the same GitHub release:
 sudo mkdir -p /var/www/ph7builder
 sudo chown deploy:www-data /var/www/ph7builder
 cd /tmp
-curl -LO https://github.com/pH7Software/pH7-Social-Dating-CMS/releases/download/v18.6.0/pH7Builder-v18.6.0.zip
-curl -LO https://github.com/pH7Software/pH7-Social-Dating-CMS/releases/download/v18.6.0/pH7Builder-v18.6.0.zip.sha256
-sha256sum -c pH7Builder-v18.6.0.zip.sha256
-unzip pH7Builder-v18.6.0.zip
-cp -a pH7Builder-v18.6.0/. /var/www/ph7builder/
+curl -LO https://github.com/pH7Software/pH7-Social-Dating-CMS/releases/download/v18.6.1/pH7Builder-v18.6.1.zip
+curl -LO https://github.com/pH7Software/pH7-Social-Dating-CMS/releases/download/v18.6.1/pH7Builder-v18.6.1.zip.sha256
+sha256sum -c pH7Builder-v18.6.1.zip.sha256
+unzip pH7Builder-v18.6.1.zip
+cp -a pH7Builder-v18.6.1/. /var/www/ph7builder/
 ```
 
 Run these commands as the `deploy` account, or replace that example account
 with your normal non-root deployment user.
 
-For a source checkout instead, clone tag `v18.6.0` and run:
+For a source checkout instead, clone tag `v18.6.1` and run:
 
 ```console
-git clone --branch v18.6.0 --depth 1 https://github.com/pH7Software/pH7-Social-Dating-CMS.git pH7Builder-v18.6.0
-cd pH7Builder-v18.6.0
+git clone --branch v18.6.1 --depth 1 https://github.com/pH7Software/pH7-Social-Dating-CMS.git pH7Builder-v18.6.1
+cd pH7Builder-v18.6.1
 composer install --no-dev --prefer-dist --optimize-autoloader
 ```
 
@@ -66,7 +66,7 @@ tagged Packagist release. Run this from the parent of the intended deployment
 directory:
 
 ```console
-composer create-project ph7software/ph7builder:18.6.0 ph7builder --no-dev --prefer-dist
+composer create-project ph7software/ph7builder:18.6.1 ph7builder --no-dev --prefer-dist
 ```
 
 Softaculous and SourceForge also list pH7Builder, but their available archive
@@ -310,7 +310,7 @@ prove inbox delivery.
    permissions, prices, currencies, and expiry periods.
 4. Admin → Billing → Gateways Configuration: keep unused gateways disabled,
    enter sandbox/test credentials first, and never commit credentials.
-   Stripe is intentionally unavailable in 18.6.0 because its bundled legacy
+   Stripe is intentionally unavailable in 18.6.x because its bundled legacy
    flow is not SCA-ready; use another supported gateway until Stripe is
    migrated to Checkout Sessions or Payment Intents.
    The bundled 2Checkout flow is also unavailable until it is migrated to the
