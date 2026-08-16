@@ -302,11 +302,23 @@ class gettext_reader
      */
     function sanitize_plural_expression($expr)
     {
-        // Get rid of disallowed characters.
-        $expr = preg_replace('@[^a-zA-Z0-9_:;\(\)\?\|\&=!<>+*/\%-]@', '', $expr);
+        $sFallback = 'nplurals=2;plural=n==1?0:1;';
+        if (!is_string($expr) || strlen($expr) > 512) {
+            $expr = $sFallback;
+        } else {
+            $expr = strtolower(trim($expr));
+            if (!preg_match(
+                '/^nplurals\s*=\s*([1-9][0-9]*)\s*;\s*plural\s*=\s*([n0-9\s?:|&=!<>()+*\/%\-]+)\s*;?$/D',
+                $expr,
+                $aMatches
+            ) || (int)$aMatches[1] > 100) {
+                $expr = $sFallback;
+            } else {
+                $expr = 'nplurals=' . (int)$aMatches[1] . ';plural=' . preg_replace('/\s+/', '', $aMatches[2]) . ';';
+            }
+        }
 
-        // Add parenthesis for tertiary '?' operator.
-        $expr .= ';';
+        // Add parentheses for the ternary '?' operator.
         $res = '';
         $p = 0;
         for ($i = 0; $i < strlen($expr); $i++) {
@@ -393,9 +405,17 @@ class gettext_reader
         $total = 0;
         $plural = 0;
 
-        eval("$string");
-        if ($plural >= $total) $plural = $total - 1;
-        return $plural;
+        try {
+            eval("$string");
+        } catch (Throwable) {
+            $total = 2;
+            $plural = $n === 1 ? 0 : 1;
+        }
+
+        $total = max(1, (int)$total);
+        $plural = (int)$plural;
+
+        return max(0, min($plural, $total - 1));
     }
 
     /**

@@ -50,4 +50,26 @@ final class GettextContextPluralTest extends TestCase
             \_dcnpgettext('test-category', 'alerts', 'one notification', 'many notifications', 2, LC_MESSAGES)
         );
     }
+
+    public function testPluralExpressionRejectsUnexpectedIdentifiers(): void
+    {
+        $oReader = new \gettext_reader(null);
+
+        $sExpression = $oReader->sanitize_plural_expression('nplurals=2; plural=exit(1);');
+
+        $this->assertStringNotContainsString('exit', $sExpression);
+        $this->assertSame('nplurals=2;plural=n==1 ? (0) : (1);', $sExpression);
+    }
+
+    public function testInvalidPluralArithmeticFallsBackWithoutBreakingTheRequest(): void
+    {
+        $oReader = new \gettext_reader(null);
+        $oReader->cache_translations = ['' => ''];
+        $oReader->table_originals = [];
+        $oReader->table_translations = [];
+        $oReader->pluralheader = 'nplurals=2;plural=1/0;';
+
+        $this->assertSame(0, $oReader->select_string(1));
+        $this->assertSame(1, $oReader->select_string(2));
+    }
 }
