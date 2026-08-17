@@ -47,7 +47,6 @@ PostgreSQL are not verified or supported by this patch.
 
 ## Post-publication operational step
 
-- [ ] After the GitHub tag, ZIP, and checksum are public, update the live
-      `ph7builder` feed entry to `REVOLUTIONARY™`, version `18.6.1`, SQL schema
-      `1.6.6`, and build `1`; enable `upd-alert` only after its download target
-      is verified.
+- [ ] Superseded by the 18.6.2 operational step. The feed was not advanced for
+      18.6.1, so installed sites were not directed to an older patch while the
+      gettext hardening release was prepared.

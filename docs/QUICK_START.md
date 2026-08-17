@@ -43,21 +43,21 @@ the archive and its checksum from the same GitHub release:
 sudo mkdir -p /var/www/ph7builder
 sudo chown deploy:www-data /var/www/ph7builder
 cd /tmp
-curl -LO https://github.com/pH7Software/pH7-Social-Dating-CMS/releases/download/v18.6.1/pH7Builder-v18.6.1.zip
-curl -LO https://github.com/pH7Software/pH7-Social-Dating-CMS/releases/download/v18.6.1/pH7Builder-v18.6.1.zip.sha256
-sha256sum -c pH7Builder-v18.6.1.zip.sha256
-unzip pH7Builder-v18.6.1.zip
-cp -a pH7Builder-v18.6.1/. /var/www/ph7builder/
+curl -LO https://github.com/pH7Software/pH7-Social-Dating-CMS/releases/download/v18.6.2/pH7Builder-v18.6.2.zip
+curl -LO https://github.com/pH7Software/pH7-Social-Dating-CMS/releases/download/v18.6.2/pH7Builder-v18.6.2.zip.sha256
+sha256sum -c pH7Builder-v18.6.2.zip.sha256
+unzip pH7Builder-v18.6.2.zip
+cp -a pH7Builder-v18.6.2/. /var/www/ph7builder/
 ```
 
 Run these commands as the `deploy` account, or replace that example account
 with your normal non-root deployment user.
 
-For a source checkout instead, clone tag `v18.6.1` and run:
+For a source checkout instead, clone tag `v18.6.2` and run:
 
 ```console
-git clone --branch v18.6.1 --depth 1 https://github.com/pH7Software/pH7-Social-Dating-CMS.git pH7Builder-v18.6.1
-cd pH7Builder-v18.6.1
+git clone --branch v18.6.2 --depth 1 https://github.com/pH7Software/pH7-Social-Dating-CMS.git pH7Builder-v18.6.2
+cd pH7Builder-v18.6.2
 composer install --no-dev --prefer-dist --optimize-autoloader
 ```
 
@@ -66,7 +66,7 @@ tagged Packagist release. Run this from the parent of the intended deployment
 directory:
 
 ```console
-composer create-project ph7software/ph7builder:18.6.1 ph7builder --no-dev --prefer-dist
+composer create-project ph7software/ph7builder:18.6.2 ph7builder --no-dev --prefer-dist
 ```
 
 Softaculous and SourceForge also list pH7Builder, but their available archive

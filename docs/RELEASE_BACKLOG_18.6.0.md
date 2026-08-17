@@ -85,8 +85,8 @@ the codebase coherent without disrupting existing sites.
 
 Make release publication update and verify the external pH7Builder update feed
 only after the GitHub tag, ZIP, and checksum are publicly available. For the
-18.6.1 patch publication, its `ph7builder` entry must say `REVOLUTIONARY™`,
-version `18.6.1`, SQL schema `1.6.6`, and build `1` before `upd-alert` is
+18.6.2 patch publication, its `ph7builder` entry must say `REVOLUTIONARY™`,
+version `18.6.2`, SQL schema `1.6.6`, and build `1` before `upd-alert` is
 enabled.
 
 **Launch impact:** installed sites discover real, downloadable releases without
