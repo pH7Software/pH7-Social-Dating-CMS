@@ -26,14 +26,14 @@ PostgreSQL are not verified or supported by this patch.
 
 ## Release verification before publication
 
-- [ ] Framework and installer versions, release date, docs, planned tag, and
+- [x] Framework and installer versions, release date, docs, planned tag, and
       release title all identify `18.6.2`.
-- [ ] The complete PHPUnit suite, PHPStan, PHP syntax sweep, Composer
+- [x] The complete PHPUnit suite, PHPStan, PHP syntax sweep, Composer
       validation, and dependency audits pass.
-- [ ] A fresh MySQL 8 install completes, including admin creation and installer
+- [x] A fresh MySQL 8 install completes, including admin creation and installer
       removal.
-- [ ] Valid gettext plural formulas work and malformed expressions fail safely.
-- [ ] A reproducible release-candidate ZIP is built from the committed tree,
+- [x] Valid gettext plural formulas work and malformed expressions fail safely.
+- [x] A reproducible release-candidate ZIP is built from the committed tree,
       includes locked dependencies, excludes development files, and matches its
       SHA-256 file.
 
