@@ -168,16 +168,23 @@ class LoadTemplate
         return $this;
     }
 
-    private function initializeUserTplOverride()
+    private function initializeUserTplOverride(): void
     {
         $oCookie = new Cookie;
+        $mRequestedTpl = $_REQUEST[self::REQUEST_PARAM_NAME] ?? null;
+        $sRequestedTpl = $this->normalizeTemplateName($mRequestedTpl);
 
         $this->sUserTpl = null;
-        if ($this->isTplParamSet()) {
-            $this->sUserTpl = $_REQUEST[self::REQUEST_PARAM_NAME] ?? '';
+        if ($sRequestedTpl !== null) {
+            $this->sUserTpl = $sRequestedTpl;
             $oCookie->set(self::COOKIE_NAME, $this->sUserTpl, static::COOKIE_LIFETIME);
         } elseif ($oCookie->exists(self::COOKIE_NAME)) {
-            $this->sUserTpl = $oCookie->get(self::COOKIE_NAME);
+            $sCookieTpl = $this->normalizeTemplateName($oCookie->get(self::COOKIE_NAME, false));
+            if ($sCookieTpl !== null) {
+                $this->sUserTpl = $sCookieTpl;
+            } else {
+                $oCookie->remove(self::COOKIE_NAME);
+            }
         }
 
         unset($oCookie);
@@ -205,12 +212,19 @@ class LoadTemplate
         return $this->oConfig->load(PH7_PATH_TPL . PH7_DEFAULT_THEME . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE);
     }
 
-    /**
-     * Check if a template name has been specified and if it doesn't exceed the maximum length (50 characters).
-     */
-    private function isTplParamSet(): bool
+    private function normalizeTemplateName(mixed $mTemplateName): ?string
     {
-        return !empty($_REQUEST[self::REQUEST_PARAM_NAME]) &&
-            strlen($_REQUEST[self::REQUEST_PARAM_NAME]) <= static::MAX_TPL_FOLDER_LENGTH;
+        if (
+            !is_string($mTemplateName) ||
+            $mTemplateName === '' ||
+            $mTemplateName === '.' ||
+            $mTemplateName === '..' ||
+            strlen($mTemplateName) > self::MAX_TPL_FOLDER_LENGTH ||
+            preg_match('/\A[^\x00-\x1F\x7F\/\\\\]+\z/u', $mTemplateName) !== 1
+        ) {
+            return null;
+        }
+
+        return $mTemplateName;
     }
 }
