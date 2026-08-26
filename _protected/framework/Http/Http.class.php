@@ -196,7 +196,7 @@ class Http
             header(sprintf('WWW-Authenticate: Basic realm="%s"', $sMsg));
             static::setHeadersByCode(StatusCode::UNAUTHORIZED);
             echo t('You must enter a valid login ID and password to access this resource.') . "\n";
-            exit(false);
+            exit;
         }
 
         return true;
