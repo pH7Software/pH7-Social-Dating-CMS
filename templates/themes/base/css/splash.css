@@ -208,6 +208,15 @@ video#bgvid {
 
 /* 760px or less */
 @media (max-width: 760px) {
+    html, body {
+        overflow-x: hidden;
+    }
+
+    #logo {
+        height: auto;
+        min-height: 45px;
+    }
+
     .left, .right, .login_block {
         text-align: center;
         margin-left: auto;
