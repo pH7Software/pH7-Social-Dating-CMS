@@ -14,8 +14,10 @@
   imports, installer checks, and website diagnostics.
 - Keeps the public splash header readable on small screens and redraws all
   admin charts after viewport changes to prevent horizontal overflow.
-- Emits each RSS discovery link once and escapes third-party video-provider
-  errors before rendering them.
+- Emits each RSS discovery link once, escapes third-party video-provider
+  errors, and validates remote project-news content before rendering it.
+- Keeps the dashboard useful by limiting project news to three concise,
+  human-readable items.
 - Adds regression coverage for each corrected security, compatibility, feed,
   and responsive-UI behavior.
 
