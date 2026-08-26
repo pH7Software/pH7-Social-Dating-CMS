@@ -193,6 +193,18 @@ final class ThemeAssetTest extends TestCase
         }
     }
 
+    public function testAdminDashboardKeepsProjectNewsConcise(): void
+    {
+        $sTemplate = file_get_contents(
+            dirname(__DIR__, 3) .
+            '/_protected/app/system/modules/admin123/views/base/tpl/main/news.inc.tpl'
+        );
+
+        $this->assertIsString($sTemplate);
+        $this->assertStringContainsString('XmlDesignCore::softwareNews(3)', $sTemplate);
+        $this->assertStringNotContainsString('XmlDesignCore::softwareNews(10)', $sTemplate);
+    }
+
     public function testThemeFormControlsRetainResponsiveBorderBoxSizing(): void
     {
         $sProjectRoot = dirname(__DIR__, 3);

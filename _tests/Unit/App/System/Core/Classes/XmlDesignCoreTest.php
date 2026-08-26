@@ -44,7 +44,7 @@ final class XmlDesignCoreTest extends TestCase
                     'safe' => [
                         'link' => 'https://ph7builder.com/news?a=1&b=2',
                         'title' => '<strong>Trusted & title</strong>',
-                        'description' => '<p onclick="evil()">Safe <b>summary</b> & details</p>'
+                        'description' => '<p onclick="evil()">Safe <b>summary</b> &amp; details. Let&#8217;s go.</p>'
                     ]
                 ];
             }
@@ -64,6 +64,30 @@ final class XmlDesignCoreTest extends TestCase
         );
         $this->assertStringContainsString('rel="noopener noreferrer"', $sOutput);
         $this->assertStringContainsString('Trusted &amp; title', $sOutput);
-        $this->assertStringContainsString('Safe summary &amp; details', $sOutput);
+        $this->assertStringContainsString('Safe summary &amp; details. Let’s go.', $sOutput);
+        $this->assertStringNotContainsString('&amp;#8217;', $sOutput);
+    }
+
+    public function testSoftwareNewsKeepsRemoteDescriptionsConcise(): void
+    {
+        $oNewsFeed = new class extends NewsFeedCore {
+            public function getSoftware($iNum = self::DEFAULT_NUMBER_ITEMS): array
+            {
+                return [
+                    'safe' => [
+                        'link' => 'https://ph7builder.com/news',
+                        'title' => 'Project news',
+                        'description' => '<p>' . str_repeat('A', 300) . '</p>'
+                    ]
+                ];
+            }
+        };
+
+        ob_start();
+        XmlDesignCore::softwareNews(1, $oNewsFeed);
+        $sOutput = (string)ob_get_clean();
+
+        $this->assertStringContainsString(str_repeat('A', 240) . '...', $sOutput);
+        $this->assertStringNotContainsString(str_repeat('A', 241), $sOutput);
     }
 }
