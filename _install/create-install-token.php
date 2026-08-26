@@ -27,7 +27,12 @@ if (file_put_contents($sTemporaryPath, hash('sha256', $sToken) . PHP_EOL, LOCK_E
     exit(1);
 }
 
-chmod($sTemporaryPath, 0640);
+if (!chmod($sTemporaryPath, 0644)) {
+    unlink($sTemporaryPath);
+    fwrite(STDERR, "Could not make the installer token hash readable by the web server. Check _install/data permissions.\n");
+    exit(1);
+}
+
 if (!rename($sTemporaryPath, $sTokenPath)) {
     unlink($sTemporaryPath);
     fwrite(STDERR, "Could not finalize the installer token. Check _install/data permissions.\n");

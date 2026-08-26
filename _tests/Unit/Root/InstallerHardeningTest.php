@@ -82,6 +82,18 @@ final class InstallerHardeningTest extends TestCase
         $this->assertStringNotContainsString('$_SESSION[self::ACCESS_SESSION_KEY] = true;', $sController);
     }
 
+    public function testGeneratedInstallerTokenHashIsReadableByTheWebServer(): void
+    {
+        $sGenerator = $this->readProjectFile('_install/create-install-token.php');
+
+        $this->assertStringContainsString('if (!chmod($sTemporaryPath, 0644))', $sGenerator);
+        $this->assertStringContainsString(
+            'Could not make the installer token hash readable by the web server.',
+            $sGenerator
+        );
+        $this->assertStringNotContainsString('chmod($sTemporaryPath, 0640)', $sGenerator);
+    }
+
     public function testInstallerUsesTransactionalMandatoryDatabaseSteps(): void
     {
         $sController = $this->readProjectFile('_install/controllers/InstallController.php');

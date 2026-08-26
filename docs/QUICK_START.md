@@ -195,6 +195,14 @@ cd /var/www/ph7builder
 php _install/create-install-token.php
 ```
 
+The generator stores only a one-way hash and makes it readable by the web
+server. If an existing v18.6.1 deployment still reports that installer access
+is locked after the command succeeds, repair that hash file and reload:
+
+```console
+chmod 0644 _install/data/caches/install-token.hash
+```
+
 Open `https://example.com/_install/`, enter that token, and complete every step.
 The installer records non-secret progress so the same token can resume after a
 browser close or session expiry. Use the MySQL
