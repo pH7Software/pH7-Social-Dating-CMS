@@ -58,7 +58,6 @@ class XmlDesignCore
     public static function rssHeaderLinks()
     {
         self::generateRssTagLink(t('Latest Blog Posts'), Uri::get('xml', 'rss', 'xmlrouter', 'blog'));
-        self::generateRssTagLink(t('Latest Blog Posts'), Uri::get('xml', 'rss', 'xmlrouter', 'blog'));
         self::generateRssTagLink(t('Latest Notes'), Uri::get('xml', 'rss', 'xmlrouter', 'note'));
         self::generateRssTagLink(t('Latest Forum Topics'), Uri::get('xml', 'rss', 'xmlrouter', 'forum-topic'));
         self::generateRssTagLink(t('Latest Profile Comments'), Uri::get('xml', 'rss', 'xmlrouter', 'comment-profile'));
