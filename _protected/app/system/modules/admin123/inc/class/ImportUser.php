@@ -71,7 +71,7 @@ class ImportUser extends Core
         // Initialize the necessary attributes
         $this->aFile = $aFile;
         $this->rHandler = @fopen($this->aFile['tmp_name'], 'rb');
-        $this->aFileData = (array)@fgetcsv($this->rHandler, 0, $sDelimiter, $sEnclosure);
+        $this->aFileData = (array)@fgetcsv($this->rHandler, 0, $sDelimiter, $sEnclosure, '\\');
         $this->aRes = $this->run($sDelimiter, $sEnclosure);
     }
 
@@ -261,7 +261,7 @@ class ImportUser extends Core
             $oExistsModel = new ExistCoreModel;
             $oValidate = new Validate;
 
-            while (false !== ($aUserData = fgetcsv($this->rHandler, 0, $sDelimiter, $sEnclosure))) {
+            while (false !== ($aUserData = fgetcsv($this->rHandler, 0, $sDelimiter, $sEnclosure, '\\'))) {
                 $sEmail = trim($aUserData[$this->aTmpData['email']]);
 
                 // Make sure the email is valid and doesn't exist yet in the database

@@ -9,7 +9,10 @@
 
 namespace PH7;
 
-defined('PH7') or exit(header('Location: ./'));
+if (!defined('PH7')) {
+    header('Location: ./');
+    exit;
+}
 
 ########## VARIABLES ##########
 

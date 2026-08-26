@@ -188,6 +188,13 @@ final class InstallerHardeningTest extends TestCase
         $this->assertStringNotContainsString("PH7_URL_INSTALL . 'test_mod_rewrite'", $sFunctions);
     }
 
+    public function testInstallerDoesNotCallDeprecatedCurlClose(): void
+    {
+        $sFunctions = $this->readProjectFile('_install/inc/fns/misc.php');
+
+        $this->assertStringNotContainsString('curl_close(', $sFunctions);
+    }
+
     public function testInstallerPinsCanonicalAuthorityWithoutTrustingRequestHeaders(): void
     {
         $sInstallerConstants = $this->readProjectFile('_install/constants.php');

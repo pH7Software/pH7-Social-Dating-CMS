@@ -78,6 +78,14 @@ final class HttpTest extends TestCase
         $this->assertFalse($sIsSsl);
     }
 
+    public function testAuthenticationFailureDoesNotPassBooleanToExit(): void
+    {
+        $sSource = file_get_contents(PH7_PATH_FRAMEWORK . 'Http/Http.class.php');
+
+        $this->assertIsString($sSource);
+        $this->assertStringNotContainsString('exit(false)', $sSource);
+    }
+
     public function testDetectSubdomain(): void
     {
         $bIsASubdomain = $this->oHttp->detectSubdomain('https://learning.ph7builder.com');

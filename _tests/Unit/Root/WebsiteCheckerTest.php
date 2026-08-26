@@ -71,6 +71,19 @@ final class WebsiteCheckerTest extends TestCase
         $this->assertStringNotContainsString("\$_SERVER['PHP_SELF']", $sChecker);
     }
 
+    public function testDirectAccessGuardsDoNotPassHeaderReturnValueToExit(): void
+    {
+        $sProjectRoot = dirname(__DIR__, 3);
+
+        foreach (['WebsiteChecker.php', '_install/data/configs/constants.php'] as $sRelativePath) {
+            $sSource = file_get_contents($sProjectRoot . '/' . $sRelativePath);
+
+            $this->assertIsString($sSource);
+            $this->assertStringContainsString("if (!defined('PH7'))", $sSource);
+            $this->assertStringNotContainsString("exit(header(", $sSource);
+        }
+    }
+
     public function testIncompatiblePhpVersionFlagIsFalseOnCurrentRuntime(): void
     {
         $oChecker = new WebsiteChecker;
