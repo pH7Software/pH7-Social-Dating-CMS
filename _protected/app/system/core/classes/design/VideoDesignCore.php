@@ -76,7 +76,7 @@ class VideoDesignCore
                     echo $oVideo;
                 }
             } catch (InvalidApiProviderException $oE) {
-                echo $oE->getMessage();
+                echo escape($oE->getMessage());
             }
         } else {
             $sDir = 'video/file/' . $oData->username . PH7_SH . $oData->albumId . PH7_SH;
