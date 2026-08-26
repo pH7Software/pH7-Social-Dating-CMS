@@ -172,6 +172,27 @@ final class ThemeAssetTest extends TestCase
         }
     }
 
+    public function testAdminChartsRedrawAfterViewportChanges(): void
+    {
+        $sAdminTemplateDirectory = dirname(__DIR__, 3) .
+            '/_protected/app/system/modules/admin123/views/base/tpl';
+        $aChartResizeBindings = [
+            $sAdminTemplateDirectory . '/main/stat.tpl' => 'resize.ph7UserChart',
+            $sAdminTemplateDirectory . '/tool/cache.tpl' => 'resize.ph7CacheChart',
+            $sAdminTemplateDirectory . '/tool/freespace.tpl' => 'resize.ph7FreeSpaceChart'
+        ];
+
+        foreach ($aChartResizeBindings as $sChartTemplate => $sResizeEvent) {
+            $sTemplate = file_get_contents($sChartTemplate);
+
+            $this->assertIsString($sTemplate);
+            $this->assertStringContainsString("off('{$sResizeEvent}')", $sTemplate);
+            $this->assertStringContainsString("on('{$sResizeEvent}'", $sTemplate);
+            $this->assertStringContainsString('clearTimeout(', $sTemplate);
+            $this->assertStringContainsString('setTimeout(', $sTemplate);
+        }
+    }
+
     public function testThemeFormControlsRetainResponsiveBorderBoxSizing(): void
     {
         $sProjectRoot = dirname(__DIR__, 3);

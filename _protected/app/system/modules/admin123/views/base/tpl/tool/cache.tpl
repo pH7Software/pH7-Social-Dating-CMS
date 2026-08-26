@@ -10,8 +10,16 @@
     <div class="s_marg">
         <script src="https://www.gstatic.com/charts/loader.js"></script>
         <script>
+            var iCacheChartResizeTimer;
+
             google.charts.load('current', {packages: ['corechart']});
-            google.charts.setOnLoadCallback(showCacheChart);
+            google.charts.setOnLoadCallback(function () {
+                showCacheChart();
+                $(window).off('resize.ph7CacheChart').on('resize.ph7CacheChart', function () {
+                    clearTimeout(iCacheChartResizeTimer);
+                    iCacheChartResizeTimer = setTimeout(showCacheChart, 150);
+                });
+            });
 
             function showCacheChart() {
                 $('#cache_chart').html('');

@@ -2,8 +2,16 @@
     <div class="s_marg">
         <script src="https://www.gstatic.com/charts/loader.js"></script>
         <script>
+            var iFreeSpaceChartResizeTimer;
+
             google.charts.load('current', {packages: ['corechart']});
-            google.charts.setOnLoadCallback(showFreeSpaceChart);
+            google.charts.setOnLoadCallback(function () {
+                showFreeSpaceChart();
+                $(window).off('resize.ph7FreeSpaceChart').on('resize.ph7FreeSpaceChart', function () {
+                    clearTimeout(iFreeSpaceChartResizeTimer);
+                    iFreeSpaceChartResizeTimer = setTimeout(showFreeSpaceChart, 150);
+                });
+            });
 
             function showFreeSpaceChart () {
                 $('#free_space_chart').html('');

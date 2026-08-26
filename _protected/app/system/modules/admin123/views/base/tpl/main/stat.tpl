@@ -1,7 +1,15 @@
 <script src="https://www.gstatic.com/charts/loader.js"></script>
 <script>
+    var iUserChartResizeTimer;
+
     google.charts.load('current', {packages: ['corechart']});
-    google.charts.setOnLoadCallback(showUserChart);
+    google.charts.setOnLoadCallback(function () {
+        showUserChart();
+        $(window).off('resize.ph7UserChart').on('resize.ph7UserChart', function () {
+            clearTimeout(iUserChartResizeTimer);
+            iUserChartResizeTimer = setTimeout(showUserChart, 150);
+        });
+    });
 
     function showUserChart() {
         $('#user_chart').html('');
