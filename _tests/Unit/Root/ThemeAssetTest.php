@@ -110,7 +110,37 @@ final class ThemeAssetTest extends TestCase
                 '$design->url(\'user\', \'signup\', \'step1\')',
                 $sTemplate
             );
+            $this->assertStringContainsString(
+                '$sNearbyCountry !== \'\' ? $design->url(\'map\', \'country\', \'index\'',
+                $sTemplate
+            );
+            $this->assertStringContainsString(
+                ': $design->url(\'user\', \'browse\', \'index\')',
+                $sTemplate
+            );
+            $this->assertStringNotContainsString(
+                'Geo::getCountry() . PH7_SH. Framework\\Geo\\Ip\\Geo::getCity()',
+                $sTemplate
+            );
         }
+
+        $sSitemapLinksTemplate = file_get_contents(
+            $sProjectRoot . '/_protected/app/system/modules/xml/views/base/tpl/links.xml.tpl'
+        );
+
+        $this->assertIsString($sSitemapLinksTemplate);
+        $this->assertStringContainsString(
+            '$sNearbyCountry !== \'\' ? $design->url(\'map\', \'country\', \'index\'',
+            $sSitemapLinksTemplate
+        );
+        $this->assertStringContainsString(
+            ': $design->url(\'user\', \'browse\', \'index\')',
+            $sSitemapLinksTemplate
+        );
+        $this->assertStringNotContainsString(
+            'Geo::getCountry() . PH7_SH. Framework\\Geo\\Ip\\Geo::getCity()',
+            $sSitemapLinksTemplate
+        );
 
         $oRoutes = new DOMDocument;
         $this->assertTrue($oRoutes->load($sProjectRoot . '/_protected/app/configs/routes/en.xml'));

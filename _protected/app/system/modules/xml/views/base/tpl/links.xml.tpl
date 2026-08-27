@@ -34,7 +34,10 @@
     {/if}
 
     {if $is_map_enabled}
-        <link title="{lang 'People Nearby'}" url="{{ $design->url('map','country','index', Framework\Geo\Ip\Geo::getCountry() . PH7_SH. Framework\Geo\Ip\Geo::getCity()) }}" />
+        {{ $sNearbyCountry = (string) Framework\Geo\Ip\Geo::getCountry() }}
+        {{ $sNearbyCity = (string) Framework\Geo\Ip\Geo::getCity() }}
+        {{ $sNearbyUrl = $sNearbyCountry !== '' ? $design->url('map', 'country', 'index', $sNearbyCountry . ($sNearbyCity !== '' ? PH7_SH . $sNearbyCity : '')) : $design->url('user', 'browse', 'index') }}
+        <link title="{lang 'People Nearby'}" url="{% $sNearbyUrl %}" />
     {/if}
 
     <link title="{lang 'About Us'}" url="{{ $design->url('page','main','about') }}" />

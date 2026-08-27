@@ -73,8 +73,11 @@
             </li>
 
             {if $is_map_enabled}
+              {{ $sNearbyCountry = (string) Framework\Geo\Ip\Geo::getCountry() }}
+              {{ $sNearbyCity = (string) Framework\Geo\Ip\Geo::getCity() }}
+              {{ $sNearbyUrl = $sNearbyCountry !== '' ? $design->url('map', 'country', 'index', $sNearbyCountry . ($sNearbyCity !== '' ? PH7_SH . $sNearbyCity : '')) : $design->url('user', 'browse', 'index') }}
               <li>
-                <a href="{{ $design->url('map', 'country', 'index', Framework\Geo\Ip\Geo::getCountry() . PH7_SH. Framework\Geo\Ip\Geo::getCity()) }}" title="{lang 'Users nearby through the map!'}">
+                <a href="{% $sNearbyUrl %}" title="{lang 'Users nearby through the map!'}">
                   <i class="fa fa-map-marker"></i> {lang 'People Nearby'}
                 </a>
               </li>
