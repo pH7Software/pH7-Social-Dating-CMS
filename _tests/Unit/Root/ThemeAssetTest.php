@@ -110,7 +110,52 @@ final class ThemeAssetTest extends TestCase
                 '$design->url(\'user\', \'signup\', \'step1\')',
                 $sTemplate
             );
+            $this->assertStringContainsString(
+                '$sNearbyCountry !== \'\' ? Framework\\Mvc\\Router\\Uri::get(\'map\', \'country\', \'index\'',
+                $sTemplate
+            );
+            $this->assertStringContainsString(
+                ': Framework\\Mvc\\Router\\Uri::get(\'user\', \'browse\', \'index\')',
+                $sTemplate
+            );
+            $this->assertStringContainsString(
+                '$str->escapeAttribute($sNearbyUrl)',
+                $sTemplate
+            );
+            $this->assertStringNotContainsString('$sNearbyUrl = $design->url(', $sTemplate);
+            $this->assertStringNotContainsString('href="{% $sNearbyUrl %}"', $sTemplate);
+            $this->assertStringNotContainsString(
+                'Geo::getCountry() . PH7_SH. Framework\\Geo\\Ip\\Geo::getCity()',
+                $sTemplate
+            );
         }
+
+        $sSitemapLinksTemplate = file_get_contents(
+            $sProjectRoot . '/_protected/app/system/modules/xml/views/base/tpl/links.xml.tpl'
+        );
+
+        $this->assertIsString($sSitemapLinksTemplate);
+        $this->assertStringContainsString(
+            '$sNearbyCountry !== \'\' ? Framework\\Mvc\\Router\\Uri::get(\'map\', \'country\', \'index\'',
+            $sSitemapLinksTemplate
+        );
+        $this->assertStringContainsString(
+            ': Framework\\Mvc\\Router\\Uri::get(\'user\', \'browse\', \'index\')',
+            $sSitemapLinksTemplate
+        );
+        $this->assertStringContainsString(
+            '$str->escapeAttribute($sNearbyUrl)',
+            $sSitemapLinksTemplate
+        );
+        $this->assertStringNotContainsString('$sNearbyUrl = $design->url(', $sSitemapLinksTemplate);
+        $this->assertStringNotContainsString(
+            'url="{% $sNearbyUrl %}"',
+            $sSitemapLinksTemplate
+        );
+        $this->assertStringNotContainsString(
+            'Geo::getCountry() . PH7_SH. Framework\\Geo\\Ip\\Geo::getCity()',
+            $sSitemapLinksTemplate
+        );
 
         $oRoutes = new DOMDocument;
         $this->assertTrue($oRoutes->load($sProjectRoot . '/_protected/app/configs/routes/en.xml'));
@@ -172,6 +217,39 @@ final class ThemeAssetTest extends TestCase
         }
     }
 
+    public function testAdminChartsRedrawAfterViewportChanges(): void
+    {
+        $sAdminTemplateDirectory = dirname(__DIR__, 3) .
+            '/_protected/app/system/modules/admin123/views/base/tpl';
+        $aChartResizeBindings = [
+            $sAdminTemplateDirectory . '/main/stat.tpl' => 'resize.ph7UserChart',
+            $sAdminTemplateDirectory . '/tool/cache.tpl' => 'resize.ph7CacheChart',
+            $sAdminTemplateDirectory . '/tool/freespace.tpl' => 'resize.ph7FreeSpaceChart'
+        ];
+
+        foreach ($aChartResizeBindings as $sChartTemplate => $sResizeEvent) {
+            $sTemplate = file_get_contents($sChartTemplate);
+
+            $this->assertIsString($sTemplate);
+            $this->assertStringContainsString("off('{$sResizeEvent}')", $sTemplate);
+            $this->assertStringContainsString("on('{$sResizeEvent}'", $sTemplate);
+            $this->assertStringContainsString('clearTimeout(', $sTemplate);
+            $this->assertStringContainsString('setTimeout(', $sTemplate);
+        }
+    }
+
+    public function testAdminDashboardKeepsProjectNewsConcise(): void
+    {
+        $sTemplate = file_get_contents(
+            dirname(__DIR__, 3) .
+            '/_protected/app/system/modules/admin123/views/base/tpl/main/news.inc.tpl'
+        );
+
+        $this->assertIsString($sTemplate);
+        $this->assertStringContainsString('XmlDesignCore::softwareNews(3)', $sTemplate);
+        $this->assertStringNotContainsString('XmlDesignCore::softwareNews(10)', $sTemplate);
+    }
+
     public function testThemeFormControlsRetainResponsiveBorderBoxSizing(): void
     {
         $sProjectRoot = dirname(__DIR__, 3);
@@ -186,6 +264,25 @@ final class ThemeAssetTest extends TestCase
             $this->assertIsString($sCss);
             $this->assertStringContainsString('box-sizing: border-box;', $sCss);
             $this->assertStringNotContainsString('box-sizing: content-box;', $sCss);
+        }
+    }
+
+    public function testThemeContentRowsMatchTheCustomContainerGutter(): void
+    {
+        $sProjectRoot = dirname(__DIR__, 3);
+        $aCommonStylesheets = [
+            $sProjectRoot . '/templates/themes/base/css/common.css',
+            $sProjectRoot . '/templates/themes/premium/css/common.css'
+        ];
+
+        foreach ($aCommonStylesheets as $sCommonStylesheet) {
+            $sCss = file_get_contents($sCommonStylesheet);
+
+            $this->assertIsString($sCss);
+            $this->assertMatchesRegularExpression(
+                '/#content\s*>\s*\.row\s*\{[^}]*margin-left:\s*-12px;[^}]*margin-right:\s*-12px;/s',
+                $sCss
+            );
         }
     }
 

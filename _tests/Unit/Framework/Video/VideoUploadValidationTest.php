@@ -32,6 +32,7 @@ final class VideoUploadValidationTest extends TestCase
 
         $this->assertIsString($sSource);
         $this->assertStringNotContainsString('$this->aFile[\'type\']', $sSource);
+        $this->assertStringNotContainsString('finfo_close(', $sSource);
         $this->assertStringContainsString('$this->isReliableDetectedMime($sDetectedMime)', $sSource);
         $this->assertStringContainsString('$this->mimeMatchesExpected($sDetectedMime, $sExpectedMime)', $sSource);
     }

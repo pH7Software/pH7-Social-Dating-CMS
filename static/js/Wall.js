@@ -76,8 +76,9 @@ function Wall() {
      */
     this.edit = function () {
         var sPost = $('.wall_post').val();
+        var iWallId = $('.wall_id').val();
 
-        $.post(pH7Url.base + this.sUrl + pH7Url.csrf, {type: 'edit', 'post': sPost}, function (oData) {
+        $.post(pH7Url.base + this.sUrl + pH7Url.csrf, {type: 'edit', 'wall_id': iWallId, 'post': sPost}, function (oData) {
             oMe._output(oData);
         }, 'json');
     };
@@ -89,9 +90,9 @@ function Wall() {
      * @async
      */
     this.del = function () {
-        var sPost = $('.wall_id').val();
+        var iWallId = $('.wall_id').val();
 
-        $.post(pH7Url.base + this.sUrl + pH7Url.csrf, {type: 'delete', 'post': sPost}, function (oData) {
+        $.post(pH7Url.base + this.sUrl + pH7Url.csrf, {type: 'delete', 'wall_id': iWallId}, function (oData) {
             oMe._output(oData);
         }, 'json');
     };

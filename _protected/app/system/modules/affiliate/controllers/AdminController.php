@@ -28,8 +28,6 @@ class AdminController extends Controller implements UserModeratable
     use BulkAction;
 
     private const PROFILES_PER_PAGE = 15;
-    private const REDIRECTION_DELAY_IN_SEC = 5;
-
     private Affiliate $oAff;
 
     private AffiliateModel $oAffModel;
@@ -113,24 +111,24 @@ class AdminController extends Controller implements UserModeratable
         );
         unset($oPage);
 
-        if (empty($oSearch)) {
-            $this->setNotFoundPage();
-        } else {
+        if (!empty($oSearch)) {
             // Add the js file necessary for the browse form
             $this->design->addJs(PH7_STATIC . PH7_JS, 'form.js');
-
-            // Assigns variables for views
-            $this->view->designSecurity = new HtmlSecurity; // Security Design Class
-            $this->view->dateTime = $this->dateTime; // Date Time Class
-            $this->view->validate = new Validate;
-
-            $this->sTitle = t('Browse Affiliates');
-            $this->view->page_title = $this->sTitle;
-            $this->view->h2_title = $this->sTitle;
-            $this->view->h3_title = nt('%n% Affiliate', '%n% Affiliates', $this->iTotalUsers);
-
-            $this->view->browse = $oSearch;
         }
+
+        // Assigns variables for views
+        $this->view->designSecurity = new HtmlSecurity; // Security Design Class
+        $this->view->dateTime = $this->dateTime; // Date Time Class
+        $this->view->validate = new Validate;
+
+        $this->sTitle = t('Browse Affiliates');
+        $this->view->page_title = $this->sTitle;
+        $this->view->h2_title = $this->sTitle;
+        $this->view->h3_title = nt('%n% Affiliate', '%n% Affiliates', $this->iTotalUsers);
+        $this->view->browse = $oSearch;
+        $this->view->empty_message = empty($sKeywords)
+            ? t('No affiliates yet. New affiliate registrations will appear here.')
+            : t('No affiliates match your search. Try different keywords.');
 
         $this->output();
     }
@@ -460,23 +458,4 @@ class AdminController extends Controller implements UserModeratable
         (new Mail)->send($aInfo, $sMessageHtml);
     }
 
-    /**
-     * Redirect to admin browse page, then display the default "Not Found" page.
-     */
-    private function setNotFoundPage(): void
-    {
-        $this->design->setRedirect(
-            Uri::get(
-                'affiliate',
-                'admin',
-                'browse'
-            ),
-            null,
-            null,
-            self::REDIRECTION_DELAY_IN_SEC
-        );
-
-        $sErrorMsg = t('No affiliates have been found.');
-        $this->displayPageNotFound($sErrorMsg);
-    }
 }

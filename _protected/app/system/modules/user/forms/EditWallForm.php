@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @author         Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
@@ -13,7 +14,9 @@ use PFBC\Element\Hidden;
 use PFBC\Element\Textarea;
 use PFBC\Element\Token;
 use PFBC\Validation\Str;
+use PH7\Framework\Layout\Html\Design;
 use PH7\Framework\Mvc\Request\Http;
+use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Session\Session;
 use PH7\Framework\Url\Header;
 
@@ -33,14 +36,24 @@ class EditWallForm
             Header::redirect();
         }
 
-        $oWallData = (new WallModel)->get((new Session)->get('member_id'), (new Http)->get('wall_id'), 0, 1);
+        $iWallId = (int)(new Http())->get('wall_id');
+        $aWallData = (new WallModel())->get((new Session())->get('member_id'), $iWallId, 0, 1);
+        $oWallData = $aWallData[0] ?? null;
+        if ($oWallData === null) {
+            Header::redirect(
+                Uri::get('user', 'main', 'index'),
+                t('The wall post does not exist.'),
+                Design::ERROR_TYPE
+            );
+        }
 
         $oForm = new \PFBC\Form('form_edit_wall');
         $oForm->configure(['action' => '']);
         $oForm->addElement(new Hidden('submit_edit_wall', 'form_edit_wall'));
+        $oForm->addElement(new Hidden('wall_id', $iWallId));
         $oForm->addElement(new Token('edit_wall'));
         $oForm->addElement(new Textarea(t('Content:'), 'post', ['value' => $oWallData->post, 'validation' => new Str(1, 900)]));
-        $oForm->addElement(new Button);
+        $oForm->addElement(new Button());
         $oForm->render();
     }
 }

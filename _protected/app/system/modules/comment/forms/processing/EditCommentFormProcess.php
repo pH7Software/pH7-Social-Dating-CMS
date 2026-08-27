@@ -85,6 +85,8 @@ class EditCommentFormProcess extends Form
      */
     private function isEditEligible()
     {
-        return $this->iMemberId === $this->iRecipientId || $this->iMemberId === $this->iSenderId;
+        return AdminCore::auth()
+            || $this->iMemberId === $this->iRecipientId
+            || $this->iMemberId === $this->iSenderId;
     }
 }

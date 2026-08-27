@@ -15,6 +15,7 @@ use PFBC\Element\Textarea;
 use PFBC\Element\Token;
 use PFBC\Validation\Str;
 use PH7\Framework\Mvc\Request\Http;
+use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Url\Header;
 
 class EditCommentForm
@@ -36,7 +37,15 @@ class EditCommentForm
         $oForm->addElement(new Hidden('submit_edit_comment', 'form_edit_comment'));
         $oForm->addElement(new Token('edit_comment'));
 
-        $oData = (new CommentModel)->get($oHttpRequest->get('id'), 1, $oHttpRequest->get('table'));
+        $oData = (new CommentModel)->get(
+            $oHttpRequest->get('id', 'int'),
+            '1',
+            $oHttpRequest->get('table')
+        );
+        if ($oData === false) {
+            Header::redirect(Uri::get('error', 'http', 'index', '404'));
+        }
+
         $oForm->addElement(
             new Textarea(
                 t('Your comment:'),

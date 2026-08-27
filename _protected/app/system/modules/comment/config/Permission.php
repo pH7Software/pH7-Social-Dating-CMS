@@ -18,7 +18,10 @@ class Permission extends PermissionCore
 
         $bAdminAuth = AdminCore::auth();
 
-        if ((!UserCore::auth() && !$bAdminAuth) && ($this->registry->action === 'add' || $this->registry->action === 'delete')) {
+        if (
+            (!UserCore::auth() && !$bAdminAuth)
+            && in_array($this->registry->action, ['add', 'edit', 'delete'], true)
+        ) {
             $this->signInRedirect();
         }
 

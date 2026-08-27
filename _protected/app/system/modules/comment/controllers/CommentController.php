@@ -131,6 +131,25 @@ class CommentController extends Controller
 
     public function edit()
     {
+        $oComment = $this->oCommentModel->get(
+            $this->httpRequest->get('id', 'int'),
+            '1',
+            $this->sTable
+        );
+
+        if (!$this->isRequestedComment($oComment)) {
+            Header::redirect(Uri::get('error', 'http', 'index', '404'));
+        }
+
+        $iMemberId = (int)$this->session->get('member_id');
+        if (
+            !AdminCore::auth()
+            && $iMemberId !== (int)$oComment->recipient
+            && $iMemberId !== (int)$oComment->sender
+        ) {
+            Header::redirect(Uri::get('error', 'http', 'index', '403'));
+        }
+
         $this->view->page_title = t('Edit the comment');
         $this->output();
     }
@@ -204,5 +223,12 @@ class CommentController extends Controller
     private function getProfileId()
     {
         return is_numeric($this->httpRequest->get('id')) ? $this->httpRequest->get('id') : null;
+    }
+
+    private function isRequestedComment($oComment): bool
+    {
+        return $oComment !== false
+            && (int)$oComment->recipient === $this->httpRequest->get('recipient', 'int')
+            && (int)$oComment->sender === $this->httpRequest->get('sender', 'int');
     }
 }

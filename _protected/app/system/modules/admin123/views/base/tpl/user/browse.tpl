@@ -1,3 +1,9 @@
+{if empty($browse)}
+    <div class="alert alert-info center">
+        <p class="bold">{lang 'No members yet. New registrations will appear here.'}</p>
+        <a class="btn btn-primary" href="{{ $design->url(PH7_ADMIN_MOD, 'user', 'add') }}">{lang 'Add a User'}</a>
+    </div>
+{else}
 <form method="post" action="{{ $design->url(PH7_ADMIN_MOD, 'user', 'browse') }}">
     {{ $designSecurity->inputToken('user_action') }}
 
@@ -145,3 +151,4 @@
 {/if}
 
 {main_include 'page_nav.inc.tpl'}
+{/if}

@@ -12,6 +12,8 @@ use PH7\Framework\Error\CException\PH7Exception;
 use PH7\Framework\Layout\Html\Design;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Pattern\Statik;
+use PH7\Framework\Security\Validate\Validate;
+use PH7\Framework\Str\Str;
 
 class XmlDesignCore
 {
@@ -20,6 +22,8 @@ class XmlDesignCore
      * The trait sets constructor/clone private to prevent instantiation.
      */
     use Statik;
+    private const SOFTWARE_NEWS_DESCRIPTION_LENGTH = 240;
+    private const SOFTWARE_NEWS_TRIM_MARKER = '...';
 
     public static function xslHeader()
     {
@@ -70,21 +74,40 @@ class XmlDesignCore
     /**
      * Show the software news.
      *
-     * @param int $iNum Number of news to display.
+     * @param int               $iNum      number of news to display
+     * @param NewsFeedCore|null $oNewsFeed optional feed source for deterministic rendering
      *
-     * @return void HTML contents.
+     * @return void HTML contents
      */
-    public static function softwareNews($iNum)
+    public static function softwareNews($iNum, ?NewsFeedCore $oNewsFeed = null)
     {
         try {
-            $aNews = (new NewsFeedCore)->getSoftware($iNum);
+            $aNews = ($oNewsFeed ?? new NewsFeedCore())->getSoftware($iNum);
+            $oStr = new Str();
+            $oValidate = new Validate();
+            $bNewsDisplayed = false;
 
-            if (count($aNews) > 0) {
-                foreach ($aNews as $aItems) {
-                    echo '<h4><a href="', $aItems['link'], '" target="_blank" rel="noopener">', escape($aItems['title'], true), '</a></h4>';
-                    echo '<p>', escape($aItems['description'], true), '</p>';
+            foreach ($aNews as $aItems) {
+                $sLink = (string)($aItems['link'] ?? '');
+                if (!$oValidate->url($sLink)) {
+                    continue;
                 }
-            } else {
+
+                $sTitle = escape(
+                    self::normalizeSoftwareNewsText((string)($aItems['title'] ?? ''))
+                );
+                $sDescription = escape(
+                    self::shortenSoftwareNewsDescription(
+                        self::normalizeSoftwareNewsText((string)($aItems['description'] ?? ''))
+                    )
+                );
+
+                echo '<h4><a href="', $oStr->escapeAttribute($sLink), '" target="_blank" rel="noopener noreferrer">', $sTitle, '</a></h4>';
+                echo '<p>', $sDescription, '</p>';
+                $bNewsDisplayed = true;
+            }
+
+            if (!$bNewsDisplayed) {
                 echo '<p>', t("No %software_name%'s news found."), '</p>';
             }
         } catch (PH7Exception $oE) {
@@ -93,6 +116,24 @@ class XmlDesignCore
                 Design::ERROR_TYPE
             );
         }
+    }
+
+    private static function normalizeSoftwareNewsText(string $sText): string
+    {
+        return strip_tags(
+            html_entity_decode($sText, ENT_QUOTES | ENT_HTML5, 'UTF-8')
+        );
+    }
+
+    private static function shortenSoftwareNewsDescription(string $sDescription): string
+    {
+        if (mb_strlen($sDescription, 'UTF-8') <= self::SOFTWARE_NEWS_DESCRIPTION_LENGTH) {
+            return $sDescription;
+        }
+
+        return rtrim(
+            mb_substr($sDescription, 0, self::SOFTWARE_NEWS_DESCRIPTION_LENGTH, 'UTF-8')
+        ) . self::SOFTWARE_NEWS_TRIM_MARKER;
     }
 
     /**

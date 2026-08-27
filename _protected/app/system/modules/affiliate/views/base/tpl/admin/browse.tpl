@@ -1,3 +1,9 @@
+{if empty($browse)}
+    <div class="alert alert-info center">
+        <p class="bold">{% escape($empty_message) %}</p>
+        <a class="btn btn-primary" href="{{ $design->url('affiliate', 'admin', 'add') }}">{lang 'Add Affiliate'}</a>
+    </div>
+{else}
 <form method="post" action="{{ $design->url('affiliate','admin','browse') }}">
     {{ $designSecurity->inputToken('aff_action') }}
 
@@ -146,3 +152,4 @@
 </form>
 
 {main_include 'page_nav.inc.tpl'}
+{/if}

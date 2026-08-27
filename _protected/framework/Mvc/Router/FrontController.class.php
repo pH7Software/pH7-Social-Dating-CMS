@@ -377,7 +377,7 @@ final class FrontController
      */
     private function initializePaths()
     {
-        $this->oRegistry->action = strtolower($this->oRegistry->action);
+        $this->oRegistry->action = self::normalizeAction($this->oRegistry->action);
 
         /***** SHORTCUTS PATH FOR MODULES *****/
         $this->oRegistry->path_module_controllers = $this->oRegistry->path_module . PH7_CTRL;
@@ -387,6 +387,11 @@ final class FrontController
         $this->oRegistry->path_module_inc = $this->oRegistry->path_module . PH7_INC;
         $this->oRegistry->path_module_config = $this->oRegistry->path_module . PH7_CONFIG;
         $this->oRegistry->path_module_lang = $this->oRegistry->path_module . PH7_LANG;
+    }
+
+    private static function normalizeAction(?string $sAction): string
+    {
+        return strtolower($sAction ?? '');
     }
 
     /**

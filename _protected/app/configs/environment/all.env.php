@@ -23,9 +23,3 @@ ini_set('ignore_repeated_errors', 'On'); // Do not log repeated errors that occu
 ini_set('session.use_cookies', 1);
 ini_set('session.use_only_cookies', 1);
 ini_set('session.use_trans_sid', 0);
-
-// These legacy directives are unsupported on modern PHP versions and can trigger startup warnings.
-if (PHP_VERSION_ID < 70000) {
-    ini_set('session.hash_function', 1);
-    ini_set('session.hash_bits_per_character', 6);
-}

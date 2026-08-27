@@ -107,12 +107,15 @@ final class LaunchSafetyDefaultsTest extends TestCase
     public function testApplicationSessionUsesStrictSecureCookieDefaults(): void
     {
         $sSession = $this->readProjectFile('_protected/framework/Session/Session.class.php');
+        $sEnvironment = $this->readProjectFile('_protected/app/configs/environment/all.env.php');
 
         $this->assertStringContainsString("ini_set('session.use_strict_mode', '1')", $sSession);
         $this->assertStringContainsString("'secure' => Server::isHttps()", $sSession);
         $this->assertStringContainsString("'httponly' => true", $sSession);
         $this->assertStringContainsString("'samesite' => 'Lax'", $sSession);
         $this->assertStringContainsString('Check session.save_path permissions.', $sSession);
+        $this->assertStringNotContainsString('session.hash_function', $sEnvironment);
+        $this->assertStringNotContainsString('session.hash_bits_per_character', $sEnvironment);
     }
 
     private function readProjectFile(string $sRelativePath): string

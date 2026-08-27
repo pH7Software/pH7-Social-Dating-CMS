@@ -37,7 +37,7 @@ final class ReleaseDeploymentTest extends TestCase
         $this->assertContains('@install-installer-dependencies', $aComposer['scripts']['post-update-cmd']);
     }
 
-    public function testReleaseVersionIsSynchronizedAcrossRuntimeInstallerAndGuides(): void
+    public function testRuntimeVersionIsSynchronizedWithInstaller(): void
     {
         $sFramework = $this->readFile('_protected/framework/Security/Version.class.php');
         $sInstaller = $this->readFile('_install/library/Controller.class.php');
@@ -51,10 +51,23 @@ final class ReleaseDeploymentTest extends TestCase
             preg_match("/SOFTWARE_VERSION = '([^']+)'/", $sInstaller, $aInstallerVersion)
         );
         $this->assertSame($aFrameworkVersion[1], $aInstallerVersion[1]);
+    }
 
-        $sVersion = $aFrameworkVersion[1];
+    public function testStableReleaseGuidesAreSynchronized(): void
+    {
+        $sReadme = $this->readFile('README.md');
+        $this->assertSame(
+            1,
+            preg_match(
+                '#releases/download/v([0-9]+\.[0-9]+\.[0-9]+)/pH7Builder-v\1\.zip#',
+                $sReadme,
+                $aStableVersion
+            )
+        );
+
+        $sVersion = $aStableVersion[1];
         $sReleaseUrl = "releases/download/v{$sVersion}/pH7Builder-v{$sVersion}.zip";
-        $this->assertStringContainsString($sReleaseUrl, $this->readFile('README.md'));
+        $this->assertStringContainsString($sReleaseUrl, $sReadme);
         $this->assertStringContainsString($sReleaseUrl, $this->readFile('docs/QUICK_START.md'));
         $this->assertStringContainsString(
             "ph7software/ph7builder:{$sVersion}",

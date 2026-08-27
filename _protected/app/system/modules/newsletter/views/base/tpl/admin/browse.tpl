@@ -1,3 +1,9 @@
+{if empty($browse)}
+    <div class="alert alert-info center">
+        <p class="bold">{% escape($empty_message) %}</p>
+        <a class="btn btn-primary" href="{{ $design->url('newsletter', 'admin', 'index') }}">{lang 'Newsletter Manager'}</a>
+    </div>
+{else}
 <form method="post" action="{{ $design->url('newsletter','admin','browse') }}">
     {{ $designSecurity->inputToken('subscriber_action') }}
 
@@ -67,3 +73,4 @@
 </form>
 
 {main_include 'page_nav.inc.tpl'}
+{/if}

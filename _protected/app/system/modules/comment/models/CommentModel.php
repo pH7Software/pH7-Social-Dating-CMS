@@ -19,7 +19,7 @@ class CommentModel extends CommentCoreModel
      * @param string $sApproved
      * @param string $sTable
      *
-     * @return array
+     * @return \stdClass|false
      */
     public function get($iCommentId, $sApproved, $sTable)
     {
@@ -93,7 +93,9 @@ class CommentModel extends CommentCoreModel
         $rStmt->bindValue(':approved', $sApproved, PDO::PARAM_STR);
         $rStmt->bindValue(':updatedDate', $sUpdatedDate, PDO::PARAM_STR);
 
-        return $rStmt->execute();
+        $rStmt->execute();
+
+        return $rStmt->rowCount() === 1;
     }
 
     /**
@@ -115,7 +117,9 @@ class CommentModel extends CommentCoreModel
         $rStmt->bindValue('recipient', $iRecipientId, PDO::PARAM_INT);
         $rStmt->bindValue(':sender', $iSenderId, PDO::PARAM_INT);
 
-        return $rStmt->execute();
+        $rStmt->execute();
+
+        return $rStmt->rowCount() === 1;
     }
 
     /**
