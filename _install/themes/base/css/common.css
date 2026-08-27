@@ -70,6 +70,23 @@ h2 {
     font-size: x-small;
 }
 
+.installer-access-commands {
+    display: inline-block;
+    max-width: 100%;
+    margin: 0 auto;
+    padding-left: 1.75rem;
+    text-align: left;
+}
+
+.installer-access-commands li {
+    margin: .5rem 0;
+}
+
+.installer-access-commands code {
+    overflow-wrap: anywhere;
+    white-space: normal;
+}
+
 .success {
     color: green;
 }

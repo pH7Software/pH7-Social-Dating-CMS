@@ -7,7 +7,10 @@
 
     {if empty($install_access_configured)}
         <p class="error">{$LANG.install_access_not_configured}</p>
-        <p><code>php _install/create-install-token.php</code></p>
+        <ol class="installer-access-commands">
+            <li><code>php _install/create-install-token.php</code></li>
+            <li><code>chmod 0644 _install/data/caches/install-token.hash</code></li>
+        </ol>
     {else}
         {if !empty($install_access_error)}
             <p class="error">{$install_access_error|escape}</p>

@@ -94,6 +94,31 @@ final class InstallerHardeningTest extends TestCase
         $this->assertStringNotContainsString('chmod($sTemporaryPath, 0640)', $sGenerator);
     }
 
+    public function testInstallerLockGuidanceStaysConciseAndReadable(): void
+    {
+        foreach (['en', 'es', 'fr'] as $sLanguage) {
+            $sTranslations = $this->readProjectFile("_install/langs/{$sLanguage}/install.lang.php");
+            $aMessage = [];
+
+            $this->assertSame(
+                1,
+                preg_match("/'install_access_not_configured' => '([^']+)'/", $sTranslations, $aMessage)
+            );
+            $sMessage = (string)($aMessage[1] ?? '');
+            $this->assertNotSame('', $sMessage);
+            $this->assertLessThanOrEqual(130, mb_strlen($sMessage));
+            $this->assertStringNotContainsString('<code>', $sMessage);
+        }
+
+        $sView = $this->readProjectFile('_install/views/base/index.tpl');
+        $sStyle = $this->readProjectFile('_install/themes/base/css/common.css');
+
+        $this->assertStringContainsString('<ol class="installer-access-commands">', $sView);
+        $this->assertStringContainsString('php _install/create-install-token.php', $sView);
+        $this->assertStringContainsString('chmod 0644 _install/data/caches/install-token.hash', $sView);
+        $this->assertStringContainsString('overflow-wrap: anywhere;', $sStyle);
+    }
+
     public function testInstallerUsesTransactionalMandatoryDatabaseSteps(): void
     {
         $sController = $this->readProjectFile('_install/controllers/InstallController.php');
