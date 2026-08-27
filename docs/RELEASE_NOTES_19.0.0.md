@@ -27,6 +27,8 @@
   errors, and validates remote project-news content before rendering it.
 - Renders the HTML Site Map and RSS Feed List from local XML templates instead
   of making blocking HTTP requests back to the same site.
+- Falls back to member browsing when IP geolocation is unavailable, preventing
+  the People Nearby menu and site-map entry from linking to `/dating//`.
 - Keeps the dashboard useful by limiting project news to three concise,
   human-readable items.
 - Replaces fresh-site 404 pages in the member, affiliate, subscriber, and mail
