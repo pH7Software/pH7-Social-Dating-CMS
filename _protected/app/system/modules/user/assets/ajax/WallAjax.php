@@ -148,6 +148,7 @@ class WallAjax extends Core
     {
         $this->bStatus = $this->oWallModel->edit(
             $this->session->get('member_id'),
+            $this->httpRequest->post('wall_id'),
             $this->httpRequest->post('post'),
             $this->dateTime->get()->dateTime('Y-m-d H:i:s')
         );
@@ -165,13 +166,13 @@ class WallAjax extends Core
     {
         $this->bStatus = $this->oWallModel->delete(
             $this->session->get('member_id'),
-            $this->httpRequest->post('post')
+            $this->httpRequest->post('wall_id')
         );
 
         if (!$this->bStatus) {
             $this->sMsg = jsonMsg(0, t('Your post does not exist anymore.'));
         } else {
-            $this->sMsg = jsonMsg(1, t('Your post has been sent successfully!'));
+            $this->sMsg = jsonMsg(1, t('Your post has been deleted successfully!'));
         }
 
         echo $this->sMsg;

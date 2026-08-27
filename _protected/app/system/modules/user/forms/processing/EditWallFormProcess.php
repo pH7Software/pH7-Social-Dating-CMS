@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @author         Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
@@ -10,6 +11,7 @@ namespace PH7;
 
 defined('PH7') or exit('Restricted access');
 
+use PH7\Framework\Layout\Html\Design;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Url\Header;
 
@@ -24,7 +26,18 @@ class EditWallFormProcess extends Form
     {
         parent::__construct();
 
-        (new WallModel)->edit($this->session->get('member_id'), $this->httpRequest->post('post'), $this->dateTime->get()->dateTime('Y-m-d H:i:s'));
-        Header::redirect(Uri::get('user', 'main', 'index'), t('Your message has been added successfully!'));
+        $bUpdated = (new WallModel())->edit(
+            $this->session->get('member_id'),
+            $this->httpRequest->post('wall_id'),
+            $this->httpRequest->post('post'),
+            $this->dateTime->get()->dateTime('Y-m-d H:i:s')
+        );
+        Header::redirect(
+            Uri::get('user', 'main', 'index'),
+            $bUpdated
+                ? t('Your message has been updated successfully!')
+                : t('The wall post does not exist.'),
+            $bUpdated ? Design::SUCCESS_TYPE : Design::ERROR_TYPE
+        );
     }
 }

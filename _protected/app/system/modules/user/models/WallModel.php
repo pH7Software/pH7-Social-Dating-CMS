@@ -34,19 +34,24 @@ class WallModel extends Model
 
     /**
      * @param int    $iProfileId
+     * @param int    $iWallId
      * @param string $sPost
      * @param string $sUpdatedDate
      *
      * @return bool
      */
-    public function edit($iProfileId, $sPost, $sUpdatedDate)
+    public function edit($iProfileId, $iWallId, $sPost, $sUpdatedDate)
     {
-        $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix(DbTableName::MEMBER_WALL) . 'SET post = :post, updatedDate = :updatedDate WHERE profileId = :profileId');
+        $rStmt = Db::getInstance()->prepare(
+            'UPDATE' . Db::prefix(DbTableName::MEMBER_WALL) .
+            'SET post = :post, updatedDate = :updatedDate WHERE profileId = :profileId AND wallId = :wallId'
+        );
         $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
+        $rStmt->bindValue(':wallId', $iWallId, \PDO::PARAM_INT);
         $rStmt->bindValue(':post', $sPost, \PDO::PARAM_STR);
         $rStmt->bindValue(':updatedDate', $sUpdatedDate, \PDO::PARAM_STR);
 
-        return $rStmt->execute();
+        return $rStmt->execute() && $rStmt->rowCount() === 1;
     }
 
     /**
@@ -64,7 +69,7 @@ class WallModel extends Model
         $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
         $rStmt->bindValue(':wallId', $iWallId, \PDO::PARAM_INT);
 
-        return $rStmt->execute();
+        return $rStmt->execute() && $rStmt->rowCount() === 1;
     }
 
     /**
