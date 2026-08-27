@@ -36,7 +36,7 @@
     {if $is_map_enabled}
         {{ $sNearbyCountry = (string) Framework\Geo\Ip\Geo::getCountry() }}
         {{ $sNearbyCity = (string) Framework\Geo\Ip\Geo::getCity() }}
-        {{ $sNearbyUrl = $sNearbyCountry !== '' ? $design->url('map', 'country', 'index', $sNearbyCountry . ($sNearbyCity !== '' ? PH7_SH . $sNearbyCity : '')) : $design->url('user', 'browse', 'index') }}
+        {{ $sNearbyUrl = $sNearbyCountry !== '' ? Framework\Mvc\Router\Uri::get('map', 'country', 'index', $sNearbyCountry . ($sNearbyCity !== '' ? PH7_SH . $sNearbyCity : '')) : Framework\Mvc\Router\Uri::get('user', 'browse', 'index') }}
         <link title="{lang 'People Nearby'}" url="{% $sNearbyUrl %}" />
     {/if}
 

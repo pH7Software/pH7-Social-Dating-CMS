@@ -111,13 +111,14 @@ final class ThemeAssetTest extends TestCase
                 $sTemplate
             );
             $this->assertStringContainsString(
-                '$sNearbyCountry !== \'\' ? $design->url(\'map\', \'country\', \'index\'',
+                '$sNearbyCountry !== \'\' ? Framework\\Mvc\\Router\\Uri::get(\'map\', \'country\', \'index\'',
                 $sTemplate
             );
             $this->assertStringContainsString(
-                ': $design->url(\'user\', \'browse\', \'index\')',
+                ': Framework\\Mvc\\Router\\Uri::get(\'user\', \'browse\', \'index\')',
                 $sTemplate
             );
+            $this->assertStringNotContainsString('$sNearbyUrl = $design->url(', $sTemplate);
             $this->assertStringNotContainsString(
                 'Geo::getCountry() . PH7_SH. Framework\\Geo\\Ip\\Geo::getCity()',
                 $sTemplate
@@ -130,13 +131,14 @@ final class ThemeAssetTest extends TestCase
 
         $this->assertIsString($sSitemapLinksTemplate);
         $this->assertStringContainsString(
-            '$sNearbyCountry !== \'\' ? $design->url(\'map\', \'country\', \'index\'',
+            '$sNearbyCountry !== \'\' ? Framework\\Mvc\\Router\\Uri::get(\'map\', \'country\', \'index\'',
             $sSitemapLinksTemplate
         );
         $this->assertStringContainsString(
-            ': $design->url(\'user\', \'browse\', \'index\')',
+            ': Framework\\Mvc\\Router\\Uri::get(\'user\', \'browse\', \'index\')',
             $sSitemapLinksTemplate
         );
+        $this->assertStringNotContainsString('$sNearbyUrl = $design->url(', $sSitemapLinksTemplate);
         $this->assertStringNotContainsString(
             'Geo::getCountry() . PH7_SH. Framework\\Geo\\Ip\\Geo::getCity()',
             $sSitemapLinksTemplate
