@@ -11,7 +11,7 @@
 - Makes the out-of-band installer token readable by the web-server process
   without exposing it to other users on the host.
 - Removes remaining PHP 8 compatibility failures in HTTP status handling, CSV
-  imports, installer checks, and website diagnostics.
+  imports, installer checks, website diagnostics, and action-less AJAX routing.
 - Keeps the public splash header readable on small screens and redraws all
   admin charts after viewport changes to prevent horizontal overflow.
 - Aligns the base and premium content gutters with responsive grid rows so
