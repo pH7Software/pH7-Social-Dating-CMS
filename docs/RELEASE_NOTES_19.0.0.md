@@ -14,6 +14,8 @@
   imports, installer checks, and website diagnostics.
 - Keeps the public splash header readable on small screens and redraws all
   admin charts after viewport changes to prevent horizontal overflow.
+- Aligns the base and premium content gutters with responsive grid rows so
+  member dashboards no longer extend beyond narrow viewports.
 - Emits each RSS discovery link once, escapes third-party video-provider
   errors, and validates remote project-news content before rendering it.
 - Keeps the dashboard useful by limiting project news to three concise,
