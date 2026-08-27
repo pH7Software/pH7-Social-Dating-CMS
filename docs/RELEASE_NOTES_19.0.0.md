@@ -27,6 +27,8 @@
   errors, and validates remote project-news content before rendering it.
 - Keeps the dashboard useful by limiting project news to three concise,
   human-readable items.
+- Replaces fresh-site 404 pages in the member, affiliate, subscriber, and mail
+  administration lists with clear empty states and useful next actions.
 - Adds regression coverage for each corrected security, compatibility, feed,
   and responsive-UI behavior.
 
