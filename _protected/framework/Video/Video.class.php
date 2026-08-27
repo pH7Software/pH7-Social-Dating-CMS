@@ -233,7 +233,6 @@ class Video extends Upload
             $rFileInfo = finfo_open(FILEINFO_MIME_TYPE);
             if ($rFileInfo !== false) {
                 $sDetectedType = finfo_file($rFileInfo, $this->aFile['tmp_name']);
-                finfo_close($rFileInfo);
                 if (is_string($sDetectedType) && $sDetectedType !== '') {
                     return $sDetectedType;
                 }
