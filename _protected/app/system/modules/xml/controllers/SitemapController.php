@@ -11,9 +11,7 @@ declare(strict_types=1);
 namespace PH7;
 
 use PH7\Datatype\Type;
-use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Xml\Exception as XmlException;
-use PH7\Framework\Xml\Link;
 
 class SitemapController extends MainController implements XmlControllable
 {
@@ -31,11 +29,8 @@ class SitemapController extends MainController implements XmlControllable
         $this->view->meta_description = t('Sitemap - Social Dating Service. Meet Single People with %site_name%');
         $this->view->h1_title = $this->sTitle;
 
-        /*** Get the links ***/
-        $sUrl = Uri::get('xml', 'sitemap', 'xmllink');
-
         try {
-            $this->view->urls = (new Link($sUrl))->get();
+            $this->view->urls = $this->getLinksFromTemplate('links.xml.tpl');
         } catch (XmlException $oExcept) {
             $this->view->error = $oExcept->getMessage();
         }

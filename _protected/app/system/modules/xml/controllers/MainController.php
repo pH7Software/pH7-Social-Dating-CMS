@@ -10,6 +10,8 @@ declare(strict_types=1);
 
 namespace PH7;
 
+use PH7\Framework\Xml\Exception as XmlException;
+
 class MainController extends Controller
 {
     protected const STATIC_CACHE_LIFETIME = 86400; // 86400 secs = 24 hours
@@ -79,6 +81,40 @@ class MainController extends Controller
     protected function setContentType(): void
     {
         header('Content-Type: text/xml; charset=' . PH7_ENCODING);
+    }
+
+    /**
+     * Render a local XML link template and return its links without making an HTTP request back to this site.
+     *
+     * @return array<string, string>
+     */
+    protected function getLinksFromTemplate(string $sTemplate): array
+    {
+        $iBufferLevel = ob_get_level();
+        ob_start();
+
+        try {
+            $this->view->display($sTemplate);
+            $sXml = ob_get_clean();
+        } catch (\Throwable $oException) {
+            while (ob_get_level() > $iBufferLevel) {
+                ob_end_clean();
+            }
+
+            throw $oException;
+        }
+
+        $oXml = new \DOMDocument();
+        if (!is_string($sXml) || !@$oXml->loadXML($sXml)) {
+            throw new XmlException(t('The link list could not be generated.'));
+        }
+
+        $aLinks = [];
+        foreach ($oXml->getElementsByTagName('link') as $oTag) {
+            $aLinks[$oTag->getAttribute('url')] = $oTag->getAttribute('title');
+        }
+
+        return $aLinks;
     }
 
     /**
