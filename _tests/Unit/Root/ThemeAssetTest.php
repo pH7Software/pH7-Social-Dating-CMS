@@ -118,7 +118,12 @@ final class ThemeAssetTest extends TestCase
                 ': Framework\\Mvc\\Router\\Uri::get(\'user\', \'browse\', \'index\')',
                 $sTemplate
             );
+            $this->assertStringContainsString(
+                '$str->escapeAttribute($sNearbyUrl)',
+                $sTemplate
+            );
             $this->assertStringNotContainsString('$sNearbyUrl = $design->url(', $sTemplate);
+            $this->assertStringNotContainsString('href="{% $sNearbyUrl %}"', $sTemplate);
             $this->assertStringNotContainsString(
                 'Geo::getCountry() . PH7_SH. Framework\\Geo\\Ip\\Geo::getCity()',
                 $sTemplate
@@ -138,7 +143,15 @@ final class ThemeAssetTest extends TestCase
             ': Framework\\Mvc\\Router\\Uri::get(\'user\', \'browse\', \'index\')',
             $sSitemapLinksTemplate
         );
+        $this->assertStringContainsString(
+            '$str->escapeAttribute($sNearbyUrl)',
+            $sSitemapLinksTemplate
+        );
         $this->assertStringNotContainsString('$sNearbyUrl = $design->url(', $sSitemapLinksTemplate);
+        $this->assertStringNotContainsString(
+            'url="{% $sNearbyUrl %}"',
+            $sSitemapLinksTemplate
+        );
         $this->assertStringNotContainsString(
             'Geo::getCountry() . PH7_SH. Framework\\Geo\\Ip\\Geo::getCity()',
             $sSitemapLinksTemplate

@@ -37,7 +37,7 @@
         {{ $sNearbyCountry = (string) Framework\Geo\Ip\Geo::getCountry() }}
         {{ $sNearbyCity = (string) Framework\Geo\Ip\Geo::getCity() }}
         {{ $sNearbyUrl = $sNearbyCountry !== '' ? Framework\Mvc\Router\Uri::get('map', 'country', 'index', $sNearbyCountry . ($sNearbyCity !== '' ? PH7_SH . $sNearbyCity : '')) : Framework\Mvc\Router\Uri::get('user', 'browse', 'index') }}
-        <link title="{lang 'People Nearby'}" url="{% $sNearbyUrl %}" />
+        <link title="{lang 'People Nearby'}" url="{% $str->escapeAttribute($sNearbyUrl) %}" />
     {/if}
 
     <link title="{lang 'About Us'}" url="{{ $design->url('page','main','about') }}" />
