@@ -192,11 +192,7 @@ function _get_codeset($domain = null)
         return $text_domains[$domain]->codeset;
     }
 
-    $legacy_encoding = ini_get('mbstring.internal_encoding');
-
-    return is_string($legacy_encoding) && $legacy_encoding !== ''
-        ? $legacy_encoding
-        : (defined('PH7_ENCODING') ? PH7_ENCODING : 'UTF-8');
+    return defined('PH7_ENCODING') ? PH7_ENCODING : 'UTF-8';
 }
 
 /**

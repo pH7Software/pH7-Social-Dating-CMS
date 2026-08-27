@@ -51,6 +51,17 @@ final class GettextContextPluralTest extends TestCase
         );
     }
 
+    public function testCodeSetFallbackDoesNotReadRemovedIniDirectives(): void
+    {
+        $sSource = file_get_contents(
+            PH7_PATH_FRAMEWORK . 'Translate/Adapter/Gettext/gettext.inc.php'
+        );
+
+        $this->assertIsString($sSource);
+        $this->assertStringNotContainsString('mbstring.internal_encoding', $sSource);
+        $this->assertSame(PH7_ENCODING, \_get_codeset('missing-domain'));
+    }
+
     public function testPluralExpressionRejectsUnexpectedIdentifiers(): void
     {
         $oReader = new \gettext_reader(null);
