@@ -222,6 +222,25 @@ final class ThemeAssetTest extends TestCase
         }
     }
 
+    public function testThemeContentRowsMatchTheCustomContainerGutter(): void
+    {
+        $sProjectRoot = dirname(__DIR__, 3);
+        $aCommonStylesheets = [
+            $sProjectRoot . '/templates/themes/base/css/common.css',
+            $sProjectRoot . '/templates/themes/premium/css/common.css'
+        ];
+
+        foreach ($aCommonStylesheets as $sCommonStylesheet) {
+            $sCss = file_get_contents($sCommonStylesheet);
+
+            $this->assertIsString($sCss);
+            $this->assertMatchesRegularExpression(
+                '/#content\s*>\s*\.row\s*\{[^}]*margin-left:\s*-12px;[^}]*margin-right:\s*-12px;/s',
+                $sCss
+            );
+        }
+    }
+
     public function testVideoSplashKeepsItsBackgroundVisible(): void
     {
         $sCss = file_get_contents(
