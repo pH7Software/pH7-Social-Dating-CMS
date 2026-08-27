@@ -18,8 +18,6 @@ class AdminController extends Controller
     use BulkAction;
 
     const SUBSCRIBERS_PER_PAGE = 30;
-    const REDIRECTION_DELAY_IN_SEC = 5;
-
     /** @var SubscriberModel */
     private $oSubscriberModel;
 
@@ -79,23 +77,23 @@ class AdminController extends Controller
         );
         unset($oPage);
 
-        if (empty($oBrowse)) {
-            $this->setNotFoundPage();
-        } else {
+        if (!empty($oBrowse)) {
             // Add the js file for the browse form
             $this->design->addJs(PH7_STATIC . PH7_JS, 'form.js');
-
-            // Assigns variables for views
-            $this->view->designSecurity = new Framework\Layout\Html\Security; // Security Design Class
-            $this->view->dateTime = $this->dateTime; // Date Time Class
-
-            $this->sTitle = t('Browse Subscribers');
-            $this->view->page_title = $this->sTitle;
-            $this->view->h2_title = $this->sTitle;
-            $this->view->h3_title = nt('%n% subscriber found', '%n% subscribers found', $iTotal);
-
-            $this->view->browse = $oBrowse;
         }
+
+        // Assigns variables for views
+        $this->view->designSecurity = new Framework\Layout\Html\Security; // Security Design Class
+        $this->view->dateTime = $this->dateTime; // Date Time Class
+
+        $this->sTitle = t('Browse Subscribers');
+        $this->view->page_title = $this->sTitle;
+        $this->view->h2_title = $this->sTitle;
+        $this->view->h3_title = nt('%n% subscriber found', '%n% subscribers found', $iTotal);
+        $this->view->browse = $oBrowse;
+        $this->view->empty_message = empty($sKeywords)
+            ? t('No subscribers yet. Newsletter signups will appear here.')
+            : t('No subscribers match your search. Try different keywords.');
 
         $this->output();
     }
@@ -122,23 +120,4 @@ class AdminController extends Controller
         );
     }
 
-    /**
-     * Redirects to admin browse page, then displays the default "Not Found" page.
-     *
-     * @return void
-     */
-    private function setNotFoundPage()
-    {
-        $this->design->setRedirect(
-            Uri::get(
-                'newsletter',
-                'admin',
-                'browse'
-            ),
-            null,
-            null,
-            self::REDIRECTION_DELAY_IN_SEC
-        );
-        $this->displayPageNotFound(t('Sorry, Your search returned no results!'));
-    }
 }

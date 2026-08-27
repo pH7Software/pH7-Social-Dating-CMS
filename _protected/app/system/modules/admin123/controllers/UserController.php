@@ -74,23 +74,17 @@ class UserController extends Controller implements UserModeratable
         );
         unset($oPage);
 
-        if (empty($oBrowse)) {
-            $this->design->setRedirect(
-                Uri::get(PH7_ADMIN_MOD, 'user', 'browse')
-            );
-
-            $this->displayPageNotFound(t('No user were found.'));
-        } else {
+        if (!empty($oBrowse)) {
             // Add the JS file for the browse form
             $this->design->addJs(PH7_STATIC . PH7_JS, 'form.js');
-
-            $this->view->page_title = $this->view->h1_title = t('Browse Users');
-            $this->view->h3_title = t('Total Users: %0%', $this->iTotalUsers);
-            $this->view->total_users = $this->iTotalUsers;
-            $this->view->browse = $oBrowse;
-
-            $this->output();
         }
+
+        $this->view->page_title = $this->view->h1_title = t('Browse Users');
+        $this->view->h3_title = t('Total Users: %0%', $this->iTotalUsers);
+        $this->view->total_users = $this->iTotalUsers;
+        $this->view->browse = $oBrowse;
+
+        $this->output();
     }
 
     public function add(): void

@@ -47,18 +47,20 @@ class AdminController extends MainController
             $this->oPage->getNbItemsPerPage()
         );
 
+        $this->sTitle = t('Email List');
+        $this->view->page_title = $this->sTitle;
+        $this->view->h2_title = $this->sTitle;
+        $this->view->h3_title = nt('%n% message found!', '%n% messages found!', $this->iTotalMails);
+
         if (empty($oAllMsg)) {
-            $this->displayPageNotFound(t('No messages found!'));
+            $this->view->error = empty($this->httpRequest->get('looking'))
+                ? t('No member messages yet. New conversations will appear here.')
+                : t('No messages match your search. Try different keywords.');
         } else {
             $this->design->addJs(PH7_STATIC . PH7_JS, 'divShow.js');
-
-            $this->sTitle = t('Email List');
-            $this->view->page_title = $this->sTitle;
-            $this->view->h2_title = $this->sTitle;
-            $this->view->h3_title = nt('%n% message found!', '%n% messages found!', $this->iTotalMails);
             $this->view->msgs = $oAllMsg;
-
-            $this->output();
         }
+
+        $this->output();
     }
 }
