@@ -11,7 +11,14 @@
 - Makes the out-of-band installer token readable by the web-server process
   without exposing it to other users on the host.
 - Removes remaining PHP 8 compatibility failures in HTTP status handling, CSV
-  imports, installer checks, website diagnostics, and action-less AJAX routing.
+  imports, installer checks, website diagnostics, and action-less AJAX routing;
+  it also removes obsolete INI reads and the PHP 8.5-deprecated explicit
+  FileInfo close call.
+- Constrains wall edits and deletions to the requested owner's exact wall post,
+  preventing one request from changing multiple posts.
+- Validates comment identity and ownership before showing the edit form, gives
+  invalid or forbidden requests an appropriate error page, and reports comment
+  mutation success only when one row changed.
 - Keeps the public splash header readable on small screens and redraws all
   admin charts after viewport changes to prevent horizontal overflow.
 - Aligns the base and premium content gutters with responsive grid rows so
