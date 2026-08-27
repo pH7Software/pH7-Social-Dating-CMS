@@ -8,8 +8,8 @@
 
 - Rejects unsafe template override paths before resolving files, preventing
   path traversal while preserving valid theme overrides.
-- Makes the out-of-band installer token readable by the web-server process
-  without exposing it to other users on the host.
+- Stores only a one-way installer-token hash for the web-server process; the
+  one-time plaintext token remains confined to CLI output.
 - Removes remaining PHP 8 compatibility failures in HTTP status handling, CSV
   imports, installer checks, website diagnostics, and action-less AJAX routing;
   it also removes obsolete INI reads and the PHP 8.5-deprecated explicit
