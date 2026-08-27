@@ -25,6 +25,8 @@
   member dashboards no longer extend beyond narrow viewports.
 - Emits each RSS discovery link once, escapes third-party video-provider
   errors, and validates remote project-news content before rendering it.
+- Renders the HTML Site Map and RSS Feed List from local XML templates instead
+  of making blocking HTTP requests back to the same site.
 - Keeps the dashboard useful by limiting project news to three concise,
   human-readable items.
 - Replaces fresh-site 404 pages in the member, affiliate, subscriber, and mail
@@ -55,8 +57,8 @@
       contents, generate its SHA-256 file, and run a fresh packaged install on
       supported PHP and MySQL versions.
 - [ ] Recheck installer token access, schema creation, admin login, public
-      signup, member login, Notes, RSS, responsive public/admin views, logs,
-      and post-install `_install` removal.
+      signup, member login, Notes, HTML/XML site maps, RSS feeds and feed list,
+      responsive public/admin views, logs, and post-install `_install` removal.
 - [ ] Update the stable README, Quick Start, upgrade guide, and release notes
       only after the final artifact names and upgrade path are known.
 - [ ] Publish the annotated tag, ZIP, and checksum; verify all public asset
