@@ -3,6 +3,26 @@
 Automatic in-place upgrades are currently unavailable. Upgrade a staging copy
 manually, verify it, and only then repeat the reviewed procedure in production.
 
+## 19.0.0 major release
+
+pH7Builder 19.0.0 is a code-only security, compatibility, and usability release
+over 18.6.2. The SQL schema remains `1.6.6`, so an installation already running
+18.6.0, 18.6.1, or 18.6.2 needs no database migration. Deploy the tagged 19.0.0
+package without overwriting local configuration, uploaded data, custom modules,
+custom themes, language packs, or gateway credentials. Reinstall dependencies
+from the committed lock file when deploying from source, clear application
+caches, and complete the post-upgrade checks below before reopening the site.
+
+Sites older than 18.6.0 must still apply every applicable intermediate migration
+in order. In particular, an 18.5.1 database requires the reviewed
+`18.5.1-18.6.0` migration before the 19.0.0 application is used.
+
+This release tightens installer access, request authorization, output escaping,
+template-path validation, and ownership checks. Do not restore older copies of
+the changed application or framework files after deployment. Review custom
+themes and modules for the same output-encoding and ownership boundaries before
+re-enabling them.
+
 ## 18.6.2 patch release
 
 pH7Builder 18.6.2 is a code-only security-hardening patch over 18.6.1. It does

@@ -41,7 +41,7 @@ final class Version
      * 1.0, 1.1 branches were "pOH", 1.2 was "pOW", 1.3, 1.4 were "p[H]", v2.* was "H2O",
      * v3.* was "H3O", v4.* was "HCO", v5.* was "pCO", v6.* was "WoW",
      * v7.* and v8.* were "NaOH", v10.* was "pKa", v12.* was "PHS", v14.* was "pKb",
-     * v15.* was ABSOLUTE™, v16.* was ACIDIC, v17.* was PURE™ and v18 is REVOLUTIONARY™
+     * v15.* was ABSOLUTE™, v16.* was ACIDIC, v17.* was PURE™, and v18-v19 are REVOLUTIONARY™
      */
     public const KERNEL_VERSION_NAME = 'REVOLUTIONARY™';
 
@@ -53,7 +53,7 @@ final class Version
      */
     public const KERNEL_VERSION = '19.0.0';
     public const KERNEL_BUILD = '1';
-    public const KERNEL_RELEASE_DATE = '2026-08-26';
+    public const KERNEL_RELEASE_DATE = '2026-08-28';
 
     /*** Framework Server ***/
     public const KERNEL_TECHNOLOGY_NAME = 'pH7Builder.com';
