@@ -1,6 +1,10 @@
 name: Check Composer
 
-on: [ push, pull_request ]
+on:
+  push:
+    branches:
+      - 18.x
+  pull_request:
 
 jobs:
   run:
