@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PH7\Tests\Unit\App\System\Core\Forms;
+namespace PH7\Test\Unit\App\System\Core\Forms;
 
 use PHPUnit\Framework\TestCase;
 
