@@ -16,6 +16,7 @@ use PH7\Framework\Mail\Mailable;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use ReflectionMethod;
+use Symfony\Component\Mailer\Exception\InvalidArgumentException;
 use Symfony\Component\Mailer\Transport\NullTransport;
 use Symfony\Component\Mailer\Transport\SendmailTransport;
 use Symfony\Component\Mailer\Transport\TransportInterface;
@@ -101,6 +102,25 @@ final class MailTest extends TestCase
         );
         $this->assertSame('site@example.com', $oMail->aFallbackData['from']);
         $this->assertSame('visitor@external.example', $oMail->aFallbackData['reply_to']);
+    }
+
+    public function testMalformedDsnIsRejectedByTheTransportFactory(): void
+    {
+        $this->expectException(InvalidArgumentException::class);
+
+        (new TestableMail())->transport('not-a-dsn');
+    }
+
+    public function testConfiguredTransportFailureDoesNotUseNativeMail(): void
+    {
+        putenv('PH7_MAILER_DSN=smtp://smtp.example.com:587');
+        $oMail = new FallbackMail();
+
+        $this->assertFalse($oMail->send(
+            ['to' => 'recipient@example.com', 'subject' => 'Transport failure test'],
+            '<p>Body</p>'
+        ));
+        $this->assertSame([], $oMail->aFallbackData);
     }
 }
 

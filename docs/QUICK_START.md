@@ -285,6 +285,13 @@ example, when the service is PHP 8.2:
 sudo systemctl reload php8.2-fpm
 ```
 
+On shared hosting, ask the host to set `PH7_MAILER_DSN` for the site's PHP web
+process or use its supported environment-variable panel. A shell `export`
+does not configure PHP-FPM, and pH7Builder does not automatically load a `.env`
+file. Do not put SMTP passwords in public files or support posts. If the host
+cannot expose this variable, ask whether it provides a working local mail
+transport before choosing the fallback below.
+
 If `PH7_MAILER_DSN` is present but invalid or the SMTP connection fails,
 pH7Builder records a transport error and does not silently send through another
 transport. Correct the DSN or provider access before launch.
