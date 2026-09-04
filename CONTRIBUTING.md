@@ -23,6 +23,11 @@ MySQL 8.0+, and Apache/nginx (see `nginx.conf` / `sample.htaccess`).
 
 ## Before you open a pull request
 
+Open pull requests against `18.x`, the current active default branch. The
+software version is defined by release tags and the version constants, not by
+the branch name. Develop each change on a focused, short-lived branch; once its
+pull request is merged, that working branch can be deleted.
+
 1. **Follow the [Code Convention](https://ph7builder.com/doc/en/code-convention).** The short version:
    - Variables use camelCase with a type-prefix (Hungarian notation): `$sName` (string), `$iCount` (int), `$aItems` (array), `$oUser` (object), `$bEnabled` (bool), `$mValue` (mixed), `$fPrice` (float).
    - Framework classes end in `.class.php`, traits in `.trait.php`, interfaces in `.interface.php` (with a `-ble` name when possible). App classes under `_protected/app` are plain `.php`.
