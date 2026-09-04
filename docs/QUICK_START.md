@@ -318,17 +318,18 @@ prove inbox delivery.
    permissions, prices, currencies, and expiry periods.
 4. Admin → Billing → Gateways Configuration: keep unused gateways disabled,
    enter sandbox/test credentials first, and never commit credentials.
-   Stripe is intentionally unavailable in 18.6.x because its bundled legacy
+   Stripe is intentionally unavailable because its bundled legacy
    flow is not SCA-ready; use another supported gateway until Stripe is
    migrated to Checkout Sessions or Payment Intents.
    The bundled 2Checkout flow is also unavailable until it is migrated to the
    2Checkout API 6.0.
    Braintree remains available, but its hosted
    [Drop-in UI](https://developer.paypal.com/braintree/docs/guides/drop-in/overview/javascript/v3)
-   is scheduled for deprecation on September 1, 2026 and loss of support on
-   September 1, 2027.
+   is scheduled for deprecation on October 1, 2026 and loss of support on
+   October 1, 2027, after which payment processing may be suspended.
    Treat it as a short-term option and plan a supported Braintree checkout
-   migration before those dates.
+   migration before those dates. Updating the PHP SDK alone does not replace
+   the Drop-in browser integration.
 5. Complete one test purchase end to end before replacing sandbox credentials
    with live credentials.
    For PayPal, keep the generated `/payment/main/notify/paypal` HTTPS callback

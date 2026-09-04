@@ -102,13 +102,14 @@ you serve.
 - [ ] Every membership name, permission, price, currency, duration, renewal,
       cancellation, and refund statement matches what the checkout promises.
 - [ ] Unused gateways are disabled and no example keys remain.
-- [ ] Stripe stays disabled in 18.6.x; the bundled legacy flow must be migrated
+- [ ] Stripe stays disabled; the bundled legacy flow must be migrated
       to Checkout Sessions or Payment Intents before it is offered to members.
 - [ ] 2Checkout stays disabled until its bundled legacy flow is migrated to the
       2Checkout API 6.0.
 - [ ] If Braintree is enabled, its Drop-in UI migration is scheduled before
-      the provider's September 1, 2026 deprecation and September 1, 2027 end of
-      support.
+      [provider's October 1, 2026 deprecation and October 1, 2027 end of
+      support](https://developer.paypal.com/braintree/docs/guides/drop-in/overview/javascript/v3).
+      A PHP SDK update alone does not replace Drop-in.
 - [ ] Sandbox/test mode covers success, decline, cancellation, callback/webhook,
       duplicate notification, refund, and expired membership behavior.
 - [ ] The PayPal IPN URL is reachable over public HTTPS and a repeated verified

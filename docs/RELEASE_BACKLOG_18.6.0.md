@@ -9,7 +9,7 @@ not weaken the requirements in the [Launch Checklist](LAUNCH_CHECKLIST.md).
 Keep Stripe and 2Checkout fail-closed until their legacy flows are replaced by
 the providers' current APIs. Migrate Braintree away from
 [Drop-in](https://developer.paypal.com/braintree/docs/guides/drop-in/overview/javascript/v3)
-before its September 1, 2026 deprecation and September 1, 2027 end of support. Add
+before its October 1, 2026 deprecation and October 1, 2027 end of support. Add
 provider-backed browser tests for successful, declined, cancelled, replayed,
 and refunded transactions before enabling a replacement by default.
 
