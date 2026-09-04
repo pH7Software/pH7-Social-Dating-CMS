@@ -1,6 +1,10 @@
 name: Check Composer
 
-on: [ push, pull_request ]
+on:
+  push:
+    branches:
+      - 18.x
+  pull_request:
 
 jobs:
   run:
@@ -9,7 +13,7 @@ jobs:
       matrix:
         os: [ 'ubuntu-latest', 'windows-2022', 'macos-latest' ]
         php-versions: [ '8.2', '8.3', '8.4', '8.5' ]
-    name: PHP ${{ matrix.php-versions }} Test on ${{ matrix.os }}
+    name: PHP ${{ matrix.php-versions }} Composer on ${{ matrix.os }}
 
     steps:
       - name: Checkout
