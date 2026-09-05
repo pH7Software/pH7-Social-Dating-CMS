@@ -8,6 +8,8 @@ updates merged since 19.0.0.
 
 - Improves base and premium form readability, touch targets, dark-mode colours,
   error messages, and password-toggle layout.
+- Preserves those form styles in production CSS bundles when comments contain
+  apostrophes or quotation marks.
 - Keeps agreement checkboxes from disabling buttons in unrelated forms.
 - Restores PFBC Ajax submission and lets users retry failed requests.
 - Renders age fields as native sliders with independent live counters, and
