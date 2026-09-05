@@ -23,7 +23,7 @@ class Textarea extends Element
         // Derive maxlength from a Str validator so the counter shows the limit and the browser enforces it.
         $this->applyMaxLengthFromValidation();
 
-        echo '<textarea onkeyup="textCounter(\'', $this->attributes['id'], '\',\'', $this->attributes['id'], '_rem_len\')"', $this->getAttributes('value'), $this->getHtmlRequiredIfApplicable(), '>';
+        echo '<textarea oninput="textCounter(\'', $this->attributes['id'], '\',\'', $this->attributes['id'], '_rem_len\')"', $this->getAttributes('value'), $this->getHtmlRequiredIfApplicable(), '>';
 
         if (!empty($this->attributes['value'])) {
             echo $this->filter($this->attributes['value']);
