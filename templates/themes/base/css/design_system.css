@@ -25,6 +25,8 @@
     --ph7-border: #e4e4ec;
     --ph7-text: #1c1c26;
     --ph7-text-muted: #6b6b7a;
+    --ph7-error: #a12622;
+    --ph7-error-bg: #fff2f1;
 
     /* Shape & elevation */
     --ph7-radius-sm: 8px;
@@ -53,6 +55,8 @@
         --ph7-border: #32323f;
         --ph7-text: #ececf2;
         --ph7-text-muted: #a2a2b2;
+        --ph7-error: #ffb4ab;
+        --ph7-error-bg: #362023;
         --ph7-shadow-sm: 0 1px 3px rgba(0, 0, 0, .4);
         --ph7-shadow: 0 6px 24px rgba(0, 0, 0, .5);
     }
@@ -158,6 +162,76 @@ input:focus, select:focus, textarea:focus {
     border-color: var(--ph7-primary);
     box-shadow: 0 0 0 3px var(--ph7-primary-soft);
     outline: none;
+}
+
+/* PFBC emits its own classes, without Bootstrap's .form-control. */
+input.pfbc-textbox:not([type=color]):not([type=range]),
+select.pfbc-select, textarea.pfbc-textarea {
+    min-height: 44px;
+    max-width: 100%;
+    font-size: 16px;
+    border-color: var(--ph7-border);
+    border-radius: var(--ph7-radius-sm);
+}
+
+input.pfbc-textbox::placeholder, textarea.pfbc-textarea::placeholder {
+    color: var(--ph7-text-muted);
+    opacity: 1;
+}
+
+input.pfbc-textbox:disabled, input.pfbc-textbox[readonly],
+select.pfbc-select:disabled, textarea.pfbc-textarea:disabled,
+textarea.pfbc-textarea[readonly] {
+    background-color: var(--ph7-surface);
+    color: var(--ph7-text-muted);
+}
+
+form input[type=file] {
+    max-width: 100%;
+}
+
+.pfbc-checkbox label, .pfbc-radio label {
+    min-height: 44px;
+    margin: 0;
+    padding: 12px 0;
+    font-weight: 400;
+    line-height: 20px;
+}
+
+.pfbc-checkbox input[type=checkbox], .pfbc-radio input[type=radio] {
+    width: 18px;
+    height: 18px;
+    margin: 13px 8px 0 0;
+    accent-color: var(--ph7-primary);
+}
+
+form button.ui-button[type=submit]:not(.btn) {
+    min-height: 44px;
+    margin: 0;
+    padding: .65em 1.1em;
+    border: 1px solid var(--ph7-primary);
+    background: var(--ph7-primary);
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+    text-shadow: none;
+}
+
+form button.ui-button[type=submit]:not(.btn):hover,
+form button.ui-button[type=submit]:not(.btn):focus-visible {
+    background: var(--ph7-primary-dark);
+    border-color: var(--ph7-primary-dark);
+}
+
+form button.ui-button[type=submit]:not(.btn) .ui-icon {
+    filter: brightness(0) invert(1);
+}
+
+.pfbc-error.ui-state-error {
+    border: 1px solid var(--ph7-error);
+    background: var(--ph7-error-bg);
+    color: var(--ph7-error);
+    overflow-wrap: anywhere;
 }
 
 /** NATIVE COLOR INPUT (replaces the legacy jQuery colorpicker) **/
@@ -353,12 +427,32 @@ input[type=color]::-moz-color-swatch {
 }
 
 /** PASSWORD VISIBILITY TOGGLE (see static/js/password_toggle.js) **/
+.pwd_field {
+    display: flex;
+    position: relative;
+    max-width: 100%;
+    align-items: center;
+}
+
+.pwd_field > input[type] {
+    min-width: 0;
+    flex: 1 1 auto;
+    /* Keep text clear of the button, including on focus. */
+    padding-right: 52px;
+}
+
 .pwd_toggle {
-    margin-left: .4em;
-    padding: .25em .55em;
-    border: 1px solid var(--ph7-border);
-    border-radius: var(--ph7-radius-sm);
-    background-color: var(--ph7-surface);
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 44px;
+    margin: 0;
+    padding: 0;
+    border: 1px solid transparent;
+    border-radius: 0 var(--ph7-radius-sm) var(--ph7-radius-sm) 0;
+    background-color: transparent;
+    color: var(--ph7-text);
     font-size: 1em;
     line-height: 1;
     cursor: pointer;

@@ -66,6 +66,7 @@ final class TextboxMaxLengthTest extends TestCase
 
         $this->assertStringContainsString('maxlength="2000"', $sHtml);
         $this->assertStringContainsString('/ 2000', $sHtml); // the "N / MAX" counter suffix
+        $this->assertStringContainsString('oninput="textCounter(', $sHtml);
     }
 
     private function render($oElement): string

@@ -445,7 +445,7 @@ class Form extends Base
         /*For ajax, an anonymous onsubmit javascript function is bound to the form using jQuery.  jQuery's
         serialize function is used to grab each element's name/value pair.*/
         if (!empty($this->ajax)) {
-            echo 'jQuery("#', $id, '").on("submit", {';
+            echo 'jQuery("#', $id, '").on("submit", function() {';
             $this->error->clear();
             echo <<<JS
             jQuery.ajax({
@@ -468,11 +468,24 @@ JS;
 
             echo '}';
 
+            $sAjaxFailure = json_encode(t('Unable to submit the form. Please try again.'));
+            echo <<<JS
+                },
+                error: function() {
+                    jQuery("<div>", {
+                        "class": "pfbc-error ui-state-error ui-corner-all",
+                        "role": "alert",
+                        text: $sAjaxFailure
+                    }).prependTo("#$id");
+                },
+                complete: function() {
+JS;
+
             if ($this->isNotJQueryUIButtons()) {
                 /* Same jQuery UI 1.12+ fallback as the submit handler above. */
                 echo 'var $pfbcBtnReset = jQuery("#', $id, ' button[type=submit] span.ui-button-text");';
                 echo 'if (!$pfbcBtnReset.length) { $pfbcBtnReset = jQuery("#', $id, ' button[type=submit]"); }';
-                echo '$pfbcBtnReset.css("padding-right", "1em").find("img").remove();';
+                echo '$pfbcBtnReset.css("padding-right", "").find("img.pfbc-loading").remove();';
                 echo 'jQuery("#', $id, ' button[type=submit]").button("enable");';
             } else {
                 echo 'jQuery("#', $id, '").find("button[type=submit]").removeAttr("disabled");';

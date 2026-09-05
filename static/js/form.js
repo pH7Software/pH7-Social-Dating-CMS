@@ -6,19 +6,29 @@
 
 const sButtonPattern = 'button[type=submit]';
 
-function enable_button() {
-    $(sButtonPattern).attr('disabled', false);
-    $(sButtonPattern).css({background: '#E6E6E6'});
+function enable_button(oForm) {
+    set_submit_disabled(oForm, false);
 }
 
-function disable_button() {
-    $(sButtonPattern).attr('disabled', 'disabled');
-    $(sButtonPattern).css({background: '#FFF'});
+function disable_button(oForm) {
+    set_submit_disabled(oForm, true);
+}
+
+function set_submit_disabled(oForm, bDisabled) {
+    const $oButtons = oForm ? $(oForm).find(sButtonPattern) : $(sButtonPattern);
+    $oButtons.each(function () {
+        const $oButton = $(this);
+        if ($oButton.data('ui-button')) {
+            $oButton.button('option', 'disabled', bDisabled);
+        } else {
+            $oButton.prop('disabled', bDisabled);
+        }
+    });
 }
 
 const sInputAgree = 'input[name="agree[]"]';
-$(sInputAgree).on('click', function () {
-    $(sInputAgree + ':checked').val() == 1 ? enable_button() : disable_button();
+$(sInputAgree).on('change', function () {
+    this.checked && this.value === '1' ? enable_button(this.form) : disable_button(this.form);
 });
 
 $('input[name=all_action]').on('click', function () {
