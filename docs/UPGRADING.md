@@ -3,6 +3,28 @@
 Automatic in-place upgrades are currently unavailable. Upgrade a staging copy
 manually, verify it, and only then repeat the reviewed procedure in production.
 
+## 19.0.1 patch release
+
+pH7Builder 19.0.1 fixes form rendering, Ajax retries, age sliders, and recipient
+and city autocomplete. PHP 8.2+ and MySQL 8.0+ requirements are unchanged. The
+SQL schema remains `1.6.6`; no database migration is needed from 19.0.0.
+
+Back up and upgrade a staging copy first. Deploy the complete tagged 19.0.1
+package, preserving local configuration, uploads, custom modules and themes,
+language packs, and gateway credentials. The release ZIP includes production
+dependencies; source deployments must run `composer install --no-dev
+--prefer-dist --optimize-autoloader` to install the updated locked Symfony
+patches. Do not rerun the installer on an existing site; remove the deployed
+`_install` directory before reopening it.
+
+Clear application caches in Admin → Tools → Caches, purge any CDN asset cache,
+and refresh browser assets. Deploy the PHP, CSS, and JavaScript files together.
+Review custom themes that override the bundled form styles or password-toggle
+markup. Test signup, login, agreement checkboxes, age sliders, Ajax form retry,
+recipient suggestions, and city/state/postcode selection on desktop and mobile.
+External SMTP, GeoNames, and payment services still require deployment-specific
+checks. Sites older than 19.0.0 must also follow the applicable guidance below.
+
 ## 19.0.0 major release
 
 pH7Builder 19.0.0 is a code-only security, compatibility, and usability release

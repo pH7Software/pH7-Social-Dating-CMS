@@ -129,8 +129,8 @@ class Compress
             $sCssMinified = $this->executeYuiCompressor($oFileType);
             unlink($this->sTmpFilePath);
         } else {
-            // Backup any values within single or double quotes
-            preg_match_all('/(\'[^\']*?\'|"[^"]*?")/ims', $sContent, $aHit, PREG_PATTERN_ORDER);
+            // Skip comments so their quotes cannot capture and discard intervening CSS rules.
+            preg_match_all('~/\*.*?\*/(*SKIP)(*F)|(\'[^\']*?\'|"[^"]*?")~s', $sContent, $aHit, PREG_PATTERN_ORDER);
 
             for ($i = 0, $iCountHit = count($aHit[1]); $i < $iCountHit; $i++) {
                 $sContent = str_replace($aHit[1][$i], '##########' . $i . '##########', $sContent);
