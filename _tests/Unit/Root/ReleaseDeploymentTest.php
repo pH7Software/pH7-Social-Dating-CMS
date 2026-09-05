@@ -10,6 +10,8 @@ declare(strict_types=1);
 
 namespace PH7\Test\Unit\Root;
 
+use PH7\Framework\Core\Kernel;
+use PH7\Framework\Security\Version;
 use PHPUnit\Framework\TestCase;
 
 final class ReleaseDeploymentTest extends TestCase
@@ -51,6 +53,9 @@ final class ReleaseDeploymentTest extends TestCase
             preg_match("/SOFTWARE_VERSION = '([^']+)'/", $sInstaller, $aInstallerVersion)
         );
         $this->assertSame($aFrameworkVersion[1], $aInstallerVersion[1]);
+        $this->assertSame($aFrameworkVersion[1], Kernel::SOFTWARE_VERSION);
+        $this->assertSame(Version::KERNEL_VERSION_NAME, Kernel::SOFTWARE_VERSION_NAME);
+        $this->assertSame(Version::KERNEL_BUILD, Kernel::SOFTWARE_BUILD);
     }
 
     public function testStableReleaseGuidesAreSynchronized(): void
@@ -66,6 +71,7 @@ final class ReleaseDeploymentTest extends TestCase
         );
 
         $sVersion = $aStableVersion[1];
+        $this->assertSame(Version::KERNEL_VERSION, $sVersion);
         $sReleaseUrl = "releases/download/v{$sVersion}/pH7Builder-v{$sVersion}.zip";
         $this->assertStringContainsString($sReleaseUrl, $sReadme);
         $this->assertStringContainsString($sReleaseUrl, $this->readFile('docs/QUICK_START.md'));
