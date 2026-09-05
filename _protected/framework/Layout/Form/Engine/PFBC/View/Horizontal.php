@@ -1,7 +1,8 @@
 <?php
+
 /**
  * Changes made in this code from original PFBC's version.
- * By Pierre-Henry Soria <https://ph7.me>
+ * By Pierre-Henry Soria <https://ph7.me>.
  */
 
 namespace PFBC\View;
@@ -52,7 +53,7 @@ class Horizontal extends View
 
         parent::renderCSS();
         echo <<<CSS
-#$id .pfbc-element { float: left; margin-right: .5em; }
+#$id .pfbc-element { float: left; margin: 0 .5em .5em 0; max-width: 100%; }
 #$id .pfbc-label strong { color: #990000; }
 #$id .pfbc-label { float: left; margin-right: .25em; }
 CSS;

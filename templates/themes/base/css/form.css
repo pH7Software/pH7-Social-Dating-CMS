@@ -51,9 +51,9 @@ input:not([type=image]):not([type=range]), textarea, select {
     box-sizing: border-box;
     font-size: 14px;
     border: 1px solid #ccc;
-    color: #3F3F3F;
-    text-shadow: 0 1px 0 rgba(200, 200, 200, .6);
-    box-shadow: 1px 1px 4px #aaa inset;
+    color: var(--ph7-text, #3F3F3F);
+    text-shadow: none;
+    box-shadow: none;
     border-radius: 5px;
     transition: border linear 0.3s, box-shadow linear 0.3s;
     -webkit-transition: border linear 0.3s, box-shadow linear 0.3s;
@@ -62,20 +62,13 @@ input:not([type=image]):not([type=range]), textarea, select {
     -ms-transition: border linear 0.3s, box-shadow linear 0.3s;
     -khtml-transition: border linear 0.3s, box-shadow linear 0.3s;
 
-    transition: padding .25s;
-    -moz-transition: padding .25s;
-    -webkit-transition: padding .25s;
-    -o-transition: padding .25s;
-    -ms-transition: padding .25s;
-    -khtml-transition: padding .25s;
     white-space: nowrap;
 }
 
 input:focus:not([type=image]):not([type=range]):not(.form_link), textarea:focus, select:focus {
     outline: 0;
-    border-color: rgba(82, 168, 236, .8);
-    box-shadow: 1px 1px 4px #aaa inset, 0 0 8px rgba(82, 168, 236, .6);
-    padding-right: 10px;
+    border-color: var(--ph7-primary, rgba(82, 168, 236, .8));
+    box-shadow: 0 0 0 3px var(--ph7-primary-soft, rgba(82, 168, 236, .2));
 }
 
 input, textarea {

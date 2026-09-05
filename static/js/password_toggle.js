@@ -46,6 +46,7 @@
                     .toggleClass('pwd_toggle_active', bReveal);
             });
 
+            $oInput.wrap('<span class="pwd_field"></span>');
             $oInput.after($oButton);
         });
     });

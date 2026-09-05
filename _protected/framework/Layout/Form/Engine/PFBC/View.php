@@ -1,4 +1,5 @@
 <?php
+
 /**
  *  This file has been modified by pH7 developers team (Pierre-Henry SORIA).
  */
@@ -35,12 +36,12 @@ abstract class View extends Base
     {
         $id = $this->form->getId();
 
-        /*For ease-of-use, default styles are applied to form elements.*/
+        /* For ease-of-use, default styles are applied to form elements. */
         if (!in_array('style', $this->form->getPrevent(), true)) {
             echo <<<CSS
 #$id .pfbc-label label{font-weight:bold}
-#$id em{font-size:.9em;color:#888}
-#$id .pfbc-label strong{color:#990000}
+#$id em{font-size:.9em;color:var(--ph7-text-muted, #888)}
+#$id .pfbc-label strong{color:var(--ph7-error, #990000)}
 #$id img.pfbc-loading{position:absolute;top:50%;right:.5em;margin-top:-8px;border:0}
 CSS;
         }
@@ -52,8 +53,6 @@ CSS;
 
     /**
      * This method encapsulates the various pieces that are included in an element's label.
-     *
-     * @param Element $element
      */
     protected function renderLabel(Element $element)
     {
