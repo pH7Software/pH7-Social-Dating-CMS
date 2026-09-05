@@ -23,7 +23,9 @@ final class GeoAutocompleteTest extends TestCase
 
         $this->assertIsString($sScript);
         $this->assertIsString($sDocumentation);
-        $this->assertStringContainsString('https://secure.geonames.org/searchJSON?', $sScript);
+        $this->assertStringContainsString("url: 'https://secure.geonames.org/searchJSON',", $sScript);
+        $this->assertStringContainsString('username: sGeonamesUsername', $sScript);
+        $this->assertStringContainsString('country: sCountry', $sScript);
         $this->assertStringContainsString("autocompleteCityInit('ph7cms')", $sScript);
         $this->assertStringNotContainsString('http://ws.geonames.org', $sScript);
         $this->assertStringNotContainsString('http://www.geonames.org', $sScript);

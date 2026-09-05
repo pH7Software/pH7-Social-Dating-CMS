@@ -5,37 +5,47 @@
  */
 
 $(document).ready(function () {
-    $('input#recipient').autocomplete({
-        source: function (request, callback) {
-            var dataString = {username: request.term};
+    var $oRecipient = $('input#recipient');
+    if (!$oRecipient.length) {
+        return;
+    }
+
+    var oAutocomplete = $oRecipient.autocomplete({
+        position: {collision: 'flipfit'},
+        source: function (oRequest, oResponse) {
             $.ajax({
                 type: 'POST',
                 url: pH7Url.base + 'asset/ajax/autocompleteUsername',
-                data: dataString,
-                //cache: false,
-                complete: function (oXhr, sResult) {
-                    if (sResult != 'success') return;
-                    var response = oXhr.responseText;
-                    var usernames = [];
-                    $(response).find('li username').each(function () {
-                        usernames.push($(this).text());
-                    });
-                    callback(usernames);
-
-                    var oUl = $('input#recipient').autocomplete('widget');
-                    $(response).find('li avatar').each(function (sIndex) {
-                        var img = $(this).text();
-                        $(oUl).find('li:eq(' + sIndex + ') a')
-                            .wrapInner('<span style="position:relative;top:-7px;left:10px"></span>')
-                            .prepend('<img src="' + img + '" class="avatar" alt="Avatar" />');
-
-                    });
+                data: {username: oRequest.term},
+                dataType: 'html',
+                success: function (sHtml) {
+                    var aUsers = $($.parseHTML(sHtml)).find('li').map(function () {
+                        var $oUser = $(this);
+                        return {
+                            label: $oUser.find('username').text(),
+                            value: $oUser.find('username').text(),
+                            avatar: $oUser.find('avatar').text()
+                        };
+                    }).get();
+                    oResponse(aUsers);
+                },
+                error: function () {
+                    oResponse([]);
                 }
             });
-        },
-        open: function () {
-            var oUl = $(this).autocomplete('widget');
-            oUl.css('width', '400px');
         }
-    })
+    }).autocomplete('instance');
+
+    oAutocomplete._renderItem = function ($oList, oItem) {
+        var $oContent = $('<div>').css({display: 'flex', gap: '8px', alignItems: 'center', overflowWrap: 'anywhere'});
+        if (/^https?:\/\//i.test(oItem.avatar)) {
+            $oContent.append($('<img>', {src: oItem.avatar, 'class': 'avatar', alt: '', width: 32, height: 32}));
+        }
+        $oContent.append($('<span>').text(oItem.label));
+        return $('<li>').append($oContent).appendTo($oList);
+    };
+
+    oAutocomplete._resizeMenu = function () {
+        this.menu.element.outerWidth(Math.min(Math.max(this.element.outerWidth(), 240), $(window).width() - 24));
+    };
 });

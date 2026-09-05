@@ -54,6 +54,10 @@ desktop and mobile widths, then select **Run interaction checks** to verify
 agreement handling, password visibility, age sliders, character counts, and Ajax retry.
 This preview only runs on PHP's local development server and uses no application data.
 
+Use `_tools/autocomplete-preview.html` on the same server to check recipient and
+city suggestions. Its interaction checks use fixed mock responses; they do not
+contact members or GeoNames and do not verify the external provider's availability.
+
 ## Reporting bugs & proposing features
 
 - Bugs: use the [issue tracker](https://github.com/pH7Software/pH7-Social-Dating-CMS/issues) and the bug-report template.
