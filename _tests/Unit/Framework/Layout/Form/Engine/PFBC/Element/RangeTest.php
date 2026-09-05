@@ -28,6 +28,9 @@ final class RangeTest extends TestCase
         $oForm->addElement($oDistance);
         $sHtml = $oForm->render(true);
 
+        $this->assertSame(2, substr_count($sHtml, 'type="range"'));
+        $this->assertStringNotContainsString('type="text"', $sHtml);
+        $this->assertStringContainsString('min="18" max="99"', $sHtml);
         foreach ([$oAge->getID(), $oDistance->getID()] as $sId) {
             $this->assertStringContainsString('id="' . $sId . '_output" for="' . $sId . '"', $sHtml);
             $this->assertStringContainsString('document.getElementById("' . $sId . '")', $sHtml);

@@ -13,10 +13,8 @@ class Range extends Textbox
 {
     public function render()
     {
-        $this->attributes += [
-            'type' => 'range', // Range Type
-            'id' => 'rangeInput'
-        ];
+        $this->attributes['type'] = 'range';
+        $this->attributes += ['id' => 'rangeInput'];
         $this->validation[] = new Numeric();
         parent::render();
 

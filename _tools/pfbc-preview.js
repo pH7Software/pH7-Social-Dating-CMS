@@ -37,6 +37,8 @@
 
         const $oAge = $oJoin.find('input[name=age]');
         const $oDistance = $oJoin.find('input[name=distance]');
+        assert($oAge.attr('type') === 'range' && $oDistance.attr('type') === 'range', 'Render native sliders, not text boxes.');
+        assert($oAge.attr('min') === '18' && $oAge.attr('max') === '99', 'Preserve the configured age bounds.');
         assert(document.getElementById($oAge.attr('id') + '_output').value === '30', 'The age counter must show its initial value.');
         $oAge.val('42').trigger('input');
         assert(document.getElementById($oAge.attr('id') + '_output').value === '42', 'The age counter must follow the slider.');
