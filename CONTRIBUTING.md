@@ -48,6 +48,12 @@ pull request is merged, that working branch can be deleted.
 
 Theme/CSS contributions: `_tools/theme-preview.html` renders the base theme's CSS chain against sample markup without a full install — serve the repo root (e.g. `python3 -m http.server 8642`) and open it to check your changes, in both light and dark mode.
 
+For real PFBC forms, run `php -S 127.0.0.1:8642 -t .` and open
+`http://127.0.0.1:8642/_tools/pfbc-preview.php`. Check base and premium themes at
+desktop and mobile widths, then select **Run interaction checks** to verify
+agreement handling, password visibility, age sliders, character counts, and Ajax retry.
+This preview only runs on PHP's local development server and uses no application data.
+
 ## Reporting bugs & proposing features
 
 - Bugs: use the [issue tracker](https://github.com/pH7Software/pH7-Social-Dating-CMS/issues) and the bug-report template.
