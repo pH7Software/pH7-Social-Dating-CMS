@@ -15,10 +15,10 @@ It is the last GeoLite2-City release MaxMind published under CC BY-SA 4.0. Since
 30 December 2019 MaxMind only distributes GeoLite databases to registered accounts
 authenticated with a licence key, under the GeoLite End User License Agreement
 (https://www.maxmind.com/en/geolite2/eula). That agreement requires every user to
-stop using and destroy each database within 30 days of the next release (MaxMind
-publishes GeoLite2-City twice a week) and to impose the same duties on anyone the
-database is shared with, so a newer build can neither be bundled with this project
-nor downloaded without a MaxMind account. The CC BY-SA 4.0 licence of this build
+stop using and destroy each database within 30 days of the next release (twice a
+week at the time of writing) and to impose the same duties on anyone the database
+is shared with, so a newer build can neither be bundled with this project nor
+downloaded without a MaxMind account. The CC BY-SA 4.0 licence of this build
 is perpetual and irrevocable (sections 2(a)(1) and 6(c)), so it may keep being
 used and redistributed with its notices intact. Updating the PHP reader library
 does not change the location data.
