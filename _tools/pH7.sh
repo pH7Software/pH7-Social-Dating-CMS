@@ -232,6 +232,7 @@ function install-geoip-db() {
 
     echo "Path of a GeoLite2-City .mmdb or .tar.gz you already have, or leave empty to install the $bundled_db_label:"
     read -r geoip_source_path
+    geoip_source_path="${geoip_source_path/#\~/$HOME}"
 
     if [ -n "$geoip_source_path" ]; then
         _install-geoip-db-from-file "$geoip_source_path"
