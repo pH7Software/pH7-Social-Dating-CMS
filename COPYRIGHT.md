@@ -18,9 +18,18 @@ asset license before redistribution.
 
 ## Geolocation data
 
-This product includes GeoLite2 data created by [MaxMind](https://www.maxmind.com/).
-The bundled legacy database (3 December 2019) is distributed under the
-[Creative Commons Attribution-ShareAlike 4.0 International License](https://creativecommons.org/licenses/by-sa/4.0/),
-not the project's MIT License. Its data has not been modified. New downloads
-must retain their accompanying notices and comply with their applicable terms.
-Public attribution is also provided on the site's Legal Notice page.
+This product includes GeoLite2 data created by [MaxMind](https://www.maxmind.com/),
+available from https://www.maxmind.com.
+Database and Contents Copyright (c) 2019 MaxMind, Inc.
+The bundled database is MaxMind's 24 December 2019 GeoLite2-City build, the
+last one published under the
+[Creative Commons Attribution-ShareAlike 4.0 International License](https://creativecommons.org/licenses/by-sa/4.0/)
+before MaxMind's GeoLite End User License Agreement replaced it on 30 December
+2019. It is distributed under that license, not the project's MIT License, as-is
+and without warranty, and its data has not been modified. It incorporates
+[GeoNames](https://www.geonames.org/) data available under the
+[Creative Commons Attribution 3.0 License](https://creativecommons.org/licenses/by/3.0/us/).
+MaxMind's own notices ship with the database in `_protected/framework/Geo/Ip/`.
+Public attribution is also provided on the site's Legal Notice page. Newer
+GeoLite data is governed by MaxMind's GeoLite End User License Agreement and is
+not bundled.
