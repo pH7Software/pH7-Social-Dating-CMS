@@ -99,6 +99,36 @@ final class BundledGeoIpDatabaseTest extends TestCase
         self::assertStringNotContainsString('geolite2/signup', $sScript);
     }
 
+    public function testMaintenanceScriptVerifiesTheBundledDatabaseWithoutCredentials(): void
+    {
+        if (PHP_OS_FAMILY === 'Windows') {
+            self::markTestSkipped('The maintenance script requires a Unix shell.');
+        }
+
+        $aPipes = [];
+        $rProcess = proc_open(
+            ['bash', '_tools/pH7.sh'],
+            [0 => ['pipe', 'r'], 1 => ['pipe', 'w'], 2 => ['pipe', 'w']],
+            $aPipes,
+            $this->sRootPath,
+            ['PATH' => (string)getenv('PATH'), 'HOME' => (string)getenv('HOME')]
+        );
+        self::assertIsResource($rProcess);
+
+        // Choose the command, then leave the source path empty to verify the bundled build
+        fwrite($aPipes[0], "install geoip db\n\n");
+        fclose($aPipes[0]);
+        $sOutput = stream_get_contents($aPipes[1]) . stream_get_contents($aPipes[2]);
+        fclose($aPipes[1]);
+        fclose($aPipes[2]);
+        $iExitCode = proc_close($rProcess);
+
+        self::assertSame(0, $iExitCode, $sOutput);
+        self::assertStringContainsString('is already installed at', $sOutput);
+        self::assertStringContainsString('GeoLite2-City database built on ' . self::BUNDLED_BUILD_LABEL, $sOutput);
+        self::assertStringNotContainsString('Downloading', $sOutput);
+    }
+
     private function geoIpPath(string $sFilename): string
     {
         return $this->sRootPath . self::GEOIP_DIRECTORY . $sFilename;
