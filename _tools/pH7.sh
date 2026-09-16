@@ -262,23 +262,20 @@ function install-geoip-db() {
     fi
 
     if [ "$(_sha256 "$geoip_db_path")" != "$bundled_db_sha256" ]; then
-        geoip_tmp_path=$(mktemp -d "${TMPDIR:-/tmp}/ph7-geoip.XXXXXX") || exit 1
+        _create-geoip-tmp-dir
         echo "Downloading the $bundled_db_label from $bundled_archive_url"
         _download "$bundled_archive_url" "$geoip_tmp_path/GeoLite2-City.tar.gz"
         if [ "$(_sha256 "$geoip_tmp_path/GeoLite2-City.tar.gz")" != "$bundled_archive_sha256" ]; then
-            rm -rf "$geoip_tmp_path"
             echo "The downloaded archive doesn't match its expected SHA-256 checksum. Nothing was installed."
             exit 1
         fi
 
         _extract-geoip-db-archive "$geoip_tmp_path/GeoLite2-City.tar.gz" "$geoip_tmp_path"
         if [ "$(_sha256 "$geoip_extracted_db_path")" != "$bundled_db_sha256" ]; then
-            rm -rf "$geoip_tmp_path"
             echo "The extracted database doesn't match its expected SHA-256 checksum. Nothing was installed."
             exit 1
         fi
         _install-geoip-db-file "$geoip_extracted_db_path" "$(dirname "$geoip_extracted_db_path")"
-        rm -rf "$geoip_tmp_path"
     fi
 
     echo "GeoIP DB successfully installed at $geoip_db_path"
@@ -352,10 +349,9 @@ function _install-geoip-db-from-file() {
 
     case "$1" in
         *.tar.gz|*.tgz)
-            geoip_tmp_path=$(mktemp -d "${TMPDIR:-/tmp}/ph7-geoip.XXXXXX") || exit 1
+            _create-geoip-tmp-dir
             _extract-geoip-db-archive "$1" "$geoip_tmp_path"
             _install-geoip-db-file "$geoip_extracted_db_path" "$(dirname "$geoip_extracted_db_path")"
-            rm -rf "$geoip_tmp_path"
             ;;
         *.mmdb)
             _install-geoip-db-file "$1"
@@ -371,17 +367,19 @@ function _install-geoip-db-from-file() {
     _show-geoip-db-licence-reminder
 }
 
+# Create the temporary directory for GeoIP archives in geoip_tmp_path; it is removed whenever the script exits
+function _create-geoip-tmp-dir() {
+    geoip_tmp_path=$(mktemp -d "${TMPDIR:-/tmp}/ph7-geoip.XXXXXX") || exit 1
+    trap 'rm -rf "$geoip_tmp_path"' EXIT
+}
+
 # Extract GeoLite2-City.mmdb (with MaxMind's notice files) from a MaxMind .tar.gz into $2; sets geoip_extracted_db_path
 function _extract-geoip-db-archive() {
     echo "Extracting $1"
-    if ! tar -xzf "$1" -C "$2"; then
-        rm -rf "$2"
-        exit 1
-    fi
+    tar -xzf "$1" -C "$2" || exit 1
 
     geoip_extracted_db_path=$(find "$2" -type f -name 'GeoLite2-City.mmdb' | head -n 1)
     if [ -z "$geoip_extracted_db_path" ]; then
-        rm -rf "$2"
         echo "No GeoLite2-City.mmdb was found in $1"
         exit 1
     fi
@@ -485,13 +483,16 @@ function _show-geoip-db-licence-reminder() {
 # Download $1 to $2 with curl or wget
 function _download() {
     if command -v curl >/dev/null 2>&1; then
-        curl -fL --retry 3 --progress-bar -o "$2" "$1" || exit 1
+        curl -fL --retry 3 --progress-bar -o "$2" "$1" && return
     elif command -v wget >/dev/null 2>&1; then
-        wget -O "$2" "$1" || exit 1
+        wget -O "$2" "$1" && return
     else
         echo "Neither curl nor wget was found. Please install one of them."
         exit 1
     fi
+
+    echo "Downloading $1 failed. Nothing was installed."
+    exit 1
 }
 
 function _require-sha256-tool() {
