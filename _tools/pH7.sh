@@ -389,7 +389,7 @@ function _extract-geoip-db-archive() {
 function _install-geoip-db-file() {
     geoip_path="./_protected/framework/Geo/Ip"
 
-    if ! _show-geoip-db-info "$1"; then
+    if ! _read-geoip-db-info "$1"; then
         echo "$1 is not a readable MaxMind City database. Nothing was installed."
         exit 1
     fi
