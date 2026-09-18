@@ -10,10 +10,13 @@ declare(strict_types=1);
 
 namespace PH7\Test\Unit\Root;
 
+use FilesystemIterator;
 use GeoIp2\Database\Reader as CityReader;
 use MaxMind\Db\Reader as MetadataReader;
 use PH7\Framework\Geo\Ip\Geo;
 use PHPUnit\Framework\TestCase;
+use RecursiveDirectoryIterator;
+use RecursiveIteratorIterator;
 
 /**
  * The bundled GeoLite2-City database must stay the last build MaxMind published under
@@ -105,28 +108,90 @@ final class BundledGeoIpDatabaseTest extends TestCase
             self::markTestSkipped('The maintenance script requires a Unix shell.');
         }
 
-        $aPipes = [];
-        $rProcess = proc_open(
-            ['bash', '_tools/pH7.sh'],
-            [0 => ['pipe', 'r'], 1 => ['pipe', 'w'], 2 => ['pipe', 'w']],
-            $aPipes,
-            $this->sRootPath,
-            ['PATH' => (string)getenv('PATH'), 'HOME' => (string)getenv('HOME')]
-        );
-        self::assertIsResource($rProcess);
-
         // Choose the command, then leave the source path empty to verify the bundled build
-        fwrite($aPipes[0], "install geoip db\n\n");
-        fclose($aPipes[0]);
-        $sOutput = stream_get_contents($aPipes[1]) . stream_get_contents($aPipes[2]);
-        fclose($aPipes[1]);
-        fclose($aPipes[2]);
-        $iExitCode = proc_close($rProcess);
+        [$iExitCode, $sOutput] = $this->runMaintenanceScript($this->sRootPath, "install geoip db\n\n");
 
         self::assertSame(0, $iExitCode, $sOutput);
         self::assertStringContainsString('is already installed at', $sOutput);
         self::assertStringContainsString('GeoLite2-City database built on ' . self::BUNDLED_BUILD_LABEL, $sOutput);
         self::assertStringNotContainsString('Downloading', $sOutput);
+    }
+
+    public function testBareMmdbInstallAsksForMaxMindNoticeFiles(): void
+    {
+        if (PHP_OS_FAMILY === 'Windows') {
+            self::markTestSkipped('The maintenance script requires a Unix shell.');
+        }
+
+        // Install into a throwaway copy of the project, so the repository's own database is never replaced
+        $sSandboxPath = $this->createScriptSandbox();
+        $sSourceDatabasePath = $this->geoIpPath(Geo::DATABASE_FILENAME);
+
+        try {
+            [$iExitCode, $sOutput] = $this->runMaintenanceScript(
+                $sSandboxPath,
+                "install geoip db\n" . $sSourceDatabasePath . "\n"
+            );
+
+            self::assertSame(0, $iExitCode, $sOutput);
+            self::assertStringContainsString("A .mmdb file comes without MaxMind's notice files", $sOutput);
+            self::assertSame(
+                hash_file('sha256', $sSourceDatabasePath),
+                hash_file('sha256', $sSandboxPath . self::GEOIP_DIRECTORY . Geo::DATABASE_FILENAME)
+            );
+        } finally {
+            $this->removeScriptSandbox($sSandboxPath);
+        }
+    }
+
+    /**
+     * @return array{int, string} The exit code and the combined standard output and error.
+     */
+    private function runMaintenanceScript(string $sWorkingDirectory, string $sInput): array
+    {
+        $aPipes = [];
+        $rProcess = proc_open(
+            ['bash', '_tools/pH7.sh'],
+            [0 => ['pipe', 'r'], 1 => ['pipe', 'w'], 2 => ['pipe', 'w']],
+            $aPipes,
+            $sWorkingDirectory,
+            ['PATH' => (string)getenv('PATH'), 'HOME' => (string)getenv('HOME')]
+        );
+        self::assertIsResource($rProcess);
+
+        fwrite($aPipes[0], $sInput);
+        fclose($aPipes[0]);
+        $sOutput = stream_get_contents($aPipes[1]) . stream_get_contents($aPipes[2]);
+        fclose($aPipes[1]);
+        fclose($aPipes[2]);
+
+        return [proc_close($rProcess), $sOutput];
+    }
+
+    /**
+     * Create a temporary project root holding only the maintenance script and an empty GeoIP directory.
+     * Without _protected/vendor, the script can't read a database's build date.
+     */
+    private function createScriptSandbox(): string
+    {
+        $sSandboxPath = sys_get_temp_dir() . '/ph7-geoip-' . bin2hex(random_bytes(6));
+        self::assertTrue(mkdir($sSandboxPath . self::GEOIP_DIRECTORY, 0700, true));
+        self::assertTrue(mkdir($sSandboxPath . '/_tools', 0700));
+        self::assertTrue(copy($this->sRootPath . '/_tools/pH7.sh', $sSandboxPath . '/_tools/pH7.sh'));
+
+        return $sSandboxPath;
+    }
+
+    private function removeScriptSandbox(string $sSandboxPath): void
+    {
+        $oEntries = new RecursiveIteratorIterator(
+            new RecursiveDirectoryIterator($sSandboxPath, FilesystemIterator::SKIP_DOTS),
+            RecursiveIteratorIterator::CHILD_FIRST
+        );
+        foreach ($oEntries as $oEntry) {
+            $oEntry->isDir() ? rmdir($oEntry->getPathname()) : unlink($oEntry->getPathname());
+        }
+        rmdir($sSandboxPath);
     }
 
     private function geoIpPath(string $sFilename): string
