@@ -16,11 +16,6 @@ use PHPUnit\Framework\TestCase;
 
 final class SignupRouteTest extends TestCase
 {
-    private static function projectRoot(): string
-    {
-        return dirname(PH7_PATH_PROTECTED);
-    }
-
     private const SIGNUP_ROUTES = [
         'step1' => 'signup',
         'step2' => 'signup/step2',
@@ -68,5 +63,10 @@ final class SignupRouteTest extends TestCase
             Uri::clearCache('geturiusersignup' . $sAction);
             $this->assertSame(PH7_URL_ROOT . $sUrl, Uri::get('user', 'signup', $sAction));
         }
+    }
+
+    private static function projectRoot(): string
+    {
+        return dirname(PH7_PATH_PROTECTED);
     }
 }

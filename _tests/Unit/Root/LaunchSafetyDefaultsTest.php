@@ -15,11 +15,6 @@ use PHPUnit\Framework\TestCase;
 
 final class LaunchSafetyDefaultsTest extends TestCase
 {
-    private static function projectRoot(): string
-    {
-        return dirname(PH7_PATH_PROTECTED);
-    }
-
     public function testFreshPaymentConfigUsesSafeEmptyDefaults(): void
     {
         $aConfig = parse_ini_file(
@@ -127,5 +122,10 @@ final class LaunchSafetyDefaultsTest extends TestCase
         $this->assertIsString($sContents);
 
         return $sContents;
+    }
+
+    private static function projectRoot(): string
+    {
+        return dirname(PH7_PATH_PROTECTED);
     }
 }

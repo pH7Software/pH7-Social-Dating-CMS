@@ -15,11 +15,6 @@ use PHPUnit\Framework\TestCase;
 
 final class XmlLinkListRoutingTest extends TestCase
 {
-    private static function projectRoot(): string
-    {
-        return dirname(PH7_PATH_PROTECTED);
-    }
-
     public function testHtmlLinkListsRenderLocalTemplatesWithoutSelfHttpRequests(): void
     {
         $sMainController = $this->readFile(
@@ -54,5 +49,10 @@ final class XmlLinkListRoutingTest extends TestCase
         self::assertIsString($sContents);
 
         return $sContents;
+    }
+
+    private static function projectRoot(): string
+    {
+        return dirname(PH7_PATH_PROTECTED);
     }
 }

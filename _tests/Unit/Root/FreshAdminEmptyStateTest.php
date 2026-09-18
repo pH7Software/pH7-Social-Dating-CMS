@@ -15,11 +15,6 @@ use PHPUnit\Framework\TestCase;
 
 final class FreshAdminEmptyStateTest extends TestCase
 {
-    private static function projectRoot(): string
-    {
-        return dirname(PH7_PATH_PROTECTED);
-    }
-
     public function testFreshAdminListsRenderUsefulEmptyStatesInsteadOfNotFoundPages(): void
     {
         $aControllers = [
@@ -77,5 +72,10 @@ final class FreshAdminEmptyStateTest extends TestCase
         self::assertIsString($sContents);
 
         return $sContents;
+    }
+
+    private static function projectRoot(): string
+    {
+        return dirname(PH7_PATH_PROTECTED);
     }
 }

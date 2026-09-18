@@ -15,11 +15,6 @@ use PHPUnit\Framework\TestCase;
 
 final class SignupExperienceTest extends TestCase
 {
-    private static function projectRoot(): string
-    {
-        return dirname(PH7_PATH_PROTECTED);
-    }
-
     public function testRequiredSignupStepsReportAccurateProgress(): void
     {
         $sController = $this->readProjectFile(
@@ -87,5 +82,10 @@ final class SignupExperienceTest extends TestCase
         $this->assertIsString($sContents);
 
         return $sContents;
+    }
+
+    private static function projectRoot(): string
+    {
+        return dirname(PH7_PATH_PROTECTED);
     }
 }

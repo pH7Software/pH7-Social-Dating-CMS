@@ -16,11 +16,6 @@ use PHPUnit\Framework\TestCase;
 
 final class ReleaseDeploymentTest extends TestCase
 {
-    private static function projectRoot(): string
-    {
-        return dirname(PH7_PATH_PROTECTED);
-    }
-
     public function testRootReleaseLockIsIncludedAndInstallerDependencyIsConstrained(): void
     {
         $sAttributes = $this->readFile('.gitattributes');
@@ -188,5 +183,10 @@ final class ReleaseDeploymentTest extends TestCase
         $this->assertIsString($sContents);
 
         return $sContents;
+    }
+
+    private static function projectRoot(): string
+    {
+        return dirname(PH7_PATH_PROTECTED);
     }
 }
