@@ -473,7 +473,11 @@ function _show-geoip-db-info() {
 
 # Builds before 30 December 2019 are under CC BY-SA 4.0; later ones are governed by MaxMind's GeoLite EULA
 function _show-geoip-db-licence-reminder() {
-    if [ -n "$geoip_db_build_epoch" ] && [ "$geoip_db_build_epoch" -lt 1577664000 ]; then
+    if [ -z "$geoip_db_build_epoch" ]; then
+        echo "Its build date is unknown: GeoLite builds made before 30 December 2019 are licensed under CC BY-SA 4.0,"
+        echo "later ones are governed by MaxMind's GeoLite EULA (https://www.maxmind.com/en/geolite2/eula)."
+        echo "Keep MaxMind's notice files next to it either way."
+    elif [ "$geoip_db_build_epoch" -lt 1577664000 ]; then
         echo "This build is licensed under CC BY-SA 4.0. Keep MaxMind's notice files next to it."
     else
         echo "This build is governed by MaxMind's GeoLite EULA (https://www.maxmind.com/en/geolite2/eula):"

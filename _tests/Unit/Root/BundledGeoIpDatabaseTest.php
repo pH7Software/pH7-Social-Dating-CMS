@@ -144,6 +144,30 @@ final class BundledGeoIpDatabaseTest extends TestCase
         }
     }
 
+    public function testInstallWithAnUnknownBuildDateNamesBothLicences(): void
+    {
+        if (PHP_OS_FAMILY === 'Windows') {
+            self::markTestSkipped('The maintenance script requires a Unix shell.');
+        }
+
+        // The sandbox has no PHP dependencies, so the script can't read the bundled build's date
+        $sSandboxPath = $this->createScriptSandbox();
+
+        try {
+            [$iExitCode, $sOutput] = $this->runMaintenanceScript(
+                $sSandboxPath,
+                "install geoip db\n" . $this->geoIpPath(Geo::DATABASE_FILENAME) . "\n"
+            );
+
+            self::assertSame(0, $iExitCode, $sOutput);
+            self::assertStringContainsString('build date is unknown', $sOutput);
+            self::assertStringContainsString('before 30 December 2019 are licensed under CC BY-SA 4.0', $sOutput);
+            self::assertStringNotContainsString('This build is governed by', $sOutput);
+        } finally {
+            $this->removeScriptSandbox($sSandboxPath);
+        }
+    }
+
     /**
      * @return array{int, string} The exit code and the combined standard output and error.
      */
