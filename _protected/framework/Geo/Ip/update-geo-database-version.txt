@@ -37,6 +37,12 @@ available, and otherwise downloads the same 24 December 2019 archive from the
 Internet Archive's capture of MaxMind's former public download URL, verifying its
 checksum before installing it together with MaxMind's notice files.
 
+The _tools/ directory only exists in a Git checkout. Release packages leave it
+out, but they already include this database and its notice files: to restore
+them in a release installation, extract GeoLite2-City.mmdb, LICENSE.txt,
+COPYRIGHT.txt and README.txt from _protected/framework/Geo/Ip/ in the same
+release package.
+
 Entering a path instead installs a GeoLite2-City .mmdb or .tar.gz you obtained
 yourself. A GeoLite database built on or after 30 December 2019 is governed by
 MaxMind's GeoLite EULA, not by CC BY-SA 4.0: keep MaxMind's attribution and the
