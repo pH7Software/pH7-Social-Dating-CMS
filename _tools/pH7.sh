@@ -355,6 +355,8 @@ function _install-geoip-db-from-file() {
             ;;
         *.mmdb)
             _install-geoip-db-file "$1"
+            # A bare .mmdb carries no notices, so the ones already in place may belong to another build
+            echo "A .mmdb file comes without MaxMind's notice files. Copy the LICENSE.txt, COPYRIGHT.txt and README.txt that came with it into ./_protected/framework/Geo/Ip/"
             ;;
         *)
             echo "$1 must be a .mmdb or .tar.gz file."
