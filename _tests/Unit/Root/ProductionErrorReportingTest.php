@@ -62,6 +62,6 @@ final class ProductionErrorReportingTest extends TestCase
 
     private function projectRoot(): string
     {
-        return dirname(__DIR__, 3);
+        return dirname(PH7_PATH_PROTECTED);
     }
 }

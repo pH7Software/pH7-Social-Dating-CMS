@@ -18,7 +18,7 @@ final class InstallerHardeningTest extends TestCase
 {
     public function testInstallerDatabaseDsnIncludesConfiguredPortAndCharset(): void
     {
-        require_once dirname(__DIR__, 3) . '/_install/library/Database.class.php';
+        require_once dirname(PH7_PATH_PROTECTED) . '/_install/library/Database.class.php';
 
         $oReflection = new ReflectionClass(Database::class);
         $oDatabase = $oReflection->newInstanceWithoutConstructor();
@@ -41,7 +41,7 @@ final class InstallerHardeningTest extends TestCase
 
     public function testEveryInstallerPostFormCarriesAnActionToken(): void
     {
-        $sViewDirectory = dirname(__DIR__, 3) . '/_install/views/base';
+        $sViewDirectory = dirname(PH7_PATH_PROTECTED) . '/_install/views/base';
         $aPostTemplates = [
             'index.tpl',
             'license.tpl',
@@ -174,8 +174,8 @@ final class InstallerHardeningTest extends TestCase
 
     public function testInstallerDefaultsUseCurrentProductNameForDatabase(): void
     {
-        require_once dirname(__DIR__, 3) . '/_install/library/DbDefaultConfig.class.php';
-        require_once dirname(__DIR__, 3) . '/_tools/cli/Misc/Database/DbDefaultConfig.php';
+        require_once dirname(PH7_PATH_PROTECTED) . '/_install/library/DbDefaultConfig.class.php';
+        require_once dirname(PH7_PATH_PROTECTED) . '/_tools/cli/Misc/Database/DbDefaultConfig.php';
 
         $this->assertSame('ph7builder', \PH7\DbDefaultConfig::NAME);
         $this->assertSame('ph7builder', \PH7\Cli\Misc\Database\DbDefaultConfig::NAME);
@@ -313,7 +313,7 @@ final class InstallerHardeningTest extends TestCase
 
     private function readProjectFile(string $sRelativePath): string
     {
-        $sContents = file_get_contents(dirname(__DIR__, 3) . '/' . $sRelativePath);
+        $sContents = file_get_contents(dirname(PH7_PATH_PROTECTED) . '/' . $sRelativePath);
 
         $this->assertIsString($sContents);
 

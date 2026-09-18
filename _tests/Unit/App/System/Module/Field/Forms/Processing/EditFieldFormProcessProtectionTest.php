@@ -14,12 +14,10 @@ use PHPUnit\Framework\TestCase;
 
 final class EditFieldFormProcessProtectionTest extends TestCase
 {
-    private const PROJECT_ROOT = __DIR__ . '/../../../../../../../..';
-
     public function testBothCurrentAndSubmittedProtectedNamesAreRejectedBeforeSchemaChange(): void
     {
         $sProcess = file_get_contents(
-            self::PROJECT_ROOT . '/_protected/app/system/modules/field/forms/processing/EditFieldFormProcess.php'
+            PH7_PATH_SYS_MOD . 'field/forms/processing/EditFieldFormProcess.php'
         );
 
         $this->assertIsString($sProcess);

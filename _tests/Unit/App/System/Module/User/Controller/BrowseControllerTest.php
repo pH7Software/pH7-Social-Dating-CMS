@@ -17,7 +17,7 @@ final class BrowseControllerTest extends TestCase
     public function testOnlyEmptySearchResultsTriggerTheNoResultsRedirect(): void
     {
         $sController = file_get_contents(
-            dirname(__DIR__, 7) . '/_protected/app/system/modules/user/controllers/BrowseController.php'
+            PH7_PATH_SYS_MOD . 'user/controllers/BrowseController.php'
         );
 
         $this->assertIsString($sController);

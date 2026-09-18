@@ -10,7 +10,7 @@ declare(strict_types=1);
 
 namespace PH7\Test\Unit\Root;
 
-require_once dirname(__DIR__, 3) . '/WebsiteChecker.php';
+require_once dirname(PH7_PATH_PROTECTED) . '/WebsiteChecker.php';
 
 use PH7\WebsiteChecker;
 use PHPUnit\Framework\Attributes\DataProvider;
@@ -45,8 +45,8 @@ final class WebsiteCheckerTest extends TestCase
 
     public function testPinnedAuthorityMarkerIsDetectedWithoutExecutingConfig(): void
     {
-        $sChecker = file_get_contents(dirname(__DIR__, 3) . '/WebsiteChecker.php');
-        $sIndex = file_get_contents(dirname(__DIR__, 3) . '/index.php');
+        $sChecker = file_get_contents(dirname(PH7_PATH_PROTECTED) . '/WebsiteChecker.php');
+        $sIndex = file_get_contents(dirname(PH7_PATH_PROTECTED) . '/index.php');
 
         $this->assertIsString($sChecker);
         $this->assertIsString($sIndex);
@@ -64,7 +64,7 @@ final class WebsiteCheckerTest extends TestCase
 
     public function testInstallerRedirectNeverUsesRequestControlledPhpSelf(): void
     {
-        $sChecker = file_get_contents(dirname(__DIR__, 3) . '/WebsiteChecker.php');
+        $sChecker = file_get_contents(dirname(PH7_PATH_PROTECTED) . '/WebsiteChecker.php');
 
         $this->assertIsString($sChecker);
         $this->assertStringContainsString("header('Location: ' . self::INSTALL_FOLDER_NAME);", $sChecker);
@@ -73,7 +73,7 @@ final class WebsiteCheckerTest extends TestCase
 
     public function testDirectAccessGuardsDoNotPassHeaderReturnValueToExit(): void
     {
-        $sProjectRoot = dirname(__DIR__, 3);
+        $sProjectRoot = dirname(PH7_PATH_PROTECTED);
 
         foreach (['WebsiteChecker.php', '_install/data/configs/constants.php'] as $sRelativePath) {
             $sSource = file_get_contents($sProjectRoot . '/' . $sRelativePath);

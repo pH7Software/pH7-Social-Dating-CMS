@@ -18,7 +18,7 @@ final class UserCoreUploadPathTest extends TestCase
 
     protected function setUp(): void
     {
-        $sUserCore = file_get_contents(dirname(__DIR__, 6) . '/_protected/app/system/core/classes/UserCore.php');
+        $sUserCore = file_get_contents(PH7_PATH_SYS . 'core/classes/UserCore.php');
 
         $this->assertIsString($sUserCore);
         $this->sUserCore = $sUserCore;

@@ -16,7 +16,10 @@ use PHPUnit\Framework\TestCase;
 
 final class ReleaseDeploymentTest extends TestCase
 {
-    private const PROJECT_ROOT = __DIR__ . '/../../..';
+    private static function projectRoot(): string
+    {
+        return dirname(PH7_PATH_PROTECTED);
+    }
 
     public function testRootReleaseLockIsIncludedAndInstallerDependencyIsConstrained(): void
     {
@@ -79,7 +82,7 @@ final class ReleaseDeploymentTest extends TestCase
             "ph7software/ph7builder:{$sVersion}",
             $this->readFile('installation-instructions-(start-here).txt')
         );
-        $this->assertFileExists(self::PROJECT_ROOT . "/docs/RELEASE_NOTES_{$sVersion}.md");
+        $this->assertFileExists(self::projectRoot() . "/docs/RELEASE_NOTES_{$sVersion}.md");
     }
 
     public function testReleasePackagerDoesNotMutateOrCreateWorldWritableSourceFiles(): void
@@ -181,7 +184,7 @@ final class ReleaseDeploymentTest extends TestCase
 
     private function readFile(string $sRelativePath): string
     {
-        $sContents = file_get_contents(self::PROJECT_ROOT . '/' . $sRelativePath);
+        $sContents = file_get_contents(self::projectRoot() . '/' . $sRelativePath);
         $this->assertIsString($sContents);
 
         return $sContents;

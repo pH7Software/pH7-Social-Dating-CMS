@@ -35,7 +35,7 @@ final class BundledGeoIpDatabaseTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->sRootPath = dirname(__DIR__, 3);
+        $this->sRootPath = dirname(PH7_PATH_PROTECTED);
     }
 
     public function testBundledDatabaseIsTheLastCreativeCommonsGeoLite2CityBuild(): void

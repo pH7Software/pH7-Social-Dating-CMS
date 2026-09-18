@@ -17,7 +17,7 @@ final class EditAdminBlogFormProcessTest extends TestCase
     public function testModificationDateUsesTheRowIdRatherThanTheUrlSlug(): void
     {
         $sProcess = file_get_contents(
-            __DIR__ . '/../../../../../../../../_protected/app/system/modules/blog/forms/processing/EditAdminBlogFormProcess.php'
+            PH7_PATH_SYS_MOD . 'blog/forms/processing/EditAdminBlogFormProcess.php'
         );
 
         self::assertIsString($sProcess);

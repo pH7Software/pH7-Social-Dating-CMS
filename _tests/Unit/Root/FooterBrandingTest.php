@@ -27,7 +27,7 @@ final class FooterBrandingTest extends TestCase
     public function testThemeFootersRenderOnlyTheVersionedProjectCredit(): void
     {
         foreach (['base', 'premium'] as $sTheme) {
-            $sTemplate = file_get_contents(dirname(__DIR__, 3) . '/templates/themes/' . $sTheme . '/tpl/layout.tpl');
+            $sTemplate = file_get_contents(dirname(PH7_PATH_PROTECTED) . '/templates/themes/' . $sTheme . '/tpl/layout.tpl');
             self::assertIsString($sTemplate);
             self::assertStringNotContainsString('We use GeoLite2', $sTemplate);
             self::assertStringNotContainsString('maxmind.com', $sTemplate);
@@ -84,7 +84,7 @@ final class FooterBrandingTest extends TestCase
     public function testMaxMindAttributionRemainsOutsideTheFooter(): void
     {
         foreach (['COPYRIGHT.md', '_protected/app/system/modules/page/views/base/tpl/main/legalnotice.tpl'] as $sFile) {
-            $sNotice = file_get_contents(dirname(__DIR__, 3) . '/' . $sFile);
+            $sNotice = file_get_contents(dirname(PH7_PATH_PROTECTED) . '/' . $sFile);
             self::assertIsString($sNotice);
             self::assertStringContainsString('GeoLite2 data created by', $sNotice);
             self::assertStringContainsString('https://www.maxmind.com/', $sNotice);

@@ -14,12 +14,15 @@ use PHPUnit\Framework\TestCase;
 
 final class GeoAutocompleteTest extends TestCase
 {
-    private const PROJECT_ROOT = __DIR__ . '/../../..';
+    private static function projectRoot(): string
+    {
+        return dirname(PH7_PATH_PROTECTED);
+    }
 
     public function testCityAutocompleteUsesTheSecureGeoNamesEndpoint(): void
     {
-        $sScript = file_get_contents(self::PROJECT_ROOT . '/static/js/geo/autocompleteCity.js');
-        $sDocumentation = file_get_contents(self::PROJECT_ROOT . '/static/js/geo/geo_api.txt');
+        $sScript = file_get_contents(self::projectRoot() . '/static/js/geo/autocompleteCity.js');
+        $sDocumentation = file_get_contents(self::projectRoot() . '/static/js/geo/geo_api.txt');
 
         $this->assertIsString($sScript);
         $this->assertIsString($sDocumentation);

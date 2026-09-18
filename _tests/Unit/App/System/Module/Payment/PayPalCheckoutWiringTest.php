@@ -15,15 +15,13 @@ use PHPUnit\Framework\TestCase;
 
 final class PayPalCheckoutWiringTest extends TestCase
 {
-    private const REPOSITORY_ROOT = __DIR__ . '/../../../../../..';
-
     public function testCheckoutUsesPersistentNotificationAndResultEndpoints(): void
     {
         $sDesign = $this->readRepositoryFile(
-            '_protected/app/system/modules/payment/inc/class/design/PaymentDesign.php'
+            'payment/inc/class/design/PaymentDesign.php'
         );
         $sTemplate = $this->readRepositoryFile(
-            '_protected/app/system/modules/payment/views/base/tpl/main/pay.tpl'
+            'payment/views/base/tpl/main/pay.tpl'
         );
 
         self::assertStringContainsString(
@@ -38,7 +36,7 @@ final class PayPalCheckoutWiringTest extends TestCase
     public function testOnlyThePayPalNotificationActionBypassesMemberAuthentication(): void
     {
         $sPermission = $this->readRepositoryFile(
-            '_protected/app/system/modules/payment/config/Permission.php'
+            'payment/config/Permission.php'
         );
 
         $sPublicEndpointPattern = <<<'REGEX'
@@ -53,7 +51,7 @@ REGEX;
     public function testControllerUsesThePersistentIdempotentPayPalFlow(): void
     {
         $sController = $this->readRepositoryFile(
-            '_protected/app/system/modules/payment/controllers/MainController.php'
+            'payment/controllers/MainController.php'
         );
 
         self::assertStringContainsString('createPayPalCheckout(', $sController);
@@ -67,7 +65,7 @@ REGEX;
     public function testResultVerifiesOwnershipBeforeSynchronizingTheSession(): void
     {
         $sController = $this->readRepositoryFile(
-            '_protected/app/system/modules/payment/controllers/MainController.php'
+            'payment/controllers/MainController.php'
         );
         $iResultStart = strpos($sController, 'public function result(): void');
         $iResultEnd = strpos($sController, 'public function info()', (int)$iResultStart);
@@ -90,7 +88,7 @@ REGEX;
     public function testPaymentCompletionIsTransactionalAndLocksTheCheckout(): void
     {
         $sModel = $this->readRepositoryFile(
-            '_protected/app/system/modules/payment/models/PaymentModel.php'
+            'payment/models/PaymentModel.php'
         );
 
         self::assertStringContainsString('beginTransaction()', $sModel);
@@ -104,7 +102,7 @@ REGEX;
 
     private function readRepositoryFile(string $sPath): string
     {
-        $sContents = file_get_contents(self::REPOSITORY_ROOT . '/' . $sPath);
+        $sContents = file_get_contents(PH7_PATH_SYS_MOD . $sPath);
 
         self::assertIsString($sContents);
 

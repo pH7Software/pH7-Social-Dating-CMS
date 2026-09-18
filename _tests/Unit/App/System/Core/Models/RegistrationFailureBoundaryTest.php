@@ -15,15 +15,13 @@ use PHPUnit\Framework\TestCase;
 
 final class RegistrationFailureBoundaryTest extends TestCase
 {
-    private const REPOSITORY_ROOT = __DIR__ . '/../../../../../..';
-
     #[DataProvider('registrationProcessProvider')]
     public function testInteractiveRegistrationFailuresAreLoggedWithoutRawUiErrors(
         string $sPath,
         string $sLogPrefix,
         string $sUserMessage
     ): void {
-        $sProcess = file_get_contents(self::REPOSITORY_ROOT . '/' . $sPath);
+        $sProcess = file_get_contents(PH7_PATH_SYS_MOD . $sPath);
 
         $this->assertIsString($sProcess);
         $this->assertStringContainsString('catch (\\Throwable $oException)', $sProcess);
@@ -36,22 +34,22 @@ final class RegistrationFailureBoundaryTest extends TestCase
     {
         return [
             'member signup' => [
-                '_protected/app/system/modules/user/forms/processing/JoinFormProcess.php',
+                'user/forms/processing/JoinFormProcess.php',
                 'Member registration failed:',
                 'An error occurred during registration!'
             ],
             'affiliate signup' => [
-                '_protected/app/system/modules/affiliate/forms/processing/JoinFormProcess.php',
+                'affiliate/forms/processing/JoinFormProcess.php',
                 'Affiliate registration failed:',
                 'An error occurred during registration!'
             ],
             'admin member' => [
-                '_protected/app/system/modules/admin123/forms/processing/AddUserFormProcess.php',
+                'admin123/forms/processing/AddUserFormProcess.php',
                 'Admin member creation failed:',
                 'The user could not be added.'
             ],
             'admin affiliate' => [
-                '_protected/app/system/modules/affiliate/forms/processing/AddAffiliateFormProcess.php',
+                'affiliate/forms/processing/AddAffiliateFormProcess.php',
                 'Admin affiliate creation failed:',
                 'The affiliate could not be added.'
             ]
