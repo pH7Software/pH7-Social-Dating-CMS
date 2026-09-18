@@ -11,7 +11,7 @@ final class ShareEmbedCoreFormTest extends TestCase
     public function testShareEmbedUsesHtml5VideoInsteadOfFlash(): void
     {
         $sSource = file_get_contents(
-            dirname(__DIR__, 6) . '/_protected/app/system/core/forms/ShareEmbedCoreForm.php'
+            PH7_PATH_SYS . 'core/forms/ShareEmbedCoreForm.php'
         );
 
         $this->assertIsString($sSource);

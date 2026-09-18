@@ -27,19 +27,19 @@ final class ThemeAssetTest extends TestCase
 
     public function testDropdownPanelsDoNotClipNestedNavigation(): void
     {
-        $sCss = file_get_contents(dirname(__DIR__, 3) . '/templates/themes/base/css/design_system.css');
+        $sCss = file_get_contents(dirname(PH7_PATH_PROTECTED) . '/templates/themes/base/css/design_system.css');
         self::assertIsString($sCss);
         self::assertSame(1, preg_match('/^\.dropdown-menu\s*\{([^}]+)\}/m', $sCss, $aMatches));
         self::assertStringContainsString('overflow: visible;', $aMatches[1]);
 
-        $sPreview = file_get_contents(dirname(__DIR__, 3) . '/_tools/theme-preview.html');
+        $sPreview = file_get_contents(dirname(PH7_PATH_PROTECTED) . '/_tools/theme-preview.html');
         self::assertIsString($sPreview);
         self::assertStringContainsString('dropdown-submenu open', $sPreview);
     }
 
     public function testNestedDropdownTogglesDoNotReachBootstrapsDocumentHandler(): void
     {
-        $sScript = file_get_contents(dirname(__DIR__, 3) . '/static/js/common.js');
+        $sScript = file_get_contents(dirname(PH7_PATH_PROTECTED) . '/static/js/common.js');
         self::assertIsString($sScript);
         self::assertStringContainsString("$('.navbar').on('click', '.dropdown-submenu > .dropdown-toggle'", $sScript);
         self::assertStringContainsString('oEvent.stopPropagation();', $sScript);
@@ -47,7 +47,7 @@ final class ThemeAssetTest extends TestCase
         self::assertStringContainsString("$(this).attr('aria-expanded', 'true')", $sScript);
 
         foreach (['base', 'premium'] as $sTheme) {
-            $sTemplate = file_get_contents(dirname(__DIR__, 3) . '/templates/themes/' . $sTheme . '/tpl/top_menu.inc.tpl');
+            $sTemplate = file_get_contents(dirname(PH7_PATH_PROTECTED) . '/templates/themes/' . $sTheme . '/tpl/top_menu.inc.tpl');
             self::assertIsString($sTemplate);
             self::assertStringContainsString(
                 'title="{lang \'Admin Blog\'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown"',
@@ -58,7 +58,7 @@ final class ThemeAssetTest extends TestCase
 
     public function testEveryThemeProvidesSharedLayoutAssets(): void
     {
-        $sThemesDirectory = dirname(__DIR__, 3) . '/templates/themes';
+        $sThemesDirectory = dirname(PH7_PATH_PROTECTED) . '/templates/themes';
         $aThemeDirectories = glob($sThemesDirectory . '/*', GLOB_ONLYDIR);
 
         $this->assertIsArray($aThemeDirectories);
@@ -76,7 +76,7 @@ final class ThemeAssetTest extends TestCase
 
     public function testPluginSurfacesUseThemeAwareTextAndBackgrounds(): void
     {
-        $sCss = file_get_contents(dirname(__DIR__, 3) . '/templates/themes/base/css/design_system.css');
+        $sCss = file_get_contents(dirname(PH7_PATH_PROTECTED) . '/templates/themes/base/css/design_system.css');
         self::assertIsString($sCss);
 
         foreach (['div.apprise .apprise-buttons button', '#tiptip_content'] as $sSelector) {
@@ -89,7 +89,7 @@ final class ThemeAssetTest extends TestCase
 
     public function testEveryLocalCssImportResolves(): void
     {
-        $sThemesDirectory = dirname(__DIR__, 3) . '/templates/themes';
+        $sThemesDirectory = dirname(PH7_PATH_PROTECTED) . '/templates/themes';
         $aThemeDirectories = glob($sThemesDirectory . '/*', GLOB_ONLYDIR);
 
         foreach ($aThemeDirectories as $sThemeDirectory) {
@@ -124,7 +124,7 @@ final class ThemeAssetTest extends TestCase
 
     public function testTemplatesRetainAccessibleBrowserAndSignupNavigation(): void
     {
-        $sProjectRoot = dirname(__DIR__, 3);
+        $sProjectRoot = dirname(PH7_PATH_PROTECTED);
         $aTemplateFiles = array_merge(
             $this->findFiles($sProjectRoot . '/templates', '.tpl'),
             $this->findFiles($sProjectRoot . '/_protected/app/system/modules', '.tpl')
@@ -224,7 +224,7 @@ final class ThemeAssetTest extends TestCase
 
     public function testCookieBarDependencyIsPinnedAndIntegrityChecked(): void
     {
-        $sProjectRoot = dirname(__DIR__, 3);
+        $sProjectRoot = dirname(PH7_PATH_PROTECTED);
         $aLayoutFiles = [
             $sProjectRoot . '/templates/themes/base/tpl/layout.tpl',
             $sProjectRoot . '/templates/themes/premium/tpl/layout.tpl'
@@ -242,7 +242,7 @@ final class ThemeAssetTest extends TestCase
 
     public function testAdminChartsUseCurrentLoaderApi(): void
     {
-        $sAdminTemplateDirectory = dirname(__DIR__, 3) .
+        $sAdminTemplateDirectory = dirname(PH7_PATH_PROTECTED) .
             '/_protected/app/system/modules/admin123/views/base/tpl';
         $aChartTemplates = [
             $sAdminTemplateDirectory . '/main/stat.tpl',
@@ -263,7 +263,7 @@ final class ThemeAssetTest extends TestCase
 
     public function testAdminChartsRedrawAfterViewportChanges(): void
     {
-        $sAdminTemplateDirectory = dirname(__DIR__, 3) .
+        $sAdminTemplateDirectory = dirname(PH7_PATH_PROTECTED) .
             '/_protected/app/system/modules/admin123/views/base/tpl';
         $aChartResizeBindings = [
             $sAdminTemplateDirectory . '/main/stat.tpl' => 'resize.ph7UserChart',
@@ -285,7 +285,7 @@ final class ThemeAssetTest extends TestCase
     public function testAdminDashboardKeepsProjectNewsConcise(): void
     {
         $sTemplate = file_get_contents(
-            dirname(__DIR__, 3) .
+            dirname(PH7_PATH_PROTECTED) .
             '/_protected/app/system/modules/admin123/views/base/tpl/main/news.inc.tpl'
         );
 
@@ -296,7 +296,7 @@ final class ThemeAssetTest extends TestCase
 
     public function testThemeFormControlsRetainResponsiveBorderBoxSizing(): void
     {
-        $sProjectRoot = dirname(__DIR__, 3);
+        $sProjectRoot = dirname(PH7_PATH_PROTECTED);
         $aFormStylesheets = [
             $sProjectRoot . '/templates/themes/base/css/form.css',
             $sProjectRoot . '/templates/themes/premium/css/form.css'
@@ -313,7 +313,7 @@ final class ThemeAssetTest extends TestCase
 
     public function testThemeContentRowsMatchTheCustomContainerGutter(): void
     {
-        $sProjectRoot = dirname(__DIR__, 3);
+        $sProjectRoot = dirname(PH7_PATH_PROTECTED);
         $aCommonStylesheets = [
             $sProjectRoot . '/templates/themes/base/css/common.css',
             $sProjectRoot . '/templates/themes/premium/css/common.css'
@@ -333,7 +333,7 @@ final class ThemeAssetTest extends TestCase
     public function testVideoSplashKeepsItsBackgroundVisible(): void
     {
         $sCss = file_get_contents(
-            dirname(__DIR__, 3) . '/templates/themes/base/css/video_splash.css'
+            dirname(PH7_PATH_PROTECTED) . '/templates/themes/base/css/video_splash.css'
         );
 
         $this->assertIsString($sCss);

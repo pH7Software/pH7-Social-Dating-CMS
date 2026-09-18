@@ -12,7 +12,7 @@ final class UserControllerInputGuardTest extends TestCase
 
     protected function setUp(): void
     {
-        $sFile = dirname(__DIR__, 7) . '/_protected/app/system/modules/api/controllers/UserController.php';
+        $sFile = PH7_PATH_SYS_MOD . 'api/controllers/UserController.php';
         $sController = file_get_contents($sFile);
 
         $this->assertIsString($sController);

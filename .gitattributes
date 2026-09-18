@@ -33,6 +33,7 @@
 *.pdf binary
 *.doc binary
 *.docx binary
+*.mmdb binary
 
 ## Exclude development files from distribution
 /.github export-ignore

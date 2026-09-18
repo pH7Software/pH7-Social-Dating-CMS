@@ -9,8 +9,6 @@ use PHPUnit\Framework\TestCase;
 
 final class AlbumOwnershipGuardTest extends TestCase
 {
-    private const PROJECT_ROOT = __DIR__ . '/../../../../../../';
-
     #[DataProvider('mediaUploadProvider')]
     public function testAlbumOwnershipIsCheckedBeforeMediaIsPersisted(
         string $sProcessorPath,
@@ -39,14 +37,14 @@ final class AlbumOwnershipGuardTest extends TestCase
     {
         return [
             'picture' => [
-                '_protected/app/system/modules/picture/forms/processing/PictureFormProcess.php',
-                '_protected/app/system/modules/picture/models/PictureModel.php',
+                'picture/forms/processing/PictureFormProcess.php',
+                'picture/models/PictureModel.php',
                 'addPhoto',
                 'ALBUM_PICTURE'
             ],
             'video' => [
-                '_protected/app/system/modules/video/forms/processing/VideoFormProcess.php',
-                '_protected/app/system/modules/video/models/VideoModel.php',
+                'video/forms/processing/VideoFormProcess.php',
+                'video/models/VideoModel.php',
                 'addVideo',
                 'ALBUM_VIDEO'
             ]
@@ -55,7 +53,7 @@ final class AlbumOwnershipGuardTest extends TestCase
 
     private function readProjectFile(string $sRelativePath): string
     {
-        $sContents = file_get_contents(self::PROJECT_ROOT . $sRelativePath);
+        $sContents = file_get_contents(PH7_PATH_SYS_MOD . $sRelativePath);
         $this->assertIsString($sContents);
 
         return $sContents;

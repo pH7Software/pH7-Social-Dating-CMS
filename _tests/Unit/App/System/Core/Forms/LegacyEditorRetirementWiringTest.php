@@ -47,7 +47,7 @@ final class LegacyEditorRetirementWiringTest extends TestCase
 
     public function testLegacyPublicEditorBundlesAreAbsent(): void
     {
-        $sProjectRoot = dirname(__DIR__, 6);
+        $sProjectRoot = dirname(PH7_PATH_PROTECTED);
 
         $this->assertDirectoryDoesNotExist($sProjectRoot . '/static/PFBC/ckeditor');
         $this->assertDirectoryDoesNotExist($sProjectRoot . '/static/PFBC/tiny_mce');
@@ -55,7 +55,7 @@ final class LegacyEditorRetirementWiringTest extends TestCase
 
     private function readProjectFile(string $sPath): string
     {
-        $sContents = file_get_contents(dirname(__DIR__, 6) . '/' . $sPath);
+        $sContents = file_get_contents(dirname(PH7_PATH_PROTECTED) . '/' . $sPath);
         $this->assertIsString($sContents);
 
         return $sContents;

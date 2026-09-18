@@ -28,7 +28,7 @@ final class DbTest extends TestCase
     {
         $this->assertSame('8.0.0', Db::REQUIRED_SQL_VERSION);
 
-        $sProjectRoot = dirname(__DIR__, 6);
+        $sProjectRoot = dirname(PH7_PATH_PROTECTED);
         $aViolations = [];
 
         foreach (self::SQL_SOURCE_DIRECTORIES as $sRelativeDirectory) {

@@ -43,7 +43,7 @@ final class CompressCssTest extends TestCase
 
     public function testProductionDesignSystemRetainsPfbcRules(): void
     {
-        $sCss = file_get_contents(dirname(__DIR__, 4) . '/templates/themes/base/css/design_system.css');
+        $sCss = file_get_contents(dirname(PH7_PATH_PROTECTED) . '/templates/themes/base/css/design_system.css');
         $this->assertIsString($sCss);
         $sMinified = $this->compressCss($sCss);
 

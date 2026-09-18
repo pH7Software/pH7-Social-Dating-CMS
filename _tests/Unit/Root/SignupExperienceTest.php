@@ -15,8 +15,6 @@ use PHPUnit\Framework\TestCase;
 
 final class SignupExperienceTest extends TestCase
 {
-    private const PROJECT_ROOT = __DIR__ . '/../../..';
-
     public function testRequiredSignupStepsReportAccurateProgress(): void
     {
         $sController = $this->readProjectFile(
@@ -80,9 +78,14 @@ final class SignupExperienceTest extends TestCase
 
     private function readProjectFile(string $sRelativePath): string
     {
-        $sContents = file_get_contents(self::PROJECT_ROOT . '/' . $sRelativePath);
+        $sContents = file_get_contents(self::projectRoot() . '/' . $sRelativePath);
         $this->assertIsString($sContents);
 
         return $sContents;
+    }
+
+    private static function projectRoot(): string
+    {
+        return dirname(PH7_PATH_PROTECTED);
     }
 }

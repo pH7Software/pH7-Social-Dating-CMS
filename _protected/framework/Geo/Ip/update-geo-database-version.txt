@@ -1,17 +1,50 @@
-The bundled legacy GeoLite2-City database was built on 3 December 2019.
-Updating the PHP reader does not update this location data.
+Bundled GeoIP database
+======================
 
-Get current GeoLite data through a free MaxMind account:
-https://www.maxmind.com/en/geolite-free-ip-geolocation-data
+File:       GeoLite2-City.mmdb
+Build date: 24 December 2019 (MaxMind build epoch 1577209301)
+SHA-256:    a253d9cd68fe17b00087da24375f31f07cd4bb3852dc5fe3afe37b8f59e5abd0
+Licence:    Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0).
+            MaxMind's own notices are LICENSE.txt, COPYRIGHT.txt and README.txt in
+            this directory; Maxmind-GeoLite2.license.txt is the licence text. The
+            data incorporates GeoNames data available under CC BY 3.0 US.
 
-Use MaxMind's GeoIP Update tool with a private GeoIP.conf containing your
-AccountID, LicenseKey and EditionIDs GeoLite2-City. From the project root, run:
-geoipupdate -f /absolute/private/path/GeoIP.conf -d ./_protected/framework/Geo/Ip
+Why this build
+--------------
+It is the last GeoLite2-City release MaxMind published under CC BY-SA 4.0. Since
+30 December 2019 MaxMind only distributes GeoLite databases to registered accounts
+authenticated with a licence key, under the GeoLite End User License Agreement
+(https://www.maxmind.com/en/geolite2/eula). That agreement requires every user to
+stop using and destroy each database within 30 days of the next release (twice a
+week at the time of writing) and to impose the same duties on anyone the database
+is shared with, so a newer build can neither be bundled with this project nor
+downloaded without a MaxMind account. The CC BY-SA 4.0 licence of this build
+is perpetual and irrevocable (sections 2(a)(1) and 6(c)), so it may keep being
+used and redistributed with its notices intact. Updating the PHP reader library
+does not change the location data.
 
-Keep the configuration outside the web root, restrict it to its owner, and
-never commit it or share its licence key. Follow MaxMind's update guidance:
-https://dev.maxmind.com/geoip/updating-databases/
+Installing or restoring it
+--------------------------
+No MaxMind account, licence key or other credential is needed. From the project
+root:
 
-Before redistributing a newly downloaded database, review its accompanying
-licence and notices, including attribution and ongoing-update requirements:
-https://www.maxmind.com/en/geolite/eula
+    bash _tools/pH7.sh
+    install geoip db
+
+Leave the prompt empty to use the bundled build. The command checks the installed
+file against the checksum above, restores the tracked copy from Git when it is
+available, and otherwise downloads the same 24 December 2019 archive from the
+Internet Archive's capture of MaxMind's former public download URL, verifying its
+checksum before installing it together with MaxMind's notice files.
+
+The _tools/ directory only exists in a Git checkout. Release packages leave it
+out, but they already include this database and its notice files: to restore
+them in a release installation, extract GeoLite2-City.mmdb, LICENSE.txt,
+COPYRIGHT.txt and README.txt from _protected/framework/Geo/Ip/ in the same
+release package.
+
+Entering a path instead installs a GeoLite2-City .mmdb or .tar.gz you obtained
+yourself. A GeoLite database built on or after 30 December 2019 is governed by
+MaxMind's GeoLite EULA, not by CC BY-SA 4.0: keep MaxMind's attribution and the
+notices shipped with it, replace it within 30 days of each MaxMind release, and
+never commit it to this repository or redistribute it with the project.

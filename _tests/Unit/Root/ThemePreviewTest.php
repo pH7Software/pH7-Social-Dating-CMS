@@ -17,7 +17,7 @@ final class ThemePreviewTest extends TestCase
 {
     public function testPreviewUsesPluginMarkupAndAnchoredDropdowns(): void
     {
-        $sPreview = file_get_contents(dirname(__DIR__, 3) . '/_tools/theme-preview.html');
+        $sPreview = file_get_contents(dirname(PH7_PATH_PROTECTED) . '/_tools/theme-preview.html');
         self::assertIsString($sPreview);
         $oDocument = new DOMDocument;
         self::assertTrue($oDocument->loadHTML($sPreview, LIBXML_NOERROR | LIBXML_NOWARNING));

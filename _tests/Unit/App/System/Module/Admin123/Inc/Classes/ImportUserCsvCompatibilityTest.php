@@ -17,7 +17,7 @@ final class ImportUserCsvCompatibilityTest extends TestCase
     public function testCsvReaderKeepsItsEscapeCharacterExplicit(): void
     {
         $sSource = file_get_contents(
-            dirname(__DIR__, 8) . '/_protected/app/system/modules/admin123/inc/class/ImportUser.php'
+            PH7_PATH_SYS_MOD . 'admin123/inc/class/ImportUser.php'
         );
         $sExplicitEscapeArgument = <<<'SOURCE'
 $sEnclosure, '\\')

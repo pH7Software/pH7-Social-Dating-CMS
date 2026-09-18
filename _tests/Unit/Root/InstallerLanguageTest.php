@@ -11,7 +11,7 @@ declare(strict_types=1);
 
 namespace PH7\Test\Unit\Root;
 
-require_once __DIR__ . '/../../../_install/library/Language.class.php';
+require_once dirname(PH7_PATH_PROTECTED) . '/_install/library/Language.class.php';
 
 use PH7\Language;
 use PHPUnit\Framework\Attributes\DataProvider;
@@ -45,7 +45,7 @@ final class InstallerLanguageTest extends TestCase
     #[DataProvider('installerLanguageProvider')]
     public function testFinishStepRequiresProductionLockdown(string $sLanguage): void
     {
-        $sLanguageFile = __DIR__ . '/../../../_install/langs/' . $sLanguage . '/install.lang.php';
+        $sLanguageFile = dirname(PH7_PATH_PROTECTED) . '/_install/langs/' . $sLanguage . '/install.lang.php';
         $sContents = file_get_contents($sLanguageFile);
 
         $this->assertIsString($sContents);
@@ -64,7 +64,7 @@ final class InstallerLanguageTest extends TestCase
 
     public function testLockdownDocumentationUrlTargetsQuickStartStep(): void
     {
-        $sController = file_get_contents(__DIR__ . '/../../../_install/library/Controller.class.php');
+        $sController = file_get_contents(dirname(PH7_PATH_PROTECTED) . '/_install/library/Controller.class.php');
 
         $this->assertIsString($sController);
         $this->assertStringContainsString(self::LOCKDOWN_URL, $sController);
@@ -74,7 +74,7 @@ final class InstallerLanguageTest extends TestCase
     public function testInstallerLicenseCreditsContributors(string $sLanguage): void
     {
         $sLicense = file_get_contents(
-            __DIR__ . '/../../../_install/langs/' . $sLanguage . '/license.html'
+            dirname(PH7_PATH_PROTECTED) . '/_install/langs/' . $sLanguage . '/license.html'
         );
 
         $this->assertIsString($sLicense);

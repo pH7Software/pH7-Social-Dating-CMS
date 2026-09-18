@@ -15,12 +15,10 @@ use PHPUnit\Framework\TestCase;
 
 final class LaunchSafetyDefaultsTest extends TestCase
 {
-    private const PROJECT_ROOT = __DIR__ . '/../../..';
-
     public function testFreshPaymentConfigUsesSafeEmptyDefaults(): void
     {
         $aConfig = parse_ini_file(
-            self::PROJECT_ROOT . '/_protected/app/system/modules/payment/config/config.ini',
+            self::projectRoot() . '/_protected/app/system/modules/payment/config/config.ini',
             true
         );
         $this->assertIsArray($aConfig);
@@ -120,9 +118,14 @@ final class LaunchSafetyDefaultsTest extends TestCase
 
     private function readProjectFile(string $sRelativePath): string
     {
-        $sContents = file_get_contents(self::PROJECT_ROOT . '/' . $sRelativePath);
+        $sContents = file_get_contents(self::projectRoot() . '/' . $sRelativePath);
         $this->assertIsString($sContents);
 
         return $sContents;
+    }
+
+    private static function projectRoot(): string
+    {
+        return dirname(PH7_PATH_PROTECTED);
     }
 }

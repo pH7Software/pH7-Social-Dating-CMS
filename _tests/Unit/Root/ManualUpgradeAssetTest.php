@@ -19,7 +19,7 @@ final class ManualUpgradeAssetTest extends TestCase
     protected function setUp(): void
     {
         $sContents = file_get_contents(
-            dirname(__DIR__, 3) . '/_protected/app/system/core/assets/file/UpgradeCoreFile.php'
+            PH7_PATH_SYS . 'core/assets/file/UpgradeCoreFile.php'
         );
 
         $this->assertIsString($sContents);

@@ -15,15 +15,13 @@ use PHPUnit\Framework\TestCase;
 
 final class CommentMutationSafetyTest extends TestCase
 {
-    private const REPOSITORY_ROOT = __DIR__ . '/../../../../../..';
-
     public function testCommentEditsRequireAuthenticationAndTheRequestedIdentity(): void
     {
         $sPermission = $this->readRepositoryFile(
-            '_protected/app/system/modules/comment/config/Permission.php'
+            'comment/config/Permission.php'
         );
         $sController = $this->readRepositoryFile(
-            '_protected/app/system/modules/comment/controllers/CommentController.php'
+            'comment/controllers/CommentController.php'
         );
 
         self::assertStringContainsString("['add', 'edit', 'delete']", $sPermission);
@@ -35,7 +33,7 @@ final class CommentMutationSafetyTest extends TestCase
     public function testCommentMutationSuccessRequiresOneAffectedRow(): void
     {
         $sModel = $this->readRepositoryFile(
-            '_protected/app/system/modules/comment/models/CommentModel.php'
+            'comment/models/CommentModel.php'
         );
 
         self::assertSame(2, substr_count($sModel, '$rStmt->rowCount() === 1'));
@@ -44,7 +42,7 @@ final class CommentMutationSafetyTest extends TestCase
     public function testAdministratorsCanUseTheEditActionShownInTheInterface(): void
     {
         $sProcess = $this->readRepositoryFile(
-            '_protected/app/system/modules/comment/forms/processing/EditCommentFormProcess.php'
+            'comment/forms/processing/EditCommentFormProcess.php'
         );
 
         self::assertStringContainsString('return AdminCore::auth()', $sProcess);
@@ -52,7 +50,7 @@ final class CommentMutationSafetyTest extends TestCase
 
     private function readRepositoryFile(string $sPath): string
     {
-        $sContents = file_get_contents(self::REPOSITORY_ROOT . '/' . $sPath);
+        $sContents = file_get_contents(PH7_PATH_SYS_MOD . $sPath);
 
         self::assertIsString($sContents);
 

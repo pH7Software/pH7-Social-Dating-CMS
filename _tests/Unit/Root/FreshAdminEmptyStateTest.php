@@ -15,8 +15,6 @@ use PHPUnit\Framework\TestCase;
 
 final class FreshAdminEmptyStateTest extends TestCase
 {
-    private const PROJECT_ROOT = __DIR__ . '/../../..';
-
     public function testFreshAdminListsRenderUsefulEmptyStatesInsteadOfNotFoundPages(): void
     {
         $aControllers = [
@@ -69,10 +67,15 @@ final class FreshAdminEmptyStateTest extends TestCase
 
     private function readFile(string $sRelativePath): string
     {
-        $sContents = file_get_contents(self::PROJECT_ROOT . '/' . $sRelativePath);
+        $sContents = file_get_contents(self::projectRoot() . '/' . $sRelativePath);
 
         self::assertIsString($sContents);
 
         return $sContents;
+    }
+
+    private static function projectRoot(): string
+    {
+        return dirname(PH7_PATH_PROTECTED);
     }
 }

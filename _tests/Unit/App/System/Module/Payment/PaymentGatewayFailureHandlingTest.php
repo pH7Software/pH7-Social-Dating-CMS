@@ -14,12 +14,10 @@ use PHPUnit\Framework\TestCase;
 
 final class PaymentGatewayFailureHandlingTest extends TestCase
 {
-    private const REPOSITORY_ROOT = __DIR__ . '/../../../../../..';
-
     public function testControllerNeverDisplaysRawGatewayExceptions(): void
     {
         $sController = $this->readRepositoryFile(
-            '_protected/app/system/modules/payment/controllers/MainController.php'
+            'payment/controllers/MainController.php'
         );
 
         $this->assertStringContainsString("error_log(sprintf('Stripe checkout %s: %s'", $sController);
@@ -35,7 +33,7 @@ final class PaymentGatewayFailureHandlingTest extends TestCase
     public function testBraintreeSaleFailureIsCaughtAfterInitialization(): void
     {
         $sController = $this->readRepositoryFile(
-            '_protected/app/system/modules/payment/controllers/MainController.php'
+            'payment/controllers/MainController.php'
         );
         $iHandler = strpos($sController, 'private function braintreeHandler()');
         $iTry = strpos($sController, 'try {', (int)$iHandler);
@@ -54,7 +52,7 @@ final class PaymentGatewayFailureHandlingTest extends TestCase
     public function testBraintreeTokenFailureLeavesAnActionableCheckoutPage(): void
     {
         $sDesign = $this->readRepositoryFile(
-            '_protected/app/system/modules/payment/inc/class/design/PaymentDesign.php'
+            'payment/inc/class/design/PaymentDesign.php'
         );
         $iTry = strpos($sDesign, 'try {', strpos($sDesign, 'public function buttonBraintree'));
         $iToken = strpos($sDesign, 'Braintree::generateClientToken()', (int)$iTry);
@@ -70,7 +68,7 @@ final class PaymentGatewayFailureHandlingTest extends TestCase
 
     private function readRepositoryFile(string $sPath): string
     {
-        $sContents = file_get_contents(self::REPOSITORY_ROOT . '/' . $sPath);
+        $sContents = file_get_contents(PH7_PATH_SYS_MOD . $sPath);
 
         $this->assertIsString($sContents);
 

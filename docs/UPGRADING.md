@@ -15,10 +15,14 @@ serves your site. If the optional compiled `ext-maxminddb` extension is present,
 upgrade it to `>=1.14.0 <2.0.0`; older versions conflict with the updated reader.
 The bundled pure-PHP reader does not require installing this extension.
 
-The reader update does not refresh the bundled 2019 GeoLite2 location data.
-Use a free MaxMind account to obtain current data and arrange regular updates;
-see the [GeoIP database instructions](../_protected/framework/Geo/Ip/update-geo-database-version.txt).
-Preserve your newer local database when replacing application files.
+The reader update does not refresh the bundled GeoLite2 location data, which is
+MaxMind's last Creative Commons build (24 December 2019). No MaxMind account is
+needed: release packages include it, and in a Git checkout the
+`install geoip db` command of `_tools/pH7.sh` verifies or restores it. The
+[GeoIP database instructions](../_protected/framework/Geo/Ip/update-geo-database-version.txt)
+explain how to restore it from a release package and why newer GeoLite data
+cannot be bundled. Preserve any newer database you installed yourself when
+replacing application files.
 
 The base and premium footers now show a plain, versioned pH7Builder link to
 GitHub instead of the site name and GeoLite2 line. The existing branding

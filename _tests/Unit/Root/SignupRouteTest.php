@@ -16,8 +16,6 @@ use PHPUnit\Framework\TestCase;
 
 final class SignupRouteTest extends TestCase
 {
-    private const PROJECT_ROOT = __DIR__ . '/../../..';
-
     private const SIGNUP_ROUTES = [
         'step1' => 'signup',
         'step2' => 'signup/step2',
@@ -28,7 +26,7 @@ final class SignupRouteTest extends TestCase
 
     public function testEveryShippedLanguageDefinesTheCompleteSignupFlow(): void
     {
-        $aRouteFiles = glob(self::PROJECT_ROOT . '/_protected/app/configs/routes/*.xml');
+        $aRouteFiles = glob(self::projectRoot() . '/_protected/app/configs/routes/*.xml');
         $this->assertIsArray($aRouteFiles);
         $this->assertNotEmpty($aRouteFiles);
 
@@ -65,5 +63,10 @@ final class SignupRouteTest extends TestCase
             Uri::clearCache('geturiusersignup' . $sAction);
             $this->assertSame(PH7_URL_ROOT . $sUrl, Uri::get('user', 'signup', $sAction));
         }
+    }
+
+    private static function projectRoot(): string
+    {
+        return dirname(PH7_PATH_PROTECTED);
     }
 }

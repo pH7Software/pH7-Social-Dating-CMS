@@ -14,12 +14,10 @@ use PHPUnit\Framework\TestCase;
 
 final class GeoAutocompleteTest extends TestCase
 {
-    private const PROJECT_ROOT = __DIR__ . '/../../..';
-
     public function testCityAutocompleteUsesTheSecureGeoNamesEndpoint(): void
     {
-        $sScript = file_get_contents(self::PROJECT_ROOT . '/static/js/geo/autocompleteCity.js');
-        $sDocumentation = file_get_contents(self::PROJECT_ROOT . '/static/js/geo/geo_api.txt');
+        $sScript = file_get_contents(self::projectRoot() . '/static/js/geo/autocompleteCity.js');
+        $sDocumentation = file_get_contents(self::projectRoot() . '/static/js/geo/geo_api.txt');
 
         $this->assertIsString($sScript);
         $this->assertIsString($sDocumentation);
@@ -30,5 +28,10 @@ final class GeoAutocompleteTest extends TestCase
         $this->assertStringNotContainsString('http://ws.geonames.org', $sScript);
         $this->assertStringNotContainsString('http://www.geonames.org', $sScript);
         $this->assertStringContainsString('https://www.geonames.org/', $sDocumentation);
+    }
+
+    private static function projectRoot(): string
+    {
+        return dirname(PH7_PATH_PROTECTED);
     }
 }

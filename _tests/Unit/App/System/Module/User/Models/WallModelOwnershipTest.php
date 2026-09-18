@@ -14,8 +14,6 @@ use PHPUnit\Framework\TestCase;
 
 final class WallModelOwnershipTest extends TestCase
 {
-    private const REPOSITORY_ROOT = __DIR__ . '/../../../../../../..';
-
     public function testWallEditsRequireBothTheOwnerAndTheWallPost(): void
     {
         $sModel = $this->readRepositoryFile(
@@ -60,7 +58,7 @@ final class WallModelOwnershipTest extends TestCase
 
     private function readRepositoryFile(string $sPath): string
     {
-        $sContents = file_get_contents(self::REPOSITORY_ROOT . '/' . $sPath);
+        $sContents = file_get_contents(dirname(PH7_PATH_PROTECTED) . PH7_DS . $sPath);
 
         $this->assertIsString($sContents);
 

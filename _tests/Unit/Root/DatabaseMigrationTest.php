@@ -84,7 +84,7 @@ final class DatabaseMigrationTest extends TestCase
 
     private function readProjectFile(string $sRelativePath): string
     {
-        $sContents = file_get_contents(dirname(__DIR__, 3) . '/' . $sRelativePath);
+        $sContents = file_get_contents(dirname(PH7_PATH_PROTECTED) . '/' . $sRelativePath);
 
         $this->assertIsString($sContents);
 
