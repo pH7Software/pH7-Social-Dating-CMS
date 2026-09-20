@@ -399,13 +399,15 @@ class SearchUserCoreForm
         }
 
         if ($oHttpRequest->getExists(SearchQueryCore::CITY)) {
-            $sCity = $oHttpRequest->get(SearchQueryCore::CITY);
+            // PFBC encodes the value at the HTML attribute boundary.
+            $mCity = $oHttpRequest->get(SearchQueryCore::CITY, HttpRequest::NO_CLEAN);
+            $sCity = is_string($mCity) ? $mCity : '';
         } else {
             $sCity = Geo::getCity();
         }
-        self::$aCityOption += ['value' => $sCity, 'onfocus' => "if('" . $sCity . "' == this.value) this.value = '';", 'onblur' => "if ('' == this.value) this.value = '" . $sCity . "';"];
+        self::$aCityOption += ['value' => $sCity];
 
-        self::$aStateOption += ['value' => Geo::getState(), 'onfocus' => "if('" . Geo::getState() . "' == this.value) this.value = '';", 'onblur' => "if ('' == this.value) this.value = '" . Geo::getState() . "';"];
+        self::$aStateOption += ['value' => Geo::getState()];
 
         if ($oHttpRequest->getExists(SearchQueryCore::ORDER)) {
             self::$aLatestOrder += ['value' => SearchCoreModel::LATEST];

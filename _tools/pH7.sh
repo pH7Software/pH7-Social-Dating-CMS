@@ -241,12 +241,12 @@ function install-geoip-db() {
 
     if [ "$(_sha256 "$geoip_db_path")" = "$bundled_db_sha256" ]; then
         echo "The $bundled_db_label is already installed at $geoip_db_path"
-        _restore-geoip-db-notices
+        _restore-geoip-db-notices || return 1
         _show-geoip-db-info "$geoip_db_path"
         return
     fi
 
-    if [ -f "$geoip_db_path" ] && _show-geoip-db-info "$geoip_db_path"; then
+    if [ -e "$geoip_db_path" ]; then
         _confirm "A different GeoIP database is installed at $geoip_db_path. Replace it with the $bundled_db_label?"
         if [ $? -ne 1 ]; then
             echo "Existing GeoIP database kept."
@@ -254,15 +254,19 @@ function install-geoip-db() {
         fi
     fi
 
-    # Prefer the copy tracked by Git, otherwise download the archived build
-    if git ls-files --error-unmatch "$geoip_db_path" >/dev/null 2>&1; then
-        echo "Restoring the tracked copy from Git"
-        git checkout -- "$geoip_db_path"
-        _restore-geoip-db-notices force
-    fi
-
-    if [ "$(_sha256 "$geoip_db_path")" != "$bundled_db_sha256" ]; then
-        _create-geoip-tmp-dir
+    # Stage the committed copy without altering the working tree or Git index.
+    _create-geoip-tmp-dir
+    if git show "HEAD:${geoip_db_path#./}" > "$geoip_tmp_path/GeoLite2-City.mmdb" 2>/dev/null &&
+        [ "$(_sha256 "$geoip_tmp_path/GeoLite2-City.mmdb")" = "$bundled_db_sha256" ]; then
+        echo "Restoring the bundled copy from Git"
+        for notice_file in LICENSE.txt COPYRIGHT.txt README.txt Maxmind-GeoLite2.license.txt; do
+            if ! git show "HEAD:${geoip_path#./}/$notice_file" > "$geoip_tmp_path/$notice_file"; then
+                echo "Unable to restore $notice_file from Git. Nothing was installed."
+                exit 1
+            fi
+        done
+        geoip_extracted_db_path="$geoip_tmp_path/GeoLite2-City.mmdb"
+    else
         echo "Downloading the $bundled_db_label from $bundled_archive_url"
         _download "$bundled_archive_url" "$geoip_tmp_path/GeoLite2-City.tar.gz"
         if [ "$(_sha256 "$geoip_tmp_path/GeoLite2-City.tar.gz")" != "$bundled_archive_sha256" ]; then
@@ -275,8 +279,9 @@ function install-geoip-db() {
             echo "The extracted database doesn't match its expected SHA-256 checksum. Nothing was installed."
             exit 1
         fi
-        _install-geoip-db-file "$geoip_extracted_db_path" "$(dirname "$geoip_extracted_db_path")"
     fi
+
+    _install-geoip-db-file "$geoip_extracted_db_path" "$(dirname "$geoip_extracted_db_path")" || return 1
 
     echo "GeoIP DB successfully installed at $geoip_db_path"
     _show-geoip-db-info "$geoip_db_path"
@@ -351,10 +356,10 @@ function _install-geoip-db-from-file() {
         *.tar.gz|*.tgz)
             _create-geoip-tmp-dir
             _extract-geoip-db-archive "$1" "$geoip_tmp_path"
-            _install-geoip-db-file "$geoip_extracted_db_path" "$(dirname "$geoip_extracted_db_path")"
+            _install-geoip-db-file "$geoip_extracted_db_path" "$(dirname "$geoip_extracted_db_path")" || return 1
             ;;
         *.mmdb)
-            _install-geoip-db-file "$1"
+            _install-geoip-db-file "$1" || return 1
             # A bare .mmdb carries no notices, so the ones already in place may belong to another build
             echo "A .mmdb file comes without MaxMind's notice files. Copy the LICENSE.txt, COPYRIGHT.txt and README.txt that came with it into ./_protected/framework/Geo/Ip/"
             ;;
@@ -378,17 +383,39 @@ function _create-geoip-tmp-dir() {
 # Extract GeoLite2-City.mmdb (with MaxMind's notice files) from a MaxMind .tar.gz into $2; sets geoip_extracted_db_path
 function _extract-geoip-db-archive() {
     echo "Extracting $1"
-    tar -xzf "$1" -C "$2" || exit 1
-
-    geoip_extracted_db_path=$(find "$2" -type f -name 'GeoLite2-City.mmdb' | head -n 1)
-    if [ -z "$geoip_extracted_db_path" ]; then
-        echo "No GeoLite2-City.mmdb was found in $1"
+    tar -tzf "$1" > "$2/members.txt" || exit 1
+    geoip_archive_member=""
+    while IFS= read -r archive_member; do
+        case "$archive_member" in
+            GeoLite2-City.mmdb|*/GeoLite2-City.mmdb)
+                if [ -n "$geoip_archive_member" ]; then
+                    echo "The archive contains more than one GeoLite2-City.mmdb. Nothing was installed."
+                    exit 1
+                fi
+                geoip_archive_member="$archive_member"
+                ;;
+        esac
+    done < "$2/members.txt"
+    if [ -z "$geoip_archive_member" ]; then
+        echo "No GeoLite2-City.mmdb was found in $1. Nothing was installed."
         exit 1
     fi
+
+    # Stream only the database and its notices into fixed filenames: never unpack arbitrary paths or links.
+    geoip_extracted_db_path="$2/GeoLite2-City.mmdb"
+    tar -xOzf "$1" -- "$geoip_archive_member" > "$geoip_extracted_db_path" || exit 1
+    geoip_archive_prefix="${geoip_archive_member%GeoLite2-City.mmdb}"
+    for notice_file in LICENSE.txt COPYRIGHT.txt README.txt; do
+        if [ "$(grep -Fxc -- "$geoip_archive_prefix$notice_file" "$2/members.txt")" != 1 ] ||
+            ! tar -xOzf "$1" -- "$geoip_archive_prefix$notice_file" > "$2/$notice_file" || [ ! -s "$2/$notice_file" ]; then
+            echo "The archive must include one readable $notice_file beside its database. Nothing was installed."
+            exit 1
+        fi
+    done
 }
 
-# Validate a MaxMind City database and atomically install it, along with MaxMind's notice files from directory $2 when given
-function _install-geoip-db-file() {
+# Stage all files before replacement; keep the previous database and notices if any installation step fails.
+function _install-geoip-db-file() (
     geoip_path="./_protected/framework/Geo/Ip"
 
     if ! _read-geoip-db-info "$1"; then
@@ -396,29 +423,92 @@ function _install-geoip-db-file() {
         exit 1
     fi
 
-    if ! cp "$1" "$geoip_path/GeoLite2-City.mmdb.tmp" || ! mv -f "$geoip_path/GeoLite2-City.mmdb.tmp" "$geoip_path/GeoLite2-City.mmdb"; then
-        rm -f "$geoip_path/GeoLite2-City.mmdb.tmp"
-        echo "Unable to write $geoip_path/GeoLite2-City.mmdb"
-        exit 1
-    fi
-    chmod 644 "$geoip_path/GeoLite2-City.mmdb"
-
-    # CC BY-SA 4.0 and the GeoLite EULA both require keeping the notices shipped with the database
+    geoip_files=()
     if [ -n "$2" ]; then
         for notice_file in LICENSE.txt COPYRIGHT.txt README.txt; do
-            if [ -f "$2/$notice_file" ]; then
-                cp "$2/$notice_file" "$geoip_path/$notice_file"
+            if [ ! -f "$2/$notice_file" ] || [ ! -s "$2/$notice_file" ]; then
+                echo "Missing or empty $notice_file. Nothing was installed."
+                exit 1
+            fi
+            geoip_files+=("$notice_file")
+        done
+        if [ -s "$2/Maxmind-GeoLite2.license.txt" ]; then
+            geoip_files+=("Maxmind-GeoLite2.license.txt")
+        fi
+    fi
+    geoip_files+=("GeoLite2-City.mmdb") # Publish the validated database last.
+
+    geoip_stage_path=$(mktemp -d "$geoip_path/.geoip-install.XXXXXX") || exit 1
+    geoip_published_files=()
+    geoip_install_complete=0
+    trap '_finish-geoip-install' EXIT
+    trap 'exit 1' HUP INT TERM
+    mkdir "$geoip_stage_path/previous" || exit 1
+    for geoip_file in "${geoip_files[@]}"; do
+        geoip_destination="$geoip_path/$geoip_file"
+        if [ -L "$geoip_destination" ] || { [ -e "$geoip_destination" ] && [ ! -f "$geoip_destination" ]; }; then
+            echo "$geoip_destination must be a regular file. Nothing was installed."
+            exit 1
+        fi
+        if [ -f "$geoip_destination" ] && ! cp -p "$geoip_destination" "$geoip_stage_path/previous/$geoip_file"; then
+            echo "Unable to back up $geoip_destination. Nothing was installed."
+            exit 1
+        fi
+        geoip_source="$2/$geoip_file"
+        [ "$geoip_file" = "GeoLite2-City.mmdb" ] && geoip_source="$1"
+        if ! cp "$geoip_source" "$geoip_stage_path/$geoip_file" || ! chmod 644 "$geoip_stage_path/$geoip_file"; then
+            echo "Unable to stage $geoip_file. Nothing was installed."
+            exit 1
+        fi
+    done
+
+    # Validate the staged bytes, not only the source that might have changed during copying.
+    _read-geoip-db-info "$geoip_stage_path/GeoLite2-City.mmdb" || exit 1
+    for geoip_file in "${geoip_files[@]}"; do
+        geoip_published_files+=("$geoip_file")
+        if ! mv -f "$geoip_stage_path/$geoip_file" "$geoip_path/$geoip_file"; then
+            echo "Unable to install $geoip_file; restoring the previous files."
+            exit 1
+        fi
+    done
+    geoip_install_complete=1
+)
+
+function _finish-geoip-install() {
+    if [ "$geoip_install_complete" -ne 1 ]; then
+        for geoip_file in "${geoip_published_files[@]}"; do
+            if [ -f "$geoip_stage_path/previous/$geoip_file" ]; then
+                if ! mv -f "$geoip_stage_path/previous/$geoip_file" "$geoip_path/$geoip_file"; then
+                    echo "Recovery failed for $geoip_file. Backups are retained in $geoip_stage_path/previous/."
+                    return 1
+                fi
+            else
+                if ! rm -f "$geoip_path/$geoip_file"; then
+                    echo "Recovery failed for $geoip_file. Check $geoip_path; backups are retained in $geoip_stage_path/previous/."
+                    return 1
+                fi
             fi
         done
     fi
+    rm -rf "$geoip_stage_path"
 }
 
-# Put back MaxMind's notice files for the bundled database from Git; "force" also overwrites modified ones
+# Repair the bundled database's notices without changing the Git index.
 function _restore-geoip-db-notices() {
+    _create-geoip-tmp-dir
     for notice_file in LICENSE.txt COPYRIGHT.txt README.txt Maxmind-GeoLite2.license.txt; do
         notice_path="./_protected/framework/Geo/Ip/$notice_file"
-        if { [ ! -f "$notice_path" ] || [ "$1" = "force" ]; } && git ls-files --error-unmatch "$notice_path" >/dev/null 2>&1; then
-            git checkout -- "$notice_path"
+        if ! git show "HEAD:${notice_path#./}" > "$geoip_tmp_path/$notice_file" 2>/dev/null; then
+            if [ ! -s "$notice_path" ] || ! cp "$notice_path" "$geoip_tmp_path/$notice_file"; then
+                echo "Restore $notice_file from the same release package as the database."
+                return 1
+            fi
+        fi
+    done
+    for notice_file in LICENSE.txt COPYRIGHT.txt README.txt Maxmind-GeoLite2.license.txt; do
+        if ! cmp -s "$geoip_tmp_path/$notice_file" "./_protected/framework/Geo/Ip/$notice_file"; then
+            _install-geoip-db-file "$geoip_db_path" "$geoip_tmp_path"
+            return
         fi
     done
 }
@@ -430,14 +520,43 @@ function _read-geoip-db-info() {
     geoip_db_build_epoch=""
     geoip_db_build_date=""
 
+    # Exact, pinned bytes are trusted even before Composer dependencies are installed.
+    if [ "$(_sha256 "$1")" = "$bundled_db_sha256" ]; then
+        geoip_db_type="GeoLite2-City"
+        geoip_db_build_epoch=1577209301
+        geoip_db_build_date="24 December 2019"
+        return 0
+    fi
+
     if command -v php >/dev/null 2>&1 && [ -f ./_protected/vendor/autoload.php ]; then
         # shellcheck disable=SC2016 # the single-quoted PHP code is meant to reach PHP unexpanded
         geoip_db_info=$(PH7_GEOIP_DB_PATH="$1" php -r '
             require "./_protected/vendor/autoload.php";
             try {
-                $oReader = new MaxMind\Db\Reader(getenv("PH7_GEOIP_DB_PATH"));
+                $oReader = new GeoIp2\Database\Reader(getenv("PH7_GEOIP_DB_PATH"));
                 $oMetadata = $oReader->metadata();
+                if ($oMetadata->databaseType !== "GeoLite2-City") {
+                    throw new RuntimeException("Expected a GeoLite2-City database.");
+                }
+                // Metadata alone can survive a corrupt search tree. Exercise actual IPv4 and IPv6 records.
+                $aAddresses = ["1.1.1.1", "8.8.8.8", "81.2.69.142", "128.101.101.101"];
+                if ($oMetadata->ipVersion === 6) {
+                    $aAddresses[] = "2001:4860:4860::8888";
+                    $aAddresses[] = "2606:4700:4700::1111";
+                }
+                $bFoundRecord = false;
+                foreach ($aAddresses as $sAddress) {
+                    try {
+                        $oReader->city($sAddress);
+                        $bFoundRecord = true;
+                    } catch (GeoIp2\Exception\AddressNotFoundException $oE) {
+                        // Coverage varies by build; an absent address is not corruption.
+                    }
+                }
                 $oReader->close();
+                if (!$bFoundRecord) {
+                    throw new RuntimeException("No location records could be read from the database.");
+                }
             } catch (Throwable $oE) {
                 fwrite(STDERR, $oE->getMessage() . PHP_EOL);
                 exit(1);
@@ -446,17 +565,10 @@ function _read-geoip-db-info() {
         ') || return 1
         IFS='|' read -r geoip_db_type geoip_db_build_epoch geoip_db_build_date <<< "$geoip_db_info"
 
-        case "$geoip_db_type" in
-            *City*) return 0;;
-            *) echo "$geoip_db_type is not a City database."; return 1;;
-        esac
-    fi
-
-    # Without PHP, only the MaxMind DB metadata marker can be checked
-    if grep -q -a 'MaxMind.com' "$1" 2>/dev/null; then
-        geoip_db_type="MaxMind"
         return 0
     fi
+
+    echo "Custom databases require PHP and Composer dependencies. Run composer install, then retry."
     return 1
 }
 

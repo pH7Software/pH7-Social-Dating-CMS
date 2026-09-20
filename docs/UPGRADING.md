@@ -3,6 +3,27 @@
 Automatic in-place upgrades are currently unavailable. Upgrade a staging copy
 manually, verify it, and only then repeat the reviewed procedure in production.
 
+## Unreleased GeoIP maintenance
+
+Changes after 19.2.0 replace the bundled 3 December 2019 GeoLite2 database with
+MaxMind's last Creative Commons build (24 December 2019) and its original
+notices. These changes are not in the published 19.2.0 package. The data is still
+historical; this is not a current-location-data update. No database migration
+is needed. Preserve any newer GeoLite2 database you maintain yourself.
+
+In a Git checkout, `install geoip db` in `_tools/pH7.sh` verifies or restores the
+pinned build without MaxMind credentials. Custom imports require PHP and
+Composer dependencies for validation; archives must include their notice files.
+Failed installations preserve the previous database and notices. See the
+[GeoIP database instructions](../_protected/framework/Geo/Ip/update-geo-database-version.txt).
+
+An unreadable or missing GeoIP file no longer interrupts ordinary login or
+signup; PHP's error log records a restoration message. Configured country
+restrictions still fail closed when the database is unavailable; the admin
+panel remains accessible for recovery. Country and city suggestions remain
+unavailable until the database is restored. Search location fields also keep
+apostrophes and ampersands intact and allow owners and members to clear a filter.
+
 ## 19.2.0 dependency-maintenance release
 
 pH7Builder 19.2.0 updates the locked PHP dependencies and adds offline SDK
@@ -15,13 +36,12 @@ serves your site. If the optional compiled `ext-maxminddb` extension is present,
 upgrade it to `>=1.14.0 <2.0.0`; older versions conflict with the updated reader.
 The bundled pure-PHP reader does not require installing this extension.
 
-The reader update does not refresh the bundled GeoLite2 location data, which is
-MaxMind's last Creative Commons build (24 December 2019). No MaxMind account is
-needed: release packages include it, and in a Git checkout the
-`install geoip db` command of `_tools/pH7.sh` verifies or restores it. The
+The 19.2.0 reader update does not refresh its bundled GeoLite2 location data
+(3 December 2019). The later 24 December build and credential-free restore
+command described above are unreleased changes. The
 [GeoIP database instructions](../_protected/framework/Geo/Ip/update-geo-database-version.txt)
-explain how to restore it from a release package and why newer GeoLite data
-cannot be bundled. Preserve any newer database you installed yourself when
+explain how to restore data from a matching release package and why newer GeoLite
+data cannot be bundled. Preserve any newer database you installed yourself when
 replacing application files.
 
 The base and premium footers now show a plain, versioned pH7Builder link to

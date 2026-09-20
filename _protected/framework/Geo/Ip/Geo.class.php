@@ -31,15 +31,21 @@ class Geo
     /**
      * Get the country ISO Code (e.g., GB, IT, ES, RU, FR, ...).
      *
-     * @param string|null $sIpAddress Specify an IP address. If NULL, it will address the current customer who visits the site.
+     * @param string|null $sIpAddress       Specify an IP address. If NULL, it will address the current customer who visits the site.
+     * @param bool        $bRequireDatabase Propagate database failures when enforcing country restrictions.
+     *
+     * @throws InvalidDatabaseException When the database is required but unavailable or corrupt.
      *
      * @return string|null Country Code.
      */
-    public static function getCountryCode($sIpAddress = null)
+    public static function getCountryCode($sIpAddress = null, bool $bRequireDatabase = false)
     {
         try {
             $sCountryCode = static::get($sIpAddress)->country->isoCode;
         } catch (AddressNotFoundException | InvalidDatabaseException $oE) {
+            if ($bRequireDatabase && $oE instanceof InvalidDatabaseException) {
+                throw $oE;
+            }
             $sCountryCode = null;
         }
 
@@ -135,7 +141,15 @@ class Geo
             $sIpAddress = Ip::get();
         }
 
-        $oReader = new Reader(__DIR__ . PH7_DS . self::DATABASE_FILENAME);
+        try {
+            $oReader = new Reader(__DIR__ . PH7_DS . self::DATABASE_FILENAME);
+        } catch (\InvalidArgumentException $oE) {
+            // Location is optional; an unavailable database must not prevent login or signup.
+            $sMessage = 'Restore GeoLite2-City.mmdb and check its read permissions in _protected/framework/Geo/Ip/.';
+            error_log('pH7Builder GeoIP: ' . $sMessage);
+            throw new InvalidDatabaseException($sMessage, 0, $oE);
+        }
+
         try {
             return $oReader->city($sIpAddress);
         } finally {

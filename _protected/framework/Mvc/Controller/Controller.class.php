@@ -385,10 +385,18 @@ abstract class Controller extends Core implements Controllable
 
     private function isBlockedCountryPageEligible(): bool
     {
-        $sCountryCode = Country::fixCode(Geo::getCountryCode());
+        if ($this->registry->module === PH7_ADMIN_MOD || AdminCore::auth()) {
+            return false;
+        }
 
-        return $this->registry->module !== PH7_ADMIN_MOD &&
-            (new BlockCountryModel)->isBlocked($sCountryCode) &&
-            !AdminCore::auth();
+        $oBlockCountry = new BlockCountryModel;
+        if ($oBlockCountry->getBlockedCountries() === []) {
+            return false;
+        }
+
+        // A broken database must not silently bypass an owner's country restrictions.
+        $sCountryCode = Country::fixCode(Geo::getCountryCode(null, true));
+
+        return $oBlockCountry->isBlocked($sCountryCode);
     }
 }
