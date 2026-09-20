@@ -14,6 +14,9 @@ use FilesystemIterator;
 use GeoIp2\Database\Reader as CityReader;
 use MaxMind\Db\Reader as MetadataReader;
 use PH7\Framework\Geo\Ip\Geo;
+use Phar;
+use PharData;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
@@ -108,13 +111,20 @@ final class BundledGeoIpDatabaseTest extends TestCase
             self::markTestSkipped('The maintenance script requires a Unix shell.');
         }
 
-        // Choose the command, then leave the source path empty to verify the bundled build
-        [$iExitCode, $sOutput] = $this->runMaintenanceScript($this->sRootPath, "install geoip db\n\n");
-
-        self::assertSame(0, $iExitCode, $sOutput);
-        self::assertStringContainsString('is already installed at', $sOutput);
-        self::assertStringContainsString('GeoLite2-City database built on ' . self::BUNDLED_BUILD_LABEL, $sOutput);
-        self::assertStringNotContainsString('Downloading', $sOutput);
+        $sSandboxPath = $this->createScriptSandbox();
+        foreach ([Geo::DATABASE_FILENAME, 'LICENSE.txt', 'COPYRIGHT.txt', 'README.txt', 'Maxmind-GeoLite2.license.txt'] as $sFile) {
+            copy($this->geoIpPath($sFile), $sSandboxPath . self::GEOIP_DIRECTORY . $sFile);
+        }
+        try {
+            // Choose the command, then leave the source path empty to verify the bundled build.
+            [$iExitCode, $sOutput] = $this->runMaintenanceScript($sSandboxPath, "install geoip db\n\n");
+            self::assertSame(0, $iExitCode, $sOutput);
+            self::assertStringContainsString('is already installed at', $sOutput);
+            self::assertStringContainsString('GeoLite2-City database built on ' . self::BUNDLED_BUILD_LABEL, $sOutput);
+            self::assertStringNotContainsString('Downloading', $sOutput);
+        } finally {
+            $this->removeScriptSandbox($sSandboxPath);
+        }
     }
 
     public function testBareMmdbInstallAsksForMaxMindNoticeFiles(): void
@@ -144,13 +154,13 @@ final class BundledGeoIpDatabaseTest extends TestCase
         }
     }
 
-    public function testInstallWithAnUnknownBuildDateNamesBothLicences(): void
+    public function testPinnedDatabaseCanBeVerifiedWithoutPhpDependencies(): void
     {
         if (PHP_OS_FAMILY === 'Windows') {
             self::markTestSkipped('The maintenance script requires a Unix shell.');
         }
 
-        // The sandbox has no PHP dependencies, so the script can't read the bundled build's date
+        // Only the exact pinned checksum is trusted without PHP dependencies.
         $sSandboxPath = $this->createScriptSandbox();
 
         try {
@@ -160,12 +170,174 @@ final class BundledGeoIpDatabaseTest extends TestCase
             );
 
             self::assertSame(0, $iExitCode, $sOutput);
-            self::assertStringContainsString('build date is unknown', $sOutput);
-            self::assertStringContainsString('before 30 December 2019 are licensed under CC BY-SA 4.0', $sOutput);
+            self::assertStringContainsString('database built on ' . self::BUNDLED_BUILD_LABEL, $sOutput);
+            self::assertStringContainsString('This build is licensed under CC BY-SA 4.0', $sOutput);
             self::assertStringNotContainsString('This build is governed by', $sOutput);
         } finally {
             $this->removeScriptSandbox($sSandboxPath);
         }
+    }
+
+    #[DataProvider('provideInvalidDatabases')]
+    public function testInvalidDatabaseCannotReplaceTheInstalledCopy(bool $bReader, bool $bCorruptTree): void
+    {
+        $sSandboxPath = $this->createScriptSandbox($bReader);
+        $sInstalledPath = $sSandboxPath . self::GEOIP_DIRECTORY . Geo::DATABASE_FILENAME;
+        $sSourcePath = $sSandboxPath . '/invalid.mmdb';
+        copy($this->geoIpPath(Geo::DATABASE_FILENAME), $sInstalledPath);
+        if ($bCorruptTree) {
+            copy($sInstalledPath, $sSourcePath);
+            $rFile = fopen($sSourcePath, 'r+b');
+            fwrite($rFile, str_repeat("\0", 32));
+            fclose($rFile);
+            $oReader = new MetadataReader($sSourcePath);
+            self::assertSame('GeoLite2-City', $oReader->metadata()->databaseType);
+            $oReader->close();
+        } else {
+            file_put_contents($sSourcePath, "Not a database: MaxMind.com\n");
+        }
+
+        try {
+            [$iExitCode, $sOutput] = $this->runMaintenanceScript($sSandboxPath, "install geoip db\n$sSourcePath\n");
+            self::assertNotSame(0, $iExitCode, $sOutput);
+            self::assertStringNotContainsString('successfully installed', $sOutput);
+            self::assertSame(hash_file('sha256', $this->geoIpPath(Geo::DATABASE_FILENAME)), hash_file('sha256', $sInstalledPath));
+        } finally {
+            $this->removeScriptSandbox($sSandboxPath);
+        }
+    }
+
+    public static function provideInvalidDatabases(): array
+    {
+        return [
+            'marker without reader' => [false, false],
+            'marker with reader' => [true, false],
+            'corrupt tree with valid metadata' => [true, true]
+        ];
+    }
+
+    public function testUnpinnedDatabaseRequiresTheReader(): void
+    {
+        foreach ([false, true] as $bReader) {
+            $sSandboxPath = $this->createScriptSandbox($bReader);
+            $sSourcePath = $sSandboxPath . '/custom.mmdb';
+            copy($this->geoIpPath(Geo::DATABASE_FILENAME), $sSourcePath);
+            // Harmless trailing padding changes the checksum without changing the database's records.
+            file_put_contents($sSourcePath, "\n", FILE_APPEND);
+            try {
+                [$iExitCode, $sOutput] = $this->runMaintenanceScript($sSandboxPath, "install geoip db\n$sSourcePath\n");
+                self::assertSame($bReader ? 0 : 1, $iExitCode, $sOutput);
+                if ($bReader) {
+                    self::assertSame(hash_file('sha256', $sSourcePath), hash_file('sha256', $sSandboxPath . self::GEOIP_DIRECTORY . Geo::DATABASE_FILENAME));
+                } else {
+                    self::assertStringContainsString('Run composer install, then retry', $sOutput);
+                    self::assertFileDoesNotExist($sSandboxPath . self::GEOIP_DIRECTORY . Geo::DATABASE_FILENAME);
+                }
+            } finally {
+                $this->removeScriptSandbox($sSandboxPath);
+            }
+        }
+    }
+
+    public function testUnverifiableInstalledDatabaseIsKeptWithoutConfirmation(): void
+    {
+        $sSandboxPath = $this->createScriptSandbox();
+        $sInstalledPath = $sSandboxPath . self::GEOIP_DIRECTORY . Geo::DATABASE_FILENAME;
+        file_put_contents($sInstalledPath, 'database not readable in this environment');
+        try {
+            [$iExitCode, $sOutput] = $this->runMaintenanceScript($sSandboxPath, "install geoip db\n\nN\n");
+            self::assertSame(0, $iExitCode, $sOutput);
+            self::assertStringContainsString('Existing GeoIP database kept', $sOutput);
+            self::assertSame('database not readable in this environment', file_get_contents($sInstalledPath));
+            self::assertStringNotContainsString('Downloading', $sOutput);
+        } finally {
+            $this->removeScriptSandbox($sSandboxPath);
+        }
+    }
+
+    public function testArchiveInstallsItsNoticesEvenWhenOldFilesAreReadOnly(): void
+    {
+        $sSandboxPath = $this->createScriptSandbox();
+        $sNoticePath = $sSandboxPath . self::GEOIP_DIRECTORY . 'LICENSE.txt';
+        file_put_contents($sNoticePath, 'previous notice');
+        chmod($sNoticePath, 0444);
+        $sArchivePath = $this->createArchive($sSandboxPath);
+        try {
+            [$iExitCode, $sOutput] = $this->runMaintenanceScript($sSandboxPath, "install geoip db\n$sArchivePath\n");
+            self::assertSame(0, $iExitCode, $sOutput);
+            foreach ([Geo::DATABASE_FILENAME, 'LICENSE.txt', 'COPYRIGHT.txt', 'README.txt'] as $sFile) {
+                self::assertSame(hash_file('sha256', $this->geoIpPath($sFile)), hash_file('sha256', $sSandboxPath . self::GEOIP_DIRECTORY . $sFile));
+            }
+        } finally {
+            $this->removeScriptSandbox($sSandboxPath);
+        }
+    }
+
+    public function testIncompleteArchiveCannotReplaceTheInstalledCopy(): void
+    {
+        $sSandboxPath = $this->createScriptSandbox();
+        $sArchivePath = $this->createArchive($sSandboxPath, false);
+        $sInstalledPath = $sSandboxPath . self::GEOIP_DIRECTORY . Geo::DATABASE_FILENAME;
+        copy($this->geoIpPath(Geo::DATABASE_FILENAME), $sInstalledPath);
+        try {
+            [$iExitCode, $sOutput] = $this->runMaintenanceScript($sSandboxPath, "install geoip db\n$sArchivePath\n");
+            self::assertNotSame(0, $iExitCode, $sOutput);
+            self::assertStringContainsString('COPYRIGHT.txt', $sOutput);
+            self::assertStringNotContainsString('successfully installed', $sOutput);
+            self::assertSame(hash_file('sha256', $this->geoIpPath(Geo::DATABASE_FILENAME)), hash_file('sha256', $sInstalledPath));
+        } finally {
+            $this->removeScriptSandbox($sSandboxPath);
+        }
+    }
+
+    #[DataProvider('provideFailedInstallCommands')]
+    public function testFailedInstallPreservesThePreviousDatabaseAndNotices(string $sCommand, string $sFailurePattern): void
+    {
+        $sSandboxPath = $this->createScriptSandbox();
+        $sArchivePath = $this->createArchive($sSandboxPath);
+        $sInstalledDirectory = $sSandboxPath . self::GEOIP_DIRECTORY;
+        copy($this->geoIpPath(Geo::DATABASE_FILENAME), $sInstalledDirectory . Geo::DATABASE_FILENAME);
+        foreach (['LICENSE.txt', 'COPYRIGHT.txt', 'README.txt'] as $sFile) {
+            file_put_contents($sInstalledDirectory . $sFile, 'previous ' . $sFile);
+        }
+        mkdir($sSandboxPath . '/bin', 0700);
+        file_put_contents($sSandboxPath . '/bin/' . $sCommand, "#!/bin/bash\ncase \"\$*\" in\n*\"/previous/\"*) exec /bin/$sCommand \"\$@\";;\n" . $sFailurePattern . ") exit 1;;\nesac\nexec /bin/$sCommand \"\$@\"\n");
+        chmod($sSandboxPath . '/bin/' . $sCommand, 0700);
+
+        try {
+            [$iExitCode, $sOutput] = $this->runMaintenanceScript($sSandboxPath, "install geoip db\n$sArchivePath\n");
+            self::assertNotSame(0, $iExitCode, $sOutput);
+            self::assertStringNotContainsString('successfully installed', $sOutput);
+            self::assertSame(hash_file('sha256', $this->geoIpPath(Geo::DATABASE_FILENAME)), hash_file('sha256', $sInstalledDirectory . Geo::DATABASE_FILENAME));
+            foreach (['LICENSE.txt', 'COPYRIGHT.txt', 'README.txt'] as $sFile) {
+                self::assertSame('previous ' . $sFile, file_get_contents($sInstalledDirectory . $sFile));
+            }
+            self::assertSame([], glob($sInstalledDirectory . '.geoip-install.*'));
+        } finally {
+            $this->removeScriptSandbox($sSandboxPath);
+        }
+    }
+
+    public static function provideFailedInstallCommands(): array
+    {
+        return [
+            'notice staging failure' => ['cp', '*COPYRIGHT.txt*'],
+            'notice publication failure' => ['mv', '*"/COPYRIGHT.txt ./_protected"*'],
+            'database publication failure' => ['mv', '*"/GeoLite2-City.mmdb ./_protected"*']
+        ];
+    }
+
+    private function createArchive(string $sSandboxPath, bool $bIncludeCopyright = true): string
+    {
+        $oArchive = new PharData($sSandboxPath . '/source.tar');
+        foreach ([Geo::DATABASE_FILENAME, 'LICENSE.txt', 'COPYRIGHT.txt', 'README.txt'] as $sFile) {
+            if ($sFile !== 'COPYRIGHT.txt' || $bIncludeCopyright) {
+                $oArchive->addFile($this->geoIpPath($sFile), 'GeoLite2-City_20191224/' . $sFile);
+            }
+        }
+        $oArchive->compress(Phar::GZ);
+
+        return $sSandboxPath . '/source.tar.gz';
     }
 
     /**
@@ -179,7 +351,7 @@ final class BundledGeoIpDatabaseTest extends TestCase
             [0 => ['pipe', 'r'], 1 => ['pipe', 'w'], 2 => ['pipe', 'w']],
             $aPipes,
             $sWorkingDirectory,
-            ['PATH' => (string)getenv('PATH'), 'HOME' => (string)getenv('HOME')]
+            ['PATH' => $sWorkingDirectory . '/bin:' . getenv('PATH'), 'HOME' => (string)getenv('HOME')]
         );
         self::assertIsResource($rProcess);
 
@@ -193,15 +365,25 @@ final class BundledGeoIpDatabaseTest extends TestCase
     }
 
     /**
-     * Create a temporary project root holding only the maintenance script and an empty GeoIP directory.
-     * Without _protected/vendor, the script can't read a database's build date.
+     * Create a temporary project root with an optional reader for custom database validation.
+     * The exact pinned build can also be verified without PHP dependencies.
      */
-    private function createScriptSandbox(): string
+    private function createScriptSandbox(bool $bWithReader = false): string
     {
+        if (PHP_OS_FAMILY === 'Windows') {
+            self::markTestSkipped('The maintenance script requires a Unix shell.');
+        }
         $sSandboxPath = sys_get_temp_dir() . '/ph7-geoip-' . bin2hex(random_bytes(6));
         self::assertTrue(mkdir($sSandboxPath . self::GEOIP_DIRECTORY, 0700, true));
         self::assertTrue(mkdir($sSandboxPath . '/_tools', 0700));
         self::assertTrue(copy($this->sRootPath . '/_tools/pH7.sh', $sSandboxPath . '/_tools/pH7.sh'));
+        if ($bWithReader) {
+            self::assertTrue(mkdir($sSandboxPath . '/_protected/vendor', 0700));
+            file_put_contents(
+                $sSandboxPath . '/_protected/vendor/autoload.php',
+                '<?php require ' . var_export(PH7_PATH_PROTECTED . 'vendor/autoload.php', true) . ';'
+            );
+        }
 
         return $sSandboxPath;
     }
