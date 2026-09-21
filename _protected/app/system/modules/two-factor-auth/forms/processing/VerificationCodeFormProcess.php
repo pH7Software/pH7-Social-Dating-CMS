@@ -13,6 +13,7 @@ namespace PH7;
 defined('PH7') or exit('Restricted access');
 
 use PH7\Framework\Error\CException\PH7InvalidArgumentException;
+use PH7\Framework\Layout\Html\Design;
 use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Mvc\Model\Engine\Util\Various;
 use PH7\Framework\Mvc\Model\Security as SecurityModel;
@@ -34,11 +35,29 @@ class VerificationCodeFormProcess extends Form
     {
         parent::__construct();
 
+        $iProfileId = TwoFactorAuthCore::getChallengeProfileId($this->session, $sMod);
+        if ($iProfileId === null) {
+            $this->rejectChallenge($sMod);
+
+            return;
+        }
+
         $oAuthenticator = TwoFactorAuthCore::createAuthenticator();
         $oSecurityModel = new SecurityModel();
 
-        $iProfileId = $this->session->get(TwoFactorAuthCore::PROFILE_ID_SESS_NAME);
-        $sSecret = (new TwoFactorAuthModel($sMod))->getSecret($iProfileId);
+        $oUserData = (new TwoFactorAuthModel($sMod))->getAuthProfile($iProfileId);
+        if ($oUserData === false || (int)$oUserData->isTwoFactorAuth !== 1) {
+            $this->rejectChallenge($sMod);
+
+            return;
+        }
+        if (!is_string($oUserData->twoFactorAuthSecret)
+            || !preg_match('/^[A-Z2-7]{16,40}$/D', $oUserData->twoFactorAuthSecret)) {
+            $this->rejectChallenge($sMod, t('Two-factor authentication is unavailable for this account. Please contact the site administrator.'));
+
+            return;
+        }
+        $sSecret = $oUserData->twoFactorAuthSecret;
         $sCode = $this->httpRequest->post('verification_code');
 
         /*
@@ -61,7 +80,15 @@ class VerificationCodeFormProcess extends Form
             $sCoreClassName = $this->getClassName($sMod);
             $sCoreModelClassName = $sCoreClassName . 'Model';
             $sCoreModelClass = new $sCoreModelClassName();
-            $oUserData = $sCoreModelClass->readProfile($iProfileId, Various::convertModToTable($sMod));
+            $oCore = new $sCoreClassName();
+            $mStatus = $sMod === PH7_ADMIN_MOD
+                ? ((int)$oUserData->ban === UserCore::BAN_STATUS ? t('Sorry, Your account has been banned.') : true)
+                : $oCore->checkAccountStatus($oUserData);
+            if ($mStatus !== true) {
+                $this->rejectChallenge($sMod, $mStatus);
+
+                return;
+            }
 
             if ($sMod === 'user') { // RememberMe is only available for "user" module
                 $oRememberMe = new RememberMeCore();
@@ -71,13 +98,14 @@ class VerificationCodeFormProcess extends Form
                 unset($oRememberMe);
             }
 
-            (new $sCoreClassName())->setAuth(
+            $oCore->setAuth(
                 $oUserData,
                 $sCoreModelClass,
                 $this->session,
                 new SecurityModel()
             );
 
+            TwoFactorAuthCore::clearChallenge($this->session);
             $this->redirectToAccountPage($sMod);
         } else {
             $oSecurityModel->addLoginAttempt($this->getAttemptTable($sMod));
@@ -114,6 +142,16 @@ class VerificationCodeFormProcess extends Form
         }
 
         return $sFullClassName;
+    }
+
+    private function rejectChallenge(string $sMod, ?string $sMessage = null): void
+    {
+        TwoFactorAuthCore::clearChallenge($this->session);
+        Header::redirect(
+            TwoFactorAuthCore::getLoginUrl($sMod),
+            $sMessage ?? t('Please sign in again. Your verification session is invalid or has expired.'),
+            Design::ERROR_TYPE
+        );
     }
 
     /**
