@@ -15,6 +15,7 @@ namespace PH7\Framework\Mvc\Request;
 
 defined('PH7') or exit('Restricted access');
 
+use PH7\Datatype\Type;
 use PH7\Framework\Navigation\Browser;
 use PH7\Framework\Registry\Registry;
 use PH7\Framework\Security as Secty;
@@ -232,7 +233,7 @@ class Http extends \PH7\Framework\Http\Http
     public function get($sKey, $sParam = null, $bStrip = false)
     {
         if (!isset($this->aGet[$sKey])) {
-            return '';
+            return $sParam === Type::ARRAY ? [] : '';
         }
 
         // Clear the CSRF token in the request variable
@@ -272,7 +273,8 @@ class Http extends \PH7\Framework\Http\Http
         }
 
         if (!isset($this->aPost[$sKey])) {
-            return '';
+            // An unticked multi-select or checkbox group is simply absent from the request.
+            return $sParam === Type::ARRAY ? [] : '';
         }
 
         if ($sParam === self::NO_CLEAN) {

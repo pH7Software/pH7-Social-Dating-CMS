@@ -54,6 +54,27 @@ final class HttpTest extends TestCase
         $this->assertIsArray($sActual);
     }
 
+    /**
+     * An unticked checkbox group or multi-select is absent from the request,
+     * and callers asking for an array must still receive one they can iterate.
+     */
+    public function testMissingKeyRequestedAsArrayIsAnEmptyArray(): void
+    {
+        $_SERVER['REQUEST_METHOD'] = 'POST';
+        unset($_GET['absent_list'], $_POST['absent_list']);
+
+        $this->assertSame([], $this->oHttpRequest->get('absent_list', Type::ARRAY));
+        $this->assertSame([], $this->oHttpRequest->post('absent_list', Type::ARRAY));
+    }
+
+    public function testMissingKeyWithoutTypeIsStillAnEmptyString(): void
+    {
+        $_SERVER['REQUEST_METHOD'] = 'POST';
+        unset($_POST['absent_value']);
+
+        $this->assertSame('', $this->oHttpRequest->post('absent_value'));
+    }
+
     public function testGetRequestCastedToBool(): void
     {
         $_SERVER['REQUEST_METHOD'] = 'GET';
