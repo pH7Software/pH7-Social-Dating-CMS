@@ -110,24 +110,25 @@ class Form extends Base
                         $data[$name] = $_FILES[$name]['name'];
                     }
 
+                    $malformed = false;
+
                     if (isset($data[$name])) {
-                        $value = $data[$name];
-                        if (is_array($value)) {
-                            $valueSize = sizeof($value);
-                            for ($v = 0; $v < $valueSize; ++$v) {
-                                $value[$v] = stripslashes($value[$v]);
-                            }
+                        $value = self::sanitizeSubmittedValue($data[$name], $element);
+
+                        /* A malformed value is never kept for redisplay, only reported as invalid. */
+                        if ($value === null) {
+                            $malformed = true;
                         } else {
-                            $value = stripslashes($value);
+                            self::setSessionValue($id, $name, $value);
                         }
-                        self::setSessionValue($id, $name, $value);
                     } else {
                         $value = null;
                     }
 
                     /*If a validation error is found, the error message is saved in the session along with
-                    the element's name.*/
-                    if (!$element->isValid($value)) {
+                    the element's name. A value of the wrong shape is rejected outright, as no element's
+                    rules are written to defend against it.*/
+                    if ($malformed || !$element->isValid($value)) {
                         self::setError($id, $element->getErrors(), $name);
                         $valid = false;
                     }
@@ -146,6 +147,49 @@ class Form extends Base
         }
 
         return $valid;
+    }
+
+    /**
+     * Normalises a submitted value before it reaches an element's validation rules.
+     *
+     * Request data is untrusted in shape as well as content: a client can send an
+     * array where a string is expected, or nest arbitrarily. Passing those straight
+     * to stripslashes() raises a TypeError, so anything that is not a string (or a
+     * flat array of strings) is rejected as invalid input rather than coerced.
+     *
+     * Array keys are preserved, as multi-value elements rely on the keys the client
+     * submitted.
+     *
+     * @param mixed $value
+     * @param Element $element The element the value was submitted for.
+     *
+     * @return array|string|null NULL when the value cannot be a legitimate submission.
+     */
+    private static function sanitizeSubmittedValue($value, Element $element)
+    {
+        if (is_array($value)) {
+            /* Only elements rendered as "name[]" can legitimately receive several values. */
+            if (substr($element->getName(), -2) !== '[]') {
+                return null;
+            }
+
+            $values = [];
+            foreach ($value as $key => $item) {
+                if (!is_string($item)) {
+                    return null;
+                }
+
+                $values[$key] = stripslashes($item);
+            }
+
+            return $values;
+        }
+
+        if (!is_string($value)) {
+            return null;
+        }
+
+        return stripslashes($value);
     }
 
     public static function clearValues($id = 'pfbc')
