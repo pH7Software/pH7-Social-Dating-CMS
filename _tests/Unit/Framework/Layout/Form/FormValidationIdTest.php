@@ -23,9 +23,15 @@ use SplFileInfo;
  */
 class FormValidationIdTest extends TestCase
 {
+    /**
+     * Paths are resolved in getScannedDirectories(), relative to the project root.
+     * _repository holds the sample modules people copy when building their own, so
+     * it has to hold the line too.
+     */
     private const SCANNED_DIRECTORIES = [
-        'app',
-        'framework'
+        '_protected/app',
+        '_protected/framework',
+        '_repository'
     ];
 
     /**
@@ -102,7 +108,7 @@ class FormValidationIdTest extends TestCase
     private function getPhpFiles(): iterable
     {
         foreach (self::SCANNED_DIRECTORIES as $sDirectory) {
-            $sPath = PH7_PATH_PROTECTED . $sDirectory;
+            $sPath = $this->getProjectRoot() . $sDirectory;
 
             if (!is_dir($sPath)) {
                 continue;
@@ -117,8 +123,13 @@ class FormValidationIdTest extends TestCase
         }
     }
 
+    private function getProjectRoot(): string
+    {
+        return dirname(PH7_PATH_PROTECTED) . '/';
+    }
+
     private function getRelativePath(string $sFilePath): string
     {
-        return str_replace(PH7_PATH_PROTECTED, '', $sFilePath);
+        return str_replace($this->getProjectRoot(), '', $sFilePath);
     }
 }
