@@ -26,8 +26,13 @@ class ForgotPasswordFormProcess extends Form
     {
         parent::__construct();
 
-        $this->oUserModel = new UserCoreModel();
         $sEmail = $this->httpRequest->post('mail');
+        if (!is_string($sEmail) || $sEmail === '') {
+            \PFBC\Form::setError('form_forgot_password', t('Please enter your account email address.'));
+
+            return;
+        }
+        $this->oUserModel = new UserCoreModel();
 
         if (!$iProfileId = $this->oUserModel->getId($sEmail, null, $sTable)) {
             $this->preventBruteForce(self::BRUTE_FORCE_SLEEP_DELAY);

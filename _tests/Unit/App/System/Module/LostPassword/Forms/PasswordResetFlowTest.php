@@ -198,6 +198,27 @@ final class PasswordResetFlowTest extends TestCase
         self::assertNotEmpty($_SESSION['pfbc']['form_forgot_password']['errors']);
     }
 
+    #[DataProvider('provideMalformedEmails')]
+    public function testMalformedEmailDoesNotReachTheAccountModel(mixed $mEmail): void
+    {
+        $_POST = ['mail' => $mEmail];
+        new ForgotPasswordFormProcess('members');
+        self::assertFalse(isset(ResetMailStub::$sHtml));
+        self::assertNotEmpty($_SESSION['pfbc']['form_forgot_password']['errors']);
+    }
+
+    public static function provideMalformedEmails(): array
+    {
+        return [[null], [''], [['owner@example.test']]];
+    }
+
+    public function testForgotFormCannotSelectAnotherFormsValidation(): void
+    {
+        $sCode = file_get_contents(PH7_PATH_SYS_MOD . 'lost-password/forms/ForgotPasswordForm.php');
+        self::assertStringContainsString("\\PFBC\\Form::isValid('form_forgot_password')", $sCode);
+        self::assertStringNotContainsString("\\PFBC\\Form::isValid(\$_POST[", $sCode);
+    }
+
     private function renderForm(): string
     {
         ob_start();
