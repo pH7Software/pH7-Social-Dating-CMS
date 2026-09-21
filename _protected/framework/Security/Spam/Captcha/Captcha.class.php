@@ -204,11 +204,17 @@ class Captcha
      */
     public function check($sCode, $bIsCaseSensitive = true)
     {
-        if ($sCode === null) {
+        if (!is_string($sCode) || $sCode === '') {
             return false;
         }
 
         $sUserInput = $this->oSession->get(self::SESSION_NAME);
+
+        /* The code only exists once the CAPTCHA image has been generated. Without this, a client
+        that never loads the image could submit an empty answer and match the empty session value. */
+        if (!is_string($sUserInput) || $sUserInput === '') {
+            return false;
+        }
 
         if (!$bIsCaseSensitive) {
             $sCode = strtolower($sCode);
