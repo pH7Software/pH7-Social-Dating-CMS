@@ -56,6 +56,9 @@ class ImportUser extends Core
     private array $aFile;
     private array $aData = [];
     private array $aTmpData = [];
+
+    /** @var array<string,int> Position of each recognised header in the CSV rows. */
+    private array $aColumns = [];
     private array $aFileData;
     private array $aRes;
 
@@ -87,13 +90,14 @@ class ImportUser extends Core
      * Check and set the data from the CSV file.
      *
      * @param int $iRow Number of row of the CSV file
+     * @param array $aUserData The values of that row.
      */
-    private function setData(int $iRow): void
+    private function setData(int $iRow, array $aUserData): void
     {
         $oUser = new UserCore;
 
         foreach (self::DB_TYPES as $sType) {
-            $sData = !empty($this->aFileData[$this->aTmpData[$sType]]) ? trim($this->aFileData[$this->aTmpData[$sType]]) : $this->aTmpData[$sType];
+            $sData = $this->getRowValue($aUserData, $sType);
 
             if ($sType === 'username') {
                 $this->aData[$iRow][$sType] = $oUser->findUsername($sData, $this->aData[$iRow]['first_name'], $this->aData[$iRow]['last_name']);
@@ -109,6 +113,18 @@ class ImportUser extends Core
         }
 
         unset($oUser);
+    }
+
+    /**
+     * The row's value when the CSV has a non-empty column for the field, otherwise its default.
+     */
+    private function getRowValue(array $aUserData, string $sType): string
+    {
+        if (isset($this->aColumns[$sType]) && !empty($aUserData[$this->aColumns[$sType]])) {
+            return trim($aUserData[$this->aColumns[$sType]]);
+        }
+
+        return $this->aTmpData[$sType];
     }
 
     /**
@@ -141,58 +157,58 @@ class ImportUser extends Core
         foreach ($this->aFileData as $sKey => $sVal) {
             $sVal = $this->cleanValue($sVal);
 
-            // Test comparisons of strings and adding values in an array "ImportUser::$aTmpData"
+            // Test comparisons of strings and recording each column position in "ImportUser::$aColumns"
             if ($sVal === 'username' || $sVal === 'login' || $sVal === 'user' || $sVal === 'nickname') {
-                $this->aTmpData['username'] = $sKey;
+                $this->aColumns['username'] = $sKey;
             }
 
             if ($sVal === 'name' || $sVal === 'firstname' || $sVal === 'givenname' || $sVal === 'forename') {
-                $this->aTmpData['first_name'] = $sKey;
+                $this->aColumns['first_name'] = $sKey;
             }
 
             if ($sVal === 'lastname' || $sVal === 'surname' || $sVal === 'familyname') {
-                $this->aTmpData['last_name'] = $sKey;
+                $this->aColumns['last_name'] = $sKey;
             }
 
             if ($sVal === 'matchsex' || $sVal === 'looking' || $sVal === 'lookingfor') {
-                $this->aTmpData['match_sex'] = $sKey;
+                $this->aColumns['match_sex'] = $sKey;
             }
 
             if ($sVal === 'sex' || $sVal === 'gender') {
-                $this->aTmpData['sex'] = $sKey;
+                $this->aColumns['sex'] = $sKey;
             }
 
             if ($sVal === 'email' || $sVal === 'mail' || $sVal === 'emailid') {
-                $this->aTmpData['email'] = $sKey;
+                $this->aColumns['email'] = $sKey;
             }
 
             if ($sVal === 'desc' || $sVal === 'description' || $sVal === 'descriptionme' ||
                 $sVal === 'generaldescription' || $sVal === 'about' || $sVal === 'aboutme' ||
                 $sVal === 'bio' || $sVal === 'biography' || $sVal === 'comment') {
-                $this->aTmpData['description'] = $sKey;
+                $this->aColumns['description'] = $sKey;
             }
 
             if ($sVal === 'country' || $sVal === 'countryid') {
-                $this->aTmpData['country'] = $sKey;
+                $this->aColumns['country'] = $sKey;
             }
 
             if ($sVal === 'city' || $sVal === 'town') {
-                $this->aTmpData['city'] = $sKey;
+                $this->aColumns['city'] = $sKey;
             }
 
             if ($sVal === 'state' || $sVal === 'district' || $sVal === 'province' || $sVal === 'region') {
-                $this->aTmpData['state'] = $sKey;
+                $this->aColumns['state'] = $sKey;
             }
 
             if (
                 $sVal === 'zip' || $sVal === 'zipcode' || $sVal === 'postal' || $sVal === 'postcode' ||
                 $sVal === 'postalcode' || $sVal === 'pin' || $sVal === 'pincode' || $sVal === 'eircode'
             ) {
-                $this->aTmpData['zip_code'] = $sKey;
+                $this->aColumns['zip_code'] = $sKey;
             }
 
             if ($sVal === 'birthday' || $sVal === 'birthdate' || $sVal === 'dateofbirth' || $sVal === 'dob') {
-                $this->aTmpData['birth_date'] = $sKey;
+                $this->aColumns['birth_date'] = $sKey;
             }
         }
     }
@@ -262,11 +278,11 @@ class ImportUser extends Core
             $oValidate = new Validate;
 
             while (false !== ($aUserData = fgetcsv($this->rHandler, 0, $sDelimiter, $sEnclosure, '\\'))) {
-                $sEmail = trim($aUserData[$this->aTmpData['email']]);
+                $sEmail = isset($this->aColumns['email']) ? trim((string)($aUserData[$this->aColumns['email']] ?? '')) : '';
 
                 // Make sure the email is valid and doesn't exist yet in the database
                 if ($oValidate->email($sEmail) && !$oExistsModel->email($sEmail)) {
-                    $this->setData($iRow);
+                    $this->setData($iRow, $aUserData);
                     $oUserModel->add(escape($this->aData[$iRow], true));
                     $iRow++;
                 }
