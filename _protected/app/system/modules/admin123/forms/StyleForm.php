@@ -20,7 +20,7 @@ class StyleForm
     public static function display()
     {
         if (isset($_POST['submit_style'])) {
-            if (\PFBC\Form::isValid($_POST['submit_style'])) {
+            if (\PFBC\Form::isValid('form_style')) {
                 new StyleFormProcess;
             }
 

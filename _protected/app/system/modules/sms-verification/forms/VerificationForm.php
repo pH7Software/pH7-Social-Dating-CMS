@@ -19,7 +19,7 @@ class VerificationForm
     public static function display(): void
     {
         if (isset($_POST['submit_sms_verification'])) {
-            if (\PFBC\Form::isValid($_POST['submit_sms_verification'])) {
+            if (\PFBC\Form::isValid('form_sms_verification')) {
                 new VerificationFormProcess();
             }
 

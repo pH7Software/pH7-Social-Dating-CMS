@@ -23,7 +23,7 @@ class EditCommentForm
     public static function display()
     {
         if (isset($_POST['submit_edit_comment'])) {
-            if (\PFBC\Form::isValid($_POST['submit_edit_comment'])) {
+            if (\PFBC\Form::isValid('form_edit_comment')) {
                 new EditCommentFormProcess();
             }
 

@@ -26,7 +26,7 @@ class MembershipForm
     public static function display()
     {
         if (isset($_POST['submit_membership'])) {
-            if (\PFBC\Form::isValid($_POST['submit_membership'])) {
+            if (\PFBC\Form::isValid('form_membership')) {
                 new MembershipFormProcess();
             }
 

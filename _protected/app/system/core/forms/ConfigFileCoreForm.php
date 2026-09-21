@@ -60,7 +60,7 @@ class ConfigFileCoreForm
         $sIniFile = empty($sConfigPath) ? Registry::getInstance()->path_module_config . static::CONFIG_FILE : $sConfigPath . static::CONFIG_FILE;
 
         if (isset($_POST['submit_config'])) {
-            if (\PFBC\Form::isValid($_POST['submit_config'])) {
+            if (\PFBC\Form::isValid('form_config')) {
                 new ConfigFileCoreFormProcess($sConfigVar, $sIniFile);
             }
 

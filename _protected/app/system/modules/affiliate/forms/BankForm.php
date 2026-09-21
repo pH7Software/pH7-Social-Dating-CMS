@@ -29,7 +29,7 @@ class BankForm
         $oHttpRequest = new HttpRequest;
 
         if (isset($_POST['submit_bank_account'])) {
-            if (\PFBC\Form::isValid($_POST['submit_bank_account'])) {
+            if (\PFBC\Form::isValid('form_bank_account')) {
                 new BankFormProcess(self::getProfileId($oHttpRequest));
             }
 

@@ -29,7 +29,7 @@ class InviteForm
     public static function display(): void
     {
         if (isset($_POST['submit_invite'])) {
-            if (\PFBC\Form::isValid($_POST['submit_invite'])) {
+            if (\PFBC\Form::isValid('form_invite')) {
                 new InviteFormProcess();
             }
 

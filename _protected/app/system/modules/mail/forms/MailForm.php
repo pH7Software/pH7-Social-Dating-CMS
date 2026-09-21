@@ -25,7 +25,7 @@ class MailForm
     public static function display()
     {
         if (isset($_POST['submit_compose_mail'])) {
-            if (\PFBC\Form::isValid($_POST['submit_compose_mail'])) {
+            if (\PFBC\Form::isValid('form_compose_mail')) {
                 new MailFormProcess;
             }
 

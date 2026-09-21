@@ -32,7 +32,7 @@ class EditFieldForm
                 || !FieldModel::isValidColumnName($_POST['name'] ?? null)
             ) {
                 \PFBC\Form::setError('form_edit_field', t('Please enter a valid field name.'));
-            } elseif (\PFBC\Form::isValid($_POST['submit_edit_field'])) {
+            } elseif (\PFBC\Form::isValid('form_edit_field')) {
                 new EditFieldFormProcess();
             }
 

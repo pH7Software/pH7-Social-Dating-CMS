@@ -34,7 +34,7 @@ class EditForm
         $iProfileId = self::getProfileId($oHttpRequest);
 
         if (isset($_POST['submit_user_edit_account'])) {
-            if (\PFBC\Form::isValid($_POST['submit_user_edit_account'])) {
+            if (\PFBC\Form::isValid('form_user_edit_account')) {
                 new EditFormProcess($iProfileId);
             }
             Header::redirect();

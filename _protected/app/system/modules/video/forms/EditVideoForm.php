@@ -27,7 +27,7 @@ class EditVideoForm
     public static function display(): void
     {
         if (isset($_POST['submit_edit_video'])) {
-            if (\PFBC\Form::isValid($_POST['submit_edit_video'])) {
+            if (\PFBC\Form::isValid('form_edit_video')) {
                 new EditVideoFormProcess;
             }
 

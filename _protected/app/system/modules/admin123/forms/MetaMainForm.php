@@ -27,7 +27,7 @@ class MetaMainForm
     public static function display()
     {
         if (isset($_POST['submit_meta'])) {
-            if (\PFBC\Form::isValid($_POST['submit_meta'])) {
+            if (\PFBC\Form::isValid('form_meta')) {
                 new MetaMainFormProcess;
             }
 

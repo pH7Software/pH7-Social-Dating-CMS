@@ -26,7 +26,7 @@ class EditForumForm
     public static function display()
     {
         if (isset($_POST['submit_edit_forum'])) {
-            if (\PFBC\Form::isValid($_POST['submit_edit_forum'])) {
+            if (\PFBC\Form::isValid('form_edit_forum')) {
                 new EditForumFormProcess();
             }
 

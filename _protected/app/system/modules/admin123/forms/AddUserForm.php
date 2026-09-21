@@ -36,7 +36,7 @@ class AddUserForm
     public static function display()
     {
         if (isset($_POST['submit_add_user'])) {
-            if (\PFBC\Form::isValid($_POST['submit_add_user'])) {
+            if (\PFBC\Form::isValid('form_add_user')) {
                 new AddUserFormProcess;
             }
 

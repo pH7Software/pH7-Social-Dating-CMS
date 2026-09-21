@@ -25,7 +25,7 @@ class EditMsgForm
     public static function display()
     {
         if (isset($_POST['submit_edit_msg'])) {
-            if (\PFBC\Form::isValid($_POST['submit_edit_msg'])) {
+            if (\PFBC\Form::isValid('form_edit_msg')) {
                 new EditMsgFormProcess();
             }
 

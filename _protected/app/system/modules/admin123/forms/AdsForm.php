@@ -23,7 +23,7 @@ class AdsForm
     public static function display()
     {
         if (isset($_POST['submit_ads'])) {
-            if (\PFBC\Form::isValid($_POST['submit_ads'])) {
+            if (\PFBC\Form::isValid('form_ads')) {
                 new AdsFormProcess;
             }
 

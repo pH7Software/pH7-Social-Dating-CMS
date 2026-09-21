@@ -19,7 +19,7 @@ class PhoneNumberForm
     public static function display(): void
     {
         if (isset($_POST['submit_phone_number_verification'])) {
-            if (\PFBC\Form::isValid($_POST['submit_phone_number_verification'])) {
+            if (\PFBC\Form::isValid('form_phone_number_verification')) {
                 new PhoneNumberFormProcess;
             }
 

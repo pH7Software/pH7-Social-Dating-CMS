@@ -29,7 +29,7 @@ class ReportForm
         $oHttpRequest = new Http;
 
         if ($oHttpRequest->postExists('submit_report')) {
-            if (\PFBC\Form::isValid($oHttpRequest->post('submit_report'))) {
+            if (\PFBC\Form::isValid('form_report')) {
                 new ReportFormProcess();
             }
 

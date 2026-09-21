@@ -28,7 +28,7 @@ class AddFieldForm
         if (isset($_POST['submit_add_field'])) {
             if (!FieldModel::isValidColumnName($_POST['name'] ?? null)) {
                 \PFBC\Form::setError('form_add_field', t('Please enter a valid field name.'));
-            } elseif (\PFBC\Form::isValid($_POST['submit_add_field'])) {
+            } elseif (\PFBC\Form::isValid('form_add_field')) {
                 new AddFieldFormProcess();
             }
 

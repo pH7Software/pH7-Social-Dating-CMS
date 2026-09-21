@@ -34,7 +34,7 @@ class NoteForm
     public static function display(): void
     {
         if (isset($_POST['submit_note'])) {
-            if (\PFBC\Form::isValid($_POST['submit_note'])) {
+            if (\PFBC\Form::isValid('form_note')) {
                 new NoteFormProcess();
             }
 

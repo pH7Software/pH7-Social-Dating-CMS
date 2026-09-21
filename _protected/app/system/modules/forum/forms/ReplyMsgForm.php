@@ -22,7 +22,7 @@ class ReplyMsgForm
     public static function display()
     {
         if (isset($_POST['submit_reply'])) {
-            if (\PFBC\Form::isValid($_POST['submit_reply'])) {
+            if (\PFBC\Form::isValid('form_reply')) {
                 new ReplyMsgFormProcess();
             }
 

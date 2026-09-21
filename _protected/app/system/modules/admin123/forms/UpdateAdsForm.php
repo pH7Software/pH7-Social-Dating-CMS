@@ -27,7 +27,7 @@ class UpdateAdsForm
     public static function display()
     {
         if (isset($_POST['submit_update_ads'])) {
-            if (\PFBC\Form::isValid($_POST['submit_update_ads'])) {
+            if (\PFBC\Form::isValid('form_update_ads')) {
                 new UpdateAdsFormProcess;
             }
 

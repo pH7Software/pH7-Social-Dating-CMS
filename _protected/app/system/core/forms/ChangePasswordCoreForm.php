@@ -23,7 +23,7 @@ class ChangePasswordCoreForm
     public static function display()
     {
         if (isset($_POST['submit_change_password'])) {
-            if (\PFBC\Form::isValid($_POST['submit_change_password'])) {
+            if (\PFBC\Form::isValid('form_change_password')) {
                 new ChangePasswordCoreFormProcess();
             }
 

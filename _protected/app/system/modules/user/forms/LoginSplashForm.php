@@ -24,7 +24,7 @@ class LoginSplashForm
     public static function display()
     {
         if (isset($_POST['submit_login_user'])) {
-            if (\PFBC\Form::isValid($_POST['submit_login_user'])) {
+            if (\PFBC\Form::isValid('form_login_user')) {
                 new LoginFormProcess();
             }
 

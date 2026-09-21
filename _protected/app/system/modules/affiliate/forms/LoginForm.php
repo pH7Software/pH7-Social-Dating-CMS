@@ -27,7 +27,7 @@ class LoginForm implements Authenticable
         static::clearCurrentSessions();
 
         if (isset($_POST['submit_login_aff'])) {
-            if (\PFBC\Form::isValid($_POST['submit_login_aff'])) {
+            if (\PFBC\Form::isValid('form_login_aff')) {
                 new LoginFormProcess();
             }
 

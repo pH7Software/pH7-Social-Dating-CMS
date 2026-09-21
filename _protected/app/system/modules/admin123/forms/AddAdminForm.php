@@ -28,7 +28,7 @@ class AddAdminForm
     public static function display()
     {
         if (isset($_POST['submit_add_admin'])) {
-            if (\PFBC\Form::isValid($_POST['submit_add_admin'])) {
+            if (\PFBC\Form::isValid('form_add_admin')) {
                 new AddAdminFormProcess;
             }
 

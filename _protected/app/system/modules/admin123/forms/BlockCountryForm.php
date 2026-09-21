@@ -24,7 +24,7 @@ class BlockCountryForm
     public static function display(): void
     {
         if (isset($_POST['submit_country_blocklist'])) {
-            if (\PFBC\Form::isValid($_POST['submit_country_blocklist'])) {
+            if (\PFBC\Form::isValid('form_country_blocklist')) {
                 new BlockCountryFormProcess;
             }
 

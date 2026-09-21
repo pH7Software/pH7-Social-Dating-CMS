@@ -23,7 +23,7 @@ class NotificationForm
         $iProfileId = (int)(new Session)->get('member_id');
 
         if (isset($_POST['submit_notification'])) {
-            if (\PFBC\Form::isValid($_POST['submit_notification'])) {
+            if (\PFBC\Form::isValid('form_notification')) {
                 new NotificationFormProcess($iProfileId, $oUserModel);
             }
 

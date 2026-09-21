@@ -26,7 +26,7 @@ class SubscriptionForm
         $sActUrl = Uri::get('newsletter', 'home', 'subscription');
 
         if (isset($_POST['submit_subscription'])) {
-            if (\PFBC\Form::isValid($_POST['submit_subscription'])) {
+            if (\PFBC\Form::isValid('form_subscription')) {
                 new SubscriptionFormProcess();
             }
 

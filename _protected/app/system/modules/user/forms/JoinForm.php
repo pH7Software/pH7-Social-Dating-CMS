@@ -45,7 +45,7 @@ class JoinForm
         }
 
         if (isset($_POST['submit_join_user'])) {
-            if (\PFBC\Form::isValid($_POST['submit_join_user'])) {
+            if (\PFBC\Form::isValid('form_join_user')) {
                 (new JoinFormProcess)->step1();
             }
 
@@ -95,7 +95,7 @@ class JoinForm
         unset($oSession);
 
         if (isset($_POST['submit_join_user2'])) {
-            if (\PFBC\Form::isValid($_POST['submit_join_user2'])) {
+            if (\PFBC\Form::isValid('form_join_user2')) {
                 (new JoinFormProcess)->step2();
             }
 
@@ -199,7 +199,7 @@ class JoinForm
         unset($oSession);
 
         if (isset($_POST['submit_join_user3'])) {
-            if (\PFBC\Form::isValid($_POST['submit_join_user3'])) {
+            if (\PFBC\Form::isValid('form_join_user3')) {
                 (new JoinFormProcess)->step3();
             }
 
@@ -245,7 +245,7 @@ class JoinForm
         unset($oSession);
 
         if (isset($_POST['submit_join_user4'])) {
-            if (\PFBC\Form::isValid($_POST['submit_join_user4'])) {
+            if (\PFBC\Form::isValid('form_join_user4')) {
                 (new JoinFormProcess)->step4();
             }
 

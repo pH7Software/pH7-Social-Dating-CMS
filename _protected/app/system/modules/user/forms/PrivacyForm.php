@@ -26,7 +26,7 @@ class PrivacyForm
         $iProfileId = (int)(new Session)->get('member_id');
 
         if (isset($_POST['submit_privacy_account'])) {
-            if (\PFBC\Form::isValid($_POST['submit_privacy_account'])) {
+            if (\PFBC\Form::isValid('form_privacy_account')) {
                 new PrivacyFormProcess($iProfileId, $oUserModel);
             }
 

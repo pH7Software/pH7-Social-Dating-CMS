@@ -31,7 +31,7 @@ class AddFakeProfilesForm
     public static function display(): void
     {
         if (isset($_POST['submit_add_fake_profiles'])) {
-            if (\PFBC\Form::isValid($_POST['submit_add_fake_profiles'])) {
+            if (\PFBC\Form::isValid('form_add_fake_profiles')) {
                 new AddFakeProfilesFormProcess;
             }
 

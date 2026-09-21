@@ -27,7 +27,7 @@ class EditAlbumForm
     public static function display(): void
     {
         if (isset($_POST['submit_edit_picture_album'])) {
-            if (\PFBC\Form::isValid($_POST['submit_edit_picture_album'])) {
+            if (\PFBC\Form::isValid('form_edit_picture_album')) {
                 new EditAlbumFormProcess();
             }
 

@@ -30,7 +30,7 @@ class ResendActivationCoreForm
         // Show the form only if the activation mode is activated by email
         if (self::isEmailActivation($sTable)) {
             if (isset($_POST['submit_resend_activation'])) {
-                if (\PFBC\Form::isValid($_POST['submit_resend_activation'])) {
+                if (\PFBC\Form::isValid('form_resend_activation')) {
                     new ResendActivationCoreFormProcess($sTable);
                 }
 

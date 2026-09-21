@@ -23,7 +23,7 @@ class EditCategoryForm
     public static function display()
     {
         if (isset($_POST['submit_category_edit'])) {
-            if (\PFBC\Form::isValid($_POST['submit_category_edit'])) {
+            if (\PFBC\Form::isValid('form_category_edit')) {
                 new EditCategoryFormProcess();
             }
 

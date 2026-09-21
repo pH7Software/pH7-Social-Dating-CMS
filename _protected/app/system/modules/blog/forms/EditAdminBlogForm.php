@@ -31,7 +31,7 @@ class EditAdminBlogForm
     public static function display()
     {
         if (isset($_POST['submit_edit_blog'])) {
-            if (\PFBC\Form::isValid($_POST['submit_edit_blog'])) {
+            if (\PFBC\Form::isValid('form_edit_blog')) {
                 new EditAdminBlogFormProcess();
             }
             Header::redirect();

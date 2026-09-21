@@ -32,7 +32,7 @@ class EditNoteForm
     public static function display()
     {
         if (isset($_POST['submit_edit_note'])) {
-            if (\PFBC\Form::isValid($_POST['submit_edit_note'])) {
+            if (\PFBC\Form::isValid('form_edit_note')) {
                 new EditNoteFormProcess();
             }
 

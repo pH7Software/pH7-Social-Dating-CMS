@@ -27,7 +27,7 @@ class VerificationCodeForm
     public static function display(): void
     {
         if (isset($_POST['submit_verification_code'])) {
-            if (\PFBC\Form::isValid($_POST['submit_verification_code'])) {
+            if (\PFBC\Form::isValid('form_verification_code')) {
                 new VerificationCodeFormProcess((new Http())->get('mod'));
             }
 

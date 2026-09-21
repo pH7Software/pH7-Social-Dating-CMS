@@ -24,7 +24,7 @@ class ImportUserForm
     public static function display()
     {
         if (isset($_POST['submit_import_user'])) {
-            if (\PFBC\Form::isValid($_POST['submit_import_user'])) {
+            if (\PFBC\Form::isValid('form_import_user')) {
                 new ImportUserFormProcess;
             }
 

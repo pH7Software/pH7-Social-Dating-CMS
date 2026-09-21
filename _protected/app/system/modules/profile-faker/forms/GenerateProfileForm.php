@@ -30,7 +30,7 @@ class GenerateProfileForm
     public static function display(int $iProfileType): void
     {
         if (isset($_POST['submit_generate_profiles'])) {
-            if (\PFBC\Form::isValid($_POST['submit_generate_profiles'])) {
+            if (\PFBC\Form::isValid('form_generate_profiles')) {
                 new GenerateProfileFormProcess($iProfileType);
             }
 

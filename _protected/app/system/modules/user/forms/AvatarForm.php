@@ -23,7 +23,7 @@ class AvatarForm
     public static function display(): void
     {
         if (isset($_POST['submit_avatar'])) {
-            if (\PFBC\Form::isValid($_POST['submit_avatar'])) {
+            if (\PFBC\Form::isValid('form_avatar')) {
                 new AvatarFormProcess;
             }
 

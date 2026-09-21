@@ -26,7 +26,7 @@ class CountryRestrictionCoreForm
     public static function display(string $sTable = DbTableName::MEMBER_COUNTRY): void
     {
         if (isset($_POST['submit_country_restriction'])) {
-            if (\PFBC\Form::isValid($_POST['submit_country_restriction'])) {
+            if (\PFBC\Form::isValid('form_country_restriction')) {
                 new CountryRestrictionCoreFormProcess($sTable);
             }
 

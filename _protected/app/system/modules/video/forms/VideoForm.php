@@ -35,7 +35,7 @@ class VideoForm
     public static function display(): void
     {
         if (isset($_POST['submit_video'])) {
-            if (\PFBC\Form::isValid($_POST['submit_video'])) {
+            if (\PFBC\Form::isValid('form_video')) {
                 new VideoFormProcess();
             }
 

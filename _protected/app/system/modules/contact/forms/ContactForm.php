@@ -31,7 +31,7 @@ class ContactForm
     {
         // Display the contact form on the template
         if (isset($_POST['submit_contact'])) {
-            if (\PFBC\Form::isValid($_POST['submit_contact'])) {
+            if (\PFBC\Form::isValid('form_contact')) {
                 new ContactFormProcess();
             }
 

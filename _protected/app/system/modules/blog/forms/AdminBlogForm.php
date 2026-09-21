@@ -29,7 +29,7 @@ class AdminBlogForm
     public static function display()
     {
         if (isset($_POST['submit_blog'])) {
-            if (\PFBC\Form::isValid($_POST['submit_blog'])) {
+            if (\PFBC\Form::isValid('form_blog')) {
                 new AdminBlogFormProcess();
             }
 

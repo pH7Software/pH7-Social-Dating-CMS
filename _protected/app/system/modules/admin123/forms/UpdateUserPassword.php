@@ -21,7 +21,7 @@ class UpdateUserPassword
     public static function display(string $sUserEmail): void
     {
         if (isset($_POST['submit_update_password'])) {
-            if (\PFBC\Form::isValid($_POST['submit_update_password'])) {
+            if (\PFBC\Form::isValid('form_update_password')) {
                 new UpdateUserPasswordFormProcess($sUserEmail);
             }
 

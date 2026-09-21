@@ -37,7 +37,7 @@ class JoinForm
     public static function step1(): void
     {
         if (isset($_POST['submit_join_aff'])) {
-            if (\PFBC\Form::isValid($_POST['submit_join_aff'])) {
+            if (\PFBC\Form::isValid('form_join_aff')) {
                 (new JoinFormProcess)->step1();
             }
 

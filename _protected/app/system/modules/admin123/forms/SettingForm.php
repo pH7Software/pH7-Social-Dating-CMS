@@ -40,7 +40,7 @@ class SettingForm
     public static function display(): void
     {
         if (isset($_POST['submit_setting'])) {
-            if (\PFBC\Form::isValid($_POST['submit_setting'])) {
+            if (\PFBC\Form::isValid('form_setting')) {
                 new SettingFormProcess();
             }
 

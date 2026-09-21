@@ -27,7 +27,7 @@ class EditPictureForm
     public static function display(): void
     {
         if (isset($_POST['submit_edit_picture'])) {
-            if (\PFBC\Form::isValid($_POST['submit_edit_picture'])) {
+            if (\PFBC\Form::isValid('form_edit_picture')) {
                 new EditPictureFormProcess;
             }
 

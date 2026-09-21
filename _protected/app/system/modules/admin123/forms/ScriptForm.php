@@ -20,7 +20,7 @@ class ScriptForm
     public static function display()
     {
         if (isset($_POST['submit_script'])) {
-            if (\PFBC\Form::isValid($_POST['submit_script'])) {
+            if (\PFBC\Form::isValid('form_script')) {
                 new ScriptFormProcess;
             }
 

@@ -32,7 +32,7 @@ class PictureForm
     public static function display(): void
     {
         if (isset($_POST['submit_picture'])) {
-            if (\PFBC\Form::isValid($_POST['submit_picture'])) {
+            if (\PFBC\Form::isValid('form_picture')) {
                 new PictureFormProcess();
             }
 

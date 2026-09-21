@@ -49,7 +49,7 @@ class ProtectedFileForm
     public static function display(): void
     {
         if (isset($_POST['submit_file'])) {
-            if (\PFBC\Form::isValid($_POST['submit_file'])) {
+            if (\PFBC\Form::isValid('form_file')) {
                 new ProtectedFileFormProcess;
             }
 

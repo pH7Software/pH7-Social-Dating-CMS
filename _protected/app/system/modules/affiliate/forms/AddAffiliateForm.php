@@ -34,7 +34,7 @@ class AddAffiliateForm
     public static function display()
     {
         if (isset($_POST['submit_add_aff'])) {
-            if (\PFBC\Form::isValid($_POST['submit_add_aff'])) {
+            if (\PFBC\Form::isValid('form_add_aff')) {
                 new AddAffiliateFormProcess;
             }
             Framework\Url\Header::redirect();
