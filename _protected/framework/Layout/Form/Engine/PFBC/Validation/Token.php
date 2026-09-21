@@ -29,6 +29,6 @@ class Token extends Validation
      */
     public function isValid($sValue): bool
     {
-        return (new SecurityToken)->check($this->sName, $sValue);
+        return is_string($sValue) && (new SecurityToken)->check($this->sName, $sValue);
     }
 }
