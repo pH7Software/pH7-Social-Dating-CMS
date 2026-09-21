@@ -1,9 +1,9 @@
 <?php
+
 /**
  * @author         Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright      (c) 2019, Pierre-Henry Soria. All Rights Reserved.
  * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
- * @package        PH7 / App / System / Module / SMS Verification / Config
  */
 
 namespace PH7;
@@ -21,7 +21,12 @@ class Permission extends PermissionCore
         parent::__construct();
 
         if ($this->isUserNotAllowed()) {
-            $this->signUpRedirect();
+            SmsVerificationCore::clearChallenge($this->session);
+            Header::redirect(
+                Uri::get('user', 'main', 'login'),
+                t('Please sign in again. Your phone verification session has expired.'),
+                Design::ERROR_TYPE
+            );
         }
 
         if ($this->registry->controller === 'AdminController' && !AdminCore::auth()) {
@@ -39,7 +44,7 @@ class Permission extends PermissionCore
      */
     private function isUserNotAllowed()
     {
-        return $this->registry->controller === 'MainController' &&
-            !$this->session->exists(SmsVerificationCore::PROFILE_ID_SESS_NAME);
+        return $this->registry->controller === 'MainController'
+            && SmsVerificationCore::getChallengeProfileId($this->session) === null;
     }
 }
