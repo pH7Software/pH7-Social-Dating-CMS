@@ -7,6 +7,7 @@
 
 namespace PFBC;
 
+use PH7\Framework\Layout\Form\Message;
 use PH7\Framework\Layout\Html\Design;
 
 /* This project's namespace structure is leveraged to autoload requested classes at runtime. */
@@ -25,6 +26,9 @@ if (in_array('__autoload', spl_autoload_functions(), true)) {
 
 class Form extends Base
 {
+    // Import `Message` trait
+    use Message;
+
     protected $ajax;
     protected $attributes;
     protected $error;
@@ -143,6 +147,11 @@ class Form extends Base
                 self::clearErrors($id);
             }
         } else {
+            /* The form is no longer in the session (typically it expired while being filled in).
+            Say so, rather than silently showing the form again. */
+            if (is_string($id) && $id !== '') {
+                self::setError($id, self::errorTokenMsg());
+            }
             $valid = false;
         }
 

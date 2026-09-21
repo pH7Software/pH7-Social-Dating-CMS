@@ -50,6 +50,17 @@ final class FormValidationTest extends TestCase
         return [[[]], [['form']], [null], [false], [42], ['']];
     }
 
+    public function testFormMissingFromTheSessionExplainsTheRejection(): void
+    {
+        $_SESSION['pfbc'] = [];
+
+        self::assertFalse(Form::isValid('expired_form'));
+        self::assertNotEmpty(
+            $_SESSION['pfbc']['expired_form']['errors'] ?? [],
+            'A form that expired from the session must say why it was rejected, not reload silently.'
+        );
+    }
+
     #[DataProvider('malformedValues')]
     public function testMalformedTextValuesAreRejected(mixed $mValue): void
     {
