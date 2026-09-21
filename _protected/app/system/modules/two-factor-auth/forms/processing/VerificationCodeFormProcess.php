@@ -37,12 +37,7 @@ class VerificationCodeFormProcess extends Form
 
         $iProfileId = TwoFactorAuthCore::getChallengeProfileId($this->session, $sMod);
         if ($iProfileId === null) {
-            TwoFactorAuthCore::clearChallenge($this->session);
-            Header::redirect(
-                TwoFactorAuthCore::getLoginUrl($sMod),
-                t('Please sign in again. Your verification session is invalid or has expired.'),
-                Design::ERROR_TYPE
-            );
+            $this->rejectChallenge($sMod);
 
             return;
         }
@@ -50,7 +45,19 @@ class VerificationCodeFormProcess extends Form
         $oAuthenticator = TwoFactorAuthCore::createAuthenticator();
         $oSecurityModel = new SecurityModel();
 
-        $sSecret = (new TwoFactorAuthModel($sMod))->getSecret($iProfileId);
+        $oUserData = (new TwoFactorAuthModel($sMod))->getAuthProfile($iProfileId);
+        if ($oUserData === false || (int)$oUserData->isTwoFactorAuth !== 1) {
+            $this->rejectChallenge($sMod);
+
+            return;
+        }
+        if (!is_string($oUserData->twoFactorAuthSecret)
+            || !preg_match('/^[A-Z2-7]{16,40}$/D', $oUserData->twoFactorAuthSecret)) {
+            $this->rejectChallenge($sMod, t('Two-factor authentication is unavailable for this account. Please contact the site administrator.'));
+
+            return;
+        }
+        $sSecret = $oUserData->twoFactorAuthSecret;
         $sCode = $this->httpRequest->post('verification_code');
 
         /*
@@ -73,7 +80,15 @@ class VerificationCodeFormProcess extends Form
             $sCoreClassName = $this->getClassName($sMod);
             $sCoreModelClassName = $sCoreClassName . 'Model';
             $sCoreModelClass = new $sCoreModelClassName();
-            $oUserData = $sCoreModelClass->readProfile($iProfileId, Various::convertModToTable($sMod));
+            $oCore = new $sCoreClassName();
+            $mStatus = $sMod === PH7_ADMIN_MOD
+                ? ((int)$oUserData->ban === UserCore::BAN_STATUS ? t('Sorry, Your account has been banned.') : true)
+                : $oCore->checkAccountStatus($oUserData);
+            if ($mStatus !== true) {
+                $this->rejectChallenge($sMod, $mStatus);
+
+                return;
+            }
 
             if ($sMod === 'user') { // RememberMe is only available for "user" module
                 $oRememberMe = new RememberMeCore();
@@ -83,7 +98,7 @@ class VerificationCodeFormProcess extends Form
                 unset($oRememberMe);
             }
 
-            (new $sCoreClassName())->setAuth(
+            $oCore->setAuth(
                 $oUserData,
                 $sCoreModelClass,
                 $this->session,
@@ -127,6 +142,16 @@ class VerificationCodeFormProcess extends Form
         }
 
         return $sFullClassName;
+    }
+
+    private function rejectChallenge(string $sMod, ?string $sMessage = null): void
+    {
+        TwoFactorAuthCore::clearChallenge($this->session);
+        Header::redirect(
+            TwoFactorAuthCore::getLoginUrl($sMod),
+            $sMessage ?? t('Please sign in again. Your verification session is invalid or has expired.'),
+            Design::ERROR_TYPE
+        );
     }
 
     /**

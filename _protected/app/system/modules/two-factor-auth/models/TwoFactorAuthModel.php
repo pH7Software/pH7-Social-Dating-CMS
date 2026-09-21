@@ -8,8 +8,22 @@
 
 namespace PH7;
 
+use PH7\Framework\Mvc\Model\Engine\Db;
+
 class TwoFactorAuthModel extends TwoFactorAuthCoreModel
 {
+    /** Read authentication state directly; a cached profile may predate an account change. */
+    public function getAuthProfile(int $iProfileId): \stdClass|false
+    {
+        $rStmt = Db::getInstance()->prepare('SELECT * FROM' . Db::prefix($this->sTable) . 'WHERE profileId = :profileId LIMIT 1');
+        $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
+        $rStmt->execute();
+        $oProfile = $rStmt->fetch(\PDO::FETCH_OBJ);
+        Db::free($rStmt);
+
+        return $oProfile;
+    }
+
     /**
      * @param int $iIsEnabled 1 = Enabled | 0 = Disabled
      * @param int $iProfileId profile ID
