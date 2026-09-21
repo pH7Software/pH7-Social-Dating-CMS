@@ -74,7 +74,7 @@ class LoginFormProcess extends Form implements LoginableForm
         }
 
         if ($this->isSmsVerificationEligible($oUserData)) {
-            $this->session->set(SmsVerificationCore::PROFILE_ID_SESS_NAME, $iProfileId);
+            SmsVerificationCore::beginChallenge($this->session, (int)$iProfileId);
             $this->redirectToSmsVerification();
         }
 
@@ -209,7 +209,8 @@ class LoginFormProcess extends Form implements LoginableForm
 
     private function isSmsVerificationEligible(stdClass $oUserData): bool
     {
-        return $oUserData->active == RegistrationCore::SMS_ACTIVATION &&
+        return (int)$oUserData->ban !== UserCore::BAN_STATUS &&
+            $oUserData->active == RegistrationCore::SMS_ACTIVATION &&
             SysMod::isEnabled('sms-verification');
     }
 
