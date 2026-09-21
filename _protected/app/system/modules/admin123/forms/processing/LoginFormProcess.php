@@ -100,7 +100,7 @@ class LoginFormProcess extends Form implements LoginableForm
             $o2FactorModel = new TwoFactorAuthCoreModel(PH7_ADMIN_MOD);
             if ($o2FactorModel->isEnabled($iProfileId)) {
                 // Store the admin ID for 2FA
-                $this->session->set(TwoFactorAuthCore::PROFILE_ID_SESS_NAME, $iProfileId);
+                TwoFactorAuthCore::beginChallenge($this->session, PH7_ADMIN_MOD, (int)$iProfileId);
 
                 $this->redirectToTwoFactorAuth();
             } else {

@@ -371,9 +371,7 @@ abstract class Controller extends Core implements Controllable
         $bSiteIsInMaintenanceMode = M\DbConfig::getSetting('siteStatus') === M\DbConfig::MAINTENANCE_SITE;
         $bAdminIsAuthenticated = AdminCore::auth();
         $bUserIsOnAdminPanel = AdminCore::isAdminPanel();
-        $bUserIsOnTwoFactorVerificationStep = $this->registry->module === 'two-factor-auth' &&
-            $this->registry->action === 'verificationcode' &&
-            $this->session->exists(\PH7\TwoFactorAuthCore::PROFILE_ID_SESS_NAME);
+        $bUserIsOnTwoFactorVerificationStep = $this->isPendingAdminTwoFactorVerification();
 
         $bShouldBlockAccess = $bSiteIsInMaintenanceMode &&
             !$bAdminIsAuthenticated &&
@@ -385,7 +383,7 @@ abstract class Controller extends Core implements Controllable
 
     private function isBlockedCountryPageEligible(): bool
     {
-        if ($this->registry->module === PH7_ADMIN_MOD || AdminCore::auth()) {
+        if ($this->registry->module === PH7_ADMIN_MOD || AdminCore::auth() || $this->isPendingAdminTwoFactorVerification()) {
             return false;
         }
 
@@ -398,5 +396,14 @@ abstract class Controller extends Core implements Controllable
         $sCountryCode = Country::fixCode(Geo::getCountryCode(null, true));
 
         return $oBlockCountry->isBlocked($sCountryCode);
+    }
+
+    private function isPendingAdminTwoFactorVerification(): bool
+    {
+        return $this->registry->module === 'two-factor-auth'
+            && $this->registry->controller === 'MainController'
+            && $this->registry->action === 'verificationcode'
+            && $this->httpRequest->get('mod') === PH7_ADMIN_MOD
+            && \PH7\TwoFactorAuthCore::getChallengeProfileId($this->session, PH7_ADMIN_MOD) !== null;
     }
 }
