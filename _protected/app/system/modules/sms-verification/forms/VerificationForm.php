@@ -1,9 +1,9 @@
 <?php
+
 /**
  * @author         Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright      (c) 2019-2023, Pierre-Henry Soria. All Rights Reserved.
  * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
- * @package        PH7 / App / System / Module / SMS Verification / Form
  */
 
 namespace PH7;
@@ -12,7 +12,6 @@ use PFBC\Element\Button;
 use PFBC\Element\Hidden;
 use PFBC\Element\Textbox;
 use PFBC\Element\Token;
-use PH7\Framework\Config\Config;
 use PH7\Framework\Url\Header;
 
 class VerificationForm
@@ -21,7 +20,7 @@ class VerificationForm
     {
         if (isset($_POST['submit_sms_verification'])) {
             if (\PFBC\Form::isValid($_POST['submit_sms_verification'])) {
-                new VerificationFormProcess;
+                new VerificationFormProcess();
             }
 
             Header::redirect();
@@ -36,7 +35,7 @@ class VerificationForm
         $oForm->addElement(new Token('sms_verification'));
 
         // Verification code field
-        $iFieldLength = (int)Config::getInstance()->values['module.setting']['verification_code.length'];
+        $iFieldLength = Verification::getCodeLength();
         $sFieldPattern = sprintf('\d{%d}', $iFieldLength);
         $oForm->addElement(
             new Textbox(
@@ -45,7 +44,9 @@ class VerificationForm
                 [
                     'pattern' => $sFieldPattern,
                     'maxlength' => $iFieldLength,
-                    'autocomplete' => 'off',
+                    'autocomplete' => 'one-time-code',
+                    'inputmode' => 'numeric',
+                    'description' => t('Codes expire after five minutes. Maximum five attempts per code.'),
                     'required' => 1
                 ]
             )

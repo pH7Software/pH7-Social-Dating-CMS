@@ -1,14 +1,14 @@
 <?php
+
 /**
  * @author         Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright      (c) 2019-2023, Pierre-Henry Soria. All Rights Reserved.
  * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
- * @package        PH7 / App / System / Module / SMS Verification / Form / Processing
  */
 
 namespace PH7;
 
-use PH7\Framework\Mvc\Model\Security as SecurityModel;
+use PH7\Framework\Layout\Html\Design;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Url\Header;
 
@@ -18,85 +18,44 @@ class VerificationFormProcess extends Form
     {
         parent::__construct();
 
-        $iProfileId = $this->session->get(SmsVerificationCore::PROFILE_ID_SESS_NAME);
-        if ($this->isVerificationCodeValid($iProfileId)) {
-            $oUser = new UserCore;
-            $oUserModel = new UserCoreModel;
-            $this->setPhoneNumberToDb($iProfileId, $oUserModel);
-            $this->approveUser($iProfileId, $oUserModel);
+        $iProfileId = SmsVerificationCore::getChallengeProfileId($this->session);
+        if ($iProfileId === null) {
+            $this->restartLogin();
 
-            // Clear "active" DB field from the cache
-            $oUser->clearReadProfileCache($iProfileId);
-
-            $oUserData = $oUserModel->readProfile($iProfileId);
-
-            $oRememberMe = new RememberMeCore;
-            if ($oRememberMe->isEligible($this->session)) {
-                $oRememberMe->enableSession($oUserData);
-            }
-            unset($oRememberMe);
-
-            $oUser->setAuth(
-                $oUserData,
-                $oUserModel,
-                $this->session,
-                new SecurityModel
-            );
-            unset($oUserModel);
-
-            Header::redirect(
-                Uri::get('user', 'account', 'index'),
-                t('Congratulations! Your phone number has been successfully verified.')
-            );
-
-        } else {
+            return;
+        }
+        $mCode = $this->httpRequest->post('verification_code');
+        if (!is_string($mCode) || !Verification::consumeCode($this->session, $mCode)) {
             \PFBC\Form::setError(
                 'form_sms_verification',
-                t('The verification code is invalid. <a href="%0%">Try to resend a new one?</a>', Uri::get('sms-verification', 'main', 'send'))
+                t('This code is invalid, expired or has too many attempts. <a href="%0%">Request a new code</a>.', Uri::get('sms-verification', 'main', 'send'))
             );
+
+            return;
         }
-    }
+        $mPhoneNumber = $this->session->get(SmsVerificationCore::PHONE_NUMBER_SESS_NAME);
+        if (!is_string($mPhoneNumber) || $mPhoneNumber === ''
+            || !(new SmsVerificationModel())->activate($iProfileId, $mPhoneNumber)) {
+            $this->restartLogin();
 
-    /**
-     * @param int $iProfileId
-     * @param UserCoreModel $oUserModel
-     */
-    private function setPhoneNumberToDb($iProfileId, UserCoreModel $oUserModel): void
-    {
-        $sPhoneNumber = $this->session->get(SmsVerificationCore::PHONE_NUMBER_SESS_NAME);
+            return;
+        }
 
-        $oUserModel->updateProfile(
-            'phone',
-            $sPhoneNumber,
-            $iProfileId,
-            DbTableName::MEMBER_INFO
+        $oUser = new UserCore();
+        $oUser->clearReadProfileCache($iProfileId);
+        $oUser->clearInfoFieldCache($iProfileId);
+        SmsVerificationCore::clearChallenge($this->session);
+        $this->session->remove(RememberMeCore::STAY_LOGGED_IN_REQUESTED);
+        Header::redirect(
+            Uri::get('user', 'main', 'login'),
+            t('Your phone number is verified. Please sign in to continue.')
         );
     }
 
-    /**
-     * Validate the user (once its phone number has been verified).
-     *
-     * @param int $iProfileId
-     * @param UserCoreModel $oUserModel
-     */
-    private function approveUser($iProfileId, UserCoreModel $oUserModel): void
+    private function restartLogin(): void
     {
-        $oUserModel->approve(
-            $iProfileId,
-            1
-        );
-    }
-
-    /**
-     * @param int $iProfileId
-     */
-    private function isVerificationCodeValid($iProfileId): bool
-    {
-        try {
-            return $this->httpRequest->post('verification_code') === Verification::getVerificationCode($iProfileId);
-        } catch (\Exception $oExcept) {
-            // If request isn't POST, return false
-            return false;
-        }
+        SmsVerificationCore::clearChallenge($this->session);
+        $this->session->remove(RememberMeCore::STAY_LOGGED_IN_REQUESTED);
+        Header::redirect(Uri::get('user', 'main', 'login'), t('Please sign in again to verify your account.'), Design::ERROR_TYPE);
     }
 }
