@@ -69,6 +69,8 @@ class LoginFormProcess extends Form implements LoginableForm
 
         if ($this->httpRequest->postExists(RememberMeCore::CHECKBOX_FIELD_NAME)) {
             $this->session->set(RememberMeCore::STAY_LOGGED_IN_REQUESTED, 1);
+        } else {
+            $this->session->remove(RememberMeCore::STAY_LOGGED_IN_REQUESTED);
         }
 
         if ($this->isSmsVerificationEligible($oUserData)) {
@@ -84,7 +86,7 @@ class LoginFormProcess extends Form implements LoginableForm
 
         $o2FactorModel = new TwoFactorAuthCoreModel('user');
         if ($o2FactorModel->isEnabled($iProfileId)) {
-            $this->session->set(TwoFactorAuthCore::PROFILE_ID_SESS_NAME, $iProfileId);
+            TwoFactorAuthCore::beginChallenge($this->session, 'user', (int)$iProfileId);
             $this->redirectToTwoFactorAuth();
             return;
         }

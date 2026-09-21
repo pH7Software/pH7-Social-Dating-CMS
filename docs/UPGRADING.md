@@ -3,6 +3,21 @@
 Automatic in-place upgrades are currently unavailable. Upgrade a staging copy
 manually, verify it, and only then repeat the reviewed procedure in production.
 
+## Unreleased authentication maintenance
+
+No database migration is required. Deploy the matching application and framework
+files together. A sign-in waiting for a two-factor code during deployment must
+restart from the login page. New verification sessions expire after ten minutes
+and are tied to their account type; completing verification clears them.
+
+The two-factor setup page now offers an **authenticator setup-key backup**, not
+a one-time recovery code. Previously downloaded six-digit files are temporary
+codes and must not be relied on for recovery. While signed in, use **Back up
+authenticator setup key** and keep the new file offline in a secure place. To
+restore access, import the key into an authenticator app, then sign in normally
+with your password and its current code. Never share this key: it can generate
+your sign-in codes. No existing authenticator enrolment changes.
+
 ## Unreleased GeoIP maintenance
 
 Changes after 19.2.0 replace the bundled 3 December 2019 GeoLite2 database with

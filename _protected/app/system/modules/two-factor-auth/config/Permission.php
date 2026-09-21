@@ -10,6 +10,7 @@ namespace PH7;
 
 defined('PH7') or exit('Restricted access');
 
+use PH7\Framework\Layout\Html\Design;
 use PH7\Framework\Url\Header;
 
 class Permission extends PermissionCore
@@ -18,10 +19,17 @@ class Permission extends PermissionCore
     {
         parent::__construct();
 
-        if ($this->registry->action === 'verificationcode'
-            && !$this->session->exists(TwoFactorAuthCore::PROFILE_ID_SESS_NAME)
-        ) {
-            Header::redirect($this->registry->site_url);
+        if ($this->registry->action === 'verificationcode') {
+            $mModule = $this->httpRequest->get('mod');
+            $sModule = is_string($mModule) ? $mModule : '';
+            if (TwoFactorAuthCore::getChallengeProfileId($this->session, $sModule) === null) {
+                TwoFactorAuthCore::clearChallenge($this->session);
+                Header::redirect(
+                    TwoFactorAuthCore::getLoginUrl($sModule),
+                    t('Please sign in again. Your verification session is invalid or has expired.'),
+                    Design::ERROR_TYPE
+                );
+            }
         }
 
         if ($this->registry->action === 'setup'
