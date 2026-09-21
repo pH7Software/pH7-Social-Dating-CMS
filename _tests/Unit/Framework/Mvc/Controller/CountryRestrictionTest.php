@@ -11,11 +11,15 @@ namespace PH7\Test\Unit\Framework\Mvc\Controller;
 
 use MaxMind\Db\Reader\InvalidDatabaseException;
 use PH7\Framework\Mvc\Controller\Controller;
+use PH7\Framework\Mvc\Request\Http;
 use PH7\Framework\Registry\Registry;
+use PH7\Framework\Session\Session;
+use PH7\TwoFactorAuthCore;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\PreserveGlobalState;
 use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
 use PHPUnit\Framework\TestCase;
+use ReflectionClass;
 use ReflectionMethod;
 use ReflectionProperty;
 
@@ -23,6 +27,76 @@ use ReflectionProperty;
 #[PreserveGlobalState(false)]
 final class CountryRestrictionTest extends TestCase
 {
+    #[DataProvider('provideTwoFactorCases')]
+    public function testOnlyCurrentAdminVerificationCanRecoverWithoutGeoIp(
+        string $sChallengeModule,
+        string $sRequestedModule,
+        string $sAction,
+        bool $bExpired,
+        bool $bCorrupt,
+        bool $bAllowed
+    ): void {
+        class_alias(CountryRestrictionAdminStub::class, 'PH7\\AdminCore');
+        class_alias(CountryRestrictionModelStub::class, 'PH7\\Framework\\Mvc\\Model\\BlockCountry');
+        CountryRestrictionModelStub::$aCountries = ['UK'];
+        $sPath = sys_get_temp_dir() . '/ph7-admin-recovery-' . bin2hex(random_bytes(6));
+        self::assertTrue(mkdir($sPath, 0700));
+        copy(PH7_PATH_FRAMEWORK . 'Geo/Ip/Geo.class.php', $sPath . '/Geo.class.php');
+        require $sPath . '/Geo.class.php';
+        if ($bCorrupt) {
+            file_put_contents($sPath . '/GeoLite2-City.mmdb', 'invalid database');
+        }
+        $sErrorLog = ini_set('error_log', $sPath . '/error.log');
+        $oSession = (new ReflectionClass(Session::class))->newInstanceWithoutConstructor();
+        if ($sChallengeModule !== '') {
+            TwoFactorAuthCore::beginChallenge($oSession, $sChallengeModule, 42);
+        }
+        if ($bExpired) {
+            $oSession->set('2fa_expires', time() - 1);
+        }
+        $_GET['mod'] = $sRequestedModule;
+        $oController = new class extends Controller {
+            public function __construct()
+            {
+            }
+        };
+        $oRegistry = Registry::getInstance();
+        $oRegistry->module = 'two-factor-auth';
+        $oRegistry->controller = 'MainController';
+        $oRegistry->action = $sAction;
+        foreach (['registry' => $oRegistry, 'session' => $oSession, 'httpRequest' => new Http()] as $sName => $oValue) {
+            (new ReflectionProperty($oController, $sName))->setValue($oController, $oValue);
+        }
+        try {
+            if (!$bAllowed) {
+                $this->expectException(InvalidDatabaseException::class);
+            }
+            self::assertFalse((new ReflectionMethod(Controller::class, 'isBlockedCountryPageEligible'))->invoke($oController));
+        } finally {
+            TwoFactorAuthCore::clearChallenge($oSession);
+            ini_set('error_log', $sErrorLog);
+            foreach (glob($sPath . '/*') as $sFile) {
+                unlink($sFile);
+            }
+            rmdir($sPath);
+        }
+    }
+
+    public static function provideTwoFactorCases(): array
+    {
+        return [
+            'admin, missing database' => [PH7_ADMIN_MOD, PH7_ADMIN_MOD, 'verificationcode', false, false, true],
+            'admin, corrupt database' => [PH7_ADMIN_MOD, PH7_ADMIN_MOD, 'verificationcode', false, true, true],
+            'member' => ['user', 'user', 'verificationcode', false, false, false],
+            'affiliate' => ['affiliate', 'affiliate', 'verificationcode', false, true, false],
+            'member requesting admin route' => ['user', PH7_ADMIN_MOD, 'verificationcode', false, false, false],
+            'admin requesting member route' => [PH7_ADMIN_MOD, 'user', 'verificationcode', false, false, false],
+            'expired admin' => [PH7_ADMIN_MOD, PH7_ADMIN_MOD, 'verificationcode', true, false, false],
+            'missing challenge' => ['', PH7_ADMIN_MOD, 'verificationcode', false, false, false],
+            'setup is not recovery' => [PH7_ADMIN_MOD, PH7_ADMIN_MOD, 'setup', false, false, false]
+        ];
+    }
+
     #[DataProvider('provideAccessCases')]
     public function testCountryRestrictionsKeepTheirRecoveryBoundary(
         array $aBlockedCountries,

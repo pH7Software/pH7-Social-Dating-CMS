@@ -13,6 +13,7 @@ namespace PH7;
 defined('PH7') or exit('Restricted access');
 
 use PH7\Framework\Error\CException\PH7InvalidArgumentException;
+use PH7\Framework\Layout\Html\Design;
 use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Mvc\Model\Engine\Util\Various;
 use PH7\Framework\Mvc\Model\Security as SecurityModel;
@@ -34,10 +35,21 @@ class VerificationCodeFormProcess extends Form
     {
         parent::__construct();
 
+        $iProfileId = TwoFactorAuthCore::getChallengeProfileId($this->session, $sMod);
+        if ($iProfileId === null) {
+            TwoFactorAuthCore::clearChallenge($this->session);
+            Header::redirect(
+                TwoFactorAuthCore::getLoginUrl($sMod),
+                t('Please sign in again. Your verification session is invalid or has expired.'),
+                Design::ERROR_TYPE
+            );
+
+            return;
+        }
+
         $oAuthenticator = TwoFactorAuthCore::createAuthenticator();
         $oSecurityModel = new SecurityModel();
 
-        $iProfileId = $this->session->get(TwoFactorAuthCore::PROFILE_ID_SESS_NAME);
         $sSecret = (new TwoFactorAuthModel($sMod))->getSecret($iProfileId);
         $sCode = $this->httpRequest->post('verification_code');
 
@@ -78,6 +90,7 @@ class VerificationCodeFormProcess extends Form
                 new SecurityModel()
             );
 
+            TwoFactorAuthCore::clearChallenge($this->session);
             $this->redirectToAccountPage($sMod);
         } else {
             $oSecurityModel->addLoginAttempt($this->getAttemptTable($sMod));
