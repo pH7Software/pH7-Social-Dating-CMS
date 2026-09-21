@@ -20,7 +20,7 @@ class LoginForm
     public static function display(): void
     {
         if (isset($_POST['submit_login'])) {
-            if (\PFBC\Form::isValid($_POST['submit_login'])) {
+            if (\PFBC\Form::isValid('form_login')) {
                 new LoginFormProcess;
             }
 
