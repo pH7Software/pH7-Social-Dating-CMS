@@ -5,6 +5,15 @@ manually, verify it, and only then repeat the reviewed procedure in production.
 
 ## Unreleased authentication maintenance
 
+SMS activation now uses numeric, single-use codes valid for five minutes, with
+five attempts per code. Requests in the same session are limited to one per minute
+and five per 15 minutes. New installations use six digits; existing configurations
+may retain a length from four to eight. Pending SMS verification sessions must
+restart after deployment. Successful phone activation returns to the normal login
+page, where account restrictions and two-factor authentication still apply.
+Gateway failures leave no usable code; check the configured SMS provider if
+delivery continues to fail.
+
 No database migration is required. Deploy the matching application and framework
 files together. A sign-in waiting for a two-factor code during deployment must
 restart from the login page. New verification sessions expire after ten minutes
