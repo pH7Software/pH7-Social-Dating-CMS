@@ -22,7 +22,7 @@ class MainController extends Controller
 
     public const TWO_FACTOR_SECRET_STRING_LENGTH = 10;
     public const WRONG_MODULE_ERROR_MESSAGE = 'Wrong "%s" module!';
-    public const BACKUP_CODE_FILE_EXT = '.txt';
+    public const BACKUP_FILE_EXT = '.txt';
 
     private TwoFactorAuthModel $o2FactorModel;
     private Authenticator $oAuthenticator;
@@ -42,6 +42,16 @@ class MainController extends Controller
     {
         $this->sMod = $sMod;
         $this->checkMod();
+        $bAuthenticated = match ($sMod) {
+            'user' => UserCore::auth(),
+            'affiliate' => AffiliateCore::auth(),
+            PH7_ADMIN_MOD => AdminCore::auth()
+        };
+        if (!$bAuthenticated) {
+            Header::redirect(TwoFactorAuthCore::getLoginUrl($sMod), t('Please sign in first.'), Design::ERROR_TYPE);
+
+            return;
+        }
 
         $this->iProfileId = $this->getProfileId();
         $this->o2FactorModel = new TwoFactorAuthModel($this->sMod);
@@ -90,28 +100,31 @@ class MainController extends Controller
     }
 
     /**
-     * Download the backup 2FA code (text file).
+     * Download the authenticator setup key for secure offline backup.
      *
      * @param string $sSecret the 2FA secret
      */
     private function download(string $sSecret): void
     {
-        $sFileName = '2FA-backup-code-' . $this->sMod . '-' . Url::clean($this->registry->site_name) . self::BACKUP_CODE_FILE_EXT;
+        $sFileName = '2FA-setup-key-' . $this->sMod . '-' . Url::clean($this->registry->site_name) . self::BACKUP_FILE_EXT;
+        header('Content-Type: text/plain; charset=UTF-8');
+        header('Cache-Control: no-store');
         header('Content-Disposition: attachment; filename=' . $sFileName);
-        $sBackupCodeTextMessage = $this->getBackupCodeMessage($sSecret);
+        $sBackupText = $this->getSetupKeyBackupMessage($sSecret);
 
-        echo $sBackupCodeTextMessage;
+        echo $sBackupText;
     }
 
     /**
      * @param string $sSecret the 2FA secret code
      */
-    private function getBackupCodeMessage(string $sSecret): string
+    private function getSetupKeyBackupMessage(string $sSecret): string
     {
-        $sTxtMsg = t('BACKUP VERIFICATION CODE - %site_url% | %0%', $this->sMod) . "\r\n\r\n";
-        $sTxtMsg .= t('Code: %0%', $this->oAuthenticator->getCode($sSecret)) . "\r\n\r\n";
+        $sTxtMsg = t('AUTHENTICATOR SETUP KEY - %site_url% | %0%', $this->sMod) . "\r\n\r\n";
+        $sTxtMsg .= t('Setup key: %0%', $sSecret) . "\r\n\r\n";
+        $sTxtMsg .= t('To restore your authenticator, add this key to an authenticator app. Then sign in with your password and the current six-digit code.') . "\r\n\r\n";
+        $sTxtMsg .= t('This is not a one-time recovery code. Keep this key offline and never share it: it can generate your sign-in codes.') . "\r\n\r\n";
         $sTxtMsg .= t('Generated on: %0%', $this->dateTime->get()->date()) . "\r\n\r\n";
-        $sTxtMsg .= t('Print it and keep it in a safe place, like your wallet.') . "\r\n\r\n\r\n";
         $sTxtMsg .= t('Regards, %site_name%') . "\r\n";
         $sTxtMsg .= '-----' . "\r\n";
         $sTxtMsg .= t('Powered by "pH7Builder.com" software.') . "\r\n";
