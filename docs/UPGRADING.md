@@ -5,6 +5,13 @@ manually, verify it, and only then repeat the reviewed procedure in production.
 
 ## Unreleased authentication maintenance
 
+Password reset links now open a form to choose a new password. They expire within
+one hour, work once and become invalid after any password change. Passwords are
+no longer generated or emailed. After deployment, request a new link: previously
+issued reset links are intentionally rejected. Successful resets return to normal
+sign-in, including any configured two-factor authentication. No schema change is
+required; only a password-bound digest of the reset token is stored.
+
 SMS activation now uses numeric, single-use codes valid for five minutes, with
 five attempts per code. Requests in the same session are limited to one per minute
 and five per 15 minutes. New installations use six digits; existing configurations
