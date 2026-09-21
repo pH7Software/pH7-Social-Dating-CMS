@@ -297,6 +297,11 @@ final class FrontController
      */
     public function _initializeDatabase()
     {
+        // The credentials are only removed from the config once connected, so there is nothing left to do.
+        if (!isset($this->oConfig->values['database'])) {
+            return;
+        }
+
         /* DSN */
         Db::getInstance(
             $this->oConfig->values['database']['type'] . ':host=' . $this->oConfig->values['database']['hostname'] . ';port=' . $this->oConfig->values['database']['port'] . ';dbname=' . $this->oConfig->values['database']['name'] . ';charset=' . $this->oConfig->values['database']['charset'],
