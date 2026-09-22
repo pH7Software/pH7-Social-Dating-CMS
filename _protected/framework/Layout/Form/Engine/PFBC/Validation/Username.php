@@ -35,6 +35,7 @@ class Username extends Validation
 
     public function isValid($sValue)
     {
-        return $this->oValidate->username($sValue, $this->iMin, $this->iMax, $this->sTable);
+        // A missing username is invalid, and checking it would pass null to trim(), a TypeError in PHP 9
+        return is_string($sValue) && $this->oValidate->username($sValue, $this->iMin, $this->iMax, $this->sTable);
     }
 }
