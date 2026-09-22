@@ -1,7 +1,7 @@
 {inc_header}
 {inc_sub_header}
 
-<p>{content}</p>
+<div>{content}</div>
 
 {inc_sub_footer}
 {inc_footer}
