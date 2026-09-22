@@ -386,6 +386,12 @@ class Http extends \PH7\Framework\Http\Http
     protected function checkType(&$aType, $sKey, $sType)
     {
         if (!empty($sType) && $sType !== self::ONLY_XSS_CLEAN) {
+            /* A value sent as "key[]=..." can't meaningfully become a scalar. settype() would turn it
+            into "Array" (with a warning) or into 1, so it gets the type's empty value instead. */
+            if (is_array($aType[$sKey]) && $sType !== Type::ARRAY) {
+                $aType[$sKey] = '';
+            }
+
             settype($aType[$sKey], $sType);
         }
     }

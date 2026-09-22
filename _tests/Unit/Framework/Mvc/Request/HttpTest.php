@@ -67,6 +67,29 @@ final class HttpTest extends TestCase
         $this->assertSame([], $this->oHttpRequest->post('absent_list', Type::ARRAY));
     }
 
+    /**
+     * "?looking[]=x" sends an array where a string is expected. Converting it with settype()
+     * gave "Array" plus a warning, and callers then crashed passing it to trim().
+     */
+    public function testArrayRequestedAsStringIsAnEmptyString(): void
+    {
+        $_SERVER['REQUEST_METHOD'] = 'GET';
+        $_GET['looking'] = ['x'];
+
+        $this->assertSame('', $this->oHttpRequest->get('looking', Type::STRING));
+    }
+
+    /**
+     * settype() turned a non-empty array into 1, so "?id[]=x" could load record 1.
+     */
+    public function testArrayRequestedAsIntegerIsZero(): void
+    {
+        $_SERVER['REQUEST_METHOD'] = 'GET';
+        $_GET['group_id'] = ['7'];
+
+        $this->assertSame(0, $this->oHttpRequest->get('group_id', Type::INTEGER));
+    }
+
     public function testMissingKeyWithoutTypeIsStillAnEmptyString(): void
     {
         $_SERVER['REQUEST_METHOD'] = 'POST';
