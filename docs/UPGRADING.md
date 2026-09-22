@@ -3,6 +3,25 @@
 Automatic in-place upgrades are currently unavailable. Upgrade a staging copy
 manually, verify it, and only then repeat the reviewed procedure in production.
 
+## 19.3.1 patch release
+
+pH7Builder 19.3.1 fixes form, comment and affiliate issues found while
+verifying 19.3.0. PHP 8.2+, MySQL 8.0+, schema `1.6.6` and the locked Composer
+dependencies are unchanged. No database migration is needed from 19.3.0.
+
+Select, radio and checkbox values must now be among the options the form
+rendered. Custom forms that add options in the browser with JavaScript must add
+them on the server too. A failed submission's input and errors are shown once,
+on the page the visitor returns to, so a page that renders the same form twice
+shows them only in the first copy. Custom themes that override the newsletter
+message mail template or the affiliate `login.inc.tpl` should apply the same
+changes.
+
+Deploy the complete 19.3.1 package as described for 19.3.0 below, then clear
+application, template and browser/CDN caches. Test a failed and a successful
+edit, a newsletter sent to a test subscriber and the affiliate pages while
+signed in as a member. See the [19.3.1 release notes](RELEASE_NOTES_19.3.1.md).
+
 ## 19.3.0 security and maintenance release
 
 pH7Builder 19.3.0 hardens form validation, password recovery, two-factor and SMS
