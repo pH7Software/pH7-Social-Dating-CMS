@@ -8,8 +8,22 @@
 
 namespace PH7;
 
+use PH7\Framework\Mvc\Router\Uri;
+use PH7\Framework\Url\Header;
+
 class AdminController extends MainController
 {
+    /**
+     * The video admin area has a single page. Without this, the index() inherited from
+     * MainController looks for a missing "admin/index.tpl" and fails with a server error.
+     */
+    public function index()
+    {
+        Header::redirect(
+            Uri::get('video', 'admin', 'config')
+        );
+    }
+
     public function config()
     {
         $this->view->page_title = $this->view->h2_title = t('Youtube API Key - Setting');
