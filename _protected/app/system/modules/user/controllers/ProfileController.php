@@ -177,7 +177,7 @@ class ProfileController extends ProfileBaseController
         $iNbMutFriend = (new FriendCoreModel)->get(
             $this->iVisitorId,
             $this->iProfileId,
-            null,
+            '',
             true,
             null,
             null,
