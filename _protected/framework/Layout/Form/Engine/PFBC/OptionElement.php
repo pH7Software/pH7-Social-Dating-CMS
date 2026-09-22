@@ -26,6 +26,14 @@ abstract class OptionElement extends Element
         }
 
         parent::__construct($label, $name, $properties);
+
+        /* Validation runs on the form saved in the session, which keeps the element's rules but not
+        its options. Record the values offered, as the browser submits them, so a crafted value is
+        rejected like any other invalid input. */
+        $this->validation[] = new Validation\Option(array_map(
+            fn ($key): string => stripslashes((string)$this->getOptionValue((string)$key)),
+            array_keys($this->options)
+        ));
     }
 
     /**
