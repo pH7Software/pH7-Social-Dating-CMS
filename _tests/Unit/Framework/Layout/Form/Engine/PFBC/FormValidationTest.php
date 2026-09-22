@@ -134,6 +134,26 @@ final class FormValidationTest extends TestCase
         return ['optional file' => [false], 'required file' => [true]];
     }
 
+    /**
+     * Edit forms share one ID for every record. Values and errors kept after a failed save on
+     * record A were shown on record B's form too, and saving it wrote them onto record B.
+     */
+    public function testFailedSubmissionIsOnlyShownOnTheNextRender(): void
+    {
+        $this->renderRecordForm('Record A');
+        $_POST = ['title' => ''];
+        self::assertFalse(Form::isValid('edit_record'));
+
+        $sRedisplayed = $this->renderRecordForm('Record A');
+        self::assertStringContainsString('value=""', $sRedisplayed);
+        self::assertStringContainsString('Title is a required field.', $sRedisplayed);
+
+        $sOtherRecord = $this->renderRecordForm('Record B');
+        self::assertStringContainsString('value="Record B"', $sOtherRecord);
+        self::assertStringNotContainsString('Title is a required field.', $sOtherRecord);
+        self::assertSame([], Form::getSessionValues('edit_record'));
+    }
+
     public function testExpectedFormRetainsItsValidationRules(): void
     {
         $oForm = new Form('expected_validation');
@@ -145,5 +165,13 @@ final class FormValidationTest extends TestCase
         self::assertFalse(Form::isValid('expected_validation'));
         $_POST['name'] = 'Valid name';
         self::assertTrue(Form::isValid('expected_validation'));
+    }
+
+    private function renderRecordForm(string $sTitle): string
+    {
+        $oForm = new Form('edit_record');
+        $oForm->addElement(new Textbox('Title', 'title', ['required' => 1, 'value' => $sTitle]));
+
+        return (string)$oForm->render(true);
     }
 }

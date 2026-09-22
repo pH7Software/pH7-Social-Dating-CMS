@@ -377,6 +377,12 @@ class Form extends Base
         /* The form's instance is serialized and saved in a session variable for use during validation. */
         $this->save();
 
+        /* A failed submission's values and errors are shown once, on the page the visitor is sent back to.
+        Kept any longer, they reappeared on every later form with this ID, such as another record's edit
+        form, where saving would have written them onto that record. */
+        self::clearValues($this->attributes['id']);
+        self::clearErrors($this->attributes['id']);
+
         if ($returnHTML) {
             $html = ob_get_contents();
             ob_end_clean();
