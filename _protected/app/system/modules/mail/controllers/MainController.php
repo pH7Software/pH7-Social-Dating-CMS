@@ -105,7 +105,7 @@ class MainController extends Controller
             $this->manualTplInclude('msg.inc.tpl');
         } else {
             $this->iTotalMails = $this->oMailModel->search(
-                null,
+                '',
                 true,
                 SearchCoreModel::SEND_DATE,
                 SearchCoreModel::DESC,
@@ -120,7 +120,7 @@ class MainController extends Controller
             );
             $this->view->current_page = $this->oPage->getCurrentPage();
             $aMail = $this->oMailModel->search(
-                null,
+                '',
                 false,
                 SearchCoreModel::SEND_DATE,
                 SearchCoreModel::DESC,
@@ -165,7 +165,7 @@ class MainController extends Controller
             $this->manualTplInclude('msg.inc.tpl');
         } else {
             $this->iTotalMails = $this->oMailModel->search(
-                null,
+                '',
                 true,
                 SearchCoreModel::SEND_DATE,
                 SearchCoreModel::DESC,
@@ -180,7 +180,7 @@ class MainController extends Controller
             );
             $this->view->current_page = $this->oPage->getCurrentPage();
             $aMail = $this->oMailModel->search(
-                null,
+                '',
                 false,
                 SearchCoreModel::SEND_DATE,
                 SearchCoreModel::DESC,
@@ -227,7 +227,7 @@ class MainController extends Controller
             $this->manualTplInclude('msg.inc.tpl');
         } else {
             $this->iTotalMails = $this->oMailModel->search(
-                null,
+                '',
                 true,
                 SearchCoreModel::SEND_DATE,
                 SearchCoreModel::DESC,
@@ -242,7 +242,7 @@ class MainController extends Controller
             );
             $this->view->current_page = $this->oPage->getCurrentPage();
             $aMail = $this->oMailModel->search(
-                null,
+                '',
                 false,
                 SearchCoreModel::SEND_DATE,
                 SearchCoreModel::DESC,
