@@ -8,6 +8,7 @@
 
 namespace PH7;
 
+use PH7\Datatype\Type;
 use PH7\Framework\Http\Http;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Navigation\Page;
@@ -41,7 +42,7 @@ class CommentController extends Controller
 
         $this->oCommentModel = new CommentModel();
 
-        $this->sTable = $this->httpRequest->get('table');
+        $this->sTable = $this->httpRequest->get('table', Type::STRING);
         $this->view->table = $this->sTable;
         $this->iId = $this->getProfileId();
 
@@ -62,6 +63,8 @@ class CommentController extends Controller
 
     public function read()
     {
+        $this->requireValidTable();
+
         $oPage = new Page;
         $iCommentNumber = $this->oCommentModel->total($this->iId, $this->sTable);
 
@@ -102,6 +105,8 @@ class CommentController extends Controller
 
     public function post()
     {
+        $this->requireValidTable();
+
         $oComment = $this->oCommentModel->get($this->iId, 1, $this->sTable);
 
         if (!empty($oComment)) {
@@ -125,12 +130,16 @@ class CommentController extends Controller
 
     public function add()
     {
+        $this->requireValidTable();
+
         $this->view->page_title = t('Add a new comment');
         $this->output();
     }
 
     public function edit()
     {
+        $this->requireValidTable();
+
         $oComment = $this->oCommentModel->get(
             $this->httpRequest->get('id', 'int'),
             '1',
@@ -159,7 +168,8 @@ class CommentController extends Controller
         $this->requireActionToken('comment', 'comment', 'delete');
 
         if (CommentCore::isRemovalEligible($this->httpRequest, $this->session)) {
-            $this->sTable = $this->httpRequest->post('table');
+            $this->sTable = $this->httpRequest->post('table', Type::STRING);
+            $this->requireValidTable();
 
             if ($this->oCommentModel->delete(
                 $this->httpRequest->post('id'),
@@ -186,6 +196,19 @@ class CommentController extends Controller
             ),
             $this->sMsg
         );
+    }
+
+    /**
+     * Comments only exist for the tables CommentCore knows. Any other value comes from a mistyped
+     * or crafted URL, and would otherwise reach the model and fail with a server error.
+     *
+     * @return void Shows the "not found" page and exits when the table is unknown.
+     */
+    private function requireValidTable()
+    {
+        if (!CommentCore::isValidTable($this->sTable)) {
+            $this->displayPageNotFound(t('Comment Not Found'));
+        }
     }
 
     /**

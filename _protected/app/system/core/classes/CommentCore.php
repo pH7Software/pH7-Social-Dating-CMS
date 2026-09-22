@@ -57,6 +57,15 @@ class CommentCore
     }
 
     /**
+     * Unlike checkTable(), report an unknown table instead of throwing, so a controller can answer
+     * a mistyped or crafted URL with a "not found" page rather than a server error.
+     */
+    public static function isValidTable(string $sTable): bool
+    {
+        return static::doesTableNameExist(strtolower($sTable));
+    }
+
+    /**
      * @internal Since the ID digits might be string or integer, it won't work if we use the identity operator (===)
      */
     public static function isRemovalEligible(HttpRequest $oHttpRequest, Session $oSession): bool

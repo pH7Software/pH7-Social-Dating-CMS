@@ -30,6 +30,23 @@ final class CommentCoreTest extends TestCase
         CommentCore::checkTable('incorrect_table');
     }
 
+    #[DataProvider('tableNamesProvider')]
+    public function testKnownTableIsValid(string $sTableName): void
+    {
+        $this->assertTrue(CommentCore::isValidTable($sTableName));
+        $this->assertTrue(CommentCore::isValidTable(ucfirst($sTableName)));
+    }
+
+    /**
+     * URLs such as "/comment/read/Nope/1" or "/comment/comment/read/note,1" carry these values,
+     * which must be reported as unknown rather than thrown on.
+     */
+    #[DataProvider('unknownTableNamesProvider')]
+    public function testUnknownTableIsNotValid(string $sTableName): void
+    {
+        $this->assertFalse(CommentCore::isValidTable($sTableName));
+    }
+
     public static function tableNamesProvider(): array
     {
         return [
@@ -38,6 +55,16 @@ final class CommentCoreTest extends TestCase
             ['video'],
             ['blog'],
             ['note']
+        ];
+    }
+
+    public static function unknownTableNamesProvider(): array
+    {
+        return [
+            ['Nope'],
+            [''],
+            ['note,1'],
+            ['members']
         ];
     }
 }
