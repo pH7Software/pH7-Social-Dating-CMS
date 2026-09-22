@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 namespace PH7\Test\Unit\Framework\Layout\Form\Engine\PFBC;
 
+use PFBC\Validation\Date;
 use PFBC\Validation\Str;
 use PHPUnit\Framework\TestCase;
 
@@ -33,6 +34,17 @@ final class ValidationMissingValueTest extends TestCase
         self::assertTrue($oRule->isValid('   '));
         self::assertFalse($oRule->isValid(' a '));
         self::assertTrue($oRule->isValid(' ab '));
+    }
+
+    public function testDateRuleAcceptsAMissingOptionalField(): void
+    {
+        $this->assertValidationWithoutDeprecation(true, static fn (): bool => (new Date)->isValid(null));
+    }
+
+    public function testDateRuleStillChecksWhatWasSent(): void
+    {
+        self::assertTrue((new Date)->isValid('2026-09-22'));
+        self::assertFalse((new Date)->isValid('not a date'));
     }
 
     private function assertValidationWithoutDeprecation(bool $bExpected, callable $fnValidate): void

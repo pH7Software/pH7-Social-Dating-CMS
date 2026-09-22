@@ -18,6 +18,7 @@ class Date extends Validation
 
     public function isValid($sValue)
     {
-        return $this->oValidate->date($sValue);
+        // A field missing from the request arrives as null, which DateTime no longer accepts in PHP 9
+        return $this->isNotApplicable($sValue) || $this->oValidate->date($sValue);
     }
 }
