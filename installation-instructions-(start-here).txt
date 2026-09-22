@@ -16,7 +16,7 @@ Release guides:
 https://github.com/pH7Software/pH7-Social-Dating-CMS/tree/18.x/docs
 
 Composer installation of this release:
-composer create-project ph7software/ph7builder:19.2.0 pH7Builder-v19.2.0 --no-dev --prefer-dist
+composer create-project ph7software/ph7builder:19.3.0 pH7Builder-v19.3.0 --no-dev --prefer-dist
 
 Other distribution listings:
 Softaculous: https://www.softaculous.com/apps/socialnetworking/pH7Builder
