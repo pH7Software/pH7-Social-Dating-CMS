@@ -36,16 +36,20 @@ class DynamicFieldCoreForm
     /** @var string */
     private $sVal;
 
+    private bool $bIsDescriptionRequired;
+
     /**
      * @param \PFBC\Form $oForm
      * @param string $sColumn Column name
      * @param string $sValue Field value
+     * @param bool $bIsDescriptionRequired False for accounts whose signup never asks for a description.
      */
-    public function __construct(\PFBC\Form $oForm, $sColumn, $sValue)
+    public function __construct(\PFBC\Form $oForm, $sColumn, $sValue, bool $bIsDescriptionRequired = true)
     {
         $this->oForm = $oForm;
         $this->sColumn = $sColumn;
         $this->sVal = $sValue;
+        $this->bIsDescriptionRequired = $bIsDescriptionRequired;
     }
 
     /**
@@ -66,7 +70,7 @@ class DynamicFieldCoreForm
                             'onblur' => 'CValid(this.value,this.id,20,4000)',
                             'value' => $this->sVal,
                             'validation' => new Str(20, 4000),
-                            'required' => 1
+                            'required' => $this->bIsDescriptionRequired
                         ]
                     )
                 );

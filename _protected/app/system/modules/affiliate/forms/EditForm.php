@@ -93,10 +93,11 @@ class EditForm
             $oForm->addElement(new HTMLExternal('<span class="input_error birth_date"></span>'));
         }
 
-        // Generate dynamic fields
+        // Generate dynamic fields. Affiliates sign up without a description,
+        // so saving their other changes must not demand one.
         $oFields = $oAffModel->getInfoFields($iProfileId, DbTableName::AFFILIATE_INFO);
         foreach ($oFields as $sColumn => $sValue) {
-            $oForm = (new DynamicFieldCoreForm($oForm, $sColumn, $sValue))->generate();
+            $oForm = (new DynamicFieldCoreForm($oForm, $sColumn, $sValue, false))->generate();
         }
 
         $oForm->addElement(new Button(t('Save'), 'submit', ['icon' => 'check']));
