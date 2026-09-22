@@ -10,6 +10,7 @@ namespace PH7;
 
 use PH7\Framework\File\File;
 use PH7\Framework\Layout\Html\Design;
+use PH7\Framework\Layout\Html\Security as HtmlSecurity;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Security\CSRF\Token;
 use PH7\Framework\Url\Header;
@@ -33,6 +34,7 @@ class ModuleController extends Controller
 
         $this->view->oFile = new File;
         $this->view->oModule = $this->oModule;
+        $this->view->designSecurity = new HtmlSecurity; // Renders the install/uninstall forms' action token
     }
 
     public function disable()
