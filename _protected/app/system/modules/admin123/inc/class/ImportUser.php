@@ -294,7 +294,7 @@ class ImportUser extends Core
 
             return [
                 'status' => true,
-                'msg' => nt('%n% user has been successfully added.', '%n% users has been successfully added.', $iRow)
+                'msg' => nt('%n% user has been successfully added.', '%n% users have been successfully added.', $iRow)
             ];
         }
     }

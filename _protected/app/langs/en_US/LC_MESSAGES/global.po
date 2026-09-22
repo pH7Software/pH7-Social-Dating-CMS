@@ -3887,7 +3887,7 @@ msgstr ""
 
 #: _protected/app/system/modules/admin123/inc/class/ImportUser.php:314
 msgid "%n% user has been successfully added."
-msgid_plural "%n% users has been successfully added."
+msgid_plural "%n% users have been successfully added."
 msgstr[0] ""
 msgstr[1] ""
 
