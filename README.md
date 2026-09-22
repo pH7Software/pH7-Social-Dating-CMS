@@ -1,4 +1,4 @@
-# pH7Builder
+# pH7Builder — Open-Source Dating Site & Social Network Builder in PHP
 
 Self-hosted, open-source PHP software for building white-label dating sites,
 matchmaking communities, and social networks. You keep control of the code,
