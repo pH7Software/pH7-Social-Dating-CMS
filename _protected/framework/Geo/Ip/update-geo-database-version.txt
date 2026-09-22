@@ -39,10 +39,10 @@ checksum before installing it together with MaxMind's notice files.
 
 Release packages omit the _tools/ directory. Restore a release installation's
 GeoIP files from that same package rather than mixing database builds and
-notices. The published 19.2.0 package still contains the older 3 December 2019
-database, not the 24 December build and notice files described here; these are
-currently source-branch changes. In this checkout, restore GeoLite2-City.mmdb,
-LICENSE.txt, COPYRIGHT.txt and README.txt together with the command above.
+notices. Packages from 19.3.0 onward contain the 24 December build and the
+notice files described here; earlier 19.x packages contain the older 3 December
+2019 database. In a source checkout, restore GeoLite2-City.mmdb, LICENSE.txt,
+COPYRIGHT.txt and README.txt together with the command above.
 
 Entering a path instead installs a GeoLite2-City .mmdb or .tar.gz you obtained
 yourself. Except for the exact bundled checksum, imports require PHP and the
