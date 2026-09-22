@@ -8,6 +8,7 @@
 
 namespace PH7;
 
+use PH7\Datatype\Type;
 use PH7\Framework\Layout\Html\Meta;
 use PH7\Framework\Navigation\Page;
 use PH7\Framework\Security\CSRF\Token;
@@ -89,7 +90,7 @@ class MainController extends Controller
 
     public function index()
     {
-        $sKeywords = $this->httpRequest->get('looking');
+        $sKeywords = $this->httpRequest->get('looking', Type::STRING);
         $sOrder = $this->httpRequest->get('order');
         $iSortBy = $this->httpRequest->get('sort', 'int');
 
@@ -142,7 +143,7 @@ class MainController extends Controller
 
     public function mutual()
     {
-        $sKeywords = $this->httpRequest->get('looking');
+        $sKeywords = $this->httpRequest->get('looking', Type::STRING);
         $sOrder = $this->httpRequest->get('order');
         $iSortBy = $this->httpRequest->get('sort', 'int');
 

@@ -8,6 +8,7 @@
 
 namespace PH7;
 
+use PH7\Datatype\Type;
 use PH7\Framework\Analytics\Statistic;
 use PH7\Framework\Http\Http;
 use PH7\Framework\Mvc\Router\Uri;
@@ -226,7 +227,7 @@ class ForumController extends Controller
     public function result()
     {
         $this->iTotalTopics = $this->oForumModel->search(
-            $this->httpRequest->get('looking'),
+            $this->httpRequest->get('looking', Type::STRING),
             true,
             $this->httpRequest->get('order'),
             $this->httpRequest->get('sort'),
@@ -240,7 +241,7 @@ class ForumController extends Controller
         $this->view->current_page = $this->oPage->getCurrentPage();
 
         $oSearch = $this->oForumModel->search(
-            $this->httpRequest->get('looking'),
+            $this->httpRequest->get('looking', Type::STRING),
             false,
             $this->httpRequest->get('order'),
             $this->httpRequest->get('sort'),

@@ -82,7 +82,7 @@ class AdminController extends Controller implements UserModeratable
 
     public function browse(): void
     {
-        $sKeywords = $this->httpRequest->get('looking');
+        $sKeywords = $this->httpRequest->get('looking', Type::STRING);
         $sOrder = $this->httpRequest->get('order');
         $iSort = $this->httpRequest->get('sort', 'int');
 

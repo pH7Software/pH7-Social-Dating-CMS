@@ -10,6 +10,7 @@
 
 namespace PH7;
 
+use PH7\Datatype\Type;
 use PH7\Framework\Layout\Html\Design;
 use PH7\Framework\Layout\Html\Security as HtmlSecurity;
 use PH7\Framework\Mvc\Router\Uri;
@@ -52,7 +53,7 @@ class AdminController extends Controller
 
     public function browse()
     {
-        $sKeywords = $this->httpRequest->get('looking');
+        $sKeywords = $this->httpRequest->get('looking', Type::STRING);
         $sOrder = $this->httpRequest->get('order');
         $iSort = $this->httpRequest->get('sort', 'int');
 

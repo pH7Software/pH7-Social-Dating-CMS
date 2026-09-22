@@ -8,6 +8,7 @@
 
 namespace PH7;
 
+use PH7\Datatype\Type;
 use PH7\Framework\Navigation\Page;
 
 class VisitorController extends Controller
@@ -76,7 +77,7 @@ class VisitorController extends Controller
         $this->view->current_page = $this->oPage->getCurrentPage();
 
         $this->iTotalVisitors = $this->oVisitorModel->get(
-            $this->httpRequest->get('looking'),
+            $this->httpRequest->get('looking', Type::STRING),
             true,
             SearchCoreModel::LAST_VISIT,
             SearchCoreModel::DESC,
@@ -84,7 +85,7 @@ class VisitorController extends Controller
             null
         );
         $oVisitor = $this->oVisitorModel->get(
-            $this->httpRequest->get('looking'),
+            $this->httpRequest->get('looking', Type::STRING),
             false,
             SearchCoreModel::LAST_VISIT,
             SearchCoreModel::DESC,

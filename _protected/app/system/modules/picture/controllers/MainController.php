@@ -282,7 +282,7 @@ class MainController extends Controller
     public function result()
     {
         $this->iTotalPictures = $this->oPictureModel->search(
-            $this->httpRequest->get('looking'),
+            $this->httpRequest->get('looking', Type::STRING),
             true,
             $this->httpRequest->get('order'),
             $this->httpRequest->get('sort'),
@@ -295,7 +295,7 @@ class MainController extends Controller
         );
         $this->view->current_page = $this->oPage->getCurrentPage();
         $oSearch = $this->oPictureModel->search(
-            $this->httpRequest->get('looking'),
+            $this->httpRequest->get('looking', Type::STRING),
             false,
             $this->httpRequest->get('order'),
             $this->httpRequest->get('sort'),

@@ -277,7 +277,7 @@ class MainController extends Controller
 
     public function result()
     {
-        $sKeywords = $this->httpRequest->get('looking');
+        $sKeywords = $this->httpRequest->get('looking', Type::STRING);
         $sOrder = $this->httpRequest->get('order');
         $iSort = $this->httpRequest->get('sort', Type::INTEGER);
         $iType = $this->httpRequest->get('where', Type::INTEGER);

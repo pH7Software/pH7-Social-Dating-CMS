@@ -8,6 +8,7 @@
 
 namespace PH7;
 
+use PH7\Datatype\Type;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Url\Header;
 
@@ -25,7 +26,7 @@ class AdminController extends MainController
     public function msgList()
     {
         $this->iTotalMails = $this->oMailModel->search(
-            $this->httpRequest->get('looking'),
+            $this->httpRequest->get('looking', Type::STRING),
             true,
             $this->httpRequest->get('order'),
             $this->httpRequest->get('sort'),
@@ -39,7 +40,7 @@ class AdminController extends MainController
         $this->view->current_page = $this->oPage->getCurrentPage();
 
         $oAllMsg = $this->oMailModel->search(
-            $this->httpRequest->get('looking'),
+            $this->httpRequest->get('looking', Type::STRING),
             false,
             $this->httpRequest->get('order'),
             $this->httpRequest->get('sort'),
@@ -53,7 +54,7 @@ class AdminController extends MainController
         $this->view->h3_title = nt('%n% message found!', '%n% messages found!', $this->iTotalMails);
 
         if (empty($oAllMsg)) {
-            $this->view->error = empty($this->httpRequest->get('looking'))
+            $this->view->error = empty($this->httpRequest->get('looking', Type::STRING))
                 ? t('No member messages yet. New conversations will appear here.')
                 : t('No messages match your search. Try different keywords.');
         } else {

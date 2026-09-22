@@ -8,6 +8,7 @@
 
 namespace PH7;
 
+use PH7\Datatype\Type;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Navigation\Page;
 use PH7\Framework\Security\CSRF\Token as SecurityToken;
@@ -51,7 +52,7 @@ class AdminController extends Controller
 
     public function browse()
     {
-        $sKeywords = $this->httpRequest->get('looking');
+        $sKeywords = $this->httpRequest->get('looking', Type::STRING);
         $sOrder = $this->httpRequest->get('order');
         $iSort = $this->httpRequest->get('sort', 'int');
 
