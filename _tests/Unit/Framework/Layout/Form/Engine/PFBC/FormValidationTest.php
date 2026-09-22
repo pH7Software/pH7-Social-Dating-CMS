@@ -10,6 +10,7 @@ declare(strict_types=1);
 namespace PH7\Test\Unit\Framework\Layout\Form\Engine\PFBC;
 
 use PFBC\Element\Checkbox;
+use PFBC\Element\File;
 use PFBC\Element\Textbox;
 use PFBC\Form;
 use PHPUnit\Framework\Attributes\DataProvider;
@@ -97,6 +98,40 @@ final class FormValidationTest extends TestCase
         $_POST['interests'] = [['music']];
 
         self::assertFalse(Form::isValid('nested_validation'));
+    }
+
+    /**
+     * Reading the absent upload logged "Undefined array key" warnings on every such request.
+     */
+    #[DataProvider('fileFieldRequirements')]
+    public function testMissingFilePartReadsAsNoFileWithoutWarnings(bool $bRequired): void
+    {
+        $oForm = new Form('file_validation');
+        $oForm->addElement(new File('Photo', 'photo', $bRequired ? ['required' => 1] : []));
+        $oForm->render(true);
+
+        $aFiles = $_FILES;
+        $_FILES = [];
+        $aWarnings = [];
+        set_error_handler(static function (int $iLevel, string $sMessage) use (&$aWarnings): bool {
+            $aWarnings[] = $sMessage;
+
+            return true;
+        });
+
+        try {
+            self::assertSame(!$bRequired, Form::isValid('file_validation'));
+        } finally {
+            restore_error_handler();
+            $_FILES = $aFiles;
+        }
+
+        self::assertSame([], $aWarnings);
+    }
+
+    public static function fileFieldRequirements(): array
+    {
+        return ['optional file' => [false], 'required file' => [true]];
     }
 
     public function testExpectedFormRetainsItsValidationRules(): void

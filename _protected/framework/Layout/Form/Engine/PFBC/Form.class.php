@@ -111,7 +111,9 @@ class Form extends Base
                     /*The File element must be handled differently b/c it uses the $_FILES superglobal and
                     not $_GET or $_POST.*/
                     if ($element instanceof Element\File) {
-                        $data[$name] = $_FILES[$name]['name'];
+                        /* Browsers always send a file field, empty when nothing was chosen. A client
+                        that leaves it out has not sent a file either. */
+                        $data[$name] = $_FILES[$name]['name'] ?? null;
                     }
 
                     $malformed = false;
