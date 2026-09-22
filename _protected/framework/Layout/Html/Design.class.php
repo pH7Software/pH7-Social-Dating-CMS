@@ -329,14 +329,21 @@ class Design
     }
 
     /**
-     * @param string $sCountryCode The Country Code (e.g., US = United States).
+     * @param string|null $sCountryCode The Country Code (e.g., US = United States), or NULL when unknown.
      *
      * @return void Output the Flag Icon Url.
      */
     public function getSmallFlagIcon($sCountryCode)
     {
-        $sIcon = $this->oStr->lower($sCountryCode) . self::FLAG_ICON_EXT;
         $sDir = PH7_URL_STATIC . PH7_IMG . 'flag/s/';
+
+        // Members may have no country, and Geo::getCountryCode() returns NULL for IPs it can't locate.
+        if (empty($sCountryCode)) {
+            echo $sDir . self::NONE_FLAG_FILENAME;
+            return;
+        }
+
+        $sIcon = $this->oStr->lower($sCountryCode) . self::FLAG_ICON_EXT;
 
         echo is_file(PH7_PATH_STATIC . PH7_IMG . 'flag/s/' . $sIcon) ? $sDir . $sIcon : $sDir . self::NONE_FLAG_FILENAME;
     }
