@@ -3,7 +3,21 @@
 Automatic in-place upgrades are currently unavailable. Upgrade a staging copy
 manually, verify it, and only then repeat the reviewed procedure in production.
 
-## Unreleased authentication maintenance
+## 19.3.0 security and maintenance release
+
+pH7Builder 19.3.0 hardens form validation, password recovery, two-factor and SMS
+sign-in, bundles MaxMind's last Creative Commons GeoLite2 build and fixes admin
+and search errors. PHP 8.2+, MySQL 8.0+, schema `1.6.6` and the locked Composer
+dependencies are unchanged. No database migration is needed from 19.2.0.
+
+Bundled forms are now validated against their own ID. Previously, the submitted
+form name chose which form's rules, including its CSRF check, were applied.
+Custom modules that call `\PFBC\Form::isValid($_POST['submit_…'])` must pass
+the form's literal ID instead, for example `\PFBC\Form::isValid('form_login')`.
+Submitted values must be strings, or flat lists of strings for `name[]` fields;
+any other shape fails validation. An expired form now shows the security-token
+message instead of silently reloading. CAPTCHA answers are rejected unless the
+CAPTCHA image generated a code in the same session.
 
 Password reset links now open a form to choose a new password. They expire within
 one hour, work once and become invalid after any password change. Passwords are
@@ -34,13 +48,10 @@ restore access, import the key into an authenticator app, then sign in normally
 with your password and its current code. Never share this key: it can generate
 your sign-in codes. No existing authenticator enrolment changes.
 
-## Unreleased GeoIP maintenance
-
-Changes after 19.2.0 replace the bundled 3 December 2019 GeoLite2 database with
-MaxMind's last Creative Commons build (24 December 2019) and its original
-notices. These changes are not in the published 19.2.0 package. The data is still
-historical; this is not a current-location-data update. No database migration
-is needed. Preserve any newer GeoLite2 database you maintain yourself.
+19.3.0 replaces the bundled 3 December 2019 GeoLite2 database with MaxMind's
+last Creative Commons build (24 December 2019) and its original notices. The
+data is still historical; this is not a current-location-data update. Preserve
+any newer GeoLite2 database you maintain yourself.
 
 In a Git checkout, `install geoip db` in `_tools/pH7.sh` verifies or restores the
 pinned build without MaxMind credentials. Custom imports require PHP and
@@ -54,6 +65,24 @@ restrictions still fail closed when the database is unavailable; the admin
 panel remains accessible for recovery. Country and city suggestions remain
 unavailable until the database is restored. Search location fields also keep
 apostrophes and ampersands intact and allow owners and members to clear a filter.
+
+Module Manager opens again, so modules can be installed and uninstalled, and
+`/video/admin` now opens the YouTube API key settings. CSV member imports read
+each member from its own row. Search and admin list pages no longer fail when a
+request sends a list where a single value is expected. Custom code that asks
+`get()` or `post()` for `Type::ARRAY` now receives an empty array for an absent
+field, and an array sent for a scalar type becomes that type's empty value.
+
+Back up and test a staging copy. Deploy the complete 19.3.0 package while
+preserving local configuration, uploads, custom modules/themes, language packs
+and credentials. Source deployments must run `composer install --no-dev
+--prefer-dist --optimize-autoloader`. Do not rerun the installer on an existing
+site; remove `_install` before reopening it. Clear application and browser/CDN
+caches, then test signup, login, password reset, two-factor and SMS sign-in if
+enabled, a CAPTCHA-protected form, Module Manager and a CSV import. Compare
+custom overrides of the lost-password and two-factor setup templates with the
+bundled versions. See the [19.3.0 release notes](RELEASE_NOTES_19.3.0.md).
+Earlier installations must also follow the applicable guidance below.
 
 ## 19.2.0 dependency-maintenance release
 
@@ -69,7 +98,7 @@ The bundled pure-PHP reader does not require installing this extension.
 
 The 19.2.0 reader update does not refresh its bundled GeoLite2 location data
 (3 December 2019). The later 24 December build and credential-free restore
-command described above are unreleased changes. The
+command described above ship in 19.3.0. The
 [GeoIP database instructions](../_protected/framework/Geo/Ip/update-geo-database-version.txt)
 explain how to restore data from a matching release package and why newer GeoLite
 data cannot be bundled. Preserve any newer database you installed yourself when
