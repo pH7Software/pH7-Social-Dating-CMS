@@ -48,6 +48,11 @@ class Str extends Validation
      */
     public function isValid($sValue)
     {
+        // A field missing from the request arrives as null, which trim() no longer accepts in PHP 9
+        if ($this->isNotApplicable($sValue)) {
+            return true; // If the field not required
+        }
+
         $sValue = trim($sValue);
 
         if ($this->isNotApplicable($sValue)) {
