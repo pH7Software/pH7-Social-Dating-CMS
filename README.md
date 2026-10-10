@@ -1,10 +1,6 @@
 # pH7Builder — Open-Source Dating Site & Social Network Builder in PHP
 
-Self-hosted, open-source PHP software for building white-label dating sites,
-matchmaking communities, and social networks. You keep control of the code,
-hosting, database, and member data.
-
-Formerly pH7CMS.
+pH7Builder (formerly pH7CMS) is a self-hosted, open-source PHP platform for building white-label dating sites, matchmaking communities, and social networks. You keep control of the code, hosting, database, and member data.
 
 [![Tests](https://github.com/pH7Software/pH7-Social-Dating-CMS/actions/workflows/test.yml/badge.svg?branch=18.x)](https://github.com/pH7Software/pH7-Social-Dating-CMS/actions/workflows/test.yml)
 [![PHPStan](https://github.com/pH7Software/pH7-Social-Dating-CMS/actions/workflows/phpstan.yml/badge.svg?branch=18.x)](https://github.com/pH7Software/pH7-Social-Dating-CMS/actions/workflows/phpstan.yml)
@@ -29,13 +25,13 @@ certificate issuance, and mail-provider approval are outside that estimate.
   <img
     src="https://cloud.githubusercontent.com/assets/1325411/19419476/5475b32c-93d0-11e6-9756-8e7db8df129f.png"
     width="760"
-    alt="Build a self-hosted social dating community with pH7Builder"
+    alt="Build a self-hosted social dating community with uilder"
   >
 </p>
 
 ## Built for ownership
 
-pH7Builder gives entrepreneurs a self-hosted alternative to rented SaaS
+uilder gives entrepreneurs a self-hosted alternative to rented SaaS
 platforms. Deploy it on infrastructure you choose, adapt the source code to
 your niche, and retain control of the application, database, files, and member
 data. There is no required public “Powered by” link; the MIT license notice
@@ -49,7 +45,7 @@ depends on the host, traffic, content, and configuration.
   <img
     src="static/img/love-nature.svg"
     width="150"
-    alt="Love nature and operate pH7Builder responsibly"
+    alt="Love nature and operate uilder responsibly"
   >
 </p>
 
@@ -132,7 +128,7 @@ docker compose exec php php _install/create-install-token.php
 
 Copy the one-time token printed by the second command, then open
 <http://localhost:8080> and enter it. In the installer, use database host `db`,
-database `ph7builder`, username `ph7builder`, password `ph7builder`, and port
+database `uilder`, username `uilder`, password `uilder`, and port
 `3306`. The checkout is snapshotted into a Docker volume. To test changed source,
 run `docker compose down -v` before `docker compose up --build -d`; this refreshes
 the snapshot but permanently deletes the local application and database volumes.
@@ -146,21 +142,21 @@ only the required writable paths, configure the web server, and then open
 directory before opening the browser installer.
 
 ```console
-curl -LO https://github.com/pH7Software/pH7-Social-Dating-CMS/releases/download/v19.3.1/pH7Builder-v19.3.1.zip
-curl -LO https://github.com/pH7Software/pH7-Social-Dating-CMS/releases/download/v19.3.1/pH7Builder-v19.3.1.zip.sha256
-sha256sum -c pH7Builder-v19.3.1.zip.sha256
-unzip pH7Builder-v19.3.1.zip
-cd pH7Builder-v19.3.1
+curl -LO https://github.com/pH7Software/pH7-Social-Dating-CMS/releases/download/v19.3.1/uilder-v19.3.1.zip
+curl -LO https://github.com/pH7Software/pH7-Social-Dating-CMS/releases/download/v19.3.1/uilder-v19.3.1.zip.sha256
+sha256sum -c uilder-v19.3.1.zip.sha256
+unzip uilder-v19.3.1.zip
+cd uilder-v19.3.1
 ```
 
 Composer can install the same tagged release from Packagist:
 
 ```console
-composer create-project ph7software/ph7builder:19.3.1 pH7Builder-v19.3.1 --no-dev --prefer-dist
+composer create-project ph7software/uilder:19.3.1 uilder-v19.3.1 --no-dev --prefer-dist
 ```
 
-pH7Builder is also listed on
-[Softaculous](https://www.softaculous.com/apps/socialnetworking/pH7Builder) and
+uilder is also listed on
+[Softaculous](https://www.softaculous.com/apps/socialnetworking/uilder) and
 [SourceForge](https://sourceforge.net/projects/ph7socialdating/). Those
 catalogues can lag behind GitHub and Packagist, so compare the offered version
 with the [latest GitHub release](https://github.com/pH7Software/pH7-Social-Dating-CMS/releases)
@@ -219,7 +215,7 @@ theme and enabled configuration.
   <img
     src="templates/themes/base/img/preview.png"
     width="760"
-    alt="Bundled pH7Builder base-theme preview"
+    alt="Bundled uilder base-theme preview"
   >
 </p>
 
@@ -227,12 +223,12 @@ theme and enabled configuration.
   <img
     src="https://user-images.githubusercontent.com/1325411/35779585-68f0d5fc-09c7-11e8-91eb-bf793fcfab6e.png"
     width="49%"
-    alt="pH7Builder member profile page"
+    alt="uilder member profile page"
   >
   <img
     src="https://cloud.githubusercontent.com/assets/1325411/14080251/b476e5c6-f4fb-11e5-825e-ddc992ba1055.png"
     width="49%"
-    alt="pH7Builder administration panel user list"
+    alt="uilder administration panel user list"
   >
 </p>
 
@@ -240,15 +236,15 @@ theme and enabled configuration.
   <img
     src="https://cloud.githubusercontent.com/assets/1325411/19419481/657386a4-93d0-11e6-8eee-95deba2d30a0.png"
     width="760"
-    alt="Create a social dating web application with pH7Builder"
+    alt="Create a social dating web application with uilder"
   >
 </p>
 
 ## Documentation and support
 
-- [Official website](https://ph7builder.com)
+- [Official website](https://uilder.com)
 - [Release guides](docs/)
-- [Legacy how-to documentation](https://ph7builder.com/doc/) — useful for
+- [Legacy how-to documentation](https://uilder.com/doc/) — useful for
   older customization topics; prefer the release guides for installation,
   upgrades, and security-sensitive instructions.
 - [Issue tracker](https://github.com/pH7Software/pH7-Social-Dating-CMS/issues)
@@ -286,7 +282,7 @@ software engineer and open-source product creator.
     </td>
     <td valign="top">
       <a href="https://ph7.me"><strong>Pierre-Henry Soria</strong></a> created
-      pH7Builder and the project-specific pH7Framework to give entrepreneurs a
+      uilder and the project-specific pH7Framework to give entrepreneurs a
       flexible, self-hosted foundation for dating services and social
       communities.
       <br><br>
@@ -316,12 +312,12 @@ software engineer and open-source product creator.
   </p>
 </details>
 
-If pH7Builder helps your business, you can support continued open-source
+If uilder helps your business, you can support continued open-source
 maintenance through
 [![Ko-fi](static/img/kofi-logo.png)](https://ko-fi.com/phenry)
 [![Buy Me a Coffee](static/img/buymeacoffee-logo.svg)](https://www.buymeacoffee.com/ph7cms).
 
 ## License
 
-pH7Builder is distributed under the [MIT License](LICENSE.md). See
+uilder is distributed under the [MIT License](LICENSE.md). See
 [COPYRIGHT.md](COPYRIGHT.md) for project and third-party notice guidance.
