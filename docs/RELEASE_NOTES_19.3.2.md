@@ -1,6 +1,6 @@
 # pH7Builder 19.3.2 — Release Notes
 
-Released on 13 October 2026, this patch release refreshes the README's
+Released on 15 October 2026, this patch release refreshes the README's
 description of pH7Builder and points production installation instructions to
 the Production Quick Start. It does not change runtime behavior.
 
