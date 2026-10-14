@@ -141,19 +141,9 @@ only the required writable paths, configure the web server, and then open
 `/_install/`. Generate the required installer access token from the deployed
 directory before opening the browser installer.
 
-```console
-curl -LO https://github.com/pH7Software/pH7-Social-Dating-CMS/releases/download/v19.3.1/pH7Builder-v19.3.1.zip
-curl -LO https://github.com/pH7Software/pH7-Social-Dating-CMS/releases/download/v19.3.1/pH7Builder-v19.3.1.zip.sha256
-sha256sum -c pH7Builder-v19.3.1.zip.sha256
-unzip pH7Builder-v19.3.1.zip
-cd pH7Builder-v19.3.1
-```
-
-Composer can install the same tagged release from Packagist:
-
-```console
-composer create-project ph7software/ph7builder:19.3.1 pH7Builder-v19.3.1 --no-dev --prefer-dist
-```
+For the current release ZIP, checksum verification, source checkout, or
+Packagist installation, follow the [Production Quick Start](docs/QUICK_START.md),
+which keeps the release-specific commands in one place.
 
 pH7Builder is also listed on
 [Softaculous](https://www.softaculous.com/apps/socialnetworking/pH7Builder) and

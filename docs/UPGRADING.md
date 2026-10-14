@@ -3,6 +3,17 @@
 Automatic in-place upgrades are currently unavailable. Upgrade a staging copy
 manually, verify it, and only then repeat the reviewed procedure in production.
 
+## 19.3.2 patch release
+
+pH7Builder 19.3.2 refreshes the README's project description and directs
+production installation instructions to the Production Quick Start. There are
+no runtime behavior, database schema, or dependency changes, and no database
+migration is needed from 19.3.1.
+
+If deploying the 19.3.2 package, follow the deployment procedure for 19.3.0
+below, then clear application, template and browser/CDN caches. No application
+configuration or custom-theme changes are needed.
+
 ## 19.3.1 patch release
 
 pH7Builder 19.3.1 fixes form, comment and affiliate issues found while
