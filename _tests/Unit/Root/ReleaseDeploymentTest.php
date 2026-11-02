@@ -81,6 +81,24 @@ final class ReleaseDeploymentTest extends TestCase
         $this->assertFileExists(self::projectRoot() . "/docs/RELEASE_NOTES_{$sVersion}.md");
     }
 
+    public function testGitHubWorkflowsUsePinnedUbuntuRunner(): void
+    {
+        $aWorkflows = [
+            'composer.yml',
+            'docker.yml',
+            'lock.yml',
+            'phpstan.yml',
+            'test.yml',
+            'validate-installer.yml'
+        ];
+
+        foreach ($aWorkflows as $sWorkflow) {
+            $sContents = $this->readFile('.github/workflows/' . $sWorkflow);
+            $this->assertStringContainsString('ubuntu-24.04', $sContents, $sWorkflow);
+            $this->assertStringNotContainsString('ubuntu-latest', $sContents, $sWorkflow);
+        }
+    }
+
     public function testReleasePackagerDoesNotMutateOrCreateWorldWritableSourceFiles(): void
     {
         $sPackager = $this->readFile('_tools/packaging.sh');
