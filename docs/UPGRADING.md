@@ -3,6 +3,20 @@
 Automatic in-place upgrades are currently unavailable. Upgrade a staging copy
 manually, verify it, and only then repeat the reviewed procedure in production.
 
+## 19.3.3 security and maintenance patch
+
+pH7Builder 19.3.3 updates Symfony MIME to close CVE-2026-45070 and prevents
+custom GeoIP databases from being installed with licence notices from a
+different MaxMind release. The bundled 24 December 2019 GeoLite2 database and
+its CC BY-SA 4.0 terms are unchanged. There is no database migration from
+19.3.2.
+
+Deploy the complete 19.3.3 package as described for 19.3.0 below, preserve
+configuration and user data, remove the installer on existing sites, and clear
+application, template and browser/CDN caches. No application configuration or
+custom-theme changes are needed. Source checkouts should run `composer install`
+from the tagged tree so the fixed dependency lock is applied.
+
 ## 19.3.2 patch release
 
 pH7Builder 19.3.2 refreshes the README's project description and directs
