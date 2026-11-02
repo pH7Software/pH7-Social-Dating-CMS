@@ -59,11 +59,12 @@ final class ReleaseDeploymentTest extends TestCase
     public function testStableReleaseGuidesAreSynchronized(): void
     {
         $sReadme = $this->readFile('README.md');
+        $sQuickStart = $this->readFile('docs/QUICK_START.md');
         $this->assertSame(
             1,
             preg_match(
                 '#releases/download/v([0-9]+\.[0-9]+\.[0-9]+)/pH7Builder-v\1\.zip#',
-                $sReadme,
+                $sQuickStart,
                 $aStableVersion
             )
         );
@@ -71,8 +72,8 @@ final class ReleaseDeploymentTest extends TestCase
         $sVersion = $aStableVersion[1];
         $this->assertSame(Version::KERNEL_VERSION, $sVersion);
         $sReleaseUrl = "releases/download/v{$sVersion}/pH7Builder-v{$sVersion}.zip";
-        $this->assertStringContainsString($sReleaseUrl, $sReadme);
-        $this->assertStringContainsString($sReleaseUrl, $this->readFile('docs/QUICK_START.md'));
+        $this->assertStringContainsString('[Quick Start](docs/QUICK_START.md)', $sReadme);
+        $this->assertStringContainsString($sReleaseUrl, $sQuickStart);
         $this->assertStringContainsString(
             "ph7software/ph7builder:{$sVersion}",
             $this->readFile('installation-instructions-(start-here).txt')
