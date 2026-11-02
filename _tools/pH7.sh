@@ -359,9 +359,8 @@ function _install-geoip-db-from-file() {
             _install-geoip-db-file "$geoip_extracted_db_path" "$(dirname "$geoip_extracted_db_path")" || return 1
             ;;
         *.mmdb)
-            _install-geoip-db-file "$1" || return 1
-            # A bare .mmdb carries no notices, so the ones already in place may belong to another build
-            echo "A .mmdb file comes without MaxMind's notice files. Copy the LICENSE.txt, COPYRIGHT.txt and README.txt that came with it into ./_protected/framework/Geo/Ip/"
+            # Never retain notices from another build: the database and its sibling notices are one install unit.
+            _install-geoip-db-file "$1" "$(dirname "$1")" || return 1
             ;;
         *)
             echo "$1 must be a .mmdb or .tar.gz file."
@@ -432,9 +431,9 @@ function _install-geoip-db-file() (
             fi
             geoip_files+=("$notice_file")
         done
-        if [ -s "$2/Maxmind-GeoLite2.license.txt" ]; then
-            geoip_files+=("Maxmind-GeoLite2.license.txt")
-        fi
+        # Remove the bundled full licence text when the imported release does not supply it.
+        # Leaving it beside a newer EULA-governed database would misdescribe that database's terms.
+        geoip_files+=("Maxmind-GeoLite2.license.txt")
     fi
     geoip_files+=("GeoLite2-City.mmdb") # Publish the validated database last.
 
@@ -456,6 +455,9 @@ function _install-geoip-db-file() (
         fi
         geoip_source="$2/$geoip_file"
         [ "$geoip_file" = "GeoLite2-City.mmdb" ] && geoip_source="$1"
+        if [ "$geoip_file" = "Maxmind-GeoLite2.license.txt" ] && [ ! -s "$geoip_source" ]; then
+            continue
+        fi
         if ! cp "$geoip_source" "$geoip_stage_path/$geoip_file" || ! chmod 644 "$geoip_stage_path/$geoip_file"; then
             echo "Unable to stage $geoip_file. Nothing was installed."
             exit 1
@@ -466,8 +468,13 @@ function _install-geoip-db-file() (
     _read-geoip-db-info "$geoip_stage_path/GeoLite2-City.mmdb" || exit 1
     for geoip_file in "${geoip_files[@]}"; do
         geoip_published_files+=("$geoip_file")
-        if ! mv -f "$geoip_stage_path/$geoip_file" "$geoip_path/$geoip_file"; then
-            echo "Unable to install $geoip_file; restoring the previous files."
+        if [ -f "$geoip_stage_path/$geoip_file" ]; then
+            if ! mv -f "$geoip_stage_path/$geoip_file" "$geoip_path/$geoip_file"; then
+                echo "Unable to install $geoip_file; restoring the previous files."
+                exit 1
+            fi
+        elif ! rm -f "$geoip_path/$geoip_file"; then
+            echo "Unable to remove the stale $geoip_file; restoring the previous files."
             exit 1
         fi
     done

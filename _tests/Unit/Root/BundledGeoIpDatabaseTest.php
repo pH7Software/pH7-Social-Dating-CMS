@@ -127,15 +127,15 @@ final class BundledGeoIpDatabaseTest extends TestCase
         }
     }
 
-    public function testBareMmdbInstallAsksForMaxMindNoticeFiles(): void
+    public function testBareMmdbCannotBeInstalledWithoutMaxMindNoticeFiles(): void
     {
         if (PHP_OS_FAMILY === 'Windows') {
             self::markTestSkipped('The maintenance script requires a Unix shell.');
         }
 
-        // Install into a throwaway copy of the project, so the repository's own database is never replaced
         $sSandboxPath = $this->createScriptSandbox();
-        $sSourceDatabasePath = $this->geoIpPath(Geo::DATABASE_FILENAME);
+        $sSourceDatabasePath = $sSandboxPath . '/' . Geo::DATABASE_FILENAME;
+        copy($this->geoIpPath(Geo::DATABASE_FILENAME), $sSourceDatabasePath);
 
         try {
             [$iExitCode, $sOutput] = $this->runMaintenanceScript(
@@ -143,12 +143,40 @@ final class BundledGeoIpDatabaseTest extends TestCase
                 "install geoip db\n" . $sSourceDatabasePath . "\n"
             );
 
-            self::assertSame(0, $iExitCode, $sOutput);
-            self::assertStringContainsString("A .mmdb file comes without MaxMind's notice files", $sOutput);
-            self::assertSame(
-                hash_file('sha256', $sSourceDatabasePath),
-                hash_file('sha256', $sSandboxPath . self::GEOIP_DIRECTORY . Geo::DATABASE_FILENAME)
+            self::assertNotSame(0, $iExitCode, $sOutput);
+            self::assertStringContainsString('Missing or empty LICENSE.txt', $sOutput);
+            self::assertStringNotContainsString('successfully installed', $sOutput);
+            self::assertFileDoesNotExist($sSandboxPath . self::GEOIP_DIRECTORY . Geo::DATABASE_FILENAME);
+        } finally {
+            $this->removeScriptSandbox($sSandboxPath);
+        }
+    }
+
+    public function testMmdbInstallPublishesSiblingMaxMindNoticeFiles(): void
+    {
+        $sSandboxPath = $this->createScriptSandbox();
+        $sSourcePath = $sSandboxPath . '/source';
+        self::assertTrue(mkdir($sSourcePath, 0700));
+        foreach ([Geo::DATABASE_FILENAME, 'LICENSE.txt', 'COPYRIGHT.txt', 'README.txt'] as $sFile) {
+            copy($this->geoIpPath($sFile), $sSourcePath . '/' . $sFile);
+        }
+        $sBundledLicensePath = $sSandboxPath . self::GEOIP_DIRECTORY . 'Maxmind-GeoLite2.license.txt';
+        file_put_contents($sBundledLicensePath, 'stale bundled licence');
+
+        try {
+            [$iExitCode, $sOutput] = $this->runMaintenanceScript(
+                $sSandboxPath,
+                "install geoip db\n" . $sSourcePath . '/' . Geo::DATABASE_FILENAME . "\n"
             );
+
+            self::assertSame(0, $iExitCode, $sOutput);
+            foreach ([Geo::DATABASE_FILENAME, 'LICENSE.txt', 'COPYRIGHT.txt', 'README.txt'] as $sFile) {
+                self::assertSame(
+                    hash_file('sha256', $this->geoIpPath($sFile)),
+                    hash_file('sha256', $sSandboxPath . self::GEOIP_DIRECTORY . $sFile)
+                );
+            }
+            self::assertFileDoesNotExist($sBundledLicensePath);
         } finally {
             $this->removeScriptSandbox($sSandboxPath);
         }
@@ -224,6 +252,9 @@ final class BundledGeoIpDatabaseTest extends TestCase
             copy($this->geoIpPath(Geo::DATABASE_FILENAME), $sSourcePath);
             // Harmless trailing padding changes the checksum without changing the database's records.
             file_put_contents($sSourcePath, "\n", FILE_APPEND);
+            foreach (['LICENSE.txt', 'COPYRIGHT.txt', 'README.txt'] as $sFile) {
+                copy($this->geoIpPath($sFile), $sSandboxPath . '/' . $sFile);
+            }
             try {
                 [$iExitCode, $sOutput] = $this->runMaintenanceScript($sSandboxPath, "install geoip db\n$sSourcePath\n");
                 self::assertSame($bReader ? 0 : 1, $iExitCode, $sOutput);

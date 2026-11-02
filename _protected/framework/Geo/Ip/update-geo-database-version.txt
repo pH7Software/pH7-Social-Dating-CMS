@@ -49,10 +49,12 @@ yourself. Except for the exact bundled checksum, imports require PHP and the
 Composer dependencies (run composer install first). Validation checks the
 database type and sample IPv4/IPv6 lookups; it is not a full integrity scan.
 Obtain custom files directly from MaxMind and verify their published checksum.
-Archives must contain exactly one GeoLite2-City.mmdb and its LICENSE.txt,
-COPYRIGHT.txt and README.txt files. Files are staged before replacement; a failed
-install restores the previous files. If restoration itself fails, the command
-reports the retained backup directory for manual recovery.
+An imported .mmdb must have the LICENSE.txt, COPYRIGHT.txt and README.txt from
+the same MaxMind release beside it. Archives must contain exactly one
+GeoLite2-City.mmdb and those three notice files. Files are staged before
+replacement; a failed install restores the previous files. If restoration
+itself fails, the command reports the retained backup directory for manual
+recovery.
 
 A GeoLite database built on or after 30 December 2019 is governed by
 MaxMind's GeoLite EULA, not by CC BY-SA 4.0: keep MaxMind's attribution and the
