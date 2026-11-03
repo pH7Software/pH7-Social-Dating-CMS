@@ -32,13 +32,27 @@ final class VersionTest extends TestCase
                 'is_alert' => true,
                 'name' => 'REVOLUTIONARY™',
                 'version' => '18.6.2',
+                'sql_schema_version' => '1.6.6',
                 'build' => '1'
             ],
             $this->parseReleaseXml(
                 '<software><ph7><ph7builder><upd-alert>true</upd-alert><name> REVOLUTIONARY™ </name>' .
-                '<version>18.6.2</version><build>1</build></ph7builder></ph7></software>'
+                '<version>18.6.2</version><sql-shcema-version>1.6.6</sql-shcema-version>' .
+                '<build>1</build></ph7builder></ph7></software>'
             )
         );
+    }
+
+    public function testCorrectedSqlSchemaElementIsSupported(): void
+    {
+        $aReleaseInfo = $this->parseReleaseXml(
+            '<software><ph7><ph7builder><upd-alert>false</upd-alert><name>REVOLUTIONARY™</name>' .
+            '<version>19.3.3</version><sql-schema-version>1.6.6</sql-schema-version>' .
+            '<build>1</build></ph7builder></ph7></software>'
+        );
+
+        $this->assertIsArray($aReleaseInfo);
+        $this->assertSame('1.6.6', $aReleaseInfo['sql_schema_version']);
     }
 
     public static function invalidReleaseXmlProvider(): iterable
@@ -49,11 +63,19 @@ final class VersionTest extends TestCase
         ];
         yield 'invalid version' => [
             '<software><ph7><ph7builder><name>Release</name><version>latest</version>' .
+            '<sql-shcema-version>1.6.6</sql-shcema-version><build>1</build></ph7builder></ph7></software>'
+        ];
+        yield 'missing SQL schema version' => [
+            '<software><ph7><ph7builder><name>Release</name><version>18.6.2</version>' .
             '<build>1</build></ph7builder></ph7></software>'
+        ];
+        yield 'invalid SQL schema version' => [
+            '<software><ph7><ph7builder><name>Release</name><version>18.6.2</version>' .
+            '<sql-shcema-version>latest</sql-shcema-version><build>1</build></ph7builder></ph7></software>'
         ];
         yield 'invalid build' => [
             '<software><ph7><ph7builder><name>Release</name><version>18.6.2</version>' .
-            '<build>beta</build></ph7builder></ph7></software>'
+            '<sql-shcema-version>1.6.6</sql-shcema-version><build>beta</build></ph7builder></ph7></software>'
         ];
     }
 

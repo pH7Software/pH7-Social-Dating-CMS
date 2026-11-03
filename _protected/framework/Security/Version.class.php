@@ -101,9 +101,11 @@ final class Version
             $aLatestInfo['is_alert'],
             $aLatestInfo['name'],
             $aLatestInfo['version'],
+            $aLatestInfo['sql_schema_version'],
             $aLatestInfo['build']
         ) || !is_bool($aLatestInfo['is_alert']) || !is_string($aLatestInfo['name']) ||
-            !is_string($aLatestInfo['version']) || !is_string($aLatestInfo['build'])
+            !is_string($aLatestInfo['version']) || !is_string($aLatestInfo['sql_schema_version']) ||
+            !is_string($aLatestInfo['build'])
         ) {
             return false;
         }
@@ -111,10 +113,15 @@ final class Version
         $bIsAlert = $aLatestInfo['is_alert'];
         $sLastName = $aLatestInfo['name'];
         $sLastVer = $aLatestInfo['version'];
+        $sLastSqlSchemaVer = $aLatestInfo['sql_schema_version'];
         $sLastBuild = $aLatestInfo['build'];
         unset($aLatestInfo);
 
-        if (!$bIsAlert || !is_string($sLastName) || !preg_match('#^' . self::VERSION_PATTERN . '$#', $sLastVer)) {
+        if (!$bIsAlert ||
+            !is_string($sLastName) ||
+            !preg_match('#^' . self::VERSION_PATTERN . '$#', $sLastVer) ||
+            !preg_match('#^' . self::VERSION_PATTERN . '$#', $sLastSqlSchemaVer)
+        ) {
             return false;
         }
 
@@ -157,9 +164,12 @@ final class Version
 
             $sVerName = self::getElementValue($oInfo, 'name');
             $sVerNumber = self::getElementValue($oInfo, 'version');
+            $sSqlSchemaVersion = self::getSqlSchemaVersion($oInfo);
             $sVerBuild = self::getElementValue($oInfo, 'build');
-            if ($sVerName === null || $sVerNumber === null || $sVerBuild === null ||
+            if ($sVerName === null || $sVerNumber === null || $sSqlSchemaVersion === null ||
+                $sVerBuild === null ||
                 !preg_match('#^' . self::VERSION_PATTERN . '$#', $sVerNumber) ||
+                !preg_match('#^' . self::VERSION_PATTERN . '$#', $sSqlSchemaVersion) ||
                 !preg_match('/^[0-9]+$/D', $sVerBuild)
             ) {
                 continue;
@@ -169,6 +179,7 @@ final class Version
                 'is_alert' => self::isUpdateAlertEnabled($oInfo),
                 'name' => $sVerName,
                 'version' => $sVerNumber,
+                'sql_schema_version' => $sSqlSchemaVersion,
                 'build' => $sVerBuild
             ];
         }
@@ -180,6 +191,12 @@ final class Version
     {
         // "Validate::bool()" returns TRUE for "1", "true", "on", and "yes", FALSE otherwise
         return (new Validate)->bool(self::getElementValue($oInfo, 'upd-alert'));
+    }
+
+    private static function getSqlSchemaVersion(DOMElement $oInfo): ?string
+    {
+        return self::getElementValue($oInfo, 'sql-shcema-version')
+            ?? self::getElementValue($oInfo, 'sql-schema-version');
     }
 
     private static function getElementValue(DOMElement $oParent, string $sElementName): ?string

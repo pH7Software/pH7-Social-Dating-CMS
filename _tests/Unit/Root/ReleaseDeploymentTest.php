@@ -10,6 +10,8 @@ declare(strict_types=1);
 
 namespace PH7\Test\Unit\Root;
 
+use DOMDocument;
+use DOMElement;
 use PH7\Framework\Core\Kernel;
 use PH7\Framework\Security\Version;
 use PHPUnit\Framework\TestCase;
@@ -79,6 +81,27 @@ final class ReleaseDeploymentTest extends TestCase
             $this->readFile('installation-instructions-(start-here).txt')
         );
         $this->assertFileExists(self::projectRoot() . "/docs/RELEASE_NOTES_{$sVersion}.md");
+    }
+
+    public function testReleaseFeedIsSynchronizedWithRuntimeAndInstallerSchema(): void
+    {
+        $oFeed = new DOMDocument;
+        $this->assertTrue($oFeed->loadXML($this->readFile('_tools/software-info.xml')));
+
+        $oPackage = $oFeed->getElementsByTagName('ph7builder')->item(0);
+        $this->assertInstanceOf(DOMElement::class, $oPackage);
+
+        $this->assertSame('false', $this->elementValue($oPackage, 'upd-alert'));
+        $this->assertSame(Version::KERNEL_VERSION_NAME, $this->elementValue($oPackage, 'name'));
+        $this->assertSame(Version::KERNEL_VERSION, $this->elementValue($oPackage, 'version'));
+        $this->assertSame(Version::KERNEL_BUILD, $this->elementValue($oPackage, 'build'));
+
+        $sInstallerSchema = $this->readFile('_install/data/sql/MySQL/pH7_Core.sql');
+        $this->assertSame(
+            1,
+            preg_match("/\('pH7Builder', 'SQL System Schema', '([^']+)', 1\)/", $sInstallerSchema, $aMatch)
+        );
+        $this->assertSame($aMatch[1], $this->elementValue($oPackage, 'sql-shcema-version'));
     }
 
     public function testGitHubWorkflowsUsePinnedUbuntuRunner(): void
@@ -202,6 +225,14 @@ final class ReleaseDeploymentTest extends TestCase
         $this->assertIsString($sContents);
 
         return $sContents;
+    }
+
+    private function elementValue(DOMElement $oParent, string $sElementName): string
+    {
+        $oElement = $oParent->getElementsByTagName($sElementName)->item(0);
+        $this->assertInstanceOf(DOMElement::class, $oElement);
+
+        return trim($oElement->textContent);
     }
 
     private static function projectRoot(): string
