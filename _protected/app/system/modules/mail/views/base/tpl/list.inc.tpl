@@ -24,7 +24,7 @@
 
                 <div class="msg_content" id="mail_{% $msg->messageId %}">
                     <div class="left">
-                        <input type="checkbox" name="action[]" value="{% $msg->messageId %}" />
+                        <input type="checkbox" name="action[]" value="{% $msg->messageId %}" aria-label="{lang 'Select message'}: {subject}" />
                     </div>
 
                     {if $msg->status == MailModel::UNREAD_STATUS}
@@ -36,17 +36,14 @@
                     {if $is_admin}
                         <div class="content" title="{lang 'See more'}"><a href="#divShow_{% $msg->messageId %}">
                     {else}
-                        <div class="content" title="{lang 'See more'}" onclick="location.href='{{ $design->url('mail','main',$slug_url,$msg->messageId) }}'">
+                        <a class="content" title="{lang 'See more'}" href="{{ $design->url('mail','main',$slug_url,$msg->messageId) }}">
                     {/if}
 
                     <div class="subject">{subject}</div>
                     <div class="message">{% substr($message,0,50) %}</div>
 
-                    {if $is_admin}
-                        </a>
-                    {/if}
-
-                    </div>
+                    </a>
+                    {if $is_admin}</div>{/if}
                     <div class="date italic small">{% Framework\Date\Various::textTimeStamp($msg->sendDate) %}</div>
 
                     {if $is_admin}
@@ -68,7 +65,7 @@
             {/if}
 
             <p>
-                <input type="checkbox" name="all_action" />
+                <input type="checkbox" name="all_action" aria-label="{lang 'Select all messages'}" />
                 <button
                     class="btn btn-default btn-md"
                     type="submit"

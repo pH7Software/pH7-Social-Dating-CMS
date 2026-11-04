@@ -126,11 +126,22 @@ final class StoredContentOutputTest extends TestCase
         $this->assertSame(0, $oXPath->query('//div[@class="message"]/*|//div[@id="divShow_1"]/*')->length);
         $this->assertSame(1, $oXPath->query('//div[@class="message"]')->length);
         $this->assertSame($sExpectedText, $oXPath->query('//div[@class="message"]')->item(0)->textContent);
+        $this->assertSame(
+            1,
+            $oXPath->query('//input[@name="action[]"][@aria-label="Select message: Hello"]')->length
+        );
+        $this->assertSame(
+            1,
+            $oXPath->query('//input[@name="all_action"][@aria-label="Select all messages"]')->length
+        );
         if ($bAdmin) {
+            $this->assertSame(1, $oXPath->query('//div[@class="content"]/a[@href="#divShow_1"]')->length);
             $oMessage = $oXPath->query('//div[@id="divShow_1"]')->item(0);
             $this->assertNotNull($oMessage);
             $this->assertSame($sExpectedText, $oMessage->textContent);
         } else {
+            $this->assertSame(1, $oXPath->query('//a[@class="content"][@href="/test-message"]')->length);
+            $this->assertSame(0, $oXPath->query('//a[@class="content"]/@onclick')->length);
             require_once PH7_PATH_FRAMEWORK . 'Layout/Form/Engine/PFBC/Form.class.php';
             $aVariables['msg'] = $aVariables['msgs'][0];
             $oDetail = new \DOMXPath($this->parseHtml($this->renderTemplate('main/msg.inc.tpl', $aVariables)));
