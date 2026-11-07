@@ -11,7 +11,7 @@
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th><input type="checkbox" name="all_action" /></th>
+                    <th><input type="checkbox" name="all_action" aria-label="{lang 'Select all members'}" /></th>
                     <th>{lang 'User ID#'}</th>
                     <th>{lang 'Email Address'}</th>
                     <th>{lang 'User'}</th>
@@ -28,7 +28,7 @@
 
             <tfoot>
                 <tr>
-                  <th><input type="checkbox" name="all_action" /></th>
+                  <th><input type="checkbox" name="all_action" aria-label="{lang 'Select all members'}" /></th>
                   <th>
                       <button
                           class="btn btn-default btn-md"
@@ -83,7 +83,7 @@
                 {each $user in $browse}
                     <tr>
                         <td>
-                            <input type="checkbox" name="action[]" value="{% $user->profileId %}_{% $str->escapeAttribute($user->username) %}" />
+                            <input type="checkbox" name="action[]" value="{% $user->profileId %}_{% $str->escapeAttribute($user->username) %}" aria-label="{lang 'Select member'}: {% $str->escapeAttribute($user->username) %}" />
                         </td>
                         <td>{% $user->profileId %}</td>
                         <td>

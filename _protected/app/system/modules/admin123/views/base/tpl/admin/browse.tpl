@@ -6,7 +6,7 @@
         <table class="table table-striped">
             <thead>
                 <tr>
-                  <th><input type="checkbox" name="all_action" /></th>
+                  <th><input type="checkbox" name="all_action" aria-label="{lang 'Select all administrators'}" /></th>
                   <th>{lang 'Admin ID#'}</th>
                   <th>{lang 'Email Address'}</th>
                   <th>{lang 'User'}</th>
@@ -20,7 +20,7 @@
 
             <tfoot>
                 <tr>
-                  <th><input type="checkbox" name="all_action" /></th>
+                  <th><input type="checkbox" name="all_action" aria-label="{lang 'Select all administrators'}" /></th>
                   <th>
                       <button
                           class="btn btn-danger btn-md"
@@ -48,7 +48,7 @@
                     {{ $adminId = (int)$admin->profileId }}
                     <tr>
                       <td>
-                          <input type="checkbox" name="action[]" value="{adminId}_{% $str->escapeAttribute($admin->username) %}" />
+                          <input type="checkbox" name="action[]" value="{adminId}_{% $str->escapeAttribute($admin->username) %}" aria-label="{lang 'Select administrator'}: {% $str->escapeAttribute($admin->username) %}" />
                       </td>
                       <td>{adminId}</td>
                       <td>{% escape($admin->email) %}</td>

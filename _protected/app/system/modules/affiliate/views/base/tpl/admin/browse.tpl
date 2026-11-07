@@ -11,7 +11,7 @@
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th><input type="checkbox" name="all_action" /></th>
+                    <th><input type="checkbox" name="all_action" aria-label="{lang 'Select all affiliates'}" /></th>
                     <th>{lang 'User ID#'}</th>
                     <th>{lang 'Email Address'}</th>
                     <th>{lang 'User'}</th>
@@ -28,7 +28,7 @@
 
             <tfoot>
                 <tr>
-                  <th><input type="checkbox" name="all_action" /></th>
+                  <th><input type="checkbox" name="all_action" aria-label="{lang 'Select all affiliates'}" /></th>
                   <th>
                       <button
                          class="btn btn-default btn-md"
@@ -87,7 +87,7 @@
                 {each $aff in $browse}
                     <tr>
                         <td>
-                            <input type="checkbox" name="action[]" value="{% $aff->profileId %}_{% $str->escapeAttribute($aff->username) %}" />
+                            <input type="checkbox" name="action[]" value="{% $aff->profileId %}_{% $str->escapeAttribute($aff->username) %}" aria-label="{lang 'Select affiliate'}: {% $str->escapeAttribute($aff->username) %}" />
                         </td>
                         <td>{% $aff->profileId %}</td>
                         <td>

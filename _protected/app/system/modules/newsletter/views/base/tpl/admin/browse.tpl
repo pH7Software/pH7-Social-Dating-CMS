@@ -13,7 +13,7 @@
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th><input type="checkbox" name="all_action" /></th>
+                    <th><input type="checkbox" name="all_action" aria-label="{lang 'Select all subscribers'}" /></th>
                     <th>{lang 'ID#'}</th>
                     <th>{lang 'Email Address'}</th>
                     <th>{lang 'Name'}</th>
@@ -25,7 +25,7 @@
 
             <tfoot>
                 <tr>
-                    <th><input type="checkbox" name="all_action" /></th>
+                    <th><input type="checkbox" name="all_action" aria-label="{lang 'Select all subscribers'}" /></th>
                     <th>
                         <button
                             class="btn btn-danger btn-md"
@@ -46,7 +46,7 @@
             <tbody>
                 {each $user in $browse}
                     <tr>
-                        <td><input type="checkbox" name="action[]" value="{% $str->escapeAttribute($user->email) %}" /></td>
+                        <td><input type="checkbox" name="action[]" value="{% $str->escapeAttribute($user->email) %}" aria-label="{lang 'Select subscriber'}: {% $str->escapeAttribute($user->email) %}" /></td>
                         <td>{% $user->profileId %}</td>
                         <td>
                             <a href="mailto:{% $str->escapeAttribute($user->email) %}" title="{lang 'Email the Subscriber'}">

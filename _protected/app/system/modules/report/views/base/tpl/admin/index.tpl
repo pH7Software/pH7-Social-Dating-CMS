@@ -7,7 +7,7 @@
             <ul>
                 {each $report in $reports}
                     <li id="report_{% $report->reportId %}">
-                        <input type="checkbox" name="action[]" value="{% $report->reportId %}" /> |
+                        <input type="checkbox" name="action[]" value="{% $report->reportId %}" aria-label="{lang 'Select report'}: {% $str->escapeAttribute($report->reportId) %}" /> |
                         <a href="{% $design->url('report', 'admin', 'report', $report->reportId) %}">{lang 'View Report'}</a> |
                         {lang 'Reporter:'} {{ $avatarDesign->get($oUserModel->getUsername($report->reporterId), $oUserModel->getFirstName($report->reporterId) ,null, 32) }} |
                         {lang 'Spammer:'} {{ $avatarDesign->get($oUserModel->getUsername($report->spammerId), $oUserModel->getFirstName($report->spammerId) ,null, 32) }}
@@ -19,7 +19,7 @@
             </ul>
 
             <p>
-                <input type="checkbox" name="all_action" />
+                <input type="checkbox" name="all_action" aria-label="{lang 'Select all reports'}" />
                 <button
                     class="btn btn-danger btn-md"
                     type="submit"
