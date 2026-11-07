@@ -49,8 +49,14 @@ class Str extends Validation
     public function isValid($sValue)
     {
         // A field missing from the request arrives as null, which trim() no longer accepts in PHP 9
-        if ($this->isNotApplicable($sValue)) {
+        if ($sValue === null || $sValue === '') {
             return true; // If the field not required
+        }
+
+        if (!is_string($sValue)) {
+            $this->message = t('Please enter a string.');
+
+            return false;
         }
 
         $sValue = trim($sValue);
@@ -67,12 +73,6 @@ class Str extends Validation
 
         if (!empty($this->iMax) && $this->oStr->length($sValue) > $this->iMax) {
             $this->message = t('%element% cannot exceed %0% character(s).', $this->iMax);
-
-            return false;
-        }
-
-        if (!is_string($sValue)) {
-            $this->message = t('Please enter a string.');
 
             return false;
         }

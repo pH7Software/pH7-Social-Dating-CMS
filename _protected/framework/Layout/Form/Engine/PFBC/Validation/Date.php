@@ -1,4 +1,5 @@
 <?php
+
 /**
  * We made many changes in this code.
  * By pH7 (Pierre-Henry SORIA).
@@ -19,6 +20,10 @@ class Date extends Validation
     public function isValid($sValue)
     {
         // A field missing from the request arrives as null, which DateTime no longer accepts in PHP 9
-        return $this->isNotApplicable($sValue) || $this->oValidate->date($sValue);
+        if ($sValue === null || $sValue === '') {
+            return true;
+        }
+
+        return is_string($sValue) && $this->oValidate->date($sValue);
     }
 }

@@ -39,6 +39,7 @@ final class ValidationMissingValueTest extends TestCase
         self::assertTrue($oRule->isValid('   '));
         self::assertFalse($oRule->isValid(' a '));
         self::assertTrue($oRule->isValid(' ab '));
+        self::assertFalse($oRule->isValid(['ab']));
     }
 
     public function testDateRuleAcceptsAMissingOptionalField(): void
@@ -50,6 +51,7 @@ final class ValidationMissingValueTest extends TestCase
     {
         self::assertTrue((new Date)->isValid('2026-09-22'));
         self::assertFalse((new Date)->isValid('not a date'));
+        self::assertFalse((new Date)->isValid(['2026-09-22']));
     }
 
     public function testUsernameRuleRejectsAMissingUsername(): void
