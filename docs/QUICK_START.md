@@ -43,21 +43,21 @@ the archive and its checksum from the same GitHub release:
 sudo mkdir -p /var/www/ph7builder
 sudo chown deploy:www-data /var/www/ph7builder
 cd /tmp
-curl -LO https://github.com/pH7Software/pH7-Social-Dating-CMS/releases/download/v19.3.3/pH7Builder-v19.3.3.zip
-curl -LO https://github.com/pH7Software/pH7-Social-Dating-CMS/releases/download/v19.3.3/pH7Builder-v19.3.3.zip.sha256
-sha256sum -c pH7Builder-v19.3.3.zip.sha256
-unzip pH7Builder-v19.3.3.zip
-cp -a pH7Builder-v19.3.3/. /var/www/ph7builder/
+curl -LO https://github.com/pH7Software/pH7-Social-Dating-CMS/releases/download/v19.4.0/pH7Builder-v19.4.0.zip
+curl -LO https://github.com/pH7Software/pH7-Social-Dating-CMS/releases/download/v19.4.0/pH7Builder-v19.4.0.zip.sha256
+sha256sum -c pH7Builder-v19.4.0.zip.sha256
+unzip pH7Builder-v19.4.0.zip
+cp -a pH7Builder-v19.4.0/. /var/www/ph7builder/
 ```
 
 Run these commands as the `deploy` account, or replace that example account
 with your normal non-root deployment user.
 
-For a source checkout instead, clone tag `v19.3.3` and run:
+For a source checkout instead, clone tag `v19.4.0` and run:
 
 ```console
-git clone --branch v19.3.3 --depth 1 https://github.com/pH7Software/pH7-Social-Dating-CMS.git pH7Builder-v19.3.3
-cd pH7Builder-v19.3.3
+git clone --branch v19.4.0 --depth 1 https://github.com/pH7Software/pH7-Social-Dating-CMS.git pH7Builder-v19.4.0
+cd pH7Builder-v19.4.0
 composer install --no-dev --prefer-dist --optimize-autoloader
 ```
 
@@ -66,7 +66,7 @@ tagged Packagist release. Run this from the parent of the intended deployment
 directory:
 
 ```console
-composer create-project ph7software/ph7builder:19.3.3 ph7builder --no-dev --prefer-dist
+composer create-project ph7software/ph7builder:19.4.0 ph7builder --no-dev --prefer-dist
 ```
 
 Softaculous and SourceForge also list pH7Builder, but their available archive
@@ -180,12 +180,16 @@ PHP-FPM environment before installing:
 ```ini
 env[PH7_CANONICAL_HOST] = "example.com"
 env[PH7_TRUST_PROXY_HEADERS] = "1"
+env[PH7_TRUSTED_PROXIES] = "127.0.0.1,10.0.0.2"
 ```
 
 Enable `PH7_TRUST_PROXY_HEADERS` only when the proxy removes client-supplied
-forwarded headers and writes its own. Include the external port in
-`PH7_CANONICAL_HOST` when it is non-standard. Direct nginx/Apache deployments
-normally need neither variable.
+forwarded headers and writes its own. Set `PH7_TRUSTED_PROXIES` to the exact
+comma-separated IP addresses of the proxies that connect directly to PHP; the
+example addresses must be replaced with the actual proxy addresses. CIDR ranges
+are not supported. Include the external port in `PH7_CANONICAL_HOST` when it is
+non-standard. Direct nginx/Apache deployments normally need neither proxy
+variable.
 
 Create the out-of-band installer access token as the deployment user and keep
 the printed value temporarily in a password manager:

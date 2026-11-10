@@ -3,6 +3,24 @@
 Automatic in-place upgrades are currently unavailable. Upgrade a staging copy
 manually, verify it, and only then repeat the reviewed procedure in production.
 
+## 19.4.0 security and maintenance release
+
+pH7Builder 19.4.0 restricts mail search to messages belonging to the signed-in
+member, rejects malformed array input in scalar form validators, and trusts
+forwarded client IP headers only when proxy-header trust is enabled and the
+direct peer matches an explicitly configured proxy IP. The release keeps the
+existing 1.6.6 schema and requires no database migration from 19.3.3.
+
+Deploy the complete 19.4.0 package as described for 19.3.0 below, preserve
+configuration and user data, remove the installer on existing sites, and clear
+application, template and browser/CDN caches. Deployments behind a reverse
+proxy must configure `PH7_TRUST_PROXY_HEADERS=1` and
+`PH7_TRUSTED_PROXIES` with the exact comma-separated IP addresses of proxies
+that connect directly to PHP. Ensure those proxies remove client-supplied
+forwarded headers and set their own. CIDR ranges are not supported. See the
+[Quick Start](QUICK_START.md#5-configure-the-canonical-host-https-and-web-server) for the PHP-FPM
+environment example.
+
 ## 19.3.3 security and maintenance patch
 
 pH7Builder 19.3.3 updates Symfony MIME to close CVE-2026-45070 and prevents
