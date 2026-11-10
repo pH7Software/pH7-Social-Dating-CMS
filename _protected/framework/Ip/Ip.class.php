@@ -112,15 +112,17 @@ class Ip
     private static function isTrustedProxy(string $sRemoteAddr): bool
     {
         $trustedProxies = getenv('PH7_TRUSTED_PROXIES');
-        if (is_string($trustedProxies) && trim($trustedProxies) !== '') {
-            foreach (preg_split('/\s*,\s*/', trim($trustedProxies)) ?: [] as $proxy) {
-                if ($proxy !== '' && strcasecmp($proxy, $sRemoteAddr) === 0) {
-                    return true;
-                }
+        if (!is_string($trustedProxies) || trim($trustedProxies) === '') {
+            return false;
+        }
+
+        foreach (preg_split('/\s*,\s*/', trim($trustedProxies)) ?: [] as $proxy) {
+            if ($proxy !== '' && strcasecmp($proxy, $sRemoteAddr) === 0) {
+                return true;
             }
         }
 
-        return in_array($sRemoteAddr, ['127.0.0.1', '::1', '::ffff:127.0.0.1'], true);
+        return false;
     }
 
     private static function extractClientIp(string $sIpList): ?string

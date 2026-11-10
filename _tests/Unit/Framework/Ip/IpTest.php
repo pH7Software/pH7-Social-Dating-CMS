@@ -18,6 +18,7 @@ final class IpTest extends TestCase
     protected function setUp(): void
     {
         putenv('PH7_TRUST_PROXY_HEADERS=1');
+        putenv('PH7_TRUSTED_PROXIES=127.0.0.1');
     }
 
     protected function tearDown(): void
@@ -59,6 +60,8 @@ final class IpTest extends TestCase
 
     public function testForwardedForListReturnsPublicIp(): void
     {
+        putenv('PH7_TRUSTED_PROXIES=127.0.0.1');
+
         $_SERVER['HTTP_X_FORWARDED_FOR'] = '10.0.0.5, 52.53.189.95';
         $_SERVER['REMOTE_ADDR'] = '127.0.0.1';
 
@@ -68,6 +71,18 @@ final class IpTest extends TestCase
     public function testForwardedForHeaderIsIgnoredWithoutExplicitTrust(): void
     {
         putenv('PH7_TRUST_PROXY_HEADERS');
+        putenv('PH7_TRUSTED_PROXIES');
+
+        $_SERVER['HTTP_X_FORWARDED_FOR'] = '198.51.100.10';
+        $_SERVER['REMOTE_ADDR'] = '203.0.113.7';
+
+        $this->assertSame('203.0.113.7', Ip::get());
+    }
+
+    public function testForwardedForHeaderIsIgnoredWithoutTrustedProxy(): void
+    {
+        putenv('PH7_TRUST_PROXY_HEADERS=1');
+        putenv('PH7_TRUSTED_PROXIES=10.0.0.2');
 
         $_SERVER['HTTP_X_FORWARDED_FOR'] = '198.51.100.10';
         $_SERVER['REMOTE_ADDR'] = '203.0.113.7';
