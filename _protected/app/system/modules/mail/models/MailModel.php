@@ -253,20 +253,24 @@ class MailModel extends MailCoreModel
         $sSqlFind = ' ' . ($bDigitSearch ? '(messageId = :looking)' : '(title LIKE :looking OR message LIKE :looking OR username LIKE :looking OR firstName LIKE :looking OR lastName LIKE :looking)');
         $sSqlOrder = SearchCoreModel::order($sOrderBy, $iSort);
 
+        if ($iProfileId === null) {
+            return $bCount ? 0 : [];
+        }
+
         switch (true) {
-            case $iType === self::INBOX && $iProfileId !== null:
+            case $iType === self::INBOX:
                 $sSql = 'msg.sender = m.profileId WHERE (msg.recipient = :profileId) AND (NOT FIND_IN_SET(\'recipient\', msg.trash)) AND';
                 break;
-            case $iType === self::OUTBOX && $iProfileId !== null:
+            case $iType === self::OUTBOX:
                 $sSql = 'msg.recipient = m.profileId WHERE (msg.sender = :profileId) AND (NOT FIND_IN_SET(\'sender\', msg.toDelete)) AND';
                 break;
-            case $iType === self::TRASH && $iProfileId !== null:
+            case $iType === self::TRASH:
                 $sSql = 'msg.sender = m.profileId WHERE (msg.recipient = :profileId) AND (FIND_IN_SET(\'recipient\', msg.trash)) AND
                 (NOT FIND_IN_SET(\'recipient\', msg.toDelete)) AND';
                 break;
             default:
-                // All messages
-                $sSql = 'msg.sender = m.profileId WHERE ';
+                // All messages, scoped to the authenticated profile to avoid cross-member leakage.
+                $sSql = 'msg.sender = m.profileId WHERE ((msg.recipient = :profileId) OR (msg.sender = :profileId)) AND';
         }
 
         $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ' FROM' . Db::prefix(DbTableName::MESSAGE) . 'AS msg LEFT JOIN ' . Db::prefix(DbTableName::MEMBER) . 'AS m ON ' .

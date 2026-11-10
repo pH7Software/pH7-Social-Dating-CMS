@@ -281,6 +281,11 @@ class MainController extends Controller
         $sOrder = $this->httpRequest->get('order');
         $iSort = $this->httpRequest->get('sort', Type::INTEGER);
         $iType = $this->httpRequest->get('where', Type::INTEGER);
+        $aAllowedTypes = [MailModel::INBOX, MailModel::OUTBOX, MailModel::TRASH];
+
+        if (!in_array($iType, $aAllowedTypes, true)) {
+            $iType = MailModel::INBOX;
+        }
 
         $this->iTotalMails = $this->oMailModel->search(
             $sKeywords,

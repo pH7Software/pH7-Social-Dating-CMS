@@ -27,7 +27,7 @@ class Permission extends PermissionCore
         }
 
         if (!$bAdminAuth || UserCore::isAdminLoggedAs()) {
-            if (!$this->checkMembership() || ($this->registry->action === 'inbox' && !$this->group->read_mails)) {
+            if (!$this->checkMembership() || (($this->registry->action === 'inbox' || $this->registry->action === 'result') && !$this->group->read_mails)) {
                 $this->paymentRedirect();
             } elseif ($this->registry->action === 'compose' && !$this->group->send_mails) {
                 $this->paymentRedirect();
