@@ -40,7 +40,7 @@ abstract class Validation extends Base
      */
     public function isNotApplicable($value)
     {
-        return ($value === null || is_array($value) || $value === '');
+        return $value === null || $value === '';
     }
 
     abstract public function isValid($value);

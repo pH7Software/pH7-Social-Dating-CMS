@@ -32,7 +32,17 @@ class BankAccount extends Validation
      */
     public function isValid($sValue)
     {
-        if ($this->isNotApplicable($sValue) || $this->oValidate->email($sValue)) {
+        if ($this->isNotApplicable($sValue)) {
+            return true;
+        }
+
+        if (!is_string($sValue)) {
+            $this->message = t('Your bank account is incorrect.');
+
+            return false;
+        }
+
+        if ($this->oValidate->email($sValue)) {
             if (!Ban::isBankAccount($sValue)) {
                 if (!(new ExistCoreModel)->bankAccount($sValue, $this->sTable)) {
                     return true;

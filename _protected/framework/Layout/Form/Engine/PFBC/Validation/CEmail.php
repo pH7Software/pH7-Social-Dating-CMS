@@ -34,7 +34,15 @@ class CEmail extends Validation
 
     public function isValid($sValue)
     {
-        if ($this->isNotApplicable($sValue) || $this->oValidate->email($sValue)) {
+        if ($this->isNotApplicable($sValue)) {
+            return true;
+        }
+
+        if (!is_string($sValue)) {
+            return false;
+        }
+
+        if ($this->oValidate->email($sValue)) {
             return !($this->sType === self::GUEST_MODE && (new ExistCoreModel)->email($sValue, $this->sTable));
         }
 

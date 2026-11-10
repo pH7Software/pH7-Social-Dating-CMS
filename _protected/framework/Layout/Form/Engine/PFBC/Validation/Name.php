@@ -18,6 +18,10 @@ class Name extends Validation
 
     public function isValid($sValue): bool
     {
-        return $this->isNotApplicable($sValue) || $this->oValidate->name($sValue);
+        if ($this->isNotApplicable($sValue)) {
+            return true;
+        }
+
+        return is_string($sValue) && $this->oValidate->name($sValue);
     }
 }

@@ -18,6 +18,10 @@ class Url extends Validation
 
     public function isValid($sValue): bool
     {
-        return $this->isNotApplicable($sValue) || $this->oValidate->url($sValue);
+        if ($this->isNotApplicable($sValue)) {
+            return true;
+        }
+
+        return is_string($sValue) && $this->oValidate->url($sValue);
     }
 }

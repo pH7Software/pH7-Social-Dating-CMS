@@ -11,6 +11,7 @@ declare(strict_types=1);
 namespace PH7\Test\Unit\Framework\Layout\Form\Engine\PFBC;
 
 use PFBC\Validation\Date;
+use PFBC\Validation\Email;
 use PFBC\Validation\Str;
 use PFBC\Validation\Username;
 use PH7\DbTableName;
@@ -40,6 +41,7 @@ final class ValidationMissingValueTest extends TestCase
         self::assertFalse($oRule->isValid(' a '));
         self::assertTrue($oRule->isValid(' ab '));
         self::assertFalse($oRule->isValid(['ab']));
+        self::assertFalse((new Email)->isValid(['user@example.com']));
     }
 
     public function testDateRuleAcceptsAMissingOptionalField(): void

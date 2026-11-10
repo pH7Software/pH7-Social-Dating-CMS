@@ -26,10 +26,14 @@ class RegExp extends Validation
 
     public function isValid($sValue)
     {
-        if ($this->isNotApplicable($sValue) || preg_match('#^' . $this->pattern . '$#', $sValue)) {
+        if ($this->isNotApplicable($sValue)) {
             return true;
         }
 
-        return false;
+        if (!is_string($sValue)) {
+            return false;
+        }
+
+        return preg_match('#^' . $this->pattern . '$#', $sValue) === 1;
     }
 }

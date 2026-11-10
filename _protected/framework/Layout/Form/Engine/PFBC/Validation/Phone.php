@@ -18,6 +18,10 @@ class Phone extends Validation
 
     public function isValid($sValue)
     {
-        return $this->isNotApplicable($sValue) || $this->oValidate->phone($sValue);
+        if ($this->isNotApplicable($sValue)) {
+            return true;
+        }
+
+        return is_string($sValue) && $this->oValidate->phone($sValue);
     }
 }

@@ -37,6 +37,10 @@ class Password extends Validation
             return true;
         }
 
+        if (!is_string($sValue)) {
+            return false;
+        }
+
         return $this->oValidate->password($sValue, $this->iMin, $this->iMax);
     }
 }

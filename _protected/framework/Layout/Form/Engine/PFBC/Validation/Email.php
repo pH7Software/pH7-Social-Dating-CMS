@@ -18,6 +18,10 @@ class Email extends Validation
 
     public function isValid($sValue)
     {
-        return $this->isNotApplicable($sValue) || $this->oValidate->email($sValue);
+        if ($this->isNotApplicable($sValue)) {
+            return true;
+        }
+
+        return is_string($sValue) && $this->oValidate->email($sValue);
     }
 }
