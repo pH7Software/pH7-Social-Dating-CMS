@@ -18,7 +18,7 @@
         <ph7builder>
             <upd-alert>false</upd-alert>
             <name>REVOLUTIONARY™</name>
-            <version>19.3.3</version>
+            <version>19.4.0</version>
             <sql-shcema-version>1.6.6</sql-shcema-version>
             <build>1</build>
         </ph7builder>

@@ -47,7 +47,7 @@ final class VersionTest extends TestCase
     {
         $aReleaseInfo = $this->parseReleaseXml(
             '<software><ph7><ph7builder><upd-alert>false</upd-alert><name>REVOLUTIONARY™</name>' .
-            '<version>19.3.3</version><sql-schema-version>1.6.6</sql-schema-version>' .
+            '<version>19.4.0</version><sql-schema-version>1.6.6</sql-schema-version>' .
             '<build>1</build></ph7builder></ph7></software>'
         );
 

@@ -51,9 +51,9 @@ final class Version
      *
      * More details: https://ph7builder.com/new-versioning-system/
      */
-    public const KERNEL_VERSION = '19.3.3';
+    public const KERNEL_VERSION = '19.4.0';
     public const KERNEL_BUILD = '1';
-    public const KERNEL_RELEASE_DATE = '2026-11-02';
+    public const KERNEL_RELEASE_DATE = '2026-11-10';
 
     /*** Framework Server ***/
     public const KERNEL_TECHNOLOGY_NAME = 'pH7Builder.com';
