@@ -68,6 +68,24 @@ final class IpTest extends TestCase
         $this->assertSame('52.53.189.95', Ip::get());
     }
 
+    public function testForwardedForUsesRightmostUntrustedAddress(): void
+    {
+        $_SERVER['HTTP_X_FORWARDED_FOR'] = '1.1.1.1, 8.8.8.8';
+        $_SERVER['REMOTE_ADDR'] = '127.0.0.1';
+
+        $this->assertSame('8.8.8.8', Ip::get());
+    }
+
+    public function testForwardedForSkipsTrustedProxyHops(): void
+    {
+        putenv('PH7_TRUSTED_PROXIES=127.0.0.1,10.0.0.2');
+
+        $_SERVER['HTTP_X_FORWARDED_FOR'] = '8.8.8.8, 10.0.0.2';
+        $_SERVER['REMOTE_ADDR'] = '127.0.0.1';
+
+        $this->assertSame('8.8.8.8', Ip::get());
+    }
+
     public function testForwardedForHeaderIsIgnoredWithoutExplicitTrust(): void
     {
         putenv('PH7_TRUST_PROXY_HEADERS');

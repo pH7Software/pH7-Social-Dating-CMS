@@ -132,21 +132,25 @@ class Ip
             return null;
         }
 
-        $sFirstValidIp = null;
-        foreach ($aCandidates as $sCandidate) {
+        $sFirstUntrustedIp = null;
+        foreach (array_reverse($aCandidates) as $sCandidate) {
             if (!filter_var($sCandidate, FILTER_VALIDATE_IP)) {
                 continue;
+            }
+
+            if (static::isTrustedProxy($sCandidate)) {
+                continue;
+            }
+
+            if ($sFirstUntrustedIp === null) {
+                $sFirstUntrustedIp = $sCandidate;
             }
 
             if (!static::isPrivate($sCandidate)) {
                 return $sCandidate;
             }
-
-            if ($sFirstValidIp === null) {
-                $sFirstValidIp = $sCandidate;
-            }
         }
 
-        return $sFirstValidIp;
+        return $sFirstUntrustedIp;
     }
 }
