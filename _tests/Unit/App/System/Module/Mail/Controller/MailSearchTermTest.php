@@ -50,6 +50,6 @@ final class MailSearchTermTest extends TestCase
         $sPermission = file_get_contents(PH7_PATH_SYS_MOD . 'mail/config/Permission.php');
 
         $this->assertStringContainsString('in_array($iType, $aAllowedTypes, true)', $sController);
-        $this->assertStringContainsString("$this->registry->action === 'result'", $sPermission);
+        $this->assertStringContainsString("\$this->registry->action === 'result'", $sPermission);
     }
 }
