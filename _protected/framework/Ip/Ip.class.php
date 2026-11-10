@@ -81,25 +81,19 @@ class Ip
      */
     private static function getClientIp(): string
     {
-        $trustedProxies = [
-            '127.0.0.1', '::1', // localhost
-            '::ffff:127.0.0.1',
-            // Add your reverse proxy IPs here (e.g., Cloudflare, nginx, etc)
-        ];
-
         $remoteAddr = (string)Server::getVar(Server::REMOTE_ADDR, '');
-        $isTrustedProxy = in_array($remoteAddr, $trustedProxies, true);
+        if ($remoteAddr === '' || getenv('PH7_TRUST_PROXY_HEADERS') !== '1' || !static::isTrustedProxy($remoteAddr)) {
+            return $remoteAddr;
+        }
 
-        $ipHeaderVars = $isTrustedProxy
-            ? [
-                'HTTP_CF_CONNECTING_IP',
-                'HTTP_TRUE_CLIENT_IP',
-                'HTTP_X_REAL_IP',
-                Server::HTTP_CLIENT_IP,
-                Server::HTTP_X_FORWARDED_FOR,
-                Server::REMOTE_ADDR
-            ]
-            : [Server::REMOTE_ADDR];
+        $ipHeaderVars = [
+            'HTTP_CF_CONNECTING_IP',
+            'HTTP_TRUE_CLIENT_IP',
+            'HTTP_X_REAL_IP',
+            Server::HTTP_CLIENT_IP,
+            Server::HTTP_X_FORWARDED_FOR,
+            Server::REMOTE_ADDR
+        ];
 
         foreach ($ipHeaderVars as $header) {
             $ip = (string)Server::getVar($header, '');
@@ -111,7 +105,22 @@ class Ip
                 return $parsedIp;
             }
         }
-        return '';
+
+        return $remoteAddr;
+    }
+
+    private static function isTrustedProxy(string $sRemoteAddr): bool
+    {
+        $trustedProxies = getenv('PH7_TRUSTED_PROXIES');
+        if (is_string($trustedProxies) && trim($trustedProxies) !== '') {
+            foreach (preg_split('/\s*,\s*/', trim($trustedProxies)) ?: [] as $proxy) {
+                if ($proxy !== '' && strcasecmp($proxy, $sRemoteAddr) === 0) {
+                    return true;
+                }
+            }
+        }
+
+        return in_array($sRemoteAddr, ['127.0.0.1', '::1', '::ffff:127.0.0.1'], true);
     }
 
     private static function extractClientIp(string $sIpList): ?string

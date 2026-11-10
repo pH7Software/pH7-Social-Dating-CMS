@@ -15,8 +15,16 @@ use PHPUnit\Framework\TestCase;
 
 final class IpTest extends TestCase
 {
+    protected function setUp(): void
+    {
+        putenv('PH7_TRUST_PROXY_HEADERS=1');
+    }
+
     protected function tearDown(): void
     {
+        putenv('PH7_TRUST_PROXY_HEADERS');
+        putenv('PH7_TRUSTED_PROXIES');
+
         unset(
             $_SERVER['HTTP_CF_CONNECTING_IP'],
             $_SERVER['HTTP_TRUE_CLIENT_IP'],
@@ -55,6 +63,16 @@ final class IpTest extends TestCase
         $_SERVER['REMOTE_ADDR'] = '127.0.0.1';
 
         $this->assertSame('52.53.189.95', Ip::get());
+    }
+
+    public function testForwardedForHeaderIsIgnoredWithoutExplicitTrust(): void
+    {
+        putenv('PH7_TRUST_PROXY_HEADERS');
+
+        $_SERVER['HTTP_X_FORWARDED_FOR'] = '198.51.100.10';
+        $_SERVER['REMOTE_ADDR'] = '203.0.113.7';
+
+        $this->assertSame('203.0.113.7', Ip::get());
     }
 
     public function testCloudflareConnectingIpHasPriority(): void
