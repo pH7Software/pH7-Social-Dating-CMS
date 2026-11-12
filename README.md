@@ -9,7 +9,10 @@ pH7Builder (formerly pH7CMS) is a self-hosted, open-source PHP platform for buil
 [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE.md)
 [![Latest release](https://img.shields.io/github/v/release/pH7Software/pH7-Social-Dating-CMS)](https://github.com/pH7Software/pH7-Social-Dating-CMS/releases)
 
-**What you need:** PHP 8.3–8.5, MySQL 8.0+, URL rewriting, and a web server.
+**For this source tree:** PHP 8.3–8.5, MySQL 8.0+, URL rewriting, and a web
+server. The latest published release is 19.4.0; use the [Quick
+Start](docs/QUICK_START.md) for its installation steps until 20.0.0 is
+published.
 Xefi Faker v1.5.4 currently prevents Composer installation on PHP 8.6 and later.
 Composer 2 is needed only for a source checkout; the versioned release ZIP
 includes locked production dependencies. With the server ready, allow about

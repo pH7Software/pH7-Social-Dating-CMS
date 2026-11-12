@@ -3,7 +3,7 @@
 Automatic in-place upgrades are currently unavailable. Upgrade a staging copy
 manually, verify it, and only then repeat the reviewed procedure in production.
 
-## 20.0.0 major release
+## Upcoming 20.0.0 major release
 
 pH7Builder 20.0.0 requires PHP 8.3 or newer; 19.4.0 is the final PHP 8.2
 compatible release. Upgrade the PHP runtime before deploying 20.0.0. Xefi

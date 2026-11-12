@@ -1,10 +1,12 @@
 pH7Builder installation
 =======================
 
-Requirements: PHP 8.3+ and MySQL 8.0+ with the PHP extensions listed in
-composer.json. Older MySQL versions and MariaDB are not verified or supported
-for this release. The versioned release ZIP includes production dependencies;
-a source checkout requires Composer 2.
+The latest published release is pH7Builder 19.4.0 and requires PHP 8.2+ and
+MySQL 8.0+ with the PHP extensions listed in its composer.json. Older MySQL
+versions and MariaDB are not verified or supported. The versioned release ZIP
+includes production dependencies; a source checkout requires Composer 2.
+The 20.0.0 source prepared in this repository requires PHP 8.3+, but is not
+published yet.
 
 Production Quick Start:
 https://github.com/pH7Software/pH7-Social-Dating-CMS/blob/18.x/docs/QUICK_START.md
@@ -16,7 +18,7 @@ Release guides:
 https://github.com/pH7Software/pH7-Social-Dating-CMS/tree/18.x/docs
 
 Composer installation of this release:
-composer create-project ph7software/ph7builder:20.0.0 pH7Builder-v20.0.0 --no-dev --prefer-dist
+composer create-project ph7software/ph7builder:19.4.0 pH7Builder-v19.4.0 --no-dev --prefer-dist
 
 Other distribution listings:
 Softaculous: https://www.softaculous.com/apps/socialnetworking/pH7Builder

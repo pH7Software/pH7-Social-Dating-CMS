@@ -1,4 +1,7 @@
-# pH7Builder 20.0.0 — Release Notes
+# pH7Builder 20.0.0 — Release Notes (Unreleased)
+
+These are draft notes for the upcoming release. The v20.0.0 tag and release
+package are not available yet.
 
 ## Breaking changes
 

@@ -92,7 +92,7 @@ final class ReleaseDeploymentTest extends TestCase
         );
     }
 
-    public function testStableReleaseGuidesAreSynchronized(): void
+    public function testPublishedReleaseGuidesAreSynchronized(): void
     {
         $sReadme = $this->readFile('README.md');
         $sQuickStart = $this->readFile('docs/QUICK_START.md');
@@ -106,10 +106,15 @@ final class ReleaseDeploymentTest extends TestCase
         );
 
         $sVersion = $aStableVersion[1];
-        $this->assertSame(Version::KERNEL_VERSION, $sVersion);
         $sReleaseUrl = "releases/download/v{$sVersion}/pH7Builder-v{$sVersion}.zip";
         $this->assertStringContainsString('[Quick Start](docs/QUICK_START.md)', $sReadme);
+        $this->assertStringContainsString("latest published release, pH7Builder {$sVersion}", $sQuickStart);
         $this->assertStringContainsString($sReleaseUrl, $sQuickStart);
+        $this->assertStringContainsString("--branch v{$sVersion}", $sQuickStart);
+        $this->assertStringContainsString(
+            "ph7software/ph7builder:{$sVersion}",
+            $sQuickStart
+        );
         $this->assertStringContainsString(
             "ph7software/ph7builder:{$sVersion}",
             $this->readFile('installation-instructions-(start-here).txt')

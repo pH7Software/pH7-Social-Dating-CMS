@@ -9,13 +9,13 @@ issuance, and mail-provider approval can take longer.
 For a local evaluation instead, use the Docker procedure in the
 [README](../README.md#local-evaluation-with-docker).
 
-This guide covers pH7Builder 20.0.0, which currently installs with PHP 8.3–8.5.
-pH7Builder 19.4.0 is the final release that supports PHP 8.2.
+This guide covers the latest published release, pH7Builder 19.4.0. The
+pH7Builder 20.0.0 version prepared in this source tree has not been published
+yet; see its release notes for planned requirements and upgrade guidance.
 
 ## 1. Confirm the requirements
 
-- PHP 8.3–8.5. Xefi Faker v1.5.4 does not yet accept PHP 8.6 or later in its
-  Composer constraint.
+- PHP 8.2 or newer for pH7Builder 19.4.0.
 - MySQL 8.0 or newer. Older MySQL versions and MariaDB are unverified and are
   not supported for this release.
 - PHP extensions: cURL, DOM, EXIF, Fileinfo, GD with FreeType and WebP, hash,
@@ -47,21 +47,22 @@ the archive and its checksum from the same GitHub release:
 sudo mkdir -p /var/www/ph7builder
 sudo chown deploy:www-data /var/www/ph7builder
 cd /tmp
-curl -LO https://github.com/pH7Software/pH7-Social-Dating-CMS/releases/download/v20.0.0/pH7Builder-v20.0.0.zip
-curl -LO https://github.com/pH7Software/pH7-Social-Dating-CMS/releases/download/v20.0.0/pH7Builder-v20.0.0.zip.sha256
-sha256sum -c pH7Builder-v20.0.0.zip.sha256
-unzip pH7Builder-v20.0.0.zip
-cp -a pH7Builder-v20.0.0/. /var/www/ph7builder/
+curl -LO https://github.com/pH7Software/pH7-Social-Dating-CMS/releases/download/v19.4.0/pH7Builder-v19.4.0.zip
+curl -LO https://github.com/pH7Software/pH7-Social-Dating-CMS/releases/download/v19.4.0/pH7Builder-v19.4.0.zip.sha256
+sha256sum -c pH7Builder-v19.4.0.zip.sha256
+unzip pH7Builder-v19.4.0.zip
+cp -a pH7Builder-v19.4.0/. /var/www/ph7builder/
 ```
 
 Run these commands as the `deploy` account, or replace that example account
 with your normal non-root deployment user.
 
-For a source checkout instead, clone tag `v20.0.0` and run:
+For a source checkout instead, clone the latest published tag, `v19.4.0`, and
+run:
 
 ```console
-git clone --branch v20.0.0 --depth 1 https://github.com/pH7Software/pH7-Social-Dating-CMS.git pH7Builder-v20.0.0
-cd pH7Builder-v20.0.0
+git clone --branch v19.4.0 --depth 1 https://github.com/pH7Software/pH7-Social-Dating-CMS.git pH7Builder-v19.4.0
+cd pH7Builder-v19.4.0
 composer install --no-dev --prefer-dist --optimize-autoloader
 ```
 
@@ -70,7 +71,7 @@ tagged Packagist release. Run this from the parent of the intended deployment
 directory:
 
 ```console
-composer create-project ph7software/ph7builder:20.0.0 ph7builder --no-dev --prefer-dist
+composer create-project ph7software/ph7builder:19.4.0 ph7builder --no-dev --prefer-dist
 ```
 
 Softaculous and SourceForge also list pH7Builder, but their available archive
