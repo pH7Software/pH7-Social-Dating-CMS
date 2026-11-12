@@ -20,7 +20,15 @@ use PH7\Framework\Url\Header;
 
 class GenerateProfileForm
 {
+    public const MIN_AMOUNT_VALUE = 1;
+    public const MAX_AMOUNT_VALUE = 100;
+
     private const DEFAULT_AMOUNT_VALUE = 20;
+
+    public static function isValidAmount(int $iAmount): bool
+    {
+        return $iAmount >= self::MIN_AMOUNT_VALUE && $iAmount <= self::MAX_AMOUNT_VALUE;
+    }
 
     /**
      * @param int $iProfileType
@@ -51,9 +59,13 @@ class GenerateProfileForm
                 t('Number of Profiles:'),
                 'amount',
                 [
-                    'min' => 1,
+                    'min' => self::MIN_AMOUNT_VALUE,
+                    'max' => self::MAX_AMOUNT_VALUE,
                     'value' => self::DEFAULT_AMOUNT_VALUE,
-                    'description' => t('Number of profiles to generate. Choosing a high number might take a few minutes to load.'),
+                    'description' => t(
+                        'Generate up to %0% profiles per request. Run another batch if you need more.',
+                        self::MAX_AMOUNT_VALUE
+                    ),
                     'required' => 1
                 ]
             )

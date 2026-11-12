@@ -28,6 +28,19 @@ class GenerateProfileFormProcess extends Form
         $this->iProfileType = $iProfileType;
         $iAmountProfiles = $this->httpRequest->post('amount', 'int');
 
+        if (!GenerateProfileForm::isValidAmount($iAmountProfiles)) {
+            \PFBC\Form::setError(
+                'form_generate_profiles',
+                t(
+                    'Generate between %0% and %1% profiles per request. Run another batch if you need more.',
+                    GenerateProfileForm::MIN_AMOUNT_VALUE,
+                    GenerateProfileForm::MAX_AMOUNT_VALUE
+                )
+            );
+
+            return;
+        }
+
         $this->generate($iAmountProfiles);
 
         \PFBC\Form::setSuccess(
