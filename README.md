@@ -13,8 +13,6 @@ pH7Builder (formerly pH7CMS) is a self-hosted, open-source PHP platform for buil
 web server. The latest published release is 19.4.0; use the [Quick
 Start](docs/QUICK_START.md) for its installation steps until 20.0.0 is
 published.
-Xefi Faker v1.5.4 currently applies a narrower PHP compatibility constraint;
-Composer may reject newer runtimes until that dependency updates its constraint.
 Composer 2 is needed only for a source checkout; the versioned release ZIP
 includes locked production dependencies. With the server ready, allow about
 **20–30 minutes** for deployment and the guided browser installer. DNS, TLS

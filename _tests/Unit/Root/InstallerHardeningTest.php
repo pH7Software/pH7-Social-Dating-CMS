@@ -267,12 +267,12 @@ final class InstallerHardeningTest extends TestCase
         );
     }
 
-    public function testInstallerSampleProfilesUseTheConfiguredXefiFaker(): void
+    public function testInstallerSampleProfilesUseFakerPhp(): void
     {
         $sController = $this->readProjectFile('_install/controllers/InstallController.php');
 
-        $this->assertStringContainsString("FakerContainerFactory::create('en_US')", $sController);
-        $this->assertStringNotContainsString('\Faker\Factory::create()', $sController);
+        $this->assertStringContainsString('\Faker\Factory::create()', $sController);
+        $this->assertStringNotContainsString('FakerContainerFactory::create', $sController);
     }
 
     public function testConfigPlaceholdersAreReplacedWithoutRescanningCredentials(): void

@@ -12,10 +12,8 @@ Before changing code, read the relevant nearby files and
 Keep changes focused and preserve unrelated work already present in the
 worktree.
 
-pH7Builder 20.0.0 requires PHP 8.3 or newer. Xefi Faker v1.5.4 currently
-declares a narrower PHP compatibility constraint, which may limit Composer
-installation on newer runtimes. It combines a modular MVC application with the
-project-specific pH7Framework and PH7Tpl template engine.
+pH7Builder 20.0.0 requires PHP 8.3 or newer. It combines a modular MVC
+application with the project-specific pH7Framework and PH7Tpl template engine.
 
 ## Repository map
 

@@ -60,6 +60,6 @@ final class GenerateProfileFormSafetyTest extends TestCase
         $aNationalities = $oMethod->invoke(null);
 
         self::assertSame(array_keys(FakerFactory::SUPPORTED_LOCALES), array_keys($aNationalities));
-        self::assertFalse(FakerFactory::isSupportedLocale('nl_NL'));
+        self::assertTrue(FakerFactory::isSupportedLocale('nl_NL'));
     }
 }

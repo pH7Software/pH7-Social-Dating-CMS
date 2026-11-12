@@ -69,6 +69,7 @@
     "bacon/bacon-qr-code": "^3.0",
     "braintree/braintree_php": "^6.0",
     "ezyang/htmlpurifier": "^4.19",
+    "fakerphp/faker": "^1.24.1",
     "geoip2/geoip2": "^3.3",
     "guzzlehttp/guzzle": "^7.4",
     "ph-7/cute-link-names": "^2.0",
@@ -82,15 +83,7 @@
     "symfony/console": "^7.4",
     "symfony/mailer": "^7.4",
     "twbs/bootstrap": "^3.4",
-    "twilio/sdk": "^8.0",
-    "xefi/faker-php": "^1.5.4",
-    "xefi/faker-php-locales-de-de": "^1.0",
-    "xefi/faker-php-locales-en-gb": "^1.0",
-    "xefi/faker-php-locales-en-us": "^1.0",
-    "xefi/faker-php-locales-es-es": "^1.0",
-    "xefi/faker-php-locales-fr-be": "^1.0",
-    "xefi/faker-php-locales-fr-ch": "^1.0",
-    "xefi/faker-php-locales-fr-fr": "^1.0"
+    "twilio/sdk": "^8.0"
   },
   "require-dev": {
     "dealerdirect/phpcodesniffer-composer-installer": "^1.0",

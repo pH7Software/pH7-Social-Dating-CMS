@@ -5,16 +5,15 @@ package are not available yet.
 
 ## Breaking changes
 
-- Requires PHP 8.3 or newer. Xefi Faker v1.5.4 currently declares a narrower
-  PHP compatibility constraint, so Composer may reject newer runtimes until
-  that dependency updates its constraint. pH7Builder 19.4.0 is the final
-  release that supports PHP 8.2.
-- Replaces FakerPHP with Xefi Faker. The profile generator now offers the
-  seven locales for which Xefi publishes locale data: American (`en_US`),
-  British (`en_GB`), French (`fr_FR`), French Belgian (`fr_BE`), French Swiss
-  (`fr_CH`), German (`de_DE`), and Spanish (`es_ES`). Generated member,
-  affiliate, and subscriber profiles remain available wherever the site owner
-  enables them, including production sites.
+- Requires PHP 8.3 or newer. pH7Builder 19.4.0 is the final release that
+  supports PHP 8.2.
+
+## Installer and dependency updates
+
+- Upgrades the installation wizard to Smarty 5.8.5. This is an internal
+  installer dependency; pH7Builder site themes continue to use PH7Tpl.
+- Keeps FakerPHP and all 29 existing profile-generator locales. Invalid locale
+  submissions are rejected server-side instead of falling back implicitly.
 
 ## Database and upgrade notes
 
