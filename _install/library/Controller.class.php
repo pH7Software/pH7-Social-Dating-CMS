@@ -13,7 +13,7 @@ namespace PH7;
 
 defined('PH7') or exit('Restricted access');
 
-use Smarty;
+use Smarty\Smarty;
 
 abstract class Controller implements Controllable
 {
@@ -78,6 +78,7 @@ abstract class Controller implements Controllable
         $this->oView->assign('software_name', self::SOFTWARE_NAME);
         $this->oView->assign('software_version', self::SOFTWARE_VERSION . ' ' . self::SOFTWARE_VERSION_NAME . ' - Build ' . self::SOFTWARE_BUILD);
         $this->oView->assign('software_website', self::SOFTWARE_WEBSITE);
+        $this->oView->assign('current_year', date('Y'));
         $this->oView->assign('software_author', self::SOFTWARE_AUTHOR);
         $this->oView->assign('software_copyright', sprintf(self::SOFTWARE_COPYRIGHT, date('Y')));
         $this->oView->assign('tpl_name', self::DEFAULT_THEME);
