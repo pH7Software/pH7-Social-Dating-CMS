@@ -33,7 +33,7 @@
   ],
   "config": {
     "platform": {
-      "php": "8.2.0"
+      "php": "8.3.0"
     },
     "vendor-dir": "_protected/vendor",
     "bin-dir": "_protected/vendor/bin",
@@ -47,7 +47,7 @@
     }
   },
   "require": {
-    "php": "^8.2",
+    "php": "^8.3",
     "ext-curl": "*",
     "ext-dom": "*",
     "ext-exif": "*",
@@ -69,7 +69,7 @@
     "bacon/bacon-qr-code": "^3.0",
     "braintree/braintree_php": "^6.0",
     "ezyang/htmlpurifier": "^4.19",
-    "fakerphp/faker": "^1.24",
+    "fakerphp/faker": "^1.24.1",
     "geoip2/geoip2": "^3.3",
     "guzzlehttp/guzzle": "^7.4",
     "ph-7/cute-link-names": "^2.0",

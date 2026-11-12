@@ -17,9 +17,10 @@ Because Docker snapshots the checkout into a named volume, run
 `docker compose down -v` before rebuilding after source changes. This deletes
 the local application and database volumes.
 
-Without Docker: install dependencies with `composer install`, then use any PHP
->= 8.2 installation with the extensions listed in `composer.json`,
-MySQL 8.0+, and Apache/nginx (see `nginx.conf` / `sample.htaccess`).
+Without Docker: install dependencies with `composer install`, then use PHP
+8.3 or newer with the extensions listed in `composer.json`, MySQL 8.0+, and
+Apache/nginx (see `nginx.conf` / `sample.htaccess`). Composer verifies that all
+locked dependencies support the selected PHP runtime.
 
 ## Before you open a pull request
 

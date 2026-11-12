@@ -18,7 +18,7 @@ use PHPUnit\Framework\TestCase;
 
 final class ReleaseDeploymentTest extends TestCase
 {
-    public function testRootReleaseLockIsIncludedAndInstallerDependencyIsConstrained(): void
+    public function testReleaseLocksAreIncludedAndInstallerDependencyIsConstrained(): void
     {
         $sAttributes = $this->readFile('.gitattributes');
         $aComposer = json_decode($this->readFile('composer.json'), true, 512, JSON_THROW_ON_ERROR);
@@ -28,9 +28,17 @@ final class ReleaseDeploymentTest extends TestCase
             512,
             JSON_THROW_ON_ERROR
         );
+        $aInstallerLock = json_decode(
+            $this->readFile('_install/composer.lock'),
+            true,
+            512,
+            JSON_THROW_ON_ERROR
+        );
+        $aInstallerPackages = array_column($aInstallerLock['packages'], null, 'name');
 
         $this->assertStringNotContainsString('composer.lock export-ignore', $sAttributes);
-        $this->assertSame('>=4.5.7 <4.5.8', $aInstallerComposer['require']['smarty/smarty']);
+        $this->assertSame('^5.8.5', $aInstallerComposer['require']['smarty/smarty']);
+        $this->assertSame('v5.8.5', $aInstallerPackages['smarty/smarty']['version']);
         $this->assertSame(
             '@php _protected/app/includes/InstallerDependencies.php',
             $aComposer['scripts']['install-installer-dependencies']
@@ -58,7 +66,41 @@ final class ReleaseDeploymentTest extends TestCase
         $this->assertSame(Version::KERNEL_BUILD, Kernel::SOFTWARE_BUILD);
     }
 
-    public function testStableReleaseGuidesAreSynchronized(): void
+    public function testPhp83IsTheMinimumAcrossComposerAndRuntimeChecks(): void
+    {
+        $aComposer = json_decode($this->readFile('composer.json'), true, 512, JSON_THROW_ON_ERROR);
+        $aInstallerComposer = json_decode(
+            $this->readFile('_install/composer.json'),
+            true,
+            512,
+            JSON_THROW_ON_ERROR
+        );
+
+        $this->assertSame('^8.3', $aComposer['require']['php']);
+        $this->assertSame('8.3.0', $aComposer['config']['platform']['php']);
+        $this->assertSame('^8.3', $aInstallerComposer['require']['php']);
+        $this->assertStringContainsString(
+            "PH7_REQUIRED_SERVER_VERSION', '8.3.0'",
+            $this->readFile('_install/constants.php')
+        );
+        $this->assertStringContainsString(
+            "REQUIRED_SERVER_VERSION = '8.3.0'",
+            $this->readFile('WebsiteChecker.php')
+        );
+
+        foreach (['composer.yml', 'phpstan.yml', 'test.yml'] as $sWorkflow) {
+            $sWorkflowContents = $this->readFile('.github/workflows/' . $sWorkflow);
+            $this->assertStringContainsString("'8.3'", $sWorkflowContents, $sWorkflow);
+            $this->assertStringNotContainsString("'8.2'", $sWorkflowContents, $sWorkflow);
+        }
+
+        $this->assertStringContainsString(
+            "php-version: '8.3'",
+            $this->readFile('.github/workflows/validate-installer.yml')
+        );
+    }
+
+    public function testPublishedReleaseGuidesAreSynchronized(): void
     {
         $sReadme = $this->readFile('README.md');
         $sQuickStart = $this->readFile('docs/QUICK_START.md');
@@ -72,10 +114,15 @@ final class ReleaseDeploymentTest extends TestCase
         );
 
         $sVersion = $aStableVersion[1];
-        $this->assertSame(Version::KERNEL_VERSION, $sVersion);
         $sReleaseUrl = "releases/download/v{$sVersion}/pH7Builder-v{$sVersion}.zip";
         $this->assertStringContainsString('[Quick Start](docs/QUICK_START.md)', $sReadme);
+        $this->assertStringContainsString("latest published release, pH7Builder {$sVersion}", $sQuickStart);
         $this->assertStringContainsString($sReleaseUrl, $sQuickStart);
+        $this->assertStringContainsString("--branch v{$sVersion}", $sQuickStart);
+        $this->assertStringContainsString(
+            "ph7software/ph7builder:{$sVersion}",
+            $sQuickStart
+        );
         $this->assertStringContainsString(
             "ph7software/ph7builder:{$sVersion}",
             $this->readFile('installation-instructions-(start-here).txt')
@@ -130,7 +177,7 @@ final class ReleaseDeploymentTest extends TestCase
         $this->assertStringContainsString('git -C "$PROJECT_ROOT" archive', $sPackager);
         $this->assertStringContainsString('mktemp -d', $sPackager);
         $this->assertStringContainsString('ls-files --error-unmatch composer.lock', $sPackager);
-        $this->assertStringNotContainsString('_install/composer.lock', $sPackager);
+        $this->assertStringContainsString('ls-files --error-unmatch _install/composer.lock', $sPackager);
         $this->assertStringContainsString('status --porcelain --untracked-files=all', $sPackager);
         $this->assertStringContainsString('find "$PACKAGE_DIRECTORY/_install" -type d -exec chmod 0775', $sPackager);
         $this->assertStringContainsString('chmod 0775 "$PACKAGE_DIRECTORY/_protected/app/configs"', $sPackager);

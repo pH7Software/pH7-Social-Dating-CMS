@@ -6,7 +6,6 @@ _install/data/caches/install-state.json
 _install/data/caches/install-token.hash
 .ph7builder-install-removal-*
 _install/vendor/*
-_install/composer.lock
 
 _protected/app/configs/config.ini
 _protected/app/system/core/assets/cron/_delay/

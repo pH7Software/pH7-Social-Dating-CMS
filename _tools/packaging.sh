@@ -87,6 +87,11 @@ if ! git -C "$PROJECT_ROOT" ls-files --error-unmatch composer.lock > /dev/null 2
     exit 1
 fi
 
+if ! git -C "$PROJECT_ROOT" ls-files --error-unmatch _install/composer.lock > /dev/null 2>&1; then
+    echo "The installer dependency lock is not tracked: _install/composer.lock" >&2
+    exit 1
+fi
+
 readonly RELEASE_DIRECTORY_NAME="pH7Builder-v$RELEASE_VERSION"
 readonly ARCHIVE_NAME="$RELEASE_DIRECTORY_NAME.zip"
 readonly CHECKSUM_NAME="$ARCHIVE_NAME.sha256"

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "085bf345ee1720758cc864e2280d6f35",
+    "content-hash": "268f9ed3d12ddadcb9bfc0457473cef7",
     "packages": [
         {
             "name": "arcturial/clickatell",
@@ -7200,7 +7200,7 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": "^8.2",
+        "php": "^8.3",
         "ext-curl": "*",
         "ext-dom": "*",
         "ext-exif": "*",
@@ -7220,7 +7220,7 @@
     },
     "platform-dev": {},
     "platform-overrides": {
-        "php": "8.2.0"
+        "php": "8.3.0"
     },
     "plugin-api-version": "2.9.0"
 }

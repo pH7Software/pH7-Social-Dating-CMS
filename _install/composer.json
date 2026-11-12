@@ -4,8 +4,8 @@
   "type": "project",
   "license": "MIT",
   "require": {
-    "php": "^8.2",
-    "smarty/smarty": ">=4.5.7 <4.5.8"
+    "php": "^8.3",
+    "smarty/smarty": "^5.8.5"
   },
   "autoload": {
     "classmap": [

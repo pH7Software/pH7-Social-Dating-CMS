@@ -11,6 +11,7 @@ declare(strict_types=1);
 namespace PH7\Test\Unit\App\System\Module\ProfileFaker;
 
 use PH7\GenerateProfileForm;
+use PH7\FakerFactory;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
@@ -19,6 +20,7 @@ final class GenerateProfileFormSafetyTest extends TestCase
     public static function setUpBeforeClass(): void
     {
         require_once PH7_PATH_SYS_MOD . 'profile-faker/forms/GenerateProfileForm.php';
+        require_once PH7_PATH_SYS_MOD . 'profile-faker/inc/class/FakerFactory.php';
     }
 
     #[DataProvider('amountLimitProvider')]
@@ -50,5 +52,14 @@ final class GenerateProfileFormSafetyTest extends TestCase
         self::assertStringContainsString("'max' => self::MAX_AMOUNT_VALUE", $sForm);
         self::assertStringContainsString('GenerateProfileForm::isValidAmount($iAmountProfiles)', $sProcessor);
         self::assertStringContainsString("\\PFBC\\Form::setError(", $sProcessor);
+    }
+
+    public function testFormOnlyOffersLocalesSupportedByTheConfiguredFakerPackages(): void
+    {
+        $oMethod = new \ReflectionMethod(GenerateProfileForm::class, 'getNationalities');
+        $aNationalities = $oMethod->invoke(null);
+
+        self::assertSame(array_keys(FakerFactory::SUPPORTED_LOCALES), array_keys($aNationalities));
+        self::assertTrue(FakerFactory::isSupportedLocale('nl_NL'));
     }
 }

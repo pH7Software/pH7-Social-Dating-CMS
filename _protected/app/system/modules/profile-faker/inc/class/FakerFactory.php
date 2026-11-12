@@ -1,9 +1,9 @@
 <?php
+
 /**
  * @author         Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright      (c) 2019-2022, Pierre-Henry Soria. All Rights Reserved.
  * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
- * @package        PH7 / App / System / Module / Profile Faker / Inc / Class
  */
 
 declare(strict_types=1);
@@ -19,6 +19,38 @@ use PH7\Framework\Util\Various;
 
 class FakerFactory
 {
+    public const SUPPORTED_LOCALES = [
+        'en_US' => 'American',
+        'en_AU' => 'Australian',
+        'pt_BR' => 'Brazilian',
+        'en_GB' => 'British',
+        'cs_CZ' => 'Czech',
+        'da_DK' => 'Danish',
+        'nl_NL' => 'Dutch',
+        'nl_BE' => 'Dutch Belgian',
+        'en_CA' => 'English Canadian',
+        'fr_CA' => 'French Canadian',
+        'fi_FI' => 'Finnish',
+        'fr_FR' => 'French',
+        'fr_BE' => 'French Belgian',
+        'fr_CH' => 'French Swiss',
+        'de_DE' => 'German',
+        'de_CH' => 'German Swiss',
+        'fa_IR' => 'Iranian',
+        'en_IE' => 'Irish',
+        'it_IT' => 'Italian',
+        'it_CH' => 'Italian Swiss',
+        'en_NZ' => 'New Zealander',
+        'nb_NO' => 'Norwegian',
+        'es_PE' => 'Peruvian',
+        'pt_PT' => 'Portuguese',
+        'ro_RO' => 'Romanian',
+        'ru_RU' => 'Russian',
+        'es_ES' => 'Spanish',
+        'tr_TR' => 'Turkish',
+        'es_VE' => 'Venezuelan'
+    ];
+
     private int $iAmount;
 
     private string $sSex;
@@ -26,27 +58,36 @@ class FakerFactory
     private string $sLocale;
 
     /**
-     * @param int $iAmount Number of profile to generate.
-     * @param string $sSex Profile gender.
+     * @param int    $iAmount number of profile to generate
+     * @param string $sSex    profile gender
      * @param string $sLocale The locale if specified. e.g., en_US, en_IE, fr_FR, fr_BE, nl_NL, es_ES, ...
      */
     public function __construct(int $iAmount, string $sSex, string $sLocale = Lang::DEFAULT_LOCALE)
     {
+        if (!self::isSupportedLocale($sLocale)) {
+            throw new \InvalidArgumentException('The requested Faker locale is not supported.');
+        }
+
         $this->iAmount = $iAmount;
         $this->sSex = $sSex;
         $this->sLocale = $sLocale;
     }
 
+    public static function isSupportedLocale(string $sLocale): bool
+    {
+        return array_key_exists($sLocale, self::SUPPORTED_LOCALES);
+    }
+
     public function generateMembers(): void
     {
-        $oUserModel = new UserCoreModel;
+        $oUserModel = new UserCoreModel();
         $oFaker = Faker::create($this->sLocale);
 
         $iMaxAge = DbConfig::getSetting('maxAgeRegistration');
         $iMinAge = DbConfig::getSetting('minAgeRegistration');
         $iMaxUsernameLength = (int)DbConfig::getSetting('maxUsernameLength');
 
-        for ($iProfile = 1; $iProfile <= $this->iAmount; $iProfile++) {
+        for ($iProfile = 1; $iProfile <= $this->iAmount; ++$iProfile) {
             $sEmail = $oFaker->safeEmail;
             $sUsername = Cleanup::username($oFaker->userName, $iMaxUsernameLength);
             if ($this->isValidProfile($sEmail, $sUsername)) {
@@ -87,12 +128,12 @@ class FakerFactory
 
     public function generateAffiliates(): void
     {
-        $oAffModel = new AffiliateCoreModel;
+        $oAffModel = new AffiliateCoreModel();
         $oFaker = Faker::create($this->sLocale);
 
         $iMaxUsernameLength = (int)DbConfig::getSetting('maxUsernameLength');
 
-        for ($iProfile = 1; $iProfile <= $this->iAmount; $iProfile++) {
+        for ($iProfile = 1; $iProfile <= $this->iAmount; ++$iProfile) {
             $sEmail = $oFaker->safeEmail;
             $sUsername = Cleanup::username($oFaker->userName, $iMaxUsernameLength);
             if ($this->isValidProfile($sEmail, $sUsername)) {
@@ -131,10 +172,10 @@ class FakerFactory
 
     public function generateSubscribers(): void
     {
-        $oSubscriberModel = new SubscriberCoreModel;
+        $oSubscriberModel = new SubscriberCoreModel();
         $oFaker = Faker::create($this->sLocale);
 
-        for ($iProfile = 1; $iProfile <= $this->iAmount; $iProfile++) {
+        for ($iProfile = 1; $iProfile <= $this->iAmount; ++$iProfile) {
             $sSex = empty($this->sSex) ? $this->getRandomGender() : $this->sSex;
             $iAccountStatus = $oFaker->randomElement(
                 [
@@ -159,7 +200,7 @@ class FakerFactory
     /**
      * Returns random and correct genders for Faker's profiles (without 'couple' gender).
      *
-     * @return string Gives 'male' or 'female' randomly.
+     * @return string gives 'male' or 'female' randomly
      */
     private function getRandomGender(): string
     {
@@ -170,11 +211,11 @@ class FakerFactory
 
     private function isValidProfile(string $sEmail, string $sUsername): bool
     {
-        $oExistsModel = new ExistCoreModel;
-        $oValidate = new Validate;
+        $oExistsModel = new ExistCoreModel();
+        $oValidate = new Validate();
 
-        return $oValidate->email($sEmail) &&
-            !$oExistsModel->email($sEmail) &&
-            $oValidate->username($sUsername);
+        return $oValidate->email($sEmail)
+            && !$oExistsModel->email($sEmail)
+            && $oValidate->username($sUsername);
     }
 }

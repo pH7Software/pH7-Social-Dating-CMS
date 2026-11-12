@@ -12,8 +12,8 @@ Before changing code, read the relevant nearby files and
 Keep changes focused and preserve unrelated work already present in the
 worktree.
 
-pH7Builder targets PHP 8.2 or newer and combines a modular MVC application with
-the project-specific pH7Framework and PH7Tpl template engine.
+pH7Builder 20.0.0 requires PHP 8.3 or newer. It combines a modular MVC
+application with the project-specific pH7Framework and PH7Tpl template engine.
 
 ## Repository map
 
@@ -201,7 +201,8 @@ already correctly protected.
   `_protected/vendor/` and also installs `_install` dependencies.
 - Never patch files under `_protected/vendor/` or `_install/vendor/`.
 - Commit root `composer.lock` when `composer.json` dependencies change.
-  `_install/composer.lock` is intentionally ignored.
+- Commit `_install/composer.lock` when installer dependencies change so release
+  builds install the tested versions reproducibly.
 - Composer install/update copies Bootstrap distribution assets into `static/`.
   Review those generated diffs and retain them only when the dependency change
   intentionally updates the public assets.
