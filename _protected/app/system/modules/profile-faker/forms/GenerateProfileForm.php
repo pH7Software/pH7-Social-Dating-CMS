@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @author         Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright      (c) 2019-2022, Pierre-Henry Soria. All Rights Reserved.
@@ -102,41 +103,13 @@ class GenerateProfileForm
         $oForm->render();
     }
 
-    /**
-     * @return array
-     */
     private static function getNationalities(): array
     {
-        return [
-            'en_US' => t('American'),
-            'en_AU' => t('Australian'),
-            'pt_BR' => t('Brazilian'),
-            'en_GB' => t('British'),
-            'cs_CZ' => t('Czech'),
-            'da_DK' => t('Danish'),
-            'nl_NL' => t('Dutch'),
-            'nl_BE' => t('Dutch Belgian'),
-            'en_CA' => t('English Canadian'),
-            'fr_CA' => t('French Canadian'),
-            'fi_FI' => t('Finnish'),
-            'fr_FR' => t('French'),
-            'fr_BE' => t('French Belgian'),
-            'fr_CH' => t('French Swiss'),
-            'de_DE' => t('German'),
-            'de_CH' => t('German Swiss'),
-            'fa_IR' => t('Iranian'),
-            'en_IE' => t('Irish'),
-            'it_IT' => t('Italian'),
-            'it_CH' => t('Italian Swiss'),
-            'en_NZ' => t('New Zealander'),
-            'nb_NO' => t('Norwegian'),
-            'es_PE' => t('Peruvian'),
-            'pt_PT' => t('Portuguese'),
-            'ro_RO' => t('Romanian'),
-            'ru_RU' => t('Russian'),
-            'es_ES' => t('Spanish'),
-            'tr_TR' => t('Turkish'),
-            'es_VE' => t('Venezuelan')
-        ];
+        $aNationalities = [];
+        foreach (FakerFactory::SUPPORTED_LOCALES as $sLocale => $sNationality) {
+            $aNationalities[$sLocale] = t($sNationality);
+        }
+
+        return $aNationalities;
     }
 }

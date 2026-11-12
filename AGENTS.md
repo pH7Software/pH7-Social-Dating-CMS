@@ -12,8 +12,8 @@ Before changing code, read the relevant nearby files and
 Keep changes focused and preserve unrelated work already present in the
 worktree.
 
-pH7Builder targets PHP 8.2 or newer and combines a modular MVC application with
-the project-specific pH7Framework and PH7Tpl template engine.
+pH7Builder 20.0.0 targets PHP 8.3 or newer and combines a modular MVC
+application with the project-specific pH7Framework and PH7Tpl template engine.
 
 ## Repository map
 

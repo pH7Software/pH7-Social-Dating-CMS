@@ -3,6 +3,24 @@
 Automatic in-place upgrades are currently unavailable. Upgrade a staging copy
 manually, verify it, and only then repeat the reviewed procedure in production.
 
+## 20.0.0 major release
+
+pH7Builder 20.0.0 requires PHP 8.3 or newer; 19.4.0 is the final PHP 8.2
+compatible release. Upgrade the PHP runtime before deploying 20.0.0. Xefi
+Faker currently limits Composer compatibility to PHP 8.3–8.5, so PHP 8.6 is
+not supported until that dependency updates its PHP constraint.
+
+The profile generator switches from FakerPHP to Xefi Faker and retains only
+the seven locales with published Xefi locale packages. Member, affiliate, and
+subscriber profile generation remains owner-controlled and can be enabled in
+production. The database schema remains `1.6.6`; no database migration is
+needed. See the [20.0.0 release notes](RELEASE_NOTES_20.0.0.md).
+
+Deploy the complete 20.0.0 package to a staging copy, preserve configuration
+and user data, remove the installer on existing sites, and clear application,
+template, and browser/CDN caches. Source deployments should run
+`composer install` from the tagged tree.
+
 ## 19.4.0 security and maintenance release
 
 pH7Builder 19.4.0 restricts mail search to messages belonging to the signed-in

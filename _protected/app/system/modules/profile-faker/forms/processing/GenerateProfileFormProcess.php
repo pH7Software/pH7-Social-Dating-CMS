@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @author         Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright      (c) 2019-2022, Pierre-Henry Soria. All Rights Reserved.
@@ -41,7 +42,17 @@ class GenerateProfileFormProcess extends Form
             return;
         }
 
-        $this->generate($iAmountProfiles);
+        $mLocale = $this->httpRequest->post('locale');
+        if (!is_string($mLocale) || !FakerFactory::isSupportedLocale($mLocale)) {
+            \PFBC\Form::setError(
+                'form_generate_profiles',
+                t('Please select a supported profile locale.')
+            );
+
+            return;
+        }
+
+        $this->generate($iAmountProfiles, $mLocale);
 
         \PFBC\Form::setSuccess(
             'form_generate_profiles',
@@ -52,12 +63,12 @@ class GenerateProfileFormProcess extends Form
     /**
      * @throws Framework\Mvc\Request\WrongRequestMethodException
      */
-    private function generate(int $iAmountProfiles): void
+    private function generate(int $iAmountProfiles, string $sLocale): void
     {
         $oFakerFactory = new FakerFactory(
             $iAmountProfiles,
             $this->httpRequest->post('sex'),
-            $this->httpRequest->post('locale')
+            $sLocale
         );
 
         switch ($this->iProfileType) {

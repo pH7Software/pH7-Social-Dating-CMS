@@ -18,7 +18,7 @@ Because Docker snapshots the checkout into a named volume, run
 the local application and database volumes.
 
 Without Docker: install dependencies with `composer install`, then use any PHP
->= 8.2 installation with the extensions listed in `composer.json`,
+>= 8.3 installation with the extensions listed in `composer.json`,
 MySQL 8.0+, and Apache/nginx (see `nginx.conf` / `sample.htaccess`).
 
 ## Before you open a pull request

@@ -58,6 +58,40 @@ final class ReleaseDeploymentTest extends TestCase
         $this->assertSame(Version::KERNEL_BUILD, Kernel::SOFTWARE_BUILD);
     }
 
+    public function testPhp83IsTheMinimumAcrossComposerAndRuntimeChecks(): void
+    {
+        $aComposer = json_decode($this->readFile('composer.json'), true, 512, JSON_THROW_ON_ERROR);
+        $aInstallerComposer = json_decode(
+            $this->readFile('_install/composer.json'),
+            true,
+            512,
+            JSON_THROW_ON_ERROR
+        );
+
+        $this->assertSame('^8.3', $aComposer['require']['php']);
+        $this->assertSame('8.3.0', $aComposer['config']['platform']['php']);
+        $this->assertSame('^8.3', $aInstallerComposer['require']['php']);
+        $this->assertStringContainsString(
+            "PH7_REQUIRED_SERVER_VERSION', '8.3.0'",
+            $this->readFile('_install/constants.php')
+        );
+        $this->assertStringContainsString(
+            "REQUIRED_SERVER_VERSION = '8.3.0'",
+            $this->readFile('WebsiteChecker.php')
+        );
+
+        foreach (['composer.yml', 'phpstan.yml', 'test.yml'] as $sWorkflow) {
+            $sWorkflowContents = $this->readFile('.github/workflows/' . $sWorkflow);
+            $this->assertStringContainsString("'8.3'", $sWorkflowContents, $sWorkflow);
+            $this->assertStringNotContainsString("'8.2'", $sWorkflowContents, $sWorkflow);
+        }
+
+        $this->assertStringContainsString(
+            "php-version: '8.3'",
+            $this->readFile('.github/workflows/validate-installer.yml')
+        );
+    }
+
     public function testStableReleaseGuidesAreSynchronized(): void
     {
         $sReadme = $this->readFile('README.md');
