@@ -785,7 +785,7 @@ class InstallController extends Controller
     }
 
     /**
-     * Populates some sample user profiles with Faker library.
+     * Populates sample user profiles with Xefi Faker.
      *
      * @param int $iMemberNumber The number of members to generate.
      * @param int $iAffiliateNumber The number of affiliates to generate (usually less than members).
@@ -807,43 +807,43 @@ class InstallController extends Controller
         $oUserModel = new UserCoreModel;
         $oAffModel = new AffiliateCoreModel;
         $oSubscriberModel = new SubscriberCoreModel;
-        $oFaker = \Faker\Factory::create();
+        $oFaker = FakerContainerFactory::create('en_US');
 
         for ($iProfile = 1; $iProfile <= $iMemberNumber; $iProfile++) {
             $sSex = $oFaker->randomElement(['male', 'female']);
             $sMatchSex = $oFaker->randomElement(['male', 'female', 'couple']);
-            $sBirthDate = $oFaker->dateTimeBetween(sprintf('-%s years', self::SAMPLE_USERS_MAX_AGE), sprintf('-%s years', self::SAMPLE_USERS_MIN_AGE))->format('Y-m-d');
+            $sBirthDate = $oFaker->dateTime(sprintf('-%s years', self::SAMPLE_USERS_MAX_AGE), sprintf('-%s years', self::SAMPLE_USERS_MIN_AGE))->format('Y-m-d');
 
             $aUser = [];
-            $aUser['username'] = str_replace(['.', ' '], '-', $oFaker->userName);
-            $aUser['email'] = $oFaker->email;
-            $aUser['first_name'] = $oFaker->firstName;
-            $aUser['last_name'] = $oFaker->lastName;
-            $aUser['password'] = $oFaker->password;
+            $aUser['username'] = $oFaker->sdl();
+            $aUser['email'] = $oFaker->sdl() . '@example.com';
+            $aUser['first_name'] = $oFaker->firstName();
+            $aUser['last_name'] = $oFaker->lastName();
+            $aUser['password'] = bin2hex(random_bytes(12));
             $aUser['sex'] = $sSex;
             $aUser['match_sex'] = [$sMatchSex];
-            $aUser['country'] = $oFaker->countryCode;
-            $aUser['city'] = $oFaker->city;
-            $aUser['address'] = $oFaker->streetAddress;
-            $aUser['zip_code'] = $oFaker->postcode;
+            $aUser['country'] = 'US';
+            $aUser['city'] = $oFaker->city();
+            $aUser['address'] = $oFaker->streetAddress();
+            $aUser['zip_code'] = $oFaker->zipCode();
             $aUser['birth_date'] = $sBirthDate;
-            $aUser['description'] = $oFaker->paragraph(2);
-            $aUser['lang'] = $oFaker->locale;
-            $aUser['ip'] = $oFaker->ipv4;
+            $aUser['description'] = $oFaker->paragraphs(2);
+            $aUser['lang'] = 'en_US';
+            $aUser['ip'] = $oFaker->ipv4();
 
             $oUserModel->add($aUser);
 
             if ($iProfile <= $iAffiliateNumber) {
                 // Specific data only for affiliates
                 $aUser['website'] = 'https://pierrehenry.be';
-                $aUser['phone'] = $oFaker->phoneNumber;
-                $aUser['bank_account'] = $oFaker->companyEmail;
+                $aUser['phone'] = $oFaker->phoneNumber();
+                $aUser['bank_account'] = $oFaker->sdl() . '@example.com';
                 $oAffModel->add($aUser);
             }
 
             if ($iProfile <= $iSubscriberNumber) {
                 // Specific data only for subscribers
-                $aUser['name'] = $oFaker->name;
+                $aUser['name'] = $oFaker->name();
                 $aUser['active'] = $iAccountStatus = $oFaker->randomElement(
                     [
                         SubscriberCoreModel::ACTIVE_STATUS,
@@ -851,7 +851,7 @@ class InstallController extends Controller
                     ]
                 );
                 $aUser['current_date'] = $oFaker->dateTime()->format('Y-m-d H:i:s');
-                $aUser['hash_validation'] = sha1($oFaker->password(20));
+                $aUser['hash_validation'] = sha1(bin2hex(random_bytes(20)));
                 $aUser['affiliated_id'] = 0;
                 $oSubscriberModel->add($aUser);
             }

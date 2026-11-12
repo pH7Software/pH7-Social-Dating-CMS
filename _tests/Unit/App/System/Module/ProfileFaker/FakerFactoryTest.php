@@ -11,6 +11,7 @@ declare(strict_types=1);
 namespace PH7\Test\Unit\App\System\Module\ProfileFaker;
 
 use InvalidArgumentException;
+use PH7\FakerContainerFactory;
 use PH7\FakerFactory;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
@@ -19,6 +20,7 @@ use Xefi\Faker\Container\Container;
 use Xefi\Faker\Extensions\PersonExtension;
 
 require_once PH7_PATH_SYS_MOD . 'profile-faker/inc/class/FakerFactory.php';
+require_once PH7_PATH_APP . 'includes/classes/FakerContainerFactory.php';
 
 final class FakerFactoryTest extends TestCase
 {
@@ -60,6 +62,26 @@ final class FakerFactoryTest extends TestCase
         $this->expectExceptionMessage('Faker locale is not supported');
 
         new FakerFactory(1, 'female', 'nl_NL');
+    }
+
+    public function testInstallerSampleDataUsesAvailableXefiGenerators(): void
+    {
+        $oFaker = FakerContainerFactory::create('en_US');
+        $sEmail = $oFaker->sdl() . '@example.com';
+
+        self::assertNotSame('', $oFaker->sdl());
+        self::assertStringEndsWith('@example.com', $sEmail);
+        self::assertNotFalse(filter_var($sEmail, FILTER_VALIDATE_EMAIL));
+        self::assertInstanceOf(\DateTimeInterface::class, $oFaker->dateTime('-60 years', '-18 years'));
+        self::assertNotSame('', $oFaker->firstName());
+        self::assertNotSame('', $oFaker->lastName());
+        self::assertNotSame('', $oFaker->name());
+        self::assertNotSame('', $oFaker->city());
+        self::assertNotSame('', $oFaker->streetAddress());
+        self::assertNotSame('', $oFaker->zipCode());
+        self::assertNotSame('', $oFaker->paragraphs(2));
+        self::assertNotSame('', $oFaker->phoneNumber());
+        self::assertNotFalse(filter_var($oFaker->ipv4(), FILTER_VALIDATE_IP, FILTER_FLAG_IPV4));
     }
 
     public static function supportedLocaleProvider(): iterable

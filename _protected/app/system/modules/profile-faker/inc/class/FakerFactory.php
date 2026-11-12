@@ -17,15 +17,7 @@ use PH7\Framework\Security\Validate\Validate;
 use PH7\Framework\Translate\Lang;
 use PH7\Framework\Util\Various;
 use Xefi\Faker\Container\Container;
-use Xefi\Faker\DeDe\FakerDeDeServiceProvider;
-use Xefi\Faker\EnGb\FakerEnGbServiceProvider;
-use Xefi\Faker\EnUs\FakerEnUsServiceProvider;
-use Xefi\Faker\EsEs\FakerEsEsServiceProvider;
 use Xefi\Faker\Extensions\PersonExtension;
-use Xefi\Faker\FakerServiceProvider;
-use Xefi\Faker\FrBe\FakerFrBeServiceProvider;
-use Xefi\Faker\FrCh\FakerFrChServiceProvider;
-use Xefi\Faker\FrFr\FakerFrFrServiceProvider;
 
 class FakerFactory
 {
@@ -38,8 +30,6 @@ class FakerFactory
         'de_DE' => 'German',
         'es_ES' => 'Spanish'
     ];
-
-    private static bool $bFakerProvidersRegistered = false;
 
     private int $iAmount;
 
@@ -201,36 +191,7 @@ class FakerFactory
 
     private function createFaker(): Container
     {
-        self::registerFakerProviders();
-
-        $oFaker = new class extends Container {
-            public function __construct()
-            {
-                if (!$this->areExtensionsInitialized()) {
-                    $this->bootstrap();
-                }
-            }
-        };
-
-        return $oFaker->locale($this->sLocale);
-    }
-
-    private static function registerFakerProviders(): void
-    {
-        if (self::$bFakerProvidersRegistered) {
-            return;
-        }
-
-        (new FakerServiceProvider())->boot();
-        (new FakerEnUsServiceProvider())->boot();
-        (new FakerEnGbServiceProvider())->boot();
-        (new FakerFrFrServiceProvider())->boot();
-        (new FakerFrBeServiceProvider())->boot();
-        (new FakerFrChServiceProvider())->boot();
-        (new FakerDeDeServiceProvider())->boot();
-        (new FakerEsEsServiceProvider())->boot();
-
-        self::$bFakerProvidersRegistered = true;
+        return FakerContainerFactory::create($this->sLocale);
     }
 
     private function getSafeEmail(Container $oFaker): string
