@@ -288,10 +288,10 @@ env[PH7_MAILER_DSN] = "smtp://SMTP_USER:SMTP_PASSWORD@smtp.example.com:587"
 ```
 
 Reload the actual PHP-FPM service after changing its pool configuration; for
-example, when the service is PHP 8.3:
+example, when the service is PHP 8.2:
 
 ```console
-sudo systemctl reload php8.3-fpm
+sudo systemctl reload php8.2-fpm
 ```
 
 On shared hosting, ask the host to set `PH7_MAILER_DSN` for the site's PHP web
