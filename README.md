@@ -5,15 +5,16 @@ pH7Builder (formerly pH7CMS) is a self-hosted, open-source PHP platform for buil
 [![Tests](https://github.com/pH7Software/pH7-Social-Dating-CMS/actions/workflows/test.yml/badge.svg?branch=18.x)](https://github.com/pH7Software/pH7-Social-Dating-CMS/actions/workflows/test.yml)
 [![PHPStan](https://github.com/pH7Software/pH7-Social-Dating-CMS/actions/workflows/phpstan.yml/badge.svg?branch=18.x)](https://github.com/pH7Software/pH7-Social-Dating-CMS/actions/workflows/phpstan.yml)
 [![Composer](https://github.com/pH7Software/pH7-Social-Dating-CMS/actions/workflows/composer.yml/badge.svg?branch=18.x)](https://github.com/pH7Software/pH7-Social-Dating-CMS/actions/workflows/composer.yml)
-[![PHP 8.3–8.5](https://img.shields.io/badge/PHP-8.3%E2%80%938.5-777BB4?logo=php&logoColor=white)](composer.json)
+[![PHP 8.3+](https://img.shields.io/badge/PHP-8.3%2B-777BB4?logo=php&logoColor=white)](composer.json)
 [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE.md)
 [![Latest release](https://img.shields.io/github/v/release/pH7Software/pH7-Social-Dating-CMS)](https://github.com/pH7Software/pH7-Social-Dating-CMS/releases)
 
-**For this source tree:** PHP 8.3–8.5, MySQL 8.0+, URL rewriting, and a web
-server. The latest published release is 19.4.0; use the [Quick
+**For this source tree:** PHP 8.3 or newer, MySQL 8.0+, URL rewriting, and a
+web server. The latest published release is 19.4.0; use the [Quick
 Start](docs/QUICK_START.md) for its installation steps until 20.0.0 is
 published.
-Xefi Faker v1.5.4 currently prevents Composer installation on PHP 8.6 and later.
+Xefi Faker v1.5.4 currently applies a narrower PHP compatibility constraint;
+Composer may reject newer runtimes until that dependency updates its constraint.
 Composer 2 is needed only for a source checkout; the versioned release ZIP
 includes locked production dependencies. With the server ready, allow about
 **20–30 minutes** for deployment and the guided browser installer. DNS, TLS
@@ -99,7 +100,7 @@ configuration.
 
 ## Requirements
 
-- PHP 8.3–8.5 with `curl`, `dom`, `exif`, `fileinfo`, GD with FreeType and
+- PHP 8.3 or newer with `curl`, `dom`, `exif`, `fileinfo`, GD with FreeType and
   WebP, `hash`, `iconv`, `json`, `mbstring`, `openssl`, `pdo_mysql`, `simplexml`,
   `xmlwriter`, `xml`, `zip`, and `zlib`.
 - MySQL 8.0 or newer with `utf8mb4` support. Older MySQL releases and MariaDB

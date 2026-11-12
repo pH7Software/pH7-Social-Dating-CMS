@@ -5,7 +5,7 @@ settings. Keep it aligned when the product requirements or positioning change.
 
 ## Description
 
-> Self-hosted, open-source PHP 8.3–8.5 software for building white-label dating
+> Self-hosted, open-source PHP 8.3 or newer software for building white-label dating
 > sites, matchmaking communities, and social networks. Own your code, hosting,
 > database, and member data.
 
@@ -47,7 +47,7 @@ point more than pH7Builder's maintained purpose.
 ```text
 pH7Builder
 Own your dating platform.
-Self-hosted • Open source • PHP 8.3–8.5
+Self-hosted • Open source • PHP 8.3+
 ```
 
 Use a 1280 × 640 image with a real current product screen or project artwork,

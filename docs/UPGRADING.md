@@ -7,8 +7,8 @@ manually, verify it, and only then repeat the reviewed procedure in production.
 
 pH7Builder 20.0.0 requires PHP 8.3 or newer; 19.4.0 is the final PHP 8.2
 compatible release. Upgrade the PHP runtime before deploying 20.0.0. Xefi
-Faker v1.5.4 currently limits Composer installation to PHP 8.3–8.5, so PHP 8.6
-is not accepted until that dependency updates its PHP constraint.
+Faker v1.5.4 currently declares a narrower PHP compatibility constraint, so
+Composer may reject newer runtimes until that dependency updates its constraint.
 
 The profile generator switches from FakerPHP to Xefi Faker and retains only
 the seven locales with published Xefi locale packages. Member, affiliate, and
