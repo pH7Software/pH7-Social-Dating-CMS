@@ -18,7 +18,7 @@ use PHPUnit\Framework\TestCase;
 
 final class ReleaseDeploymentTest extends TestCase
 {
-    public function testRootReleaseLockIsIncludedAndInstallerDependencyIsConstrained(): void
+    public function testReleaseLocksAreIncludedAndInstallerDependencyIsConstrained(): void
     {
         $sAttributes = $this->readFile('.gitattributes');
         $aComposer = json_decode($this->readFile('composer.json'), true, 512, JSON_THROW_ON_ERROR);
@@ -28,9 +28,17 @@ final class ReleaseDeploymentTest extends TestCase
             512,
             JSON_THROW_ON_ERROR
         );
+        $aInstallerLock = json_decode(
+            $this->readFile('_install/composer.lock'),
+            true,
+            512,
+            JSON_THROW_ON_ERROR
+        );
+        $aInstallerPackages = array_column($aInstallerLock['packages'], null, 'name');
 
         $this->assertStringNotContainsString('composer.lock export-ignore', $sAttributes);
         $this->assertSame('^5.8.5', $aInstallerComposer['require']['smarty/smarty']);
+        $this->assertSame('v5.8.5', $aInstallerPackages['smarty/smarty']['version']);
         $this->assertSame(
             '@php _protected/app/includes/InstallerDependencies.php',
             $aComposer['scripts']['install-installer-dependencies']
@@ -169,7 +177,7 @@ final class ReleaseDeploymentTest extends TestCase
         $this->assertStringContainsString('git -C "$PROJECT_ROOT" archive', $sPackager);
         $this->assertStringContainsString('mktemp -d', $sPackager);
         $this->assertStringContainsString('ls-files --error-unmatch composer.lock', $sPackager);
-        $this->assertStringNotContainsString('_install/composer.lock', $sPackager);
+        $this->assertStringContainsString('ls-files --error-unmatch _install/composer.lock', $sPackager);
         $this->assertStringContainsString('status --porcelain --untracked-files=all', $sPackager);
         $this->assertStringContainsString('find "$PACKAGE_DIRECTORY/_install" -type d -exec chmod 0775', $sPackager);
         $this->assertStringContainsString('chmod 0775 "$PACKAGE_DIRECTORY/_protected/app/configs"', $sPackager);
