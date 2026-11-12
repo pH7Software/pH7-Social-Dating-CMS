@@ -30,7 +30,7 @@ final class ReleaseDeploymentTest extends TestCase
         );
 
         $this->assertStringNotContainsString('composer.lock export-ignore', $sAttributes);
-        $this->assertSame('>=4.5.7 <4.5.8', $aInstallerComposer['require']['smarty/smarty']);
+        $this->assertSame('^4.5.8', $aInstallerComposer['require']['smarty/smarty']);
         $this->assertSame(
             '@php _protected/app/includes/InstallerDependencies.php',
             $aComposer['scripts']['install-installer-dependencies']
