@@ -334,13 +334,13 @@ prove inbox delivery.
    migrated to Checkout Sessions or Payment Intents.
    The bundled 2Checkout flow is also unavailable until it is migrated to the
    2Checkout API 6.0.
-   Braintree remains available, but its hosted
+   Existing Braintree integrations use the hosted
    [Drop-in UI](https://developer.paypal.com/braintree/docs/guides/drop-in/overview/javascript/v3)
-   is scheduled for deprecation on October 1, 2026 and loss of support on
-   October 1, 2027, after which payment processing may be suspended.
-   Treat it as a short-term option and plan a supported Braintree checkout
-   migration before those dates. Updating the PHP SDK alone does not replace
-   the Drop-in browser integration.
+   whose announced deprecation date, October 1, 2026, has passed. Its announced
+   end-of-support date is October 1, 2027; confirm the provider's current
+   migration notice and your account's eligibility before enabling or relying
+   on Drop-in. Plan a supported checkout migration before end of support.
+   Updating the PHP SDK alone does not replace the Drop-in browser integration.
 5. Complete one test purchase end to end before replacing sandbox credentials
    with live credentials.
    For PayPal, keep the generated `/payment/main/notify/paypal` HTTPS callback
