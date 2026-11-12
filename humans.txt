@@ -14,7 +14,7 @@ Contributors: https://github.com/pH7Software/pH7-Social-Dating-CMS/graphs/contri
 
 /* TECHNOLOGY */
 
-Application: PHP 8.3+, MySQL 8.0+, HTML, CSS, JavaScript
+Application: PHP 8.3–8.5, MySQL 8.0+, HTML, CSS, JavaScript
 Architecture: modular MVC, pH7Framework, PH7Tpl
 License: MIT
 

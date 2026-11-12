@@ -14,7 +14,7 @@ licenses and authors are identified in the files or in accompanying text files.
 ==================================================
 
 pH7Builder is based on pH7Framework, which was written specifically for this
-project. The software requires PHP 8.3 or newer, and the code is 100%
+project. The software currently requires PHP 8.3–8.5, and the code is 100%
 object-oriented.
 
 We need help to continue this project, so we are waiting for you! We want to

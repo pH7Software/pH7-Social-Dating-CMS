@@ -9,12 +9,13 @@ issuance, and mail-provider approval can take longer.
 For a local evaluation instead, use the Docker procedure in the
 [README](../README.md#local-evaluation-with-docker).
 
-This guide covers pH7Builder 20.0.0, which requires PHP 8.3 or newer.
+This guide covers pH7Builder 20.0.0, which currently installs with PHP 8.3–8.5.
 pH7Builder 19.4.0 is the final release that supports PHP 8.2.
 
 ## 1. Confirm the requirements
 
-- PHP 8.3 or newer.
+- PHP 8.3–8.5. Xefi Faker v1.5.4 does not yet accept PHP 8.6 or later in its
+  Composer constraint.
 - MySQL 8.0 or newer. Older MySQL versions and MariaDB are unverified and are
   not supported for this release.
 - PHP extensions: cURL, DOM, EXIF, Fileinfo, GD with FreeType and WebP, hash,
