@@ -12,6 +12,7 @@ pH7Builder (formerly pH7CMS) is a self-hosted, open-source PHP platform for buil
 [Quick Start](docs/QUICK_START.md) ·
 [Upgrade Guide](docs/UPGRADING.md) ·
 [Launch Checklist](docs/LAUNCH_CHECKLIST.md) ·
+[2027 Roadmap](docs/ROADMAP_2027.md) ·
 [Release guides](docs/) ·
 [Releases](https://github.com/pH7Software/pH7-Social-Dating-CMS/releases)
 
