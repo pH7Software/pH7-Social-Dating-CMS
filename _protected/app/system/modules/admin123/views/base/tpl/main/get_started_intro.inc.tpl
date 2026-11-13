@@ -1,83 +1,39 @@
-<div class="center">
-    <div class="s_bMarg border">
-        <h2>🍰 <span class="underline">{lang 'Getting Started'}</span> 👌</h2>
+<section class="launch-readiness panel panel-default" aria-labelledby="launch-readiness-heading">
+    <div class="panel-heading">
+        <h2 id="launch-readiness-heading">{lang 'Launch readiness'}</h2>
+    </div>
+
+    <div class="panel-body center">
+        <p>{lang 'Resolve these essential technical checks before inviting members or accepting payments.'}</p>
+
+        <progress aria-labelledby="launch-readiness-progress" value="{launch_readiness_completed}" max="{launch_readiness_total}">
+            {launch_readiness_completed}/{launch_readiness_total}
+        </progress>
+        <p id="launch-readiness-progress" class="bold">
+            {lang '%0% of %1% essential checks complete.', $launch_readiness_completed, $launch_readiness_total}
+        </p>
+
+        <ul class="launch-readiness-list">
+            {each $aCheck in $launch_readiness_checks}
+                <li class="alert {if $aCheck['is_complete']}alert-success{else}alert-warning{/if}">
+                    <strong>
+                        {if $aCheck['is_complete']}{lang 'Ready'}{else}{lang 'Action needed'}{/if}:
+                    </strong>
+                    {% escape($aCheck['label']) %}
+                    {if !$aCheck['is_complete']}
+                        <a href="{% $str->escapeAttribute($aCheck['action_url']) %}">
+                            {% escape($aCheck['action_label']) %}
+                        </a>
+                    {/if}
+                </li>
+            {/each}
+        </ul>
 
         <p>
-            {lang 'Welcome to your admin dashboard! You will find everything you need to customize and manage your website in here 🙂'}
+            {lang 'Automated checks cannot verify email delivery, payments, backups, moderation, accessibility, or legal requirements.'}
+            <a href="{% $str->escapeAttribute($launch_checklist_url) %}" target="_blank" rel="noopener">
+                {lang 'Complete the full launch checklist'}
+            </a>.
         </p>
-
-        <p class="underline">
-            {lang 'Here are a few steps to start well your site:'}
-        </p>
-
-        <ul>
-            <li>
-                <a href="{{ $design->url(PH7_ADMIN_MOD, 'setting', 'general') }}#p=general">
-                    {lang 'Review the general settings'}
-                </a>
-            </li>
-
-            <li>
-                <a href="{{ $design->url(PH7_ADMIN_MOD, 'setting', 'metamain') }}">
-                    {lang 'Update homepage texts & site info'}
-                </a>
-            </li>
-
-            <li>
-                <a href="{{ $design->url(PH7_ADMIN_MOD, 'setting', 'general') }}#p=icon">
-                    {lang "Upload website's icon"}
-                </a>
-            </li>
-
-            <li>
-                <a href="{{ $design->url(PH7_ADMIN_MOD, 'setting', 'general') }}#p=design">
-                    {lang "Update website's colors"}
-                </a>
-            </li>
-
-            <li>
-                <a href="{{ $design->url(PH7_ADMIN_MOD, 'setting', 'general') }}#p=email">
-                    {lang 'Update email settings'}
-                </a>
-            </li>
-
-            <li>
-                <a href="{{ $design->url(PH7_ADMIN_MOD, 'file', 'pagedisplay') }}">
-                    {lang 'Edit static pages'}
-                </a>
-            </li>
-
-            <li>
-                <a href="{{ $design->url(PH7_ADMIN_MOD, 'module', 'disable') }}">
-                    {lang 'Enable/disable modules'}
-                </a>
-            </li>
-
-            {if $is_profile_faker_enabled}
-              <li>
-                  <a href="{{ $design->url('profile-faker', 'generator', 'addmember') }}">
-                      {lang 'Add clearly labelled sample profiles on a non-production site'}
-                  </a> 👥
-              </li>
-            {/if}
-
-            <li>
-                <a href="{{ $design->url('payment', 'admin', 'membershiplist') }}">
-                    {lang 'Review membership permissions, prices, and expiry periods'}
-                </a>
-            </li>
-
-            <li>
-                <a href="{{ $design->url(PH7_ADMIN_MOD, 'setting', 'general') }}#p=automation">
-                    {lang 'Configure the cron secret and server scheduler'}
-                </a>
-            </li>
-
-            <li>
-                <a href="{{ $design->url(PH7_ADMIN_MOD, 'setting', 'general') }}#p=registration">
-                    {lang 'Review registration, activation, moderation, and anti-spam settings'}
-                </a>
-            </li>
-        </ul>
     </div>
-</div>
+</section>

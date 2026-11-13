@@ -18,6 +18,28 @@
     height: 300px;
 }
 
+.launch-readiness progress {
+    width: 100%;
+    max-width: 40rem;
+    height: 1.25rem;
+}
+
+.launch-readiness-list {
+    max-width: 56rem;
+    margin: 1.5rem auto;
+    padding: 0;
+    list-style: none;
+    text-align: left;
+}
+
+.launch-readiness-list .alert {
+    margin-bottom: .75rem;
+}
+
+.launch-readiness-list a {
+    margin-left: .5rem;
+}
+
 table, td, th {
     border: 1px solid gray;
 }

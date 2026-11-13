@@ -15,6 +15,15 @@ package are not available yet.
 - Keeps FakerPHP and all 29 existing profile-generator locales. Invalid locale
   submissions are rejected server-side instead of falling back implicitly.
 
+## Founder launch experience
+
+- Replaces the time-limited admin getting-started list with a launch-readiness
+  panel that remains visible until HTTPS, installer removal, production mode,
+  online status, and cron URL protection are confirmed.
+- Links each incomplete check to its relevant setting or documentation and
+  makes clear that email, payment, backup, moderation, accessibility, and legal
+  readiness still require human verification.
+
 ## Database and upgrade notes
 
 The database schema remains `1.6.6`; no database migration is required. Before

@@ -12,10 +12,10 @@ declare(strict_types=1);
 
 namespace PH7;
 
+use PH7\Framework\Config\Config;
 use PH7\Framework\Core\Kernel;
 use PH7\Framework\Date\Various as VDate;
 use PH7\Framework\Layout\Html\Meta;
-use PH7\Framework\Module\Various as SysMod;
 use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Security\Version;
@@ -24,6 +24,8 @@ use PH7\Framework\Url\Header;
 class MainController extends Controller
 {
     private const DURATION_SITE_CONSIDERED_NEW = '8 days';
+    private const QUICK_START_DOC_URL = 'https://github.com/pH7Software/pH7-Social-Dating-CMS/blob/18.x/docs/QUICK_START.md';
+    private const LAUNCH_CHECKLIST_DOC_URL = 'https://github.com/pH7Software/pH7-Social-Dating-CMS/blob/18.x/docs/LAUNCH_CHECKLIST.md';
     private const SOFTWARE_BLOG_URL = 'https://ph7builder.com/blog/';
 
     public function index(): void
@@ -35,8 +37,7 @@ class MainController extends Controller
 
         $this->view->is_news_feed = (bool)DbConfig::getSetting('isSoftwareNewsFeed');
         $this->view->software_blog_url = self::SOFTWARE_BLOG_URL;
-        $this->view->show_get_started_section = $this->isWebsiteNew();
-        $this->view->is_profile_faker_enabled = SysMod::isEnabled('profile-faker');
+        $this->addLaunchReadiness();
         $this->checkUpdates();
         $this->addStats();
 
@@ -318,6 +319,55 @@ class MainController extends Controller
         $iSiteCreationDate = VDate::getTime(StatisticCoreModel::getDateOfCreation());
 
         return VDate::setTime('-' . self::DURATION_SITE_CONSIDERED_NEW) <= $iSiteCreationDate;
+    }
+
+    private function addLaunchReadiness(): void
+    {
+        $oLaunchReadiness = new LaunchReadiness(
+            PH7_URL_ROOT,
+            is_dir(PH7_PATH_ROOT . '_install'),
+            (string)(Config::getInstance()->values['mode']['environment'] ?? ''),
+            (string)DbConfig::getSetting('siteStatus'),
+            (string)DbConfig::getSetting('cronSecurityHash')
+        );
+        $aStatuses = $oLaunchReadiness->checks();
+
+        $this->view->launch_readiness_checks = [
+            [
+                'is_complete' => $aStatuses[LaunchReadiness::HTTPS],
+                'label' => t('The public site uses HTTPS.'),
+                'action_label' => t('Configure HTTPS'),
+                'action_url' => self::QUICK_START_DOC_URL . '#5-configure-the-canonical-host-https-and-web-server'
+            ],
+            [
+                'is_complete' => $aStatuses[LaunchReadiness::INSTALLER_REMOVED],
+                'label' => t('The installer directory is no longer publicly available.'),
+                'action_label' => t('Lock down the installation'),
+                'action_url' => self::QUICK_START_DOC_URL . '#6-lock-the-installation-down'
+            ],
+            [
+                'is_complete' => $aStatuses[LaunchReadiness::PRODUCTION_MODE],
+                'label' => t('The application uses production mode.'),
+                'action_label' => t('Change environment mode'),
+                'action_url' => Uri::get(PH7_ADMIN_MOD, 'tool', 'envmode')
+            ],
+            [
+                'is_complete' => $aStatuses[LaunchReadiness::SITE_ONLINE],
+                'label' => t('The site is online instead of in maintenance mode.'),
+                'action_label' => t('Review site status'),
+                'action_url' => Uri::get(PH7_ADMIN_MOD, 'setting', 'general') . '#p=general'
+            ],
+            [
+                'is_complete' => $aStatuses[LaunchReadiness::CRON_SECRET],
+                'label' => t('A secret protects the scheduled-task URLs.'),
+                'action_label' => t('Configure automation'),
+                'action_url' => Uri::get(PH7_ADMIN_MOD, 'setting', 'general') . '#p=automation'
+            ]
+        ];
+        $this->view->launch_readiness_completed = $oLaunchReadiness->completedCount();
+        $this->view->launch_readiness_total = $oLaunchReadiness->totalCount();
+        $this->view->launch_checklist_url = self::LAUNCH_CHECKLIST_DOC_URL;
+        $this->view->show_get_started_section = $this->isWebsiteNew() || !$oLaunchReadiness->isComplete();
     }
 
     /**
