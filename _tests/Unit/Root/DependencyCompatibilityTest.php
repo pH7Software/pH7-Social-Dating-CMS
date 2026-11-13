@@ -29,6 +29,30 @@ use Twilio\Rest\Client as SmsClient;
 
 final class DependencyCompatibilityTest extends TestCase
 {
+    public function testProductionDependenciesHaveExplicitLicenseMetadata(): void
+    {
+        $sProjectPath = dirname(PH7_PATH_PROTECTED);
+        $sComposer = file_get_contents($sProjectPath . '/composer.json');
+        $sLock = file_get_contents($sProjectPath . '/composer.lock');
+
+        self::assertIsString($sComposer);
+        self::assertIsString($sLock);
+
+        $aComposer = json_decode($sComposer, true, 512, JSON_THROW_ON_ERROR);
+        $aLock = json_decode($sLock, true, 512, JSON_THROW_ON_ERROR);
+        $aPackages = array_column($aLock['packages'], null, 'name');
+
+        self::assertArrayNotHasKey('arcturial/clickatell', $aComposer['require']);
+        self::assertArrayNotHasKey('arcturial/clickatell', $aPackages);
+
+        foreach ($aPackages as $sPackageName => $aPackage) {
+            self::assertNotEmpty(
+                $aPackage['license'] ?? [],
+                sprintf('Production dependency %s must declare its license.', $sPackageName)
+            );
+        }
+    }
+
     public function testHttpRequestsResolveThroughTheLockedPromiseStack(): void
     {
         $oHandler = new MockHandler([new Response(200, [], '{"ok":true}')]);

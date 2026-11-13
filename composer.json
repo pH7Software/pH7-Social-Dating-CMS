@@ -64,7 +64,6 @@
     "ext-xmlwriter": "*",
     "ext-zip": "*",
     "ext-zlib": "*",
-    "arcturial/clickatell": "^3.0",
     "aws/aws-sdk-php": "^3.200",
     "bacon/bacon-qr-code": "^3.0",
     "braintree/braintree_php": "^6.0",

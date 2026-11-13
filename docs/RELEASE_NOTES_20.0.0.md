@@ -14,6 +14,8 @@ package are not available yet.
   installer dependency; pH7Builder site themes continue to use PH7Tpl.
 - Keeps FakerPHP and all 29 existing profile-generator locales. Invalid locale
   submissions are rejected server-side instead of falling back implicitly.
+- Keeps Clickatell SMS support while replacing its unmaintained GPL wrapper
+  with the existing MIT-licensed HTTP client and Clickatell's current API.
 
 ## Database and upgrade notes
 

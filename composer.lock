@@ -4,54 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "268f9ed3d12ddadcb9bfc0457473cef7",
+    "content-hash": "5017043628121fcb81d6102c4c7df7e7",
     "packages": [
-        {
-            "name": "arcturial/clickatell",
-            "version": "3.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/arcturial/clickatell.git",
-                "reference": "541ab55c3a807374fe727aad57004c09887080cf"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/arcturial/clickatell/zipball/541ab55c3a807374fe727aad57004c09887080cf",
-                "reference": "541ab55c3a807374fe727aad57004c09887080cf",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.3"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "4.3.*"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Clickatell\\": [
-                        "src",
-                        "test"
-                    ]
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "GNU General Public License"
-            ],
-            "authors": [
-                {
-                    "name": "Chris Brand"
-                }
-            ],
-            "description": "Standalone PHP library to integrate with the Clickatell SMS gateway",
-            "homepage": "https://arcturial.github.com",
-            "support": {
-                "issues": "https://github.com/arcturial/clickatell/issues",
-                "source": "https://github.com/arcturial/clickatell/tree/3.0.0"
-            },
-            "time": "2017-03-10T09:48:13+00:00"
-        },
         {
             "name": "aws/aws-crt-php",
             "version": "v1.2.7",
