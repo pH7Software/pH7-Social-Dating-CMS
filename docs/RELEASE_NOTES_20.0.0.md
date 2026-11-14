@@ -7,6 +7,8 @@ package are not available yet.
 
 - Requires PHP 8.3 or newer. pH7Builder 19.4.0 is the final release that
   supports PHP 8.2.
+- Removes the deprecated Braintree Drop-in checkout. Operators using Braintree
+  must migrate to a supported payment integration before upgrading.
 
 ## Installer and dependency updates
 
@@ -14,6 +16,8 @@ package are not available yet.
   installer dependency; pH7Builder site themes continue to use PH7Tpl.
 - Keeps FakerPHP and all 29 existing profile-generator locales. Invalid locale
   submissions are rejected server-side instead of falling back implicitly.
+- Keeps Clickatell SMS support while replacing its unmaintained GPL wrapper
+  with the existing MIT-licensed HTTP client and Clickatell's current API.
 
 ## Database and upgrade notes
 

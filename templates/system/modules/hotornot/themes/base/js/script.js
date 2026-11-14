@@ -7,3 +7,30 @@
 $('.hon_click').click(function () {
     window.location.reload(true);
 });
+
+$(document).on('keydown.ph7HotOrNot', function (oEvent) {
+    var $oTarget = $(oEvent.target);
+    var sActionId;
+
+    if (
+        oEvent.altKey || oEvent.ctrlKey || oEvent.metaKey || oEvent.shiftKey ||
+        $oTarget.is('a, input, textarea, select, button') ||
+        $oTarget.closest('[contenteditable]').length
+    ) {
+        return;
+    }
+
+    if (oEvent.key === 'ArrowLeft') {
+        sActionId = 'hotornot_skip';
+    } else if (oEvent.key === 'ArrowRight') {
+        sActionId = 'hotornot_interested';
+    } else {
+        return;
+    }
+
+    var oAction = document.getElementById(sActionId);
+    if (oAction) {
+        oEvent.preventDefault();
+        oAction.click();
+    }
+});

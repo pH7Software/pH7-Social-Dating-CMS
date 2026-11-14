@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en" data-audit-status="pending">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>pH7Builder — Browser Behavior Preview</title>
+<link rel="stylesheet" href="/static/css/bootstrap.css">
+<link rel="stylesheet" href="/templates/themes/base/css/common.css">
+<link rel="stylesheet" href="/templates/themes/base/css/style.css">
+</head>
+<body>
+<main class="container">
+    <h1>Browser behavior preview</h1>
+    <p>Developer-only checks using the production templates and JavaScript.</p>
+
+    <section aria-labelledby="hotornot_heading">
+        <h2 id="hotornot_heading">Profile decisions</h2>
+        <div id="hotornot_fixture"></div>
+        <input id="hotornot_input" type="text" value="Editing must keep arrow keys">
+        <div id="hotornot_editable" contenteditable="true">Editable content</div>
+    </section>
+
+    <section aria-labelledby="splash_heading">
+        <h2 id="splash_heading">Splash video</h2>
+        <div id="splash_fixture"></div>
+    </section>
+
+    <p id="browser_behavior_result" role="status">Checks have not run.</p>
+</main>
+
+<script src="/static/js/jquery/jquery.js"></script>
+<script>
+(function () {
+    'use strict';
+
+    const aFailures = [];
+    let iAssertions = 0;
+
+    function assert(bCondition, sMessage) {
+        ++iAssertions;
+        if (!bCondition) {
+            aFailures.push(sMessage);
+        }
+    }
+
+    async function loadTemplate(sPath, sContainerId) {
+        const oResponse = await fetch(sPath);
+        if (!oResponse.ok) {
+            throw new Error('Unable to load ' + sPath);
+        }
+        document.getElementById(sContainerId).innerHTML = await oResponse.text();
+    }
+
+    function loadScript(sPath) {
+        return new Promise(function (resolve, reject) {
+            const oScript = document.createElement('script');
+            oScript.src = sPath;
+            oScript.onload = resolve;
+            oScript.onerror = function () {
+                reject(new Error('Unable to load ' + sPath));
+            };
+            document.body.appendChild(oScript);
+        });
+    }
+
+    function pressKey(oTarget, sKey, aOptions) {
+        const oEvent = new KeyboardEvent('keydown', Object.assign({
+            key: sKey,
+            bubbles: true,
+            cancelable: true
+        }, aOptions));
+        oTarget.dispatchEvent(oEvent);
+
+        return oEvent;
+    }
+
+    async function checkProfileDecisions() {
+        await loadTemplate(
+            '/_protected/app/system/modules/hotornot/views/base/tpl/main/yes_no_buttons.inc.tpl',
+            'hotornot_fixture'
+        );
+        await loadScript('/templates/system/modules/hotornot/themes/base/js/script.js');
+
+        const oGroup = document.querySelector('#hotornot_fixture [role="group"]');
+        const oSkip = document.getElementById('hotornot_skip');
+        const oInterested = document.getElementById('hotornot_interested');
+        let sDecision = '';
+
+        assert(oGroup !== null, 'Expose the profile actions as one accessible group.');
+        assert(oSkip !== null && oInterested !== null, 'Render both profile decisions.');
+        if (!oSkip || !oInterested) {
+            return;
+        }
+
+        oSkip.addEventListener('click', function (oEvent) {
+            oEvent.preventDefault();
+            sDecision = 'skip';
+        });
+        oInterested.addEventListener('click', function (oEvent) {
+            oEvent.preventDefault();
+            sDecision = 'interested';
+        });
+
+        const oLeftEvent = pressKey(document.body, 'ArrowLeft', {});
+        assert(sDecision === 'skip', 'The left arrow must choose Not Interested.');
+        assert(oLeftEvent.defaultPrevented, 'A handled left arrow must not scroll the page.');
+
+        sDecision = '';
+        const oRightEvent = pressKey(document.body, 'ArrowRight', {});
+        assert(sDecision === 'interested', 'The right arrow must choose Interested.');
+        assert(oRightEvent.defaultPrevented, 'A handled right arrow must not scroll the page.');
+
+        sDecision = '';
+        pressKey(document.getElementById('hotornot_input'), 'ArrowLeft', {});
+        assert(sDecision === '', 'Arrow keys in an input must keep editing the field.');
+
+        pressKey(document.getElementById('hotornot_editable'), 'ArrowRight', {});
+        assert(sDecision === '', 'Arrow keys in editable content must keep editing the content.');
+
+        pressKey(document.body, 'ArrowRight', {ctrlKey: true});
+        assert(sDecision === '', 'Modified arrow keys must remain available to the browser.');
+    }
+
+    async function checkSplashVideoPreferences() {
+        await loadTemplate(
+            '/_protected/app/system/modules/user/views/base/tpl/main/splash_video_background.inc.tpl',
+            'splash_fixture'
+        );
+
+        const oVideo = document.getElementById('bgvid');
+        if (!oVideo) {
+            assert(false, 'Render the desktop splash video.');
+            return;
+        }
+
+        let bReducedMotion = true;
+        let bSaveData = false;
+        let iLoadCalls = 0;
+        let iPlayCalls = 0;
+
+        window.matchMedia = function () {
+            return {matches: bReducedMotion};
+        };
+        Object.defineProperty(navigator, 'connection', {
+            configurable: true,
+            get: function () {
+                return {saveData: bSaveData};
+            }
+        });
+        oVideo.load = function () {
+            ++iLoadCalls;
+        };
+        oVideo.play = function () {
+            ++iPlayCalls;
+            return Promise.resolve();
+        };
+
+        await loadScript('/templates/themes/base/js/splash.js');
+        assert(iLoadCalls === 0, 'Reduced motion must prevent video loading.');
+
+        bReducedMotion = false;
+        bSaveData = true;
+        loadSplashBackgroundVideo();
+        assert(iLoadCalls === 0, 'Data Saver must prevent video loading.');
+
+        bSaveData = false;
+        loadSplashBackgroundVideo();
+        const aSources = Array.from(oVideo.querySelectorAll('source'));
+        assert(aSources.length === 2, 'Keep both splash video formats.');
+        assert(aSources.every(function (oSource) {
+            return oSource.getAttribute('src') === oSource.getAttribute('data-src');
+        }), 'Load video sources only after browser preferences allow it.');
+        assert(iLoadCalls === 1 && iPlayCalls === 1, 'Load and play an allowed splash video once.');
+        assert(oVideo.preload === 'none', 'Do not preload the splash video.');
+    }
+
+    async function runChecks() {
+        try {
+            await checkProfileDecisions();
+            await checkSplashVideoPreferences();
+            assert(document.documentElement.scrollWidth <= innerWidth, 'Keep the preview inside the viewport.');
+        } catch (oError) {
+            aFailures.push('Unexpected check error: ' + oError.message);
+        }
+
+        const sResult = aFailures.length ? aFailures.join(' ') : iAssertions + ' checks passed.';
+        document.getElementById('browser_behavior_result').textContent = sResult;
+        document.documentElement.dataset.auditStatus = aFailures.length ? 'failed' : 'passed';
+        document.documentElement.dataset.auditFailures = aFailures.join(' ');
+    }
+
+    if (new URLSearchParams(window.location.search).has('audit')) {
+        window.addEventListener('load', runChecks);
+    }
+})();
+</script>
+</body>
+</html>

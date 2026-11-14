@@ -33,6 +33,12 @@ class VariousTest extends TestCase
         $this->assertSame(3731, $iResult);
     }
 
+    #[DataProvider('invalidOrPartialTimeProvider')]
+    public function testInvalidOrPartialTimeToSec(string $sTime, int $iExpectedSeconds): void
+    {
+        $this->assertSame($iExpectedSeconds, Various::timeToSec($sTime));
+    }
+
     #[DataProvider('secAndTimeProvider')]
     public function testSecToTime(int $iSec, string $sTime): void
     {
@@ -48,6 +54,15 @@ class VariousTest extends TestCase
             [60, '01:00'],
             [121, '02:01'],
             [4802, '80:02']
+        ];
+    }
+
+    public static function invalidOrPartialTimeProvider(): array
+    {
+        return [
+            ['invalid', 0],
+            ['01:02', 3720],
+            ['00:00:00', 0]
         ];
     }
 }

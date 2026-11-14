@@ -4,7 +4,6 @@
  * @author         Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright      (c) 2026, Pierre-Henry Soria and pH7Builder contributors.
  * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
- * @package        PH7 / Test / Unit / App / System / Module / Payment / Inc / Classes
  */
 
 declare(strict_types=1);
@@ -30,12 +29,13 @@ final class PaymentGatewayConfigTest extends TestCase
         $this->assertFalse(PaymentGatewayConfig::isReady('2co', $this->configuredSettings()));
     }
 
-    public function testEnabledGatewayWithoutEveryCredentialIsUnavailable(): void
+    public function testRemovedBraintreeGatewayCannotBecomeAvailable(): void
     {
-        $aSettings = $this->configuredSettings();
-        $aSettings['braintree.private_key'] = '';
-
-        $this->assertFalse(PaymentGatewayConfig::isReady('braintree', $aSettings));
+        $this->assertFalse(PaymentGatewayConfig::isReady('braintree', $this->configuredSettings()));
+        $this->assertArrayNotHasKey(
+            'braintree',
+            PaymentGatewayConfig::getAvailability($this->configuredSettings())
+        );
     }
 
     public function testInvalidPayPalMerchantEmailIsUnavailable(): void
@@ -52,20 +52,10 @@ final class PaymentGatewayConfigTest extends TestCase
             [
                 'paypal' => true,
                 'stripe' => false,
-                'braintree' => true,
                 '2co' => false
             ],
             PaymentGatewayConfig::getAvailability($this->configuredSettings())
         );
-    }
-
-    public function testLegacyBraintreePrivateKeyRemainsSupported(): void
-    {
-        $aSettings = $this->configuredSettings();
-        $aSettings['braintree.private_ke'] = $aSettings['braintree.private_key'];
-        unset($aSettings['braintree.private_key']);
-
-        $this->assertTrue(PaymentGatewayConfig::isReady('braintree', $aSettings));
     }
 
     public function testShippedLegacyPlaceholdersNeverEnableCheckout(): void
@@ -76,17 +66,13 @@ final class PaymentGatewayConfigTest extends TestCase
             'stripe.enabled' => 1,
             'stripe.publishable_key' => 'pk_test_6pRNASCoBOKtIshFeQd4XMUh',
             'stripe.secret_key' => 'sk_test_d8e8fca2dc0f896fd7cb4cb0031ba249',
-            'braintree.enabled' => 1,
-            'braintree.merchant_id' => 'cbqd3ncztsszwbrh',
-            'braintree.public_key' => '7mr28wc74trf2xp4',
-            'braintree.private_key' => '3a21c73d4c362d0bf38080e9d87a5854',
             '2co.enabled' => 1,
             '2co.vendor_id' => 'APIuser1817037',
             '2co.secret_word' => '0L8GUb@yM|Be2H#uW3E]'
         ];
 
         $this->assertSame(
-            ['paypal' => false, 'stripe' => false, 'braintree' => false, '2co' => false],
+            ['paypal' => false, 'stripe' => false, '2co' => false],
             PaymentGatewayConfig::getAvailability($aSettings)
         );
     }
@@ -99,10 +85,6 @@ final class PaymentGatewayConfigTest extends TestCase
             'stripe.enabled' => 1,
             'stripe.publishable_key' => 'pk_test_example',
             'stripe.secret_key' => 'sk_test_example',
-            'braintree.enabled' => 1,
-            'braintree.merchant_id' => 'merchant',
-            'braintree.public_key' => 'public',
-            'braintree.private_key' => 'private',
             '2co.enabled' => 1,
             '2co.vendor_id' => 'vendor',
             '2co.secret_word' => 'secret'

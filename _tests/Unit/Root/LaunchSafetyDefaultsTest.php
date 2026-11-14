@@ -4,7 +4,6 @@
  * @author         Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright      (c) 2026, Pierre-Henry Soria and pH7Builder contributors.
  * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
- * @package        PH7 / Test / Unit / Root
  */
 
 declare(strict_types=1);
@@ -26,7 +25,7 @@ final class LaunchSafetyDefaultsTest extends TestCase
 
         $this->assertSame('1', (string)$aSettings['sandbox.enabled']);
         $this->assertSame('0', (string)$aSettings['vat_rate']);
-        foreach (['paypal', 'stripe', 'braintree', '2co'] as $sProvider) {
+        foreach (['paypal', 'stripe', '2co'] as $sProvider) {
             $this->assertSame('0', (string)$aSettings[$sProvider . '.enabled']);
         }
         foreach (
@@ -34,9 +33,6 @@ final class LaunchSafetyDefaultsTest extends TestCase
                 'paypal.email',
                 'stripe.publishable_key',
                 'stripe.secret_key',
-                'braintree.merchant_id',
-                'braintree.public_key',
-                'braintree.private_key',
                 '2co.vendor_id',
                 '2co.secret_word'
             ] as $sSetting

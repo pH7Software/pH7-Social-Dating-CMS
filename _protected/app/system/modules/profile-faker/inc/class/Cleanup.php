@@ -28,6 +28,7 @@ class Cleanup
      */
     public static function username(string $sUsername, int $iMaxLength = PH7_MAX_USERNAME_LENGTH)
     {
+        $sUsername = preg_replace('/([.\s])de\s+/iu', '$1', $sUsername) ?? $sUsername;
         $sUsername = str_replace(['.', ' '], '-', $sUsername);
 
         return substr($sUsername, 0, $iMaxLength);

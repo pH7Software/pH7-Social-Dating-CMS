@@ -11,6 +11,8 @@
  * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  */
 
+declare(strict_types=1);
+
 namespace PH7\Framework\Util;
 
 defined('PH7') or exit('Restricted access');
@@ -29,14 +31,13 @@ class Various
      *
      * @return string
      */
-    public static function genRnd($sStr = null, $iLength = self::DEFAULT_LENGTH)
+    public static function genRnd(?string $sStr = null, int $iLength = self::DEFAULT_LENGTH): string
     {
-        $iLength = (int)$iLength;
         if ($iLength <= 0) {
             return '';
         }
 
-        $iBytesLength = (int)max(16, ceil($iLength / 2));
+        $iBytesLength = max(16, (int)ceil($iLength / 2));
 
         $sChars = bin2hex(random_bytes($iBytesLength));
 
@@ -51,10 +52,8 @@ class Various
      *
      * @return string
      */
-    public static function padStr($sStr, $iLength = self::DEFAULT_LENGTH)
+    public static function padStr(string $sStr, int $iLength = self::DEFAULT_LENGTH): string
     {
-        $iLength = (int)$iLength;
-
         return ((new Str())->length($sStr) >= $iLength) ? substr($sStr, 0, $iLength) : str_pad($sStr, $iLength, $sStr);
     }
 
@@ -65,19 +64,24 @@ class Various
      *
      * @return string
      */
-    public static function genRndWord($iLength)
+    public static function genRndWord(int $iLength): string
     {
+        if ($iLength <= 0) {
+            return '';
+        }
+
         $sWord = '';
         $aSpecialChars = ['-', '_', '~', '|', '%', '^', '!', '$', '#', '@', '?'];
         $aKeys = array_merge(
-            range(0, 9),
+            range('0', '9'),
             range('a', 'z'),
-            range('Z', 'Z'),
+            range('A', 'Z'),
             $aSpecialChars
         );
+        $iLastKey = array_key_last($aKeys);
 
         for ($iAmount = 0; $iAmount < $iLength; ++$iAmount) {
-            $sWord .= $aKeys[array_rand($aKeys)];
+            $sWord .= $aKeys[random_int(0, $iLastKey)];
         }
 
         return $sWord;
