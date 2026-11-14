@@ -47,6 +47,7 @@ audit_page() {
     local path="$1"
     local viewport="$2"
     local name="$3"
+    local expected_marker="${4:-data-audit-status=\"passed\"}"
     local output_file="$AUDIT_DIRECTORY/${name//[^a-zA-Z0-9]/_}.html"
 
     "$CHROME" \
@@ -62,7 +63,7 @@ audit_page() {
         --dump-dom \
         "$AUDIT_ORIGIN/$path" > "$output_file" 2> "$AUDIT_DIRECTORY/chrome-errors.log"
 
-    if ! grep -q 'data-audit-status="passed"' "$output_file"; then
+    if ! grep -Fq "$expected_marker" "$output_file"; then
         printf 'FAIL: %s\n' "$name" >&2
         grep -o 'data-audit-failures="[^"]*"' "$output_file" >&2 || true
         grep -o 'data-audit-status="[^"]*"' "$output_file" >&2 || true
@@ -78,7 +79,8 @@ audit_page() {
 
 readonly CHROME="$(find_chrome)"
 
-php -S "$AUDIT_HOST:$AUDIT_PORT" -t "$PROJECT_ROOT" > "$AUDIT_DIRECTORY/php-server.log" 2>&1 &
+PH7_INSTALL_TOKEN='browser-audit-token-browser-audit-token' \
+    php -S "$AUDIT_HOST:$AUDIT_PORT" -t "$PROJECT_ROOT" > "$AUDIT_DIRECTORY/php-server.log" 2>&1 &
 server_pid=$!
 
 for _ in {1..40}; do
@@ -108,3 +110,5 @@ audit_page '_tools/pfbc-preview.php?theme=premium&scheme=dark&audit=1' '1280,900
 
 audit_page '_tools/autocomplete-preview.html?audit=1' '390,844' 'autocomplete mobile'
 audit_page '_tools/autocomplete-preview.html?audit=1' '1280,900' 'autocomplete desktop'
+audit_page '_tools/browser-behavior-preview.html?audit=1' '390,844' 'browser behavior mobile'
+audit_page '_install/?a=index' '1280,900' 'installer Smarty runtime' 'name="install_access_token"'

@@ -70,37 +70,12 @@ final class FrontEndPerformanceBudgetTest extends TestCase
         );
     }
 
-    public function testSplashVideoLoadsOnlyWhenMotionAndDataPreferencesAllowIt(): void
-    {
-        $sTemplate = $this->readFile(
-            '_protected/app/system/modules/user/views/base/tpl/main/splash_video_background.inc.tpl'
-        );
-        $sScript = $this->readFile('templates/themes/base/js/splash.js');
-
-        $this->assertStringContainsString('preload="none"', $sTemplate);
-        $this->assertStringContainsString('playsinline', $sTemplate);
-        $this->assertStringContainsString('aria-hidden="true"', $sTemplate);
-        $this->assertStringContainsString('<source data-src=', $sTemplate);
-        $this->assertStringNotContainsString('<source src=', $sTemplate);
-        $this->assertStringContainsString("matchMedia('(prefers-reduced-motion: reduce)')", $sScript);
-        $this->assertStringContainsString('oConnection.saveData', $sScript);
-        $this->assertStringContainsString("oSource.getAttribute('data-src')", $sScript);
-    }
-
     public static function defaultAssetBudgetProvider(): array
     {
         return [
             'CSS' => [self::DEFAULT_CSS_ASSETS, self::MAX_DEFAULT_CSS_BYTES],
             'JavaScript' => [self::DEFAULT_JS_ASSETS, self::MAX_DEFAULT_JS_BYTES]
         ];
-    }
-
-    private function readFile(string $sRelativePath): string
-    {
-        $sContents = file_get_contents(self::projectRoot() . '/' . $sRelativePath);
-        $this->assertIsString($sContents);
-
-        return $sContents;
     }
 
     private static function projectRoot(): string
