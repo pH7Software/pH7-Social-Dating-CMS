@@ -23,7 +23,6 @@ class MainController extends Controller
 {
     public const PAYPAL_GATEWAY_NAME = 'paypal';
     public const STRIPE_GATEWAY_NAME = 'stripe';
-    public const BRAINTREE_GATEWAY_NAME = 'braintree';
     public const TWO_CHECKOUT_GATEWAY_NAME = '2co';
     public const CCBILL_GATEWAY_NAME = 'ccbill';
 
@@ -31,7 +30,6 @@ class MainController extends Controller
 
     public const PAYMENT_GATEWAYS = [
         PayPal::class,
-        Braintree::class,
         Stripe::class,
         TwoCO::class
     ];
@@ -41,7 +39,6 @@ class MainController extends Controller
     private const SENSITIVE_PAYMENT_FIELDS = [
         'checkout_reference',
         'custom',
-        'payment_method_nonce',
         'stripeToken'
     ];
 
@@ -174,9 +171,6 @@ class MainController extends Controller
         switch ($sProvider) {
             case self::STRIPE_GATEWAY_NAME:
                 $this->stripeHandler();
-                break;
-            case self::BRAINTREE_GATEWAY_NAME:
-                $this->braintreeHandler();
                 break;
             case self::TWO_CHECKOUT_GATEWAY_NAME:
                 $this->twoCheckOutHandler();
@@ -421,57 +415,6 @@ class MainController extends Controller
                 $sFailureType = $this->isStripeCardDeclineException($oException) ? 'declined' : 'failed';
                 error_log(sprintf('Stripe checkout %s: %s', $sFailureType, $oException->getMessage()));
                 $this->setPaymentGatewayFailureMessage('Stripe');
-            }
-        }
-    }
-
-    private function braintreeHandler()
-    {
-        if (
-            $this->httpRequest->postExists(['payment_method_nonce', 'checkout_reference'])
-            && $sNonce = $this->httpRequest->post('payment_method_nonce')
-        ) {
-            $oMembership = $this->getCheckoutMembership(
-                $this->httpRequest->post('checkout_reference')
-            );
-            if ($oMembership === null) {
-                return;
-            }
-
-            try {
-                Braintree::init($this->config);
-
-                $oResult = Braintree::sale([
-                    'amount' => $this->getTotalAmount($oMembership),
-                    'paymentMethodNonce' => $sNonce,
-                    'options' => ['submitForSettlement' => true]
-                ]);
-
-                if (
-                    $oResult->success
-                    && $oResult->transaction
-                    && PaymentCheckout::isExpectedAmount(
-                        $oMembership->price,
-                        $this->config->values['module.setting']['vat_rate'],
-                        $oResult->transaction->amount
-                    )
-                    && strtoupper((string)$oResult->transaction->currencyIsoCode) === strtoupper(
-                        $this->config->values['module.setting']['currency_code']
-                    )
-                ) {
-                    $this->completeMembershipPayment($oMembership, Braintree::class);
-                } else {
-                    if ($oResult->transaction) {
-                        error_log(sprintf(
-                            'Braintree checkout declined: %s',
-                            (string)$oResult->transaction->processorResponseText
-                        ));
-                    }
-                    $this->setPaymentGatewayFailureMessage('Braintree');
-                }
-            } catch (\Throwable $oException) {
-                error_log(sprintf('Braintree checkout failed: %s', $oException->getMessage()));
-                $this->setPaymentGatewayFailureMessage('Braintree');
             }
         }
     }

@@ -7,6 +7,8 @@ package are not available yet.
 
 - Requires PHP 8.3 or newer. pH7Builder 19.4.0 is the final release that
   supports PHP 8.2.
+- Removes the deprecated Braintree Drop-in checkout. Operators using Braintree
+  must migrate to a supported payment integration before upgrading.
 
 ## Installer and dependency updates
 

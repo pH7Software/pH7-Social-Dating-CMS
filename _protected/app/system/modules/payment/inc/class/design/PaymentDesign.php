@@ -15,9 +15,7 @@ use PH7\Framework\Payment\Gateway\Api\Api as PaymentApi;
 
 class PaymentDesign extends Framework\Core\Core
 {
-    public const DIV_CONTAINER_NAME = 'payment-form';
     public const MAX_STRING_FIELD_LENGTH = 127;
-    private const BRAINTREE_FORM_ID = 'braintree-payment-form';
 
     /**
      * @return void
@@ -89,78 +87,6 @@ class PaymentDesign extends Framework\Core\Core
     }
 
     /**
-     * Generates Braintree payment form Braintree API.
-     *
-     * @return void
-     */
-    public function buttonBraintree(\stdClass $oMembership, string $sCheckoutToken)
-    {
-        $sTotalAmount = PaymentCheckout::getTotalAmount(
-            $oMembership->price,
-            $this->config->values['module.setting']['vat_rate']
-        );
-        $sCurrency = $this->config->values['module.setting']['currency_code'];
-        $sLocale = PH7_LANG_NAME;
-
-        try {
-            Braintree::init($this->config);
-            $sClientToken = Braintree::generateClientToken();
-        } catch (\Throwable $oException) {
-            error_log(sprintf('Braintree checkout initialization failed: %s', $oException->getMessage()));
-            echo '<p class="alert alert-warning">',
-            $this->str->escape(
-                t('Braintree checkout is temporarily unavailable. Please use another payment method or contact the site owner.')
-            ),
-            '</p>';
-
-            return;
-        }
-
-        echo '<script src="', $this->str->escapeAttribute(Braintree::JS_LIBRARY_URL), '"></script>';
-
-        $oBraintree = new Braintree();
-        $oBraintree
-            ->param(
-                'checkout_reference',
-                PaymentCheckout::createReference($oMembership->groupId, $sCheckoutToken)
-            );
-
-        $this->displayGatewayForm($oBraintree, $oMembership->name, 'Braintree');
-
-        unset($oBraintree);
-
-        echo '<script>';
-        echo '$(function () {';
-        echo 'const oForm = document.getElementById(' . json_encode(self::BRAINTREE_FORM_ID) . ');';
-        echo 'if (!oForm || !window.braintree || !braintree.dropin || typeof braintree.dropin.create !== "function") { return; }';
-        echo 'const oDropinOptions = {';
-        echo 'authorization: ' . json_encode($sClientToken) . ',';
-        echo 'container: ' . json_encode('#' . self::DIV_CONTAINER_NAME) . ',';
-        echo 'paypal: {flow: "checkout", amount: ' . json_encode($sTotalAmount) . ', currency: ' . json_encode($sCurrency) . ', locale: ' . json_encode($sLocale) . '}';
-        echo '};';
-        echo 'braintree.dropin.create(oDropinOptions, function (oError, oDropinInstance) {';
-        echo 'if (oError || !oDropinInstance) { console.error(oError); return; }';
-        echo 'oForm.addEventListener("submit", function (oEvent) {';
-        echo 'oEvent.preventDefault();';
-        echo 'oDropinInstance.requestPaymentMethod(function (oNonceError, oPayload) {';
-        echo 'if (oNonceError || !oPayload || !oPayload.nonce) { console.error(oNonceError); return; }';
-        echo 'let oNonceInput = oForm.querySelector(\'input[name="payment_method_nonce"]\');';
-        echo 'if (!oNonceInput) {';
-        echo 'oNonceInput = document.createElement("input");';
-        echo 'oNonceInput.type = "hidden";';
-        echo 'oNonceInput.name = "payment_method_nonce";';
-        echo 'oForm.appendChild(oNonceInput);';
-        echo '}';
-        echo 'oNonceInput.value = oPayload.nonce;';
-        echo 'HTMLFormElement.prototype.submit.call(oForm);';
-        echo '});';
-        echo '});';
-        echo '});';
-        echo '});';
-        echo '</script>';
-    }
-
-    /**
      * @return void
      */
     public function button2CheckOut(\stdClass $oMembership, string $sCheckoutToken)
@@ -207,15 +133,7 @@ class PaymentDesign extends Framework\Core\Core
      */
     private function displayGatewayForm(PaymentApi $oPaymentProvider, $sMembershipName, $sProviderName)
     {
-        $sFormId = ($oPaymentProvider instanceof Braintree)
-            ? ' id="' . self::BRAINTREE_FORM_ID . '"'
-            : '';
-
-        echo '<form action="', $this->str->escapeAttribute($oPaymentProvider->getUrl()), '" method="post"', $sFormId, '>';
-
-        if ($oPaymentProvider instanceof Braintree) {
-            echo $this->getDivFormContainer();
-        }
+        echo '<form action="', $this->str->escapeAttribute($oPaymentProvider->getUrl()), '" method="post">';
 
         echo $oPaymentProvider->generate();
         echo '<button class="btn btn-primary btn-md" type="submit" name="submit">', $this->buyTxt($sMembershipName, $sProviderName), '</button>';
@@ -237,14 +155,6 @@ class PaymentDesign extends Framework\Core\Core
             $this->str->escape($sMembershipName),
             '<b>' . $this->str->escape($sProviderName) . '</b>'
         );
-    }
-
-    /**
-     * @return string
-     */
-    private function getDivFormContainer()
-    {
-        return '<div id="' . self::DIV_CONTAINER_NAME . '"></div>';
     }
 
     /**

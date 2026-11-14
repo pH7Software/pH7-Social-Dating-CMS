@@ -66,7 +66,6 @@
     "ext-zlib": "*",
     "aws/aws-sdk-php": "^3.200",
     "bacon/bacon-qr-code": "^3.0",
-    "braintree/braintree_php": "^6.0",
     "ezyang/htmlpurifier": "^4.19",
     "fakerphp/faker": "^1.24.1",
     "geoip2/geoip2": "^3.3",
