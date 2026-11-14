@@ -24,7 +24,12 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: '8.3'
+          tools: composer:v2
+          extensions: curl, dom, exif, fileinfo, gd, hash, iconv, json, mbstring, openssl, pdo_mysql, simplexml, xml, xmlwriter, zip, zlib
           coverage: none
+
+      - name: Install production dependencies
+        run: composer install --no-dev --no-interaction --no-progress --prefer-dist
 
       - name: Run browser interaction audits
         run: _tools/browser-audit.sh
