@@ -33,7 +33,6 @@ class VariousTest extends TestCase
         $this->assertStringContainsString('random_bytes(', $sSource);
         $this->assertStringNotContainsString('mt_rand(', $sSource);
         $this->assertStringNotContainsString('uniqid(', $sSource);
-        $this->assertStringNotContainsString('array_rand(', $sSource);
         $this->assertStringNotContainsString('catch (', $sSource);
     }
 

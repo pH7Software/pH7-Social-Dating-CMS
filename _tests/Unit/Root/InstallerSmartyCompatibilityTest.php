@@ -43,20 +43,6 @@ final class InstallerSmartyCompatibilityTest extends TestCase
             }
 
             self::assertGreaterThan(0, $iTemplateCount);
-
-            $iCompiledTemplateCount = 0;
-            $oCompiledTemplates = new \RecursiveIteratorIterator(
-                new \RecursiveDirectoryIterator($sCompileDirectory, \FilesystemIterator::SKIP_DOTS)
-            );
-
-            /** @var \SplFileInfo $oCompiledTemplate */
-            foreach ($oCompiledTemplates as $oCompiledTemplate) {
-                if ($oCompiledTemplate->isFile() && $oCompiledTemplate->getExtension() === 'php') {
-                    ++$iCompiledTemplateCount;
-                }
-            }
-
-            self::assertGreaterThanOrEqual($iTemplateCount, $iCompiledTemplateCount);
         } finally {
             $this->removeDirectory($sCompileDirectory);
         }

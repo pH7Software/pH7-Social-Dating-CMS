@@ -20,6 +20,7 @@ use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Middleware;
 use GuzzleHttp\Psr7\Response;
 use PH7\ClickatellProvider;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\RequestInterface;
 
@@ -70,14 +71,15 @@ final class ClickatellProviderTest extends TestCase
         );
     }
 
-    public function testSendReturnsFalseForRejectedRequest(): void
+    #[DataProvider('invalidResponseProvider')]
+    public function testSendRejectsInvalidProviderResponses(int $iStatusCode, string $sResponseBody): void
     {
         $oProvider = new ClickatellProvider(
             '+61400000000',
             'api-token',
             new Client([
                 'handler' => new MockHandler([
-                    new Response(401, ['Content-Type' => 'application/json'], '{"error":"Unauthorized"}')
+                    new Response($iStatusCode, ['Content-Type' => 'application/json'], $sResponseBody)
                 ])
             ])
         );
@@ -85,55 +87,17 @@ final class ClickatellProviderTest extends TestCase
         $this->assertFalse($oProvider->send('+64210000000', 'Your verification code is 123456.'));
     }
 
-    public function testSendReturnsFalseForMalformedSuccessPayload(): void
+    public static function invalidResponseProvider(): array
     {
-        $oProvider = new ClickatellProvider(
-            '+61400000000',
-            'api-token',
-            new Client([
-                'handler' => new MockHandler([
-                    new Response(202, ['Content-Type' => 'application/json'], '{invalid-json')
-                ])
-            ])
-        );
-
-        $this->assertFalse($oProvider->send('+64210000000', 'Your verification code is 123456.'));
-    }
-
-    public function testIsSuccessResponseReturnsTrueForSuccessfulPayload(): void
-    {
-        $oProvider = new ClickatellProvider('+61400000000', 'api-token');
-        $oMethod = new \ReflectionMethod(ClickatellProvider::class, 'isSuccessResponse');
-
-        $this->assertTrue($oMethod->invoke($oProvider, [['accepted' => true, 'error' => null]]));
-    }
-
-    public function testIsSuccessResponseReturnsFalseForEmptyResponse(): void
-    {
-        $oProvider = new ClickatellProvider('+61400000000', 'api-token');
-        $oMethod = new \ReflectionMethod(ClickatellProvider::class, 'isSuccessResponse');
-
-        $this->assertFalse($oMethod->invoke($oProvider, []));
-    }
-
-    public function testIsSuccessResponseReturnsFalseWhenErrorKeyIsMissing(): void
-    {
-        $oProvider = new ClickatellProvider('+61400000000', 'api-token');
-        $oMethod = new \ReflectionMethod(ClickatellProvider::class, 'isSuccessResponse');
-
-        $this->assertFalse($oMethod->invoke($oProvider, [['accepted' => true, 'id' => 'abc123']]));
-    }
-
-    public function testIsSuccessResponseReturnsFalseWhenMessageWasRejected(): void
-    {
-        $oProvider = new ClickatellProvider('+61400000000', 'api-token');
-        $oMethod = new \ReflectionMethod(ClickatellProvider::class, 'isSuccessResponse');
-
-        $this->assertFalse(
-            $oMethod->invoke(
-                $oProvider,
-                [['accepted' => false, 'error' => 'Invalid destination address.']]
-            )
-        );
+        return [
+            'unauthorized request' => [401, '{"error":"Unauthorized"}'],
+            'malformed JSON' => [202, '{invalid-json'],
+            'missing messages' => [202, '{}'],
+            'missing error status' => [202, '{"messages":[{"accepted":true,"id":"abc123"}]}'],
+            'rejected message' => [
+                202,
+                '{"messages":[{"accepted":false,"error":"Invalid destination address."}]}'
+            ]
+        ];
     }
 }
