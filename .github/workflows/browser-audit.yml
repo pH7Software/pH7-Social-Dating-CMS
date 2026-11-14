@@ -1,0 +1,30 @@
+name: Audit Browser UX
+
+on:
+  push:
+    branches:
+      - 18.x
+  pull_request:
+    branches:
+      - 18.x
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  browser-audit:
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          coverage: none
+
+      - name: Run browser interaction audits
+        run: _tools/browser-audit.sh

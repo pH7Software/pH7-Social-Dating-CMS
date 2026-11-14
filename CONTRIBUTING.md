@@ -65,6 +65,10 @@ Use `_tools/autocomplete-preview.html` on the same server to check recipient and
 city suggestions. Its interaction checks use fixed mock responses; they do not
 contact members or GeoNames and do not verify the external provider's availability.
 
+Run `_tools/browser-audit.sh` before a release to exercise the theme, PFBC, and
+autocomplete previews in Chrome at desktop and mobile widths. The same audit runs
+for every pull request and fails on interaction, loading, or horizontal-overflow regressions.
+
 ## Reporting bugs & proposing features
 
 - Bugs: use the [issue tracker](https://github.com/pH7Software/pH7-Social-Dating-CMS/issues) and the bug-report template.
