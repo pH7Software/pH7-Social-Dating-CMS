@@ -17,8 +17,8 @@ class VariousTest extends TestCase
 {
     public function testGenerateRandom(): void
     {
-        $sFirstValue = Various::genRnd('Pierre-Henry Random :D', 40);
-        $sSecondValue = Various::genRnd('Pierre-Henry Random :D', 40);
+        $sFirstValue = Various::genRnd('Pierre-Henry_Seven_Soria', 40);
+        $sSecondValue = Various::genRnd('Pierre-Henry_Seven_Soria', 40);
 
         $this->assertSame(40, strlen($sFirstValue));
         $this->assertMatchesRegularExpression('/\A[a-f0-9]{40}\z/', $sFirstValue);
@@ -33,7 +33,14 @@ class VariousTest extends TestCase
         $this->assertStringContainsString('random_bytes(', $sSource);
         $this->assertStringNotContainsString('mt_rand(', $sSource);
         $this->assertStringNotContainsString('uniqid(', $sSource);
+        $this->assertStringNotContainsString('array_rand(', $sSource);
         $this->assertStringNotContainsString('catch (', $sSource);
+    }
+
+    public function testNonPositiveRandomLengthsReturnEmptyStrings(): void
+    {
+        $this->assertSame('', Various::genRnd(null, 0));
+        $this->assertSame('', Various::genRndWord(-1));
     }
 
     public function testPaddingString(): void
@@ -43,7 +50,9 @@ class VariousTest extends TestCase
 
     public function testGenerateRandomWord(): void
     {
-        $iStringLength = strlen(Various::genRndWord(10));
-        $this->assertSame(10, $iStringLength);
+        $sWord = Various::genRndWord(64);
+
+        $this->assertSame(64, strlen($sWord));
+        $this->assertMatchesRegularExpression('/\A[0-9a-zA-Z_~|%^!$#@?\-]{64}\z/', $sWord);
     }
 }

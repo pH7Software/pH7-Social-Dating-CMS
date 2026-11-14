@@ -8,6 +8,8 @@
  * @package          PH7 / Framework / Module
  */
 
+declare(strict_types=1);
+
 namespace PH7\Framework\Module;
 
 defined('PH7') or exit('Restricted access');
@@ -21,15 +23,11 @@ class Various
      *
      * @return bool
      */
-    public static function isEnabled($sModFolderName)
+    public static function isEnabled(string $sModFolderName): bool
     {
-        $oMods = (new ModuleModel)->get($sModFolderName);
+        $oMods = (new ModuleModel())->get($sModFolderName);
 
         // If the module is not in the SysModsEnabled table, return always TRUE
-        if (!isset($oMods->enabled)) {
-            return true;
-        }
-
-        return $oMods->enabled === ModuleModel::YES;
+        return !isset($oMods->enabled) || $oMods->enabled === ModuleModel::YES;
     }
 }
