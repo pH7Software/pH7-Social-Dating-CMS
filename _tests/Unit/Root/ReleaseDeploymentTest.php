@@ -148,6 +148,15 @@ final class ReleaseDeploymentTest extends TestCase
             1,
             preg_match("/\('pH7Builder', 'SQL System Schema', '([^']+)', 1\)/", $sInstallerSchema, $aMatch)
         );
+        $this->assertSame(
+            1,
+            preg_match(
+                "/SQL_SCHEMA_VERSION = '([^']+)'/",
+                $this->readFile('_install/controllers/InstallController.php'),
+                $aInstallerMatch
+            )
+        );
+        $this->assertSame($aMatch[1], $aInstallerMatch[1]);
         $this->assertSame($aMatch[1], $this->elementValue($oPackage, 'sql-shcema-version'));
     }
 

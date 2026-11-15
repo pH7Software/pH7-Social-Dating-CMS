@@ -21,10 +21,16 @@ package are not available yet.
 
 ## Database and upgrade notes
 
-The database schema remains `1.6.6`; no database migration is required. Before
-deploying 20.0.0, upgrade the server runtime to PHP 8.3 or newer and confirm
-that the locked dependencies support it. Sites that must remain on PHP 8.2
-should stay on 19.4.0.
+The SQL schema advances to `1.6.7`. Existing installations must apply
+`_repository/upgrade/19.4.0-20.0.0/data/sql/MySQL/upgrade.sql` so the profile
+generator and milestone celebration modules can be controlled from the module
+manager. It widens the module folder identifier to store the milestone module's
+full name. The migration is idempotent and preserves both modules' existing
+enabled behavior.
+
+Before deploying 20.0.0, upgrade the server runtime to PHP 8.3 or newer and
+confirm that the locked dependencies support it. Sites that must remain on PHP
+8.2 should stay on 19.4.0.
 
 For source deployments, install the locked production dependencies with
 `composer install`. For existing sites, preserve configuration and user data,

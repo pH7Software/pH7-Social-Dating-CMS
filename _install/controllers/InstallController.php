@@ -20,7 +20,7 @@ defined('PH7') or exit('Restricted access');
 class InstallController extends Controller
 {
     private const CORE_SQL_FILE = 'pH7_Core.sql';
-    private const SQL_SCHEMA_VERSION = '1.6.6';
+    private const SQL_SCHEMA_VERSION = '1.6.7';
     private const INITIAL_ADMIN_MISMATCH_ERROR_CODE = 180601;
 
     private const SAMPLE_USERS_MIN_AGE = 18;

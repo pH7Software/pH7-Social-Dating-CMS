@@ -910,7 +910,7 @@ INSERT INTO ph7_meta_main (langId, pageTitle, metaDescription, metaKeywords, hea
 CREATE TABLE IF NOT EXISTS ph7_sys_mods_enabled (
   moduleId tinyint(2) unsigned NOT NULL AUTO_INCREMENT,
   moduleTitle varchar(50) NOT NULL,
-  folderName varchar(20) NOT NULL,
+  folderName varchar(64) NOT NULL,
   premiumMod enum('0','1') NOT NULL DEFAULT '0',
   enabled enum('0','1') NOT NULL DEFAULT '1',
   PRIMARY KEY (moduleId)
@@ -955,7 +955,7 @@ CREATE TABLE IF NOT EXISTS ph7_modules (
 
 INSERT INTO ph7_modules (vendorName, moduleName, version, active) VALUES
 /* Gives the current version of pH7Builder SQL schema (this helps to update and shows whether it is necessary or not to update the database as well) */
-('pH7Builder', 'SQL System Schema', '1.6.6', 1);
+('pH7Builder', 'SQL System Schema', '1.6.7', 1);
 
 
 CREATE TABLE IF NOT EXISTS ph7_report (
