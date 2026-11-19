@@ -58,14 +58,20 @@ final class ClickatellProviderTest extends TestCase
         /** @var RequestInterface $oRequest */
         $oRequest = $aHistory[0]['request'];
         $this->assertSame('POST', $oRequest->getMethod());
-        $this->assertSame('https://platform.clickatell.com/messages', (string) $oRequest->getUri());
+        $this->assertSame('https://platform.clickatell.com/v1/message', (string) $oRequest->getUri());
         $this->assertSame('api-token', $oRequest->getHeaderLine('Authorization'));
         $this->assertSame('application/json', $oRequest->getHeaderLine('Accept'));
+        $this->assertSame('application/json', $oRequest->getHeaderLine('Content-Type'));
         $this->assertSame(
             [
-                'content' => 'Your verification code is 123456.',
-                'to' => ['+64210000000'],
-                'from' => '+61400000000'
+                'messages' => [
+                    [
+                        'channel' => 'sms',
+                        'to' => '64210000000',
+                        'content' => 'Your verification code is 123456.',
+                        'from' => '61400000000'
+                    ]
+                ]
             ],
             json_decode((string) $oRequest->getBody(), true, 512, JSON_THROW_ON_ERROR)
         );

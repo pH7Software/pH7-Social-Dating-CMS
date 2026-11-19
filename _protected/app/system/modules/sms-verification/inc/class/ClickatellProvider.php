@@ -15,7 +15,7 @@ use PH7\Framework\Error\Logger;
 
 class ClickatellProvider extends SmsProvider implements SmsProvidable
 {
-    private const API_ENDPOINT = 'https://platform.clickatell.com/messages';
+    private const API_ENDPOINT = 'https://platform.clickatell.com/v1/message';
 
     private ClientInterface $oHttpClient;
 
@@ -34,6 +34,15 @@ class ClickatellProvider extends SmsProvider implements SmsProvidable
 
     public function send(string $sPhoneNumber, string $sTextMessage): bool
     {
+        $aMessage = [
+            'channel' => 'sms',
+            'to' => self::normalizePhoneNumber($sPhoneNumber),
+            'content' => $sTextMessage
+        ];
+        if ($this->sSenderNumber !== '') {
+            $aMessage['from'] = self::normalizePhoneNumber($this->sSenderNumber);
+        }
+
         try {
             $oResponse = $this->oHttpClient->request(
                 'POST',
@@ -45,9 +54,7 @@ class ClickatellProvider extends SmsProvider implements SmsProvidable
                         'Authorization' => $this->sApiToken
                     ],
                     'json' => [
-                        'content' => $sTextMessage,
-                        'to' => [$sPhoneNumber],
-                        'from' => $this->sSenderNumber
+                        'messages' => [$aMessage]
                     ]
                 ]
             );
@@ -89,5 +96,10 @@ class ClickatellProvider extends SmsProvider implements SmsProvidable
         }
 
         return ($aMessage['accepted'] ?? false) === true && $aMessage['error'] === null;
+    }
+
+    private static function normalizePhoneNumber(string $sPhoneNumber): string
+    {
+        return str_starts_with($sPhoneNumber, '+') ? substr($sPhoneNumber, 1) : $sPhoneNumber;
     }
 }
