@@ -11,9 +11,6 @@ declare(strict_types=1);
 namespace PH7\Test\Unit\Root;
 
 use Aws\S3\S3Client;
-use Braintree\ClientToken;
-use Braintree\ClientTokenGateway;
-use Braintree\Gateway;
 use GuzzleHttp\Client;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
@@ -79,25 +76,6 @@ final class DependencyCompatibilityTest extends TestCase
         ]);
 
         self::assertSame('SM-test-message', $oMessage->sid);
-    }
-
-    public function testBraintreeClientTokenRequestRetainsItsDefaultVersion(): void
-    {
-        $oGateway = new Gateway([
-            'environment' => 'sandbox',
-            'merchantId' => 'test-merchant',
-            'publicKey' => 'test-public',
-            'privateKey' => 'test-private'
-        ]);
-        $oTokens = $this->getMockBuilder(ClientTokenGateway::class)
-            ->setConstructorArgs([$oGateway])
-            ->onlyMethods(['_doGenerate'])
-            ->getMock();
-        $oTokens->expects(self::once())->method('_doGenerate')
-            ->with('/client_token', ['client_token' => ['version' => ClientToken::DEFAULT_VERSION]])
-            ->willReturn('test-client-token');
-
-        self::assertSame('test-client-token', $oTokens->generate());
     }
 
     public function testBundledGeoDatabaseWorksWithTheUpdatedReader(): void

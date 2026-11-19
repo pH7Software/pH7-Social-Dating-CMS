@@ -7,6 +7,8 @@ package are not available yet.
 
 - Requires PHP 8.3 or newer. pH7Builder 19.4.0 is the final release that
   supports PHP 8.2.
+- Removes the deprecated Braintree Drop-in checkout. Operators using Braintree
+  must migrate to a supported payment integration before upgrading.
 
 ## Installer and dependency updates
 
@@ -14,13 +16,21 @@ package are not available yet.
   installer dependency; pH7Builder site themes continue to use PH7Tpl.
 - Keeps FakerPHP and all 29 existing profile-generator locales. Invalid locale
   submissions are rejected server-side instead of falling back implicitly.
+- Keeps Clickatell SMS support while replacing its unmaintained GPL wrapper
+  with the existing MIT-licensed HTTP client and Clickatell's current API.
 
 ## Database and upgrade notes
 
-The database schema remains `1.6.6`; no database migration is required. Before
-deploying 20.0.0, upgrade the server runtime to PHP 8.3 or newer and confirm
-that the locked dependencies support it. Sites that must remain on PHP 8.2
-should stay on 19.4.0.
+The SQL schema advances to `1.6.7`. Existing installations must apply
+`_repository/upgrade/19.4.0-20.0.0/data/sql/MySQL/upgrade.sql` so the profile
+generator and milestone celebration modules can be controlled from the module
+manager. It widens the module folder identifier to store the milestone module's
+full name. The migration is idempotent and preserves both modules' existing
+enabled behavior.
+
+Before deploying 20.0.0, upgrade the server runtime to PHP 8.3 or newer and
+confirm that the locked dependencies support it. Sites that must remain on PHP
+8.2 should stay on 19.4.0.
 
 For source deployments, install the locked production dependencies with
 `composer install`. For existing sites, preserve configuration and user data,

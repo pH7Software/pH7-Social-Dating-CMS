@@ -14,7 +14,7 @@ use PHPUnit\Framework\TestCase;
 
 final class DatabaseMigrationTest extends TestCase
 {
-    private const SQL_SCHEMA_VERSION = '1.6.6';
+    private const SQL_SCHEMA_VERSION = '1.6.7';
 
     public function testFreshSchemaUsesUtf8mb4ForWallPosts(): void
     {
@@ -35,6 +35,7 @@ final class DatabaseMigrationTest extends TestCase
             "('pH7Builder', 'SQL System Schema', '" . self::SQL_SCHEMA_VERSION . "', 1)",
             $sSchema
         );
+        $this->assertStringContainsString('folderName varchar(64) NOT NULL', $sSchema);
     }
 
     public function testFreshSchemaUsesInnoDbForErrorLogs(): void
@@ -75,6 +76,27 @@ final class DatabaseMigrationTest extends TestCase
             'CREATE TABLE IF NOT EXISTS ph7_payment_transactions',
             $sMigration
         );
+        $this->assertStringNotContainsString('DROP TABLE', strtoupper($sMigration));
+        $this->assertStringContainsString(
+            "UPDATE ph7_modules SET version = '1.6.6'",
+            $sMigration
+        );
+    }
+
+    public function testVersionTwentyMigrationAddsMissingModuleFeatureGates(): void
+    {
+        $sMigration = $this->readProjectFile(
+            '_repository/upgrade/19.4.0-20.0.0/data/sql/MySQL/upgrade.sql'
+        );
+
+        $this->assertStringContainsString(
+            'ALTER TABLE ph7_sys_mods_enabled MODIFY folderName varchar(64) NOT NULL;',
+            $sMigration
+        );
+        foreach (['milestone-celebration', 'profile-faker'] as $sModule) {
+            $this->assertStringContainsString("WHERE folderName = '" . $sModule . "'", $sMigration);
+        }
+        $this->assertSame(2, substr_count($sMigration, 'WHERE NOT EXISTS'));
         $this->assertStringNotContainsString('DROP TABLE', strtoupper($sMigration));
         $this->assertStringContainsString(
             "UPDATE ph7_modules SET version = '" . self::SQL_SCHEMA_VERSION . "'",

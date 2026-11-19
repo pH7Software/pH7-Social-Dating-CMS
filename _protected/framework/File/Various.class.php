@@ -8,6 +8,8 @@
  * @package          PH7 / Framework / File
  */
 
+declare(strict_types=1);
+
 namespace PH7\Framework\File;
 
 defined('PH7') or exit('Restricted access');
@@ -31,13 +33,13 @@ class Various
      *
      * @return string The size.
      */
-    public static function bytesToSize($iBytes, $iPrecision = 2)
+    public static function bytesToSize(int|float $iBytes, int $iPrecision = 2): string
     {
         $aUnits = ['byte', 'kilobyte', 'megabyte', 'gigabyte', 'terabyte'];
 
         $iBytes = max($iBytes, 0);
-        $iPow = floor(($iBytes ? log($iBytes) : 0) / log(1024));
-        $iPow = min($iPow, count($aUnits) - 1);
+        $iPow = (int)floor(($iBytes > 0 ? log($iBytes) : 0) / log(1024));
+        $iPow = min($iPow, array_key_last($aUnits));
         $iBytes /= (1 << (10 * $iPow));
 
         return t($aUnits[$iPow], round($iBytes, $iPrecision));
@@ -52,33 +54,20 @@ class Various
      *
      * @throws PH7InvalidArgumentException Explanatory message.
      */
-    public static function sizeToBytes($sSize)
+    public static function sizeToBytes(string $sSize): int
     {
         $cSuffix = strtolower(substr(trim($sSize), -1));
         $iSize = (int)$sSize;
 
-        switch ($cSuffix) {
-            // kilobyte
-            case 'k':
-                $iSize *= 1024;
-                break;
+        $iMultiplier = match ($cSuffix) {
+            'k' => 1024,
+            'm' => 1024 ** 2,
+            'g' => 1024 ** 3,
+            default => throw new PH7InvalidArgumentException(
+                sprintf('Wrong suffix: %s! Choose between: K, M, G', $cSuffix)
+            ),
+        };
 
-            // megabyte
-            case 'm':
-                $iSize *= 1024 * 1024;
-                break;
-
-            // gigabyte
-            case 'g':
-                $iSize *= 1024 * 1024 * 1024;
-                break;
-
-            default:
-                throw new PH7InvalidArgumentException(
-                    sprintf('Wrong suffix: %s! Choose between: K, M, G', $cSuffix)
-                );
-        }
-
-        return $iSize;
+        return $iSize * $iMultiplier;
     }
 }

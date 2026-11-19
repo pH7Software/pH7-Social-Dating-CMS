@@ -195,5 +195,41 @@ if (previewRevision) {
         </div>
     </div>
 </div>
+<script>
+window.addEventListener('load', () => {
+    if (!previewParameters.has('audit')) {
+        return;
+    }
+
+    setTimeout(() => {
+        const failures = [];
+        const assert = (condition, message) => {
+            if (!condition) failures.push(message);
+        };
+        const visibleControls = document.querySelectorAll('a.btn, button, input, select, textarea');
+
+        assert(
+            Array.from(document.querySelectorAll('link[rel="stylesheet"]')).every((link) => link.sheet !== null),
+            'Every local stylesheet must load.'
+        );
+        assert(document.documentElement.scrollWidth <= innerWidth, 'The preview must not overflow horizontally.');
+        visibleControls.forEach((control) => {
+            const bounds = control.getBoundingClientRect();
+            assert(bounds.left >= 0 && bounds.right <= innerWidth, 'Every visible control must fit inside the viewport.');
+        });
+        assert(
+            getComputedStyle(document.querySelector('.empty_state')).textAlign === 'center',
+            'The empty state must retain its centered layout.'
+        );
+        assert(
+            getComputedStyle(document.querySelector('.dropdown-submenu > .dropdown-menu')).visibility !== 'hidden',
+            'The nested navigation must remain visible.'
+        );
+
+        document.documentElement.dataset.auditStatus = failures.length ? 'failed' : 'passed';
+        document.documentElement.dataset.auditFailures = failures.join(' ');
+    }, 0);
+});
+</script>
 </body>
 </html>

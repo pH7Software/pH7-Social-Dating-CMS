@@ -20,14 +20,12 @@ final class PaymentGatewayConfig
     private const ENABLE_SETTINGS = [
         'paypal' => 'paypal.enabled',
         'stripe' => 'stripe.enabled',
-        'braintree' => 'braintree.enabled',
         '2co' => '2co.enabled'
     ];
 
     private const REQUIRED_SETTINGS = [
         'paypal' => ['paypal.email'],
         'stripe' => ['stripe.publishable_key', 'stripe.secret_key'],
-        'braintree' => ['braintree.merchant_id', 'braintree.public_key'],
         '2co' => ['2co.vendor_id', '2co.secret_word']
     ];
 
@@ -35,9 +33,6 @@ final class PaymentGatewayConfig
         'your_paypal_email_address@domain.com',
         'pk_test_6pRNASCoBOKtIshFeQd4XMUh',
         'sk_test_d8e8fca2dc0f896fd7cb4cb0031ba249',
-        'cbqd3ncztsszwbrh',
-        '7mr28wc74trf2xp4',
-        '3a21c73d4c362d0bf38080e9d87a5854',
         'APIuser1817037',
         '0L8GUb@yM|Be2H#uW3E]'
     ];
@@ -79,12 +74,6 @@ final class PaymentGatewayConfig
 
         if ($sProvider === 'paypal' && filter_var($aSettings['paypal.email'], FILTER_VALIDATE_EMAIL) === false) {
             return false;
-        }
-
-        if ($sProvider === 'braintree') {
-            $mPrivateKey = $aSettings['braintree.private_key'] ?? $aSettings['braintree.private_ke'] ?? null;
-
-            return self::hasUsableValue($mPrivateKey);
         }
 
         return true;

@@ -4,7 +4,6 @@
  * @author         Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright      (c) 2026, Pierre-Henry Soria and pH7Builder contributors.
  * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
- * @package        PH7 / Test / Unit / App / System / Core / Forms
  */
 
 declare(strict_types=1);
@@ -18,7 +17,6 @@ use PH7\ConfigFileCoreForm;
 use PH7\ConfigFileCoreFormProcess;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
-use ReflectionMethod;
 
 final class ConfigFileCoreFormTest extends TestCase
 {
@@ -33,7 +31,6 @@ final class ConfigFileCoreFormTest extends TestCase
         return [
             ['stripe.secret_key'],
             ['2co.secret_word'],
-            ['braintree.private_key'],
             ['twilio.api_token'],
             ['youtube.key'],
             ['password']
@@ -43,13 +40,12 @@ final class ConfigFileCoreFormTest extends TestCase
     public function testPublicConfigurationKeysRemainVisible(): void
     {
         $this->assertFalse(ConfigFileCoreForm::isSensitiveKey('stripe.publishable_key'));
-        $this->assertFalse(ConfigFileCoreForm::isSensitiveKey('braintree.public_key'));
         $this->assertFalse(ConfigFileCoreForm::isSensitiveKey('paypal.email'));
     }
 
     public function testSensitiveFieldNeverReceivesTheStoredValue(): void
     {
-        $oMethod = new ReflectionMethod(ConfigFileCoreForm::class, 'getFieldProperties');
+        $oMethod = new \ReflectionMethod(ConfigFileCoreForm::class, 'getFieldProperties');
 
         $aProperties = $oMethod->invoke(null, 'stripe.secret_key', 'stored-secret');
 
@@ -61,7 +57,7 @@ final class ConfigFileCoreFormTest extends TestCase
     #[DataProvider('unavailableGatewayHelpProvider')]
     public function testUnavailableGatewaysExplainTheirRequiredMigration(string $sKey, string $sExpectedHelp): void
     {
-        $oMethod = new ReflectionMethod(ConfigFileCoreForm::class, 'getFieldProperties');
+        $oMethod = new \ReflectionMethod(ConfigFileCoreForm::class, 'getFieldProperties');
 
         $aProperties = $oMethod->invoke(null, $sKey, 1);
 
@@ -78,7 +74,7 @@ final class ConfigFileCoreFormTest extends TestCase
 
     public function testBlankSensitiveSubmissionPreservesExistingValue(): void
     {
-        $oMethod = new ReflectionMethod(ConfigFileCoreFormProcess::class, 'shouldPreserveExistingValue');
+        $oMethod = new \ReflectionMethod(ConfigFileCoreFormProcess::class, 'shouldPreserveExistingValue');
 
         $this->assertTrue($oMethod->invoke(null, 'stripe.secret_key', ''));
         $this->assertFalse($oMethod->invoke(null, 'stripe.secret_key', 'replacement'));
@@ -88,7 +84,7 @@ final class ConfigFileCoreFormTest extends TestCase
     public function testQuotedConfigValueIsSafelyReplaced(): void
     {
         $sConfig = "[module.setting]\nstripe.secret_key = \"\"\n";
-        $oMethod = new ReflectionMethod(ConfigFileCoreFormProcess::class, 'replaceConfigValue');
+        $oMethod = new \ReflectionMethod(ConfigFileCoreFormProcess::class, 'replaceConfigValue');
 
         $sSecret = 'secret"with\\symbols${PH7_CONFIG_EXPANSION}';
         putenv('PH7_CONFIG_EXPANSION=must-not-be-expanded');

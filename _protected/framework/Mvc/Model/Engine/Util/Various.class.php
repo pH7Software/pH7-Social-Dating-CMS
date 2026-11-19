@@ -46,6 +46,10 @@ class Various
 
         $oDb = Db::getInstance();
         $sSqlContent = file_get_contents($sSqlFile);
+        if ($sSqlContent === false) {
+            return false;
+        }
+
         $sSqlContent = static::renameTablePrefix($sSqlContent);
         $rStmt = $oDb->exec($sSqlContent);
         unset($sSqlContent);
@@ -86,28 +90,13 @@ class Various
      */
     public static function convertTableToMod(string $sTable): string
     {
-        switch ($sTable) {
-            case DbTableName::MEMBER:
-                $sMod = 'user';
-                break;
-
-            case DbTableName::AFFILIATE:
-                $sMod = 'affiliate';
-                break;
-
-            case DbTableName::SUBSCRIBER:
-                $sMod = 'newsletter';
-                break;
-
-            case DbTableName::ADMIN:
-                $sMod = PH7_ADMIN_MOD;
-                break;
-
-            default:
-                static::launchErr($sTable);
-        }
-
-        return $sMod;
+        return match ($sTable) {
+            DbTableName::MEMBER => 'user',
+            DbTableName::AFFILIATE => 'affiliate',
+            DbTableName::SUBSCRIBER => 'newsletter',
+            DbTableName::ADMIN => PH7_ADMIN_MOD,
+            default => static::launchErr($sTable),
+        };
     }
 
     /**
@@ -123,49 +112,16 @@ class Various
      */
     public static function convertTableToId(string $sTable): string
     {
-        switch ($sTable) {
-            case DbTableName::MEMBER:
-                $sId = 'profileId';
-                break;
-
-            case DbTableName::PICTURE:
-                $sId = 'pictureId';
-                break;
-
-            case DbTableName::ALBUM_PICTURE:
-                $sId = 'albumId';
-                break;
-
-            case DbTableName::VIDEO:
-                $sId = 'videoId';
-                break;
-
-            case DbTableName::ALBUM_VIDEO:
-                $sId = 'albumId';
-                break;
-
-            case DbTableName::BLOG:
-                $sId = 'blogId';
-                break;
-
-            case DbTableName::NOTE:
-                $sId = 'noteId';
-                break;
-
-            case DbTableName::FORUM_TOPIC:
-                $sId = 'topicId';
-                break;
-
-            /** Check Ads Tables **/
-            case AdsCore::checkTable($sTable):
-                $sId = AdsCore::convertTableToId($sTable);
-                break;
-
-            default:
-                static::launchErr($sTable);
-        }
-
-        return $sId;
+        return match ($sTable) {
+            DbTableName::MEMBER => 'profileId',
+            DbTableName::PICTURE => 'pictureId',
+            DbTableName::ALBUM_PICTURE, DbTableName::ALBUM_VIDEO => 'albumId',
+            DbTableName::VIDEO => 'videoId',
+            DbTableName::BLOG => 'blogId',
+            DbTableName::NOTE => 'noteId',
+            DbTableName::FORUM_TOPIC => 'topicId',
+            default => AdsCore::convertTableToId($sTable),
+        };
     }
 
     /**
@@ -181,25 +137,16 @@ class Various
      */
     public static function checkTable(string $sTable): string
     {
-        switch ($sTable) {
-            case DbTableName::MEMBER:
-            case DbTableName::ALBUM_PICTURE:
-            case DbTableName::ALBUM_VIDEO:
-            case DbTableName::PICTURE:
-            case DbTableName::VIDEO:
-            case DbTableName::BLOG:
-            case DbTableName::NOTE:
-                return $sTable;
-
-            /** Check Ads Tables **/
-            case AdsCore::checkTable($sTable):
-                return $sTable;
-
-            default:
-                static::launchErr($sTable);
-        }
-
-        return $sTable;
+        return match ($sTable) {
+            DbTableName::MEMBER,
+            DbTableName::ALBUM_PICTURE,
+            DbTableName::ALBUM_VIDEO,
+            DbTableName::PICTURE,
+            DbTableName::VIDEO,
+            DbTableName::BLOG,
+            DbTableName::NOTE => $sTable,
+            default => AdsCore::checkTable($sTable),
+        };
     }
 
     /**
@@ -215,31 +162,26 @@ class Various
      */
     public static function checkModelTable(string $sTable): string
     {
-        switch ($sTable) {
-            case DbTableName::MEMBER:
-            case DbTableName::MEMBER_INFO:
-            case DbTableName::MEMBER_COUNTRY:
-            case DbTableName::MEMBER_ATTEMPT_LOGIN:
-            case DbTableName::MEMBER_LOG_LOGIN:
-            case DbTableName::MEMBER_LOG_SESS:
-            case DbTableName::AFFILIATE:
-            case DbTableName::AFFILIATE_INFO:
-            case DbTableName::AFFILIATE_COUNTRY:
-            case DbTableName::AFFILIATE_ATTEMPT_LOGIN:
-            case DbTableName::AFFILIATE_LOG_LOGIN:
-            case DbTableName::AFFILIATE_LOG_SESS:
-            case DbTableName::ADMIN:
-            case DbTableName::ADMIN_ATTEMPT_LOGIN:
-            case DbTableName::ADMIN_LOG_LOGIN:
-            case DbTableName::ADMIN_LOG_SESS:
-            case DbTableName::SUBSCRIBER:
-                return $sTable;
-
-            default:
-                static::launchErr($sTable);
-        }
-
-        return $sTable;
+        return match ($sTable) {
+            DbTableName::MEMBER,
+            DbTableName::MEMBER_INFO,
+            DbTableName::MEMBER_COUNTRY,
+            DbTableName::MEMBER_ATTEMPT_LOGIN,
+            DbTableName::MEMBER_LOG_LOGIN,
+            DbTableName::MEMBER_LOG_SESS,
+            DbTableName::AFFILIATE,
+            DbTableName::AFFILIATE_INFO,
+            DbTableName::AFFILIATE_COUNTRY,
+            DbTableName::AFFILIATE_ATTEMPT_LOGIN,
+            DbTableName::AFFILIATE_LOG_LOGIN,
+            DbTableName::AFFILIATE_LOG_SESS,
+            DbTableName::ADMIN,
+            DbTableName::ADMIN_ATTEMPT_LOGIN,
+            DbTableName::ADMIN_LOG_LOGIN,
+            DbTableName::ADMIN_LOG_SESS,
+            DbTableName::SUBSCRIBER => $sTable,
+            default => static::launchErr($sTable),
+        };
     }
 
     /**

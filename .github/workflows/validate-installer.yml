@@ -10,6 +10,9 @@ on:
       - '_install/**'
       - '.github/workflows/validate-installer.yml'
 
+permissions:
+  contents: read
+
 jobs:
   validate:
     runs-on: ubuntu-24.04

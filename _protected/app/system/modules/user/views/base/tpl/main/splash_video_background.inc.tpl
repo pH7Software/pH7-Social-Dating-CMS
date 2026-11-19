@@ -5,9 +5,9 @@
 {if !$browser->isMobile()}
     {* The background video is enabled only if visitors aren't from mobile devices (for performance reasons...) *}
     <style scoped="scoped">video#bgvid{background: url({url_tpl}file/splash/{video_prefix}_vid.jpg) no-repeat center}</style>
-    <video autoplay loop muted poster="{url_tpl}file/splash/{video_prefix}_vid.jpg" id="bgvid">
-        <source src="{url_tpl}file/splash/{video_prefix}_vid.webm" type="video/webm" />
-        <source src="{url_tpl}file/splash/{video_prefix}_vid.mp4" type="video/mp4" />
+    <video autoplay loop muted playsinline preload="none" poster="{url_tpl}file/splash/{video_prefix}_vid.jpg" id="bgvid" aria-hidden="true" tabindex="-1">
+        <source data-src="{url_tpl}file/splash/{video_prefix}_vid.webm" type="video/webm" />
+        <source data-src="{url_tpl}file/splash/{video_prefix}_vid.mp4" type="video/mp4" />
     </video>
 {else}
     <style scoped="scoped">

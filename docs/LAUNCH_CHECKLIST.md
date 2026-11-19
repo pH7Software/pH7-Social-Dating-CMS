@@ -106,12 +106,6 @@ you serve.
       to Checkout Sessions or Payment Intents before it is offered to members.
 - [ ] 2Checkout stays disabled until its bundled legacy flow is migrated to the
       2Checkout API 6.0.
-- [ ] If Braintree is enabled, verify current provider guidance and account
-      eligibility for its [Drop-in UI](https://developer.paypal.com/braintree/docs/guides/drop-in/overview/javascript/v3).
-      The announced October 1, 2026 deprecation
-      date has passed; the announced end-of-support date is October 1, 2027.
-      Schedule migration before then. A PHP SDK update alone does not replace
-      Drop-in.
 - [ ] Sandbox/test mode covers success, decline, cancellation, callback/webhook,
       duplicate notification, refund, and expired membership behavior.
 - [ ] The PayPal IPN URL is reachable over public HTTPS and a repeated verified

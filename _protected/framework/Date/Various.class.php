@@ -15,7 +15,7 @@ namespace PH7\Framework\Date;
 
 defined('PH7') or exit('Restricted access');
 
-use DateTime;
+use DateTimeImmutable;
 
 class Various
 {
@@ -29,7 +29,7 @@ class Various
      */
     public static function getTime(string $sTime = 'now'): int
     {
-        return (new DateTime($sTime))->getTimestamp();
+        return (new DateTimeImmutable($sTime))->getTimestamp();
     }
 
     /**
@@ -41,12 +41,7 @@ class Various
      */
     public static function setTime(string $sTime): int
     {
-        $oDate = new DateTime;
-        $oDate->modify($sTime);
-        $iNewTime = $oDate->getTimestamp();
-        unset($oDate);
-
-        return $iNewTime;
+        return (new DateTimeImmutable())->modify($sTime)->getTimestamp();
     }
 
     /**
@@ -58,17 +53,13 @@ class Various
      */
     public static function timeToSec(string $sHMS): int
     {
-        if (strpos($sHMS, ':') === false) {
+        if (!str_contains($sHMS, ':')) {
             return 0;
         }
 
-        [$iH, $iM, $iS] = explode(':', $sHMS);
-        $iSeconds = 0;
-        $iSeconds += ((int)$iH * 3600);
-        $iSeconds += ((int)$iM * 60);
-        $iSeconds += (int)$iS;
+        [$iHours, $iMinutes, $iSeconds] = array_pad(explode(':', $sHMS, 3), 3, 0);
 
-        return $iSeconds;
+        return ((int)$iHours * 3600) + ((int)$iMinutes * 60) + (int)$iSeconds;
     }
 
     /**
@@ -78,14 +69,14 @@ class Various
      *
      * @return string Example: 09:23
      */
-    public static function secToTime($iSeconds): string
+    public static function secToTime(int|float|string $iSeconds): string
     {
         $iSeconds = (int)$iSeconds;
 
-        $iTime1 = floor($iSeconds / 60);
-        $iTime2 = ($iSeconds % 60);
+        $iMinutes = intdiv($iSeconds, 60);
+        $iRemainingSeconds = $iSeconds % 60;
 
-        return static::checkSecToTime((int)$iTime1) . ':' . static::checkSecToTime($iTime2);
+        return static::checkSecToTime($iMinutes) . ':' . static::checkSecToTime($iRemainingSeconds);
     }
 
     /**
@@ -95,7 +86,7 @@ class Various
      *
      * @return string Returns the text of the time stamp.
      */
-    public static function textTimeStamp($mTime): string
+    public static function textTimeStamp(int|string $mTime): string
     {
         if (is_string($mTime)) {
             // Converting the date string format into timeStamp
@@ -111,25 +102,16 @@ class Various
         $iMonths = round($iSeconds / 2419200);
         $iYears = round($iSeconds / 29030400);
 
-        if ($iSeconds === 0)
-            $sTxt = t('%0% seconds ago.', 0.5);
-        elseif ($iSeconds < 60)
-            $sTxt = t('%0% seconds ago.', $iSeconds);
-        elseif ($iMinutes < 60)
-            $sTxt = $iMinutes === 1 ? t('one minute ago.') : t('%0% minutes ago.', $iMinutes);
-        elseif ($iHours < 24)
-            $sTxt = $iHours === 1 ? t('one hour ago.') : t('%0% hours ago.', $iHours);
-        else
-            if ($iDays < 7)
-                $sTxt = $iDays === 1 ? t('one day ago.') : t('%0% days ago.', $iDays);
-            elseif ($iWeeks < 4)
-                $sTxt = $iWeeks === 1 ? t('one week ago.') : t('%0% weeks ago.', $iWeeks);
-            elseif ($iMonths < 12)
-                $sTxt = $iMonths === 1 ? t('one month ago.') : t('%0% months ago.', $iMonths);
-            else
-                $sTxt = $iYears === 1 ? t('one year ago.') : t('%0% years ago.', $iYears);
-
-        return $sTxt;
+        return match (true) {
+            $iSeconds === 0 => t('%0% seconds ago.', 0.5),
+            $iSeconds < 60 => t('%0% seconds ago.', $iSeconds),
+            $iMinutes < 60 => $iMinutes === 1 ? t('one minute ago.') : t('%0% minutes ago.', $iMinutes),
+            $iHours < 24 => $iHours === 1 ? t('one hour ago.') : t('%0% hours ago.', $iHours),
+            $iDays < 7 => $iDays === 1 ? t('one day ago.') : t('%0% days ago.', $iDays),
+            $iWeeks < 4 => $iWeeks === 1 ? t('one week ago.') : t('%0% weeks ago.', $iWeeks),
+            $iMonths < 12 => $iMonths === 1 ? t('one month ago.') : t('%0% months ago.', $iMonths),
+            default => $iYears === 1 ? t('one year ago.') : t('%0% years ago.', $iYears),
+        };
     }
 
     /**
@@ -139,8 +121,6 @@ class Various
      */
     private static function checkSecToTime(int $iVal): string
     {
-        $sVal = (string)$iVal;
-
-        return strlen($sVal) === 1 ? 0 . $sVal : $sVal;
+        return str_pad((string)$iVal, 2, '0', STR_PAD_LEFT);
     }
 }

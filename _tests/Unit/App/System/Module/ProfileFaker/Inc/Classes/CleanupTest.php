@@ -30,8 +30,8 @@ final class CleanupTest extends TestCase
         return [
             ['pierre.soria', 'pierre-soria', 40],
             ['pierre-henry soria', 'pierre-henry-soria', 40],
-            ['Marie-Amelie.Rollier', 'Marie-Amelie-R', 14],
-            ['marie..heloise Beghin', 'marie--helois', 13],
+            ['Marie-Amelie.de Remond', 'Marie-Amelie-R', 14],
+            ['marie..heloise de Remond', 'marie--helois', 13],
             ['.', '', 0]
         ];
     }

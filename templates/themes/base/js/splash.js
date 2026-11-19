@@ -4,6 +4,30 @@
  * License:       MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  */
 
+function loadSplashBackgroundVideo() {
+    var oVideo = document.getElementById('bgvid');
+    var oConnection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+    var bReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (!oVideo || bReducedMotion || (oConnection && oConnection.saveData)) {
+        return;
+    }
+
+    Array.prototype.forEach.call(oVideo.getElementsByTagName('source'), function (oSource) {
+        oSource.src = oSource.getAttribute('data-src');
+    });
+    oVideo.load();
+
+    var oPlayback = oVideo.play();
+    if (oPlayback && typeof oPlayback.catch === 'function') {
+        oPlayback.catch(function () {
+            // The poster remains visible when a browser blocks autoplay.
+        });
+    }
+}
+
+loadSplashBackgroundVideo();
+
 // Set Default State of each portfolio piece
 $(".paging").show();
 $(".paging a:first").addClass("active");

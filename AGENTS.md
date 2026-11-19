@@ -53,6 +53,27 @@ controllers, persistence in models, reusable application behavior in
 Generate application URLs with `Uri::get()` and respect the XML routing model
 instead of hardcoding route strings.
 
+## Architecture decisions
+
+- Treat the current architecture as a revisable default. When a concrete
+  requirement fits badly, improve the responsible seam instead of adding a
+  parallel path or a compatibility wrapper.
+- Before a substantial implementation, compare the direct change with the
+  smallest architectural change that makes the requirement ordinary. Repeated
+  branches, duplicated flows, or disproportionate glue are signals to stop and
+  reconsider the boundary.
+- Choose the design with the lowest total project complexity, including
+  migrations, callers, tests, operations, and code that becomes obsolete.
+- Do not introduce speculative frameworks, services, or broad rewrites. A new
+  abstraction must solve a current requirement and fit pH7Builder's modular
+  architecture, independent-hosting model, security rules, and MIT licence.
+- Complete an architectural change across its callers and remove the superseded
+  path once verified. Do not leave two ways to perform the same operation.
+- Treat existing files as valuable work. Prefer the smallest targeted edit and
+  preserve unrelated structure, comments, formatting, and behavior. If a change
+  would replace roughly a third of a file, first look for a narrower refactor or
+  a better owning seam.
+
 ## Coding conventions
 
 Follow the surrounding file when legacy compatibility constrains a change, but
@@ -212,6 +233,21 @@ already correctly protected.
 ## Verification
 
 Run checks proportionate to the change. Start focused and expand:
+
+- Test observable contracts and outcomes, not the current spelling or layout of
+  an implementation. A useful regression test should fail when users, callers,
+  providers, security boundaries, or release artifacts would see a defect, and
+  keep passing after a behavior-preserving refactor.
+- Use unit tests for isolated logic and provider boundaries, integration tests
+  for collaborating PHP components, and the Chrome audit for JavaScript, DOM,
+  keyboard, form, responsive, and other browser behavior.
+- Avoid assertions that merely search PHP, JavaScript, CSS, or templates for
+  source strings. Keep a static contract test only when the repository artifact
+  itself is the contract and executing the behavior is impractical, such as a
+  dependency declaration, schema inventory, or feature-gate classification.
+- Add the smallest test that protects the identified regression. Do not add a
+  duplicate test only to increase test or assertion counts; retain the strongest
+  layer and remove weaker coverage when a behavioral test replaces it.
 
 ```console
 # Syntax-check each changed PHP file

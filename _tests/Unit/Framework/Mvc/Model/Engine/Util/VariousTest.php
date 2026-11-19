@@ -31,6 +31,11 @@ class VariousTest extends TestCase
         DbVarious::checkTable('incorrect_table');
     }
 
+    public function testMissingQueryFileIsRejected(): void
+    {
+        $this->assertFalse(DbVarious::execQueryFile(__DIR__ . '/missing-query-file.sql'));
+    }
+
     #[DataProvider('modelTablesProvider')]
     public function testCorrectModelTable(string $sTable, string $sExpectedTable): void
     {

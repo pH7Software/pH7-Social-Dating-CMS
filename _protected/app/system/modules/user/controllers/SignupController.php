@@ -10,6 +10,7 @@
 
 namespace PH7;
 
+use PH7\Framework\Module\Various as SysMod;
 use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Url\Header;
@@ -120,7 +121,10 @@ class SignupController extends Controller
                 )
             );
         } else {
-            if ((new UserMilestoneCore(new UserCoreModel()))->isTotalUserReached()) {
+            if (
+                SysMod::isEnabled('milestone-celebration')
+                && (new UserMilestoneCore(new UserCoreModel()))->isTotalUserReached()
+            ) {
                 $sUrl = Uri::get(
                     'milestone-celebration',
                     'main',

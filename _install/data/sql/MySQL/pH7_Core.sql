@@ -910,7 +910,7 @@ INSERT INTO ph7_meta_main (langId, pageTitle, metaDescription, metaKeywords, hea
 CREATE TABLE IF NOT EXISTS ph7_sys_mods_enabled (
   moduleId tinyint(2) unsigned NOT NULL AUTO_INCREMENT,
   moduleTitle varchar(50) NOT NULL,
-  folderName varchar(20) NOT NULL,
+  folderName varchar(64) NOT NULL,
   premiumMod enum('0','1') NOT NULL DEFAULT '0',
   enabled enum('0','1') NOT NULL DEFAULT '1',
   PRIMARY KEY (moduleId)
@@ -933,9 +933,11 @@ INSERT INTO ph7_sys_mods_enabled (moduleTitle, folderName, premiumMod, enabled) 
 ('User Dashboard', 'user-dashboard', '0', '1'),
 ('Dating-Style Profile Page', 'cool-profile-page', '0', '1'),
 ('Birthday: Let''s Celebrate Birthdays', 'birthday', '0', '1'),
+('Milestone Celebration', 'milestone-celebration', '0', '1'),
 ('Google Maps', 'map', '0', '1'),
 ('Newsletter', 'newsletter', '0', '1'),
 ('Invite Friends', 'invite', '0', '1'),
+('Profile Generator', 'profile-faker', '0', '1'),
 ('SMS Verification', 'sms-verification', '0', '0'),
 ('Progressive Web App (HTTPS required)', 'pwa', '0', '0');
 
@@ -953,7 +955,7 @@ CREATE TABLE IF NOT EXISTS ph7_modules (
 
 INSERT INTO ph7_modules (vendorName, moduleName, version, active) VALUES
 /* Gives the current version of pH7Builder SQL schema (this helps to update and shows whether it is necessary or not to update the database as well) */
-('pH7Builder', 'SQL System Schema', '1.6.6', 1);
+('pH7Builder', 'SQL System Schema', '1.6.7', 1);
 
 
 CREATE TABLE IF NOT EXISTS ph7_report (
