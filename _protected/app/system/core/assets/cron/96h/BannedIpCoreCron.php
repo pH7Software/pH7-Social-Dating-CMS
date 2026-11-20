@@ -35,7 +35,7 @@ class BannedIpCoreCron extends Cron
      */
     private const SVC_URLS = [
         'https://www.blocklist.de/downloads/export-ips_all.txt',
-        'https://www.badips.com/get/list/ssh/2?age=30d',
+        'https://netapi.com/api2/?method=compromised&dataset_type=ip&header=0',
         'https://www.rjmblocklist.com/free/badips.txt'
     ];
 
