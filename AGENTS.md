@@ -15,6 +15,16 @@ worktree.
 pH7Builder 20.0.0 requires PHP 8.3 or newer. It combines a modular MVC
 application with the project-specific pH7Framework and PH7Tpl template engine.
 
+## Reusable agent skills
+
+Use the canonical workflows below when a task matches their scope. They supplement this guide and the nearby source files rather than replacing them:
+
+- [Published-release installation and evaluation](.agents/skills/ph7builder-installation/SKILL.md).
+- [Custom module development](.agents/skills/ph7builder-module-development/SKILL.md).
+- [Read-only upgrade preflight](.agents/skills/ph7builder-upgrade-preflight/SKILL.md).
+
+Claude-compatible entry points under `.claude/skills/` refer to these canonical skills to avoid maintaining conflicting copies.
+
 ## Repository map
 
 - `_protected/app/system/modules/`: bundled application modules. A module
