@@ -7,6 +7,8 @@ description: Evaluate or install a published pH7Builder release locally or on a 
 
 Use this skill when setting up a local development copy, installing a published release, or preparing a deployment.
 
+Before changing a production host or live data, obtain explicit authorisation and verify a usable backup and recovery plan. Read-only checks do not authorise deployment.
+
 1. Read the repository `AGENTS.md`, `README.md`, `docs/QUICK_START.md`, and, for production, `docs/LAUNCH_CHECKLIST.md`. Treat these files and the published release notes as authoritative.
 2. Distinguish the current source branch from the most recent **published** release. As of the documentation in this branch, 19.4.0 is published and 20.0.0 is being prepared. Check current release information rather than hardcoding an assumption.
 3. For local evaluation, follow the README Docker procedure. Its database credentials and volume-recreation command are for disposable local environments only. Never reuse the example credentials or delete real data.
