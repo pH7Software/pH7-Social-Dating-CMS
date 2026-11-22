@@ -77,7 +77,7 @@
     "ph-7/passcode-password-generator": "^2.0",
     "ph-7/ph2gravatar": "^2.0",
     "robthree/twofactorauth": "^3.0",
-    "stripe/stripe-php": "^20.0",
+    "stripe/stripe-php": "^23.1",
     "symfony/console": "^7.4",
     "symfony/mailer": "^7.4",
     "twbs/bootstrap": "^3.4",
