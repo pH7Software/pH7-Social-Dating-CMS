@@ -17,7 +17,6 @@ defined('PH7') or exit('Restricted access');
 use Exception;
 use GuzzleHttp\Client;
 use PH7\Framework\Error\Logger;
-use PH7\Framework\File\Permission\Chmod;
 use PH7\Framework\Security\Ban\Ban;
 use PH7\JustHttp\StatusCode;
 
@@ -234,7 +233,8 @@ class BannedIpCoreCron extends Cron
             return false;
         }
 
-        $this->file->chmod(self::BANNED_IP_FILE_PATH, Chmod::MODE_ALL_EXEC);
+        // Only the owner and trusted web-server group may modify the ban file.
+        $this->file->chmod(self::BANNED_IP_FILE_PATH, 0660);
 
         foreach ($this->aNewIps as $sIp) {
             $this->addIp($sIp);
