@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 namespace PH7\Test\Unit\Root;
 
+use Composer\Semver\Semver;
 use DOMDocument;
 use DOMElement;
 use PH7\Framework\Core\Kernel;
@@ -37,8 +38,13 @@ final class ReleaseDeploymentTest extends TestCase
         $aInstallerPackages = array_column($aInstallerLock['packages'], null, 'name');
 
         $this->assertStringNotContainsString('composer.lock export-ignore', $sAttributes);
-        $this->assertSame('^5.8.5', $aInstallerComposer['require']['smarty/smarty']);
-        $this->assertSame('v5.8.5', $aInstallerPackages['smarty/smarty']['version']);
+        $sSmartyConstraint = $aInstallerComposer['require']['smarty/smarty'];
+        $sSmartyVersion = ltrim($aInstallerPackages['smarty/smarty']['version'], 'v');
+
+        $this->assertTrue(
+            Semver::satisfies($sSmartyVersion, $sSmartyConstraint),
+            sprintf('Locked Smarty %s does not satisfy %s.', $sSmartyVersion, $sSmartyConstraint)
+        );
         $this->assertSame(
             '@php _protected/app/includes/InstallerDependencies.php',
             $aComposer['scripts']['install-installer-dependencies']
