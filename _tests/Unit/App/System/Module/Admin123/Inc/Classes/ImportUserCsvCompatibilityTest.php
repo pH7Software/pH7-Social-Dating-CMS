@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @author           Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright        (c) 2026, Pierre-Henry Soria and pH7Builder contributors.
@@ -10,11 +11,10 @@ declare(strict_types=1);
 
 namespace PH7\Test\Unit\App\System\Module\Admin123\Inc\Classes;
 
-use PH7\ImportUser;
+use PH7\MemberMigrationCsv;
 use PHPUnit\Framework\TestCase;
-use ReflectionClass;
 
-require_once PH7_PATH_SYS_MOD . 'admin123/inc/class/ImportUser.php';
+require_once PH7_PATH_SYS_MOD . 'admin123/inc/class/MemberMigrationCsv.php';
 
 final class ImportUserCsvCompatibilityTest extends TestCase
 {
@@ -24,36 +24,37 @@ final class ImportUserCsvCompatibilityTest extends TestCase
      */
     public function testRowValuesComeFromTheRowWithDefaultsForGaps(): void
     {
-        $oReflection = new ReflectionClass(ImportUser::class);
-        $oImport = $oReflection->newInstanceWithoutConstructor();
-        $oReflection->getProperty('aFileData')->setValue($oImport, ['User_Name', 'E-mail', 'Country', 'City']);
-        $oReflection->getProperty('aTmpData')->setValue(
-            $oImport,
-            ['username' => 'pH7Builder', 'email' => '', 'country' => 'US', 'city' => 'Virginia', 'state' => 'Doswell']
-        );
-        $oReflection->getMethod('setTmpData')->invoke($oImport);
+        $oCsv = new MemberMigrationCsv();
+        $aColumns = $oCsv->mapHeaders(['User_Name', 'E-mail', 'Country', 'City', 'activation_status']);
+        $aDefaults = [
+            'username' => 'pH7Builder',
+            'email' => '',
+            'country' => 'US',
+            'city' => 'Virginia',
+            'state' => 'Doswell',
+            'is_active' => '1'
+        ];
+        $aRow = ['cara', 'cara@example.test', 'NZ', '', '0'];
 
-        $oGetRowValue = $oReflection->getMethod('getRowValue');
-        $fnValue = static fn(array $aRow, string $sType): string => $oGetRowValue->invoke($oImport, $aRow, $sType);
-        $aRow = ['cara', 'cara@example.test', 'NZ', ''];
-
-        $this->assertSame('cara', $fnValue($aRow, 'username'));
-        $this->assertSame('NZ', $fnValue($aRow, 'country'));
-        $this->assertSame('Virginia', $fnValue($aRow, 'city'), 'An empty cell uses the default, not its column.');
-        $this->assertSame('Doswell', $fnValue($aRow, 'state'), 'A column the CSV lacks uses the default.');
+        $this->assertSame('cara', $oCsv->getValue($aRow, $aColumns, $aDefaults, 'username'));
+        $this->assertSame('NZ', $oCsv->getValue($aRow, $aColumns, $aDefaults, 'country'));
+        $this->assertSame('Virginia', $oCsv->getValue($aRow, $aColumns, $aDefaults, 'city'));
+        $this->assertSame('Doswell', $oCsv->getValue($aRow, $aColumns, $aDefaults, 'state'));
+        $this->assertSame('0', $oCsv->getValue($aRow, $aColumns, $aDefaults, 'is_active'));
     }
 
-    public function testCsvReaderKeepsItsEscapeCharacterExplicit(): void
+    public function testDialectRejectsUnexpectedControlCharacters(): void
     {
-        $sSource = file_get_contents(
-            PH7_PATH_SYS_MOD . 'admin123/inc/class/ImportUser.php'
-        );
-        $sExplicitEscapeArgument = <<<'SOURCE'
-$sEnclosure, '\\')
-SOURCE;
+        $this->expectException(\InvalidArgumentException::class);
 
-        $this->assertIsString($sSource);
-        $this->assertSame(2, substr_count($sSource, 'fgetcsv('));
-        $this->assertSame(2, substr_count($sSource, $sExplicitEscapeArgument));
+        (new MemberMigrationCsv())->assertDialect("\n", '"');
+    }
+
+    public function testMapsAnEmailHeaderWithUtf8ByteOrderMark(): void
+    {
+        $aColumns = (new MemberMigrationCsv())->mapHeaders(["\xEF\xBB\xBFemail", 'first_name']);
+
+        $this->assertSame(0, $aColumns['email']);
+        $this->assertSame(1, $aColumns['first_name']);
     }
 }
