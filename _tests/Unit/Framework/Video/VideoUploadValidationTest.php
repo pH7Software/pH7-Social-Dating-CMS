@@ -37,6 +37,16 @@ final class VideoUploadValidationTest extends TestCase
         $this->assertStringContainsString('$this->mimeMatchesExpected($sDetectedMime, $sExpectedMime)', $sSource);
     }
 
+    #[DataProvider('invalidThumbnailArgumentProvider')]
+    public function testThumbnailRejectsCommandExpressions($mSeconds, $mWidth, $mHeight): void
+    {
+        $oReflection = new \ReflectionClass(Video::class);
+        $oVideo = $oReflection->newInstanceWithoutConstructor();
+
+        $this->expectException(\InvalidArgumentException::class);
+        $oVideo->thumbnail('/tmp/thumbnail.jpg', $mSeconds, $mWidth, $mHeight);
+    }
+
     public static function mimeReliabilityProvider(): array
     {
         return [
@@ -45,6 +55,18 @@ final class VideoUploadValidationTest extends TestCase
             'mixed-case generic detection' => [' Application/Octet-Stream ', false],
             'server-detected video' => ['video/mp4', true],
             'recognized alias' => ['application/ogg', true]
+        ];
+    }
+
+    public static function invalidThumbnailArgumentProvider(): array
+    {
+        return [
+            'time command expression' => ['1; touch /tmp/pwned', 320, 180],
+            'width command expression' => [1, '320; touch /tmp/pwned', 180],
+            'height command expression' => [1, 320, '180; touch /tmp/pwned'],
+            'negative time' => [-1, 320, 180],
+            'zero width' => [1, 0, 180],
+            'zero height' => [1, 320, 0]
         ];
     }
 }
