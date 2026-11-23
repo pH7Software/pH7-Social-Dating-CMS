@@ -118,16 +118,21 @@ final class Token
             'security_token_http_user_agent_' . $sName
         ];
 
-        if ($this->oSession->exists($aCheckSession) && !empty($sInputToken))
-            if ($this->oSession->get('security_token_' . $sName) === $sInputToken)
-                if ($this->oSession->get('security_token_time_' . $sName) >= (time() - $iTime))
-                    //if ($this->sHttpReferer === $this->oSession->get('security_token_http_referer_' . $sName))
-                        if (Ip::get() === $this->oSession->get('security_token_ip_' . $sName))
-                            if ($this->sUserAgent === $this->oSession->get('security_token_http_user_agent_' . $sName)) {
-                                // Delete the token and data sessions expired
-                                $this->oSession->remove($aCheckSession);
-                                return true;
-                            }
+        if ($this->oSession->exists($aCheckSession) && is_string($sInputToken) && $sInputToken !== '') {
+            $sExpectedToken = $this->oSession->get('security_token_' . $sName);
+            $bTokenMatches = is_string($sExpectedToken) && hash_equals($sExpectedToken, $sInputToken);
+            $bWithinLifetime = $this->oSession->get('security_token_time_' . $sName) >= (time() - $iTime);
+            $bIpMatches = Ip::get() === $this->oSession->get('security_token_ip_' . $sName);
+            $bUserAgentMatches = $this->sUserAgent === $this->oSession->get(
+                'security_token_http_user_agent_' . $sName
+            );
+
+            if ($bTokenMatches && $bWithinLifetime && $bIpMatches && $bUserAgentMatches) {
+                // Delete the token and data sessions expired
+                $this->oSession->remove($aCheckSession);
+                return true;
+            }
+        }
 
         // Delete the token and data sessions expired
         $this->oSession->remove($aCheckSession);
@@ -153,8 +158,16 @@ final class Token
     public function checkUrl(): bool
     {
         $oHttpRequest = new HttpRequest;
-        $bRet = (($this->currentSess() === true) || $oHttpRequest->currentUrl() === PH7_URL_ROOT ||
-            ($oHttpRequest->get(static::VAR_NAME) === $this->currentSess()));
+        $mExpectedToken = $this->currentSess();
+        $mInputToken = $oHttpRequest->get(static::VAR_NAME);
+        $bRet = $mExpectedToken === true
+            || $oHttpRequest->currentUrl() === PH7_URL_ROOT
+            || (
+                is_string($mExpectedToken)
+                && is_string($mInputToken)
+                && $mInputToken !== ''
+                && hash_equals($mExpectedToken, $mInputToken)
+            );
         unset($oHttpRequest);
 
         return $bRet;
