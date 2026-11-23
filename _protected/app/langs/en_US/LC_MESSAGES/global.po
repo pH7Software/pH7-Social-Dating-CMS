@@ -2722,23 +2722,35 @@ msgstr ""
 msgid "With your time zone, the other administrators may know when they can contact you easily."
 msgstr ""
 
-#: _protected/app/system/modules/admin123/forms/ImportUserForm.php:30
-msgid "Import members into your site from a <strong><abbr title=\"Comma Separated Values\">CSV</abbr></strong> file. You should be able to find websites that offer dating profiles database. Make sure they offer CSV format."
-msgstr ""
-
-#: _protected/app/system/modules/admin123/forms/ImportUserForm.php:31
-msgid "Note: This tool cannot import profile photos. Please use the <a href=\"%0%\">Fake Profile Generator</a> if you need profiles with photos"
-msgstr ""
-
 #: _protected/app/system/modules/admin123/forms/ImportUserForm.php:34
-msgid "CSV file:"
+msgid "Preview or import members from a CSV export. Preview checks email validity and duplicates without changing member data."
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/ImportUserForm.php:35
+msgid "For UNA 14.0.0, first create a compatible CSV with the documented pH7Builder migration command. Password hashes and profile photos are not copied."
+msgstr ""
+
+#: _protected/app/system/modules/admin123/forms/ImportUserForm.php:39
+msgid "CSV file:"
+msgstr ""
+
+#: _protected/app/system/modules/admin123/forms/ImportUserForm.php:42
+msgid "Migration action:"
+msgstr ""
+
+#: _protected/app/system/modules/admin123/forms/ImportUserForm.php:46
+msgid "Preview only (recommended)"
+msgstr ""
+
+#: _protected/app/system/modules/admin123/forms/ImportUserForm.php:47
+msgid "Import after reviewing a preview"
+msgstr ""
+
+#: _protected/app/system/modules/admin123/forms/ImportUserForm.php:53
 msgid "Delimiter:"
 msgstr ""
 
-#: _protected/app/system/modules/admin123/forms/ImportUserForm.php:36
+#: _protected/app/system/modules/admin123/forms/ImportUserForm.php:54
 msgid "Enclosure:"
 msgstr ""
 
@@ -3873,23 +3885,33 @@ msgstr ""
 msgid "The banner has been saved!"
 msgstr ""
 
-#: _protected/app/system/modules/admin123/inc/class/ImportUser.php:237
-msgid "Invalid File Format! Please select a valid CSV file containing the member data."
+#: _protected/app/system/modules/admin123/forms/processing/ImportUserFormProcess.php:27
+msgid "Select a valid migration action."
 msgstr ""
 
-#: _protected/app/system/modules/admin123/inc/class/ImportUser.php:241
-msgid "The file is too large. Please select a smaller file or change your server PHP settings. Especially \"upload_max_filesize\" and \"post_max_size\" directives in the php.ini file."
+#: _protected/app/system/modules/admin123/inc/class/ImportUser.php:193
+msgid "Invalid file format. Select a CSV file containing member data."
 msgstr ""
 
-#: _protected/app/system/modules/admin123/inc/class/ImportUser.php:245
-msgid "The file is Invalid/Empty or has incorrect Delimiter/Enclosure set."
+#: _protected/app/system/modules/admin123/inc/class/ImportUser.php:194
+msgid "The file is too large. Select a smaller file or increase the upload_max_filesize and post_max_size PHP settings."
 msgstr ""
 
-#: _protected/app/system/modules/admin123/inc/class/ImportUser.php:314
-msgid "%n% user has been successfully added."
-msgid_plural "%n% users have been successfully added."
-msgstr[0] ""
-msgstr[1] ""
+#: _protected/app/system/modules/admin123/inc/class/ImportUser.php:195
+msgid "The CSV is empty, unreadable, or does not match the selected delimiter and enclosure."
+msgstr ""
+
+#: _protected/app/system/modules/admin123/inc/class/ImportUser.php:236
+msgid "The CSV must contain an email column."
+msgstr ""
+
+#: _protected/app/system/modules/admin123/inc/class/ImportUser.php:319
+msgid "Preview complete: %0% members can be imported; %1% rows are invalid and %2% already exist."
+msgstr ""
+
+#: _protected/app/system/modules/admin123/inc/class/ImportUser.php:328
+msgid "Migration complete: %0% members imported; %1% rows invalid, %2% already existed and %3% failed."
+msgstr ""
 
 #: _protected/app/system/modules/admin123/inc/class/Module.php:212
 msgid "Unable to execute the query SQL of module.<br />Error Message: %0%"

@@ -47,3 +47,49 @@ jobs:
 
       - name: Run Unit Tests (CI Suite)
         run: php _protected/vendor/bin/phpunit --testsuite "pH7Builder Protected CI"
+
+  una-migration:
+    runs-on: ubuntu-24.04
+    name: UNA 14 migration contract
+    services:
+      mysql:
+        image: mysql:8.4
+        env:
+          MYSQL_ALLOW_EMPTY_PASSWORD: yes
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          tools: composer:v2
+          extensions: pdo_mysql
+          coverage: none
+
+      - name: Install Composer Dependencies
+        run: composer install --no-interaction --no-progress
+
+      - name: Load Synthetic UNA Fixture
+        run: |
+          mysql --host=127.0.0.1 --user=root < _tests/Unit/fixtures/migration/una-14.0.0.sql
+          mysql --host=127.0.0.1 --user=root --execute="CREATE USER 'migration_reader'@'%' IDENTIFIED BY 'fixture-password'; GRANT SELECT ON una_migration_fixture.* TO 'migration_reader'@'%';"
+
+      - name: Verify Preview and Export
+        env:
+          PH7_MIGRATION_SOURCE_DSN: mysql:host=127.0.0.1;dbname=una_migration_fixture;charset=utf8mb4
+          PH7_MIGRATION_SOURCE_USER: migration_reader
+          PH7_MIGRATION_SOURCE_PASSWORD: fixture-password
+        run: |
+          php _tools/cli/ph7cms migration:una:export
+          php _tools/cli/ph7cms migration:una:export --output="$RUNNER_TEMP/una-members.csv"
+          # shellcheck disable=SC2016
+          php -r '$f = fopen($argv[1], "rb"); $rows = 0; while (fgetcsv($f, 0, ",", "\"", "\\") !== false) { ++$rows; } exit($rows === 3 ? 0 : 1);' "$RUNNER_TEMP/una-members.csv"

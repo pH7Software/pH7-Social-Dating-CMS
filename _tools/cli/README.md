@@ -12,6 +12,23 @@ The legacy interactive CLI installer is disabled because it could leave a partia
 Use the supported browser installer documented in the root [README](../../README.md#quick-start).
 Running `php ph7cms setup:install` prints that guidance without changing the site or database.
 
+## Data migration
+
+The CLI can validate UNA 14.0.0's public account and Persons schema, then
+export members to pH7Builder's canonical CSV without changing the source:
+
+```console
+php ph7cms migration:una:export
+php ph7cms migration:una:export --output=/secure/private/path/una-members.csv
+```
+
+The preview is the default. Connection details come from
+`PH7_MIGRATION_SOURCE_DSN`, `PH7_MIGRATION_SOURCE_USER`, and
+`PH7_MIGRATION_SOURCE_PASSWORD`. Use a source database account with `SELECT`
+permission only. See [Data migration](../../docs/DATA_MIGRATION.md) for the
+supported fields, security model, limitations, and administration-panel import
+steps.
+
 For GitHub issue maintenance, you can also run:
 
 `php ph7cms github:issues:resolve 1202 1201 --dry-run`

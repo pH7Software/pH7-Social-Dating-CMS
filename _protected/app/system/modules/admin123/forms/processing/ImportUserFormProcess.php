@@ -1,6 +1,8 @@
 <?php
+
 /**
  * @title          Import Users; Process Class
+ *
  * @desc           Import new Users from CSV data file.
  *
  * @author         Pierre-Henry Soria <hello@ph7builder.com>
@@ -21,18 +23,27 @@ class ImportUserFormProcess
 {
     public function __construct()
     {
-        $oHR = new HttpRequest;
+        $oHR = new HttpRequest();
+        $sAction = (string)$oHR->post('migration_action');
+        if (!in_array($sAction, ['preview', 'import'], true)) {
+            \PFBC\Form::setError('form_import_user', t('Select a valid migration action.'));
+
+            return;
+        }
+
+        $bPreview = $sAction === 'preview';
         $aData = (new ImportUser(
             $_FILES['csv_file'],
             $oHR->post('delimiter'),
-            $oHR->post('enclosure')
+            $oHR->post('enclosure'),
+            $bPreview
         ))->getResponse();
 
         if (!$aData['status']) {
             \PFBC\Form::setError('form_import_user', $aData['msg']);
         } else {
             Header::redirect(
-                Uri::get(PH7_ADMIN_MOD, 'user', 'browse'),
+                Uri::get(PH7_ADMIN_MOD, 'user', $bPreview ? 'import' : 'browse'),
                 $aData['msg']
             );
         }
