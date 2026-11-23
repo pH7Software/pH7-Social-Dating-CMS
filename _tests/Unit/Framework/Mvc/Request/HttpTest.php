@@ -274,6 +274,19 @@ final class HttpTest extends TestCase
         );
     }
 
+    public function testCurrentUrlEncodesCharactersAfterUrlDecoding(): void
+    {
+        $_SERVER['REQUEST_URI'] = '/%22%3E%3Cscript%3Ealert(1)%3C/script%3E';
+
+        $sCurrentUrl = $this->oHttpRequest->currentUrl();
+
+        $this->assertSame(
+            'http://localhost:8888/&quot;&gt;&lt;script&gt;alert(1)&lt;/script&gt;',
+            $sCurrentUrl
+        );
+        $this->assertStringNotContainsString('"><script>', $sCurrentUrl);
+    }
+
     public function testCurrentUrlForHeaderUsesRawQuerySeparators(): void
     {
         $_SERVER['REQUEST_URI'] = '/signup/step2?signup_profile_id=2&signup_recovery_token=abc123';

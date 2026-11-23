@@ -26,6 +26,10 @@ class DesignTest extends TestCase
 
     protected function setUp(): void
     {
+        if (!defined('PH7_STATIC')) {
+            define('PH7_STATIC', 'static/');
+        }
+
         $this->oConfig = Config::getInstance();
         $this->oSession = new Session;
         $this->oDesign = new Design;
@@ -76,5 +80,69 @@ class DesignTest extends TestCase
         } finally {
             restore_error_handler();
         }
+    }
+
+    public function testMessageIsEncodedForJavaScript(): void
+    {
+        $sPayload = '");alert(document.domain);//</script><img src=x onerror=alert(1)>';
+        $this->oDesign->setMessage($sPayload);
+
+        ob_start();
+        try {
+            $this->oDesign->message();
+            $sOutput = ob_get_contents();
+        } finally {
+            ob_end_clean();
+        }
+
+        $this->assertIsString($sOutput);
+        $this->assertStringContainsString('Apprise("', $sOutput);
+        $this->assertStringContainsString('\\u0022);alert', $sOutput);
+        $this->assertStringNotContainsString('onerror', $sOutput);
+        $this->assertStringNotContainsString('</script><img', $sOutput);
+        $this->assertStringNotContainsString($sPayload, $sOutput);
+    }
+
+    public function testErrorIsEncodedForJavaScript(): void
+    {
+        $sPayload = '");alert(document.domain);//</script><img src=x onerror=alert(1)>';
+        $this->oDesign->setError($sPayload);
+
+        ob_start();
+        try {
+            $this->oDesign->error();
+            $sOutput = ob_get_contents();
+        } finally {
+            ob_end_clean();
+        }
+
+        $this->assertIsString($sOutput);
+        $this->assertStringContainsString('Apprise("', $sOutput);
+        $this->assertStringContainsString('\\u0022);alert', $sOutput);
+        $this->assertStringNotContainsString('onerror', $sOutput);
+        $this->assertStringNotContainsString('</script><img', $sOutput);
+        $this->assertStringNotContainsString($sPayload, $sOutput);
+    }
+
+    public function testPopupConfirmationEncodesLabelAndClass(): void
+    {
+        $sPayload = '<img src=x onerror=alert(1)>';
+
+        ob_start();
+        $this->oDesign->popupLinkConfirm(
+            $sPayload,
+            'user',
+            'main',
+            'delete',
+            '1',
+            'button" onmouseover="alert(1)'
+        );
+        $sOutput = ob_get_clean();
+
+        $this->assertIsString($sOutput);
+        $this->assertStringContainsString('&lt;img src=x onerror=alert(1)&gt;', $sOutput);
+        $this->assertStringContainsString('class="button&quot; onmouseover=&quot;alert(1)"', $sOutput);
+        $this->assertStringNotContainsString('<img src=x', $sOutput);
+        $this->assertStringNotContainsString('class="button" onmouseover="', $sOutput);
     }
 }

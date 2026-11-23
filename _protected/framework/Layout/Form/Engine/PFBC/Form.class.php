@@ -29,6 +29,9 @@ class Form extends Base
     // Import `Message` trait
     use Message;
 
+    private const JAVASCRIPT_JSON_FLAGS = JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP |
+        JSON_INVALID_UTF8_SUBSTITUTE | JSON_THROW_ON_ERROR;
+
     protected $ajax;
     protected $attributes;
     protected $error;
@@ -506,13 +509,25 @@ class Form extends Base
         /*For ajax, an anonymous onsubmit javascript function is bound to the form using jQuery.  jQuery's
         serialize function is used to grab each element's name/value pair.*/
         if (!empty($this->ajax)) {
+            $sAjaxAction = json_encode(
+                (string)$this->attributes['action'],
+                self::JAVASCRIPT_JSON_FLAGS
+            );
+            $sAjaxMethod = json_encode(
+                (string)$this->attributes['method'],
+                self::JAVASCRIPT_JSON_FLAGS
+            );
+            $sFormSelector = json_encode(
+                '#' . $id,
+                self::JAVASCRIPT_JSON_FLAGS
+            );
             echo 'jQuery("#', $id, '").on("submit", function() {';
             $this->error->clear();
             echo <<<JS
             jQuery.ajax({
-                url: "{$this->attributes['action']}",
-                type: "{$this->attributes['method']}",
-                data: jQuery("#$id").serialize(),
+                url: {$sAjaxAction},
+                type: {$sAjaxMethod},
+                data: jQuery({$sFormSelector}).serialize(),
                 success: function(response) {
                     if(typeof response != "undefined" && typeof response == "object" && response.errors) {
 JS;
@@ -537,7 +552,7 @@ JS;
                         "class": "pfbc-error ui-state-error ui-corner-all",
                         "role": "alert",
                         text: $sAjaxFailure
-                    }).prependTo("#$id");
+                    }).prependTo({$sFormSelector});
                 },
                 complete: function() {
 JS;
@@ -590,7 +605,7 @@ JS;
         if (!empty($urls)) {
             $urls = array_values(array_unique($urls));
             foreach ($urls as $url) {
-                echo '<script src="', $url, '"></script>';
+                echo '<script src="', htmlspecialchars((string)$url, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8'), '"></script>';
             }
         }
     }
@@ -623,7 +638,7 @@ JS;
         if (!empty($urls)) {
             $urls = array_values(array_unique($urls));
             foreach ($urls as $url) {
-                echo '<link rel="stylesheet" href="', $url, '"/>';
+                echo '<link rel="stylesheet" href="', htmlspecialchars((string)$url, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8'), '"/>';
             }
         }
     }

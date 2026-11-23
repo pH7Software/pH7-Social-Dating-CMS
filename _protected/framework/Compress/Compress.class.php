@@ -23,7 +23,7 @@ class Compress
     const COMPRESSION_LEVEL = 6;
     const GOOGLE_CLOSURE_HOST = 'closure-compiler.appspot.com';
     const GOOGLE_CLOSURE_PARAMS = 'js_code=%s&compilation_level=SIMPLE_OPTIMIZATIONS&output_format=text&output_info=compiled_code';
-    const GOOGLE_CLOSURE_PORT = 80;
+    const GOOGLE_CLOSURE_PORT = 443;
 
     const MAX_LIMIT_SIZE_GOOGLE_CLOSURE = 200000; // 200KB
 
@@ -257,7 +257,23 @@ class Compress
             strlen($sContentEncoded) < static::MAX_LIMIT_SIZE_GOOGLE_CLOSURE &&
             preg_match('/[^a-z]eval\(/ism', $sContent) == 0
         ) {
-            return @pfsockopen(self::GOOGLE_CLOSURE_HOST, self::GOOGLE_CLOSURE_PORT);
+            $oTlsContext = stream_context_create([
+                'ssl' => [
+                    'SNI_enabled' => true,
+                    'peer_name' => self::GOOGLE_CLOSURE_HOST,
+                    'verify_peer' => true,
+                    'verify_peer_name' => true
+                ]
+            ]);
+
+            return @stream_socket_client(
+                'tls://' . self::GOOGLE_CLOSURE_HOST . ':' . self::GOOGLE_CLOSURE_PORT,
+                $iErrorCode,
+                $sErrorMessage,
+                10,
+                STREAM_CLIENT_CONNECT,
+                $oTlsContext
+            );
         }
 
         return false;

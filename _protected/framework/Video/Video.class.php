@@ -171,6 +171,9 @@ class Video extends Upload
      */
     public function thumbnail($sPicturePath, $iSeconds, $iWidth, $iHeight)
     {
+        $iSeconds = self::validateCommandInteger($iSeconds, 0, 'Thumbnail time');
+        $iWidth = self::validateCommandInteger($iWidth, 1, 'Thumbnail width');
+        $iHeight = self::validateCommandInteger($iHeight, 1, 'Thumbnail height');
         $sInput = $this->getEscapedTmpFilePath();
         $sOutput = escapeshellarg($sPicturePath);
         $this->executeCommand(
@@ -225,6 +228,24 @@ class Video extends Upload
                 $sArgument
             )
         );
+    }
+
+    /**
+     * Validate an integer before interpolating it into an FFmpeg command.
+     */
+    private static function validateCommandInteger($mValue, int $iMinimum, string $sName): int
+    {
+        $mValidatedValue = filter_var(
+            $mValue,
+            FILTER_VALIDATE_INT,
+            ['options' => ['min_range' => $iMinimum]]
+        );
+
+        if ($mValidatedValue === false) {
+            throw new \InvalidArgumentException($sName . ' must be an integer of at least ' . $iMinimum . '.');
+        }
+
+        return $mValidatedValue;
     }
 
     private function detectMimeType(): string
