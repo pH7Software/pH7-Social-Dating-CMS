@@ -308,8 +308,15 @@ class Http extends \PH7\Framework\Http\Http
      */
     public function currentUrl()
     {
-        // Server::getVar() already encodes REQUEST_URI for safe HTML output.
-        return PH7_URL_PROT . PH7_DOMAIN . $this->getUri();
+        // getUri() URL-decodes the request target after Server::getVar() has
+        // encoded it. Encode the completed URL again so percent-encoded quotes
+        // and angle brackets cannot escape an HTML attribute.
+        return htmlspecialchars(
+            PH7_URL_PROT . PH7_DOMAIN . $this->getUri(),
+            ENT_QUOTES | ENT_SUBSTITUTE,
+            'UTF-8',
+            false
+        );
     }
 
     /**
