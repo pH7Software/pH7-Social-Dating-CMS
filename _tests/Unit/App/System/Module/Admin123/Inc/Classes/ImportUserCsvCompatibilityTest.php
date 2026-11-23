@@ -57,4 +57,20 @@ final class ImportUserCsvCompatibilityTest extends TestCase
         $this->assertSame(0, $aColumns['email']);
         $this->assertSame(1, $aColumns['first_name']);
     }
+
+    public function testCanonicalMigrationsPreserveIntentionalEmptyValues(): void
+    {
+        $oCsv = new MemberMigrationCsv();
+        $aColumns = $oCsv->mapHeaders([
+            'source_platform',
+            'source_version',
+            'source_id',
+            'email',
+            'city'
+        ]);
+        $aRow = ['una', '14.0.0', '42', 'member@example.test', ''];
+
+        $this->assertTrue($oCsv->isCanonicalMigration($aColumns));
+        $this->assertSame('', $oCsv->getValue($aRow, $aColumns, ['city' => 'Virginia'], 'city', true));
+    }
 }

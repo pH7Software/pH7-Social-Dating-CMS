@@ -102,6 +102,9 @@ data. Unknown genders fall back to the destination's current supported default.
 The generic CSV importer recognises common aliases for email, username, names,
 gender, matching preference, birth date, description, country, city, region,
 postal code, IP address, and activation state. Extra columns are ignored.
+Canonical adapter exports include source provenance columns. In those files,
+intentional empty values remain empty instead of receiving the generic CSV
+importer's legacy sample defaults. An unavailable birth date remains unset.
 
 ## Why UNA is first
 

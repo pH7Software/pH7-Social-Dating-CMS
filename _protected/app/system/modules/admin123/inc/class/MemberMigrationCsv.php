@@ -34,6 +34,9 @@ final class MemberMigrationCsv
     ];
 
     private const HEADER_ALIASES = [
+        'source_platform' => ['sourceplatform'],
+        'source_version' => ['sourceversion'],
+        'source_id' => ['sourceid'],
         'username' => ['username', 'login', 'user', 'nickname'],
         'first_name' => ['name', 'firstname', 'givenname', 'forename'],
         'last_name' => ['lastname', 'surname', 'familyname'],
@@ -97,17 +100,33 @@ final class MemberMigrationCsv
      * @param array<string, int>    $aColumns
      * @param array<string, string> $aDefaults
      */
-    public function getValue(array $aRow, array $aColumns, array $aDefaults, string $sField): string
-    {
+    public function getValue(
+        array $aRow,
+        array $aColumns,
+        array $aDefaults,
+        string $sField,
+        bool $bPreserveEmpty = false
+    ): string {
         if (isset($aColumns[$sField])) {
             $sValue = trim((string)($aRow[$aColumns[$sField]] ?? ''));
 
-            if ($sValue !== '') {
+            if ($sValue !== '' || $bPreserveEmpty) {
                 return $sValue;
             }
         }
 
         return $aDefaults[$sField] ?? '';
+    }
+
+    /**
+     * Canonical files carry provenance fields that ad-hoc legacy CSV files do not.
+     * Their intentional empty values must not be replaced with sample defaults.
+     *
+     * @param array<string, int> $aColumns
+     */
+    public function isCanonicalMigration(array $aColumns): bool
+    {
+        return isset($aColumns['source_platform'], $aColumns['source_version'], $aColumns['source_id']);
     }
 
     public function assertDialect(string $sDelimiter, string $sEnclosure): void

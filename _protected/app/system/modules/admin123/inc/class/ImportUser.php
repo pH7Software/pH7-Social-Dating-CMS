@@ -60,6 +60,7 @@ class ImportUser extends Core
     private array $aColumns = [];
     private array $aFileData;
     private array $aRes;
+    private bool $bCanonicalMigration = false;
     private bool $bPreview;
     private bool $bRemoveTmpFile = false;
     private MemberMigrationCsv $oCsv;
@@ -165,7 +166,13 @@ class ImportUser extends Core
      */
     private function getRowValue(array $aUserData, string $sType): string
     {
-        return $this->oCsv->getValue($aUserData, $this->aColumns, $this->aTmpData, $sType);
+        return $this->oCsv->getValue(
+            $aUserData,
+            $this->aColumns,
+            $this->aTmpData,
+            $sType,
+            $this->bCanonicalMigration
+        );
     }
 
     /**
@@ -197,6 +204,7 @@ class ImportUser extends Core
     private function setTmpData(): void
     {
         $this->aColumns = $this->oCsv->mapHeaders($this->aFileData);
+        $this->bCanonicalMigration = $this->oCsv->isCanonicalMigration($this->aColumns);
     }
 
     /**
@@ -295,7 +303,11 @@ class ImportUser extends Core
 
                 try {
                     $this->setData(0, $aUserData);
-                    $oUserModel->add(escape($this->aData[0], true));
+                    $aMemberData = escape($this->aData[0], true);
+                    if ($this->aData[0]['birth_date'] === null) {
+                        $aMemberData['birth_date'] = null;
+                    }
+                    $oUserModel->add($aMemberData);
                     unset($this->aData[0]);
                     ++$aReport['imported'];
                 } catch (\Throwable $oException) {
@@ -356,7 +368,7 @@ class ImportUser extends Core
         return date('Y') - mt_rand(20, 50) . '-' . mt_rand(1, 12) . '-' . mt_rand(1, 28);
     }
 
-    private function normalizeBirthDate(string $sBirthDate): string
+    private function normalizeBirthDate(string $sBirthDate): ?string
     {
         $oBirthDate = \DateTimeImmutable::createFromFormat('!Y-m-d', $sBirthDate);
 
@@ -364,7 +376,7 @@ class ImportUser extends Core
             return $sBirthDate;
         }
 
-        return $this->aTmpData['birth_date'];
+        return $this->bCanonicalMigration ? null : $this->aTmpData['birth_date'];
     }
 
     private function normalizeActivation(string $sActivation): int
