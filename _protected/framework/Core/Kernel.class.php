@@ -24,7 +24,7 @@ abstract class Kernel
     const SOFTWARE_NAME = 'pH7Builder';
     const SOFTWARE_DESCRIPTION = 'Self-hosted, open-source software for dating sites, matchmaking communities, and social networks';
     const SOFTWARE_WEBSITE = 'https://ph7builder.com';
-    const SOFTWARE_DOC_URL = 'https://github.com/pH7Software/pH7-Social-Dating-CMS/tree/18.x/docs';
+    const SOFTWARE_DOC_URL = 'https://github.com/pH7Software/pH7-Social-Dating-CMS/tree/20.x/docs';
     const SOFTWARE_GIT_REPO_URL = 'https://github.com/pH7Software/pH7-Social-Dating-CMS';
     const SOFTWARE_ISSUE_URL = self::SOFTWARE_GIT_REPO_URL . '/issues';
     const SOFTWARE_DISCUSSION_URL = self::SOFTWARE_GIT_REPO_URL . '/discussions';

@@ -3,6 +3,7 @@ name: Review Dependencies
 on:
   pull_request:
     branches:
+      - 20.x
       - 18.x
 
 permissions:

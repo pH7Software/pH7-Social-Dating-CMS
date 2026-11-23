@@ -30,7 +30,7 @@ final class Autoloader
 {
     const FRAMEWORK_NAMESPACE = 'PH7\Framework';
     const COMPOSER_AUTOLOAD_FULL_PATH = PH7_PATH_PROTECTED . 'vendor/autoload.php';
-    const INFO_INSTALL_COMPOSER_LINK = 'https://github.com/pH7Software/pH7-Social-Dating-CMS/blob/18.x/docs/QUICK_START.md';
+    const INFO_INSTALL_COMPOSER_LINK = 'https://github.com/pH7Software/pH7-Social-Dating-CMS/blob/20.x/docs/QUICK_START.md';
     const DOWNLOAD_SOFTWARE_LINK = 'https://github.com/pH7Software/pH7-Social-Dating-CMS/releases/latest';
 
     /**

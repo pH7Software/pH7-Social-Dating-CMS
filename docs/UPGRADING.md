@@ -441,4 +441,4 @@ caches, and confirm the recorded previous version. Do not combine old code
 with a partially migrated database.
 
 The maintained manual upgrade guide is also linked from the admin update
-notice: <https://github.com/pH7Software/pH7-Social-Dating-CMS/blob/18.x/docs/UPGRADING.md>.
+notice: <https://github.com/pH7Software/pH7-Social-Dating-CMS/blob/20.x/docs/UPGRADING.md>.

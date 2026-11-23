@@ -24,7 +24,7 @@ locked dependencies support the selected PHP runtime.
 
 ## Before you open a pull request
 
-Open pull requests against `18.x`, the current active default branch. The
+Open pull requests against `20.x`, the current active default branch. The
 software version is defined by release tags and the version constants, not by
 the branch name. Develop each change on a focused, short-lived branch; once its
 pull request is merged, that working branch can be deleted.

@@ -3,9 +3,11 @@ name: Audit Browser UX
 on:
   push:
     branches:
+      - 20.x
       - 18.x
   pull_request:
     branches:
+      - 20.x
       - 18.x
   workflow_dispatch:
 

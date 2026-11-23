@@ -18,5 +18,5 @@ Application: PHP 8.3 or newer, MySQL 8.0+, HTML, CSS, JavaScript
 Architecture: modular MVC, pH7Framework, PH7Tpl
 License: MIT
 
-Contributing: https://github.com/pH7Software/pH7-Social-Dating-CMS/blob/18.x/CONTRIBUTING.md
+Contributing: https://github.com/pH7Software/pH7-Social-Dating-CMS/blob/20.x/CONTRIBUTING.md
 Translations: https://github.com/pH7Software/pH7-Internationalization

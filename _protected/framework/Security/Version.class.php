@@ -27,7 +27,7 @@ final class Version
 
     private const LATEST_VERSION_URL = 'https://xml.ph7builder.com/software-info.xml';
 
-    public const UPGRADE_DOC_URL = 'https://github.com/pH7Software/pH7-Social-Dating-CMS/blob/18.x/docs/UPGRADING.md';
+    public const UPGRADE_DOC_URL = 'https://github.com/pH7Software/pH7-Social-Dating-CMS/blob/20.x/docs/UPGRADING.md';
 
     public const VERSION_PATTERN = '\d{1,2}\.\d{1,2}\.\d{1,2}';
 

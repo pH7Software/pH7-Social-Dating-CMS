@@ -17,7 +17,7 @@
                         {lang 'Creator: %0%', '<a href="https://ph7.me">Pierre-Henry Soria</a> (<a href="https://github.com/pH-7">GitHub</a>)'}
                     </li>
                     <li class="list-group-item">
-                        {lang 'License: %0%', '<a href="https://github.com/pH7Software/pH7-Social-Dating-CMS/blob/18.x/LICENSE.md">MIT</a>'}
+                        {lang 'License: %0%', '<a href="https://github.com/pH7Software/pH7-Social-Dating-CMS/blob/20.x/LICENSE.md">MIT</a>'}
                     </li>
                 </ul>
             </div>
@@ -40,7 +40,7 @@
             <div class="panel-body">
                 <ul class="list-group">
                     <li class="list-group-item">
-                        <a href="https://github.com/pH7Software/pH7-Social-Dating-CMS/tree/18.x/docs">{lang 'Release guides'}</a>
+                        <a href="https://github.com/pH7Software/pH7-Social-Dating-CMS/tree/20.x/docs">{lang 'Release guides'}</a>
                     </li>
                     <li class="list-group-item">
                         <a href="https://github.com/pH7Software/pH7-Social-Dating-CMS/issues">{lang 'Issue tracker'}</a>
@@ -49,7 +49,7 @@
                         <a href="https://github.com/pH7Software/pH7-Social-Dating-CMS/discussions">{lang 'Community discussions'}</a>
                     </li>
                     <li class="list-group-item">
-                        <a href="https://github.com/pH7Software/pH7-Social-Dating-CMS/blob/18.x/CONTRIBUTING.md">{lang 'Contributing guide'}</a>
+                        <a href="https://github.com/pH7Software/pH7-Social-Dating-CMS/blob/20.x/CONTRIBUTING.md">{lang 'Contributing guide'}</a>
                     </li>
                     <li class="list-group-item">
                         <a href="{{ $design->url('ph7cms-helper', 'main', 'suggestionbox', '?box=donationbox') }}">{lang 'Optional project support'}</a>

@@ -33,7 +33,7 @@ $LANG = [
     'register' => '¡Guárdelo!',
     'site_name' => 'Nombre de tu sitio',
     'agree_license' => 'He leído y acepto los términos anteriores.',
-    'conform_to_laws' => 'Estoy de acuerdo en mantener siempre mi sitio web totalmente legal y cumplir con cualquier leyes y regulaciones aplicables que pueda aplicarse a mí, mi corporación, a mi sitio web y a sus usuarios, y para revisar y <a href="https://github.com/pH7Software/pH7-Social-Dating-CMS/blob/18.x/docs/LAUNCH_CHECKLIST.md#legal-and-privacy" target="_blank" rel="noopener">actualizar los "Términos", "Política de privacidad" (y cualquier otra página legal necesaria)</a> para cumplir plenamente con las leyes y regulaciones aplicables.',
+    'conform_to_laws' => 'Estoy de acuerdo en mantener siempre mi sitio web totalmente legal y cumplir con cualquier leyes y regulaciones aplicables que pueda aplicarse a mí, mi corporación, a mi sitio web y a sus usuarios, y para revisar y <a href="https://github.com/pH7Software/pH7-Social-Dating-CMS/blob/20.x/docs/LAUNCH_CHECKLIST.md#legal-and-privacy" target="_blank" rel="noopener">actualizar los "Términos", "Política de privacidad" (y cualquier otra página legal necesaria)</a> para cumplir plenamente con las leyes y regulaciones aplicables.',
     'responsibilities_agreement' => 'Estoy de acuerdo en usar el software bajo mi propio riesgo y que el autor de este software no puede, en ningún caso, ser considerado responsable por daños directos o indirectos, ni por ningún otro daño de ningún tipo, como resultado del uso de este software o la imposibilidad de Úsalo por cualquier motivo.',
     'step' => 'Paso',
     'welcome' => 'Bienvenido a la instalación de',

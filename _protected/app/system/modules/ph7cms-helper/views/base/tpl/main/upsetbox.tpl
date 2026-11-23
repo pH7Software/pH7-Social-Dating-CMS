@@ -8,7 +8,7 @@
         <p>
             <a href="https://github.com/pH7Software/pH7-Social-Dating-CMS/issues" target="_blank" rel="noopener noreferrer">{lang 'Report an issue'}</a>
             &nbsp;·&nbsp;
-            <a href="https://github.com/pH7Software/pH7-Social-Dating-CMS/blob/18.x/CONTRIBUTING.md" target="_blank" rel="noopener noreferrer">{lang 'Read the contributing guide'}</a>
+            <a href="https://github.com/pH7Software/pH7-Social-Dating-CMS/blob/20.x/CONTRIBUTING.md" target="_blank" rel="noopener noreferrer">{lang 'Read the contributing guide'}</a>
         </p>
 
         <p>{lang 'Financial support is optional and helps fund continued maintenance.'}</p>
