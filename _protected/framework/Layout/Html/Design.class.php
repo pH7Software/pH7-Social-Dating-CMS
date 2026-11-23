@@ -30,6 +30,7 @@ use PH7\Framework\Navigation\Browser;
 use PH7\Framework\Navigation\Page;
 use PH7\Framework\Navigation\Pagination;
 use PH7\Framework\Registry\Registry;
+use PH7\Framework\Security\Validate\Purifier;
 use PH7\Framework\Security\Validate\Validate;
 use PH7\Framework\Session\Session;
 use PH7\Framework\Str\Str;
@@ -43,6 +44,9 @@ use PH7\UserCoreModel;
 
 class Design
 {
+    private const JAVASCRIPT_JSON_FLAGS = JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP |
+        JSON_INVALID_UTF8_SUBSTITUTE | JSON_THROW_ON_ERROR;
+
     const CACHE_GROUP = 'str/design';
     const CACHE_AVATAR_GROUP = 'str/design/avatar/'; // We put a slash for after creating a directory for each username
     const CACHE_AVATAR_LIFETIME = 3600;
@@ -175,18 +179,18 @@ class Design
         /** Check if there are any messages in $aMessages array **/
         if ($iMsgNum > 0) {
             $this->staticFiles('js', PH7_STATIC . PH7_JS, 'jquery/apprise.js');
-
-            echo '<script>$(function(){Apprise(\'';
+            $sMessage = '';
 
             if ($iMsgNum > 1) {
-                echo '<strong>', t('You have'), ' <em>', $iMsgNum, '</em> ', nt('message:', 'messages:', $iMsgNum), '</strong><br />';
+                $sMessage .= '<strong>' . t('You have') . ' <em>' . $iMsgNum . '</em> ' .
+                    nt('message:', 'messages:', $iMsgNum) . '</strong><br />';
             }
 
             for ($iKey = 0; $iKey < $iMsgNum; $iKey++) {
-                echo $this->oStr->upperFirst(str_replace('-', ' ', $this->aMessages[$iKey])), '<br />';
+                $sMessage .= $this->oStr->upperFirst(str_replace('-', ' ', $this->aMessages[$iKey])) . '<br />';
             }
 
-            echo '\')});</script>';
+            echo '<script>$(function(){Apprise(', self::encodeNotificationForJavaScript($sMessage), ')});</script>';
         }
 
         unset($this->aMessages);
@@ -213,18 +217,35 @@ class Design
         /** Check if there are any errors in $aErrors array **/
         if ($iErrNum > 0) {
             $this->staticFiles('js', PH7_STATIC . PH7_JS, 'jquery/apprise.js');
-
-            echo '<script>$(function(){Apprise(\'';
-            echo '<strong>', t('You have'), ' <em>', $iErrNum, '</em> ', nt('error:', 'errors:', $iErrNum), '</strong><br />';
+            $sError = '<strong>' . t('You have') . ' <em>' . $iErrNum . '</em> ' .
+                nt('error:', 'errors:', $iErrNum) . '</strong><br />';
 
             for ($iKey = 0; $iKey < $iErrNum; $iKey++) {
-                echo $this->oStr->upperFirst(str_replace('-', ' ', $this->aErrors[$iKey])), '<br />';
+                $sError .= $this->oStr->upperFirst(str_replace('-', ' ', $this->aErrors[$iKey])) . '<br />';
             }
 
-            echo '\')});</script>';
+            echo '<script>$(function(){Apprise(', self::encodeNotificationForJavaScript($sError), ')});</script>';
         }
 
         unset($this->aErrors);
+    }
+
+    /**
+     * Sanitize notification markup and serialize it as an inline JavaScript string.
+     */
+    private static function encodeNotificationForJavaScript(string $sValue): string
+    {
+        $sSafeValue = (string)(new Purifier())->xssClean($sValue);
+
+        return self::encodeForJavaScript($sSafeValue);
+    }
+
+    /**
+     * Serialize a string as an inline JavaScript value.
+     */
+    private static function encodeForJavaScript(string $sValue): string
+    {
+        return json_encode($sValue, self::JAVASCRIPT_JSON_FLAGS);
     }
 
     /**
@@ -315,7 +336,7 @@ class Design
      */
     public function popupLinkConfirm(string $sLabel, string $sMod, string $sCtrl, string $sAct, string $sId, ?string $sClass = null): void
     {
-        $sClass = $sClass !== null ? ' class="' . $sClass . '" ' : ' ';
+        $sClass = $sClass !== null ? ' class="' . $this->oStr->escapeAttribute($sClass) . '" ' : ' ';
 
         $aHttpParams = [
             'label' => Url::encode($sLabel),
@@ -325,7 +346,7 @@ class Design
             'id' => Url::encode($sId)
         ];
 
-        echo '<a', $sClass, 'href="', PH7_URL_ROOT, 'asset/ajax/popup/confirm/?', Url::httpBuildQuery($aHttpParams), '" data-popup="classic">', $sLabel, '</a>';
+        echo '<a', $sClass, 'href="', PH7_URL_ROOT, 'asset/ajax/popup/confirm/?', Url::httpBuildQuery($aHttpParams), '" data-popup="classic">', escape($sLabel), '</a>';
     }
 
     /**
@@ -950,7 +971,7 @@ HTML;
         $this->staticFiles('css', PH7_LAYOUT . PH7_TPL . PH7_DEFAULT_THEME . PH7_SH . PH7_CSS, 'common.css,style.css,form.css');
         $this->externalJsFile(PH7_URL_STATIC . PH7_JS . 'jquery/jquery.js');
         $this->externalJsFile(PH7_URL_STATIC . PH7_JS . 'jquery/jquery-ui.js');
-        echo '<script>var pH7Url={base:\'', PH7_URL_ROOT, '\'}</script></head><body>';
+        echo '<script>var pH7Url={base:', self::encodeForJavaScript(PH7_URL_ROOT), '}</script></head><body>';
 
         if ($bLogo) {
             // Website's name
