@@ -162,7 +162,7 @@ class Bootstrap
     {
         $sMsg = '<p class="warning"><a href="' . Kernel::SOFTWARE_WEBSITE . '">pH7Builder</a> requires URL rewriting.</p>
         <p>On Apache, confirm that the package\'s <strong>.htaccess file is present in the pH7Builder root directory</strong>.<br />
-        Then make sure URL rewriting is correctly configured for your Web server. See the <a href="https://github.com/pH7Software/pH7-Social-Dating-CMS/blob/18.x/docs/QUICK_START.md" target="_blank" rel="noopener">Production Quick Start</a> for Apache and nginx examples.<br /><br />
+        Then make sure URL rewriting is correctly configured for your Web server. See the <a href="https://github.com/pH7Software/pH7-Social-Dating-CMS/blob/20.x/docs/QUICK_START.md" target="_blank" rel="noopener">Production Quick Start</a> for Apache and nginx examples.<br /><br />
         Once configured, <a href="' . PH7_URL_ROOT . '">retry</a>.</p>';
 
         echo html_body('URL rewriting is required', $sMsg);

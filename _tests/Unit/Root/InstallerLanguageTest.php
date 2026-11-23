@@ -20,7 +20,7 @@ use ReflectionMethod;
 
 final class InstallerLanguageTest extends TestCase
 {
-    private const LOCKDOWN_URL = 'https://github.com/pH7Software/pH7-Social-Dating-CMS/blob/18.x/docs/QUICK_START.md#6-lock-the-installation-down';
+    private const LOCKDOWN_URL = 'https://github.com/pH7Software/pH7-Social-Dating-CMS/blob/20.x/docs/QUICK_START.md#6-lock-the-installation-down';
 
     #[DataProvider('languageInputProvider')]
     public function testOnlyTwoLetterLanguageCodesAreAccepted(mixed $mInput, string $sExpected): void

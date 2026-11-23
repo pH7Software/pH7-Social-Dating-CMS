@@ -11,7 +11,7 @@
     </p>
 
     <p>
-        <a href="https://github.com/pH7Software/pH7-Social-Dating-CMS/blob/18.x/CONTRIBUTING.md">{lang 'Read the contributing guide'}</a>
+        <a href="https://github.com/pH7Software/pH7-Social-Dating-CMS/blob/20.x/CONTRIBUTING.md">{lang 'Read the contributing guide'}</a>
         &nbsp;·&nbsp;
         <a href="https://github.com/pH7Software/pH7-Social-Dating-CMS/issues">{lang 'View issues'}</a>
         &nbsp;·&nbsp;
@@ -20,6 +20,6 @@
 
     <p>
         {lang 'Report security vulnerabilities privately by following the'}
-        <a href="https://github.com/pH7Software/pH7-Social-Dating-CMS/blob/18.x/SECURITY.md">{lang 'security policy'}</a>.
+        <a href="https://github.com/pH7Software/pH7-Social-Dating-CMS/blob/20.x/SECURITY.md">{lang 'security policy'}</a>.
     </p>
 </div>

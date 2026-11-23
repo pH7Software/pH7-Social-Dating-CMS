@@ -22,8 +22,8 @@ abstract class Controller implements Controllable
     public const DEFAULT_ADMIN_USERNAME = 'administrator';
     public const SOFTWARE_PREFIX_COOKIE_NAME = 'pH7';
     public const SOFTWARE_WEBSITE = 'https://ph7builder.com';
-    public const SOFTWARE_REQUIREMENTS_URL = 'https://github.com/pH7Software/pH7-Social-Dating-CMS/blob/18.x/README.md#requirements';
-    public const SOFTWARE_LOCKDOWN_URL = 'https://github.com/pH7Software/pH7-Social-Dating-CMS/blob/18.x/docs/QUICK_START.md#6-lock-the-installation-down';
+    public const SOFTWARE_REQUIREMENTS_URL = 'https://github.com/pH7Software/pH7-Social-Dating-CMS/blob/20.x/README.md#requirements';
+    public const SOFTWARE_LOCKDOWN_URL = 'https://github.com/pH7Software/pH7-Social-Dating-CMS/blob/20.x/docs/QUICK_START.md#6-lock-the-installation-down';
     public const SOFTWARE_AUTHOR = 'Pierre-Henry Soria';
     public const AUTHOR_URL = 'https://github.com/pH-7';
     public const SOFTWARE_GIT_REPO_URL = 'https://github.com/pH7Software/pH7-Social-Dating-CMS';

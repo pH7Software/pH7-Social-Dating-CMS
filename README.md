@@ -2,9 +2,9 @@
 
 pH7Builder (formerly pH7CMS) is a self-hosted, open-source PHP platform for building white-label dating sites, matchmaking communities, and social networks. You keep control of the code, hosting, database, and member data.
 
-[![Tests](https://github.com/pH7Software/pH7-Social-Dating-CMS/actions/workflows/test.yml/badge.svg?branch=18.x)](https://github.com/pH7Software/pH7-Social-Dating-CMS/actions/workflows/test.yml)
-[![PHPStan](https://github.com/pH7Software/pH7-Social-Dating-CMS/actions/workflows/phpstan.yml/badge.svg?branch=18.x)](https://github.com/pH7Software/pH7-Social-Dating-CMS/actions/workflows/phpstan.yml)
-[![Composer](https://github.com/pH7Software/pH7-Social-Dating-CMS/actions/workflows/composer.yml/badge.svg?branch=18.x)](https://github.com/pH7Software/pH7-Social-Dating-CMS/actions/workflows/composer.yml)
+[![Tests](https://github.com/pH7Software/pH7-Social-Dating-CMS/actions/workflows/test.yml/badge.svg?branch=20.x)](https://github.com/pH7Software/pH7-Social-Dating-CMS/actions/workflows/test.yml)
+[![PHPStan](https://github.com/pH7Software/pH7-Social-Dating-CMS/actions/workflows/phpstan.yml/badge.svg?branch=20.x)](https://github.com/pH7Software/pH7-Social-Dating-CMS/actions/workflows/phpstan.yml)
+[![Composer](https://github.com/pH7Software/pH7-Social-Dating-CMS/actions/workflows/composer.yml/badge.svg?branch=20.x)](https://github.com/pH7Software/pH7-Social-Dating-CMS/actions/workflows/composer.yml)
 [![PHP 8.3+](https://img.shields.io/badge/PHP-8.3%2B-777BB4?logo=php&logoColor=white)](composer.json)
 [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE.md)
 [![Latest release](https://img.shields.io/github/v/release/pH7Software/pH7-Social-Dating-CMS)](https://github.com/pH7Software/pH7-Social-Dating-CMS/releases)

@@ -3,6 +3,7 @@ name: PHPStan
 on:
   push:
     branches:
+      - 20.x
       - 18.x
   pull_request:
 

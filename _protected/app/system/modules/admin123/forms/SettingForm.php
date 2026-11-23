@@ -35,7 +35,7 @@ class SettingForm
     private const CHANGE_CHAT_DOC_URL = 'https://ph7builder.com/how-to-change-chat/';
     private const I18N_DOC_URL = 'https://github.com/pH7Software/pH7-Internationalization';
     private const GOOGLE_API_KEY_URL = 'https://console.cloud.google.com/google/maps-apis/credentials';
-    private const QUICK_START_DOC_URL = 'https://github.com/pH7Software/pH7-Social-Dating-CMS/blob/18.x/docs/QUICK_START.md';
+    private const QUICK_START_DOC_URL = 'https://github.com/pH7Software/pH7-Social-Dating-CMS/blob/20.x/docs/QUICK_START.md';
 
     public static function display(): void
     {
