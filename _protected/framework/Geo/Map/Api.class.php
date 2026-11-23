@@ -26,6 +26,7 @@ defined('PH7') or exit('Restricted access');
 
 use PH7\Framework\Compress\Compress;
 use PH7\Framework\Config\Config;
+use PH7\Framework\Security\Validate\Purifier;
 
 /**
  * Class to use the Google Maps v3 API
@@ -35,6 +36,9 @@ use PH7\Framework\Config\Config;
  */
 class Api
 {
+    private const JAVASCRIPT_JSON_FLAGS = JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP |
+        JSON_INVALID_UTF8_SUBSTITUTE | JSON_THROW_ON_ERROR;
+
     const API_KEY_MIN_LENGTH = 10;
     const MARKER_ICON_PATH = PH7_URL_STATIC . PH7_IMG . 'icon/map-marker.svg';
     const GOOGLE_API_URL = 'https://maps.googleapis.com/maps/api/';
@@ -377,7 +381,7 @@ class Api
      */
     public function setCenterLatLng($lat, $lng)
     {
-        $this->centerLatLng = 'new google.maps.LatLng(' . $lat . ', ' . $lng . ')';
+        $this->centerLatLng = 'new google.maps.LatLng(' . self::encodeCoordinate($lat) . ', ' . self::encodeCoordinate($lng) . ')';
     }
 
     /**
@@ -517,8 +521,12 @@ class Api
         $this->minLat = (float)min((float)$lat, $this->minLat);
         $this->centerLng = (float)($this->minLng + $this->maxLng) / 2;
         $this->centerLat = (float)($this->minLat + $this->maxLat) / 2;
+        $sSafeHtml = (string)(new Purifier())->xssClean((string)$html);
 
-        $this->contentMarker .= "\t" . 'addMarker(new google.maps.LatLng("' . $lat . '","' . $lng . '"),"' . $title . '","' . $html . '","' . $category . '","' . $icon . '",map' . $this->googleMapId . ',"' . $id . '");' . "\n";
+        $this->contentMarker .= "\t" . 'addMarker(new google.maps.LatLng(' . self::encodeCoordinate($lat) . ',' . self::encodeCoordinate($lng) . '),' .
+            self::encodeForJavaScript($title) . ',' . self::encodeForJavaScript($sSafeHtml) . ',' .
+            self::encodeForJavaScript($category) . ',' . self::encodeForJavaScript($icon) . ',map' .
+            $this->getJavaScriptIdentifierSuffix() . ',' . self::encodeForJavaScript($id) . ');' . "\n";
     }
 
     /**
@@ -584,7 +592,7 @@ class Api
      */
     public function addDirection($from, $to)
     {
-        $this->contentMarker .= 'addDirection("' . $from . '","' . $to . '");';
+        $this->contentMarker .= 'addDirection(' . self::encodeForJavaScript($from) . ',' . self::encodeForJavaScript($to) . ');';
     }
 
     /**
@@ -613,32 +621,42 @@ class Api
      */
     public function init()
     {
+        $sMapDivId = self::encodeHtmlAttribute($this->googleMapId);
+        $sMapElementId = self::encodeForJavaScript($this->googleMapId);
+        $sMapVariable = 'map' . $this->getJavaScriptIdentifierSuffix();
+
         // Google map DIV
         if (($this->width != '') && ($this->height != '')) {
-            $this->content .= "\t" . '<div id="' . $this->googleMapId . '" style="width:' . $this->width . ';height:' . $this->height . '"></div>' . "\n";
+            $this->content .= "\t" . '<div id="' . $sMapDivId . '" style="width:' .
+                self::encodeHtmlAttribute($this->width) . ';height:' . self::encodeHtmlAttribute($this->height) . '"></div>' . "\n";
         } else {
-            $this->content .= "\t" . '<div id="' . $this->googleMapId . '"></div>' . "\n";
+            $this->content .= "\t" . '<div id="' . $sMapDivId . '"></div>' . "\n";
         }
 
         if ($this->includeJs === true) {
             // Google map JS
             $this->content .= '<script src="' . self::GOOGLE_API_URL . 'js?key=' .
-                $this->key . '&amp;language=' . $this->lang . '&amp;v=weekly">';
+                rawurlencode((string)$this->key) . '&amp;language=' . rawurlencode((string)$this->lang) . '&amp;v=weekly">';
             $this->content .= '</script>' . "\n";
 
             // Clusterer JS
             if ($this->useClusterer) {
-                $this->content .= '<script src="' . $this->clustererLibraryPath . '"></script>' . "\n";
+                $this->content .= '<script src="' . self::encodeHtmlAttribute($this->clustererLibraryPath) . '"></script>' . "\n";
             }
         }
 
         $this->content .= '<script>' . "\n";
 
         if ($this->isApiKeyNotSet()) {
-            $this->content .= 'document.write("' . t('You need to get a Google Maps API key to get it working. Please go to your pH7Builder Admin Panel -> Settings -> General -> API -> Google Maps API Key') . '".toUpperCase());' . "\n";
+            $sApiKeyMessage = self::encodeForJavaScript(
+                t('You need to get a Google Maps API key to get it working. Please go to your pH7Builder Admin Panel -> Settings -> General -> API -> Google Maps API Key')
+            );
+            $this->content .= 'document.getElementById(' . $sMapElementId . ').textContent = ' .
+                $sApiKeyMessage . '.toUpperCase();' . "\n";
         }
 
         $this->content .= 'function addLoadEvent(func) { ' . "\n";
+        $this->content .= 'if (window.addEventListener) { window.addEventListener("load", func, {once:true}); return; }' . "\n";
         $this->content .= 'var oldonload = window.onload; ' . "\n";
         $this->content .= 'if (typeof window.onload != \'function\') { ' . "\n";
         $this->content .= 'window.onload = func; ' . "\n";
@@ -654,7 +672,7 @@ class Api
 
         //global variables
         $this->content .= 'var geocoder = new google.maps.Geocoder();' . "\n";
-        $this->content .= 'var map' . $this->googleMapId . ';' . "\n";
+        $this->content .= 'var ' . $sMapVariable . ';' . "\n";
         $this->content .= 'var gmarkers = [];' . "\n";
         $this->content .= 'var infowindow;' . "\n";
         $this->content .= 'var directions = new google.maps.DirectionsRenderer();' . "\n";
@@ -675,9 +693,9 @@ class Api
         $this->content .= "\t\t" . 'var marker = new google.maps.Marker({' . "\n";
         $this->content .= "\t\t\t" . 'map:  currentmap,' . "\n";
         $this->content .= "\t\t\t" . 'title : title,' . "\n";
-        $this->content .= "\t\t\t" . 'icon:  {url:icon,size:new google.maps.Size(' . $this->iconWidth . ', ' . $this->iconHeight . ')';
+        $this->content .= "\t\t\t" . 'icon:  {url:icon,size:new google.maps.Size(' . (int)$this->iconWidth . ', ' . (int)$this->iconHeight . ')';
         if (!empty($this->iconAnchorWidth) || !empty($this->iconAnchorHeight)) {
-            $this->content .= ',anchor:new google.maps.Point(' . $this->iconAnchorWidth . ',' . $this->iconAnchorHeight . ')';
+            $this->content .= ',anchor:new google.maps.Point(' . (int)$this->iconAnchorWidth . ',' . (int)$this->iconAnchorHeight . ')';
         }
         $this->content .= '},' . "\n";
         $this->content .= "\t\t\t" . 'position: latlng' . "\n";
@@ -693,7 +711,7 @@ class Api
             $this->content .= "\t\t" . 'content += \'<input type="button" onClick="addDirection(document.getElementById(\\\'\'+id_name+\'\\\').value,to.value);" value="Départ"/>\';' . "\n";
         }
 
-        $this->content .= "\t\t" . 'var html = \'<div style="text-align:left;width:' . $this->infoWindowWidth . 'px;" class="infoGmaps">\'+content+\'</div>\';' . "\n";
+        $this->content .= "\t\t" . 'var html = \'<div style="text-align:left;width:' . (int)$this->infoWindowWidth . 'px;" class="infoGmaps">\'+content+\'</div>\';' . "\n";
         $this->content .= "\t\t" . 'google.maps.event.addListener(marker, "click", function() {' . "\n";
         $this->content .= "\t\t\t" . 'if (infowindow) infowindow.close();' . "\n";
         $this->content .= "\t\t\t" . 'infowindow = new google.maps.InfoWindow({content: html,disableAutoPan: false});' . "\n";
@@ -701,7 +719,7 @@ class Api
 
         // Enable the zoom when you click on a marker
         if ($this->enableWindowZoom) {
-            $this->content .= "\t\t\t" . 'currentmap.setCenter(new google.maps.LatLng(latlng.lat(),latlng.lng()),' . $this->infoWindowZoom . ');' . "\n";
+            $this->content .= "\t\t\t" . 'currentmap.setCenter(new google.maps.LatLng(latlng.lat(),latlng.lng()),' . (int)$this->infoWindowZoom . ');' . "\n";
         }
 
         $this->content .= "\t\t" . '});' . "\n";
@@ -732,7 +750,7 @@ class Api
         $this->content .= "\t\t" . 'if (geocoder) {' . "\n";
         $this->content .= "\t\t\t" . 'geocoder.geocode( { "address": address}, function(results, status) {' . "\n";
         $this->content .= "\t\t\t\t" . 'if (status === "OK") {' . "\n";
-        $this->content .= "\t\t\t\t" . 'map' . $this->googleMapId . '.setCenter(results[0].geometry.location);' . "\n";
+        $this->content .= "\t\t\t\t" . $sMapVariable . '.setCenter(results[0].geometry.location);' . "\n";
         $this->content .= "\t\t\t\t" . '} else {' . "\n";
         $this->content .= "\t\t\t\t" . 'console.error("' . t('Oops! Google Maps was not successful for the following reason:') . '" + status);' . "\n";
         $this->content .= "\t\t\t\t" . '}' . "\n";
@@ -817,7 +835,7 @@ class Api
         // JS public function add a KML
         $this->content .= "\t" . 'function addKML(file) {' . "\n";
         $this->content .= "\t\t" . 'var ctaLayer = new google.maps.KmlLayer(file);' . "\n";
-        $this->content .= "\t\t" . 'ctaLayer.setMap(map' . $this->googleMapId . ');' . "\n";
+        $this->content .= "\t\t" . 'ctaLayer.setMap(' . $sMapVariable . ');' . "\n";
         $this->content .= "\t" . '}' . "\n";
     }
 
@@ -827,18 +845,21 @@ class Api
     public function generate()
     {
         $this->init();
+        $sIdentifierSuffix = $this->getJavaScriptIdentifierSuffix();
+        $sMapVariable = 'map' . $sIdentifierSuffix;
 
         // init() function
-        $this->content .= "\t" . 'function initialize' . $this->googleMapId . '() {' . "\n";
+        $this->content .= "\t" . 'function initialize' . $sIdentifierSuffix . '() {' . "\n";
         $this->content .= "\t" . 'var defLatLng = new google.maps.LatLng(40.785091,-73.968285);' . "\n";
         $this->content .= "\t" . 'var defOptions = {' . "\n";
-        $this->content .= "\t\t" . 'zoom: ' . $this->zoom . ',' . "\n";
+        $this->content .= "\t\t" . 'zoom: ' . (int)$this->zoom . ',' . "\n";
         $this->content .= "\t\t" . 'center: defLatLng,' . "\n";
         $this->content .= "\t\t" . 'mapTypeId: google.maps.MapTypeId.' . $this->mapType . "\n";
         $this->content .= "\t" . '}' . "\n";
 
         // Google map Div ID
-        $this->content .= "\t" . 'map' . $this->googleMapId . ' = new google.maps.Map(document.getElementById("' . $this->googleMapId . '"), defOptions);' . "\n";
+        $this->content .= "\t" . $sMapVariable . ' = new google.maps.Map(document.getElementById(' .
+            self::encodeForJavaScript($this->googleMapId) . '), defOptions);' . "\n";
 
         // Center
         if ($this->enableAutomaticCenterZoom) {
@@ -854,40 +875,44 @@ class Api
             $maxLat = number_format(floatval($this->maxLat), 12, '.', '');
             $maxLng = number_format(floatval($this->maxLng), 12, '.', '');
             $this->content .= "\t\t\t" . 'var bds = new google.maps.LatLngBounds(new google.maps.LatLng(' . $minLat . ',' . $minLng . '),new google.maps.LatLng(' . $maxLat . ',' . $maxLng . '));' . "\n";
-            $this->content .= "\t\t\t" . 'map' . $this->googleMapId . '.fitBounds(bds);' . "\n";
+            $this->content .= "\t\t\t" . $sMapVariable . '.fitBounds(bds);' . "\n";
         } else {
+            $sCenter = self::encodeForJavaScript($this->center);
+
             if ($this->enableGeolocation === true) {
                 $this->content .= "\t" . 'if(navigator.geolocation) {' . "\n";
                 $this->content .= "\t\t" . 'navigator.geolocation.getCurrentPosition(function(position) {' . "\n";
                 $this->content .= "\t\t" . 'var pos = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);' . "\n";
-                $this->content .= "\t\t" . 'map' . $this->googleMapId . '.setCenter(pos);' . "\n";
-                $this->content .= "\t\t" . '},function() { geocodeCenter("' . $this->center . '"); } );' . "\n";
+                $this->content .= "\t\t" . $sMapVariable . '.setCenter(pos);' . "\n";
+                $this->content .= "\t\t" . '},function() { geocodeCenter(' . $sCenter . '); } );' . "\n";
                 $this->content .= "\t" . '}' . "\n";
             } elseif (isset($this->centerLatLng)) {
-                $this->content .= "\t" . 'map' . $this->googleMapId . '.setCenter(' . $this->centerLatLng . ');' . "\n";
+                $this->content .= "\t" . $sMapVariable . '.setCenter(' . $this->centerLatLng . ');' . "\n";
             } else {
-                $this->content .= "\t" . 'geocodeCenter("' . $this->center . '");' . "\n";
+                $this->content .= "\t" . 'geocodeCenter(' . $sCenter . ');' . "\n";
             }
         }
 
 
-        $this->content .= "\t" . 'google.maps.event.addListener(map' . $this->googleMapId . ',"click",function(event) { if (event) { current_lat=event.latLng.lat();current_lng=event.latLng.lng(); }}) ;' . "\n";
+        $this->content .= "\t" . 'google.maps.event.addListener(' . $sMapVariable . ',"click",function(event) { if (event) { current_lat=event.latLng.lat();current_lng=event.latLng.lng(); }}) ;' . "\n";
 
-        $this->content .= "\t" . 'directions.setMap(map' . $this->googleMapId . ');' . "\n";
-        $this->content .= "\t" . 'directions.setPanel(document.getElementById("' . $this->googleMapDirectionId . '"))' . "\n";
+        $this->content .= "\t" . 'directions.setMap(' . $sMapVariable . ');' . "\n";
+        $this->content .= "\t" . 'directions.setPanel(document.getElementById(' .
+            self::encodeForJavaScript($this->googleMapDirectionId) . '))' . "\n";
 
         // Add all the markers
         $this->content .= $this->contentMarker;
 
         // JS Clusterer
         if ($this->useClusterer) {
-            $this->content .= "\t" . 'var markerCluster = new MarkerClusterer(map' . $this->googleMapId . ', gmarkers,{gridSize: ' . $this->gridSize . ', maxZoom: ' . $this->maxZoom . '});' . "\n";
+            $this->content .= "\t" . 'var markerCluster = new MarkerClusterer(' . $sMapVariable . ', gmarkers,{gridSize: ' .
+                (int)$this->gridSize . ', maxZoom: ' . (int)$this->maxZoom . '});' . "\n";
         }
 
         $this->content .= '}' . "\n";
 
         // Loading the map at the end of the HTML
-        $this->content .= "\t" . 'addLoadEvent(initialize' . $this->googleMapId . ');' . "\n";
+        $this->content .= "\t" . 'addLoadEvent(initialize' . $sIdentifierSuffix . ');' . "\n";
 
         $this->content .= '</script>' . "\n";
     }
@@ -898,5 +923,51 @@ class Api
     public function isApiKeyNotSet()
     {
         return empty($this->key) || strlen($this->key) <= self::API_KEY_MIN_LENGTH;
+    }
+
+    /**
+     * Serialize a value for an inline JavaScript expression.
+     */
+    private static function encodeForJavaScript($mValue): string
+    {
+        return json_encode((string)$mValue, self::JAVASCRIPT_JSON_FLAGS);
+    }
+
+    /**
+     * Encode a value for an HTML attribute.
+     */
+    private static function encodeHtmlAttribute($mValue): string
+    {
+        return htmlspecialchars((string)$mValue, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
+    }
+
+    /**
+     * Preserve valid existing map identifiers and safely replace invalid ones.
+     */
+    private function getJavaScriptIdentifierSuffix(): string
+    {
+        $sMapId = (string)$this->googleMapId;
+        if ($sMapId !== '' && preg_match('/^[a-zA-Z0-9_$]+$/D', $sMapId) === 1) {
+            return $sMapId;
+        }
+
+        return '_' . substr(hash('sha256', $sMapId), 0, 16);
+    }
+
+    /**
+     * Keep coordinates as JavaScript numbers and reject invalid expressions.
+     */
+    private static function encodeCoordinate($mCoordinate): string
+    {
+        if (!is_numeric($mCoordinate)) {
+            throw new \InvalidArgumentException('Map coordinates must be numeric.');
+        }
+
+        $fCoordinate = (float)$mCoordinate;
+        if (!is_finite($fCoordinate)) {
+            throw new \InvalidArgumentException('Map coordinates must be finite.');
+        }
+
+        return json_encode($fCoordinate, self::JAVASCRIPT_JSON_FLAGS | JSON_PRESERVE_ZERO_FRACTION);
     }
 }
