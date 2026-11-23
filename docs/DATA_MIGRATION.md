@@ -87,8 +87,9 @@ unique random password for every imported account. Members must use the normal
 password-recovery flow before signing in.
 
 UNA accounts are active only when the source account is active, its email is
-confirmed, and its Person profile is active. Other source accounts enter
-pH7Builder's manual-approval state.
+confirmed, its Person profile is active, and supported gender and birth-date
+values are present. Other source accounts enter pH7Builder's manual-approval
+state.
 
 ## Field mapping and limitations
 

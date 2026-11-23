@@ -46,6 +46,8 @@ final class UnaMemberMapper
     public function map(array $aSource): array
     {
         $sEmail = strtolower(trim((string)($aSource['email'] ?? '')));
+        $sGender = $this->mapGender((string)($aSource['gender'] ?? ''));
+        $sBirthDate = $this->mapBirthDate((string)($aSource['birthday'] ?? ''));
         [$sFirstName, $sLastName] = $this->splitName(
             trim((string)($aSource['fullname'] ?? '')),
             trim((string)($aSource['last_name'] ?? ''))
@@ -60,16 +62,16 @@ final class UnaMemberMapper
             'first_name' => $sFirstName,
             'last_name' => $sLastName,
             'password' => '',
-            'sex' => $this->mapGender((string)($aSource['gender'] ?? '')),
+            'sex' => $sGender,
             'match_sex' => '',
-            'birth_date' => $this->mapBirthDate((string)($aSource['birthday'] ?? '')),
+            'birth_date' => $sBirthDate,
             'description' => trim((string)($aSource['description'] ?? '')),
             'country' => '',
             'city' => '',
             'state' => '',
             'zip_code' => '',
             'ip' => $this->mapIp((string)($aSource['ip'] ?? '')),
-            'is_active' => $this->mapActivation($aSource)
+            'is_active' => $this->mapActivation($aSource, $sGender, $sBirthDate)
         ];
     }
 
@@ -133,12 +135,14 @@ final class UnaMemberMapper
         return filter_var($sIp, FILTER_VALIDATE_IP) !== false ? $sIp : '0.0.0.0';
     }
 
-    private function mapActivation(array $aSource): string
+    private function mapActivation(array $aSource, string $sGender, string $sBirthDate): string
     {
         $bAccountActive = (int)($aSource['account_active'] ?? 0) > 0;
         $bEmailConfirmed = (int)($aSource['email_confirmed'] ?? 0) === 1;
         $bProfileActive = (string)($aSource['profile_status'] ?? '') === 'active';
 
-        return $bAccountActive && $bEmailConfirmed && $bProfileActive ? '1' : '3';
+        $bProfileComplete = $sGender !== '' && $sBirthDate !== '';
+
+        return $bAccountActive && $bEmailConfirmed && $bProfileActive && $bProfileComplete ? '1' : '3';
     }
 }

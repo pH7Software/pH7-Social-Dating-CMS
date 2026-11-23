@@ -94,5 +94,6 @@ final class UnaMemberMapperTest extends TestCase
         $this->assertSame('', $aMember['sex']);
         $this->assertSame('', $aMember['birth_date']);
         $this->assertSame('0.0.0.0', $aMember['ip']);
+        $this->assertSame('3', $aMember['is_active']);
     }
 }
