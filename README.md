@@ -20,6 +20,7 @@ certificate issuance, and mail-provider approval are outside that estimate.
 
 [Quick Start](docs/QUICK_START.md) ·
 [Upgrade Guide](docs/UPGRADING.md) ·
+[Data Migration](docs/DATA_MIGRATION.md) ·
 [Launch Checklist](docs/LAUNCH_CHECKLIST.md) ·
 [Release guides](docs/) ·
 [Releases](https://github.com/pH7Software/pH7-Social-Dating-CMS/releases)
@@ -237,6 +238,7 @@ theme and enabled configuration.
 
 - [Official website](https://ph7builder.com)
 - [Release guides](docs/)
+- [Data migration from supported platforms](docs/DATA_MIGRATION.md)
 - [Legacy how-to documentation](https://ph7builder.com/doc/) — useful for
   older customization topics; prefer the release guides for installation,
   upgrades, and security-sensitive instructions.
