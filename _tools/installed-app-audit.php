@@ -31,7 +31,7 @@ if (!is_string($sOriginalConfig) || !is_string($sCookiePath)) {
 }
 
 $aJourneys = [
-    'homepage' => ['path' => '/', 'max_queries' => 80, 'marker' => 'pH7Builder Release Gate'],
+    'homepage' => ['path' => '/', 'max_queries' => 80, 'marker' => null],
     'member login' => ['path' => '/login', 'max_queries' => 60, 'marker' => 'form_login_user'],
     'member discovery' => ['path' => '/meet-people', 'max_queries' => 100, 'marker' => 'release-profile'],
     'public profile' => ['path' => '/@release-profile', 'max_queries' => 120, 'marker' => 'release-profile']
