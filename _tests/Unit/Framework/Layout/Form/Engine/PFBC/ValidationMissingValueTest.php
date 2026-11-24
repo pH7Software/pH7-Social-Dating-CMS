@@ -60,7 +60,7 @@ final class ValidationMissingValueTest extends TestCase
     {
         // The app's configs/constants.php defines this; the test bootstrap does not load it.
         if (!defined('PH7_USERNAME_PATTERN')) {
-            define('PH7_USERNAME_PATTERN', '[\w-]');
+            define('PH7_USERNAME_PATTERN', '[\w\-]');
         }
 
         // Built without its constructor, which reads the length settings from the database.

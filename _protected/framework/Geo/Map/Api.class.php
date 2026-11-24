@@ -463,6 +463,10 @@ class Api
      */
     public function geocoding($address)
     {
+        if ($this->isApiKeyNotSet()) {
+            return null;
+        }
+
         $return = null;
         $url = self::GOOGLE_API_URL . 'geocode/json?address=' . urlencode($address) . '&key=' . $this->key;
 
@@ -490,7 +494,7 @@ class Api
                 echo '<!-- geocoding : failure to geocode : ' . $response['status'] . " -->\n";
             }
         } else {
-            echo '<!-- geocoding : failure to reach ' . $url . " -->\n";
+            echo "<!-- geocoding : Google Maps API request failed -->\n";
         }
 
         return $return;
@@ -633,6 +637,16 @@ class Api
             $this->content .= "\t" . '<div id="' . $sMapDivId . '"></div>' . "\n";
         }
 
+        if ($this->isApiKeyNotSet()) {
+            $sApiKeyMessage = self::encodeForJavaScript(
+                t('You need to get a Google Maps API key to get it working. Please go to your pH7Builder Admin Panel -> Settings -> General -> API -> Google Maps API Key')
+            );
+            $this->content .= '<script>document.getElementById(' . $sMapElementId . ').textContent = ' .
+                $sApiKeyMessage . '.toUpperCase();</script>' . "\n";
+
+            return;
+        }
+
         if ($this->includeJs === true) {
             // Google map JS
             $this->content .= '<script src="' . self::GOOGLE_API_URL . 'js?key=' .
@@ -646,14 +660,6 @@ class Api
         }
 
         $this->content .= '<script>' . "\n";
-
-        if ($this->isApiKeyNotSet()) {
-            $sApiKeyMessage = self::encodeForJavaScript(
-                t('You need to get a Google Maps API key to get it working. Please go to your pH7Builder Admin Panel -> Settings -> General -> API -> Google Maps API Key')
-            );
-            $this->content .= 'document.getElementById(' . $sMapElementId . ').textContent = ' .
-                $sApiKeyMessage . '.toUpperCase();' . "\n";
-        }
 
         $this->content .= 'function addLoadEvent(func) { ' . "\n";
         $this->content .= 'if (window.addEventListener) { window.addEventListener("load", func, {once:true}); return; }' . "\n";
@@ -845,6 +851,10 @@ class Api
     public function generate()
     {
         $this->init();
+        if ($this->isApiKeyNotSet()) {
+            return;
+        }
+
         $sIdentifierSuffix = $this->getJavaScriptIdentifierSuffix();
         $sMapVariable = 'map' . $sIdentifierSuffix;
 

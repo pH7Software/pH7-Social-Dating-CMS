@@ -153,11 +153,20 @@ abstract class ProfileBaseController extends Controller
     {
         $sFullAddress = $sCity . ' ' . t($sCountry);
         $sMarkerText = t('Meet <b>%0%</b> near here!', $oUser->username);
+        $sApiKey = (string)DbConfig::getSetting('googleApiKey');
+        $oMap = new Map;
+        $oMap->setKey($sApiKey);
+
+        if ($oMap->isApiKeyNotSet()) {
+            $this->view->is_map_enabled = false;
+
+            return;
+        }
 
         try {
             $oMapDrawer = new MapDrawerCore(
-                new Map,
-                DbConfig::getSetting('googleApiKey')
+                $oMap,
+                $sApiKey
             );
             $oMapDrawer->setWidthSize(self::MAP_WIDTH_SIZE);
             $oMapDrawer->setHeightSize(self::MAP_HEIGHT_SIZE);

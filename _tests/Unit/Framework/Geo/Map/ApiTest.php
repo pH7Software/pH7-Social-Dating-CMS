@@ -17,13 +17,14 @@ use ReflectionProperty;
 
 class ApiTest extends TestCase
 {
+    private const API_KEY = 'OIzaSyBu-916IsoKajomJNIgngS6HL_kDIKU0aU';
     private const JAVASCRIPT_JSON_FLAGS = JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP |
         JSON_INVALID_UTF8_SUBSTITUTE | JSON_THROW_ON_ERROR;
 
     public function testApiKeyIsSet(): void
     {
         $oMap = new ApiMap;
-        $oMap->setKey('OIzaSyBu-916IsoKajomJNIgngS6HL_kDIKU0aU');
+        $oMap->setKey(self::API_KEY);
         $this->assertFalse($oMap->isApiKeyNotSet());
     }
 
@@ -40,6 +41,54 @@ class ApiTest extends TestCase
         $this->assertTrue($oMap->isApiKeyNotSet());
     }
 
+    public function testMapWithoutApiKeyDoesNotRequestGoogleMaps(): void
+    {
+        $oMap = new ApiMap;
+        $oMap->generate();
+
+        $oContent = new ReflectionProperty(ApiMap::class, 'content');
+        $sContent = $oContent->getValue($oMap);
+        $this->assertIsString($sContent);
+        $this->assertStringNotContainsString(ApiMap::GOOGLE_API_URL, $sContent);
+        $this->assertStringNotContainsString('google.maps.', $sContent);
+        $this->assertStringContainsString('Google Maps API key', $sContent);
+    }
+
+    public function testGeocodingWithoutApiKeyDoesNotMakeRequest(): void
+    {
+        $oMap = new class extends ApiMap {
+            public bool $bRequestMade = false;
+
+            public function getContent($url)
+            {
+                $this->bRequestMade = true;
+
+                return '';
+            }
+        };
+
+        $this->assertNull($oMap->geocoding('Wellington'));
+        $this->assertFalse($oMap->bRequestMade);
+    }
+
+    public function testFailedGeocodingDoesNotExposeApiKey(): void
+    {
+        $oMap = new class extends ApiMap {
+            public function getContent($url)
+            {
+                return '';
+            }
+        };
+        $oMap->setKey(self::API_KEY);
+
+        ob_start();
+        $oMap->geocoding('Wellington');
+        $sOutput = (string)ob_get_clean();
+
+        $this->assertStringContainsString('Google Maps API request failed', $sOutput);
+        $this->assertStringNotContainsString(self::API_KEY, $sOutput);
+    }
+
     public function testCenterAddressIsEncodedForJavaScript(): void
     {
         $sCenter = 'Wellington");alert(document.domain);//</script>';
@@ -50,6 +99,7 @@ class ApiTest extends TestCase
 
         foreach ([false, true] as $bEnableGeolocation) {
             $oMap = new ApiMap;
+            $oMap->setKey(self::API_KEY);
             $oMap->setCenter($sCenter);
             $oMap->setEnableGeolocation($bEnableGeolocation);
             $oMap->generate();
@@ -96,6 +146,7 @@ class ApiTest extends TestCase
     public function testCenterCoordinatesAreSerializedAsNumbers(): void
     {
         $oMap = new ApiMap;
+        $oMap->setKey(self::API_KEY);
         $oMap->setCenterLatLng('-27.47', '153.02');
         $oMap->generate();
 
@@ -119,6 +170,7 @@ class ApiTest extends TestCase
         $sMapId = 'map-id"><script>alert(document.domain)</script>';
         $sDirectionId = 'route-id");alert(document.domain);//';
         $oMap = new ApiMap;
+        $oMap->setKey(self::API_KEY);
         $oMap->setDivId($sMapId);
         $oMap->setDirectionDivId($sDirectionId);
         $oMap->generate();
@@ -141,6 +193,7 @@ class ApiTest extends TestCase
     public function testMapUsesModernLoadListenerAndAvoidsDocumentWrite(): void
     {
         $oMap = new ApiMap;
+        $oMap->setKey(self::API_KEY);
         $oMap->generate();
 
         $oContent = new ReflectionProperty(ApiMap::class, 'content');
@@ -157,6 +210,7 @@ class ApiTest extends TestCase
     {
         $sPayload = ');alert(document.domain);//';
         $oMap = new ApiMap;
+        $oMap->setKey(self::API_KEY);
         $oMap->setZoom('9' . $sPayload);
         $oMap->setInfoWindowWidth('250' . $sPayload);
         $oMap->setInfoWindowZoom('6' . $sPayload);
