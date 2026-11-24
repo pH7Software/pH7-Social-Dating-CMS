@@ -138,7 +138,7 @@ php -r '
     "$OUTPUT_DIRECTORY/pH7Builder-v$RELEASE_VERSION.build.json"
 
 unzip -Z1 "$ARCHIVE_PATH" > "$WORK_DIRECTORY/archive-files.txt"
-if grep -Eq '/(_tests|\.github)/|/(\.env|auth\.json)$|\.(pem|key)$|/id_(rsa|ed25519)$' "$WORK_DIRECTORY/archive-files.txt"; then
+if grep -Eq '^[^/]+/(_tests|\.github)/|/(\.env|auth\.json)$|/id_(rsa|ed25519)$' "$WORK_DIRECTORY/archive-files.txt"; then
     echo 'The release archive contains development files or possible secrets.' >&2
     exit 1
 fi
@@ -152,6 +152,11 @@ if grep -Eq '/_protected/vendor/(phpunit|phpstan|phake)/' "$WORK_DIRECTORY/archi
 fi
 
 unzip -q "$ARCHIVE_PATH" -d "$WORK_DIRECTORY"
+if grep -RIlE -- 'BEGIN ([A-Z0-9]+ )*PRIVATE KEY' "$PACKAGE_DIRECTORY" > "$WORK_DIRECTORY/private-keys.txt"; then
+    echo 'The release archive contains private-key material.' >&2
+    sed -n '1,20p' "$WORK_DIRECTORY/private-keys.txt" >&2
+    exit 1
+fi
 
 mysql_admin --execute="CREATE DATABASE \`$INSTALL_DATABASE\` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci; CREATE USER '$INSTALL_DATABASE_USER'@'%' IDENTIFIED BY '$INSTALL_DATABASE_PASSWORD'; GRANT ALL PRIVILEGES ON \`$INSTALL_DATABASE\`.* TO '$INSTALL_DATABASE_USER'@'%';"
 database_created='true'

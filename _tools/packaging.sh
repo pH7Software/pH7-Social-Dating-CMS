@@ -127,6 +127,12 @@ rm -rf -- \
     "$PACKAGE_DIRECTORY/_protected/vendor/cache" \
     "$PACKAGE_DIRECTORY/_install/vendor/cache"
 
+# Upstream CI metadata is not needed to run production dependencies.
+find \
+    "$PACKAGE_DIRECTORY/_protected/vendor" \
+    "$PACKAGE_DIRECTORY/_install/vendor" \
+    -type d -name .github -prune -exec rm -rf -- {} +
+
 # Start from restrictive, predictable modes.
 find "$PACKAGE_DIRECTORY" -type d -exec chmod 0755 {} +
 find "$PACKAGE_DIRECTORY" -type f -exec chmod 0644 {} +
