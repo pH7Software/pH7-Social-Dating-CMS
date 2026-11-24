@@ -31,7 +31,7 @@ define('PH7_ADMIN_MOD', 'admin123'); // http://ph7builder.com/doc/en/rename-the-
 
 /***** PATTERN USERNAME (for 'Members', 'Affiliates' and 'Admins') *****/
 
-define('PH7_USERNAME_PATTERN', '[\w-]');
+define('PH7_USERNAME_PATTERN', '[\w\-]');
 
 /***** ADMIN ID (for sending email by an admin) *****/
 
