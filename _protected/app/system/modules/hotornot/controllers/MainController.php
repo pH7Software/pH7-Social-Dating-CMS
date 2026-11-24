@@ -8,9 +8,6 @@
 
 namespace PH7;
 
-use PH7\Framework\Http\Http;
-use PH7\JustHttp\StatusCode;
-
 class MainController extends Controller
 {
     /** @var HotOrNotModel */
@@ -51,7 +48,6 @@ class MainController extends Controller
         $oData = $this->oHoNModel->getPicture($iProfileId);
 
         if (empty($oData)) {
-            Http::setHeadersByCode(StatusCode::NOT_FOUND);
             $this->view->error = t("Sorry, we haven't found any photos for the HotOrNot Party :(");
         } else {
             $this->view->avatarDesign = new AvatarDesignCore; // Avatar Design Class

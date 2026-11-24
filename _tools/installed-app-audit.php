@@ -37,6 +37,7 @@ $aJourneys = [
 ];
 $aAuthenticatedJourneys = [
     'member discovery' => ['path' => '/meet-people', 'max_queries' => 100, 'marker' => null],
+    'member rating' => ['path' => '/hot-or-not', 'max_queries' => 100, 'marker' => 'HotOrNot Party'],
     'member profile' => ['path' => '/@release-profile', 'max_queries' => 120, 'marker' => 'release-profile'],
     'member dashboard' => ['path' => '/user/account/index', 'max_queries' => 120, 'marker' => 'release-member'],
     'member inbox' => ['path' => '/mail', 'max_queries' => 100, 'marker' => null]
