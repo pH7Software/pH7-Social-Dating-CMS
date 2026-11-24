@@ -105,8 +105,15 @@ run_step 'Validate the installer dependency definition' composer validate --stri
 run_step 'Install the locked development dependencies' composer install --working-dir "$PROJECT_ROOT" --no-interaction --no-progress --prefer-dist
 run_step 'Audit the locked runtime dependencies' composer audit --locked --working-dir "$PROJECT_ROOT"
 run_step 'Audit the locked installer dependencies' composer audit --locked --working-dir "$PROJECT_ROOT/_install"
-run_step 'Run static analysis' composer analyse --working-dir "$PROJECT_ROOT"
-run_step 'Run deterministic application tests' composer test --working-dir "$PROJECT_ROOT"
+run_step 'Run static analysis' \
+    php "$PROJECT_ROOT/_protected/vendor/bin/phpstan" analyse \
+        --configuration="$PROJECT_ROOT/phpstan.neon.dist" \
+        --memory-limit=1G
+run_step 'Run deterministic application tests' \
+    php "$PROJECT_ROOT/_protected/vendor/bin/phpunit" \
+        --configuration="$PROJECT_ROOT/phpunit.xml.dist" \
+        --testsuite='pH7Builder Protected CI' \
+        --no-coverage
 run_step 'Run browser smoke journeys' "$PROJECT_ROOT/_tools/browser-audit.sh"
 run_step 'Prove fresh schema, migration idempotency, and restoration' "$PROJECT_ROOT/_tools/release-database-check.sh"
 run_step 'Build the release archive and provenance' "$PROJECT_ROOT/_tools/packaging.sh" '' "$OUTPUT_DIRECTORY"
