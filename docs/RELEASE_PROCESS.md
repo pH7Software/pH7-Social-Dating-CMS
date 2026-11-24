@@ -33,7 +33,10 @@ The command performs the following checks against one commit:
 7. Builds the production ZIP from the committed tree.
 8. Verifies archive exclusions, the SHA-256 checksum, and release metadata.
 9. Installs the packaged ZIP through the complete browser wizard and verifies
-   the resulting schema, administrator, homepage, and installer removal.
+   the resulting schema, administrator, sample profiles, homepage, and
+   installer removal.
+10. Signs in through the packaged member form and enforces query-count and
+    round-trip budgets on discovery, profile, dashboard, and inbox pages.
 
 The gate uses isolated temporary databases and removes them on exit. Set
 `PH7_RELEASE_OUTPUT_DIRECTORY` to retain artefacts at a specific location. The

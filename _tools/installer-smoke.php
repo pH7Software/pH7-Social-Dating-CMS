@@ -24,6 +24,7 @@ $sDatabaseName = requiredEnvironment('PH7_RELEASE_INSTALL_DB_NAME');
 $sDatabasePort = getenv('PH7_RELEASE_DB_PORT') ?: '3306';
 $sDatabasePrefix = getenv('PH7_RELEASE_DB_PREFIX') ?: 'ph7_';
 $sAdminPassword = getenv('PH7_RELEASE_ADMIN_PASSWORD') ?: 'Gate-Smoke!72-Blue-Quartz';
+$sMemberPassword = getenv('PH7_RELEASE_MEMBER_PASSWORD') ?: 'Member-Smoke!72-Blue-Quartz';
 $sCookiePath = tempnam(sys_get_temp_dir(), 'ph7-installer-cookie-');
 if (!is_string($sCookiePath)) {
     fail('Could not create the installer cookie jar.');
@@ -101,6 +102,7 @@ try {
             'admin_email' => 'admin@ph7builder.test',
             'admin_feedback_email' => 'feedback@ph7builder.test',
             'admin_return_email' => 'noreply@ph7builder.test',
+            'sample_data_request' => '1',
             'config_site_submit' => '1'
         ],
         'name="niche_submit"'
@@ -154,10 +156,41 @@ try {
     $iAdminCount = (int)$oDatabase->query(
         sprintf("SELECT COUNT(*) FROM %sadmins WHERE username = 'releasegate'", $sDatabasePrefix)
     )->fetchColumn();
+    $aMemberIds = $oDatabase->query(
+        sprintf("SELECT profileId FROM %smembers WHERE profileId > 1 ORDER BY profileId LIMIT 2", $sDatabasePrefix)
+    )->fetchAll(PDO::FETCH_COLUMN);
 
-    if ($sSchemaVersion !== '1.6.7' || $iAdminCount !== 1) {
-        fail('The installer did not persist the expected schema version and administrator.');
+    if ($sSchemaVersion !== '1.6.7' || $iAdminCount !== 1 || count($aMemberIds) !== 2) {
+        fail('The installer did not persist the expected schema, administrator, and sample profiles.');
     }
+
+    $sMemberPasswordHash = password_hash($sMemberPassword, PASSWORD_BCRYPT, ['cost' => 10]);
+    if (!is_string($sMemberPasswordHash)) {
+        fail('The release member password could not be hashed.');
+    }
+
+    $oMemberUpdate = $oDatabase->prepare(
+        sprintf(
+            'UPDATE %smembers SET email = :email, username = :username, password = :password, active = 1 WHERE profileId = :profile_id',
+            $sDatabasePrefix
+        )
+    );
+    $oMemberUpdate->execute(
+        [
+            'email' => 'release-member@ph7builder.test',
+            'username' => 'release-member',
+            'password' => $sMemberPasswordHash,
+            'profile_id' => (int)$aMemberIds[0]
+        ]
+    );
+    $oMemberUpdate->execute(
+        [
+            'email' => 'release-profile@ph7builder.test',
+            'username' => 'release-profile',
+            'password' => $sMemberPasswordHash,
+            'profile_id' => (int)$aMemberIds[1]
+        ]
+    );
 
     fwrite(STDOUT, "Fresh installation smoke check passed.\n");
 } finally {

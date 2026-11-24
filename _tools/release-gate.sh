@@ -178,7 +178,8 @@ readonly INSTALL_PORT
 readonly INSTALL_ORIGIN="http://127.0.0.1:$INSTALL_PORT"
 
 PH7_INSTALL_TOKEN="$INSTALL_TOKEN" PH7_MAILER_DSN='null://null' \
-    php -S "127.0.0.1:$INSTALL_PORT" -t "$PACKAGE_DIRECTORY" > "$WORK_DIRECTORY/php-server.log" 2>&1 &
+    php -S "127.0.0.1:$INSTALL_PORT" -t "$PACKAGE_DIRECTORY" \
+        "$PROJECT_ROOT/_tools/php-built-in-router.php" > "$WORK_DIRECTORY/php-server.log" 2>&1 &
 server_pid=$!
 
 for _ in {1..40}; do
@@ -202,7 +203,14 @@ run_step 'Complete a fresh installation from the release archive' env \
     PH7_RELEASE_DB_USER="$INSTALL_DATABASE_USER" \
     PH7_RELEASE_DB_PASSWORD="$INSTALL_DATABASE_PASSWORD" \
     PH7_RELEASE_INSTALL_DB_NAME="$INSTALL_DATABASE" \
+    PH7_RELEASE_MEMBER_PASSWORD='Member-Smoke!72-Blue-Quartz' \
     php "$PROJECT_ROOT/_tools/installer-smoke.php"
+
+run_step 'Enforce installed application performance budgets' env \
+    PH7_PERFORMANCE_BASE_URL="$INSTALL_ORIGIN" \
+    PH7_PERFORMANCE_PACKAGE_ROOT="$PACKAGE_DIRECTORY" \
+    PH7_RELEASE_MEMBER_PASSWORD='Member-Smoke!72-Blue-Quartz' \
+    php "$PROJECT_ROOT/_tools/installed-app-audit.php"
 
 run_step 'Verify packaged operator diagnostics' env \
     PH7_MAILER_DSN='null://null' \
