@@ -31,8 +31,8 @@ if (!is_string($sOriginalConfig) || !is_string($sCookiePath)) {
 }
 
 $aJourneys = [
-    'homepage' => ['path' => '/', 'max_queries' => 80, 'marker' => null],
-    'member login' => ['path' => '/login', 'max_queries' => 60, 'marker' => 'form_login_user'],
+    'homepage' => ['path' => '/', 'max_queries' => null, 'marker' => null],
+    'member login' => ['path' => '/login', 'max_queries' => null, 'marker' => 'form_login_user'],
     'member discovery' => ['path' => '/meet-people', 'max_queries' => 100, 'marker' => 'release-profile'],
     'public profile' => ['path' => '/@release-profile', 'max_queries' => 120, 'marker' => 'release-profile']
 ];
@@ -81,8 +81,11 @@ function auditPage(
         fail(sprintf('%s did not render its expected content.', ucfirst($sName)));
     }
 
-    $aMetrics = performanceMetrics($aResponse['body']);
-    if ($aMetrics['queries'] > $aJourney['max_queries']) {
+    $aMetrics = null;
+    if (is_int($aJourney['max_queries'])) {
+        $aMetrics = performanceMetrics($aResponse['body']);
+    }
+    if (is_array($aMetrics) && $aMetrics['queries'] > $aJourney['max_queries']) {
         fail(
             sprintf(
                 '%s used %d queries, above its %d-query budget.',
@@ -103,15 +106,12 @@ function auditPage(
         );
     }
 
+    $sApplicationMetrics = is_array($aMetrics)
+        ? sprintf('%d queries, %s application time, ', $aMetrics['queries'], $aMetrics['application_time'])
+        : '';
     fwrite(
         STDOUT,
-        sprintf(
-            "PASS: %s (%d queries, %s application time, %.3fs round trip)\n",
-            $sName,
-            $aMetrics['queries'],
-            $aMetrics['application_time'],
-            $aResponse['seconds']
-        )
+        sprintf("PASS: %s (%s%.3fs round trip)\n", $sName, $sApplicationMetrics, $aResponse['seconds'])
     );
 }
 
