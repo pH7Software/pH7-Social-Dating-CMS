@@ -19,4 +19,6 @@ if ($sRequestPath !== '/' && (is_file($sRequestedFile) || is_dir($sRequestedFile
     return false;
 }
 
+$_SERVER['HTTP_MOD_REWRITE'] = 'on';
+
 require $sPublicPath . '/index.php';

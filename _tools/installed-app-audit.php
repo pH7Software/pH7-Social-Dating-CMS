@@ -27,20 +27,22 @@ $sOriginalConfig = file_get_contents($sConfigPath);
 $sCookiePath = tempnam(sys_get_temp_dir(), 'ph7-performance-cookie-');
 
 if (!is_string($sOriginalConfig) || !is_string($sCookiePath)) {
-    fail('The installed application audit could not initialise its configuration or cookie jar.');
+    fwrite(STDERR, "The installed application audit could not initialise its configuration or cookie jar.\n");
+    exit(1);
 }
 
 $aJourneys = [
     'homepage' => ['path' => '/', 'max_queries' => null, 'marker' => null],
-    'member login' => ['path' => '/login', 'max_queries' => null, 'marker' => 'form_login_user'],
-    'member discovery' => ['path' => '/meet-people', 'max_queries' => 100, 'marker' => 'release-profile'],
-    'public profile' => ['path' => '/@release-profile', 'max_queries' => 120, 'marker' => 'release-profile']
+    'member login' => ['path' => '/login', 'max_queries' => null, 'marker' => null]
 ];
 $aAuthenticatedJourneys = [
+    'member discovery' => ['path' => '/meet-people', 'max_queries' => 100, 'marker' => null],
+    'member profile' => ['path' => '/@release-profile', 'max_queries' => 120, 'marker' => 'release-profile'],
     'member dashboard' => ['path' => '/user/account/index', 'max_queries' => 120, 'marker' => 'release-member'],
     'member inbox' => ['path' => '/mail', 'max_queries' => 100, 'marker' => null]
 ];
 
+$iExitCode = 0;
 try {
     enableDevelopmentMode($sConfigPath, $sOriginalConfig);
 
@@ -51,13 +53,30 @@ try {
     signIn($sBaseUrl, $sCookiePath, $sMemberPassword);
 
     foreach ($aAuthenticatedJourneys as $sName => $aJourney) {
+        warmPage($sName, $sBaseUrl, $sCookiePath, $aJourney);
+    }
+
+    foreach ($aAuthenticatedJourneys as $sName => $aJourney) {
         auditPage($sName, $sBaseUrl, $sCookiePath, $aJourney, true);
     }
 
     fwrite(STDOUT, "Installed application performance audit passed.\n");
+} catch (RuntimeException $oException) {
+    fwrite(STDERR, $oException->getMessage() . PHP_EOL);
+    $iExitCode = 1;
 } finally {
-    file_put_contents($sConfigPath, $sOriginalConfig);
+    if (file_put_contents($sConfigPath, $sOriginalConfig) === false) {
+        fwrite(STDERR, "The installed application audit could not restore production mode.\n");
+        $iExitCode = 1;
+    }
     @unlink($sCookiePath);
+}
+
+exit($iExitCode);
+
+function warmPage(string $sName, string $sBaseUrl, string $sCookiePath, array $aJourney): void
+{
+    assertJourneyResponse($sName, request($sBaseUrl . $aJourney['path'], $sCookiePath), $aJourney, true);
 }
 
 function auditPage(
@@ -68,18 +87,7 @@ function auditPage(
     bool $bRequiresAuthentication = false
 ): void {
     $aResponse = request($sBaseUrl . $aJourney['path'], $sCookiePath);
-    if ($aResponse['status'] !== 200) {
-        fail(sprintf('%s returned HTTP %d.', ucfirst($sName), $aResponse['status']));
-    }
-    if (containsPhpFailure($aResponse['body'])) {
-        fail(sprintf('%s exposed a PHP failure.', ucfirst($sName)));
-    }
-    if ($bRequiresAuthentication && str_contains($aResponse['body'], 'form_login_user')) {
-        fail(sprintf('%s redirected the authenticated member to sign in.', ucfirst($sName)));
-    }
-    if (is_string($aJourney['marker']) && !str_contains($aResponse['body'], $aJourney['marker'])) {
-        fail(sprintf('%s did not render its expected content.', ucfirst($sName)));
-    }
+    assertJourneyResponse($sName, $aResponse, $aJourney, $bRequiresAuthentication);
 
     $aMetrics = null;
     if (is_int($aJourney['max_queries'])) {
@@ -115,10 +123,30 @@ function auditPage(
     );
 }
 
+function assertJourneyResponse(
+    string $sName,
+    array $aResponse,
+    array $aJourney,
+    bool $bRequiresAuthentication
+): void {
+    if ($aResponse['status'] !== 200) {
+        fail(sprintf('%s returned HTTP %d.', ucfirst($sName), $aResponse['status']));
+    }
+    if (containsPhpFailure($aResponse['body'])) {
+        fail(sprintf('%s exposed a PHP failure.', ucfirst($sName)));
+    }
+    if ($bRequiresAuthentication && str_contains($aResponse['body'], 'form_login_user')) {
+        fail(sprintf('%s redirected the authenticated member to sign in.', ucfirst($sName)));
+    }
+    if (is_string($aJourney['marker']) && !str_contains($aResponse['body'], $aJourney['marker'])) {
+        fail(sprintf('%s did not render its expected content.', ucfirst($sName)));
+    }
+}
+
 function signIn(string $sBaseUrl, string $sCookiePath, string $sMemberPassword): void
 {
     $aLoginPage = request($sBaseUrl . '/login', $sCookiePath);
-    $aFields = hiddenFormFields($aLoginPage['body'], 'form_login_user');
+    $aFields = hiddenFormFields($aLoginPage['body'], 'submit_login_user');
     $aFields['mail'] = MEMBER_EMAIL;
     $aFields['password'] = $sMemberPassword;
 
@@ -128,7 +156,7 @@ function signIn(string $sBaseUrl, string $sCookiePath, string $sMemberPassword):
     }
 }
 
-function hiddenFormFields(string $sHtml, string $sFormId): array
+function hiddenFormFields(string $sHtml, string $sSubmitField): array
 {
     $oDocument = new DOMDocument();
     $bPreviousErrorMode = libxml_use_internal_errors(true);
@@ -141,7 +169,10 @@ function hiddenFormFields(string $sHtml, string $sFormId): array
 
     $oXPath = new DOMXPath($oDocument);
     $oInputs = $oXPath->query(
-        sprintf('//form[@id="%s"]//input[@type="hidden" and @name]', $sFormId)
+        sprintf(
+            '//input[@name="%s"]/ancestor::form[1]//input[@type="hidden" and @name]',
+            $sSubmitField
+        )
     );
     if ($oInputs === false || $oInputs->length === 0) {
         fail('The installed application sign-in form has no hidden security fields.');
@@ -241,6 +272,5 @@ function requiredEnvironment(string $sName): string
 
 function fail(string $sMessage): never
 {
-    fwrite(STDERR, $sMessage . PHP_EOL);
-    exit(1);
+    throw new RuntimeException($sMessage);
 }

@@ -36,7 +36,8 @@ The command performs the following checks against one commit:
    the resulting schema, administrator, sample profiles, homepage, and
    installer removal.
 10. Signs in through the packaged member form and enforces query-count and
-    round-trip budgets on discovery, profile, dashboard, and inbox pages.
+    warm-cache round-trip budgets on discovery, profile, dashboard, and inbox
+    pages. The first request also verifies each journey while compiling caches.
 
 The gate uses isolated temporary databases and removes them on exit. Set
 `PH7_RELEASE_OUTPUT_DIRECTORY` to retain artefacts at a specific location. The
