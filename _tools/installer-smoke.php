@@ -116,13 +116,20 @@ try {
     );
 
     $aResponse = request($sBaseUrl . '_install/?a=finish', $sCookiePath);
-    postStep(
+    $aFinishResponse = request(
         $sBaseUrl . '_install/?a=finish',
         $sCookiePath,
-        $aResponse['body'],
-        ['confirm_remove_install' => '1'],
-        'pH7Builder Release Gate'
+        [
+            'confirm_remove_install' => '1',
+            'action_token' => actionToken($aResponse['body'])
+        ]
     );
+    if ($aFinishResponse['status'] !== 200
+        || rtrim($aFinishResponse['url'], '/') !== rtrim($sBaseUrl, '/')
+        || is_dir($sPackageRoot . '/_install')
+    ) {
+        fail('The installer did not remove itself and redirect to the installed site.');
+    }
 
     $aHomeResponse = request($sBaseUrl, $sCookiePath);
     if ($aHomeResponse['status'] !== 200
@@ -198,14 +205,14 @@ function request(string $sUrl, string $sCookiePath, ?array $aFields = null): arr
 
     $sBody = curl_exec($oCurl);
     $iStatus = (int)curl_getinfo($oCurl, CURLINFO_RESPONSE_CODE);
+    $sEffectiveUrl = (string)curl_getinfo($oCurl, CURLINFO_EFFECTIVE_URL);
     $sError = curl_error($oCurl);
-    curl_close($oCurl);
 
     if (!is_string($sBody)) {
         fail('Installer request failed: ' . $sError);
     }
 
-    return ['status' => $iStatus, 'body' => $sBody];
+    return ['status' => $iStatus, 'body' => $sBody, 'url' => $sEffectiveUrl];
 }
 
 function actionToken(string $sHtml): string
