@@ -152,7 +152,7 @@ if grep -Eq '/_protected/vendor/(phpunit|phpstan|phake)/' "$WORK_DIRECTORY/archi
 fi
 
 unzip -q "$ARCHIVE_PATH" -d "$WORK_DIRECTORY"
-if grep -RIlE -- 'BEGIN ([A-Z0-9]+ )*PRIVATE KEY' "$PACKAGE_DIRECTORY" > "$WORK_DIRECTORY/private-keys.txt"; then
+if grep -RIlE -- '^-----BEGIN ([A-Z0-9]+ )*PRIVATE KEY-----[[:space:]]*$' "$PACKAGE_DIRECTORY" > "$WORK_DIRECTORY/private-keys.txt"; then
     echo 'The release archive contains private-key material.' >&2
     sed -n '1,20p' "$WORK_DIRECTORY/private-keys.txt" >&2
     exit 1
