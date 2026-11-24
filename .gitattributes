@@ -38,7 +38,9 @@
 ## Exclude development files from distribution
 /.github export-ignore
 /_tests export-ignore
-/_tools export-ignore
+/_tools/* export-ignore
+/_tools/cli !export-ignore
+/_tools/cli/** !export-ignore
 /AGENTS.md export-ignore
 .gitattributes export-ignore
 .gitignore export-ignore

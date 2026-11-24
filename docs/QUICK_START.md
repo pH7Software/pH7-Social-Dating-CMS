@@ -247,6 +247,18 @@ completed and the path is correct. Do not leave the installer web-accessible.
 Keep production error display disabled. Application logs belong under
 `_protected/data/log/`, outside direct web access.
 
+Run the packaged read-only health report after locking down the installer and
+again after configuration changes:
+
+```console
+php _tools/cli/ph7cms health:report
+```
+
+Resolve failed compatibility, schema, permission, installer, cron, and
+production-mode checks before launch. A passing report does not prove external
+email delivery, scheduler execution, backups, or payment providers; complete
+the checks below and the [launch checklist](LAUNCH_CHECKLIST.md).
+
 ## 7. Configure cron
 
 In Admin → Settings → Automation, replace the default cron secret with a long,

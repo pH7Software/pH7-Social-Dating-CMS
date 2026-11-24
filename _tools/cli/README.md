@@ -12,6 +12,21 @@ The legacy interactive CLI installer is disabled because it could leave a partia
 Use the supported browser installer documented in the root [README](../../README.md#quick-start).
 Running `php ph7cms setup:install` prints that guidance without changing the site or database.
 
+## Operator health report
+
+After installation, run the read-only operator report from the project root:
+
+```console
+php _tools/cli/ph7cms health:report
+php _tools/cli/ph7cms health:report --json
+```
+
+It checks PHP and MySQL compatibility, required extensions, schema version,
+runtime paths, production mode, installer removal, cron-secret configuration,
+mail-transport configuration, and old cache files. It does not send email, run
+cron, alter configuration, or change the database. External delivery,
+schedulers, backups, and providers still require the launch checklist.
+
 ## Data migration
 
 The CLI can validate UNA 14.0.0's public account and Persons schema, then
