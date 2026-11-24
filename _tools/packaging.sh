@@ -222,5 +222,12 @@ else
     exit 1
 fi
 
+php "$SCRIPT_DIRECTORY/release-provenance.php" \
+    "$RELEASE_VERSION" \
+    "$ARCHIVE_PATH" \
+    "$OUTPUT_DIRECTORY"
+
 echo "Release archive: $ARCHIVE_PATH"
 echo "SHA-256 file: $CHECKSUM_PATH"
+echo "SPDX SBOM: $OUTPUT_DIRECTORY/pH7Builder-v$RELEASE_VERSION.spdx.json"
+echo "Build metadata: $OUTPUT_DIRECTORY/pH7Builder-v$RELEASE_VERSION.build.json"
