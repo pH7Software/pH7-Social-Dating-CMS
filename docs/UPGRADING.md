@@ -7,8 +7,9 @@ manually, verify it, and only then repeat the reviewed procedure in production.
 
 pH7Builder 20.0.0 requires PHP 8.3 or newer; 19.4.0 is the final PHP 8.2
 compatible release. Upgrade the PHP runtime before deploying 20.0.0. The
-installer now uses Smarty 5.8.5; this affects only the installation wizard and
-does not change pH7Builder's PH7Tpl site themes.
+installer requires Smarty 5.8.5 or newer and currently locks Smarty 5.9.0; this
+affects only the installation wizard and does not change pH7Builder's PH7Tpl
+site themes.
 
 The profile generator continues to use FakerPHP and retains all 29 existing
 locale choices. Member, affiliate, and subscriber profile generation remains
@@ -31,7 +32,11 @@ row in `ph7_modules` reports version `1.6.7`. See the
 Deploy the complete 20.0.0 package to a staging copy, preserve configuration
 and user data, remove the installer on existing sites, and clear application,
 template, and browser/CDN caches. Source deployments should run
-`composer install` from the tagged tree.
+`composer install` from the tagged tree. Before production, restore the actual
+database, uploaded media, configuration, custom modules, themes, and language
+packs into a separate environment and verify that restored copy. Follow the
+[release restore rehearsal](RELEASE_PROCESS.md#restore-rehearsal); an untested
+backup alone is not a recovery plan.
 
 ## 19.4.0 security and maintenance release
 

@@ -108,6 +108,7 @@
     "test-ci": "_protected/vendor/bin/phpunit --testsuite \"pH7Builder Protected CI\" --coverage-text --coverage-clover=build/coverage.xml",
     "test-integration": "_protected/vendor/bin/phpunit --testsuite \"pH7Builder Integration\" --no-coverage",
     "analyse": "_protected/vendor/bin/phpstan analyse --configuration=phpstan.neon.dist --memory-limit=1G",
+    "release-gate": "bash _tools/release-gate.sh",
     "post-cmd": [
       "cp -R _protected/vendor/twbs/bootstrap/dist/css/bootstrap.min.css static/css/bootstrap.css",
       "cp -R _protected/vendor/twbs/bootstrap/dist/js/bootstrap.min.js static/js/bootstrap.js"

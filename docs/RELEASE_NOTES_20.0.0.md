@@ -12,8 +12,9 @@ package are not available yet.
 
 ## Installer and dependency updates
 
-- Upgrades the installation wizard to Smarty 5.8.5. This is an internal
-  installer dependency; pH7Builder site themes continue to use PH7Tpl.
+- Requires Smarty 5.8.5 or newer for the installation wizard and currently
+  locks Smarty 5.9.0. This is an internal installer dependency; pH7Builder site
+  themes continue to use PH7Tpl.
 - Keeps FakerPHP and all 29 existing profile-generator locales. Invalid locale
   submissions are rejected server-side instead of falling back implicitly.
 - Keeps Clickatell SMS support while replacing its unmaintained GPL wrapper
@@ -35,4 +36,6 @@ confirm that the locked dependencies support it. Sites that must remain on PHP
 For source deployments, install the locked production dependencies with
 `composer install`. For existing sites, preserve configuration and user data,
 remove or block the installer, and clear application, template, and
-browser/CDN caches after deployment.
+browser/CDN caches after deployment. The release candidate must pass the
+[automated release gate](RELEASE_PROCESS.md#automated-release-gate), including
+a packaged fresh installation, the 19.4.0 migration, and a restore rehearsal.

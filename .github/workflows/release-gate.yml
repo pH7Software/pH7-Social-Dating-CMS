@@ -1,0 +1,70 @@
+name: Validate Release Candidate
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - 20.x
+  pull_request:
+    branches:
+      - 20.x
+
+permissions:
+  contents: read
+
+jobs:
+  release-gate:
+    name: Installation, migration, recovery, and package
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    services:
+      mysql:
+        image: mysql:8.4
+        env:
+          MYSQL_ROOT_PASSWORD: release-gate-root-password
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping --password=release-gate-root-password"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=10
+
+    steps:
+      - name: Checkout complete release history
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          tools: composer:v2
+          extensions: curl, dom, exif, fileinfo, gd, hash, iconv, json, mbstring, openssl, pdo_mysql, simplexml, xml, xmlwriter, zip, zlib
+          coverage: none
+
+      - name: Cache Composer dependencies
+        uses: actions/cache@v6
+        with:
+          path: ~/.cache/composer/files
+          key: release-gate-composer-${{ hashFiles('composer.lock', '_install/composer.lock') }}
+          restore-keys: release-gate-composer-
+
+      - name: Run the v20 release gate
+        env:
+          PH7_RELEASE_DB_HOST: 127.0.0.1
+          PH7_RELEASE_DB_PORT: 3306
+          PH7_RELEASE_DB_ADMIN_USER: root
+          PH7_RELEASE_DB_ADMIN_PASSWORD: release-gate-root-password
+          PH7_RELEASE_DB_SUFFIX: ci
+          PH7_RELEASE_OUTPUT_DIRECTORY: ${{ runner.temp }}/ph7builder-release
+        run: composer release-gate
+
+      - name: Upload verified release candidate
+        uses: actions/upload-artifact@v6
+        with:
+          name: pH7Builder-release-candidate
+          path: ${{ runner.temp }}/ph7builder-release/
+          if-no-files-found: error
+          retention-days: 14
