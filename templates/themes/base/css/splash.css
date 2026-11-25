@@ -212,16 +212,70 @@ video#bgvid {
         overflow-x: hidden;
     }
 
+    header {
+        padding: 12px;
+    }
+
     #logo {
         height: auto;
-        min-height: 45px;
+        min-height: 52px;
+        width: calc(100% - 24px);
+        margin: 0 auto;
+        padding: 10px 12px 10px 58px;
+        float: none;
+        background-position: 12px center;
+        background-color: rgba(21, 21, 28, .78);
+        border: 1px solid rgba(255, 255, 255, .18);
+        border-radius: var(--ph7-radius-lg, 20px);
+        box-shadow: var(--ph7-shadow, 0 6px 24px rgba(20, 20, 40, .1));
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+    }
+
+    #logo h1 {
+        margin: 0;
+        font-size: clamp(1.4rem, 7vw, 1.85rem);
+        line-height: 1.15;
     }
 
     .left, .right, .login_block {
         text-align: center;
         margin-left: auto;
         margin-right: auto;
-        width: 80%;
+        width: 100%;
+        max-width: 36rem;
+    }
+
+    .folio_block {
+        position: static;
+    }
+
+    .splash_slideshow {
+        display: none;
+    }
+
+    .profiles_window {
+        display: none;
+    }
+
+    .block_txt {
+        margin: .75rem auto 1.5rem;
+    }
+
+    .block_txt h2 {
+        font-size: clamp(1.35rem, 6vw, 1.7rem);
+        line-height: 1.2;
+    }
+
+    h1.red3 {
+        font-size: clamp(1.6rem, 7vw, 2rem);
+        line-height: 1.15;
+    }
+
+    #form_join_user, #form_login_user {
+        margin-left: auto;
+        margin-right: auto;
+        padding: 1.2rem;
     }
 
     .center {
