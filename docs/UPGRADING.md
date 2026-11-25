@@ -3,7 +3,7 @@
 Automatic in-place upgrades are currently unavailable. Upgrade a staging copy
 manually, verify it, and only then repeat the reviewed procedure in production.
 
-## Upcoming 20.0.0 major release
+## 20.0.0 major release
 
 pH7Builder 20.0.0 supports PHP 8.3 through 8.5; 19.4.0 is the final PHP 8.2
 compatible release. Use a supported PHP runtime before deploying 20.0.0. The
@@ -11,8 +11,8 @@ installer requires Smarty 5.8.5 or newer and currently locks Smarty 5.9.0; this
 affects only the installation wizard and does not change pH7Builder's PH7Tpl
 site themes.
 
-The profile generator continues to use FakerPHP and retains all 29 existing
-locale choices. Member, affiliate, and subscriber profile generation remains
+The profile generator now uses Xefi Faker and retains all 29 existing locale
+choices. Member, affiliate, and subscriber profile generation remains
 owner-controlled and can be enabled in production. The SQL schema advances to
 `1.6.7` so existing installations can enable or disable the profile generator
 and milestone celebration modules. The migration also widens the stored module
