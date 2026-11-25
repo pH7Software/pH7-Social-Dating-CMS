@@ -51,7 +51,7 @@ jobs:
 
   una-migration:
     runs-on: ubuntu-24.04
-    name: UNA 14 migration contract
+    name: UNA 14 migration adapter
     services:
       mysql:
         image: mysql:8.4

@@ -84,13 +84,24 @@ final class WebsiteCheckerTest extends TestCase
         }
     }
 
-    public function testIncompatiblePhpVersionFlagIsFalseOnCurrentRuntime(): void
+    #[DataProvider('phpVersionCompatibilityProvider')]
+    public function testPhpVersionCompatibility(string $sPhpVersion, bool $bExpectedIncompatible): void
     {
         $oChecker = new WebsiteChecker;
         $oReflection = new ReflectionClass(WebsiteChecker::class);
         $oMethod = $oReflection->getMethod('isIncompatiblePhpVersion');
 
-        $this->assertFalse($oMethod->invoke($oChecker));
+        $this->assertSame($bExpectedIncompatible, $oMethod->invoke($oChecker, $sPhpVersion));
+    }
+
+    public static function phpVersionCompatibilityProvider(): array
+    {
+        return [
+            'below minimum' => ['8.2.99', true],
+            'minimum' => ['8.3.0', false],
+            'latest supported branch' => ['8.5.99', false],
+            'first unsupported branch' => ['8.6.0', true]
+        ];
     }
 
     public function testRequestAuthorityUsesServerNameInsteadOfRequestHost(): void

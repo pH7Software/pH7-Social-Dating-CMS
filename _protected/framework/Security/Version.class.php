@@ -54,7 +54,7 @@ final class Version
      */
     public const KERNEL_VERSION = '20.0.0';
     public const KERNEL_BUILD = '1';
-    public const KERNEL_RELEASE_DATE = '2026-11-12';
+    public const KERNEL_RELEASE_DATE = '2026-11-25';
 
     /*** Framework Server ***/
     public const KERNEL_TECHNOLOGY_NAME = 'pH7Builder.com';

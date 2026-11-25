@@ -21,10 +21,11 @@ use RuntimeException;
 class WebsiteChecker
 {
     private const REQUIRED_SERVER_VERSION = '8.3.0';
+    private const MAX_SERVER_VERSION = '8.6.0';
     private const REQUIRED_CONFIG_FILE_NAME = '_constants.php';
     private const INSTALL_FOLDER_NAME = '_install/';
 
-    private const PHP_VERSION_ERROR_MESSAGE = 'ERROR: Your current PHP version is %s. pH7Builder requires PHP %s or newer.<br /> Please ask your Web host to upgrade PHP to %s or newer.';
+    private const PHP_VERSION_ERROR_MESSAGE = 'ERROR: Your current PHP version is %s. pH7Builder requires PHP %s through 8.5.x.<br /> Please ask your Web host to use a supported PHP version below %s.';
     private const NO_CONFIG_FOUND_ERROR_MESSAGE = 'CONFIG FILE NOT FOUND! If you want to make a new installation, please re-upload _install/ folder and clear your database.';
 
     /**
@@ -38,7 +39,7 @@ class WebsiteChecker
                     self::PHP_VERSION_ERROR_MESSAGE,
                     PHP_VERSION,
                     self::REQUIRED_SERVER_VERSION,
-                    self::REQUIRED_SERVER_VERSION
+                    self::MAX_SERVER_VERSION
                 )
             );
         }
@@ -137,9 +138,10 @@ class WebsiteChecker
         return is_dir(__DIR__ . '/' . self::INSTALL_FOLDER_NAME);
     }
 
-    private function isIncompatiblePhpVersion(): bool
+    private function isIncompatiblePhpVersion(string $sPhpVersion = PHP_VERSION): bool
     {
-        return version_compare(PHP_VERSION, self::REQUIRED_SERVER_VERSION, '<');
+        return version_compare($sPhpVersion, self::REQUIRED_SERVER_VERSION, '<') ||
+            version_compare($sPhpVersion, self::MAX_SERVER_VERSION, '>=');
     }
 
     private function isValidCanonicalHost(string $sHost): bool
