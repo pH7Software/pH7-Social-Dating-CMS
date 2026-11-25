@@ -146,7 +146,7 @@ if grep -E '/_tools/' "$WORK_DIRECTORY/archive-files.txt" | grep -Ev '/_tools/($
     echo 'The release archive contains unsupported development tools.' >&2
     exit 1
 fi
-if grep -Eq '/_protected/vendor/(phpunit|phpstan|phake)/' "$WORK_DIRECTORY/archive-files.txt"; then
+if grep -Eq '/_protected/vendor/(phpunit/phpunit|phpstan/phpstan|phake/phake)/' "$WORK_DIRECTORY/archive-files.txt"; then
     echo 'The release archive contains development dependencies.' >&2
     exit 1
 fi
