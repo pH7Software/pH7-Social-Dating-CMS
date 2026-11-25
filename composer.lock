@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "26d6b6093c56abac4a41afaa16b1d50b",
+    "content-hash": "e55563aeb231c79a6b430ecb736c615f",
     "packages": [
         {
             "name": "aws/aws-crt-php",
@@ -337,6 +337,55 @@
             "time": "2025-09-16T12:23:56+00:00"
         },
         {
+            "name": "doctrine/deprecations",
+            "version": "1.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/doctrine/deprecations.git",
+                "reference": "d2e16653a734c8784c1851ad68b02f997b53ca82"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/doctrine/deprecations/zipball/d2e16653a734c8784c1851ad68b02f997b53ca82",
+                "reference": "d2e16653a734c8784c1851ad68b02f997b53ca82",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.4 || ^8.0"
+            },
+            "conflict": {
+                "phpunit/phpunit": "<=7.5 || >=14"
+            },
+            "require-dev": {
+                "doctrine/coding-standard": "^9 || ^12 || ^14",
+                "phpstan/phpstan": "1.4.10 || 2.1.30",
+                "phpstan/phpstan-phpunit": "^1.0 || ^2",
+                "phpunit/phpunit": "^7.5 || ^8.5 || ^9.6 || ^10.5 || ^11.5 || ^12.4 || ^13.0",
+                "psr/log": "^1 || ^2 || ^3"
+            },
+            "suggest": {
+                "psr/log": "Allows logging deprecations via PSR-3 logger implementation"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Doctrine\\Deprecations\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "A small layer on top of trigger_error(E_USER_DEPRECATED) or PSR-3 logging with options to disable all deprecations or selectively for packages.",
+            "homepage": "https://www.doctrine-project.org/",
+            "support": {
+                "issues": "https://github.com/doctrine/deprecations/issues",
+                "source": "https://github.com/doctrine/deprecations/tree/1.2.0"
+            },
+            "time": "2026-11-11T10:04:49+00:00",
+            "published-time": "2026-11-11T10:12:24+00:00"
+        },
+        {
             "name": "doctrine/lexer",
             "version": "3.0.3",
             "source": {
@@ -540,69 +589,6 @@
                 "source": "https://github.com/ezyang/htmlpurifier/tree/v4.19.1"
             },
             "time": "2026-09-15T15:42:51+00:00"
-        },
-        {
-            "name": "fakerphp/faker",
-            "version": "v1.24.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/FakerPHP/Faker.git",
-                "reference": "e0ee18eb1e6dc3cda3ce9fd97e5a0689a88a64b5"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/FakerPHP/Faker/zipball/e0ee18eb1e6dc3cda3ce9fd97e5a0689a88a64b5",
-                "reference": "e0ee18eb1e6dc3cda3ce9fd97e5a0689a88a64b5",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.4 || ^8.0",
-                "psr/container": "^1.0 || ^2.0",
-                "symfony/deprecation-contracts": "^2.2 || ^3.0"
-            },
-            "conflict": {
-                "fzaninotto/faker": "*"
-            },
-            "require-dev": {
-                "bamarni/composer-bin-plugin": "^1.4.1",
-                "doctrine/persistence": "^1.3 || ^2.0",
-                "ext-intl": "*",
-                "phpunit/phpunit": "^9.5.26",
-                "symfony/phpunit-bridge": "^5.4.16"
-            },
-            "suggest": {
-                "doctrine/orm": "Required to use Faker\\ORM\\Doctrine",
-                "ext-curl": "Required by Faker\\Provider\\Image to download images.",
-                "ext-dom": "Required by Faker\\Provider\\HtmlLorem for generating random HTML.",
-                "ext-iconv": "Required by Faker\\Provider\\ru_RU\\Text::realText() for generating real Russian text.",
-                "ext-mbstring": "Required for multibyte Unicode string functionality."
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Faker\\": "src/Faker/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "François Zaninotto"
-                }
-            ],
-            "description": "Faker is a PHP library that generates fake data for you.",
-            "keywords": [
-                "data",
-                "faker",
-                "fixtures"
-            ],
-            "support": {
-                "issues": "https://github.com/FakerPHP/Faker/issues",
-                "source": "https://github.com/FakerPHP/Faker/tree/v1.24.1"
-            },
-            "time": "2024-11-21T13:46:39+00:00"
         },
         {
             "name": "geoip2/geoip2",
@@ -1562,6 +1548,238 @@
                 }
             ],
             "time": "2022-04-06T10:23:22+00:00"
+        },
+        {
+            "name": "phpdocumentor/reflection-common",
+            "version": "2.2.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phpDocumentor/ReflectionCommon.git",
+                "reference": "ee15a5a2022c8383906b225055e9496a6a5e6e3b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phpDocumentor/ReflectionCommon/zipball/ee15a5a2022c8383906b225055e9496a6a5e6e3b",
+                "reference": "ee15a5a2022c8383906b225055e9496a6a5e6e3b",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.4 || ^8.0"
+            },
+            "require-dev": {
+                "phpstan/phpstan": "^1.8",
+                "phpunit/phpunit": "^9.5",
+                "vimeo/psalm": "^4.25"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-2.x": "2.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "phpDocumentor\\Reflection\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jaap van Otterdijk",
+                    "email": "opensource@ijaap.nl"
+                }
+            ],
+            "description": "Common reflection classes used by phpdocumentor to reflect the code structure",
+            "homepage": "https://www.phpdoc.org",
+            "keywords": [
+                "FQSEN",
+                "phpDocumentor",
+                "phpdoc",
+                "reflection",
+                "static analysis"
+            ],
+            "support": {
+                "issues": "https://github.com/phpDocumentor/ReflectionCommon/issues",
+                "source": "https://github.com/phpDocumentor/ReflectionCommon/tree/2.2.1"
+            },
+            "time": "2025-11-10T21:21:55+00:00",
+            "published-time": "2026-09-27T10:14:49+00:00"
+        },
+        {
+            "name": "phpdocumentor/reflection-docblock",
+            "version": "6.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phpDocumentor/ReflectionDocBlock.git",
+                "reference": "7bae67520aa9f5ecc506d646810bd40d9da54582"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phpDocumentor/ReflectionDocBlock/zipball/7bae67520aa9f5ecc506d646810bd40d9da54582",
+                "reference": "7bae67520aa9f5ecc506d646810bd40d9da54582",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/deprecations": "^1.1",
+                "ext-filter": "*",
+                "php": "^7.4 || ^8.0",
+                "phpdocumentor/reflection-common": "^2.2",
+                "phpdocumentor/type-resolver": "^2.0",
+                "phpstan/phpdoc-parser": "^2.0",
+                "webmozart/assert": "^1.9.1 || ^2"
+            },
+            "require-dev": {
+                "mockery/mockery": "~1.3.5 || ~1.6.0",
+                "phpstan/extension-installer": "^1.1",
+                "phpstan/phpstan": "^1.8",
+                "phpstan/phpstan-mockery": "^1.1",
+                "phpstan/phpstan-webmozart-assert": "^1.2",
+                "phpunit/phpunit": "^9.5",
+                "psalm/phar": "^5.26",
+                "shipmonk/dead-code-detector": "^0.5.1"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "5.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "phpDocumentor\\Reflection\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mike van Riel",
+                    "email": "me@mikevanriel.com"
+                },
+                {
+                    "name": "Jaap van Otterdijk",
+                    "email": "opensource@ijaap.nl"
+                }
+            ],
+            "description": "With this component, a library can provide support for annotations via DocBlocks or otherwise retrieve information that is embedded in a DocBlock.",
+            "support": {
+                "issues": "https://github.com/phpDocumentor/ReflectionDocBlock/issues",
+                "source": "https://github.com/phpDocumentor/ReflectionDocBlock/tree/6.0.3"
+            },
+            "time": "2026-03-18T20:49:53+00:00",
+            "published-time": "2026-03-18T20:51:16+00:00"
+        },
+        {
+            "name": "phpdocumentor/type-resolver",
+            "version": "2.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phpDocumentor/TypeResolver.git",
+                "reference": "dbe2133bb23e2e33a6834f4ed417f24a1b167769"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phpDocumentor/TypeResolver/zipball/dbe2133bb23e2e33a6834f4ed417f24a1b167769",
+                "reference": "dbe2133bb23e2e33a6834f4ed417f24a1b167769",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/deprecations": "^1.0",
+                "php": "^7.4 || ^8.0",
+                "phpdocumentor/reflection-common": "^2.0",
+                "phpstan/phpdoc-parser": "^2.0"
+            },
+            "require-dev": {
+                "ext-tokenizer": "*",
+                "phpbench/phpbench": "^1.2",
+                "phpstan/extension-installer": "^1.4",
+                "phpstan/phpstan": "^2.1",
+                "phpstan/phpstan-phpunit": "^2.0",
+                "phpunit/phpunit": "^9.5",
+                "psalm/phar": "^4"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-1.x": "1.x-dev",
+                    "dev-2.x": "2.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "phpDocumentor\\Reflection\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mike van Riel",
+                    "email": "me@mikevanriel.com"
+                }
+            ],
+            "description": "A PSR-5 based resolver of Class names, Types and Structural Element Names",
+            "support": {
+                "issues": "https://github.com/phpDocumentor/TypeResolver/issues",
+                "source": "https://github.com/phpDocumentor/TypeResolver/tree/2.1.0"
+            },
+            "time": "2026-09-27T19:32:54+00:00",
+            "published-time": "2026-09-28T18:39:55+00:00"
+        },
+        {
+            "name": "phpstan/phpdoc-parser",
+            "version": "2.4.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phpstan/phpdoc-parser.git",
+                "reference": "af8e840551031d254cfdb3a18a62c3470a309c10"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phpstan/phpdoc-parser/zipball/af8e840551031d254cfdb3a18a62c3470a309c10",
+                "reference": "af8e840551031d254cfdb3a18a62c3470a309c10",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.4 || ^8.0"
+            },
+            "require-dev": {
+                "doctrine/annotations": "^2.0",
+                "nikic/php-parser": "^5.3.0",
+                "php-parallel-lint/php-parallel-lint": "^1.2",
+                "phpstan/extension-installer": "^1.0",
+                "phpstan/phpstan": "^2.0",
+                "phpstan/phpstan-phpunit": "^2.0",
+                "phpstan/phpstan-strict-rules": "^2.0",
+                "phpunit/phpunit": "^9.6",
+                "symfony/process": "^5.2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "PHPStan\\PhpDocParser\\": [
+                        "src/"
+                    ]
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "PHPDoc parser with support for nullable, intersection and generic types",
+            "support": {
+                "issues": "https://github.com/phpstan/phpdoc-parser/issues",
+                "source": "https://github.com/phpstan/phpdoc-parser/tree/2.4.1"
+            },
+            "time": "2026-10-30T19:36:28+00:00",
+            "published-time": "2026-10-30T19:37:11+00:00"
         },
         {
             "name": "psr/container",
@@ -3451,6 +3669,1824 @@
                 "source": "https://github.com/twilio/twilio-php/tree/8.14.1"
             },
             "time": "2026-11-17T09:50:22+00:00"
+        },
+        {
+            "name": "webmozart/assert",
+            "version": "2.5.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/webmozarts/assert.git",
+                "reference": "e578132c01bd0c64108386ab20d8217cd175ddec"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/webmozarts/assert/zipball/e578132c01bd0c64108386ab20d8217cd175ddec",
+                "reference": "e578132c01bd0c64108386ab20d8217cd175ddec",
+                "shasum": ""
+            },
+            "require": {
+                "ext-ctype": "*",
+                "ext-date": "*",
+                "ext-filter": "*",
+                "php": "^8.2"
+            },
+            "suggest": {
+                "ext-intl": "",
+                "ext-simplexml": "",
+                "ext-spl": ""
+            },
+            "type": "library",
+            "extra": {
+                "psalm": {
+                    "pluginClass": "Webmozart\\Assert\\PsalmPlugin"
+                },
+                "branch-alias": {
+                    "dev-master": "2.0-dev",
+                    "dev-feature/2-0": "2.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Webmozart\\Assert\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Bernhard Schussek",
+                    "email": "bschussek@gmail.com"
+                },
+                {
+                    "name": "Woody Gilk",
+                    "email": "woody.gilk@gmail.com"
+                }
+            ],
+            "description": "Assertions to validate method input/output with nice error messages.",
+            "keywords": [
+                "assert",
+                "check",
+                "validate"
+            ],
+            "support": {
+                "issues": "https://github.com/webmozarts/assert/issues",
+                "source": "https://github.com/webmozarts/assert/tree/2.5.1"
+            },
+            "time": "2026-11-15T13:41:13+00:00",
+            "published-time": "2026-11-15T13:41:42+00:00"
+        },
+        {
+            "name": "xefi/faker-php",
+            "version": "v1.5.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/xefi/faker-php.git",
+                "reference": "c314baa2a39cd16b4e9b0e01cfe6dd0c259bfa8a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/xefi/faker-php/zipball/c314baa2a39cd16b4e9b0e01cfe6dd0c259bfa8a",
+                "reference": "c314baa2a39cd16b4e9b0e01cfe6dd0c259bfa8a",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.3 <8.6",
+                "phpdocumentor/reflection-docblock": "^5.6|^6.0",
+                "psr/container": "^2.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^12.5.23"
+            },
+            "type": "library",
+            "extra": {
+                "faker": {
+                    "providers": [
+                        "Xefi\\Faker\\FakerServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Xefi\\Faker\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Gautier Deleglise"
+                },
+                {
+                    "name": "Martin Soenen"
+                }
+            ],
+            "description": "Lightweight, modular fake data generator for PHP 8.3+: tests, fixtures and database seeding, with installable locales and extensions.",
+            "homepage": "https://faker-php.xefi.com",
+            "keywords": [
+                "Fake data",
+                "Lorem ipsum",
+                "dummy data",
+                "factories",
+                "faker",
+                "fixtures",
+                "mock data",
+                "seeding",
+                "test data",
+                "testing"
+            ],
+            "support": {
+                "docs": "https://faker-php.xefi.com",
+                "issues": "https://github.com/xefi/faker-php/issues",
+                "source": "https://github.com/xefi/faker-php"
+            },
+            "time": "2026-11-17T13:37:58+00:00",
+            "published-time": "2026-11-17T14:03:17+00:00"
+        },
+        {
+            "name": "xefi/faker-php-locales-cs-cz",
+            "version": "v1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/xefi/faker-php-locales-cs-cz.git",
+                "reference": "ae3fb5eaae18161d4759cf18afa3e7e7ccfecc2d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/xefi/faker-php-locales-cs-cz/zipball/ae3fb5eaae18161d4759cf18afa3e7e7ccfecc2d",
+                "reference": "ae3fb5eaae18161d4759cf18afa3e7e7ccfecc2d",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.3",
+                "psr/container": "^2.0",
+                "xefi/faker-php": "^1.5.3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^11"
+            },
+            "type": "library",
+            "extra": {
+                "faker": {
+                    "providers": [
+                        "Xefi\\Faker\\CsCz\\FakerCsCzServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Xefi\\Faker\\CsCz\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Martin Soenen"
+                }
+            ],
+            "description": "Faker extension to include cs_CZ locale",
+            "keywords": [
+                "cs_CZ",
+                "data",
+                "faker",
+                "locale"
+            ],
+            "support": {
+                "issues": "https://github.com/xefi/faker-php-locales-cs-cz/issues",
+                "source": "https://github.com/xefi/faker-php-locales-cs-cz/tree/v1.0.1"
+            },
+            "time": "2026-11-18T10:22:26+00:00",
+            "published-time": "2026-11-18T11:05:04+00:00"
+        },
+        {
+            "name": "xefi/faker-php-locales-da-dk",
+            "version": "v1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/xefi/faker-php-locales-da-dk.git",
+                "reference": "983fa910c315412d7c96cd5afa03c95bd7473654"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/xefi/faker-php-locales-da-dk/zipball/983fa910c315412d7c96cd5afa03c95bd7473654",
+                "reference": "983fa910c315412d7c96cd5afa03c95bd7473654",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.3",
+                "psr/container": "^2.0",
+                "xefi/faker-php": "^1.5.3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^11"
+            },
+            "type": "library",
+            "extra": {
+                "faker": {
+                    "providers": [
+                        "Xefi\\Faker\\DaDk\\FakerDaDkServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Xefi\\Faker\\DaDk\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Martin Soenen"
+                }
+            ],
+            "description": "Faker extension to include da_DK locale",
+            "keywords": [
+                "da_DK",
+                "data",
+                "faker",
+                "locale"
+            ],
+            "support": {
+                "issues": "https://github.com/xefi/faker-php-locales-da-dk/issues",
+                "source": "https://github.com/xefi/faker-php-locales-da-dk/tree/v1.0.1"
+            },
+            "time": "2026-11-18T10:23:23+00:00",
+            "published-time": "2026-11-18T11:05:27+00:00"
+        },
+        {
+            "name": "xefi/faker-php-locales-de-ch",
+            "version": "v1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/xefi/faker-php-locales-de-ch.git",
+                "reference": "3da16544b0df30b2280626f4ae96a8f6daef17dc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/xefi/faker-php-locales-de-ch/zipball/3da16544b0df30b2280626f4ae96a8f6daef17dc",
+                "reference": "3da16544b0df30b2280626f4ae96a8f6daef17dc",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.3",
+                "psr/container": "^2.0",
+                "xefi/faker-php": "^1.5.3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^11"
+            },
+            "type": "library",
+            "extra": {
+                "faker": {
+                    "providers": [
+                        "Xefi\\Faker\\DeCh\\FakerDeChServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Xefi\\Faker\\DeCh\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Martin Soenen"
+                }
+            ],
+            "description": "Faker extension to include de_CH locale",
+            "keywords": [
+                "data",
+                "de_CH",
+                "faker",
+                "locale"
+            ],
+            "support": {
+                "issues": "https://github.com/xefi/faker-php-locales-de-ch/issues",
+                "source": "https://github.com/xefi/faker-php-locales-de-ch/tree/v1.0.1"
+            },
+            "time": "2026-11-18T10:25:06+00:00",
+            "published-time": "2026-11-18T11:07:59+00:00"
+        },
+        {
+            "name": "xefi/faker-php-locales-de-de",
+            "version": "v1.1.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/xefi/faker-php-locales-de-de.git",
+                "reference": "fd5b4fdb0a20ad658ddb3a86c07954cafc47c99b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/xefi/faker-php-locales-de-de/zipball/fd5b4fdb0a20ad658ddb3a86c07954cafc47c99b",
+                "reference": "fd5b4fdb0a20ad658ddb3a86c07954cafc47c99b",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.3",
+                "psr/container": "^2.0",
+                "xefi/faker-php": "^1.5"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^11"
+            },
+            "type": "library",
+            "extra": {
+                "faker": {
+                    "providers": [
+                        "Xefi\\Faker\\DeDe\\FakerDeDeServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Xefi\\Faker\\DeDe\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Gautier Deleglise"
+                }
+            ],
+            "description": "Faker extension to include de_DE locale",
+            "keywords": [
+                "DE",
+                "data",
+                "faker"
+            ],
+            "support": {
+                "issues": "https://github.com/xefi/faker-php-locales-de-de/issues",
+                "source": "https://github.com/xefi/faker-php-locales-de-de/tree/v1.1.2"
+            },
+            "time": "2026-11-18T11:12:36+00:00",
+            "published-time": "2026-11-18T12:53:29+00:00"
+        },
+        {
+            "name": "xefi/faker-php-locales-en-au",
+            "version": "v1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/xefi/faker-php-locales-en-au.git",
+                "reference": "8e3b96870daa8d13b75f4c74d407804c5060d566"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/xefi/faker-php-locales-en-au/zipball/8e3b96870daa8d13b75f4c74d407804c5060d566",
+                "reference": "8e3b96870daa8d13b75f4c74d407804c5060d566",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.3",
+                "psr/container": "^2.0",
+                "xefi/faker-php": "^1.5.3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^11"
+            },
+            "type": "library",
+            "extra": {
+                "faker": {
+                    "providers": [
+                        "Xefi\\Faker\\EnAu\\FakerEnAuServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Xefi\\Faker\\EnAu\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Martin Soenen"
+                }
+            ],
+            "description": "Faker extension to include en_AU locale",
+            "keywords": [
+                "data",
+                "en_AU",
+                "faker",
+                "locale"
+            ],
+            "support": {
+                "issues": "https://github.com/xefi/faker-php-locales-en-au/issues",
+                "source": "https://github.com/xefi/faker-php-locales-en-au/tree/v1.0.1"
+            },
+            "time": "2026-11-18T10:22:11+00:00",
+            "published-time": "2026-11-18T11:07:51+00:00"
+        },
+        {
+            "name": "xefi/faker-php-locales-en-ca",
+            "version": "v1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/xefi/faker-php-locales-en-ca.git",
+                "reference": "e2a5aa12fa372bc285f2ffa13461c8401c93f085"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/xefi/faker-php-locales-en-ca/zipball/e2a5aa12fa372bc285f2ffa13461c8401c93f085",
+                "reference": "e2a5aa12fa372bc285f2ffa13461c8401c93f085",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.3",
+                "psr/container": "^2.0",
+                "xefi/faker-php": "^1.5.3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^11"
+            },
+            "type": "library",
+            "extra": {
+                "faker": {
+                    "providers": [
+                        "Xefi\\Faker\\EnCa\\FakerEnCaServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Xefi\\Faker\\EnCa\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Martin Soenen"
+                }
+            ],
+            "description": "Faker extension to include en_CA locale",
+            "keywords": [
+                "data",
+                "en_CA",
+                "faker",
+                "locale"
+            ],
+            "support": {
+                "issues": "https://github.com/xefi/faker-php-locales-en-ca/issues",
+                "source": "https://github.com/xefi/faker-php-locales-en-ca/tree/v1.0.1"
+            },
+            "time": "2026-11-18T10:25:21+00:00",
+            "published-time": "2026-11-18T11:07:44+00:00"
+        },
+        {
+            "name": "xefi/faker-php-locales-en-gb",
+            "version": "v1.1.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/xefi/faker-php-locales-en-gb.git",
+                "reference": "489ccb8301727a92dfe6bbaa3270974f30a5777f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/xefi/faker-php-locales-en-gb/zipball/489ccb8301727a92dfe6bbaa3270974f30a5777f",
+                "reference": "489ccb8301727a92dfe6bbaa3270974f30a5777f",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.3",
+                "psr/container": "^2.0",
+                "xefi/faker-php": "^1.5"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^11"
+            },
+            "type": "library",
+            "extra": {
+                "faker": {
+                    "providers": [
+                        "Xefi\\Faker\\EnGb\\FakerEnGbServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Xefi\\Faker\\EnGb\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Gautier Deleglise"
+                }
+            ],
+            "description": "Faker extension to include en_GB locale",
+            "keywords": [
+                "DE",
+                "data",
+                "faker"
+            ],
+            "support": {
+                "issues": "https://github.com/xefi/faker-php-locales-en-gb/issues",
+                "source": "https://github.com/xefi/faker-php-locales-en-gb/tree/v1.1.2"
+            },
+            "time": "2026-11-18T11:12:43+00:00",
+            "published-time": "2026-11-18T12:53:43+00:00"
+        },
+        {
+            "name": "xefi/faker-php-locales-en-ie",
+            "version": "v1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/xefi/faker-php-locales-en-ie.git",
+                "reference": "1e188da689cf746e4e602be280ffedc4ca75ad31"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/xefi/faker-php-locales-en-ie/zipball/1e188da689cf746e4e602be280ffedc4ca75ad31",
+                "reference": "1e188da689cf746e4e602be280ffedc4ca75ad31",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.3",
+                "psr/container": "^2.0",
+                "xefi/faker-php": "^1.5.3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^11"
+            },
+            "type": "library",
+            "extra": {
+                "faker": {
+                    "providers": [
+                        "Xefi\\Faker\\EnIe\\FakerEnIeServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Xefi\\Faker\\EnIe\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Martin Soenen"
+                }
+            ],
+            "description": "Faker extension to include en_IE locale",
+            "keywords": [
+                "data",
+                "en_IE",
+                "faker",
+                "locale"
+            ],
+            "support": {
+                "issues": "https://github.com/xefi/faker-php-locales-en-ie/issues",
+                "source": "https://github.com/xefi/faker-php-locales-en-ie/tree/v1.0.1"
+            },
+            "time": "2026-11-18T10:22:03+00:00",
+            "published-time": "2026-11-18T11:07:35+00:00"
+        },
+        {
+            "name": "xefi/faker-php-locales-en-nz",
+            "version": "v1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/xefi/faker-php-locales-en-nz.git",
+                "reference": "890b3fe23103e47c9714891dc784f953760944cb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/xefi/faker-php-locales-en-nz/zipball/890b3fe23103e47c9714891dc784f953760944cb",
+                "reference": "890b3fe23103e47c9714891dc784f953760944cb",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.3",
+                "psr/container": "^2.0",
+                "xefi/faker-php": "^1.5.3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^11"
+            },
+            "type": "library",
+            "extra": {
+                "faker": {
+                    "providers": [
+                        "Xefi\\Faker\\EnNz\\FakerEnNzServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Xefi\\Faker\\EnNz\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Martin Soenen"
+                }
+            ],
+            "description": "Faker extension to include en_NZ locale",
+            "keywords": [
+                "data",
+                "en_NZ",
+                "faker",
+                "locale"
+            ],
+            "support": {
+                "issues": "https://github.com/xefi/faker-php-locales-en-nz/issues",
+                "source": "https://github.com/xefi/faker-php-locales-en-nz/tree/v1.0.1"
+            },
+            "time": "2026-11-18T10:21:56+00:00",
+            "published-time": "2026-11-18T11:07:28+00:00"
+        },
+        {
+            "name": "xefi/faker-php-locales-en-us",
+            "version": "v1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/xefi/faker-php-locales-en-us.git",
+                "reference": "78aa70cb03b0e74307c749194f6417259ef088d7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/xefi/faker-php-locales-en-us/zipball/78aa70cb03b0e74307c749194f6417259ef088d7",
+                "reference": "78aa70cb03b0e74307c749194f6417259ef088d7",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.3",
+                "psr/container": "^2.0",
+                "xefi/faker-php": "^1"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^11"
+            },
+            "type": "library",
+            "extra": {
+                "faker": {
+                    "providers": [
+                        "Xefi\\Faker\\EnUs\\FakerEnUsServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Xefi\\Faker\\EnUs\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Gautier Deleglise"
+                }
+            ],
+            "description": "Faker extension to include en_US locale",
+            "keywords": [
+                "data",
+                "en",
+                "faker"
+            ],
+            "support": {
+                "issues": "https://github.com/xefi/faker-php-locales-en-us/issues",
+                "source": "https://github.com/xefi/faker-php-locales-en-us/tree/v1.1.0"
+            },
+            "time": "2026-11-18T11:01:18+00:00",
+            "published-time": "2026-11-18T11:03:54+00:00"
+        },
+        {
+            "name": "xefi/faker-php-locales-es-es",
+            "version": "v1.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/xefi/faker-php-locales-es-es.git",
+                "reference": "d2b0aa8d9d06d6bb1ed31f2aedaccc37ae714d21"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/xefi/faker-php-locales-es-es/zipball/d2b0aa8d9d06d6bb1ed31f2aedaccc37ae714d21",
+                "reference": "d2b0aa8d9d06d6bb1ed31f2aedaccc37ae714d21",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.3",
+                "psr/container": "^2.0",
+                "xefi/faker-php": "^1.5"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^11"
+            },
+            "type": "library",
+            "extra": {
+                "faker": {
+                    "providers": [
+                        "Xefi\\Faker\\EsEs\\FakerEsEsServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Xefi\\Faker\\EsEs\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Martin Soenen"
+                }
+            ],
+            "description": "Faker extension to include es_ES locale",
+            "keywords": [
+                "data",
+                "es",
+                "faker"
+            ],
+            "support": {
+                "issues": "https://github.com/xefi/faker-php-locales-es-es/issues",
+                "source": "https://github.com/xefi/faker-php-locales-es-es/tree/v1.1.1"
+            },
+            "time": "2026-11-18T11:00:34+00:00",
+            "published-time": "2026-11-18T11:03:26+00:00"
+        },
+        {
+            "name": "xefi/faker-php-locales-es-pe",
+            "version": "v1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/xefi/faker-php-locales-es-pe.git",
+                "reference": "59b4fbe5499974994a7ed9f6a8f2922a08eaf0b5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/xefi/faker-php-locales-es-pe/zipball/59b4fbe5499974994a7ed9f6a8f2922a08eaf0b5",
+                "reference": "59b4fbe5499974994a7ed9f6a8f2922a08eaf0b5",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.3",
+                "psr/container": "^2.0",
+                "xefi/faker-php": "^1.5.3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^11"
+            },
+            "type": "library",
+            "extra": {
+                "faker": {
+                    "providers": [
+                        "Xefi\\Faker\\EsPe\\FakerEsPeServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Xefi\\Faker\\EsPe\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Martin Soenen"
+                }
+            ],
+            "description": "Faker extension to include es_PE locale",
+            "keywords": [
+                "data",
+                "es_PE",
+                "faker",
+                "locale"
+            ],
+            "support": {
+                "issues": "https://github.com/xefi/faker-php-locales-es-pe/issues",
+                "source": "https://github.com/xefi/faker-php-locales-es-pe/tree/v1.0.1"
+            },
+            "time": "2026-11-18T10:23:55+00:00",
+            "published-time": "2026-11-18T11:06:19+00:00"
+        },
+        {
+            "name": "xefi/faker-php-locales-es-ve",
+            "version": "v1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/xefi/faker-php-locales-es-ve.git",
+                "reference": "73fda8cbbfe902d4c9db6dcf932d677a5dacdcb0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/xefi/faker-php-locales-es-ve/zipball/73fda8cbbfe902d4c9db6dcf932d677a5dacdcb0",
+                "reference": "73fda8cbbfe902d4c9db6dcf932d677a5dacdcb0",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.3",
+                "psr/container": "^2.0",
+                "xefi/faker-php": "^1.5.3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^11"
+            },
+            "type": "library",
+            "extra": {
+                "faker": {
+                    "providers": [
+                        "Xefi\\Faker\\EsVe\\FakerEsVeServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Xefi\\Faker\\EsVe\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Martin Soenen"
+                }
+            ],
+            "description": "Faker extension to include es_VE locale",
+            "keywords": [
+                "data",
+                "es_VE",
+                "faker",
+                "locale"
+            ],
+            "support": {
+                "issues": "https://github.com/xefi/faker-php-locales-es-ve/issues",
+                "source": "https://github.com/xefi/faker-php-locales-es-ve/tree/v1.0.1"
+            },
+            "time": "2026-11-18T10:23:47+00:00",
+            "published-time": "2026-11-18T11:06:12+00:00"
+        },
+        {
+            "name": "xefi/faker-php-locales-fa-ir",
+            "version": "v1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/xefi/faker-php-locales-fa-ir.git",
+                "reference": "4eadf0d79fab62e9f867b97a5e46f795757c2e87"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/xefi/faker-php-locales-fa-ir/zipball/4eadf0d79fab62e9f867b97a5e46f795757c2e87",
+                "reference": "4eadf0d79fab62e9f867b97a5e46f795757c2e87",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.3",
+                "psr/container": "^2.0",
+                "xefi/faker-php": "^1.5.3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^11"
+            },
+            "type": "library",
+            "extra": {
+                "faker": {
+                    "providers": [
+                        "Xefi\\Faker\\FaIr\\FakerFaIrServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Xefi\\Faker\\FaIr\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Martin Soenen"
+                }
+            ],
+            "description": "Faker extension to include fa_IR locale",
+            "keywords": [
+                "data",
+                "fa_IR",
+                "faker",
+                "locale"
+            ],
+            "support": {
+                "issues": "https://github.com/xefi/faker-php-locales-fa-ir/issues",
+                "source": "https://github.com/xefi/faker-php-locales-fa-ir/tree/v1.0.1"
+            },
+            "time": "2026-11-18T10:21:48+00:00",
+            "published-time": "2026-11-18T11:04:42+00:00"
+        },
+        {
+            "name": "xefi/faker-php-locales-fi-fi",
+            "version": "v1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/xefi/faker-php-locales-fi-fi.git",
+                "reference": "6849dba380527376679af66a16901e3fcfddee7e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/xefi/faker-php-locales-fi-fi/zipball/6849dba380527376679af66a16901e3fcfddee7e",
+                "reference": "6849dba380527376679af66a16901e3fcfddee7e",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.3",
+                "psr/container": "^2.0",
+                "xefi/faker-php": "^1.5.3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^11"
+            },
+            "type": "library",
+            "extra": {
+                "faker": {
+                    "providers": [
+                        "Xefi\\Faker\\FiFi\\FakerFiFiServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Xefi\\Faker\\FiFi\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Martin Soenen"
+                }
+            ],
+            "description": "Faker extension to include fi_FI locale",
+            "keywords": [
+                "data",
+                "faker",
+                "fi_FI",
+                "locale"
+            ],
+            "support": {
+                "issues": "https://github.com/xefi/faker-php-locales-fi-fi/issues",
+                "source": "https://github.com/xefi/faker-php-locales-fi-fi/tree/v1.0.1"
+            },
+            "time": "2026-11-18T10:23:07+00:00",
+            "published-time": "2026-11-18T11:05:11+00:00"
+        },
+        {
+            "name": "xefi/faker-php-locales-fr-be",
+            "version": "v1.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/xefi/faker-php-locales-fr-be.git",
+                "reference": "f091e004efbba52b9bd12452b638e93eac01f64b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/xefi/faker-php-locales-fr-be/zipball/f091e004efbba52b9bd12452b638e93eac01f64b",
+                "reference": "f091e004efbba52b9bd12452b638e93eac01f64b",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.3",
+                "psr/container": "^2.0",
+                "xefi/faker-php": "^1.5"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^11"
+            },
+            "type": "library",
+            "extra": {
+                "faker": {
+                    "providers": [
+                        "Xefi\\Faker\\FrBe\\FakerFrBeServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Xefi\\Faker\\FrBe\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Martin Soenen"
+                }
+            ],
+            "description": "Faker extension to include fr_BE locale",
+            "keywords": [
+                "BE",
+                "data",
+                "faker",
+                "fr"
+            ],
+            "support": {
+                "issues": "https://github.com/xefi/faker-php-locales-fr-be/issues",
+                "source": "https://github.com/xefi/faker-php-locales-fr-be/tree/v1.1.1"
+            },
+            "time": "2026-11-18T11:01:01+00:00",
+            "published-time": "2026-11-18T11:03:32+00:00"
+        },
+        {
+            "name": "xefi/faker-php-locales-fr-ca",
+            "version": "v1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/xefi/faker-php-locales-fr-ca.git",
+                "reference": "c4c3ed27fbc43010c422252e191b20c4298cbe2d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/xefi/faker-php-locales-fr-ca/zipball/c4c3ed27fbc43010c422252e191b20c4298cbe2d",
+                "reference": "c4c3ed27fbc43010c422252e191b20c4298cbe2d",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.3",
+                "psr/container": "^2.0",
+                "xefi/faker-php": "^1.5.3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^11"
+            },
+            "type": "library",
+            "extra": {
+                "faker": {
+                    "providers": [
+                        "Xefi\\Faker\\FrCa\\FakerFrCaServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Xefi\\Faker\\FrCa\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Martin Soenen"
+                }
+            ],
+            "description": "Faker extension to include fr_CA locale",
+            "keywords": [
+                "data",
+                "faker",
+                "fr_CA",
+                "locale"
+            ],
+            "support": {
+                "issues": "https://github.com/xefi/faker-php-locales-fr-ca/issues",
+                "source": "https://github.com/xefi/faker-php-locales-fr-ca/tree/v1.0.1"
+            },
+            "time": "2026-11-18T10:25:14+00:00",
+            "published-time": "2026-11-18T11:07:21+00:00"
+        },
+        {
+            "name": "xefi/faker-php-locales-fr-ch",
+            "version": "v1.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/xefi/faker-php-locales-fr-ch.git",
+                "reference": "1500e3e23eef21f82f56c66638d8cc7e75088b44"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/xefi/faker-php-locales-fr-ch/zipball/1500e3e23eef21f82f56c66638d8cc7e75088b44",
+                "reference": "1500e3e23eef21f82f56c66638d8cc7e75088b44",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.3",
+                "psr/container": "^2.0",
+                "xefi/faker-php": "^1.5"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^11"
+            },
+            "type": "library",
+            "extra": {
+                "faker": {
+                    "providers": [
+                        "Xefi\\Faker\\FrCh\\FakerFrChServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Xefi\\Faker\\FrCh\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Martin Soenen"
+                }
+            ],
+            "description": "Faker extension to include fr_CH locale",
+            "keywords": [
+                "BE",
+                "data",
+                "faker",
+                "fr"
+            ],
+            "support": {
+                "issues": "https://github.com/xefi/faker-php-locales-fr-ch/issues",
+                "source": "https://github.com/xefi/faker-php-locales-fr-ch/tree/v1.1.1"
+            },
+            "time": "2026-11-18T11:01:07+00:00",
+            "published-time": "2026-11-18T11:03:40+00:00"
+        },
+        {
+            "name": "xefi/faker-php-locales-fr-fr",
+            "version": "v1.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/xefi/faker-php-locales-fr-fr.git",
+                "reference": "a78f799c0323240f5fd5d8c5f74dd7c38fbbffeb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/xefi/faker-php-locales-fr-fr/zipball/a78f799c0323240f5fd5d8c5f74dd7c38fbbffeb",
+                "reference": "a78f799c0323240f5fd5d8c5f74dd7c38fbbffeb",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.3",
+                "psr/container": "^2.0",
+                "xefi/faker-php": "^1"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^11"
+            },
+            "type": "library",
+            "extra": {
+                "faker": {
+                    "providers": [
+                        "Xefi\\Faker\\FrFr\\FakerFrFrServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Xefi\\Faker\\FrFr\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Gautier Deleglise"
+                },
+                {
+                    "name": "Martin Soenen"
+                }
+            ],
+            "description": "Faker extension to include fr_FR locale",
+            "keywords": [
+                "data",
+                "faker",
+                "fr"
+            ],
+            "support": {
+                "issues": "https://github.com/xefi/faker-php-locales-fr-fr/issues",
+                "source": "https://github.com/xefi/faker-php-locales-fr-fr/tree/v1.2.0"
+            },
+            "time": "2026-11-18T11:01:24+00:00",
+            "published-time": "2026-11-18T11:04:01+00:00"
+        },
+        {
+            "name": "xefi/faker-php-locales-it-ch",
+            "version": "v1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/xefi/faker-php-locales-it-ch.git",
+                "reference": "f4ad68a5b3427350f83042306e7bc48e50bf8def"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/xefi/faker-php-locales-it-ch/zipball/f4ad68a5b3427350f83042306e7bc48e50bf8def",
+                "reference": "f4ad68a5b3427350f83042306e7bc48e50bf8def",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.3",
+                "psr/container": "^2.0",
+                "xefi/faker-php": "^1.5.3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^11"
+            },
+            "type": "library",
+            "extra": {
+                "faker": {
+                    "providers": [
+                        "Xefi\\Faker\\ItCh\\FakerItChServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Xefi\\Faker\\ItCh\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Martin Soenen"
+                }
+            ],
+            "description": "Faker extension to include it_CH locale",
+            "keywords": [
+                "data",
+                "faker",
+                "it_CH",
+                "locale"
+            ],
+            "support": {
+                "issues": "https://github.com/xefi/faker-php-locales-it-ch/issues",
+                "source": "https://github.com/xefi/faker-php-locales-it-ch/tree/v1.0.1"
+            },
+            "time": "2026-11-18T10:24:52+00:00",
+            "published-time": "2026-11-18T11:06:42+00:00"
+        },
+        {
+            "name": "xefi/faker-php-locales-it-it",
+            "version": "v1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/xefi/faker-php-locales-it-it.git",
+                "reference": "59cc66195a4bf546afa886e17e6a03d10546ade9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/xefi/faker-php-locales-it-it/zipball/59cc66195a4bf546afa886e17e6a03d10546ade9",
+                "reference": "59cc66195a4bf546afa886e17e6a03d10546ade9",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.3",
+                "psr/container": "^2.0",
+                "xefi/faker-php": "^1.5.3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^11"
+            },
+            "type": "library",
+            "extra": {
+                "faker": {
+                    "providers": [
+                        "Xefi\\Faker\\ItIt\\FakerItItServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Xefi\\Faker\\ItIt\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Martin Soenen"
+                }
+            ],
+            "description": "Faker extension to include it_IT locale",
+            "keywords": [
+                "data",
+                "faker",
+                "it_IT",
+                "locale"
+            ],
+            "support": {
+                "issues": "https://github.com/xefi/faker-php-locales-it-it/issues",
+                "source": "https://github.com/xefi/faker-php-locales-it-it/tree/v1.0.1"
+            },
+            "time": "2026-11-18T10:24:59+00:00",
+            "published-time": "2026-11-18T11:07:13+00:00"
+        },
+        {
+            "name": "xefi/faker-php-locales-nb-no",
+            "version": "v1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/xefi/faker-php-locales-nb-no.git",
+                "reference": "9c8cb7e12931efd73ccee1431b5f51b3f2bb858e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/xefi/faker-php-locales-nb-no/zipball/9c8cb7e12931efd73ccee1431b5f51b3f2bb858e",
+                "reference": "9c8cb7e12931efd73ccee1431b5f51b3f2bb858e",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.3",
+                "psr/container": "^2.0",
+                "xefi/faker-php": "^1.5.3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^11"
+            },
+            "type": "library",
+            "extra": {
+                "faker": {
+                    "providers": [
+                        "Xefi\\Faker\\NbNo\\FakerNbNoServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Xefi\\Faker\\NbNo\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Martin Soenen"
+                }
+            ],
+            "description": "Faker extension to include nb_NO locale",
+            "keywords": [
+                "data",
+                "faker",
+                "locale",
+                "nb_NO"
+            ],
+            "support": {
+                "issues": "https://github.com/xefi/faker-php-locales-nb-no/issues",
+                "source": "https://github.com/xefi/faker-php-locales-nb-no/tree/v1.0.1"
+            },
+            "time": "2026-11-18T10:23:15+00:00",
+            "published-time": "2026-11-18T11:05:18+00:00"
+        },
+        {
+            "name": "xefi/faker-php-locales-nl-be",
+            "version": "v1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/xefi/faker-php-locales-nl-be.git",
+                "reference": "19c6bc5550ffb68a6eee114a88eeaf6735a6fdf7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/xefi/faker-php-locales-nl-be/zipball/19c6bc5550ffb68a6eee114a88eeaf6735a6fdf7",
+                "reference": "19c6bc5550ffb68a6eee114a88eeaf6735a6fdf7",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.3",
+                "psr/container": "^2.0",
+                "xefi/faker-php": "^1.5.3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^11"
+            },
+            "type": "library",
+            "extra": {
+                "faker": {
+                    "providers": [
+                        "Xefi\\Faker\\NlBe\\FakerNlBeServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Xefi\\Faker\\NlBe\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Martin Soenen"
+                }
+            ],
+            "description": "Faker extension to include nl_BE locale",
+            "keywords": [
+                "data",
+                "faker",
+                "locale",
+                "nl_BE"
+            ],
+            "support": {
+                "issues": "https://github.com/xefi/faker-php-locales-nl-be/issues",
+                "source": "https://github.com/xefi/faker-php-locales-nl-be/tree/v1.0.1"
+            },
+            "time": "2026-11-18T10:23:31+00:00",
+            "published-time": "2026-11-18T11:05:57+00:00"
+        },
+        {
+            "name": "xefi/faker-php-locales-nl-nl",
+            "version": "v1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/xefi/faker-php-locales-nl-nl.git",
+                "reference": "a35b955631550016739a166c9380b36c6204f3aa"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/xefi/faker-php-locales-nl-nl/zipball/a35b955631550016739a166c9380b36c6204f3aa",
+                "reference": "a35b955631550016739a166c9380b36c6204f3aa",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.3",
+                "psr/container": "^2.0",
+                "xefi/faker-php": "^1.5.3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^11"
+            },
+            "type": "library",
+            "extra": {
+                "faker": {
+                    "providers": [
+                        "Xefi\\Faker\\NlNl\\FakerNlNlServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Xefi\\Faker\\NlNl\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Martin Soenen"
+                }
+            ],
+            "description": "Faker extension to include nl_NL locale",
+            "keywords": [
+                "data",
+                "faker",
+                "locale",
+                "nl_NL"
+            ],
+            "support": {
+                "issues": "https://github.com/xefi/faker-php-locales-nl-nl/issues",
+                "source": "https://github.com/xefi/faker-php-locales-nl-nl/tree/v1.0.1"
+            },
+            "time": "2026-11-18T10:23:39+00:00",
+            "published-time": "2026-11-18T11:06:04+00:00"
+        },
+        {
+            "name": "xefi/faker-php-locales-pt-br",
+            "version": "v1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/xefi/faker-php-locales-pt-br.git",
+                "reference": "764a4e6b77108e9a8b8efed5b2cb0f466885f863"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/xefi/faker-php-locales-pt-br/zipball/764a4e6b77108e9a8b8efed5b2cb0f466885f863",
+                "reference": "764a4e6b77108e9a8b8efed5b2cb0f466885f863",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.3",
+                "psr/container": "^2.0",
+                "xefi/faker-php": "^1.5.3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^11"
+            },
+            "type": "library",
+            "extra": {
+                "faker": {
+                    "providers": [
+                        "Xefi\\Faker\\PtBr\\FakerPtBrServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Xefi\\Faker\\PtBr\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Martin Soenen"
+                }
+            ],
+            "description": "Faker extension to include pt_BR locale",
+            "keywords": [
+                "data",
+                "faker",
+                "locale",
+                "pt_BR"
+            ],
+            "support": {
+                "issues": "https://github.com/xefi/faker-php-locales-pt-br/issues",
+                "source": "https://github.com/xefi/faker-php-locales-pt-br/tree/v1.0.1"
+            },
+            "time": "2026-11-18T10:24:44+00:00",
+            "published-time": "2026-11-18T11:06:33+00:00"
+        },
+        {
+            "name": "xefi/faker-php-locales-pt-pt",
+            "version": "v1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/xefi/faker-php-locales-pt-pt.git",
+                "reference": "fcb02bf70f8ae53b6d338d3f2edad8f5dfd1b30d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/xefi/faker-php-locales-pt-pt/zipball/fcb02bf70f8ae53b6d338d3f2edad8f5dfd1b30d",
+                "reference": "fcb02bf70f8ae53b6d338d3f2edad8f5dfd1b30d",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.3",
+                "psr/container": "^2.0",
+                "xefi/faker-php": "^1.5.3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^11"
+            },
+            "type": "library",
+            "extra": {
+                "faker": {
+                    "providers": [
+                        "Xefi\\Faker\\PtPt\\FakerPtPtServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Xefi\\Faker\\PtPt\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Martin Soenen"
+                }
+            ],
+            "description": "Faker extension to include pt_PT locale",
+            "keywords": [
+                "data",
+                "faker",
+                "locale",
+                "pt_PT"
+            ],
+            "support": {
+                "issues": "https://github.com/xefi/faker-php-locales-pt-pt/issues",
+                "source": "https://github.com/xefi/faker-php-locales-pt-pt/tree/v1.0.1"
+            },
+            "time": "2026-11-18T10:24:36+00:00",
+            "published-time": "2026-11-18T11:06:26+00:00"
+        },
+        {
+            "name": "xefi/faker-php-locales-ro-ro",
+            "version": "v1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/xefi/faker-php-locales-ro-ro.git",
+                "reference": "3682fe10c703a7eb3f89eac053be3e37887efc3b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/xefi/faker-php-locales-ro-ro/zipball/3682fe10c703a7eb3f89eac053be3e37887efc3b",
+                "reference": "3682fe10c703a7eb3f89eac053be3e37887efc3b",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.3",
+                "psr/container": "^2.0",
+                "xefi/faker-php": "^1.5.3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^11"
+            },
+            "type": "library",
+            "extra": {
+                "faker": {
+                    "providers": [
+                        "Xefi\\Faker\\RoRo\\FakerRoRoServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Xefi\\Faker\\RoRo\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Martin Soenen"
+                }
+            ],
+            "description": "Faker extension to include ro_RO locale",
+            "keywords": [
+                "data",
+                "faker",
+                "locale",
+                "ro_RO"
+            ],
+            "support": {
+                "issues": "https://github.com/xefi/faker-php-locales-ro-ro/issues",
+                "source": "https://github.com/xefi/faker-php-locales-ro-ro/tree/v1.0.1"
+            },
+            "time": "2026-11-18T10:22:19+00:00",
+            "published-time": "2026-11-18T11:04:56+00:00"
+        },
+        {
+            "name": "xefi/faker-php-locales-ru-ru",
+            "version": "v1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/xefi/faker-php-locales-ru-ru.git",
+                "reference": "be76bf59f9fe66815523a065111fff1d321d2b08"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/xefi/faker-php-locales-ru-ru/zipball/be76bf59f9fe66815523a065111fff1d321d2b08",
+                "reference": "be76bf59f9fe66815523a065111fff1d321d2b08",
+                "shasum": ""
+            },
+            "require": {
+                "ext-mbstring": "*",
+                "php": "^8.3",
+                "psr/container": "^2.0",
+                "xefi/faker-php": "^1.5.3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^11"
+            },
+            "type": "library",
+            "extra": {
+                "faker": {
+                    "providers": [
+                        "Xefi\\Faker\\RuRu\\FakerRuRuServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Xefi\\Faker\\RuRu\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Martin Soenen"
+                }
+            ],
+            "description": "Faker extension to include ru_RU locale",
+            "keywords": [
+                "data",
+                "faker",
+                "locale",
+                "ru_RU"
+            ],
+            "support": {
+                "issues": "https://github.com/xefi/faker-php-locales-ru-ru/issues",
+                "source": "https://github.com/xefi/faker-php-locales-ru-ru/tree/v1.0.1"
+            },
+            "time": "2026-11-18T10:20:54+00:00",
+            "published-time": "2026-11-18T11:04:49+00:00"
+        },
+        {
+            "name": "xefi/faker-php-locales-tr-tr",
+            "version": "v1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/xefi/faker-php-locales-tr-tr.git",
+                "reference": "d8440d67513616af0a85d68323c918b72e6dcff4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/xefi/faker-php-locales-tr-tr/zipball/d8440d67513616af0a85d68323c918b72e6dcff4",
+                "reference": "d8440d67513616af0a85d68323c918b72e6dcff4",
+                "shasum": ""
+            },
+            "require": {
+                "ext-mbstring": "*",
+                "php": "^8.3",
+                "psr/container": "^2.0",
+                "xefi/faker-php": "^1.5.3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^11"
+            },
+            "type": "library",
+            "extra": {
+                "faker": {
+                    "providers": [
+                        "Xefi\\Faker\\TrTr\\FakerTrTrServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Xefi\\Faker\\TrTr\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Martin Soenen"
+                }
+            ],
+            "description": "Faker extension to include tr_TR locale",
+            "keywords": [
+                "data",
+                "faker",
+                "locale",
+                "tr_TR"
+            ],
+            "support": {
+                "issues": "https://github.com/xefi/faker-php-locales-tr-tr/issues",
+                "source": "https://github.com/xefi/faker-php-locales-tr-tr/tree/v1.0.1"
+            },
+            "time": "2026-11-18T10:21:40+00:00",
+            "published-time": "2026-11-18T11:04:35+00:00"
         }
     ],
     "packages-dev": [

@@ -10,12 +10,13 @@ declare(strict_types=1);
 
 namespace PH7;
 
-use Faker\Factory as Faker;
 use PH7\Framework\Core\Kernel;
 use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Security\Validate\Validate;
 use PH7\Framework\Translate\Lang;
 use PH7\Framework\Util\Various;
+use Xefi\Faker\Extensions\PersonExtension;
+use Xefi\Faker\Faker;
 
 class FakerFactory
 {
@@ -81,15 +82,15 @@ class FakerFactory
     public function generateMembers(): void
     {
         $oUserModel = new UserCoreModel();
-        $oFaker = Faker::create($this->sLocale);
+        $oFaker = FakerGeneratorFactory::create($this->sLocale);
 
         $iMaxAge = DbConfig::getSetting('maxAgeRegistration');
         $iMinAge = DbConfig::getSetting('minAgeRegistration');
         $iMaxUsernameLength = (int)DbConfig::getSetting('maxUsernameLength');
 
         for ($iProfile = 1; $iProfile <= $this->iAmount; ++$iProfile) {
-            $sEmail = $oFaker->safeEmail;
-            $sUsername = Cleanup::username($oFaker->userName, $iMaxUsernameLength);
+            $sEmail = $this->getSafeEmail($oFaker);
+            $sUsername = Cleanup::username($oFaker->sdl(), $iMaxUsernameLength);
             if ($this->isValidProfile($sEmail, $sUsername)) {
                 $sSex = empty($this->sSex) ? $this->getRandomGender() : $this->sSex;
                 $sMatchSex = $oFaker->randomElement(
@@ -99,7 +100,7 @@ class FakerFactory
                         GenderTypeUserCore::COUPLE
                     ]
                 );
-                $sBirthDate = $oFaker->dateTimeBetween(
+                $sBirthDate = $oFaker->dateTime(
                     sprintf('-%s years', $iMaxAge),
                     sprintf('-%s years', $iMinAge)
                 )->format('Y-m-d');
@@ -107,19 +108,19 @@ class FakerFactory
                 $aUser = [];
                 $aUser['username'] = $sUsername;
                 $aUser['email'] = $sEmail;
-                $aUser['first_name'] = $oFaker->firstName($sSex);
-                $aUser['last_name'] = $oFaker->lastName;
-                $aUser['password'] = $oFaker->password;
+                $aUser['first_name'] = $oFaker->firstName($this->getFakerGender($sSex));
+                $aUser['last_name'] = $oFaker->lastName();
+                $aUser['password'] = $this->getPassword();
                 $aUser['sex'] = $sSex;
                 $aUser['match_sex'] = [$sMatchSex];
-                $aUser['country'] = $oFaker->countryCode;
-                $aUser['city'] = $oFaker->city;
-                $aUser['address'] = $oFaker->streetAddress;
-                $aUser['zip_code'] = $oFaker->postcode;
+                $aUser['country'] = $this->getCountryCode();
+                $aUser['city'] = $oFaker->city();
+                $aUser['address'] = $oFaker->streetAddress();
+                $aUser['zip_code'] = $this->getPostcode($oFaker);
                 $aUser['birth_date'] = $sBirthDate;
-                $aUser['description'] = $oFaker->paragraph(2);
-                $aUser['lang'] = $oFaker->locale;
-                $aUser['ip'] = $oFaker->ipv4;
+                $aUser['description'] = $oFaker->paragraphs(2);
+                $aUser['lang'] = $this->sLocale;
+                $aUser['ip'] = $oFaker->ipv4();
 
                 $oUserModel->add($aUser);
             }
@@ -129,16 +130,16 @@ class FakerFactory
     public function generateAffiliates(): void
     {
         $oAffModel = new AffiliateCoreModel();
-        $oFaker = Faker::create($this->sLocale);
+        $oFaker = FakerGeneratorFactory::create($this->sLocale);
 
         $iMaxUsernameLength = (int)DbConfig::getSetting('maxUsernameLength');
 
         for ($iProfile = 1; $iProfile <= $this->iAmount; ++$iProfile) {
-            $sEmail = $oFaker->safeEmail;
-            $sUsername = Cleanup::username($oFaker->userName, $iMaxUsernameLength);
+            $sEmail = $this->getSafeEmail($oFaker);
+            $sUsername = Cleanup::username($oFaker->sdl(), $iMaxUsernameLength);
             if ($this->isValidProfile($sEmail, $sUsername)) {
                 $sSex = empty($this->sSex) ? $this->getRandomGender() : $this->sSex;
-                $sBirthDate = $oFaker->dateTimeBetween('-65 years', '-18 years')->format('Y-m-d');
+                $sBirthDate = $oFaker->dateTime('-65 years', '-18 years')->format('Y-m-d');
                 $sWebsite = $oFaker->randomElement(
                     [
                         Kernel::SOFTWARE_WEBSITE,
@@ -150,20 +151,20 @@ class FakerFactory
                 $aUser = [];
                 $aUser['username'] = $sUsername;
                 $aUser['email'] = $sEmail;
-                $aUser['first_name'] = $oFaker->firstName($sSex);
-                $aUser['last_name'] = $oFaker->lastName;
-                $aUser['password'] = $oFaker->password;
+                $aUser['first_name'] = $oFaker->firstName($this->getFakerGender($sSex));
+                $aUser['last_name'] = $oFaker->lastName();
+                $aUser['password'] = $this->getPassword();
                 $aUser['sex'] = $sSex;
-                $aUser['country'] = $oFaker->countryCode;
-                $aUser['city'] = $oFaker->city;
-                $aUser['address'] = $oFaker->streetAddress;
-                $aUser['zip_code'] = $oFaker->postcode;
+                $aUser['country'] = $this->getCountryCode();
+                $aUser['city'] = $oFaker->city();
+                $aUser['address'] = $oFaker->streetAddress();
+                $aUser['zip_code'] = $this->getPostcode($oFaker);
                 $aUser['birth_date'] = $sBirthDate;
-                $aUser['description'] = $oFaker->paragraph(2);
+                $aUser['description'] = $oFaker->paragraphs(2);
                 $aUser['website'] = $sWebsite;
-                $aUser['bank_account'] = $oFaker->companyEmail;
-                $aUser['lang'] = $oFaker->locale;
-                $aUser['ip'] = $oFaker->ipv4;
+                $aUser['bank_account'] = $this->getSafeEmail($oFaker);
+                $aUser['lang'] = $this->sLocale;
+                $aUser['ip'] = $oFaker->ipv4();
 
                 $oAffModel->add($aUser);
             }
@@ -173,7 +174,7 @@ class FakerFactory
     public function generateSubscribers(): void
     {
         $oSubscriberModel = new SubscriberCoreModel();
-        $oFaker = Faker::create($this->sLocale);
+        $oFaker = FakerGeneratorFactory::create($this->sLocale);
 
         for ($iProfile = 1; $iProfile <= $this->iAmount; ++$iProfile) {
             $sSex = empty($this->sSex) ? $this->getRandomGender() : $this->sSex;
@@ -185,13 +186,13 @@ class FakerFactory
             );
 
             $aUser = [];
-            $aUser['name'] = $oFaker->name($sSex);
-            $aUser['email'] = $oFaker->safeEmail;
+            $aUser['name'] = $oFaker->name($this->getFakerGender($sSex));
+            $aUser['email'] = $this->getSafeEmail($oFaker);
             $aUser['active'] = $iAccountStatus;
             $aUser['current_date'] = $oFaker->dateTime()->format('Y-m-d H:i:s');
             $aUser['hash_validation'] = Various::genRnd(null, UserCoreModel::HASH_VALIDATION_LENGTH);
             $aUser['affiliated_id'] = 0;
-            $aUser['ip'] = $oFaker->ipv4;
+            $aUser['ip'] = $oFaker->ipv4();
 
             $oSubscriberModel->add($aUser);
         }
@@ -207,6 +208,39 @@ class FakerFactory
         $aGenders = [GenderTypeUserCore::MALE, GenderTypeUserCore::FEMALE];
 
         return $aGenders[array_rand($aGenders)];
+    }
+
+    private function getSafeEmail(Faker $oFaker): string
+    {
+        return $oFaker->sdl() . '@example.com';
+    }
+
+    private function getPassword(): string
+    {
+        return bin2hex(random_bytes(12));
+    }
+
+    private function getFakerGender(string $sSex): ?string
+    {
+        return match ($sSex) {
+            GenderTypeUserCore::MALE => PersonExtension::GENDER_MALE,
+            GenderTypeUserCore::FEMALE => PersonExtension::GENDER_FEMALE,
+            default => null
+        };
+    }
+
+    private function getCountryCode(): string
+    {
+        return substr($this->sLocale, 3, 2);
+    }
+
+    private function getPostcode(Faker $oFaker): string
+    {
+        $mPostcode = in_array($this->sLocale, ['en_US', 'de_DE'], true)
+            ? $oFaker->zipCode()
+            : $oFaker->postcode();
+
+        return (string)$mPostcode;
     }
 
     private function isValidProfile(string $sEmail, string $sUsername): bool

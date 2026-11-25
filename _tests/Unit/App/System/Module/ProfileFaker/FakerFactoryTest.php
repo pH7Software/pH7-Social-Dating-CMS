@@ -10,30 +10,35 @@ declare(strict_types=1);
 
 namespace PH7\Test\Unit\App\System\Module\ProfileFaker;
 
-use Faker\Factory;
 use InvalidArgumentException;
 use PH7\FakerFactory;
+use PH7\FakerGeneratorFactory;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 require_once PH7_PATH_SYS_MOD . 'profile-faker/inc/class/FakerFactory.php';
+require_once PH7_PATH_APP . 'includes/classes/FakerGeneratorFactory.php';
 
 final class FakerFactoryTest extends TestCase
 {
     #[DataProvider('supportedLocaleProvider')]
-    public function testFakerPhpGeneratesProfileDataForEverySupportedLocale(string $sLocale): void
+    public function testXefiFakerGeneratesProfileDataForEverySupportedLocale(string $sLocale): void
     {
-        $oFaker = Factory::create($sLocale);
+        $oFaker = FakerGeneratorFactory::create($sLocale);
+        $mPostcode = in_array($sLocale, ['en_US', 'de_DE'], true)
+            ? $oFaker->zipCode()
+            : $oFaker->postcode();
 
-        self::assertNotSame('', $oFaker->userName);
-        self::assertNotFalse(filter_var($oFaker->safeEmail, FILTER_VALIDATE_EMAIL));
-        self::assertNotSame('', $oFaker->firstName);
-        self::assertNotSame('', $oFaker->lastName);
-        self::assertNotSame('', $oFaker->city);
-        self::assertNotSame('', $oFaker->streetAddress);
-        self::assertNotSame('', (string)$oFaker->postcode);
-        self::assertNotSame('', $oFaker->paragraph(2));
-        self::assertNotFalse(filter_var($oFaker->ipv4, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4));
+        self::assertNotSame('', $oFaker->sdl());
+        self::assertNotFalse(filter_var($oFaker->sdl() . '@example.com', FILTER_VALIDATE_EMAIL));
+        self::assertNotSame('', $oFaker->firstName());
+        self::assertNotSame('', $oFaker->lastName());
+        self::assertNotSame('', $oFaker->city());
+        self::assertNotSame('', $oFaker->streetAddress());
+        self::assertNotSame('', (string)$mPostcode);
+        self::assertNotSame('', $oFaker->paragraphs(2));
+        self::assertNotFalse(filter_var($oFaker->ipv4(), FILTER_VALIDATE_IP, FILTER_FLAG_IPV4));
+        self::assertInstanceOf(\DateTimeInterface::class, $oFaker->dateTime('-60 years', '-18 years'));
     }
 
     public function testUnsupportedLocaleIsRejected(): void
@@ -49,5 +54,11 @@ final class FakerFactoryTest extends TestCase
         foreach (array_keys(FakerFactory::SUPPORTED_LOCALES) as $sLocale) {
             yield $sLocale => [$sLocale];
         }
+    }
+
+    public static function tearDownAfterClass(): void
+    {
+        @unlink(PH7_PATH_CACHE . 'xefi-faker-packages.php');
+        @unlink(PH7_PATH_CACHE . 'xefi-faker-mixin.php');
     }
 }
