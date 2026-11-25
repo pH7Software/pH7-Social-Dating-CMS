@@ -4,6 +4,9 @@ pH7Builder can preview and import members from a canonical CSV file. The first
 version-specific source adapter exports member accounts from UNA 14.0.0 without
 modifying the UNA database.
 
+This workflow first appears in pH7Builder 20.0.0. It is not available in 19.4.0
+or earlier releases.
+
 This is an incremental migration path, not a claim that every feature of a
 source platform is portable. Test the complete workflow on an isolated staging
 copy before importing production data.
@@ -14,10 +17,7 @@ copy before importing production data.
 | --- | --- | --- |
 | Generic CSV | Member accounts and basic profile fields | Available in the administration panel |
 | UNA 14.0.0 | Accounts and Persons profiles exported to canonical CSV | Available through the read-only CLI exporter |
-| UNA 15 prereleases | None | Not supported until a stable schema is released and tested |
-| SkaDate | None | Requires a licensed, version-specific schema fixture |
-| Dating Pro | None | Requires a licensed, version-specific schema fixture |
-| Oxwall | None | Not prioritised because the public release line is less active |
+| Other platforms or UNA versions | None | Not supported until a version-specific adapter and representative fixture are tested |
 
 The current importer does not migrate photos, albums, conversations, friends,
 subscriptions, transactions, or payment credentials. Never move payment
@@ -106,29 +106,18 @@ Canonical adapter exports include source provenance columns. In those files,
 intentional empty values remain empty instead of receiving the generic CSV
 importer's legacy sample defaults. An unavailable birth date remains unset.
 
-## Why UNA is first
+## Compatibility policy
 
-This assessment was refreshed on 23 November 2026:
+The UNA 14.0.0 adapter is possible because its MIT-licensed schema is public and
+can be represented by a version-specific test fixture. The adapter verifies the
+required tables and columns before exporting anything, but it does not imply
+compatibility with another UNA release or a customised schema.
 
-- [UNA](https://github.com/unacms/UNA) publishes an MIT-licensed schema. Its
-  latest stable release is 14.0.0, published on 9 April 2025, and its public
-  repository remained active on 22 November 2026. That makes a version-specific
-  adapter testable without guessing customer data structures.
-- [SkaDate](https://www.skadate.com/) remains commercially active and publishes
-  a 2026 roadmap, but its current customer database schema and versioned export
-  contract are not public. Its reported customer reach makes it a worthwhile
-  next adapter only after obtaining a licensed fixture.
-- [Dating Pro](https://www.datingpro.com/dating-software/) reports more than 100
-  active platforms, but its delivered commercial schema is not public. The
-  same fixture requirement applies.
-- [Oxwall](https://github.com/oxwall/oxwall) has public source, but its latest
-  listed core release is 1.9.1 from October 2023 and its repository was last
-  updated in July 2024. It is a lower maintenance priority than current buyers
-  on UNA, SkaDate, or Dating Pro.
-
-Vendor adoption statements are vendor-reported, not independently verified.
-Support must continue to follow tested source versions rather than marketing
-names alone.
+Do not claim support for another source platform or version until its schema,
+field mapping, privacy constraints, failure recovery, and destination behaviour
+have representative automated tests. Commercial platforms such as SkaDate and
+Dating Pro require a lawfully obtained, version-specific fixture before an
+adapter can be designed or advertised.
 
 ## Commercial boundary
 
