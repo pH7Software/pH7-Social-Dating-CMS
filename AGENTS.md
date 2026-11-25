@@ -25,6 +25,9 @@ built on the project-specific pH7Framework and PH7Tpl template engine.
 - Use `$ph7-i18n-audit` when changing user-facing strings, locale selection,
   Gettext catalogues, PH7Tpl translation calls, language-aware routes, or a
   language pack. Do not generate or publish human translations with AI.
+- Use `$open-source-advocacy` after a merged, public engineering decision is
+  genuinely useful to the wider developer community. Do not publish routine
+  updates, unverified claims, private work, or profile changes.
 - Start with the narrowest deterministic check that covers the change. Expand
   to the CI suite, static analysis, browser audit, or integration environment
   only when the affected boundary requires it.
