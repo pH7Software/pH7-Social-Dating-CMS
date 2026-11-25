@@ -158,6 +158,10 @@ Security controls are layered; do not remove one because another exists.
 
 - `composer install` installs root dependencies in `_protected/vendor/` and
   invokes the installer dependency setup. Never patch either vendor directory.
+- Generate development and sample data through `FakerGeneratorFactory` and
+  Xefi Faker. Keep its locale packages aligned with
+  `FakerFactory::SUPPORTED_LOCALES`; do not silently drop a supported locale or
+  reintroduce FakerPHP.
 - Commit root `composer.lock` with root dependency changes and
   `_install/composer.lock` with installer dependency changes.
 - Composer install/update copies Bootstrap distributions into `static/`; keep

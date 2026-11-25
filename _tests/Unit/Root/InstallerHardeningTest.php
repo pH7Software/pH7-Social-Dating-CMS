@@ -267,14 +267,6 @@ final class InstallerHardeningTest extends TestCase
         );
     }
 
-    public function testInstallerSampleProfilesUseFakerPhp(): void
-    {
-        $sController = $this->readProjectFile('_install/controllers/InstallController.php');
-
-        $this->assertStringContainsString('\Faker\Factory::create()', $sController);
-        $this->assertStringNotContainsString('FakerContainerFactory::create', $sController);
-    }
-
     public function testConfigPlaceholdersAreReplacedWithoutRescanningCredentials(): void
     {
         $sController = $this->readProjectFile('_install/controllers/InstallController.php');
