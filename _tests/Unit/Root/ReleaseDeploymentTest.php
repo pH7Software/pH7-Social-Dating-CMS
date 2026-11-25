@@ -72,7 +72,7 @@ final class ReleaseDeploymentTest extends TestCase
         $this->assertSame(Version::KERNEL_BUILD, Kernel::SOFTWARE_BUILD);
     }
 
-    public function testPhp83IsTheMinimumAcrossComposerAndRuntimeChecks(): void
+    public function testPhp83ThroughPhp85AreSupportedAcrossComposerAndRuntimeChecks(): void
     {
         $aComposer = json_decode($this->readFile('composer.json'), true, 512, JSON_THROW_ON_ERROR);
         $aInstallerComposer = json_decode(
@@ -82,15 +82,23 @@ final class ReleaseDeploymentTest extends TestCase
             JSON_THROW_ON_ERROR
         );
 
-        $this->assertSame('^8.3', $aComposer['require']['php']);
+        $this->assertSame('>=8.3 <8.6', $aComposer['require']['php']);
         $this->assertSame('8.3.0', $aComposer['config']['platform']['php']);
-        $this->assertSame('^8.3', $aInstallerComposer['require']['php']);
+        $this->assertSame('>=8.3 <8.6', $aInstallerComposer['require']['php']);
         $this->assertStringContainsString(
             "PH7_REQUIRED_SERVER_VERSION', '8.3.0'",
             $this->readFile('_install/constants.php')
         );
         $this->assertStringContainsString(
+            "PH7_MAX_SERVER_VERSION', '8.6.0'",
+            $this->readFile('_install/constants.php')
+        );
+        $this->assertStringContainsString(
             "REQUIRED_SERVER_VERSION = '8.3.0'",
+            $this->readFile('WebsiteChecker.php')
+        );
+        $this->assertStringContainsString(
+            "MAX_SERVER_VERSION = '8.6.0'",
             $this->readFile('WebsiteChecker.php')
         );
 

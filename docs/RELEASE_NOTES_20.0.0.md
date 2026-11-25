@@ -5,7 +5,7 @@ package are not available yet.
 
 ## Breaking changes
 
-- Requires PHP 8.3 or newer. pH7Builder 19.4.0 is the final release that
+- Supports PHP 8.3 through 8.5. pH7Builder 19.4.0 is the final release that
   supports PHP 8.2.
 - Removes the deprecated Braintree Drop-in checkout. Operators using Braintree
   must migrate to a supported payment integration before upgrading.
@@ -30,8 +30,9 @@ manager. It widens the module folder identifier to store the milestone module's
 full name. The migration is idempotent and preserves both modules' existing
 enabled behavior.
 
-Before deploying 20.0.0, upgrade the server runtime to PHP 8.3 or newer and
-confirm that the locked dependencies support it. Sites that must remain on PHP
+Before deploying 20.0.0, use PHP 8.3, 8.4, or 8.5. The locked Xefi Faker
+dependency does not yet support PHP 8.6, so the installer rejects that runtime
+instead of claiming unverified compatibility. Sites that must remain on PHP
 8.2 should stay on 19.4.0.
 
 For source deployments, install the locked production dependencies with

@@ -25,8 +25,8 @@ define('DIRECTIVE_KEY', 'directive');
 
 $aErrors = array();
 
-if (does_meet_minimum_required_php_version()) {
-    $aErrors[] = 'Your current PHP version is ' . PHP_VERSION . '. pH7Builder requires PHP ' . PH7_REQUIRED_SERVER_VERSION . ' or newer.<br /> Please ask your Web host to upgrade PHP to ' . PH7_REQUIRED_SERVER_VERSION . ' or newer.';
+if (does_not_meet_supported_php_version()) {
+    $aErrors[] = 'Your current PHP version is ' . PHP_VERSION . '. pH7Builder requires PHP ' . PH7_REQUIRED_SERVER_VERSION . ' through 8.5.x.<br /> Please ask your Web host to use a supported PHP version below ' . PH7_MAX_SERVER_VERSION . '.';
 }
 
 $aRequirementsNeeded = array(
@@ -134,9 +134,10 @@ if ($iErrors > 0) {
     exit(1);
 }
 
-function does_meet_minimum_required_php_version()
+function does_not_meet_supported_php_version()
 {
-    return version_compare(PHP_VERSION, PH7_REQUIRED_SERVER_VERSION, '<');
+    return version_compare(PHP_VERSION, PH7_REQUIRED_SERVER_VERSION, '<') ||
+        version_compare(PHP_VERSION, PH7_MAX_SERVER_VERSION, '>=');
 }
 
 function display_html_header($sPageTitle)
