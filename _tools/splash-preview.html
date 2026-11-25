@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>pH7Builder — Splash Preview</title>
+<link rel="stylesheet" href="/static/css/bootstrap.css">
+<link rel="stylesheet" href="/static/css/bootstrap_customize.css">
+<link rel="stylesheet" href="/templates/themes/base/css/common.css">
+<link rel="stylesheet" href="/templates/themes/base/css/style.css">
+<link rel="stylesheet" href="/templates/themes/base/css/layout.css">
+<link rel="stylesheet" href="/templates/themes/base/css/menu.css">
+<link rel="stylesheet" href="/templates/themes/base/css/color.css">
+<link rel="stylesheet" href="/templates/themes/base/css/form.css">
+<link rel="stylesheet" href="/templates/themes/base/css/design_system.css">
+<link rel="stylesheet" href="/templates/themes/base/css/video_splash.css">
+<link rel="stylesheet" href="/templates/themes/base/css/splash.css">
+</head>
+<body>
+<header>
+    <div class="row">
+        <div role="banner" id="logo" class="col-md-8">
+            <h1><a href="#">pH7Builder Product Experience</a></h1>
+        </div>
+    </div>
+</header>
+<main role="main" class="container" id="content">
+    <div class="left col-lg-7 col-md-8 col-sm-7 col-xs-12">
+        <h1 class="red3 italic underline">Meet people. Build genuine connections.</h1>
+        <div class="center profiles_window thumb pic_block" aria-hidden="true">
+            <span>Profile preview</span>
+        </div>
+        <div id="promo_text">
+            <h2>Meet people near your area who share your interests</h2>
+            <p>Create your profile, discover people nearby, and start a conversation.</p>
+        </div>
+    </div>
+    <div class="right col-lg-4 col-md-4 col-sm-5 col-xs-10">
+        <h1 class="red3 italic underline">Welcome to our community</h1>
+        <div class="login_button center">
+            <a href="#" class="btn btn-primary btn-lg"><strong>Sign in</strong></a>
+        </div>
+        <form id="form_join_user" class="form-horizontal" onsubmit="return false">
+            <div class="form-group">
+                <label for="preview-name">Your first name</label>
+                <input id="preview-name" class="form-control" type="text" placeholder="First name">
+            </div>
+            <div class="form-group">
+                <label for="preview-email">Your email</label>
+                <input id="preview-email" class="form-control" type="email" placeholder="Email">
+            </div>
+            <button class="btn btn-primary" type="submit">Join for free</button>
+        </form>
+    </div>
+</main>
+<footer>
+    <div class="ft_copy"><p>Powered by pH7Builder</p></div>
+    <nav class="bottom_nav"><a href="#">About</a> | <a href="#">Help</a> | <a href="#">Site map</a></nav>
+</footer>
+<script>
+const parameters = new URLSearchParams(window.location.search);
+window.addEventListener('load', () => {
+    if (!parameters.has('audit')) return;
+
+    const failures = [];
+    const assert = (condition, message) => {
+        if (!condition) failures.push(message);
+    };
+    const logo = document.querySelector('#logo').getBoundingClientRect();
+    const form = document.querySelector('#form_join_user').getBoundingClientRect();
+    const footer = document.querySelector('footer').getBoundingClientRect();
+    const footerChildren = Array.from(document.querySelector('footer').children)
+        .map((element) => element.getBoundingClientRect());
+
+    assert(
+        Array.from(document.querySelectorAll('link[rel="stylesheet"]')).every((link) => link.sheet !== null),
+        'Every production stylesheet must load.'
+    );
+    assert(document.documentElement.scrollWidth <= innerWidth, 'The splash page must not overflow horizontally.');
+    assert(getComputedStyle(document.querySelector('.profiles_window')).display === 'none', 'The mobile profile montage must not delay signup.');
+    assert(logo.height <= 72, 'The mobile brand header must remain compact.');
+    assert(form.top + scrollY < 900, 'The signup form must remain near the opening value proposition.');
+    assert(
+        footerChildren.every((child) => child.bottom <= footer.bottom),
+        'The footer must contain its floated content.'
+    );
+
+    document.documentElement.dataset.auditStatus = failures.length ? 'failed' : 'passed';
+    document.documentElement.dataset.auditFailures = failures.join(' ');
+});
+</script>
+</body>
+</html>

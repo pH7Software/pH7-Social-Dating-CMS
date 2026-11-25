@@ -39,6 +39,16 @@ footer a, footer p {
     color: #EEE;
 }
 
+footer {
+    display: flow-root;
+    background-color: rgba(21, 21, 28, .78);
+    border-color: rgba(255, 255, 255, .18);
+    border-radius: var(--ph7-radius, 12px);
+    box-shadow: var(--ph7-shadow-sm, 0 1px 3px rgba(20, 20, 40, .08));
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
 /* Not "!important" for this one, otherwise all footer paragraph/link colors will be overwritten as well */
 .ft_dm a.dropdown_item {
     color: #EEE !important;

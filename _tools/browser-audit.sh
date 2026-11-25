@@ -98,6 +98,7 @@ fi
 
 audit_page '_tools/theme-preview.html?theme=base&audit=1' '1280,900' 'base theme desktop'
 audit_page '_tools/theme-preview.html?theme=base&audit=1' '390,844' 'base theme mobile'
+audit_page '_tools/splash-preview.html?audit=1' '390,844' 'base splash mobile'
 audit_page '_tools/theme-preview.html?theme=premium&audit=1' '390,844' 'premium theme mobile'
 audit_page '_tools/theme-preview.html?theme=cartoon&audit=1' '390,844' 'cartoon theme mobile'
 audit_page '_tools/theme-preview.html?theme=datelove&audit=1' '390,844' 'datelove theme mobile'
