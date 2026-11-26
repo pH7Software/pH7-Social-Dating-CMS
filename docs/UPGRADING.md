@@ -3,6 +3,18 @@
 Automatic in-place upgrades are currently unavailable. Upgrade a staging copy
 manually, verify it, and only then repeat the reviewed procedure in production.
 
+## 20.0.1 security patch
+
+pH7Builder 20.0.1 updates Symfony Mailer and MIME to 7.4.24. The Mailer update
+closes CVE-2026-133751 and CVE-2026-133755, which could allow a network attacker
+to bypass mandatory TLS or inject a reply during a STARTTLS negotiation. There
+is no database migration from 20.0.0 and the SQL schema remains `1.6.7`.
+
+Deploy the complete 20.0.1 package, preserve configuration and user data,
+remove or block the installer, and clear application, template, and browser/CDN
+caches. Source deployments should install the updated lock file with
+`composer install`.
+
 ## 20.0.0 major release
 
 pH7Builder 20.0.0 supports PHP 8.3 through 8.5; 19.4.0 is the final PHP 8.2

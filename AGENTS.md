@@ -11,7 +11,7 @@ Treat the implementation, `.editorconfig`, `.php-cs-fixer.dist.php`,
 sources of truth. Preserve unrelated work and avoid loading unrelated parts of
 the repository.
 
-pH7Builder 20.0.0 supports PHP 8.3 through 8.5. It is a modular MVC application
+pH7Builder 20.x supports PHP 8.3 through 8.5. It is a modular MVC application
 built on the project-specific pH7Framework and PH7Tpl template engine.
 
 ## Task-specific workflow
