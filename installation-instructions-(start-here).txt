@@ -1,7 +1,7 @@
 pH7Builder installation
 =======================
 
-The latest published release is pH7Builder 20.0.0 and supports PHP 8.3 through
+The latest published release is pH7Builder 20.0.1 and supports PHP 8.3 through
 8.5 and MySQL 8.0+ with the PHP extensions listed in its composer.json. Older
 MySQL versions and MariaDB are not verified or supported. The versioned release
 ZIP includes production dependencies; a source checkout requires Composer 2.
@@ -16,7 +16,7 @@ Release guides:
 https://github.com/pH7Software/pH7-Social-Dating-CMS/tree/20.x/docs
 
 Composer installation of this release:
-composer create-project ph7software/ph7builder:20.0.0 pH7Builder-v20.0.0 --no-dev --prefer-dist
+composer create-project ph7software/ph7builder:20.0.1 pH7Builder-v20.0.1 --no-dev --prefer-dist
 
 Other distribution listings:
 Softaculous: https://www.softaculous.com/apps/socialnetworking/pH7Builder

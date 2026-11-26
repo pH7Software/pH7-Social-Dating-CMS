@@ -10,7 +10,7 @@ pH7Builder (formerly pH7CMS) is a self-hosted, open-source PHP platform for buil
 [![Latest release](https://img.shields.io/github/v/release/pH7Software/pH7-Social-Dating-CMS)](https://github.com/pH7Software/pH7-Social-Dating-CMS/releases)
 
 **For this source tree:** PHP 8.3 through 8.5, MySQL 8.0+, URL rewriting, and a
-web server. The latest published release is 20.0.0; use the [Quick
+web server. The latest published release is 20.0.1; use the [Quick
 Start](docs/QUICK_START.md) for its installation steps.
 Composer 2 is needed only for a source checkout; the versioned release ZIP
 includes locked production dependencies. With the server ready, allow about
