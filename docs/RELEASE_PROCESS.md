@@ -62,8 +62,20 @@ Before tagging, update the release date, release notes, Quick Start download
 references, and `_tools/software-info.xml`. Keep `upd-alert` set to `false`
 until the release and its upgrade instructions are publicly available. The
 repository tests enforce runtime, installer, schema, build, and feed
-consistency. Deploy the same reviewed feed to `xml.ph7builder.com`; committing
-the file does not publish it.
+consistency.
+
+Publishing a stable GitHub release runs the `Publish Release Feed` workflow.
+It checks out the published tag, refuses any tag that is not GitHub's latest
+stable release, verifies that the feed version matches the tag, and deploys the
+reviewed file to `xml.ph7builder.com` through GitHub Pages. The workflow can be
+dispatched with the same latest stable tag to recover or repeat a deployment;
+it must not be used to publish prereleases or older metadata.
+
+The one-time Pages configuration belongs to this repository. Set its custom
+domain to `xml.ph7builder.com`, point that subdomain directly to
+`pH7Software.github.io` with a DNS-only CNAME record, and enable HTTPS after
+GitHub provisions the certificate. Keep the existing endpoint and filename so
+released installations do not need a compatibility redirect.
 
 ## Restore rehearsal
 
