@@ -1,6 +1,8 @@
 .git
 .github
 .idea
+.claude
+.codex
 .phpunit.cache
 .DS_Store
 _constants.php
