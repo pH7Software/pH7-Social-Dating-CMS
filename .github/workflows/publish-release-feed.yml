@@ -1,0 +1,96 @@
+name: Publish Release Feed
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Stable release tag to republish, for example v20.0.1
+        required: true
+        type: string
+
+concurrency:
+  group: release-feed
+  cancel-in-progress: false
+
+jobs:
+  prepare:
+    if: github.event_name == 'workflow_dispatch' || github.event.release.prerelease == false
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout published release
+        uses: actions/checkout@v7
+        with:
+          ref: ${{ github.event.release.tag_name || inputs.tag }}
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          coverage: none
+
+      - name: Verify latest stable release feed
+        env:
+          EXPECTED_TAG: ${{ github.event.release.tag_name || inputs.tag }}
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          latest_tag="$(gh api "repos/${GITHUB_REPOSITORY}/releases/latest" --jq '.tag_name')"
+          if [[ "${EXPECTED_TAG}" != "${latest_tag}" ]]; then
+            echo "Refusing to publish ${EXPECTED_TAG}; the latest stable release is ${latest_tag}." >&2
+            exit 1
+          fi
+
+          if [[ ! "${EXPECTED_TAG}" =~ ^v([0-9]{1,2}\.[0-9]{1,2}\.[0-9]{1,2})$ ]]; then
+            echo "Release tag ${EXPECTED_TAG} is not a supported stable version." >&2
+            exit 1
+          fi
+
+          # The PHP source is intentionally single-quoted so the shell cannot expand it.
+          # shellcheck disable=SC2016
+          php -r '
+          $oFeed = simplexml_load_file($argv[1], SimpleXMLElement::class, LIBXML_NONET);
+          $oPackage = $oFeed?->ph7?->ph7builder;
+          if (!$oPackage instanceof SimpleXMLElement) {
+              fwrite(STDERR, "The pH7Builder release-feed node is missing.\n");
+              exit(1);
+          }
+
+          $sVersion = trim((string) $oPackage->version);
+          $sSchemaVersion = trim((string) $oPackage->{"sql-shcema-version"});
+          $sBuild = trim((string) $oPackage->build);
+          if ($sVersion !== $argv[2] ||
+              !preg_match("/^\d{1,2}\.\d{1,2}\.\d{1,2}$/D", $sSchemaVersion) ||
+              !preg_match("/^\d+$/D", $sBuild)
+          ) {
+              fwrite(STDERR, "Release-feed metadata does not match the published release.\n");
+              exit(1);
+          }
+          ' _tools/software-info.xml "${BASH_REMATCH[1]}"
+
+      - name: Prepare static feed
+        run: |
+          mkdir -p _release-feed
+          cp _tools/software-info.xml _release-feed/software-info.xml
+          touch _release-feed/.nojekyll
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: _release-feed
+
+  deploy:
+    needs: prepare
+    runs-on: ubuntu-24.04
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy release feed
+        id: deployment
+        uses: actions/deploy-pages@v5
