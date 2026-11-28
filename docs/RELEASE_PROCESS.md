@@ -44,6 +44,25 @@ The gate uses isolated temporary databases and removes them on exit. Set
 GitHub `Validate Release Candidate` workflow runs the same command and retains
 successful candidate artefacts for 14 days.
 
+## Automated stable publication
+
+Once the selected `20.x` commit contains the final version metadata, dated
+release notes, download references, and reviewed update feed, run the
+`Publish Stable Release` workflow with that exact semantic version. The workflow
+refuses a mismatched, existing, or undocumented version before it performs any
+publication action.
+
+The workflow then reruns the complete release gate, creates the tag and a draft
+GitHub release from the verified commit, uploads the ZIP, checksum, SPDX SBOM,
+and build metadata, and publishes the release only after every artefact is
+available. It finally dispatches the release-feed deployment explicitly. This
+explicit dispatch is required because GitHub does not start another workflow
+from most events created with a repository's `GITHUB_TOKEN`.
+
+The workflow dispatch is the deliberate release decision. Do not automate that
+decision from every merge to `20.x`; routine pushes already build a candidate,
+while a stable public release is irreversible for package consumers.
+
 ## Published artefacts
 
 Publish these files together from the successful workflow run:

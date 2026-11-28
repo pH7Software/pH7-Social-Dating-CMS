@@ -1,0 +1,139 @@
+name: Publish Stable Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Stable version to publish, for example 20.0.2
+        required: true
+        type: string
+
+permissions:
+  actions: write
+  contents: write
+
+concurrency:
+  group: stable-release
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    name: Verify, package, and publish
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    services:
+      mysql:
+        image: mysql:8.4
+        env:
+          MYSQL_ROOT_PASSWORD: release-gate-root-password
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping --password=release-gate-root-password"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=10
+
+    steps:
+      - name: Checkout the selected release commit
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          tools: composer:v2
+          extensions: curl, dom, exif, fileinfo, gd, hash, iconv, json, mbstring, openssl, pdo_mysql, simplexml, xml, xmlwriter, zip, zlib
+          coverage: none
+
+      - name: Cache Composer dependencies
+        uses: actions/cache@v6
+        with:
+          path: ~/.cache/composer/files
+          key: stable-release-composer-${{ hashFiles('composer.lock', '_install/composer.lock') }}
+          restore-keys: stable-release-composer-
+
+      - name: Validate the requested stable version
+        env:
+          REQUESTED_VERSION: ${{ inputs.version }}
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if [[ ! "${REQUESTED_VERSION}" =~ ^[0-9]{1,2}\.[0-9]{1,2}\.[0-9]{1,2}$ ]]; then
+            echo "The requested version is not a stable semantic version." >&2
+            exit 1
+          fi
+
+          # shellcheck disable=SC2016
+          source_version="$(php -r '
+          $sContents = file_get_contents("_protected/framework/Security/Version.class.php");
+          if (!is_string($sContents) || !preg_match("/KERNEL_VERSION\\s*=\\s*\x27([^\x27]+)\x27/", $sContents, $aMatches)) {
+              exit(1);
+          }
+          echo $aMatches[1];
+          ')"
+          if [[ "${REQUESTED_VERSION}" != "${source_version}" ]]; then
+            echo "Requested ${REQUESTED_VERSION}, but the selected source declares ${source_version}." >&2
+            exit 1
+          fi
+
+          notes="docs/RELEASE_NOTES_${REQUESTED_VERSION}.md"
+          if [[ ! -s "${notes}" ]]; then
+            echo "Missing release notes: ${notes}" >&2
+            exit 1
+          fi
+
+          tag="v${REQUESTED_VERSION}"
+          if git rev-parse --verify --quiet "refs/tags/${tag}" > /dev/null; then
+            echo "The release tag already exists: ${tag}" >&2
+            exit 1
+          fi
+          if gh release view "${tag}" > /dev/null 2>&1; then
+            echo "The GitHub release already exists: ${tag}" >&2
+            exit 1
+          fi
+
+      - name: Run the complete release gate
+        env:
+          PH7_RELEASE_DB_HOST: 127.0.0.1
+          PH7_RELEASE_DB_PORT: 3306
+          PH7_RELEASE_DB_ADMIN_USER: root
+          PH7_RELEASE_DB_ADMIN_PASSWORD: release-gate-root-password
+          PH7_RELEASE_DB_SUFFIX: publish
+          PH7_RELEASE_OUTPUT_DIRECTORY: ${{ runner.temp }}/ph7builder-release
+        run: composer release-gate
+
+      - name: Create the verified draft release
+        env:
+          VERSION: ${{ inputs.version }}
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "v${VERSION}" \
+            --target "${GITHUB_SHA}" \
+            --title "pH7Builder ${VERSION}" \
+            --notes-file "docs/RELEASE_NOTES_${VERSION}.md" \
+            --draft
+
+      - name: Upload the verified release artefacts
+        env:
+          VERSION: ${{ inputs.version }}
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release upload "v${VERSION}" \
+            "${RUNNER_TEMP}/ph7builder-release/pH7Builder-v${VERSION}.zip" \
+            "${RUNNER_TEMP}/ph7builder-release/pH7Builder-v${VERSION}.zip.sha256" \
+            "${RUNNER_TEMP}/ph7builder-release/pH7Builder-v${VERSION}.spdx.json" \
+            "${RUNNER_TEMP}/ph7builder-release/pH7Builder-v${VERSION}.build.json"
+
+      - name: Publish the complete stable release
+        env:
+          VERSION: ${{ inputs.version }}
+          GH_TOKEN: ${{ github.token }}
+        run: gh release edit "v${VERSION}" --draft=false --latest
+
+      - name: Publish the automatic-update feed
+        env:
+          VERSION: ${{ inputs.version }}
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run publish-release-feed.yml --ref 20.x -f tag="v${VERSION}"
